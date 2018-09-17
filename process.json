@@ -1,0 +1,16 @@
+{
+  "apps": [{
+    "name": "ico_user_zineum",
+    "script": "server",
+    "instances": "max",
+    "exec_mode": "cluster",
+    "env": {
+      "PORT": 4041,
+      "NODE_ENV": "production"
+    },
+    "env_production": {
+      "PORT": 4041,
+      "NODE_ENV": "production"
+    }
+  }]
+}
