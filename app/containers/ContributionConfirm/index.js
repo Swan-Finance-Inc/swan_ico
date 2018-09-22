@@ -16,7 +16,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectContributionConfirm from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 import { ENGINE_METHOD_DH } from 'constants';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
@@ -132,13 +132,14 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
   render() {
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
-        {/* <h1>Security</h1> */}
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-            <div className="" style={{ marginBottom: '500px' }}>
-            <div className="panel panel-default">
-              <div className="panel-heading">Confirm Payment</div>
-                <div className="panel-body" style={{fontSize:'16px'}}>
+          <div className="panel panel-default">
+          <div className="panel-heading">Confirm Payment</div>
+          <div className="panel-body" style={{fontSize:'16px'}}>
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="contribution">
                   <div className="row">
                     <div className="col-sm-12 col-md-12 text-center">
                       <h2>You are almost there!</h2>
@@ -151,7 +152,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                       <div className="row">
                         <div className="col-sm-12 col-md-6">
                           <ol>
-                            <li>Wallet address to deposit <strong>{this.props.currencyQty} {this.props.currency}</strong> for purchase of <strong>{this.props.tokens} ZIN tokens</strong>
+                            <li>Wallet address to deposit <strong>{this.props.currencyQty} {this.props.currency === 'Ethereum' ? 'ETH' : 'BTC'}</strong> for purchase of <strong>{this.props.tokens} ZIN tokens</strong>
                               <div className="mt-10">
                                 <div className="mt-20">
                                   <div className="blockchain-tx text-center ">
@@ -159,10 +160,17 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                                     <p><span>
                                       <h4 id="address" defaultValue={this.props.ethAddress}>{this.props.ethAddress}</h4>
                                      {/* <button style={{margin:"10px" ,borderRadius:"30px"}} className="form-buy-button" onClick={this.copyFunction}> */}
+                                     <div className="row">
+                                     <div className="col-sm-6">
                                      <CopyToClipboard text={this.props.ethAddress}
                                   onCopy={() => this.setState({copy: true})}>
-                                <button style={{margin:"10px" ,borderRadius:"30px"}} className="form-buy-button">Copy</button>
+                                <button style={{borderRadius:"30px"}} className="form-buy-button">Copy</button>
                                 </CopyToClipboard>
+                                  </div>
+                                  <div className="col-sm-6" style={{paddingTop:'10px'}}>
+                                    {this.state.copy ? <p>TX hash copied.</p> : ''}
+                                  </div>
+                                  </div>
                                  </span></p>
                                   </div>
                                 </div>
@@ -201,6 +209,8 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
               </div>
             </div>
           </div>
+        </div>
+        </div>
         </div>
       </div>
     );

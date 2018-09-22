@@ -83,7 +83,7 @@ export class Support extends React.PureComponent { // eslint-disable-line react/
                     <div className="form-group">
                       <select className="form-control" defaultValue='select'>
                         <option value='select' hidden>Select a topic</option>
-                        <option value='TOKEN NOT RECEIVED'>QUILL token not received</option>
+                        <option value='TOKEN NOT RECEIVED'>ZIN token not received</option>
                         <option value='OTHER ISSUES'>Other issues</option>
                         <option  value='FEEDBACK'>Feedback</option>
                       </select>

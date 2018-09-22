@@ -27,10 +27,13 @@ import { loadProfileAction, submitSocial, resetKycDone } from './actions';
 import makeSelectDashBoardWelcomePage, { makeSelectKycDone }from './selectors';
 import SupportPage from 'containers/Support';
 import { resetSuccess } from '../KycPage/actions';
+import $ from 'jquery'
 
 import reducer from './reducer';
 import saga from './saga';
-// console.log(...user)
+import Web3 from 'web3';
+const ABI = require('./CrowdSale');
+
 export class DashBoardWelcomePage extends React.PureComponent {
   constructor() {
     super();
@@ -49,7 +52,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       alertMsg: '',
       showAlert: true,
-      showVideo: false
+      showVideo: false,
+      notifyTransactions: []
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -65,6 +69,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.closeAlert = this.closeAlert.bind(this);
     this.showVideo = this.showVideo.bind(this);
     this.closeVideo = this.closeVideo.bind(this);
+    this.web3 = new Web3(new Web3.providers.WebsocketProvider('wss://ropsten.infura.io/ws'));
+    this.contract = new this.web3.eth.Contract(ABI, '0xcc760e05f33d4d9775248fac39e8cfde40476270');
   }
   componentWillMount() {
     this.props.loadProfileAction();
@@ -72,6 +78,17 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   componentDidMount() {
+    const outer = this;
+    this.contract.events.transactionNotify()
+    .on('data', function (event) {
+      const transaction = {
+        address: event.returnValues['0'],
+        amount: event.returnValues.weiAmount / Math.pow(10, 18)
+      }
+      var newArray = outer.state.notifyTransactions.slice();    
+      newArray.unshift(transaction);
+      outer.setState({notifyTransactions:newArray})
+    });
     console.log('dashboard');
     if (this.props.location.pathname == '/dashboard') {
       this.setState({
@@ -379,6 +396,33 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   render() {
+    console.log(this.state.notifyTransactions);
+    if(this.state.notifyTransactions.length == 1){
+      setTimeout(function(){
+        $("#notify").addClass("hidden");
+       }, 5000);
+      //  let arr = this.state.notifyTransactions;
+      //  arr.pop();
+      //  this.setState({
+      //    notifyTransactions: arr
+      //  })
+    }
+
+    if(this.state.notifyTransactions.length > 1){
+      setTimeout(function(){
+        $("#notify").addClass("hidden");
+       }, 5000);
+       let arr = this.state.notifyTransactions;
+       arr.pop();
+       this.setState({
+         notifyTransactions: arr
+       })
+      //  if(this.state.notifyTransactions.length >= 1){
+        $("#notify").removeClass("hidden");
+      //  }
+    }
+
+  
     const { kycStatus } = this.props.dashboardwelcomepage.userInfo; 
     if (!localStorage.token) {
       return <Redirect to="/" />;
@@ -466,6 +510,12 @@ export class DashBoardWelcomePage extends React.PureComponent {
 '' }
           <div id="footer" className="ui-footer">© 2018 ICOCabinet-demo, All Rights Reserved</div>
           <div className="sticky-telegram"><a href="https://t.me/#" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+          { this.state.notifyTransactions.length > 0 ? 
+          <div className="notify-deposit fade-in" id="notify">
+          <p><strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].address}</strong><br/> 
+            has contributed <strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].amount}ETH</strong></p>
+          </div> : null
+          }
         </div>
 
         <div className="static-modal">

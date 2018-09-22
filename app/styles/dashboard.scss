@@ -922,6 +922,24 @@ ol.rule-list li {
 	z-index: 5;
 }
 
+.notify-deposit {
+	position: fixed;
+	left: 20px;
+	bottom: 20px;
+	z-index: 10;
+	border-radius: 5px;
+	background-color: #fff;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	box-shadow: 5px 5px 8px 5px rgba(0, 0, 0, 0.15);
+	transition: 'all 5s ease';
+	padding: 15px;
+}
+
+.notify-deposit p {
+	font-size: 12px;
+}
+
 .sticky-telegram a {
     background-size: 50px 50px;
     height: 50px;
@@ -1351,4 +1369,21 @@ sup {
 	top: 40%;
 	left: 50%;
 	transform: translate(-50%, -50%) !important;
+}
+
+.fade-in {
+	opacity: 1;
+	animation-name: fadeInOpacity;
+	animation-iteration-count: 1;
+	animation-timing-function: ease-in;
+	animation-duration: 1s;
+}
+
+@keyframes fadeInOpacity {
+	0% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 1;
+	}
 }
