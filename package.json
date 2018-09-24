@@ -231,6 +231,7 @@
     "lodash": "4.17.10",
     "mime": "1.6.0",
     "minimist": "1.2.0",
+    "moment": "^2.22.2",
     "postcss-filter-plugins": "2.0.3",
     "prop-types": "15.5.10",
     "qrcode.react": "^0.8.0",
@@ -324,5 +325,5 @@
     "webpack-dev-middleware": "1.11.0",
     "webpack-hot-middleware": "2.18.0"
   },
-  "proxy": "http://localhost:4000"
+  "proxy": "http://localhost:4040"
 }

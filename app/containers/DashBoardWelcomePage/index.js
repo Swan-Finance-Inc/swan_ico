@@ -401,11 +401,6 @@ export class DashBoardWelcomePage extends React.PureComponent {
       setTimeout(function(){
         $("#notify").addClass("hidden");
        }, 5000);
-      //  let arr = this.state.notifyTransactions;
-      //  arr.pop();
-      //  this.setState({
-      //    notifyTransactions: arr
-      //  })
     }
 
     if(this.state.notifyTransactions.length > 1){

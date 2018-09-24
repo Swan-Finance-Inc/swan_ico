@@ -206,7 +206,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
                         <input id="token" type="number" name="token" className="form-input form-control" placeholder="Google Authenticator" autoComplete="off" />
                       </div>
                       <div className="form-group text-center">
-                        <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LcHp2QUAAAAAFNkyK9wjYnRjdR4QyPdQMAJSPDC" onChange={this.onChange} />
+                        <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6Lf0228UAAAAAOX7Ac2RABTWXG_Pnr_JtsUdRET8" onChange={this.onChange} />
                       </div>
                       <div className="form-group text-center">
                         <label className="form-check-label" htmlFor="user_accepted_policies">
