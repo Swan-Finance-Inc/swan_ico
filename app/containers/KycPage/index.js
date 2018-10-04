@@ -409,8 +409,8 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
                     </div>
                   </div>
                   <div className="row">
-                    <div className="col-sm-12">
-                    <button className="btn btn-primary form-control" disabled={!this.state.allUploaded} type="submit">SUBMIT</button>
+                    <div className="col-sm-12 text-center">
+                    <button className="btn btn-primary" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={!this.state.allUploaded} type="submit">SUBMIT</button>
                     </div>
                   </div>
                 </form>

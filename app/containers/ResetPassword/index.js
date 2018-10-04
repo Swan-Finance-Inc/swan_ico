@@ -88,31 +88,48 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
 
         <section>
         <div className="ui-container container-fluid">
+        <div className="panel panel-default">
+          <div className="panel-heading">Reset Password</div>
+          <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
-              <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-                <div className="card-header">
+              <div className="col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1">
+                {/* <div className="card-header">
                   <h1 className="reset-title">Reset Password</h1>
-                </div>
-                <div className="signin-card-body" style={{ marginBottom: '500px' }}>
+                </div> */}
+                <div className="contribution" style={{ marginBottom: '200px' }}>
                   <form onSubmit={this.formSubmit}>
-                    <div className="form-group">
-                      <label htmlFor="oldPassword" className="form-label">Old Password</label>
+                  <div className="row form-group">
+                    <div className="col-sm-4">
+                      <label htmlFor="oldPassword"><span style={{fontWeight: '500'}}>OLD PASSWORD</span></label>
+                    </div>
+                    <div className="col-sm-8">
                       <input id="oldPassword" type="password" className="form-input form-control" name="oldPassword" placeholder="Enter Old Password" autoComplete="off" required />
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="newPassword" className="form-label">New Password</label>
+                  </div>
+                  <div className="row form-group">
+                    <div className="col-sm-4">
+                      <label htmlFor="newPassword"><span style={{fontWeight: '500'}}>NEW PASSWORD</span></label>
+                    </div>
+                    <div className="col-sm-8">
                       <input id="newPassword" minLength={6} maxLength={256} type="password" className="form-input form-control" name="newPassword" placeholder="Enter New Password" autoComplete="off" required />
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="confPassword" className="form-label">Confirm Password</label>
+                  </div>
+                  <div className="row form-group">
+                    <div className="col-sm-4">
+                      <label htmlFor="confPassword"><span style={{fontWeight: '500'}}>CONFIRM PASSWORD</span></label>
+                    </div>
+                    <div className="col-sm-8">
                       <input id="confPassword" minLength={6} maxLength={256} type="password" className="form-input form-control" name="confPassword" placeholder="Confirm New Password" autoComplete="off" required />
                     </div>
+                  </div>
                     <div className="text-center">
                       <button type="submit" className="form-button">Reset Password</button>
                     </div>
                   </form>
                 </div>
               </div>
+            </div>
+            </div>
             </div>
           </div>
         </section>

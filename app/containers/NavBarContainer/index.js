@@ -70,11 +70,11 @@ export class NavBarContainer extends React.PureComponent {
   render() {
     return (
       <header>
-        <Navbar fluid fixedTop style={{ backgroundColor: '#ECF5FA', borderWidth: '0' }}>
+        <Navbar fluid fixedTop style={{	background: 'linear-gradient(to right, #5F00D4, #30006C)',borderWidth: '0'}}>
           <div className="header-left">
             <div className="logo"><Link to="/"><img src="/assets/img/logo.svg" alt="ZINEUM" /></Link></div>
           </div>
-          <div className="header-right">
+          <div className="header-right hidden-xs">
             <Nav pullRight >
               <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Profile</MenuItem>

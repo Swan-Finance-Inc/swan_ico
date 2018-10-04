@@ -49,6 +49,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       faq: '',
       ticket: '',
+      profile: '',
+      resetPass: '',
       support: '',
       alertMsg: '',
       showAlert: true,
@@ -63,6 +65,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.toggleTicketActive = this.toggleTicketActive.bind(this);
     this.toggleSupportActive = this.toggleSupportActive.bind(this);
     this.toggleFaqActive = this.toggleFaqActive.bind(this);
+    this.toggleProfileActive = this.toggleProfileActive.bind(this);
+    this.toggleResetPassActive = this.toggleResetPassActive.bind(this);
     this.dashActive = this.dashActive.bind(this);
     this.buyPage = this.buyPage.bind(this);
     this.socialSubmit = this.socialSubmit.bind(this);
@@ -99,7 +103,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
         sec: '',
         support: '',
         ticket: '',
-        faq: ''
+        faq: '',
+        profile: '',
+        resetPass: ''
       });
     } else if (this.props.location.pathname == '/dashboard/contribution') {
       this.setState({
@@ -110,7 +116,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
         sec: '',
         support: '',
         ticket: '',
-        faq: ''
+        faq: '',
+        profile: '',
+        resetPass: ''
       });
     } else if (this.props.location.pathname == '/dashboard/kyc') {
       this.setState({
@@ -121,7 +129,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
         sec: '',
         support: '',
         ticket: '',
-        faq: ''
+        faq: '',
+        profile: '',
+        resetPass: ''
       });
     } else if (this.props.location.pathname == '/dashboard/transactionHistory') {
       this.setState({
@@ -132,7 +142,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
         sec: '',
         support: '',
         ticket: '',
-        faq: ''
+        faq: '',
+        profile: '',
+        resetPass: ''
       });
     } else if (this.props.location.pathname == '/dashboard/security') {
       this.setState({
@@ -143,7 +155,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
         sec: 'active',
         support: '',
         ticket: '',
-        faq: ''
+        faq: '',
+        profile: '',
+        resetPass: ''
       });
     } else if (this.props.location.pathname == '/dashboard/ticket') {
       this.setState({
@@ -155,6 +169,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
         support: '',
         faq: '',
         ticket: 'active',
+        profile: '',
+        resetPass: ''
       });
     } else if (this.props.location.pathname == '/dashboard/support') {
       this.setState({
@@ -165,7 +181,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
         sec: '',
         support: 'active',
         ticket: '',
-        faq: ''
+        faq: '',
+        profile: '',
+        resetPass: ''
       });
     } else if (this.props.location.pathname == '/dashboard/faq') {
       this.setState({
@@ -176,7 +194,22 @@ export class DashBoardWelcomePage extends React.PureComponent {
         sec: '',
         support: '',
         ticket: '',
-        faq: 'active'
+        faq: 'active',
+        profile: '',
+        resetPass: ''
+      });
+    } else if (this.props.location.pathname == '/dashboard/profile') {
+      this.setState({
+        dash: '',
+        cont: '',
+        kyc: '',
+        tran: '',
+        sec: '',
+        support: '',
+        faq: '',
+        ticket: '',
+        profile: 'active',
+        resetPass: ''
       });
     }
   }
@@ -238,7 +271,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
           secActive: '',
           supportActive: '',
           ticketActive: '',
-          faqActive: ''
+          faqActive: '',
+          profileActive: '',
+          resetPassActive: ''
         });
       }
     }
@@ -273,7 +308,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       ticket: '',
-      faq: ''
+      faq: '',
+      profile: '',
+      resetPass: ''
     });
   }
   toggleSecActive() {
@@ -285,7 +322,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       ticket: '',
-      faq: ''
+      faq: '',
+      profile: '',
+      resetPass: ''
     });
   }
   toggleContActive() {
@@ -297,7 +336,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       ticket: '',
-      faq: ''
+      faq: '',
+      profile: '',
+      resetPass: ''
     });
   }
   toggleTranActive() {
@@ -309,7 +350,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: 'active',
       support: '',
       ticket: '',
-      faq: ''
+      faq: '',
+      profile: '',
+      resetPass: ''
     });
   }
   toggleSupportActive() {
@@ -321,7 +364,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: 'active',
       ticket: '',
-      faq: ''
+      faq: '',
+      profile: '',
+      resetPass: ''
     });
   }
   dashActive() {
@@ -333,7 +378,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       ticket: '',
-      faq: ''
+      faq: '',
+      profile: '',
+      resetPass: ''
     });
     this.notifyTimeout();
   }
@@ -346,7 +393,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       ticket: '',
-      faq: ''
+      faq: '',
+      profile: '',
+      resetPass: ''
     });
   }
   toggleFaqActive() {
@@ -358,7 +407,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       ticket: '',
-      faq: 'active'
+      faq: 'active',
+      profile: '',
+      resetPass: ''
     });
   }
   toggleTicketActive() {
@@ -370,7 +421,37 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       faq: '',
-      ticket: 'active'
+      ticket: 'active',
+      profile: '',
+      resetPass: ''
+    });
+  }
+  toggleProfileActive() {
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      cont: '',
+      tran: '',
+      support: '',
+      faq: '',
+      ticket: '',
+      profile: 'active',
+      resetPass: ''
+    });
+  }
+  toggleResetPassActive() {
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      cont: '',
+      tran: '',
+      support: '',
+      faq: '',
+      ticket: '',
+      profile: '',
+      resetPass: 'active'
     });
   }
   notifyTimeout() {
@@ -443,6 +524,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
             support={this.state.support}
             faq={this.state.faq}
             ticket={this.state.ticket}
+            profile= {this.state.profile}
+            resetPass = {this.state.resetPass}
             compact={this.compactNav}
             open={this.openNav}
             webCompact={this.webScreenCompact}
@@ -454,6 +537,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
             toggleTranActive={this.toggleTranActive}
             toggleSupportActive={this.toggleSupportActive}
             toggleFaqActive={this.toggleFaqActive}
+            toggleProfileActive={this.toggleProfileActive}
+            toggleResetPassActive={this.toggleResetPassActive}
             toggleTicketActive={this.toggleTicketActive}
           />
           {(this.props.location.pathname == '/dashboard') ?
@@ -463,7 +548,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                 <div className="col-sm-6">
                 <h1>Dashboard</h1>
                 </div>
-                <div className="col-sm-6 text-right">
+                <div className="col-sm-6 hidden-xs text-right">
                   <button className="btn btn-video" style={{marginRight:'20px'}} onClick={this.showVideo}>Video Instruction  <i className="fa fa-play-circle"></i></button>
                 </div>
               </div>
@@ -504,7 +589,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                     <TransactionHistory message={this.props.global.depositSuccess} /> :
 '' }
           <div id="footer" className="ui-footer">© 2018 Zineum, All Rights Reserved</div>
-          <div className="sticky-telegram"><a href="https://t.me/#" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+          <div className="sticky-telegram-logo"><a href="https://t.me/#" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
           { this.state.notifyTransactions.length > 0 ? 
           <div className="notify-deposit fade-in" id="notify">
           <p><strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].address}</strong><br/> 
@@ -515,7 +600,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
         <div className="static-modal">
           <Modal show={this.state.showVideo} onHide={this.closeVideo} style={{marginTop:'100px'}}>
-            <Modal.Body style={{background:'#ECF4FE'}}>
+            <Modal.Body style={{background:'#edf2f8'}}>
             <div className="row text-right">
               <div className="col-sm-12">
                 <i className="fa fa-close" style={{cursor:'pointer'}} onClick={this.closeVideo}></i>

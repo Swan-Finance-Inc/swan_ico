@@ -106,10 +106,13 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       <div id="content" className="ui-content ui-content-aside-overlay">
       <div className="ui-content-body">
         <div className="ui-container container-fluid">
+        <div className="panel panel-default">
+              <div className="panel-heading">Update Profile</div>
+                <div className="panel-body" style={{fontSize:'16px'}}>
           <div className=" contribution row">
             <div className="col-sm-12">
               <div className="row text-center">
-                <h2>UPDATE PROFILE</h2>
+                {/* <h2>UPDATE PROFILE</h2> */}
                 <h5 style={{color:'#888'}}>Please fill the details down below.<hr/></h5>
               </div>
               <form onSubmit={this.updateDetails}>
@@ -197,6 +200,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 </div>
               </form>
             </div>
+          </div>
+          </div>
           </div>
         </div>
       </div>

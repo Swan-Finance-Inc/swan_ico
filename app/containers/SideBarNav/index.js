@@ -33,6 +33,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       ticketAct: '',
       supportAct: '',
       faqAct: '',
+      profileAct: '',
+      resetPassAct: '',
       showSignOut: false
     };
 
@@ -44,6 +46,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.toggleSecActive = this.toggleSecActive.bind(this);
     this.toggleTranActive = this.toggleTranActive.bind(this);
     this.toggleSupportActive = this.toggleSupportActive.bind(this);
+    this.toggleProfileActive = this.toggleProfileActive.bind(this);
+    this.toggleResetPassActive = this.toggleResetPassActive.bind(this);
     this.toggleFaqActive = this.toggleFaqActive.bind(this);
     this.showSignOut = this.showSignOut.bind(this);
     this.closeSignOut = this.closeSignOut.bind(this);
@@ -58,7 +62,9 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       ticketAct: this.props.ticket,
       secAct: this.props.sec,
       supportAct: this.props.support,
-      faqAct: this.props.faqAct
+      faqAct: this.props.faqAct,
+      profileAct: this.props.profile,
+      resetPassAct: this.props.resetPass
     });
   }
   handleLogOut() {
@@ -109,6 +115,14 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.props.compact();
     this.props.toggleTicketActive();
   }
+  toggleProfileActive(e) {
+    this.props.compact();
+    this.props.toggleProfileActive();
+  }
+  toggleResetPassActive(e) {
+    this.props.compact();
+    this.props.toggleResetPassActive();
+  }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -120,6 +134,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       ticketAct: nextProps.ticket,
       supportAct: nextProps.support,
       faqAct: nextProps.faq,
+      profileAct: nextProps.profile,
+      resetPassAct: nextProps.resetPass
     });
   }
 
@@ -138,7 +154,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
 
   render() {
     return (
-      <div>
+      <div style={{'height': '100%','width': '100%','overflow': 'hidden'}}>
+        <div style={{width: '100%',height: '99%',overflow: 'auto',paddingRight: '15px'}}>
         <ul className="nav navbar-nav sidebar-trigger hamburger-menu visible-xs">
           <li><a className="toggle-btn" data-toggle="ui-nav" role="button" onClick={this.props.compact}> <span /> </a> </li>
         </ul>
@@ -206,7 +223,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span>Manage Tickets</span></Link></li>
               </ul>
             </li>
-            <li className={this.state.supportAct}><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span></Link>
+            {/* <li className={this.state.supportAct}><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
                 <li className="nav-sub-header"><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span>Support</span></Link></li>
               </ul>
@@ -215,7 +232,21 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
               <ul className="nav nav-sub sidebar-niceScroll">
                 <li className="nav-sub-header"><a><span>FAQ</span></a></li>
               </ul>
-            </li>
+            </li> */}
+            {
+              window.innerWidth < 768 ? <li className={this.state.profileAct}><Link to="/dashboard/profile" role="button" onClick={this.toggleProfileActive}><span className="has-icon"><i className="fa fa-user"></i></span><span>Update Profile</span></Link>
+              <ul className="nav nav-sub sidebar-niceScroll">
+                <li className="nav-sub-header"><Link to="/dashboard/profile" role="button" onClick={this.toggleProfileActive}><span>Update Profile</span></Link></li>
+              </ul>
+            </li> : null
+            }
+            {
+              window.innerWidth < 768 ? <li className={this.state.resetPassAct}><Link to="/dashboard/resetpassword" role="button" onClick={this.toggleResetPassActive}><span className="has-icon"><i className="fa fa-key"></i></span><span>Reset Password</span></Link>
+              <ul className="nav nav-sub sidebar-niceScroll">
+                <li className="nav-sub-header"><Link to="/dashboard/resetpassword" role="button" onClick={this.toggleResetPassActive}><span>Reset Password</span></Link></li>
+              </ul>
+            </li> : null
+            }
             <li><a  onClick={this.showSignOut}  style={{cursor:'pointer'}} ><span className="has-icon"><i className="fa fa-sign-out"></i></span><span>Sign Out</span></a>
               <ul className="nav nav-sub sidebar-niceScroll">
                 <li className="nav-sub-header"><a><span>Sign Out</span></a></li>
@@ -223,6 +254,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             </li> 
           </ul>
         </aside>
+        </div>
       </div>
     );
   }

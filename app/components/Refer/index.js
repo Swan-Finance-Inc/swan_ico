@@ -21,7 +21,7 @@ import {
 } from 'react-share';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-const SHARE_POST = 'zineum.com introduces a unique tokensale platform for the Community.You can earn up to 2000 ZIN tokens , Sign-up';
+const SHARE_POST = 'zineum.io introduces a unique tokensale platform for the Community.You can earn up to 2000 ZIN tokens , Sign-up';
 
 class Refer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -35,7 +35,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
         componentDidMount(){
           this.setState({
             code : this.props.code.referral.code,
-            link : `https://tokensale.zineum.com/signup/refer/${this.props.code.referral.code}`,
+            link : `https://tokensale.zineum.io/signup/refer/${this.props.code.referral.code}`,
           })
     // copyText.select();
 
@@ -57,7 +57,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   
                   <p>Share your unique referral link with your friends and you will earn free ZIN tokens.</p>
                   <div className="referral-link">
-                  <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.zineum.com/signup/refer/${this.state.code}`} id="myInput" />
+                  <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} id="myInput" />
                     <CopyToClipboard text={this.state.link}
                       onCopy={() => this.setState({copied: true})}>
                       <button>Copy Link</button>
@@ -68,20 +68,20 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <div className="referral">
 
 
-                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.com/signup/refer/${this.state.code}`} quote={`zineum.com introduces a unique tokensale platform for the Community. Sign-up now by clicking on https://tokensale.zineum.com/signup/refer/${this.state.code}`}>
+                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} quote={`zineum.io introduces a unique tokensale platform for the Community. Sign-up now by clicking on https://tokensale.zineum.io/signup/refer/${this.state.code}`}>
                       <FacebookIcon size={42} round />
 
                     </FacebookShareButton>
 
-                    <TwitterShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.com/signup/refer/${this.state.code}`} title={SHARE_POST}>
+                    <TwitterShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} title={SHARE_POST}>
                       <TwitterIcon size={42} round />
 
                     </TwitterShareButton>
-                    <TelegramShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.com/signup/refer/${this.state.code}`} title={SHARE_POST}>
+                    <TelegramShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} title={SHARE_POST}>
                       <TelegramIcon size={42} round />
 
                     </TelegramShareButton>
-                    <WhatsappShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.com/signup/refer/${this.state.code}`} title={SHARE_POST}>
+                    <WhatsappShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} title={SHARE_POST}>
                       <WhatsappIcon size={42} round />
 
                     </WhatsappShareButton>
@@ -92,21 +92,21 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                         }
                       }
                       url={
-                        `https://tokensale.zineum.com/signup/refer/${this.state.code}`
+                        `https://tokensale.zineum.io/signup/refer/${this.state.code}`
                       }
                       title={
-                        `zineum.com introduces a unique tokensale platform for the Community. You can earn up to 2000 ZIN tokens , Sign-up
-                          now by clicking on https://tokensale.zineum.com/signup/refer/${this.state.code}`
+                        `zineum.io introduces a unique tokensale platform for the Community. You can earn up to 2000 ZIN tokens , Sign-up
+                          now by clicking on https://tokensale.zineum.io/signup/refer/${this.state.code}`
                       }
                       description={
-                        `zineum.com introduces a unique earning platform for the Community. You can earn up to 2000 ZIN tokens , Sign-up
-                          now by clicking on https://tokensale.zineum.com/signup/refer/${this.state.code}`
+                        `zineum.io introduces a unique earning platform for the Community. You can earn up to 2000 ZIN tokens , Sign-up
+                          now by clicking on https://tokensale.zineum.io/signup/refer/${this.state.code}`
                       }
                     >
                       <LinkedinIcon size={42} round />
                     </LinkedinShareButton>
-                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.com/signup/refer/${this.state.code}`} title={`zineum.com introduces a unique tokensale platform for the Community. You can earn up to 2000 ZIN tokens , Sign-up
-                          now by clicking on https://tokensale.zineum.com/signup/refer/${this.state.code}`}>
+                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} title={`zineum.io introduces a unique tokensale platform for the Community. You can earn up to 2000 ZIN tokens , Sign-up
+                          now by clicking on https://tokensale.zineum.io/signup/refer/${this.state.code}`}>
                       <RedditIcon size={42} round />
                     </RedditShareButton>
 

@@ -67,13 +67,13 @@ header .container {
 }
 
 .header {
-	background-color:#ECF5FE;
+	background: linear-gradient(to right, #5F00D4, #30006C);
 	box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 	-webkit-box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 }
 .header .header-btn>a {
-	background-color:#0074e6;
-	color:#fff;
+	background-color:#fff;
+	color:#1C1466;
 }
 .header-right p {
 	font-family:'Poppins', sans-serif;
@@ -81,9 +81,11 @@ header .container {
 	margin: 12px 10px 0 0;
 }
 .signin-block {
-	background: #ECF5FA url('/assets/img/hero-banner.png') no-repeat;
-	background-size: cover;
+	// background-repeat: no-repeat;
+	// background-position-y: 20%;
+	// background-image: url("/assets/img/back.svg"), linear-gradient(to right, #5F00D4, #30006C);
 	// height:calc(100vh - 70px);
+	background: radial-gradient(#00C9BC, #1B92A4, #3D4C85, #532172, #5B106B);
 	&.login{
 
 		//height:100vh;
@@ -143,7 +145,7 @@ header .container {
 	max-width:450px;
 }
 .card-header h1 {
-	color:#273f5b;
+	color:#fff;
 	font-size:30px;
 	font-weight:700;
 	margin:0;
