@@ -230,7 +230,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 
                       <div className="form-group text-center">
 
-                        <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6Lf0228UAAAAAOX7Ac2RABTWXG_Pnr_JtsUdRET8" onChange={this.onChange} />
+                        <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdUZHIUAAAAAC-Fs1h2axjwggA74SYYarH3XZ6-" onChange={this.onChange} />
 
                         <button type="submit" className="form-button" style={{ marginTop: '10px' }}>Sign Up</button>
                       </div>

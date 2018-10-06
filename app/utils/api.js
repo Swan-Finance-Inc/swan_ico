@@ -1,5 +1,5 @@
 import axios from 'axios';
-const BaseUrl = 'http://206.189.130.98:4040/api/v1/';
+const BaseUrl = 'https://tokensaleapis.zineum.io/api/v1/';
 export default {
   user: {
     vote: (list, headers) =>
