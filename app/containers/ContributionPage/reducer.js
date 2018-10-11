@@ -25,7 +25,7 @@ const initialState = fromJS({
     btcUsd: false,
     ethAddress: false,
     btcAddress: false,
-    discount: false,
+    bonus: false,
     stage: false,
     minInvest: false,
 
@@ -79,7 +79,7 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['success', 'btcUsd'], action.data.btcUsd)
         .setIn(['success', 'ethAddress'], action.data.ethAddress)
         .setIn(['success', 'btcAddress'], action.data.btcAddress)
-        .setIn(['success', 'discount'], action.data.discount)
+        .setIn(['success', 'bonus'], action.data.bonus)
         .setIn(['success', 'stage'], action.data.stage)
         .setIn(['success', 'minInvest'], action.data.minInvest)
         .setIn(['success', 'privateSaleTokenUsd'], action.data.privateSaleTokenUsd)

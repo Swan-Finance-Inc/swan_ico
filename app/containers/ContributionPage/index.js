@@ -27,15 +27,19 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     super(props);
     this.state = {
       confirmContri: false,
+      usdEurContributionConfirm: false,
       curr: 'Ethereum',
       btcToDollar: 7500,
       ethToDollar: 600,
+      eurToDollar: 1.16,
       currencyQuantity: 0,
       dollarQuantity: 0,
       tokens: 0,
-      // tokensWithBonus: 0,
+      tokensWithBonus: 0,
       tokensPerEther: 0,
       tokensPerBitcoin: 0,
+      tokensPerUsd: 0,
+      tokensPerEur: 0,
       ethAddress: false,
       btcAddress: false,
       fromAddress: '',
@@ -43,15 +47,16 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       timer: 1800,
       minutes: 30,
       seconds: 0,
-      interval: '',
+      // interval: '',
+      amtInvested: '',
       dollarsInvested: '',
       valid: '',
       validWallet: '',
       validBlank: '',
       validWalletBlank: '',
-      // bonus: 'x',
+      bonus: '',
       stage: '',
-      minInvest: 0,
+      minInvest: 100,
       contribution: false
     };
 
@@ -60,8 +65,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     this.currencyQuantityChange = this.currencyQuantityChange.bind(this);
     this.comeBack = this.comeBack.bind(this);
     this.confirm = this.confirm.bind(this);
-    this.updatetime = this.updatetime.bind(this);
-    this.dollarInvested = this.dollarInvested.bind(this);
+    // this.updatetime = this.updatetime.bind(this);
+    this.amtInvested = this.amtInvested.bind(this);
     this.validator = this.validator.bind(this);
     this.validatorWallet = this.validatorWallet.bind(this);
 
@@ -75,20 +80,24 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   componentDidMount() {
     this.props.getData();
     const data = this.props.successData;
-
-    const interval = setInterval(() => this.updatetime(), 1000);
+    console.log('data :' , data);
+    // const interval = setInterval(() => this.updatetime(), 1000);
     let tokensPerEther = data.ethUsd / data.tokenUsd;
     let tokensPerBitcoin = data.btcUsd / data.tokenUsd;
+    let tokensPerUsd = 1/data.tokenUsd;
+    let tokensPerEur = 1/data.tokenUsd * 1.16;
     const fromAddress = this.props.userInfo.userInfo.ethAddress;
     this.setState({
       ethToDollar: data.ethUsd,
       btcToDollar: data.btcUsd,
       tokensPerEther: tokensPerEther,
       tokensPerBitcoin: tokensPerBitcoin,
+      tokensPerUsd: tokensPerUsd,
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
-      interval,
-      // bonus: data.bonus,
+      tokensPerEur: tokensPerEur,
+      // interval,
+      bonus: data.bonus,
       stage: data.stage,
       minInvest: data.minInvest,
       fromAddress,
@@ -109,6 +118,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       btcToDollar: data.btcUsd,
       tokensPerEther: data.ethUsd / data.tokenUsd,
       tokensPerBitcoin: data.btcUsd / data.tokenUsd,
+      tokensPerUsd: 1/data.tokenUsd,
+      tokensPerEur: 1/data.tokenUsd * 1.16,
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
       time: nextProps.deadline,
@@ -130,60 +141,71 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   onContributionConfirm(e) {
     e.preventDefault();
     /*  form = document.getElementById('contriForm'); */
-
-    const fromAddress = document.getElementById('fromAddress').value;
-    console.log(typeof(this.state.dollarsInvested));
-    if (parseInt(this.state.dollarsInvested) < this.state.minInvest) {
-      this.notifyMinimum();
-    } else if (!this.state.valid) {
-      const curr = this.state.curr;
-      toast.error(`Please enter a valid ${curr} address`);
-    } else if (this.state.curr == 'Bitcoin') {
-    const tokenReceive = document.getElementById('tokenReceive').value;
-
-        if(!this.state.validWallet){
-          toast.error('Please enter a valid ERC20 address');
-        }else{
+    if( this.state.curr == 'Bitcoin' || this.state.curr == 'Ethereum') {
+      const fromAddress = document.getElementById('fromAddress').value;
+      console.log(typeof(this.state.dollarsInvested));
+      if (parseInt(this.state.dollarsInvested) < this.state.minInvest) {
+        this.notifyMinimum();
+      } else if (!this.state.valid) {
+        const curr = this.state.curr;
+        toast.error(`Please enter a valid ${curr} address`);
+      } else if (this.state.curr == 'Bitcoin') {
+      // const tokenReceive = document.getElementById('tokenReceive').value;
+  
+          // if(!this.state.validWallet){
+          //   toast.error('Please enter a valid ERC20 address');
+          // }
+          // else{
+            this.setState({
+              confirmContri: true,
+              fromAddress,
+              // tokenReceiveAddress: tokenReceive,
+            })
+  
+            const body = {
+              tokens: this.state.tokens,
+              type: this.state.curr,
+              amount: this.state.currencyQuantity,
+              fromAddress,
+              toAddress: this.state.btcAddress,
+              tokenReceivingAddress: '',
+              usdAmount: this.state.dollarsInvested,
+            };
+  
+            // console.log(body);
+            this.props.confirmPayment(body);
+          // }
+      } else if(this.state.curr == 'Ethereum'){
           this.setState({
             confirmContri: true,
             fromAddress,
-            tokenReceiveAddress: tokenReceive,
-          })
-
+            tokenReceiveAddress: fromAddress,
+          });
+  
           const body = {
             tokens: this.state.tokens,
             type: this.state.curr,
             amount: this.state.currencyQuantity,
             fromAddress,
-            toAddress: this.state.btcAddress,
-            tokenReceivingAddress: tokenReceive,
+            toAddress: this.state.ethAddress,
+            tokenReceivingAddress: fromAddress,
             usdAmount: this.state.dollarsInvested,
           };
-
+  
           // console.log(body);
           this.props.confirmPayment(body);
+      } 
+      
+    }else {
+      console.log('dollar :' , this.state.dollarsInvested);
+        if (parseInt(this.state.dollarsInvested) < this.state.minInvest) {
+          this.notifyMinimum();
+        } else if (this.state.curr == 'Dollar' || this.state.curr == 'Euro') {
+          this.setState({
+            usdEurContributionConfirm : true
+          })
         }
-    } else{
-        this.setState({
-          confirmContri: true,
-          fromAddress,
-          tokenReceiveAddress: fromAddress,
-        });
-
-        const body = {
-          tokens: this.state.tokens,
-          type: this.state.curr,
-          amount: this.state.currencyQuantity,
-          fromAddress,
-          toAddress: this.state.ethAddress,
-          tokenReceivingAddress: fromAddress,
-          usdAmount: this.state.dollarsInvested,
-        };
-
-        // console.log(body);
-        this.props.confirmPayment(body);
-    }
-
+      }
   }
 
 
@@ -299,16 +321,32 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     if (this.state.curr === 'Bitcoin') {
       this.setState({
         currencyQuantity,
-        dollarQuantity: currencyQuantity * this.state.btcToDollar,
+        dollarsInvested: currencyQuantity * this.state.btcToDollar,
         tokens: this.state.tokensPerBitcoin * currencyQuantity,
-        dollars: e.target.value,
+        tokensWithBonus: this.state.tokensPerBitcoin * currencyQuantity + this.state.tokensPerBitcoin * currencyQuantity * 0.01 * this.state.bonus,
       });
-    } else {
+    } else if (this.state.curr === 'Ethereum') {
       this.setState({
         currencyQuantity,
-        dollarQuantity: currencyQuantity * this.state.ethToDollar,
+        dollarsInvested: currencyQuantity * this.state.ethToDollar,
         tokens: currencyQuantity * this.state.tokensPerEther,
+        tokensWithBonus: currencyQuantity * this.state.tokensPerEther + currencyQuantity * this.state.tokensPerEther * 0.01 * this.state.bonus,
         dollars: e.target.value,
+      });
+    } else if (this.state.curr === 'Dollar') {
+      this.setState({
+        currencyQuantity,
+        dollarsInvested: currencyQuantity,
+        tokens: currencyQuantity * this.state.tokensPerUsd,
+        tokensWithBonus: currencyQuantity * this.state.tokensPerUsd + currencyQuantity * this.state.tokensPerUsd * 0.01 * this.state.bonus,
+        dollars: e.target.value,
+      });
+    } else if (this.state.curr === 'Euro') {
+      this.setState({
+        currencyQuantity,
+        dollarsInvested: currencyQuantity * 1.16,
+        tokens: currencyQuantity * this.state.tokensPerEur,
+        tokensWithBonus: currencyQuantity * this.state.tokensPerEur + currencyQuantity * this.state.tokensPerEur * 0.01 * this.state.bonus,
       });
     }
     document.getElementById('tokens').value = this.state.tokens;
@@ -316,51 +354,56 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
   CurrencyChange(e) {
     /* console.log(e.target.value); */
-    let currencyQuantity = document.getElementById('currencyqty');
-    let add = document.getElementById('fromAddress').value;
-    if (currencyQuantity.length === 0) {
+    let currencyQuantity = document.getElementById('amt');
+    let add = this.state.fromAddress;
+    console.log(currencyQuantity.value);
+    if (currencyQuantity.value === 0) {
       currencyQuantity = 0;
     }
     if (e.target.value === 'BTC') {
-      this.setState({
-        fromAddress: '',
-        tokenReceiveAddress: this.props.userInfo.userInfo.ethAddress,
-        validWallet: true
-      })
-      currencyQuantity.value = this.state.dollarsInvested / this.state.btcToDollar;
-      if (add.match(/^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/)) {
-        // console.log('done btc');
+        // let add = document.getElementById('fromAddress').value;
+    
         this.setState({
-          valid: true,
-          validBlank: 'false',
-          curr: 'Bitcoin',
-          currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
-          dollarQuantity: currencyQuantity.value * this.state.btcToDollar,
-          tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
-        });
-      }else if(add == ''){
-       // console.log('Empty');
-        this.setState({
-          validBlank: 'true',
-          curr: 'Bitcoin',
-          currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
-          dollarQuantity: currencyQuantity.value * this.state.btcToDollar,
-          tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
+          fromAddress: '',
+          tokenReceiveAddress: this.props.userInfo.userInfo.ethAddress,
+          validWallet: true
         })
-      }else {
-        // console.log('not done');
-        this.setState({
-          valid: false,
-          curr: 'Bitcoin',
-          currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
-          dollarQuantity: currencyQuantity.value * this.state.btcToDollar,
-          tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
-        });
-      }
-
-
-    } else {
-      currencyQuantity.value = this.state.dollarsInvested / this.state.ethToDollar;
+        // currencyQuantity.value = this.state.dollarsInvested / this.state.btcToDollar;
+        if (add.match(/^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/)) {
+          // console.log('done btc');
+          this.setState({
+            valid: true,
+            validBlank: 'false',
+            curr: 'Bitcoin',
+            currencyQuantity: currencyQuantity.value,
+            dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
+            tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
+            tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
+          });
+        }else if(add == ''){
+         // console.log('Empty');
+          this.setState({
+            validBlank: 'true',
+            curr: 'Bitcoin',
+            currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
+            dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
+            tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
+            tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
+          })
+        }else {
+          // console.log('not done');
+          this.setState({
+            valid: false,
+            curr: 'Bitcoin',
+            currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
+            dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
+            tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
+            tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
+          });
+        }
+    } else  if(e.target.value === 'ETH') {
+      let currencyQuantity = document.getElementById('amt');
+      // let add = document.getElementById('fromAddress').value;
       this.setState({
         fromAddress: this.props.userInfo.userInfo.ethAddress,
         tokenReceiveAddress: false,
@@ -373,19 +416,20 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
           validBlank: 'false',
           curr: 'Ethereum',
           validWallet: true,
-          currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
-         dollarQuantity: currencyQuantity.value * this.state.ethToDollar,
+          currencyQuantity: this.state.amtInvested,
+         dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
          tokens: currencyQuantity.value * this.state.tokensPerEther,
+         tokensWithBonus: currencyQuantity.value * this.state.tokensPerEther + currencyQuantity.value * this.state.tokensPerEther * 0.01 * this.state.bonus
         });
       }else if(add == ''){
         // console.log('Empty');
         this.setState({
           validBlank: 'true',
           curr: 'Ethereum',
-        currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
-        dollarQuantity: currencyQuantity.value * this.state.ethToDollar,
+        currencyQuantity: this.state.amtInvested,
+        dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
         tokens: currencyQuantity.value * this.state.tokensPerEther,
-        tokensWithBonus: (currencyQuantity.value * this.state.tokensPerEther) + ((currencyQuantity.value * this.state.tokensPerBitcoin) * (this.state.bonus / 100)),
+        tokensWithBonus: (currencyQuantity.value * this.state.tokensPerEther) + ((currencyQuantity.value * this.state.tokensPerEther) * (this.state.bonus / 100)),
         })
       }else {
        // console.log('not done');
@@ -394,52 +438,93 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
           validBlank: 'false',
           curr: 'Ethereum',
         currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
-        dollarQuantity: currencyQuantity.value * this.state.ethToDollar,
+        dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
         tokens: currencyQuantity.value * this.state.tokensPerEther,
+        tokensWithBonus: currencyQuantity.value * this.state.tokensPerEther + currencyQuantity.value * this.state.tokensPerEther * 0.01 * this.state.bonus
         });
       }
 
 
+    } else if (e.target.value === 'USD') {
+      let currencyQuantity = document.getElementById('amt');
+      this.setState({
+        valid: true,
+        validBlank: 'false',
+        curr: 'Dollar',
+        validWallet: true,
+        dollarsInvested: currencyQuantity.value,
+        currencyQuantity: currencyQuantity.value,
+        tokens: currencyQuantity.value * this.state.tokensPerUsd,
+        tokensWithBonus: currencyQuantity.value * this.state.tokensPerUsd + this.state.tokensPerUsd * currencyQuantity.value * 0.01 * this.state.bonus
+      })
+    } else if (e.target.value === 'EUR') {
+      let currencyQuantity = document.getElementById('amt');
+      this.setState({
+        valid: true,
+        validBlank: 'false',
+        curr: 'Euro',
+        validWallet: true,
+        dollarsInvested: currencyQuantity.value * 1.16,
+        currencyQuantity: currencyQuantity.value,
+        tokens: currencyQuantity.value * this.state.tokensPerEur,
+        tokensWithBonus: currencyQuantity.value * this.state.tokensPerEur + this.state.tokensPerEur * currencyQuantity.value * 0.01 * this.state.bonus
+      }) 
     }
   }
 
-  dollarInvested(e) {
-     const currencyQuant = document.getElementById('currencyqty');
+  amtInvested(e) {
+     const currencyQuant = document.getElementById('amt');
      this.setState({
-       dollarsInvested: e.target.value,
+       amtInvested: e.target.value,
      });
      if (this.state.curr == 'Ethereum') {
-       currencyQuant.value = e.target.value / this.state.ethToDollar;
+      //  currencyQuant.value = e.target.value / this.state.ethToDollar;
        this.setState({
          currencyQuantity: currencyQuant.value,
-         dollarQuantity: currencyQuant.value * this.state.ethToDollar,
+         dollarsInvested: currencyQuant.value * this.state.ethToDollar,
          tokens: this.state.tokensPerEther * currencyQuant.value,
+         tokensWithBonus: this.state.tokensPerEther * currencyQuant.value + this.state.tokensPerEther * currencyQuant.value * 0.01 * this.state.bonus
        });
-     } else {
-       currencyQuant.value = e.target.value / this.state.btcToDollar;
+     } else if (this.state.curr == 'Bitcoin') {
+      //  currencyQuant.value = e.target.value / this.state.btcToDollar;
        this.setState({
          currencyQuantity: currencyQuant.value,
-         dollarQuantity: currencyQuant.value * this.state.btcToDollar,
-         tokens: this.state.tokensPerBitcoin * currencyQuant.value,
-       });
+         dollarsInvested: currencyQuant.value * this.state.btcToDollar,
+         tokens: currencyQuant.value * this.state.tokensPerBitcoin,
+         tokensWithBonus: this.state.tokensPerBitcoin * currencyQuant.value + this.state.tokensPerBitcoin * currencyQuant.value * 0.01 * this.state.bonus
+      });
+     } else if (this.state.curr == 'Dollar') {
+       this.setState({
+         currencyQuantity: currencyQuant.value,
+         dollarsInvested: currencyQuant.value,
+         tokens: currencyQuant.value * this.state.tokensPerUsd,
+         tokensWithBonus: this.state.tokensPerUsd * currencyQuant.value + this.state.tokensPerUsd * currencyQuant.value * 0.01 * this.state.bonus
+       })
+     } else if (this.state.curr == 'Euro') {
+       this.setState({
+         currencyQuantity: currencyQuant.value,
+         dollarsInvested: currencyQuant.value * 1.16,
+         tokens: currencyQuant.value * this.state.tokensPerEur,
+         tokensWithBonus: this.state.tokensPerEur * currencyQuant.value + this.state.tokensPerEur * currencyQuant.value * 0.01 * this.state.bonus
+       })
      }
    }
-   updatetime() {
-    if (this.state.timer > 0) {
-      const min = this.state.timer / 60;
-      const minutes = Math.floor(min);
-      const seconds = this.state.timer % 60;
-      this.setState({
-        timer: this.state.timer - 1,
-        minutes,
-        seconds: seconds < 10 ? `0${seconds}` : seconds,
-      });
-    } else {
-      clearInterval(this.state.interval);
-      this.props.dash();
-      this.props.reload();
-    }
-  }
+  //  updatetime() {
+  //   if (this.state.timer > 0) {
+  //     const min = this.state.timer / 60;
+  //     const minutes = Math.floor(min);
+  //     const seconds = this.state.timer % 60;
+  //     this.setState({
+  //       timer: this.state.timer - 1,
+  //       minutes,
+  //       seconds: seconds < 10 ? `0${seconds}` : seconds,
+  //     });
+  //   } else {
+  //     clearInterval(this.state.interval);
+  //     this.props.dash();
+  //     this.props.reload();
+  //   }
+  // }
 
   // End of container functions
   render() {
@@ -484,7 +569,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
         sec={this.state.seconds}
         dollars={this.state.dollarQuantity}
         currency={this.state.curr}
-        tokens={this.state.tokens}
+        tokens={this.state.tokensWithBonus}
         currencyQty={this.state.currencyQuantity}
         back={this.comeBack}
         btcAddress={this.props.successData.btcAddress}
@@ -496,6 +581,24 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
         />
       );
     }
+    if (this.state.usdEurContributionConfirm) {
+      return (
+        <div id="content" className="ui-content ui-content-aside-overlay">
+          <div className="ui-content-body">
+          <div className="ui-container container-fluid">
+            <div className="row">
+              <div className="col-sm-12">
+                <div className="alert alert-success text-center">
+                  <h4>Contribution in USD and EUR is temporarily disabled.<br/></h4>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+      )
+    }
+    console.log(this.state);
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
         <div className="ui-content-body">
@@ -508,63 +611,64 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                 <div className="contribution">
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
-
-
-                      {/* <h2>{this.state.bonus}% Bonus until 24 July 2018</h2> */}
+                      <p><h2>{ this.state.bonus === 300 ? 'Get 4x Coins in Close Group Sale' : this.state.bonus === 100 ? 'Get 2x Coins in Pre-ICO sale' : null}</h2></p>
                       <p style={{color:'#ff0000'}}>Minimum investment ${this.state.minInvest}</p>
-                      <h4>Time remaining for this transaction:<span style={{color: '#ff0000'}}> {this.state.minutes}:{this.state.seconds} </span>(mm:ss)</h4>
-
                     </div>
                   </div>
                   <div className="row">
                     <div className="col-sm-12">
                       <form id="contriForm" onSubmit={this.onContributionConfirm} >
                         <div className="frm-block">
-
-                          <div className="form-group">
-                            <label htmlFor="dollars" className="form-label">How much Dollars you would like to invest?</label>
-                            <input id="dollars" onChange={this.dollarInvested} type="number" className="form-input form-control" required/>
-
-                          </div>
-                          <div className="form-group">
-
-                            <label htmlFor="currency" className="form-label">Select your currency</label>
-                            <span className="select-wrapper"><select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input" required>
+                        <div className="form-group">
+                          <label htmlFor="currency" className="form-label">Select your currency</label>
+                          <span className="select-wrapper">
+                            <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input" required>
                               <option value="ETH">ETH</option>
                               <option value="BTC">BTC</option>
+                              <option value="USD">USD</option>
+                              <option value="EUR">EUR</option>
                             </select>
-                            </span>
-                            <span id="currency-tokens">1  {this.state.curr}= {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.tokensPerBitcoin).toFixed(2)} ZIN tokens</span>
+                          </span>
+                          <span id="currency-tokens">1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} ZIN Coins</span>
+                        </div>
+                          <div className="form-group">
+                            <label htmlFor="amt" className="form-label">How much {this.state.curr} you would like to invest?</label>
+                            <input id="amt" onChange={this.amtInvested} type="number" className="form-input form-control" required/>
                           </div>
 
-                          <div className="form-group">
+                          {/* <div className="form-group">
                             <label htmlFor="currencyqty" className="form-label">Amount in {this.state.curr}</label>
                             <input id="currencyqty" type="text" value={this.state.currencyQuantity} className="form-input form-control text-right" disabled required/>
 
-                          </div>
+                          </div> */}
 
                           <div className="form-group">
-                            <label htmlFor="tokens" className="form-label">NO. OF ZIN TOKENS</label>
+                            <label htmlFor="tokens" className="form-label">TOTAL ZIN COINS</label>
                             <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right" disabled required/>
-
                           </div>
 
-
                           <div className="form-group">
+                            <label htmlFor="tokensWithBonus" className="form-label">TOTAL ZIN COINS WITH BONUS</label>
+                            <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
+                          </div>
+                          {
+                            this.state.curr == 'Ethereum' || this.state.curr == 'Bitcoin' ? 
+                            <div className="form-group">
                             <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
                             <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left" required/>
-                          </div>
+                          </div> : ''
+                          }
 
                           {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
-                          {(this.state.curr == 'Bitcoin') ?
+                          {/* {(this.state.curr == 'Bitcoin') ?
                           (<div className="form-group">
-                            <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving ZIN tokens</label>
+                            <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving ZIN Coins</label>
                             <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" required/>
                             </div>) : <div></div>
-                            }
+                            } */}
 
                         {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
-                          <span><strong style={{color:"#ff0000"}}>Note:</strong> Please provide ERC-20 compatible wallet address</span>
+                         { (this.state.curr == 'Ethereum') ? <span><strong style={{color:"#ff0000"}}>Note:</strong> Please provide ERC-20 compatible wallet address</span> : null } 
                           <div className="btn-row">
                             <button className="form-button btn-primary" type="submit" >Continue</button>
                           </div>

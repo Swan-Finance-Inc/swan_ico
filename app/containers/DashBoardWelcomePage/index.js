@@ -554,8 +554,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
               </div>
               {/*
                 kycStatus === 'ACCEPTED' ? <Link to="/dashboard/contribution" > 
-                <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Tokens</span></button>
-                </Link> : <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Tokens</span></button>
+                <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Coins</span></button>
+                </Link> : <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Coins</span></button>
               */}
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
@@ -589,7 +589,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                     <TransactionHistory message={this.props.global.depositSuccess} /> :
 '' }
           <div id="footer" className="ui-footer">© 2018 Zineum, All Rights Reserved</div>
-          <div className="sticky-telegram-logo"><a href="https://t.me/#" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+          <div className="sticky-telegram-logo"><a href=" https://t.me/zineumofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
           { this.state.notifyTransactions.length > 0 ? 
           <div className="notify-deposit fade-in" id="notify">
           <p><strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].address}</strong><br/> 

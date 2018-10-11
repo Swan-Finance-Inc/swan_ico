@@ -18,7 +18,9 @@ import reducer from './reducer';
 import saga from './saga';
 import { updateDetails, resetSuccess } from './actions';
 import { ToastContainer, toast } from 'react-toastify';
-
+import PhoneInput from 'react-phone-number-input'
+import 'react-phone-number-input/style.css'
+import { parseNumber, formatNumber, isValidNumber } from 'libphonenumber-js'
 export class ProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
     super(props);
@@ -82,7 +84,9 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
 
   updateDetails(e){
     e.preventDefault()
-    if(this.state.valid){
+    if(!isValidNumber(this.state.phone)){
+      toast.error('Phone number is invalid');
+    }else if(this.state.valid){
       const { fullName, dob, gender, phone, telegram, twitter, loginAlert, ethAddress } = this.state;
       this.props.updateDetail({fullName,dob,gender,phone,telegram,twitter,loginAlert,ethAddress});
     }else{
@@ -102,6 +106,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   }
 
   render() {
+    const { phone } = this.state;
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
       <div className="ui-content-body">
@@ -158,7 +163,13 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <label htmlFor="phone"><span style={{fontWeight:'500'}}>Phone Number </span></label>
                   </div>
                   <div className="col-sm-9">
-                    <input className="form-control" type="text" name="phone" id="phone" onChange={this.handleInput} value={this.state.phone}/>
+                    {/* <input className="form-control" type="text" name="phone" id="phone" onChange={this.handleInput} value={this.state.phone}/> */}
+                    <PhoneInput id="phone"
+                        placeholder="Enter phone number"
+                        name="phone"
+                        value={ phone }
+                        onChange={ phone => this.setState({ phone }) }
+                        error={ phone ? (isValidNumber(phone) ? undefined : 'Invalid phone number') : '' }/>
                   </div>
                 </div>
                 <div className="row form-group">
@@ -166,7 +177,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <label htmlFor="telegram"><span style={{fontWeight:'500'}}>Telegram </span></label>
                   </div>
                   <div className="col-sm-9">
-                    <input className="form-control" type="text" name="telegram" id="telegram"  placeholder="Telegram Username" onChange={this.handleInput} value={this.state.telegram}/>
+                    <input className="form-control" type="text" name="telegram" id="telegram" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Telegram Profile link" placeholder="Telegram link" onChange={this.handleInput} value={this.state.telegram}/>
                   </div>
                 </div>
                 <div className="row form-group">
@@ -174,7 +185,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <label htmlFor="twitter"><span style={{fontWeight:'500'}}>Twitter </span></label>
                   </div>
                   <div className="col-sm-9">
-                    <input className="form-control" type="text" name="twitter" id="twitter" placeholder="Twitter handle" onChange={this.handleInput} value={this.state.twitter}/>
+                    <input className="form-control" type="text" name="twitter" id="twitter" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Twitter Profile link" placeholder="Twitter link" onChange={this.handleInput} value={this.state.twitter}/>
                   </div>
                 </div>
                 <div className="row form-group">

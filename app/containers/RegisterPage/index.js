@@ -223,7 +223,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
                       <div className="form-group">
                         <label className="form-check-label" htmlFor="usCitizen">
                           <input id="usCitizen" className="boolean required form-check-input" required label="false" data-title="Please confirm" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="usCitizen" />
-                             &nbsp; I’m not US citizen and agree to the token policy of ZINEUM token sale.
+                             &nbsp; I’m not US citizen and agree to the policy of ZINEUM Coin sale.
                         </label>
                       </div>
 

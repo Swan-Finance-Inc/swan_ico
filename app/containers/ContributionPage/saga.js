@@ -15,6 +15,7 @@ export function* getData() {
     const apiData = yield call(api.user.getContributionData, headers);
    // console.log(apiData);
     if (apiData.success) {
+      console.log(apiData);
       yield put(successData(apiData.data));
     }
   } catch (error) {

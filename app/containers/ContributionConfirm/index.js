@@ -143,8 +143,8 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                   <div className="row">
                     <div className="col-sm-12 col-md-12 text-center">
                       <h2>You are almost there!</h2>
-                      <h4> Time remaining for this transaction: <span style={{ color: '#ff0000' }}>{this.props.min}:{this.props.sec}</span> (mm:ss)</h4>
-                      <div id="timer"></div>
+                      {/* <h4> Time remaining for this transaction: <span style={{ color: '#ff0000' }}>{this.props.min}:{this.props.sec}</span> (mm:ss)</h4> */}
+                      {/* <div id="timer"></div> */}
                     </div>
                   </div>
                   
@@ -152,7 +152,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                       <div className="row">
                         <div className="col-sm-12 col-md-6">
                           <ol>
-                            <li>Wallet address to deposit <strong>{this.props.currencyQty} {this.props.currency === 'Ethereum' ? 'ETH' : 'BTC'}</strong> for purchase of <strong>{this.props.tokens} ZIN tokens</strong>
+                            <li>Wallet address to deposit <strong>{this.props.currencyQty} {this.props.currency === 'Ethereum' ? 'ETH' : 'BTC'}</strong> for purchase of <strong>{this.props.tokens} ZIN Coins</strong>
                               <div className="mt-10">
                                 <div className="mt-20">
                                   <div className="blockchain-tx text-center ">
