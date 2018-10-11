@@ -123,7 +123,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
       time: nextProps.deadline,
-      // bonus: data.bonus,
+      bonus: data.bonus,
       stage: data.stage,
       minInvest: data.minInvest,
     });
