@@ -175,7 +175,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
           <div className="panel-body" style={{fontSize:'16px'}}>
               <div className="row">
                 <div className="col-sm-12">
-                  <button className="ticketBtn" onClick={this.showCreateTicket}>New Ticket</button>
+                  <button className="btn btn-primary" onClick={this.showCreateTicket}>New Ticket</button>
                 </div>
               </div>
               <div className="row">

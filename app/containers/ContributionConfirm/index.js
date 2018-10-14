@@ -164,7 +164,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                                      <div className="col-sm-6">
                                      <CopyToClipboard text={this.props.ethAddress}
                                   onCopy={() => this.setState({copy: true})}>
-                                <button style={{borderRadius:"30px"}} className="form-buy-button">Copy</button>
+                                <button style={{borderRadius:"30px"}} className="form-button">Copy</button>
                                 </CopyToClipboard>
                                   </div>
                                   <div className="col-sm-6" style={{paddingTop:'10px'}}>

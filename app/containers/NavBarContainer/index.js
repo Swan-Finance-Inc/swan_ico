@@ -70,9 +70,9 @@ export class NavBarContainer extends React.PureComponent {
   render() {
     return (
       <header>
-        <Navbar fluid fixedTop style={{	background: 'linear-gradient(to right, #5F00D4, #30006C)',borderWidth: '0'}}>
+        <Navbar fluid fixedTop style={{borderWidth: '0'}} className="navbar-back">
           <div className="header-left">
-            <div className="logo"><Link to="/"><img src="/assets/img/logo.svg" alt="ZINEUM" /></Link></div>
+            <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="ZINEUM" /></Link></div>
           </div>
           <div className="header-right hidden-xs">
             <Nav pullRight >

@@ -50,7 +50,7 @@ export class SignupConfirm extends React.PureComponent { // eslint-disable-line 
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
 
-                <div className="logo"><Link to="/"><img src="/assets/img/logo.svg" alt="ZINEUM" /></Link></div>
+                <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="ZINEUM" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>

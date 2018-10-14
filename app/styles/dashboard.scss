@@ -125,7 +125,8 @@ transition: all .301s;
 	overflow: hidden;
 }
 .ui-aside {
-	background: linear-gradient(to right, #5F00D4, #30006C);
+	background-image: url("/assets/img/sidebar.png");
+	background-size: cover;
 	color: rgba(255, 255, 255, 0.5);
 	height: 100%;
 	min-height: 100%;
@@ -308,7 +309,7 @@ transition: all .301s;
 	background-color:rgba(0, 0, 0, 0.03) !important;
 }
 .ui-aside .nav .active {
-	background: linear-gradient(to right, #5F00D4, #30006C) !important;
+	background-color: #978FFF !important;
 }
 .ui-aside .nav > li .nav-sub {
 	max-height:180px;
@@ -354,7 +355,6 @@ transition: all .301s;
 	position: relative;
 }
 a.toggle-btn {
-	background: linear-gradient(to right, #5F00D4, #30006C 20%);
 	color:#fff;
 }
 .dropdown a span i {
@@ -501,7 +501,9 @@ a.toggle-btn {
 	width: 100%;
 }
 .referral-link button {
-	background: linear-gradient(to right, #5F00D4, #30006C);
+	// background: linear-gradient(to right, #5F00D4, #30006C);
+	// background: linear-gradient(to bottom, #C8C2FF, #978FFF) !important;
+	background-color: #978FFF !important;
 	border: 0;
 	color: #FFF;
 	position: absolute;
@@ -510,7 +512,14 @@ a.toggle-btn {
 	width: 120px;
 	top: 1px;
 	border-radius: 0 5px 5px 0;
+	-webkit-transition: all .5s ease;
+    transition: all .5s ease;
 }
+
+.referral-link button:hover {
+	background-color: #000 !important;
+}
+
 .buy-button {
 	background-color: #0074ec;
 	border: 0;
@@ -565,7 +574,9 @@ a.toggle-btn {
 	max-width: 160px;
 }
 .form-button {
-	background: linear-gradient(to right, #5F00D4, #30006C);
+	background-color: #978FFF !important;
+	// background: linear-gradient(to bottom, #C8C2FF, #978FFF);
+	// background: #000;
 	border: 0;
 	display: inline-block;
 	margin: 0 auto;
@@ -574,7 +585,7 @@ a.toggle-btn {
 	height: 50px;
 	line-height: 50px;
 	padding: 0 60px;
-	font-size: 12px;
+	font-size: 16px;
 	font-weight: 500;
 	color: #fff;
 	cursor: pointer;
@@ -582,7 +593,7 @@ a.toggle-btn {
 	-webkit-transition: all .5s ease;
     transition: all .5s ease;
 }
-.form-button:hover, .form-button:focus{outline: 0; -webkit-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);}
+.form-button:hover, .form-button:focus{outline: 0; -webkit-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);background-color: #000 !important}
 .note {
 	font-size: 14px;
 	font-style: italic;
@@ -672,7 +683,7 @@ ol.rule-list li {
 .confirm-block li{margin-bottom: 20px;}
 .confirm-block .read-only{font-size: 18px; text-align: left;}
 .get-address{margin-top: 10px;}
-.confirm-block .form-button{background-color: transparent; border: 1px solid #2767ff; color: #2767ff; padding: 0 20px; height: 40px; line-height: 40px;}
+.confirm-block .form-button{background-color: transparent; padding: 0 20px; height: 40px; line-height: 40px;}
 .blockchain-tx{border: 1px solid #ddd; padding: 20px; -webkit-border-radius: 5px;    border-radius: 5px; -webkit-transition: all .5s ease; transition: all .5s ease;}
 .blockchain-tx:hover{-webkit-box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15);  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.15); }
 .blockchain-tx > p{text-align: left; margin-bottom: 0;}
@@ -772,18 +783,19 @@ ol.rule-list li {
 	}
 	 .ui-aside-compact .nav > li .nav-sub-header {
 	 color: #ffffff;
-	 background: linear-gradient(to left, #5F00D4, #30006C);
+	 background-color: #978FFF !important;
 	}
 	 .ui-aside .nav > li .nav-sub > li.nav-sub-header > a, .ui-aside .nav > li .nav-sub > li.nav-sub-header > a span {
 	 color: #ffffff;
 	}
 	 .ui-aside > .nav > li:hover > a, .ui-aside > .nav > li.active > a {
-	 background: linear-gradient(to right, #5F00D4, #30006C 50%);
-	 color: #fff;
+	//  background: linear-gradient(to right, #5F00D4, #30006C 50%);
+	background-color: #978FFF !important;
+	color: #fff;
 	}
 	 .ui-aside-compact .nav > li:hover > a.toggle-btn {
-	 background-color:#30006C;
-	 color:#fff;
+		background-color: #978FFF !important;
+	 	color:#fff;
 	}
 	 .ui-aside-compact .nav > li:hover > .nav-sub {
 	 margin-left: 0;
@@ -822,10 +834,10 @@ ol.rule-list li {
 	/* Confirm Contribution */	
 
 }
-.ui-aside > .nav > li:hover > a, .ui-aside > .nav > li.active > a {
-	background: linear-gradient(to right, #5F00D4, #30006C 50%);
-	color: #fff;
-   }
+// .ui-aside > .nav > li:hover > a, .ui-aside > .nav > li.active > a {
+// 	background: linear-gradient(to right, #5F00D4, #30006C 50%);
+// 	color: #fff;
+//    }
  @media (min-width: 992px) {
 	 .refer-friends .col-md-6 {
 	margin-left: 0;
@@ -1068,6 +1080,9 @@ opacity:0;
 
 
 @media (max-width: 767px) {
+	.nav > li > a:hover {
+		background: none;
+	}
 	#google_translate_element {
    display: none;
    }
@@ -1367,12 +1382,23 @@ sup {
 }
 
 .btn-primary {
-	background : linear-gradient(to right, #5F00D4, #30006C) !important;
-	border: 1px solid #5F00D4 !important;
+	// background : linear-gradient(to right, #5F00D4, #30006C) !important;
+	// background: linear-gradient(to bottom, #C8C2FF, #978FFF) !important;
+	background-color: #978FFF !important; 
+	border-color: #fff;
+	-webkit-transition: all .5s ease;
+	transition: all .5s ease;
+	border-radius: 25px;
+	font-size: 16px;
+	font-family: inherit;
+	border:0px;
+	// border: 1px solid #5F00D4 !important;
 }
 
 .btn-primary[disabled] {
-	background-color: #0074e6;
+	// background-color: #0074e6;
+	// background: linear-gradient(to bottom, #C8C2FF, #978FFF) !important;
+	background-color: #978FFF !important;
 }
 
 .btn-video {
@@ -1422,7 +1448,8 @@ sup {
 
 .panel > .panel-heading {
 	font-family: 'Exo', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
-	background: linear-gradient(to right, #5F00D4, #30006C) !important;
+	background-image: url("/assets/img/panel.png");
+	background-size: cover;
 	color: #fff;
 	font-weight: 600;
 	font-size: 20px;
@@ -1464,4 +1491,22 @@ sup {
 	height: auto !important;
 	padding: auto !important;
 	margin-top: 8px;
+}
+
+.navbar-back {
+	background-image: url("/assets/img/nav.png");
+	background-size: cover;
+}
+
+.alert-danger {
+	background: none;
+}
+
+.alert-success {
+	background: none;
+}
+
+.btn-primary:hover {
+	color: #fff;
+	background: #000 !important;
 }

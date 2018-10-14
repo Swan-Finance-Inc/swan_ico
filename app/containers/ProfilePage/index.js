@@ -206,7 +206,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 </div>
                 <div className="row">
                   <div className="col-sm-12 text-center">
-                    <button type="submit" className="btn btn-primary form-control">Update Profile</button>
+                    <button type="submit" className="form-button">Update Profile</button>
                   </div>
                 </div>
               </form>

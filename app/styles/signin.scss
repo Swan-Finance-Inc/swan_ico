@@ -67,7 +67,7 @@ header .container {
 }
 
 .header {
-	background: linear-gradient(to right, #5F00D4, #30006C);
+	background: transparent;
 	box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 	-webkit-box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 }
@@ -81,11 +81,10 @@ header .container {
 	margin: 12px 10px 0 0;
 }
 .signin-block {
-	// background-repeat: no-repeat;
-	// background-position-y: 20%;
-	// background-image: url("/assets/img/back.svg"), linear-gradient(to right, #5F00D4, #30006C);
-	// height:calc(100vh - 70px);
-	background: radial-gradient(#00C9BC, #1B92A4, #3D4C85, #532172, #5B106B);
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-image: url("/assets/img/hero-banner.png");
+	background-attachment: fixed;
 	&.login{
 
 		//height:100vh;
