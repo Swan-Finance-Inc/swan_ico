@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 
 class Balance extends React.PureComponent {
   render() {
+    console.log('tokens: ', this.props.userInfo.tokens);
     return (
       <div>
         <div className="panel panel-default">
@@ -95,6 +96,12 @@ class Balance extends React.PureComponent {
             <div className="bal-card">
               <h3>Signature Stakes</h3>
               <div className="balance">{this.props.userInfo.tokens.bounty.signature}</div>
+            </div>
+          </div>
+          <div className="col-sm-6 col-md-3">
+            <div className="bal-card">
+              <h3>LinkedIn Stakes</h3>
+              <div className="balance">{this.props.userInfo.tokens.bounty.linkedIn}</div>
             </div>
           </div>
         </div>

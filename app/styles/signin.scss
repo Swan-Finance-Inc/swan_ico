@@ -45,7 +45,6 @@ header .container {
 	margin-top: 3px;
 }
 .header-btn > a {
-	border:solid 1px #0074e6;
 	border-radius:25px;
 	-webkit-border-radius:25px;
 	min-width:130px;
@@ -60,8 +59,8 @@ header .container {
 	-webkit-transition:1s cubic-bezier(0.5, 1.7, 0.35, 0.8);
 }
 .header-btn a:hover {
-	background-color:#0074e6;
-	border-color:#0074e6;
+	background-color:#978FFF;
+	border-color:#978FFF;
 	box-shadow:rgba(0, 0, 0, 0.2) 0 10px 20px;
 	-webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 10px 20px;
 }
@@ -72,8 +71,8 @@ header .container {
 	-webkit-box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 }
 .header .header-btn>a {
-	background-color:#fff;
-	color:#1C1466;
+	background-color:#978FFF;
+	color:#FFF;
 }
 .header-right p {
 	font-family:'Poppins', sans-serif;
