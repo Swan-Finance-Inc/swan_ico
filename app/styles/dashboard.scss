@@ -408,7 +408,7 @@ a.toggle-btn {
 	text-align: center;
 }
 .bal-card h3 {
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: 700;
 	line-height: 22px;
 	margin-top: 0;
@@ -689,7 +689,7 @@ ol.rule-list li {
 .blockchain-tx > p{text-align: left; margin-bottom: 0;}
 .blockchain-tx > p > span{background-color: rgba(39, 103, 255, .05); display: block; margin: 10px 0; padding: 10px; word-break: break-all;}
 .blockchain-tx .form-input{text-align: left; word-break: break-all;}
-.btn-row .form-button{background-color: #2767ff; border: 0; color: #FFF; font-size: 16px; height: 50px; line-height: 50px; min-width: 190px;}
+.btn-row .form-button{background-color: #2767ff; border: 0; color: #FFF; font-size: 16px; height: 50px; line-height: 50px; min-width: 150px;}
 .qr-code{text-align: center;}
 
 /* Media Queries */
@@ -1360,6 +1360,7 @@ margin-top: 25px;
 
 .link {
 	color: #00f;
+	cursor: pointer;
 }
 
 .cross {

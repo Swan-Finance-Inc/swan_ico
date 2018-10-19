@@ -24,7 +24,7 @@ class Balance extends React.PureComponent {
         <div className="row">
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
-              <h3>Current Balance</h3>
+              <h3>Total Balance</h3>
               <div className="balance">{Math.round(this.props.userInfo.tokens.total)}</div>
             </div>
           </div>
@@ -46,11 +46,18 @@ class Balance extends React.PureComponent {
               <div className="balance">{this.props.userInfo.referral.pending}</div>
             </div>
           </div>
-
         </div>
-
-        <div className="row">
-          <div className="col-sm-6 col-md-3">
+        </div>
+        </div>
+            <div className="panel panel-default">
+                <div className="panel-heading">Bounty Stakes</div>
+                <div className="panel-body">
+                <div className="row">
+                  <div className="col-sm-12"><p>To participate in bounty <a href="https://www.google.com" target="_blank" className="link">click here</a>.</p></div>
+                </div>
+                <div className="row">
+                  <div className="col-sm-12">
+                <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3>Creative Stakes</h3>
               <div className="balance">{Math.round(this.props.userInfo.tokens.bounty.creative)}</div>
@@ -104,11 +111,12 @@ class Balance extends React.PureComponent {
               <div className="balance">{this.props.userInfo.tokens.bounty.linkedIn}</div>
             </div>
           </div>
+            </div>
+          </div>
         </div>
         
       </div>
       </div>
-        </div>  
     );
   }
 }

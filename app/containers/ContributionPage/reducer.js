@@ -77,6 +77,7 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['success', 'tokenUsd'], action.data.tokenUsd)
         .setIn(['success', 'ethUsd'], action.data.ethUsd)
         .setIn(['success', 'btcUsd'], action.data.btcUsd)
+        .setIn(['success', 'eurUsd'], action.data.eurUsd)
         .setIn(['success', 'ethAddress'], action.data.ethAddress)
         .setIn(['success', 'btcAddress'], action.data.btcAddress)
         .setIn(['success', 'bonus'], action.data.bonus)
