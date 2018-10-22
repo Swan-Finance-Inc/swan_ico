@@ -155,7 +155,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                       <li>Maximum 2000 Coins can be earned through referral program.</li>
                       <li>Limited Coins will be allocated under referral program.</li>
                       <li>Multiple accounts are not allowed. Anyone having multiple accounts will be disqualified from the referral program, and no Coins will be rewarded for any of the accounts.</li>
-                      <li>Please join our official <a href=" https://t.me/zineumofficial" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/Zineum/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/zineum" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/Zineum" className="link" target="_blank">Reddit Page</a>.</li>
+                      <li>Please join our official <a href=" https://t.me/zineumofficial" target="_blank" className="link">Telegram group,</a> like Our <a href="https://www.facebook.com/Zineum/" target="_blank" className="link">Facebook Page</a>, follow our official <a href="https://twitter.com/zineum" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/Zineum" className="link" target="_blank">Reddit Page</a>.</li>
                       <li>To confirm participation, please fill this <a href="https://www.google.com" target="_blank" className="link">form.</a></li>
                       <li>zineum reserves the right to add, alter, modify, change or vary all of above rules or end it altogether, at any time without prior notice and without assigning any reason whatsoever.</li>
                     </ol>
