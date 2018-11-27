@@ -63,6 +63,10 @@ const makeSelectGetMessagesSuccess = () => createSelector(
   selectTicketPageDomain,
   (substate) => substate.get('messagesSuccess')
 )
+const makeSelectTicketPageLoading = () => createSelector(
+  selectTicketPageDomain,
+  (substate) => substate.get('loading')
+)
 export default makeSelectTicketPage;
 export {
   selectTicketPageDomain,
@@ -74,5 +78,6 @@ export {
   makeSelectMessage,
   makeSelectMessageSuccess,
   makeSelectTicketId,
-  makeSelectGetMessagesSuccess
+  makeSelectGetMessagesSuccess,
+  makeSelectTicketPageLoading
 };

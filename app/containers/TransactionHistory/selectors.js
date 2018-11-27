@@ -31,6 +31,10 @@ const makeSelectNextPage = () => createSelector(
   selectTransactionHistoryDomain,
   (substate) => substate.get('nextPage')
 );
+const makeSelectTransLoading = () => createSelector(
+  selectTransactionHistoryDomain,
+  (substate) => substate.get('loading')
+);
 
 export default makeSelectTransactionHistory;
 export {
@@ -38,4 +42,5 @@ export {
   makeSelectTransactions,
   makeSelectPage,
   makeSelectNextPage,
+  makeSelectTransLoading
 };

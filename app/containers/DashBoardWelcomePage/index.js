@@ -25,6 +25,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
 import { loadProfileAction, submitSocial, resetKycDone } from './actions';
 import makeSelectDashBoardWelcomePage, { makeSelectKycDone }from './selectors';
+import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
 import { resetSuccess } from '../KycPage/actions';
 import $ from 'jquery'
@@ -89,7 +90,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
         address: event.returnValues['0'],
         amount: event.returnValues.weiAmount / Math.pow(10, 18)
       }
-      var newArray = outer.state.notifyTransactions.slice();    
+      var newArray = outer.state.notifyTransactions.slice();
       newArray.unshift(transaction);
       outer.setState({notifyTransactions:newArray})
     });
@@ -498,15 +499,15 @@ export class DashBoardWelcomePage extends React.PureComponent {
       //  }
     }
 
-  
-    const { kycStatus } = this.props.dashboardwelcomepage.userInfo; 
+
+    const { kycStatus } = this.props.dashboardwelcomepage.userInfo;
     if (!localStorage.token) {
       return <Redirect to="/" />;
     }
     if (this.props.dashboardwelcomepage.loading) {
       return (
         <div>
-          <CustomLoading />
+          <LoadingSpinner style ={{display:"flex",justifyContent:"center",alignItems:"center",position:"fixed",width:"100%",height:"100%", background:"#fff", zIndex:"99999",overflow:"hidden"}} />
         </div>);
     }
     return (
@@ -553,7 +554,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                 </div>
               </div>
               {/*
-                kycStatus === 'ACCEPTED' ? <Link to="/dashboard/contribution" > 
+                kycStatus === 'ACCEPTED' ? <Link to="/dashboard/contribution" >
                 <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Coins</span></button>
                 </Link> : <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Coins</span></button>
               */}
@@ -590,9 +591,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
 '' }
           <div id="footer" className="ui-footer">© 2018 Zineum, All Rights Reserved</div>
           <div className="sticky-telegram-logo"><a href=" https://t.me/zineumofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
-          { this.state.notifyTransactions.length > 0 ? 
+          { this.state.notifyTransactions.length > 0 ?
           <div className="notify-deposit fade-in" id="notify">
-          <p><strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].address}</strong><br/> 
+          <p><strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].address}</strong><br/>
             has contributed <strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].amount}ETH</strong></p>
           </div> : null
           }
@@ -613,7 +614,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             </div>
             </Modal.Body>
           </Modal>
-        </div>        
+        </div>
       </div>);
   }
 }

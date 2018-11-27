@@ -21,8 +21,8 @@ import 'react-table/react-table.css';
 import { getTransactions } from './actions';
 import reducer from './reducer';
 import saga from './saga';
-import makeSelectTransactionHistory, { makeSelectTransactions, makeSelectNextPage } from './selectors';
-
+import makeSelectTransactionHistory, { makeSelectTransactions, makeSelectNextPage ,makeSelectTransLoading } from './selectors';
+import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 
 export class TransactionHistory extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -140,6 +140,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     toast.success('Transaction deposited successfully');
   }
   render() {
+    let loading = this.props.loading
     return (
 
 
@@ -165,7 +166,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                       <button className="btn btn-primary b1" disabled={this.state.disablePrevious} onClick={this.previousChange}> Previous Page </button>
                       <button className="btn btn-primary b2" style={{ right: '16px', position: 'absolute' }} onClick={this.pageChange} disabled={this.state.disableNext}>Next Page </button>
 
-                      <ReactTable
+                    {loading?<LoadingSpinner /> :<ReactTable
                         showPaginationBottom={false}
                         style={{ marginTop: '20px', fontSize: '12px', cursor: 'default' }}
                         data={this.state.data}
@@ -175,8 +176,8 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                         noDataText={'No transactions found'}
                         rowsText={'transactions'}
                         defaultPageSize={10}
-                        
-                      />
+
+                      />}
                     </div>
                   </div>
                 </div>
@@ -201,6 +202,7 @@ const mapStateToProps = createStructuredSelector({
   globalPage: makeGlobalParent(),
   transactionsData: makeSelectTransactions(),
   nextPage: makeSelectNextPage(),
+  loading:makeSelectTransLoading()
 
 });
 function mapDispatchToProps(dispatch) {

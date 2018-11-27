@@ -13,6 +13,7 @@ const initialState = fromJS({
   transactions: [],
   page: '',
   nextPage: false,
+  loading:false,
 });
 
 function transactionHistoryReducer(state = initialState, action) {
@@ -21,10 +22,12 @@ function transactionHistoryReducer(state = initialState, action) {
       return state;
     case SUCCESS_TRANSACTIONS:
       return state
+        .set('loading',false)
         .set('transactions', action.data.transactions)
         .set('nextPage', action.data.nextPage);
     case GET_TRANSACTIONS:
       return state
+        .set('loading',true)
         .set('page', action.data);
     default:
       return state;

@@ -16,12 +16,13 @@ import 'react-table/react-table.css';
 import { Modal, Button } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectTicketPage, { makeSelectCreateSuccess, makeSelectTickets, makeSelectMessageSuccess, makeSelectGetMessagesSuccess } from './selectors';
+import makeSelectTicketPage, { makeSelectCreateSuccess,makeSelectTicketPageLoading, makeSelectTickets, makeSelectMessageSuccess, makeSelectGetMessagesSuccess } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { createTicket, resetTicketSuccess, showTickets, sendMessage, getMessages } from './actions';
 import { ToastContainer, toast } from 'react-toastify';
 import UserMessage from 'components/UserMessage';
+import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 
 
 export class TicketPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -159,8 +160,9 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
       }
     }
   }
-  
+
   render() {
+    var loading = this.props.loading
     return (
       <div id="content" className="ui-content ui-content-aside-overlay" style={{marginBottom : '50px'}}>
         <div className="ui-content-body">
@@ -180,7 +182,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
               </div>
               <div className="row">
                 <div className="col-sm-12">
-                  <ReactTable
+              {loading?<LoadingSpinner />:    <ReactTable
                             className="-striped -highlight"
                             showPaginationBottom={true}
                             style={{ marginTop: '20px', fontSize: '12px', cursor: 'pointer' }}
@@ -198,7 +200,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                                 // console.log("It was in this row:", rowInfo);
                                 this.props.getMessages(rowInfo.original.ticketId);
                                 this.setState({
-                                  
+
                                   currentTicketDetails : {
                                     subject: rowInfo.original.subject,
                                     messages: rowInfo.original.messages,
@@ -219,7 +221,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                                 }
                               }
                             })}
-                          />
+                          />}
                 </div>
               </div>
               </div>
@@ -289,13 +291,13 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                   </div>
                   <div className="col-sm-12">
                   {
-                    !!this.state.currentTicketMessages ? 
+                    !!this.state.currentTicketMessages ?
                     <UserMessage messages={this.state.currentTicketMessages}/> : ''
                   }
                   </div>
                 </div>
                 {
-                  this.state.currentTicketDetails.status == 'CLOSED' ? 
+                  this.state.currentTicketDetails.status == 'CLOSED' ?
                   <div className="row">
                   <div className="col-sm-12 text-center"><hr />
                     <span className="alert alert-danger" style={{margin: '20px'}}>This ticket is closed.</span>
@@ -313,7 +315,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                         </div>
                         <div className="form-group text-center">
                           <button type="submit" className="form-button">Send Message</button>
-  
+
                         </div>
                       </form>
                     </div>
@@ -336,7 +338,8 @@ const mapStateToProps = createStructuredSelector({
   createSuccess: makeSelectCreateSuccess(),
   messageSuccess: makeSelectMessageSuccess(),
   tickets: makeSelectTickets(),
-  messages: makeSelectGetMessagesSuccess()
+  messages: makeSelectGetMessagesSuccess(),
+  loading:makeSelectTicketPageLoading()
 });
 
 function mapDispatchToProps(dispatch) {

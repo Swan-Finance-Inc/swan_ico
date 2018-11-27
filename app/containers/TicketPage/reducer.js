@@ -21,6 +21,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
+  loading:false,
   newTicket: '',
   updateTicket: '',
   createTicketSuccess: '',
@@ -57,9 +58,11 @@ function ticketPageReducer(state = initialState, action) {
         .set(('messagesSuccess', false))
     case TICKETS_SUCCESS:
       return state
+        .set('loading',false)
         .set('tickets', action.data)
     case GET_TICKETS:
       return state
+      .set('loading',true)
     case SEND_MESSAGE:
       return state
         .set('message', action.data.message)

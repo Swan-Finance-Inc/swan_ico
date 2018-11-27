@@ -254,8 +254,8 @@ transition: all .301s;
 	-webkit-box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.15);
 	box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.15);
 }
-.navbar-default .navbar-nav > .open > a, 
-.navbar-default .navbar-nav > .open > a:hover, 
+.navbar-default .navbar-nav > .open > a,
+.navbar-default .navbar-nav > .open > a:hover,
 .navbar-default .navbar-nav > .open > a:focus{
 	color: #fff;
 	background: transparent;
@@ -266,6 +266,7 @@ transition: all .301s;
 	background-color: none !important;
 }
 .navbar-nav>li>.dropdown-menu {
+	color:#D3A94A !important;
 	border: 0;
 	margin:0;
 	padding:0;
@@ -309,7 +310,7 @@ transition: all .301s;
 	background-color:rgba(0, 0, 0, 0.03) !important;
 }
 .ui-aside .nav .active {
-	background-color: #978FFF !important;
+	background-color: #D3A94A !important;
 }
 .ui-aside .nav > li .nav-sub {
 	max-height:180px;
@@ -321,6 +322,9 @@ transition: all .301s;
 }
 .nav-sub--open {
 	display: block;
+}
+.ui-aside li> a:hover {
+background-color: #D3A94A !important;
 }
 .nav-sub .active a {
 	background-color: inherit;
@@ -372,7 +376,7 @@ a.toggle-btn {
 	overflow: hidden;
 }
 .dropdown-menu>li>a:hover {
-	background-color: #978FFF;
+	background-color:  #D3A94A !important;
 	color: #FFF;
 }
 /* Dashboard Content */
@@ -415,11 +419,12 @@ a.toggle-btn {
 	position: relative;
 	padding-bottom: 15px;
 }
+
 .bal-card h3:before {
 	background: #2767ff;
-	background: -moz-linear-gradient(left, #5F00D4 0, #30006C 100%);
-	background: -webkit-linear-gradient(left, #5F00D4 0, #30006C 100%);
-	background:  linear-gradient(to right, #5F00D4, #30006C 100%);
+	background: -moz-linear-gradient(left, #fff 0, #000 100%);
+	background: -webkit-linear-gradient(left, #fff 0, #000 100%);
+	background:  linear-gradient(to right, #fff, #000 100%);
  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#5F00D4', endColorstr='#30006C', GradientType=1);
 	bottom: 0;
 	content: "";
@@ -463,7 +468,7 @@ a.toggle-btn {
 	-webkit-box-shadow: none;
 	-moz-box-shadow: none;
 	box-shadow: none;
-	
+
 }
 
 .social-link {
@@ -502,8 +507,8 @@ a.toggle-btn {
 }
 .referral-link button {
 	// background: linear-gradient(to right, #5F00D4, #30006C);
-	// background: linear-gradient(to bottom, #C8C2FF, #978FFF) !important;
-	background-color: #978FFF !important;
+	// background: linear-gradient(to bottom, #C8C2FF, #D3A94A) !important;
+	background-color: #D3A94A !important;
 	border: 0;
 	color: #FFF;
 	position: absolute;
@@ -574,8 +579,8 @@ a.toggle-btn {
 	max-width: 160px;
 }
 .form-button {
-	background-color: #978FFF !important;
-	// background: linear-gradient(to bottom, #C8C2FF, #978FFF);
+	background-color: #D3A94A !important;
+	// background: linear-gradient(to bottom, #C8C2FF, #D3A94A);
 	// background: #000;
 	border: 0;
 	display: inline-block;
@@ -656,7 +661,7 @@ ol.rule-list li {
     outline: 0;
     height: 52px;
     display: block;
-	
+
     width: 100%;
     -webkit-transition: border-color .2s ease;
     transition: border-color .2s ease;
@@ -698,7 +703,7 @@ ol.rule-list li {
 }
 
 .navbar-nav > li > .dropdown-menu li:hover a{
-	background: #978FFF;
+	background: #D3A94A;
 	color: #fff;
 }
 
@@ -783,18 +788,18 @@ ol.rule-list li {
 	}
 	 .ui-aside-compact .nav > li .nav-sub-header {
 	 color: #ffffff;
-	 background-color: #978FFF !important;
+	 background-color: #D3A94A !important;
 	}
 	 .ui-aside .nav > li .nav-sub > li.nav-sub-header > a, .ui-aside .nav > li .nav-sub > li.nav-sub-header > a span {
 	 color: #ffffff;
 	}
 	 .ui-aside > .nav > li:hover > a, .ui-aside > .nav > li.active > a {
 	//  background: linear-gradient(to right, #5F00D4, #30006C 50%);
-	background-color: #978FFF !important;
+	background-color: #D3A94A !important;
 	color: #fff;
 	}
 	 .ui-aside-compact .nav > li:hover > a.toggle-btn {
-		background-color: #978FFF !important;
+		background-color: #D3A94A !important;
 	 	color:#fff;
 	}
 	 .ui-aside-compact .nav > li:hover > .nav-sub {
@@ -830,8 +835,8 @@ ol.rule-list li {
 	 .bal-card {
 	height: auto;
 	}
-	
-	/* Confirm Contribution */	
+
+	/* Confirm Contribution */
 
 }
 // .ui-aside > .nav > li:hover > a, .ui-aside > .nav > li.active > a {
@@ -1072,7 +1077,7 @@ opacity:0;
 .google-translate {
 	float: right;
 	background: #86a3ce;
-	
+
     min-width: 157px;
     margin-top: 7px;
     margin-left: 5px;
@@ -1197,7 +1202,7 @@ opacity:0;
 	width: 48px;
 	padding: 10px 5px 2px 5px;
 	border: 3px solid #ddd;
-}	
+}
 .sidebar-trigger.nav>li>a span {
 	top: -8px;
 	background-color:#888;
@@ -1248,7 +1253,7 @@ opacity:0;
 	.ui-aside-compact .ui-content {
    padding-left:0;
    }
-   
+
    /* Confirm Contribution */
    .confirm-block .form-button{font-size: 13px;}
    .qr-code{margin-top: 30px;}
@@ -1353,8 +1358,8 @@ margin-top: 25px;
 	text-transform: uppercase;
 	-webkit-transition: all .5s ease;
 	transition: all .5s ease;
-	
-	
+
+
 
 }
 
@@ -1384,8 +1389,8 @@ sup {
 
 .btn-primary {
 	// background : linear-gradient(to right, #5F00D4, #30006C) !important;
-	// background: linear-gradient(to bottom, #C8C2FF, #978FFF) !important;
-	background-color: #978FFF !important; 
+	// background: linear-gradient(to bottom, #C8C2FF, #D3A94A) !important;
+	background-color: #D3A94A !important;
 	border-color: #fff;
 	-webkit-transition: all .5s ease;
 	transition: all .5s ease;
@@ -1398,9 +1403,15 @@ sup {
 
 .btn-primary[disabled] {
 	// background-color: #0074e6;
-	// background: linear-gradient(to bottom, #C8C2FF, #978FFF) !important;
-	background-color: #978FFF !important;
+	// background: linear-gradient(to bottom, #C8C2FF, #D3A94A) !important;
+	background-color: #D3A94A !important;
+
 }
+.btn-primary[disabled]:hover {
+	background-color: #D3A94A !important;
+	color: #000;
+}
+
 
 .btn-video {
 	margin-top: 10px;
@@ -1425,7 +1436,7 @@ sup {
     cursor: pointer;
 	text-transform: uppercase;
 	-webkit-transition: all .5s ease;
-    transition: all .5s ease;	
+    transition: all .5s ease;
 }
 
 .btn-outline {
@@ -1440,7 +1451,7 @@ sup {
 .form-control {
 	border-color: inherit;
 	-webkit-box-shadow: none;
-	box-shadow: none;  
+	box-shadow: none;
 	outline: none;
 	border-radius: 0px;
 	border:0px;
@@ -1509,5 +1520,5 @@ sup {
 
 .btn-primary:hover {
 	color: #fff;
-	background: #000 !important;
+	background:#000!important;
 }
