@@ -53,11 +53,11 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
       this.notify(nextProps.errorMessage);
     }
   }
-  
+
   shouldComponentUpdate(nextProps) {
     if (nextProps) {
       return true;
-    } 
+    }
     return false;
   }
 
@@ -117,7 +117,7 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
             <div className="row">
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
                 <ToastContainer position="top-center" type="error" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="logo"><img src="/assets/img/logo.png" alt="ZINEUM" /></div>
+                <div className="logo"><img src="/assets/img/logo.png" alt="RUC" /></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>

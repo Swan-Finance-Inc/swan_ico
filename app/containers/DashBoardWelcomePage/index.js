@@ -589,8 +589,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/transactionHistory') ?
                     <TransactionHistory message={this.props.global.depositSuccess} /> :
 '' }
-          <div id="footer" className="ui-footer">© 2018 Zineum, All Rights Reserved</div>
-          <div className="sticky-telegram-logo"><a href=" https://t.me/zineumofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+          <div id="footer" className="ui-footer">© 2018 RUC, All Rights Reserved</div>
+          <div className="sticky-telegram-logo"><a href=" https://t.me/rucofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
           { this.state.notifyTransactions.length > 0 ?
           <div className="notify-deposit fade-in" id="notify">
           <p><strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].address}</strong><br/>

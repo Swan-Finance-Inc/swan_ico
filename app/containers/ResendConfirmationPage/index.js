@@ -17,7 +17,7 @@ import makeSelectResendConfirmationPage from './selectors';
 import reducer from './reducer';
 import saga, { resend } from './saga';
 import { toast, ToastContainer } from 'react-toastify';
-import { Link, Redirect } from 'react-router-dom'; 
+import { Link, Redirect } from 'react-router-dom';
 import { resendMail } from './actions';
 import { makeSelectResendError, makeSelectResendSuccess } from './selectors';
 import ReCAPTCHA from 'react-google-recaptcha';
@@ -40,7 +40,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
     e.preventDefault();
     const data = {
       email : e.target[0].value,
-      captcha: this.state['g-recaptcha-response'],      
+      captcha: this.state['g-recaptcha-response'],
     }
     if (this.state.captcha === true) {
       this.setState({
@@ -48,7 +48,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
       });
       window.grecaptcha.reset();
       this.props.resendMail(data);
-    } 
+    }
     else {
       this.notifyCaptcha();
     }
@@ -100,7 +100,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
             <div className="signin-card-body">
               <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
               <p>If you DON’T see our emails, please check your SPAM folder.</p>
-              <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@zineum.io</p>
+              <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@ruc.io</p>
             </div>
           </div>
         </div>
@@ -116,7 +116,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="ZINEUM" /></Link></div>
+                <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="RUC" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10">
                 <div className="header-right">

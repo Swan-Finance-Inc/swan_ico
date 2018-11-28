@@ -172,7 +172,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
                 <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
                   <div className="logo">
                     <Link to="/signin">
-                      <img src="/assets/img/logo.png" alt="ZINEUM" />
+                      <img src="/assets/img/logo.png" alt="ruc" />
                     </Link>
                   </div>
                 </div>
@@ -218,12 +218,12 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 
                            <input id="terms" className="boolean required form-check-input" required label="false" data-title="Please confirm" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="user[accepted_policies]" />
 
-                     &nbsp; I consent to receive email updates from ZINEUM.</label>
+                     &nbsp; I consent to receive email updates from RUC.</label>
                       </div>
                       <div className="form-group">
                         <label className="form-check-label" htmlFor="usCitizen">
                           <input id="usCitizen" className="boolean required form-check-input" required label="false" data-title="Please confirm" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="usCitizen" />
-                             &nbsp; I’m not US citizen and agree to the policy of ZINEUM Coin sale.
+                             &nbsp; I’m not US citizen and agree to the policy of RUC Coin sale.
                         </label>
                       </div>
 

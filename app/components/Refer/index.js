@@ -21,7 +21,7 @@ import {
 } from 'react-share';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-const SHARE_POST = 'zineum.io introduces a unique tokensale platform for the Community.You can earn upto 2000 ZIN Coins , Sign-up';
+const SHARE_POST = 'RUC introduces a unique tokensale platform for the Community.You can earn upto 2000 RUC Coins , Sign-up';
 
 class Refer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -31,7 +31,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
       copied: false,
     };
   }
-      
+
         componentDidMount(){
           this.setState({
             code : this.props.code.referral.code,
@@ -54,7 +54,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
             <div className="refer-friends refer-panel">
               <div className="row">
                 <div className="col-sm-12 col-md-6 col-md-offset-3">
-                  
+
                   <p>Share your unique referral link with your friends and you will earn free ZIN Coins.</p>
                   <div className="referral-link">
                   <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} id="myInput" />
@@ -95,17 +95,17 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                         `https://tokensale.zineum.io/signup/refer/${this.state.code}`
                       }
                       title={
-                        `zineum.io introduces a unique tokensale platform for the Community. You can earn upto 2000 ZIN Coins , Sign-up
-                          now by clicking on https://tokensale.zineum.io/signup/refer/${this.state.code}`
+                        `RUC.io introduces a unique tokensale platform for the Community. You can earn upto 2000 ZIN Coins , Sign-up
+                          now by clicking on https://tokensale.ruc.io/signup/refer/${this.state.code}`
                       }
                       description={
-                        `zineum.io introduces a unique earning platform for the Community. You can earn upto 2000 ZIN Coins , Sign-up
-                          now by clicking on https://tokensale.zineum.io/signup/refer/${this.state.code}`
+                        `RUC.io introduces a unique earning platform for the Community. You can earn upto 2000 ZIN Coins , Sign-up
+                          now by clicking on https://tokensale.ruc.io/signup/refer/${this.state.code}`
                       }
                     >
                       <LinkedinIcon size={42} round />
                     </LinkedinShareButton>
-                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} title={`zineum.io introduces a unique tokensale platform for the Community. You can earn upto 2000 ZIN Coins , Sign-up
+                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.zineum.io/signup/refer/${this.state.code}`} title={`RUC.io introduces a unique tokensale platform for the Community. You can earn upto 2000 RUC Coins , Sign-up
                           now by clicking on https://tokensale.zineum.io/signup/refer/${this.state.code}`}>
                       <RedditIcon size={42} round />
                     </RedditShareButton>
@@ -155,8 +155,8 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                       <li>Maximum 2000 Coins can be earned through referral program.</li>
                       <li>Limited Coins will be allocated under referral program.</li>
                       <li>Multiple accounts are not allowed. Anyone having multiple accounts will be disqualified from the referral program, and no Coins will be rewarded for any of the accounts.</li>
-                      <li>Please join our official <a href=" https://t.me/zineumofficial" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/Zineum/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/zineum" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/Zineum" className="link" target="_blank">Reddit Page</a>.</li>
-                      <li>zineum reserves the right to add, alter, modify, change or vary all of above rules or end it altogether, at any time without prior notice and without assigning any reason whatsoever.</li>
+                      <li>Please join our official <a href=" https://t.me/rucofficial" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/ruc/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/zineum" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/Zineum" className="link" target="_blank">Reddit Page</a>.</li>
+                      <li>RUC reserves the right to add, alter, modify, change or vary all of above rules or end it altogether, at any time without prior notice and without assigning any reason whatsoever.</li>
                     </ol>
                   </div>
                 </div>

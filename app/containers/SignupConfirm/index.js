@@ -50,7 +50,7 @@ export class SignupConfirm extends React.PureComponent { // eslint-disable-line 
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
 
-                <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="ZINEUM" /></Link></div>
+                <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="ruc" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>
@@ -70,7 +70,7 @@ export class SignupConfirm extends React.PureComponent { // eslint-disable-line 
                 <div className="signin-card-body">
                   <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
                   <p>If you DON’T see our emails, please check your SPAM folder.</p>
-                  <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@zineum.io</p>
+                  <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@RUC.io</p>
                 </div>
               </div>
             </div>

@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "ico_user_zineum",
+    "name": "ico_user_RUC",
     "script": "server",
     "instances": "max",
     "exec_mode": "cluster",
