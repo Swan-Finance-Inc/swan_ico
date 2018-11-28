@@ -152,7 +152,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
         toast.error(`Please enter a valid ${curr} address`);
       } else if (this.state.curr == 'Bitcoin') {
       // const tokenReceive = document.getElementById('tokenReceive').value;
-  
+
           // if(!this.state.validWallet){
           //   toast.error('Please enter a valid ERC20 address');
           // }
@@ -162,7 +162,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
               fromAddress,
               // tokenReceiveAddress: tokenReceive,
             })
-  
+
             const body = {
               tokens: this.state.tokens,
               type: this.state.curr,
@@ -172,7 +172,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
               tokenReceivingAddress: '',
               usdAmount: this.state.dollarsInvested,
             };
-  
+
             // console.log(body);
             this.props.confirmPayment(body);
           // }
@@ -182,7 +182,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
             fromAddress,
             tokenReceiveAddress: fromAddress,
           });
-  
+
           const body = {
             tokens: this.state.tokens,
             type: this.state.curr,
@@ -192,11 +192,11 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
             tokenReceivingAddress: fromAddress,
             usdAmount: this.state.dollarsInvested,
           };
-  
+
           // console.log(body);
           this.props.confirmPayment(body);
-      } 
-      
+      }
+
     }else {
       console.log('dollar :' , this.state.dollarsInvested);
         if (parseInt(this.state.dollarsInvested) < this.state.minInvest) {
@@ -213,7 +213,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   notifyMinimum() {
     toast.error(`Minimum contribution is $ ${this.state.minInvest}`);
   }
-  
+
 
   confirm(data) {
     // console.log(this.props.transactionId)
@@ -363,7 +363,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     }
     if (e.target.value === 'BTC') {
         // let add = document.getElementById('fromAddress').value;
-    
+
         this.setState({
           fromAddress: '',
           tokenReceiveAddress: this.props.userInfo.userInfo.ethAddress,
@@ -469,7 +469,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
         currencyQuantity: currencyQuantity.value,
         tokens: currencyQuantity.value * this.state.tokensPerEur,
         tokensWithBonus: currencyQuantity.value * this.state.tokensPerEur + this.state.tokensPerEur * currencyQuantity.value * 0.01 * this.state.bonus
-      }) 
+      })
     }
   }
 
@@ -578,7 +578,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
         fromAddress={this.state.fromAddress}
         tokenReceive={this.state.tokenReceiveAddress}
         finalPayment={this.confirm}
-      
+
         />
       );
     }
@@ -614,7 +614,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
                       {/* <p><h2>{this.state.stage}</h2></p> */}
                       <p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>
-                      <h5>1 ZIN COIN = {this.state.tokenPrice} $</h5>
+                      <h5>1 RUC COIN = {this.state.tokenPrice} $</h5>
                     </div>
                   </div>
                   <div className="row">
@@ -631,7 +631,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                               <option value="EUR">EUR</option>
                             </select>
                           </span>
-                          <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} ZIN Coins</span>
+                          <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Coins</span>
                           {
                             this.state.curr !== 'Dollar' ?
                             <span style={{float: 'left'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.ethToDollar.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.btcToDollar).toFixed(2) : (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null} $</span>
@@ -651,16 +651,16 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                           </div> */}
 
                           <div className="form-group">
-                            <label htmlFor="tokens" className="form-label">TOTAL ZIN COINS</label>
+                            <label htmlFor="tokens" className="form-label">TOTAL RUC COINS</label>
                             <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right" disabled required/>
                           </div>
 
                           {/* <div className="form-group">
-                            <label htmlFor="tokensWithBonus" className="form-label">TOTAL ZIN COINS</label>
+                            <label htmlFor="tokensWithBonus" className="form-label">TOTAL RUC COINS</label>
                             <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
                           </div> */}
                           {
-                            this.state.curr == 'Ethereum' || this.state.curr == 'Bitcoin' ? 
+                            this.state.curr == 'Ethereum' || this.state.curr == 'Bitcoin' ?
                             <div className="form-group">
                             <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
                             <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left" required/>
@@ -670,7 +670,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                           {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
                           {/* {(this.state.curr == 'Bitcoin') ?
                           (<div className="form-group">
-                            <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving ZIN Coins</label>
+                            <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving RUC Coins</label>
                             <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" required/>
                             </div>) : <div></div>
                             } */}

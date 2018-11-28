@@ -63,11 +63,11 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
 
   // Begin Container functions
   txValidator(e){
-  
+
     let hash = e.target.value;
     if(hash.length > 0){
    if(this.props.currency == "Ethereum"){
-    
+
    if(hash.match(/^(0x)?([A-Fa-f0-9]{64})$/)){
    this.setState({
      valid:true,
@@ -78,7 +78,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
      this.setState({
        valid:false,
        validBlank: false,
-      
+
      })
    }
   }
@@ -94,7 +94,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
      this.setState({
        valid:false,
        validBlank: false,
-      
+
      })
    }
   }
@@ -147,12 +147,12 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                       {/* <div id="timer"></div> */}
                     </div>
                   </div>
-                  
+
                     <div className="confirm-block">
                       <div className="row">
                         <div className="col-sm-12 col-md-6">
                           <ol>
-                            <li>Wallet address to deposit <strong>{this.props.currencyQty} {this.props.currency === 'Ethereum' ? 'ETH' : 'BTC'}</strong> for purchase of <strong>{this.props.tokens} ZIN Coins</strong>
+                            <li>Wallet address to deposit <strong>{this.props.currencyQty} {this.props.currency === 'Ethereum' ? 'ETH' : 'BTC'}</strong> for purchase of <strong>{this.props.tokens} RUC Coins</strong>
                               <div className="mt-10">
                                 <div className="mt-20">
                                   <div className="blockchain-tx text-center ">
@@ -192,7 +192,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                             <button className="form-button btn btn-primary" style={{ margin: '10px' }} onClick={this.goBack}>Go Back</button>
 
                           </div>
-                       
+
                         </form>
                         </div>
                         <div className="col-sm-12 col-md-6">
@@ -204,7 +204,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                         </div>
                       </div>
                     </div>
-                 
+
                 </div>
               </div>
             </div>
