@@ -165,6 +165,10 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
     var loading = this.props.loading
     return (
       <div id="content" className="ui-content ui-content-aside-overlay" style={{marginBottom : '50px'}}>
+      <Helmet>
+        <title>Tickets</title>
+        <meta name="description" content="Description of Tickets" />
+      </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
               <div className="row">

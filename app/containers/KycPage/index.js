@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { parseNumber, formatNumber, isValidNumber } from 'libphonenumber-js'
-
+import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectKycPage, { makeSelectSubmitKycSuccess } from './selectors';
@@ -169,7 +169,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     }else{
       const { fullName, email, dob, gender, phone, ethAddress, citizenship, country, state, city, address, address2, doc_type, doc_number } = this.state;
       const kycDetails = {fullName, email, dob, gender, ethAddress, phone, citizenship, country, state, city, address, address2, doc_type, doc_number}
-  
+
       this.props.submitKyc(kycDetails);
     }
   }
@@ -235,6 +235,10 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       this.props.kycActive();
       return (
         <div id="content" className="ui-content ui-content-aside-overlay">
+        <Helmet>
+          <title>Kyc Page</title>
+          <meta name="description" content="Description of Kyc Page" />
+        </Helmet>
         <div className="ui-content-body">
         <div className="ui-container container-fluid">
           <div className="row">
@@ -253,6 +257,10 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       this.props.kycActive();
       return (
         <div id="content" className="ui-content ui-content-aside-overlay">
+        <Helmet>
+          <title>Kyc Page</title>
+          <meta name="description" content="Description of Kyc Page" />
+        </Helmet>
         <div className="ui-content-body">
         <div className="ui-container container-fluid">
           <div className="row">
@@ -271,7 +279,10 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     this.props.kycActive()
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
-
+      <Helmet>
+        <title>Kyc Page</title>
+        <meta name="description" content="Description of Kyc Page" />
+      </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
@@ -388,7 +399,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
                       <div className="col-sm-6 form-group">
                       <label htmlFor="number"><h5>NUMBER<sup>*</sup></h5></label>
                       <input className="form-control" type="text" id="number" placeholder="ID number" name="doc_number" onChange={this.handleInput} required/>
-                      
+
                       </div>
                   </div>
                   <div className="row">

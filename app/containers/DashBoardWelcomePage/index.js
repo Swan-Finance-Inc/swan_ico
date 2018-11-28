@@ -21,6 +21,7 @@ import ResetPassword from 'containers/ResetPassword';
 import ProfilePage from 'containers/ProfilePage';
 import SideBarNav from 'containers/SideBarNav';
 import CustomLoading from 'components/CustomLoading/Loadable';
+import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
 import { loadProfileAction, submitSocial, resetKycDone } from './actions';
@@ -514,6 +515,10 @@ export class DashBoardWelcomePage extends React.PureComponent {
       <div>
         <NavBarContainer username={this.props.dashboardwelcomepage.userInfo.fullName} />
         <div id="ui" className={this.state.compact}>
+        <Helmet>
+          <title>User|Dashboard</title>
+          <meta name="description" content="Description of Dashboard" />
+        </Helmet>
           <ToastContainer position="top-center" autoClose={6000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover />
           <SideBarNav
             kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus}

@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectSecurityPage, { makeSelectEnable, makeSelectResponse, makeSelectDisable, makeSelectQr, makeSelectVerified, makeSelectQrKey } from './selectors';
@@ -126,6 +126,10 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
       <div id="content" className="ui-content ui-content-aside-overlay">
         {/* <h1>Security</h1> */}
         <div className="ui-content-body">
+        <Helmet>
+          <title>Security</title>
+          <meta name="description" content="Description of Security" />
+        </Helmet>
           <div className="ui-container container-fluid">
             <div className="" style={{ marginBottom: '500px' }}>
             <div className="panel panel-default">
@@ -179,7 +183,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                               <div className="text-center">
                               <button type="submit" className="form-button" style={{ marginTop: '10px' }}>Verify</button>
                               </div>
-                              
+
                             </form>
                           </div>
                           : <div></div>

@@ -8,7 +8,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-
+import { Helmet } from 'react-helmet';
 import { compose } from 'redux';
 import ReactTable from 'react-table';
 import injectSaga from 'utils/injectSaga';
@@ -145,6 +145,10 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
 
 
       <div id="content" className="ui-content ui-content-aside-overlay">
+      <Helmet>
+        <title>Transaction History</title>
+        <meta name="description" content="Description of Transaction History" />
+      </Helmet>
 
         {/* { <h1>Transaction History</h1> } */}
         <div className="ui-content-body">

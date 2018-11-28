@@ -20,7 +20,7 @@ import { selectAction, getData, confirmPayment, reload,finalizePayment } from '.
 import { ContributionConfirm } from '../ContributionConfirm';
 import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
-
+import { Helmet } from 'react-helmet';
 export class ContributionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
   constructor(props) {
@@ -565,26 +565,36 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     // }
     if (this.state.confirmContri) {
       return (
-        <ContributionConfirm
-        min={this.state.minutes}
-        sec={this.state.seconds}
-        dollars={this.state.dollarQuantity}
-        currency={this.state.curr}
-        tokens={this.state.tokens}
-        currencyQty={this.state.currencyQuantity}
-        back={this.comeBack}
-        btcAddress={this.props.successData.btcAddress}
-        ethAddress={this.props.successData.ethAddress}
-        fromAddress={this.state.fromAddress}
-        tokenReceive={this.state.tokenReceiveAddress}
-        finalPayment={this.confirm}
+      <div>
+      <Helmet>
+        <title>Contributions</title>
+        <meta name="description" content="Description of Contributions" />
+      </Helmet>
+      <ContributionConfirm
+      min={this.state.minutes}
+      sec={this.state.seconds}
+      dollars={this.state.dollarQuantity}
+      currency={this.state.curr}
+      tokens={this.state.tokens}
+      currencyQty={this.state.currencyQuantity}
+      back={this.comeBack}
+      btcAddress={this.props.successData.btcAddress}
+      ethAddress={this.props.successData.ethAddress}
+      fromAddress={this.state.fromAddress}
+      tokenReceive={this.state.tokenReceiveAddress}
+      finalPayment={this.confirm}
 
-        />
+      />
+      </div>
       );
     }
     if (this.state.usdEurContributionConfirm) {
       return (
         <div id="content" className="ui-content ui-content-aside-overlay">
+        <Helmet>
+          <title>Contributions</title>
+          <meta name="description" content="Description of Contributions" />
+        </Helmet>
           <div className="ui-content-body">
           <div className="ui-container container-fluid">
             <div className="row">
@@ -602,6 +612,10 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     console.log(this.state);
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
+      <Helmet>
+        <title>Contributions</title>
+        <meta name="description" content="Description of Contributions" />
+      </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
