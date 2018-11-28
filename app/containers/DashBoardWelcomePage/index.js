@@ -543,7 +543,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             toggleTicketActive={this.toggleTicketActive}
           />
           {(this.props.location.pathname == '/dashboard') ?
-             <div id="content" className="ui-content ui-content-aside-overlay">
+             (this.props.dashboardwelcomepage.loading?<LoadingSpinner />:<div id="content" className="ui-content ui-content-aside-overlay">
               <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} closeAlert={this.closeAlert} showAlert={this.state.showAlert}/>
               <div className="row">
                 <div className="col-sm-6">
@@ -565,7 +565,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                 </div>
               </div>
 
-            </div> : (this.props.location.pathname == '/dashboard/security') ?
+            </div>) : (this.props.location.pathname == '/dashboard/security') ?
               <SecurityPage /> :
               (this.props.location.pathname == '/dashboard/profile') ?
               <ProfilePage /> :
