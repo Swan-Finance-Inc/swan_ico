@@ -36,6 +36,9 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       success: false,
       mail: '',
       show: false,
+      password_class:'fa fa-fw fa-eye',
+      conf_password_class:'fa fa-fw fa-eye'
+
     };
     this.formSubmit = this.formSubmit.bind(this);
   }
@@ -154,6 +157,47 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
   notifyError(message) {
     toast.error(message);
   }
+
+  showPassWord= (e)=>{
+    console.log(e," inside show password");
+    var x = document.getElementById("password");
+     if (x.type === "password") {
+         x.type = "text";
+     } else {
+         x.type = "password";
+     }
+     if(this.state.password_class==='fa fa-fw fa-eye'){
+       this.setState({
+         password_class:'fa fa-fw fa-eye-slash'
+       })
+     }
+     else if(this.state.password_class==='fa fa-fw fa-eye-slash'){
+       this.setState({
+         password_class:'fa fa-fw fa-eye'
+       })
+     }
+  }
+  showConfirmPassWord= (e)=>{
+    console.log(e," inside show confirm password");
+    var x = document.getElementById("repeat_password");
+     if (x.type === "password") {
+         x.type = "text";
+     } else {
+         x.type = "password";
+     }
+     if(this.state.conf_password_class==='fa fa-fw fa-eye'){
+       this.setState({
+         conf_password_class:'fa fa-fw fa-eye-slash'
+       })
+     }
+     else if(this.state.conf_password_class==='fa fa-fw fa-eye-slash'){
+       this.setState({
+         conf_password_class:'fa fa-fw fa-eye'
+       })
+     }
+  }
+
+
   render() {
     if (localStorage.token) {
       return <Redirect to="/dashboard" />;
@@ -161,7 +205,6 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
     if (this.state.success) {
       return (<SignupConfirm email={this.state.mail} />);
     }
-
     return (
       <div className="signin">
         <div className="wrapper">
@@ -193,7 +236,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
               <div className="row">
                 <div className="col-sm-4 col-sm-offset-4">
                   <div className="card-header">
-                    <h1>Sign Up</h1>
+                    <h1>Create Account</h1>
                   </div>
                   <div className="signin-card-body">
                     <form id="signupform" onSubmit={this.formSubmit} >
@@ -209,7 +252,9 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
                       <div className="form-group">
                         <label htmlFor="password" className="form-label">Password (Minimum six Characters)</label>
                         <input id="password" type="password" className="form-input form-control" name="password" minLength={6} maxLength={256} placeholder="Your Password" autoComplete="off" required />
+                         <i onClick={this.showPassWord} className={`${this.state.password_class} field-icon`}></i>
                         <input id="repeat_password" onChange={this.passwordMatch} type="password" className="form-input mt-10 form-control" minLength={6} maxLength={256} name="repeat_password" placeholder="Repeat your Password" required />
+                         <i onClick={this.showConfirmPassWord} className={`${this.state.conf_password_class} field-icon`}></i>
                       </div>
                       {(this.state.match == true) ? <p style={{ color: '#00bb27' }}>Password matched</p> : (this.state.match === '') ? <p style={{ color: '#0000fe' }}></p> : <p style={{ color: '#ff0000' }}>Password do not match</p>}
 
@@ -232,7 +277,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 
                         <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdUZHIUAAAAAC-Fs1h2axjwggA74SYYarH3XZ6-" onChange={this.onChange} />
 
-                        <button type="submit" className="form-button" style={{ marginTop: '10px' }}>Sign Up</button>
+                        <button type="submit" className="form-button" style={{ marginTop: '10px' }}>Create Account</button>
                       </div>
                     </form>
                   </div>

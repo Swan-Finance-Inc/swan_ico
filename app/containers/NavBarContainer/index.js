@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Navbar, Nav, MenuItem, NavDropdown, Modal } from 'react-bootstrap';
+import { Navbar, Nav, MenuItem, NavDropdown, Modal ,Badge } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectNavBarContainer from './selectors';
@@ -19,6 +19,7 @@ import saga from './saga';
 import { userLoggedOut } from '../App/actions';
 import { push } from 'react-router-redux';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
+import BellIcon from 'react-bell-icon';
 export class NavBarContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -29,7 +30,8 @@ export class NavBarContainer extends React.PureComponent {
     this.profile = this.profile.bind(this);
     this.state = {
       name: 'Username',
-      showSignOut: false
+      showSignOut: false,
+      deleteProfile:false,
     };
   }
 
@@ -53,11 +55,30 @@ export class NavBarContainer extends React.PureComponent {
       showSignOut: true
     })
   }
+  showDeleteProfile=()=> {
+    this.setState({
+      deleteProfile: true
+    })
+  }
+  selectEnglish=()=>{
+    console.log("select english clicked");
+  }
+  selectChinese=()=>{
+    console.log("select Chinese clicked");
+  }
 
   closeSignOut() {
     this.setState({
       showSignOut: false
     })
+  }
+  closeDeleteProfile=()=> {
+    this.setState({
+      deleteProfile: false
+    })
+  }
+  deleteProfileYes =()=>{
+    console.log(" Yes On Delete Profile");
   }
   resetPassword() {
     this.props.push('/dashboard/resetpassword');
@@ -75,10 +96,18 @@ export class NavBarContainer extends React.PureComponent {
             <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="RUC" /></Link></div>
           </div>
           <div className="header-right hidden-xs">
+          <span className="NotificationBell"> <BellIcon width='30' color={'#D3A94A'} active={false} animate={false} /></span>
+          <span className='badgeClass' style={{color:"#fff"}}><Badge>{2}</Badge></span>
+
             <Nav pullRight >
-              <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
-                <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Profile</MenuItem>
+            <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">
+            <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectEnglish}><i ></i>English</MenuItem>
+            <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectChinese}><i ></i>Chinese</MenuItem>
+            </NavDropdown>
+                <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
+                <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Update Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem>
+                <MenuItem style={{ cursor: 'pointer' }} onClick={this.showDeleteProfile}><i className="fa fa-user-times"></i>Delete Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showSignOut}><i className="fa fa-power-off"></i>Sign Out</MenuItem>
               </NavDropdown>
             </Nav>
@@ -107,7 +136,28 @@ export class NavBarContainer extends React.PureComponent {
               </Modal.Body>
             </Modal>
           </div>
-
+          <div className="static-modal">
+              <Modal show={this.state.deleteProfile} onHide={this.closeDeleteProfile} bsSize="large" dialogClassName="modal-signout">
+                <Modal.Body>
+                  <div className="row">
+                    <div className="col-sm-12 text-right" style={{'cursor': 'pointer'}}>
+                        <i className="fa fa-close" onClick={this.closeDeleteProfile}></i>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-12 text-center">
+                      <h3 className="signOut-head">Do you want to <text style={{color:"red"}}>DELETE</text> your Profile ?</h3><hr/>
+                    </div>
+                  </div>
+                  <div className="row">
+                    <div className="col-sm-12 text-center">
+                      <button className=" col-sm-3  btn btn-outline-red" style={{marginLeft:'15%'}} onClick={this.deleteProfileYes}>YES</button>
+                      <button className="col-sm-3  btn  btn-outline" style={{marginLeft:'15%'}} onClick={this.closeDeleteProfile}>GO Back</button>
+                    </div>
+                  </div>
+                </Modal.Body>
+              </Modal>
+            </div>
       </header>
     );
   }

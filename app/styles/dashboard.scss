@@ -6,6 +6,39 @@
 	display:block;
 	white-space:nowrap;
 }
+.gas1{
+ color:#DAA520;
+ font-weight: 500;
+ position: relative;
+ left: -30px;
+
+}
+.gas2{
+font-weight: 500;
+	color:#DAA520;
+}
+.goodThingDiv{
+	background-color: white;
+  margin-right: 0px !important;
+	float:right;
+}
+body::-webkit-scrollbar {
+    width: 5px;
+}
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
+.field-icon {
+  float: right;
+  bottom:30px;
+	right:10px;
+  position: relative;
+  z-index: 2;
+}
 .header-right {
 	display: -ms-flexbox;
 	display: -webkit-flex;
@@ -667,10 +700,14 @@ ol.rule-list li {
     -webkit-transition: border-color .2s ease;
     transition: border-color .2s ease;
 }
+.form-group input {
+	border: 1px solid grey;
+}
 .form-group span {
     display: block;
     margin: 10px 0;
-	text-align: right;
+		text-align: right;
+
 }
 .form-label span {
     position: absolute;
@@ -1439,6 +1476,13 @@ sup {
 	-webkit-transition: all .5s ease;
     transition: all .5s ease;
 }
+.NotificationBell{
+	margin-top: 20px;
+	margin-right: 10px;
+}
+.badgeClass {
+	margin-left:-9%;
+}
 
 .btn-outline {
     border: 2px solid #5F00D4;
@@ -1448,7 +1492,15 @@ sup {
 	cursor: pointer;
 	margin-top: 5px;
 }
+.btn-outline-red{
+	border: 2px solid #f00;
+	background-color: white;
+	color: #f00;
+	font-size: 14px;
+	cursor: pointer;
+	margin-top: 5px;
 
+}
 .form-control {
 	border-color: inherit;
 	-webkit-box-shadow: none;

@@ -641,8 +641,10 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                             <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input" required>
                               <option value="ETH">ETH</option>
                               <option value="BTC">BTC</option>
-                              <option value="USD">USD</option>
-                              <option value="EUR">EUR</option>
+                              {
+                              // <option value="USD">USD</option>
+                              // <option value="EUR">EUR</option>
+                            }
                             </select>
                           </span>
                           <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Coins</span>

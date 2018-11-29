@@ -30,7 +30,8 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     super(props);
     this.state = {
       'g-recaptcha-response': '',
-      captcha : false
+      captcha : false,
+      password_class:'fa fa-fw fa-eye'
     }
     this.formSubmit = this.formSubmit.bind(this);
     this.notify = this.notify.bind(this);
@@ -155,7 +156,25 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     // console.log(this.props.error);
     // console.log(this.props.errorMessage);
   }
-
+showPassWord= (e)=>{
+  console.log(e," inside show password");
+  var x = document.getElementById("password");
+   if (x.type === "password") {
+       x.type = "text";
+   } else {
+       x.type = "password";
+   }
+   if(this.state.password_class==='fa fa-fw fa-eye'){
+     this.setState({
+       password_class:'fa fa-fw fa-eye-slash'
+     })
+   }
+   else if(this.state.password_class==='fa fa-fw fa-eye-slash'){
+     this.setState({
+       password_class:'fa fa-fw fa-eye'
+     })
+   }
+}
   render() {
     if (localStorage.token) {
       return <Redirect to="/dashboard" />;
@@ -177,7 +196,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
                   <div className="header-right">
 
                     <div className="header-btn-group">
-                      <div className="header-btn"><Link to="/signup">Sign Up</Link></div>
+                      <div className="header-btn"><Link to="/signup">Create Account</Link></div>
                     </div>
                   </div>
                 </div>
@@ -193,13 +212,14 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
                   </div>
                   <div className="signin-card-body">
                     <form className onSubmit={this.formSubmit}>
-                      <div className="form-group">
+                      <div className="form-group newInput">
                         <label htmlFor="emailAddress" className="form-label">Email Address</label>
-                        <input id="emailAddress" type="email" name="email" className="form-input form-control" placeholder="Your Email" required autoComplete="email" />
+                        <input id="emailAddress" type="email" name="email" className="form-input form-control " placeholder="Your Email" required autoComplete="email" />
                       </div>
                       <div className="form-group">
                         <label htmlFor="password" className="form-label">Password</label>
                         <input id="password" type="password" className="form-input form-control" name="password" placeholder="Your Password" autoComplete="off" required />
+                       <i onClick={this.showPassWord} className={`${this.state.password_class} field-icon`}></i>
                       </div>
                       <div className="form-group">
                         <label htmlFor="token" className="form-label">Two-Factor Code (if enabled)</label>

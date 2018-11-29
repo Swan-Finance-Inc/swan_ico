@@ -41,7 +41,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         signature: '',
         loginAlert : '',
         ethAddress: '',
-        valid : true
+        valid : true,
+        latestNewsAlert:'',
     }
 
     this.handleInput = this.handleInput.bind(this);
@@ -281,6 +282,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <label>
                       <input type="checkbox" name="loginAlert" id="loginAlert" onChange={this.handleInput} checked={this.state.loginAlert}/>I would like to receive email after every login.
                     </label>
+                    <div className="col-sm-12 text-center checkbox">
+                    <label>
+                      <input type="checkbox" name="latestNewsAlert" id="latestNewsAlert" onChange={this.handleInput} checked={this.state.latestNewsAlert}/>Notify me for latest News and alerts.
+                    </label>
+                    </div>
                   </div>
                 </div>
                 <div className="row">
@@ -293,9 +299,22 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           </div>
           </div>
           </div>
+          <div className="panel panel-default">
+                <div className="panel-heading">DELETE PROFILE</div>
+                  <div className="panel-body" style={{fontSize:'16px'}}>
+            <div className=" contribution row">
+              <div className="col-sm-12">
+                <div className="row text-center">
+                  {/* <h2>UPDATE PROFILE</h2> */}
+                  <h5 style={{color:'#888'}}>Please fill the details down below.<hr/></h5>
+                </div>
+              </div>
+            </div>
+            </div>
+            </div>
         </div>
       </div>
-      </div>  
+      </div>
     );
   }
 }
