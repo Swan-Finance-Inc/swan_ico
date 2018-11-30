@@ -183,7 +183,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                             </li>
                             <li>Please  visit your cryptocurrency wallet and make payment to the above address.</li>
                             <li>Only send {this.props.currency === 'Bitcoin' ? 'BTC' : 'ETH'} to this address</li>
-                            <li>Don't make payment through exchange.You can use Metmask,MyEtherWallet,Mist Wallet etc</li>
+                            <li>Don't make payment through exchange.You can use Metmask, MyEtherWallet, Mist Wallet etc</li>
                             <li>To avoid delays, you must paste and confirm your Blockchain TX Code as soon as available and confirm for our records.</li>
                           </ol>
                           <form onSubmit={this.confirmPayment} >
@@ -202,7 +202,7 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                         </div>
                         <div className="col-sm-12 col-md-6">
                           <div className="qr-code">
-                            <h4> <text style={{fontSize:'40px'}}>OR</text> Scan this Address QR Code from your {this.props.currency} wallet </h4>
+                            <h4> <text style={{fontSize:'25px'}}>OR</text> Scan this Address QR Code from your {this.props.currency} wallet </h4>
                             {this.props.currency === 'Bitcoin' ? <img src={this.state.url} alt="" /> :
                               <img src={this.state.url} alt="" />}
                           </div>

@@ -37,20 +37,6 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       resetPassAct: '',
       showSignOut: false
     };
-
-    this.handleLogOut = this.handleLogOut.bind(this);
-    this.toggleDashActive = this.toggleDashActive.bind(this);
-    this.toggleContriActive = this.toggleContriActive.bind(this);
-    this.toggleKycActive = this.toggleKycActive.bind(this);
-    this.toggleTicketActive = this.toggleTicketActive.bind(this);
-    this.toggleSecActive = this.toggleSecActive.bind(this);
-    this.toggleTranActive = this.toggleTranActive.bind(this);
-    this.toggleSupportActive = this.toggleSupportActive.bind(this);
-    this.toggleProfileActive = this.toggleProfileActive.bind(this);
-    this.toggleResetPassActive = this.toggleResetPassActive.bind(this);
-    this.toggleFaqActive = this.toggleFaqActive.bind(this);
-    this.showSignOut = this.showSignOut.bind(this);
-    this.closeSignOut = this.closeSignOut.bind(this);
   }
 
   componentDidMount() {
@@ -67,18 +53,18 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       resetPassAct: this.props.resetPass
     });
   }
-  handleLogOut() {
+  handleLogOut=()=>{
   // console.log('logginouttt...');
     this.props.logOut();
     this.props.push('/signin');
   }
-  toggleDashActive(e) {
+  toggleDashActive=(e)=>{
     this.props.compact();
     this.props.toggleDashActive();
 
   // console.log('toggling', e);
   }
-  toggleContriActive(e) {
+  toggleContriActive=(e)=>{
     // if(this.props.kycStatus == 'ACCEPTED'){
       this.props.compact();
       this.props.toggleContActive();
@@ -87,39 +73,39 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     // }
   }
 
-  toggleKycActive(e) {
+  toggleKycActive=(e)=>{
     if(this.props.kycStatus == 'PENDING' || this.props.kycStatus == 'REJECTED'){
       this.props.compact();
       this.props.toggleKycActive();
     }
   }
 
-  toggleTranActive(e) {
+  toggleTranActive=(e)=>{
     this.props.compact();
     this.props.toggleTranActive();
   // console.log('toggling', e);
   }
-  toggleSecActive(e) {
+  toggleSecActive=(e)=>{
     this.props.compact();
     this.props.toggleSecActive();
   }
-  toggleSupportActive(e) {
+  toggleSupportActive=(e)=>{
     this.props.compact();
     this.props.toggleSupportActive();
   }
-  toggleFaqActive(e) {
+  toggleFaqActive=(e)=>{
     this.props.compact();
     this.props.toggleFaqActive();
   }
-  toggleTicketActive(e) {
+  toggleTicketActive=(e)=>{
     this.props.compact();
     this.props.toggleTicketActive();
   }
-  toggleProfileActive(e) {
+  toggleProfileActive=(e)=>{
     this.props.compact();
     this.props.toggleProfileActive();
   }
-  toggleResetPassActive(e) {
+  toggleResetPassActive=(e)=>{
     this.props.compact();
     this.props.toggleResetPassActive();
   }
@@ -139,18 +125,18 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     });
   }
 
-  showSignOut() {
+  showSignOut=()=>{
     this.setState({
       showSignOut: true
     })
   }
-  
-  closeSignOut() {
+
+  closeSignOut=()=>{
     this.setState({
       showSignOut: false
     })
   }
-  
+
 
   render() {
     return (
@@ -251,7 +237,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
               <ul className="nav nav-sub sidebar-niceScroll">
                 <li className="nav-sub-header"><a><span>Sign Out</span></a></li>
               </ul>
-            </li> 
+            </li>
           </ul>
         </aside>
         </div>

@@ -10,9 +10,21 @@ import {
   LOAD_PROFILE_SUCCESS,
   SUBMIT_SOCIAL,
   KYC_DONE,
-  RESET_KYC_DONE
+  RESET_KYC_DONE,
+  DELETE_USER,
+  DELETE_USER_SUCCESS,
 } from './constants';
 
+export function deleteUserSuccessAction() {
+  return {
+    type: DELETE_USER_SUCCESS,
+  };
+}
+export function deleteUserAction() {
+  return {
+    type: DELETE_USER,
+  };
+}
 export function defaultAction() {
   return {
     type: DEFAULT_ACTION,

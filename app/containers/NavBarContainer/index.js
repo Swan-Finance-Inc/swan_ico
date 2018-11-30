@@ -78,7 +78,8 @@ export class NavBarContainer extends React.PureComponent {
     })
   }
   deleteProfileYes =()=>{
-    console.log(" Yes On Delete Profile");
+    console.log(" Yes On Delete Profile in nav container");
+    this.props.handleDeleteUser();
   }
   resetPassword() {
     this.props.push('/dashboard/resetpassword');

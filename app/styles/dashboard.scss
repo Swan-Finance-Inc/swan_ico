@@ -22,6 +22,28 @@ font-weight: 500;
   margin-right: 0px !important;
 	float:right;
 }
+
+@media (max-width:988px ) {
+	.form-captcha{
+	 margin-right: 10px;
+	}
+}
+@media (max-width:500px ) {
+	.form-captcha{
+	 margin-right: 20px;
+	}
+}
+@media (min-width:700px ) {
+	.form-captcha{
+	 margin-left: 2%;
+	}
+}
+@media (min-width:1000px ) {
+	.form-captcha{
+	 margin-left: 10%;
+	}
+}
+
 body::-webkit-scrollbar {
     width: 5px;
 }

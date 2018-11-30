@@ -24,7 +24,7 @@ import CustomLoading from 'components/CustomLoading/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
-import { loadProfileAction, submitSocial, resetKycDone } from './actions';
+import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction } from './actions';
 import makeSelectDashBoardWelcomePage, { makeSelectKycDone }from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
@@ -35,7 +35,18 @@ import reducer from './reducer';
 import saga from './saga';
 import Web3 from 'web3';
 const ABI = require('./CrowdSale');
-
+const initialState = {
+  dash: '',
+  kyc: '',
+  sec: '',
+  cont: '',
+  tran: '',
+  support: '',
+  ticket: '',
+  faq: '',
+  profile: '',
+  resetPass: ''
+}
 export class DashBoardWelcomePage extends React.PureComponent {
   constructor() {
     super();
@@ -98,120 +109,40 @@ export class DashBoardWelcomePage extends React.PureComponent {
     console.log('dashboard');
     if (this.props.location.pathname == '/dashboard') {
       this.setState({
-        dash: 'active',
-        cont: '',
-        kyc: '',
-        tran: '',
-        sec: '',
-        support: '',
-        ticket: '',
-        faq: '',
-        profile: '',
-        resetPass: ''
+      ...initialState,dash: 'active'
+
       });
     } else if (this.props.location.pathname == '/dashboard/contribution') {
       this.setState({
-        dash: '',
-        cont: 'active',
-        kyc: '',
-        tran: '',
-        sec: '',
-        support: '',
-        ticket: '',
-        faq: '',
-        profile: '',
-        resetPass: ''
+      ...initialState,cont:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/kyc') {
       this.setState({
-        dash: '',
-        cont: '',
-        kyc: 'active',
-        tran: '',
-        sec: '',
-        support: '',
-        ticket: '',
-        faq: '',
-        profile: '',
-        resetPass: ''
+      ...initialState,kyc:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/transactionHistory') {
       this.setState({
-        dash: '',
-        cont: '',
-        kyc: '',
-        tran: 'active',
-        sec: '',
-        support: '',
-        ticket: '',
-        faq: '',
-        profile: '',
-        resetPass: ''
+    ...initialState,tran:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/security') {
       this.setState({
-        dash: '',
-        cont: '',
-        kyc: '',
-        tran: '',
-        sec: 'active',
-        support: '',
-        ticket: '',
-        faq: '',
-        profile: '',
-        resetPass: ''
+      ...initialState,sec:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/ticket') {
       this.setState({
-        dash: '',
-        cont: '',
-        kyc: '',
-        tran: '',
-        sec: '',
-        support: '',
-        faq: '',
-        ticket: 'active',
-        profile: '',
-        resetPass: ''
+    ...initialState,ticket:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/support') {
       this.setState({
-        dash: '',
-        cont: '',
-        kyc: '',
-        tran: '',
-        sec: '',
-        support: 'active',
-        ticket: '',
-        faq: '',
-        profile: '',
-        resetPass: ''
+      ...initialState,support:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/faq') {
       this.setState({
-        dash: '',
-        cont: '',
-        kyc: '',
-        tran: '',
-        sec: '',
-        support: '',
-        ticket: '',
-        faq: 'active',
-        profile: '',
-        resetPass: ''
+      ...initialState,faq:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/profile') {
       this.setState({
-        dash: '',
-        cont: '',
-        kyc: '',
-        tran: '',
-        sec: '',
-        support: '',
-        faq: '',
-        ticket: '',
-        profile: 'active',
-        resetPass: ''
+      ...initialState,profile:'active'
       });
     }
   }
@@ -477,6 +408,10 @@ export class DashBoardWelcomePage extends React.PureComponent {
       showAlert : false
     })
   }
+  handleDeleteUser=()=>{
+    console.log(" in handle delete user in dashboard welcome page");
+    this.props.deleteUserAction()
+  }
 
   render() {
     console.log(this.state.notifyTransactions);
@@ -513,7 +448,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     }
     return (
       <div>
-        <NavBarContainer username={this.props.dashboardwelcomepage.userInfo.fullName} />
+        <NavBarContainer username={this.props.dashboardwelcomepage.userInfo.fullName} handleDeleteUser={this.handleDeleteUser} />
         <div id="ui" className={this.state.compact}>
         <Helmet>
           <title>User|Dashboard</title>
@@ -639,7 +574,9 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     loadProfileAction: () => dispatch(loadProfileAction()),
     submitSocial: (data) => dispatch(submitSocial(data)),
-    resetKycDone: () => dispatch(resetKycDone())
+    resetKycDone: () => dispatch(resetKycDone()),
+    deleteUserAction: () => dispatch(deleteUserAction()),
+
   };
 }
 

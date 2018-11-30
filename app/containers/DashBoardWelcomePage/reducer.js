@@ -11,7 +11,9 @@ import {
   LOAD_PROFILE_SUCCESS,
   SUBMIT_SOCIAL,
   KYC_DONE,
-  RESET_KYC_DONE
+  RESET_KYC_DONE,
+  DELETE_USER,
+  DELETE_USER_SUCCESS
 } from './constants';
 
 // The initial state of the App
@@ -37,6 +39,12 @@ const initialState = fromJS({
 
 function dashBoardWelcomePageReducer(state = initialState, action) {
   switch (action.type) {
+    case DELETE_USER_SUCCESS:
+      return state
+        .set('loading', false);
+    case DELETE_USER:
+      return state
+        .set('loading', true);
     case LOAD_PROFILE:
       return state
         .set('loading', true);

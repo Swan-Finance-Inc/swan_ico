@@ -29,7 +29,6 @@ export function* getUser() {
     const userData = yield select(makeSelectUser());
     // console.log(userData)
     const apiData = yield call(api.user.login, userData);
-
     if (apiData.success) {
       localStorage.setItem('token', apiData.authToken);
       yield put(userLoaded());

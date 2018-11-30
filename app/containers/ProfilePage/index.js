@@ -43,6 +43,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         ethAddress: '',
         valid : true,
         latestNewsAlert:'',
+        referalUrl:''
     }
 
     this.handleInput = this.handleInput.bind(this);
@@ -96,6 +97,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       valid: true
     }
   }
+  componentDidMount(){
+    this.setState({
+      referalUrl:`https://tokensale.ruc.io/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
+    })
+  }
 
   updateDetails(e){
     e.preventDefault()
@@ -121,6 +127,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   }
 
   render() {
+    console.log(this.props," props in  profile");
+    console.log(this.state," state in  profile");
     const { phone } = this.state;
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
@@ -257,6 +265,14 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                   </div>
                   <div className="col-sm-9">
                     <input className="form-control" type="text" name="linkedIn" id="linkedIn" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid LinkedIn Profile link" placeholder="LinkedIn link" onChange={this.handleInput} value={this.state.linkedIn}/>
+                  </div>
+                </div>
+                <div className="row form-group">
+                  <div className="col-sm-3">
+                    <label htmlFor="referalUrl"><span style={{fontWeight:'500'}}>Referal URL</span></label>
+                  </div>
+                  <div className="col-sm-9">
+                    <input className="form-control" type="text" name="referalUrl" id="referalUrl" title="Your referal url" placeholder="Referal Url" onChange={this.handleInput} value={this.state.referalUrl} disabled/>
                   </div>
                 </div>
                 {/* Signature link */}
