@@ -14,7 +14,7 @@ export function* createTicket(){
 
     const data = yield select(makeSelectCreateTicket());
     const apiData = yield call(api.user.createTicket, headers, data);
-    
+    console.log(apiData," api data");
     if(apiData){
       console.log(apiData);
       yield put(createTicketSuccess(apiData));

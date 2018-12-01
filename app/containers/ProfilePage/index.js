@@ -12,15 +12,16 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectProfilePage, { makeSelectDetails, makeSelectUpdateSuccess } from './selectors';
+import makeSelectProfilePage, { makeSelectDetails, makeSelectUpdateSuccess ,makeSelectImageReturn } from './selectors';
 import makeSelectDashBoardWelcomePage from 'containers/DashBoardWelcomePage/selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { updateDetails, resetSuccess } from './actions';
+import { updateDetails, resetSuccess ,uploadProfileImage } from './actions';
 import { ToastContainer, toast } from 'react-toastify';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import { parseNumber, formatNumber, isValidNumber } from 'libphonenumber-js'
+
 export class ProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
     super(props);
@@ -43,7 +44,9 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         ethAddress: '',
         valid : true,
         latestNewsAlert:'',
-        referalUrl:''
+        referalUrl:'',
+        profilePicUrl:'',
+        profilePic:'',
     }
 
     this.handleInput = this.handleInput.bind(this);
@@ -124,11 +127,36 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         nextProps.resetSuccess();
       }
     }
+    if(nextProps.ImageRet){
+      console.log(" success");
+      this.setState({
+        profilePicUrl:nextProps.ImageRet.imageUrl
+      })
+      nextProps.resetSuccess();
+    }
+  }
+  uploadProfileImage=()=>{
+    document.getElementById('profileImage').click()
+  }
+  handleBackImg=(e)=> {
+    e.preventDefault();
+    var reader = new FileReader();
+    var file = e.target.files[0];
+    if(file.size > 2*1024*1024){
+      toast.error('File size should be less than 2MB');
+    }else{
+        this.setState({
+          profilePicUrl : '/assets/img/uploading.svg',
+        })
+      this.props.uploadProfileImage({ imageProfile :file})
+    }
   }
 
   render() {
     console.log(this.props," props in  profile");
     console.log(this.state," state in  profile");
+  const   { profilePicUrl } = this.state;
+  console.log(profilePicUrl," iiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
     const { phone } = this.state;
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
@@ -141,7 +169,20 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
             <div className="col-sm-12">
               <div className="row text-center">
                 {/* <h2>UPDATE PROFILE</h2> */}
+                <div className="col-sm-6 form-group">
+                {
+                  // <label htmlFor="back_id"><h5>UPLOAD BACK ID<sup>*</sup></h5></label>
+                }
+                <img className="img-responsive profile-Image"  src={profilePicUrl?profilePicUrl:'/assets/img/dummyProfile.png' } alt="back id" id="back_img_src"  />
+                <button onClick={this.uploadProfileImage} className='changeImage' >Change Image</button>
+                <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg} required/>
+                  {
+                // <input type="file" accept="image/png, image/jpeg" name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} required/>
+              }
+                </div>
+                <div className="fillDetail">
                 <h5 style={{color:'#888'}}>Please fill the details down below.<hr/></h5>
+              </div>
               </div>
               <form onSubmit={this.updateDetails}>
                 <div className="row form-group">
@@ -315,19 +356,6 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           </div>
           </div>
           </div>
-          <div className="panel panel-default">
-                <div className="panel-heading">DELETE PROFILE</div>
-                  <div className="panel-body" style={{fontSize:'16px'}}>
-            <div className=" contribution row">
-              <div className="col-sm-12">
-                <div className="row text-center">
-                  {/* <h2>UPDATE PROFILE</h2> */}
-                  <h5 style={{color:'#888'}}>Please fill the details down below.<hr/></h5>
-                </div>
-              </div>
-            </div>
-            </div>
-            </div>
         </div>
       </div>
       </div>
@@ -342,14 +370,17 @@ ProfilePage.propTypes = {
 const mapStateToProps = createStructuredSelector({
   profilepage: makeSelectProfilePage(),
   userInfo: makeSelectDashBoardWelcomePage(),
-  updateSuccess: makeSelectUpdateSuccess()
+  updateSuccess: makeSelectUpdateSuccess(),
+  ImageRet:makeSelectImageReturn()
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     updateDetail : (data) => dispatch(updateDetails(data)),
-    resetSuccess : (data) => dispatch(resetSuccess(data))
+    resetSuccess : (data) => dispatch(resetSuccess(data)),
+    uploadProfileImage : (data) => dispatch(uploadProfileImage(data)),
+
   };
 }
 

@@ -139,9 +139,9 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     const user = {
       email: event.target[0].value,
       password: event.target[1].value,
-      otpToken: event.target[2].value,
-      rememberMe,
-      captcha: this.state['g-recaptcha-response'],
+      // otpToken: event.target[2].value,
+      // rememberMe,
+      // captcha: this.state['g-recaptcha-response'],
     };
 
     if (this.formValidation(user)) {
@@ -206,7 +206,7 @@ showPassWord= (e)=>{
           <section className="signin-block login">
             <div className="container">
               <div className="row">
-                <div className="col-sm-6 col-sm-offset-3 col-md-5 col-md-offset-3">
+                <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                   <div className="card-header">
                     <h1>Sign In</h1>
                   </div>

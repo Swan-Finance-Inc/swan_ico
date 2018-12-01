@@ -91,7 +91,8 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
     e.preventDefault();
     const ticket = {
       subject : e.target[0].value,
-      message: e.target[1].value
+      message: e.target[2].value,
+      transactionId:e.target[1].value
     }
 
     this.props.createTicket(ticket);
@@ -250,6 +251,12 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                     <form className="form-horizontal createTicket-form" onSubmit={this.createTicket}>
                       <div className="form-group">
                         <label className="control-label col-sm-2"><h4>Subject: </h4></label>
+                        <div className="col-sm-10">
+                          <input type="text"  className="form-control" required/>
+                        </div>
+                      </div>
+                      <div className="form-group">
+                        <label className="control-label col-sm-2"><h4>Transaction Id:</h4></label>
                         <div className="col-sm-10">
                           <input type="text" className="form-control" required/>
                         </div>

@@ -234,7 +234,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
           <section className="signin-block">
             <div className="container">
               <div className="row">
-                <div className="col-sm-4 col-sm-offset-4">
+                <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                   <div className="card-header">
                     <h1>Create Account</h1>
                   </div>

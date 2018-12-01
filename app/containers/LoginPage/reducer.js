@@ -18,9 +18,9 @@ const initialState = fromJS({
   user: {
     email: '',
     password: '',
-    rememberMe: false,
-    otpToken: '',
-    captcha: ''
+    // rememberMe: false,
+    // otpToken: '',
+    // captcha: ''
   },
   emailVerified: false,
   initialEmail: false,

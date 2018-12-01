@@ -1,12 +1,17 @@
 import axios from 'axios';
- const NewBaseUrl = 'http://13.229.146.169:4040/api/v1/'
-// const BaseUrl = 'http://127.0.0.1:4040/api/v1/';
-const BaseUrl = 'https://tokensaleapis.zineum.io/api/v1/';
+ const BaseUrl = 'http://13.229.146.169:4040/api/v1/'
 
 export default {
   user: {
     deleteUser:(headers)=>
-    axios.delete(`${NewBaseUrl}local/deleteUser`,headers).then((res) => res.data).catch((err) => err.response.data),
+    axios.delete(`${BaseUrl}local/deleteUser`,headers).then((res) => res.data).catch((err) => err.response.data),
+    createTicket: (headers, data) =>
+    axios.post(`${BaseUrl}ticket`, data, headers)
+      .then((res) => res.data).catch((err) => err.response.data),
+    uploadProfileImage: (headers, data) =>
+    axios.patch(`${BaseUrl}user/profile/uploadImage`, data, headers).then((res) => res.data).catch((err) => err.response.data),
+
+
     vote: (list, headers) =>
       axios.post(`${BaseUrl}user/vote`, list, headers).then((res) => res.data).catch((err) => err.response.data),
     profile: (headers) =>

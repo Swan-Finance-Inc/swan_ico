@@ -62,7 +62,7 @@ function ticketPageReducer(state = initialState, action) {
         .set('tickets', action.data)
     case GET_TICKETS:
       return state
-      .set('loading',true)
+      .set('loading',false)
     case SEND_MESSAGE:
       return state
         .set('message', action.data.message)
