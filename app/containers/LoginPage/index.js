@@ -206,7 +206,7 @@ showPassWord= (e)=>{
           <section className="signin-block login">
             <div className="container">
               <div className="row">
-                <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+                <div className="col-sm-6 col-sm-offset-3 ">
                   <div className="card-header">
                     <h1>Sign In</h1>
                   </div>
