@@ -194,14 +194,14 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><Link to="/dashboard/contribution" role="button" onClick={this.toggleContriActive}><span>Contribution</span></Link></li>
               </ul>
             </li>
-            <li className={this.state.tranAct}><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}><span className="has-icon"><i className="fa fa-history"></i></span><span>Transaction History</span></Link>
+            <li className={this.state.tranAct}><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}><span className="has-icon"><i className="fa fa-history"></i></span><span>Transactions</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive} ><span>Transaction History</span></Link></li>
+                <li className="nav-sub-header"><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive} ><span>Transactions</span></Link></li>
               </ul>
             </li>
-            <li className={this.state.ticketAct}><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span className="has-icon"><i className="fa fa-ticket"></i></span><span>Manage Tickets</span></Link>
+            <li className={this.state.ticketAct}><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span className="has-icon"><i className="fa fa-ticket"></i></span><span>Tickets</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span>Manage Tickets</span></Link></li>
+                <li className="nav-sub-header"><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span>Tickets</span></Link></li>
               </ul>
             </li>
             <li className={this.state.secAct}><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}><span className="has-icon"><i className="fa fa-lock"></i></span><span>Security</span></Link>

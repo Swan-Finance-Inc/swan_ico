@@ -215,7 +215,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
                 <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
                   <div className="logo">
                     <Link to="/signin">
-                      <img src="/assets/img/logo.png" alt="ruc" />
+                      <img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="ruc" />
                     </Link>
                   </div>
                 </div>

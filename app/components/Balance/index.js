@@ -30,7 +30,7 @@ class Balance extends React.PureComponent {
           </div>
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
-              <h3>Referral Coins Earned</h3>
+              <h3>Referral Tokens Earned</h3>
               <div className="balance">{this.props.userInfo.tokens.referral}</div>
             </div>
           </div>
@@ -114,7 +114,7 @@ class Balance extends React.PureComponent {
             </div>
           </div>
         </div>
-        
+
       </div>
       </div>
     );

@@ -99,7 +99,7 @@ export class NavBarContainer extends React.PureComponent {
       <header>
         <Navbar fluid fixedTop style={{borderWidth: '0'}} className="navbar-back">
           <div className="header-left">
-            <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="RUC" /></Link></div>
+            <div className="logo"><Link to="/"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="RUC" /></Link></div>
           </div>
           <div className="header-right hidden-xs">
 

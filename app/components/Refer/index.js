@@ -21,7 +21,7 @@ import {
 } from 'react-share';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 
-const SHARE_POST = 'RUC introduces a unique tokensale platform for the Community.You can earn upto 2000 RUC Coins , Sign-up';
+const SHARE_POST = 'RUC introduces a unique tokensale platform for the Community.You can earn upto 2000 RUC Tokens , Sign-up';
 
 class Refer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -47,7 +47,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
     return (
       <div>
         <div className="panel panel-default">
-          <div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free RUC Coins</div>
+          <div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free RUC Tokens</div>
           <div className="panel-body">
         <div className="row">
           <div className="col-sm-12">
@@ -55,7 +55,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               <div className="row">
                 <div className="col-sm-12 col-md-6 col-md-offset-3">
 
-                  <p>Share your unique referral link with your friends and you will earn free RUC Coins.</p>
+                  <p>Share your unique referral link with your friends and you will earn free RUC Tokens.</p>
                   <p>Refer bonus is 3% of tokens purchased by the referee</p>
                   <div className="referral-link">
                   <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.ruc.io/signup/refer/${this.state.code}`} id="myInput" />
@@ -69,7 +69,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <div className="referral">
 
 
-                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.RUC.io/signup/refer/${this.state.code}`} quote={`RUC.io introduces a unique tokensale platform for the Community.You can earn upto 2000 RUC Coins , Sign-up`}>
+                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.RUC.io/signup/refer/${this.state.code}`} quote={`RUC.io introduces a unique tokensale platform for the Community.You can earn upto 2000 RUC Tokens , Sign-up`}>
                       <FacebookIcon size={42} round />
 
                     </FacebookShareButton>
@@ -96,17 +96,17 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                         `https://tokensale.ruc.io/signup/refer/${this.state.code}`
                       }
                       title={
-                        `RUC.io introduces a unique tokensale platform for the Community. You can earn upto 2000 RUC Coins , Sign-up
+                        `RUC.io introduces a unique tokensale platform for the Community. You can earn upto 2000 RUC Tokens , Sign-up
                           now by clicking on https://tokensale.ruc.io/signup/refer/${this.state.code}`
                       }
                       description={
-                        `RUC.io introduces a unique earning platform for the Community. You can earn upto 2000 RUC Coins , Sign-up
+                        `RUC.io introduces a unique earning platform for the Community. You can earn upto 2000 RUC Tokens , Sign-up
                           now by clicking on https://tokensale.ruc.io/signup/refer/${this.state.code}`
                       }
                     >
                       <LinkedinIcon size={42} round />
                     </LinkedinShareButton>
-                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.ruc.io/signup/refer/${this.state.code}`} title={`RUC.io introduces a unique tokensale platform for the Community. You can earn upto 2000 RUC Coins , Sign-up
+                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.ruc.io/signup/refer/${this.state.code}`} title={`RUC.io introduces a unique tokensale platform for the Community. You can earn upto 2000 RUC Tokens , Sign-up
                           now by clicking on https://tokensale.ruc.io/signup/refer/${this.state.code}`}>
                       <RedditIcon size={42} round />
                     </RedditShareButton>
@@ -123,7 +123,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               //         <thead>
               //           <tr>
               //             <th>Number of Referrals</th>
-              //             <th>Coins per Referral</th>
+              //             <th>Tokens per Referral</th>
               //             <th>Total Earning Potential</th>
               //           </tr>
               //         </thead>
@@ -153,10 +153,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               //     <div className="rules">
               //       <h3>Rules:</h3>
               //       <ol className="rule-list">
-              //         <li>Coins will be transferred after the KYC Verification Process is Completed and assurance of no multiple accounts of user.</li>
-              //         <li>Maximum 2000 Coins can be earned through referral program.</li>
-              //         <li>Limited Coins will be allocated under referral program.</li>
-              //         <li>Multiple accounts are not allowed. Anyone having multiple accounts will be disqualified from the referral program, and no Coins will be rewarded for any of the accounts.</li>
+              //         <li>Tokens will be transferred after the KYC Verification Process is Completed and assurance of no multiple accounts of user.</li>
+              //         <li>Maximum 2000 Tokens can be earned through referral program.</li>
+              //         <li>Limited Tokens will be allocated under referral program.</li>
+              //         <li>Multiple accounts are not allowed. Anyone having multiple accounts will be disqualified from the referral program, and no Tokens will be rewarded for any of the accounts.</li>
               //         <li>Please join our official <a href=" https://t.me/rucofficial" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/ruc/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/RUC" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/ruc" className="link" target="_blank">Reddit Page</a>.</li>
               //         <li>RUC reserves the right to add, alter, modify, change or vary all of above rules or end it altogether, at any time without prior notice and without assigning any reason whatsoever.</li>
               //       </ol>
