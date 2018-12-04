@@ -13,6 +13,23 @@
  left: -30px;
 
 }
+.unsubscribeHeading {
+	color:#fff!important;
+	margin-left: 30%;
+}
+.unsubscribe{
+	background-color: #000;
+}
+.dropdown{
+	margin-right: 15px;
+}
+.unsubscribePara{
+	color:#ffff!important;
+	font-size: 24px;
+}
+.unsubscribeLi {
+	color:#fff!important;
+}
 .changeImage {
 	position: relative;
 	margin-top: 10px;
@@ -1535,11 +1552,23 @@ sup {
     transition: all .5s ease;
 }
 .NotificationBell{
-	margin-top: 20px;
-	margin-right: 10px;
+	position: relative;
+	top: 10px;
 }
 .badgeClass {
-	margin-left:-9%;
+	position: relative;
+	right: 15px;
+	bottom: 15px;
+}
+.notificationWrapper{
+	 margin: 0%;
+}
+.notiHeading {
+	font-weight: 400;
+font-size: 25px;
+}
+.inviteUser{
+	    margin-top: -50px;
 }
 
 .btn-outline {

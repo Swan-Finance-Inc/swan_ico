@@ -21,6 +21,7 @@ import ResetPassword from 'containers/ResetPassword';
 import ProfilePage from 'containers/ProfilePage';
 import SideBarNav from 'containers/SideBarNav';
 import CustomLoading from 'components/CustomLoading/Loadable';
+import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
@@ -68,6 +69,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       alertMsg: '',
       showAlert: true,
       showVideo: false,
+      notification:'',
       notifyTransactions: []
     };
     this.toggleContActive = this.toggleContActive.bind(this);
@@ -143,6 +145,10 @@ export class DashBoardWelcomePage extends React.PureComponent {
     } else if (this.props.location.pathname == '/dashboard/profile') {
       this.setState({
       ...initialState,profile:'active'
+      });
+    }else if (this.props.location.pathname == '/dashboard/notification') {
+      this.setState({
+      ...initialState,notification:'active'
       });
     }
   }
@@ -243,7 +249,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: '',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleSecActive() {
@@ -257,7 +264,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: '',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleContActive() {
@@ -271,7 +279,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: '',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleTranActive() {
@@ -285,7 +294,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: '',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleSupportActive() {
@@ -299,7 +309,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: '',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   dashActive() {
@@ -313,7 +324,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: '',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
     this.notifyTimeout();
   }
@@ -328,7 +340,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: '',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleFaqActive() {
@@ -342,7 +355,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       faq: 'active',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleTicketActive() {
@@ -356,7 +370,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       ticket: 'active',
       profile: '',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleProfileActive() {
@@ -370,7 +385,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       ticket: '',
       profile: 'active',
-      resetPass: ''
+      resetPass: '',
+      notification:''
     });
   }
   toggleResetPassActive() {
@@ -384,7 +400,24 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       ticket: '',
       profile: '',
-      resetPass: 'active'
+      resetPass: 'active',
+      notification:''
+    });
+  }
+  toggleNotificationsActive=()=>{
+    console.log(" inside toogle");
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      cont: '',
+      tran: '',
+      support: '',
+      faq: '',
+      ticket: '',
+      profile: '',
+      resetPass: '',
+      notification:'active'
     });
   }
   notifyTimeout() {
@@ -448,7 +481,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     }
     return (
       <div>
-        <NavBarContainer username={this.props.dashboardwelcomepage.userInfo.fullName} handleDeleteUser={this.handleDeleteUser} />
+        <NavBarContainer routeToNotifications={this.toggleNotificationsActive} username={this.props.dashboardwelcomepage.userInfo.fullName} handleDeleteUser={this.handleDeleteUser} />
         <div id="ui" className={this.state.compact}>
         <Helmet>
           <title>User|Dashboard</title>
@@ -528,6 +561,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
                     <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive}/> :
                   (this.props.location.pathname == '/dashboard/transactionHistory') ?
                     <TransactionHistory message={this.props.global.depositSuccess} /> :
+                    (this.props.location.pathname == '/dashboard/notification') ?
+                      <Notification  />:
 '' }
           <div id="footer" className="ui-footer">© 2018 RUC, All Rights Reserved</div>
           <div className="sticky-telegram-logo"><a href=" https://t.me/rucofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>

@@ -4,7 +4,7 @@
  *
  */
 
-import React from 'react';
+import React  from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
@@ -88,8 +88,13 @@ export class NavBarContainer extends React.PureComponent {
   profile() {
     this.props.push('/dashboard/profile');
   }
+  routeToNotifications=()=>{
+    console.log(" ffffjfjfjfjfj");
+   this.props.routeToNotifications()
+  }
 
   render() {
+    console.log(this.props.history," tttttttttttttttttttttttttttttt");
     return (
       <header>
         <Navbar fluid fixedTop style={{borderWidth: '0'}} className="navbar-back">
@@ -97,9 +102,10 @@ export class NavBarContainer extends React.PureComponent {
             <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="RUC" /></Link></div>
           </div>
           <div className="header-right hidden-xs">
-          <span className="NotificationBell"> <BellIcon width='30' color={'#D3A94A'} active={false} animate={false} /></span>
-          <span className='badgeClass' style={{color:"#fff"}}><Badge>{2}</Badge></span>
 
+        <Link to="/dashboard/notification"  onClick={this.routeToNotifications} ><span  className="NotificationBell"><BellIcon width='30' color={'#D3A94A'} active={false} animate={false} /></span>
+            <span className='badgeClass' style={{color:"#fff"}}><Badge>{2}</Badge></span>
+        </Link>
             <Nav pullRight >
             <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">
             <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectEnglish}><i ></i>English</MenuItem>

@@ -252,19 +252,19 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                       <div className="form-group">
                         <label className="control-label col-sm-2"><h4>Subject: </h4></label>
                         <div className="col-sm-10">
-                          <input type="text"  className="form-control" required/>
+                          <input type="text"   className="form-control " required/>
                         </div>
                       </div>
                       <div className="form-group">
                         <label className="control-label col-sm-2"><h4>Transaction Id:</h4></label>
                         <div className="col-sm-10">
-                          <input type="text" className="form-control" required/>
+                          <input type="text" className="form-control"  placeholder='Optional'/>
                         </div>
                       </div>
                       <div className="form-group">
                         <label className="control-label col-sm-2"><h4>Message: </h4></label>
                         <div className="col-sm-10">
-                          <textarea type="text" className="form-control" required/>
+                          <textarea type="text" rows="10" placeholder='Write Message' className="form-control" required/>
                         </div>
                       </div>
                       {/* <div className="form-group text-center">

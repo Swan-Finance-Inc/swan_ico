@@ -189,7 +189,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               </tr>
               <tr>
                 <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                <td>15000 MAP</td>
+                <td>15000 RUC</td>
               </tr>
               </tbody>
             </table>
@@ -219,13 +219,13 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 </tr>
                 <tr>
                   <td>Minimum Purchase: </td>
-                  <td>500 MAP</td>
+                  <td>500 RUC</td>
                 </tr>
               </tbody>
             </table>
-            <p className=" text-center">Token Price : <strong>1 MAP = $0.1</strong></p>
-            <p className=" text-center">We Accept : <strong>BTC, ETH, LTC, BCH, XRP</strong></p>
-            <p className=" text-center">Currently Processed : <strong>0 MAP TOKENS</strong></p>
+            <p className=" text-center">Token Price : <strong>1 RUC = $0.1</strong></p>
+            <p className=" text-center">We Accept : <strong>BTC, ETH</strong></p>
+            <p className=" text-center">Currently Processed : <strong>0 RUC TOKENS</strong></p>
         </div>
      </div>
       </div>
