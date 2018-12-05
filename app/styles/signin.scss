@@ -168,9 +168,15 @@ header .container {
 	text-align:center;
 	text-transform:uppercase;
 }
+p.subtitle {
+	color:#ffff !important;
+}
+.resend h1{
+	color:#ffff !important;
+}
 .card-header p.subtitle {
 	margin-bottom:20px;
-	color: #273f5b;
+	color: #ffff;
     text-align: center;
 }
 .form-group {
@@ -233,9 +239,7 @@ header .container {
 	color:#FFF;
 	margin:20px 0 0 0;
 }
-.forgot a {
-	color:#0074ec;
-}
+
 .get-started a {
 	color:#FFF;
 	font-weight:600;

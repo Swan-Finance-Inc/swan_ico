@@ -119,7 +119,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
         <section className="signin-block">
           <div className="container">
             <div className="row">
-              <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+              <div className="col-sm-6 col-sm-offset-3">
                 <div className="card-header">
                   <h1>Forgot Password</h1>
                   <p className="subtitle">Please enter your email address. We will send you an email to reset your password.</p>
@@ -130,7 +130,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
                       <label htmlFor="emailAddress" className="form-label">Email Address</label>
                       <input id="emailAddress" type="email" name="email" className="form-input form-control" placeholder="Your Email" required />
                     </div>
-                    <div className="form-group text-center">
+                    <div className=" forgotpassCaptcha form-group text-center">
                       <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdUZHIUAAAAAC-Fs1h2axjwggA74SYYarH3XZ6-" onChange={this.onChange} />
                     </div>
                     <div className="text-center">

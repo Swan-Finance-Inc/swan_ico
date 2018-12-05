@@ -90,7 +90,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
       return <section className="signin-block">
       <div className="container">
         <div className="row">
-          <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+          <div className="col-sm-6 col-sm-offset-3">
             <div className="resend">
               <h1>Resend Confirmation Success</h1>
               <p>
@@ -99,8 +99,8 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
             </div>
             <div className="signin-card-body">
               <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
-              <p>If you DON’T see our emails, please check your SPAM folder.</p>
-              <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@ruc.io</p>
+              <p className="subtitle">If you DON’T see our emails, please check your SPAM folder.</p>
+              <p className="subtitle" > To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@ruc.io</p>
             </div>
           </div>
         </div>
@@ -142,7 +142,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
                       <label htmlFor="emailAddress" className="form-label">Email Address</label>
                       <input id="emailAddress" type="email" name="email" className="form-input form-control" placeholder="Your Email" required />
                     </div>
-                    <div className="form-group text-center">
+                    <div className="resConfCaptcha form-group text-center">
                       <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdUZHIUAAAAAC-Fs1h2axjwggA74SYYarH3XZ6-" onChange={this.onChange} />
                     </div>
                     <div className="text-center">

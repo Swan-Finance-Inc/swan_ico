@@ -13,15 +13,28 @@
  left: -30px;
 
 }
+.resConfCaptcha {
+	position: relative;
+	right:7%;
+}
+.forgotpassCaptcha {
+	position: relative;
+	left:5%
+}
 .unsubscribeHeading {
 	color:#fff!important;
 	margin-left: 30%;
 }
+
 .unsubscribe{
 	background-color: #000;
 }
 .dropdown{
 	margin-right: 15px;
+}
+.signInCaptcha{
+	position: relative;
+	left:6%;
 }
 .unsubscribePara{
 	color:#ffff!important;
@@ -258,7 +271,7 @@ transition: all .301s;
  z-index: -1;
 }
 .ui-aside .hamburger-menu > li {
-	background-color: #D6A156 !important;
+	background-color: #d3ba6d !important;
 	margin-top: 0;
 }
 .ui-aside > ul.nav > li.active > a > span, .ui-aside > ul.nav > li.active > a > i {
@@ -282,6 +295,10 @@ transition: all .301s;
 	padding-left: 5px;
 	width: 24px;
 }
+.forgot a {
+	color:#000 !important;
+}
+
 .ui-aside .nav > li .nav-sub > li > a, .ui-aside .nav > li .nav-sub > li > a span {
 	color:#273f5b;
 }

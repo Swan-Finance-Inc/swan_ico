@@ -225,7 +225,7 @@ showPassWord= (e)=>{
                         <label htmlFor="token" className="form-label">Two-Factor Code (if enabled)</label>
                         <input id="token" type="number" name="token" className="form-input form-control" placeholder="Google Authenticator" autoComplete="off" />
                       </div>
-                      <div className="form-group text-center">
+                      <div className="signInCaptcha form-group text-center">
                         <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdUZHIUAAAAAC-Fs1h2axjwggA74SYYarH3XZ6-" onChange={this.onChange} />
                       </div>
                       <div className="form-group text-center">
