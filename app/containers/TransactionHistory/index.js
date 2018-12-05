@@ -51,13 +51,13 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           className: 'text-center'
         },
         {
-          Header: 'RUC Coins',
+          Header: 'RUC Tokens',
           accessor: 'tokens', // Custom cell components!
           className: 'text-right'
         },
 
         {
-          Header: 'Coins Received',
+          Header: 'Tokens Received',
           accessor: 'tokensTransferred', // Custom cell components!
           className: 'text-center'
         },
@@ -146,15 +146,15 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
 
       <div id="content" className="ui-content ui-content-aside-overlay">
       <Helmet>
-        <title>Transaction History</title>
-        <meta name="description" content="Description of Transaction History" />
+        <title>Transactions</title>
+        <meta name="description" content="Description of Transactions" />
       </Helmet>
 
-        {/* { <h1>Transaction History</h1> } */}
+        {/* { <h1>Transactions</h1> } */}
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
-        <div className="panel-heading">Transaction History</div>
+        <div className="panel-heading">Transactions</div>
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
               <div className="col-sm-12">

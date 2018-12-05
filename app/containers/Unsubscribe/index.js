@@ -17,8 +17,31 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectUnsubscribe from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import { unsubscribeUserAction } from "./actions";
+import { makeSelectDetails } from '../ProfilePage/selectors';
 
 export class Unsubscribe extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      email: ""
+    };
+  }
+
+  handleUnsubscribe = () => {
+    this.props.unsubscribeUserAction({ email: this.state.email });
+  }
+
+  componentDidMount() {
+    const email = window.location.href.split("?email=")[1];
+    console.log("email: ", email);
+    console.log("email: ", typeof email);
+    this.setState({
+      email: email
+    });
+  }
+
   render() {
     return (
       <div className="wrapper">
@@ -28,7 +51,7 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
 
-                <div className="logo"><Link to="/"><img src="/assets/img/logo.png" alt="ruc" /></Link></div>
+                <div className="logo"><Link to="/"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="ruc" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>
@@ -39,12 +62,21 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
             <div className="row">
             <div className='col-md-8 col-md-offset-2'>
             <div className="title-subtile-holder ">
+            <h2  className="unsubscribeHeading">Unsubscribe Request</h2>
+            <div className="section-border dark_border"></div>
+            <div className="moveCenter col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+              <label className="mr-10" for="email">Email</label>
+              <input className="inputFieldEmail" type="input" name="email" value={this.state.email}/>
+            </div>
+
+{/*
             <h2  className="unsubscribeHeading">Unsubscribe Successful</h2>
 <div className="section-border dark_border"></div>
 <p className='unsubscribePara'  >You have been successfully removed from our subscriber list.</p>
 <p className='unsubscribePara' >You will no longer receive updates from us.</p>
+*/}
 <p>&nbsp;</p>
-<div className="col-md-6 col-md-offset-3 unsubscribeLi">
+<div className="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 unsubscribeLi">
 <p ><strong> If you have a moment, please let us know why did you unsubscribe </strong></p>
 <ul >
 <li><input type="radio" name="reason" id="many" value="many" />&nbsp;<label for="many">You send too many emails</label></li>
@@ -54,10 +86,10 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
 <li><input type="radio" name="reason" id="never" value="never" />&nbsp;<label for="never">I never signed up for this mailing list</label></li>
 </ul>
 </div>
-<div className="col-md-6 col-md-offset-3">
+<div className="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
 <div>&nbsp;</div>
 <center>
-<input type="submit" value="Submit" className="btnunsubscribe btn btn-danger"/>
+<input type="submit" value="Submit" onClick={this.handleUnsubscribe} className="btnunsubscribe btn btn-danger"/>
 </center>
 <center id="responsmsg">
 </center>
@@ -80,12 +112,13 @@ Unsubscribe.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-  unsubscribe: makeSelectUnsubscribe(),
+  // unsubscribe: makeSelectUnsubscribe(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    unsubscribeUserAction: (data) => dispatch(unsubscribeUserAction(data))
   };
 }
 

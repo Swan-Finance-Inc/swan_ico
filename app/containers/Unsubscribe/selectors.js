@@ -14,12 +14,17 @@ const selectUnsubscribeDomain = (state) => state.get('unsubscribe');
  * Default selector used by Unsubscribe
  */
 
-const makeSelectUnsubscribe = () => createSelector(
+ const makeSelectUnsubscribe = () => createSelector(
+   selectProfilePageDomain,
+   (substate) => substate.toJS()
+ );
+
+const selectUnsubscribeDetails = () => createSelector(
   selectUnsubscribeDomain,
-  (substate) => substate.toJS()
+  (substate) => substate.get('data')
 );
 
 export default makeSelectUnsubscribe;
 export {
-  selectUnsubscribeDomain,
+  selectUnsubscribeDetails,
 };

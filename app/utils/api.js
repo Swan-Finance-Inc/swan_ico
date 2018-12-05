@@ -10,7 +10,8 @@ export default {
       .then((res) => res.data).catch((err) => err.response.data),
     uploadProfileImage: (headers, data) =>
     axios.patch(`${BaseUrl}user/profile/uploadImage`, data, headers).then((res) => res.data).catch((err) => err.response.data),
-
+    unSubscribeUser: (headers, email) =>
+      axios.delete(`${BaseUrl}unsubscribe?email=${email}`,headers).then((res) => res.data).catch((err) => err.response.data),
 
     vote: (list, headers) =>
       axios.post(`${BaseUrl}user/vote`, list, headers).then((res) => res.data).catch((err) => err.response.data),

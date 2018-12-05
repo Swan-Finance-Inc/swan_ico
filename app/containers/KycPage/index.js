@@ -32,9 +32,9 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
 
     this.state = {
       frontImg : '',
-      frontImgUrl : '/assets/img/id_front.png',
+      frontImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
       backImg : '',
-      backImgUrl : '/assets/img/id_back.png',
+      backImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
       fullName : this.props.userInfo.userInfo.fullName,
       email : this.props.userInfo.userInfo.email,
       dob: '',

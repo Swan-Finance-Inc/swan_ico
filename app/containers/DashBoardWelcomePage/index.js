@@ -528,8 +528,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
               </div>
               {/*
                 kycStatus === 'ACCEPTED' ? <Link to="/dashboard/contribution" >
-                <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Coins</span></button>
-                </Link> : <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Coins</span></button>
+                <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Tokens</span></button>
+                </Link> : <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Tokens</span></button>
               */}
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
