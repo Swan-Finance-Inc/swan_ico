@@ -226,7 +226,7 @@ showPassWord= (e)=>{
                         <input id="token" type="number" name="token" className="form-input form-control" placeholder="Google Authenticator" autoComplete="off" />
                       </div>
                       <div className="signInCaptcha form-group text-center">
-                        <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdUZHIUAAAAAC-Fs1h2axjwggA74SYYarH3XZ6-" onChange={this.onChange} />
+                        <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk" onChange={this.onChange} />
                       </div>
                       <div className="form-group text-center">
                         <label className="form-check-label" htmlFor="user_accepted_policies">
