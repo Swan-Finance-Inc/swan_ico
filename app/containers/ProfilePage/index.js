@@ -169,22 +169,23 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
             <div className="col-sm-12">
               <div className="row text-center">
                 {/* <h2>UPDATE PROFILE</h2> */}
-                <div className="col-sm-6 form-group">
-                {
-                  // <label htmlFor="back_id"><h5>UPLOAD BACK ID<sup>*</sup></h5></label>
-                }
-                <img className="img-responsive profile-Image"  src={profilePicUrl?profilePicUrl:'https://s3.amazonaws.com/websiteimagesrama/dummyProfile.png' } alt="back id" id="back_img_src"  />
-                <button onClick={this.uploadProfileImage} className='changeImage' >Change Image</button>
-                <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg} required/>
-                  {
-                // <input type="file" accept="image/png, image/jpeg" name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} required/>
-              }
-                </div>
                 <div className="fillDetail">
                 <h5 style={{color:'#888'}}>Please fill the details down below.<hr/></h5>
               </div>
               </div>
               <form onSubmit={this.updateDetails}>
+
+              <div className="row form-group">
+                <div className="col-sm-3">
+                    <img className="img-responsive profile-Image"  src={profilePicUrl?profilePicUrl:'https://s3.amazonaws.com/websiteimagesrama/dummyProfile.png' } alt="back id" id="back_img_src"  />
+                </div>
+                <div className="col-sm-9">
+                <button onClick={this.uploadProfileImage} className='changeImage' >Change Image</button>
+                <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg} required/>
+                </div>
+              </div>
+
+
                 <div className="row form-group">
                   <div className="col-sm-3">
                     <label htmlFor="email"><span style={{fontWeight:'500'}}>Email</span></label>

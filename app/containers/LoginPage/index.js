@@ -139,9 +139,9 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     const user = {
       email: event.target[0].value,
       password: event.target[1].value,
-      // otpToken: event.target[2].value,
-      // rememberMe,
-      // captcha: this.state['g-recaptcha-response'],
+      otpToken: event.target[2].value,
+      rememberMe,
+      captcha: this.state['g-recaptcha-response'],
     };
 
     if (this.formValidation(user)) {
