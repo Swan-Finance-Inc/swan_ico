@@ -3,7 +3,10 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-import { Redirect } from 'react-router-dom';
+{
+  // import { Redirect } from 'react-router-dom';
+}
+import { Redirect } from 'react-router'
 import { Modal, Button } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -447,6 +450,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   render() {
+    console.log(this.props," props in");
+    console.log(this.state,"state in ");
     console.log(this.state.notifyTransactions);
     if(this.state.notifyTransactions.length == 1){
       setTimeout(function(){
@@ -534,7 +539,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
                   <Balance userInfo={this.props.dashboardwelcomepage.userInfo} />
-                  <Refer code={this.props.dashboardwelcomepage.userInfo} />
+                  <Refer  code={this.props.dashboardwelcomepage.userInfo} />
+
                 </div>
               </div>
 

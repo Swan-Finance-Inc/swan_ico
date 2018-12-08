@@ -17,6 +17,7 @@ import {
 } from './constants';
 
 const initialState = fromJS({
+  loading:false,
   currency: 'ethereum',
   getData: false,
   success: {
@@ -49,7 +50,7 @@ const initialState = fromJS({
     transactionId: false,
     transactionHash: false,
   },
-  
+
 });
 
 function contributionPageReducer(state = initialState, action) {
@@ -61,6 +62,7 @@ function contributionPageReducer(state = initialState, action) {
         .set('currency', action.data);
     case GET_DATA:
       return state
+        .set('loading', true)
         .set('getData', true);
     case CONFIRM_PAYMENT:
       return state
@@ -74,6 +76,7 @@ function contributionPageReducer(state = initialState, action) {
       // .setIn(['paymentConfirm', 'transactionHash'], action.data.transactionHash);
     case SUCCESS_DATA:
       return state
+        .set('loading', false)
         .setIn(['success', 'tokenUsd'], action.data.tokenUsd)
         .setIn(['success', 'ethUsd'], action.data.ethUsd)
         .setIn(['success', 'btcUsd'], action.data.btcUsd)
@@ -105,6 +108,7 @@ function contributionPageReducer(state = initialState, action) {
         .set('paymentFailure', false);
     case FAILURE_DATA:
       return state
+        .set('loading', false)
         .set('failure', true);
     case SEND_PAYMENT:
       return state

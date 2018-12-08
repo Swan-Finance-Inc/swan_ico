@@ -54,6 +54,11 @@ const makeSelectTransactionId = () => createSelector(
   selectContributionPageDomain,
   (substate) => substate.get('paymentId')
 );
+const makeSelectLoading = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('loading')
+);
+
 
 export default makeSelectContributionPage;
 export {
@@ -66,4 +71,5 @@ export {
   makeSelectPaymentId,
   makeSelectFinalTransaction,
   makeSelectTransactionId,
+  makeSelectLoading
 };

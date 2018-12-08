@@ -36,6 +36,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
           this.setState({
             code : this.props.code.referral.code,
             link : `https://tokensale.ruc.io/signup/refer/${this.props.code.referral.code}`,
+            percent:this.props.code.amountPercent
           })
     // copyText.select();
 
@@ -44,9 +45,11 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
   }
 
   render() {
+    const { percent } = this.state;
     return (
       <div>
-        <div className="panel panel-default">
+
+      {this.props.code.status?   <div className="panel panel-default">
           <div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free RUC Tokens</div>
           <div className="panel-body">
         <div className="row">
@@ -56,7 +59,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 <div className="col-sm-12 col-md-6 col-md-offset-3">
 
                   <p>Share your unique referral link with your friends and you will earn free RUC Tokens.</p>
-                  <p>Refer bonus is 3% of tokens purchased by the referee</p>
+                  <p>Refer bonus is {percent}% of tokens purchased by the referee</p>
                   <div className="referral-link">
                   <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.ruc.io/signup/refer/${this.state.code}`} id="myInput" />
                     <CopyToClipboard text={this.state.link}
@@ -168,66 +171,66 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
           </div>
         </div>
       </div>
-      </div>
+      </div> :''}
       <div className="panel panel-default">
-        <div className="panel-heading">ICO Details</div>
-        <div className="panel-body" style={{fontSize:'16px'}}>
-          <h2 style={{fontSize:'20px'}} className="panel-subHead">Pre-Sale</h2>
-          <table className="table table-bordered sale">
-            <tbody>
-              <tr>
-                <td>Start date: </td>
-                <td>19th November, 2018 GMT</td>
-              </tr>
-              <tr>
-                <td>End date: </td>
-                <td>16th December, 2018 GMT</td>
-              </tr>
-              <tr>
-                <td>Bonus: </td>
-                <td>30 %</td>
-              </tr>
-              <tr>
-                <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                <td>15000 RUC</td>
-              </tr>
-              </tbody>
-            </table>
-
-            <h2 style={{fontSize:'20px'}}>Crowd Sale</h2>
+          <div className="panel-heading">ICO Details</div>
+          <div className="panel-body" style={{fontSize:'16px'}}>
+            <h2 style={{fontSize:'20px'}} className="panel-subHead">Pre-Sale</h2>
             <table className="table table-bordered sale">
               <tbody>
                 <tr>
                   <td>Start date: </td>
-                  <td>2nd January, 2019 GMT</td>
+                  <td>19th November, 2018 GMT</td>
                 </tr>
                 <tr>
                   <td>End date: </td>
-                  <td>31st January, 2019 GMT</td>
+                  <td>16th December, 2018 GMT</td>
                 </tr>
                 <tr>
-                  <td>Bonus(Ist week): </td>
-                  <td>15 %</td>
+                  <td>Bonus: </td>
+                  <td>30%</td>
                 </tr>
                 <tr>
-                  <td>Bonus(2nd week): </td>
-                  <td>10 %</td>
+                  <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
+                  <td>15000 RUC</td>
                 </tr>
-                <tr>
-                  <td>Bonus(3rd &amp; 4th week) : </td>
-                  <td>0 %</td>
-                </tr>
-                <tr>
-                  <td>Minimum Purchase: </td>
-                  <td>500 RUC</td>
-                </tr>
-              </tbody>
-            </table>
-            <p className=" text-center">Token Price : <strong>1 RUC = $0.1</strong></p>
-            <p className=" text-center">We Accept : <strong>BTC, ETH</strong></p>
-            <p className=" text-center">Currently Processed : <strong>0 RUC TOKENS</strong></p>
-        </div>
-     </div>
+                </tbody>
+              </table>
+
+              <h2 style={{fontSize:'20px'}}>Crowd Sale</h2>
+              <table className="table table-bordered sale">
+                <tbody>
+                  <tr>
+                    <td>Start date: </td>
+                    <td>2nd January, 2019 GMT</td>
+                  </tr>
+                  <tr>
+                    <td>End date: </td>
+                    <td>31st January, 2019 GMT</td>
+                  </tr>
+                  <tr>
+                    <td>Bonus(Ist week): </td>
+                    <td>15%</td>
+                  </tr>
+                  <tr>
+                    <td>Bonus(2nd week): </td>
+                    <td>10%</td>
+                  </tr>
+                  <tr>
+                    <td>Bonus(3rd &amp; 4th week): </td>
+                    <td>0%</td>
+                  </tr>
+                  <tr>
+                    <td>Minimum Purchase: </td>
+                    <td>500 RUC</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div className="text-center">Token Price: <strong>1 RUC = $0.1</strong></div>
+              <div className="text-center">We Accept: <strong>BTC, ETH</strong></div>
+              <div className="text-center">Currently Processed: <strong>0 RUC TOKENS</strong></div>
+          </div>
+       </div>
       </div>
     );
   }

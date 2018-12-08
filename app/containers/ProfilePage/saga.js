@@ -1,8 +1,8 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import api from 'utils/api';
-import { UPDATE_DETAILS ,UPLOAD_PROFILE_IMAGE } from './constants';
+import { UPDATE_DETAILS ,UPLOAD_PROFILE_IMAGE, GET_PROFILE_DATA } from './constants';
 import makeSelectProfilePage, { makeSelectDetails , makeSelectProfileImage } from './selectors';
-import { updateDetailsSuccess ,uploadProfileImageSuccess } from './actions';
+import { updateDetailsSuccess ,uploadProfileImageSuccess, getProfileSuccess } from './actions';
 
 export function* updateDetails(){
   try{
@@ -43,6 +43,25 @@ export function* uploadProfileImage(){
     console.log(err)
   }
 }
+export function* getProfileData(){
+  try{
+    const headers = {
+      headers : {
+        'x-auth-token' : localStorage.getItem('token'),
+      },
+    }
+    const apiData = yield call(api.user.profile, headers);
+    console.log(apiData,'api data....')
+    if(apiData.success){
+      console.log(" Succeasaaaaaaa");
+      yield put(getProfileSuccess(apiData.userInfo))
+  }
+  }
+  catch(err){
+    console.log(" errrrrrrrrrrrrrrrrrrrrrorrrr");
+    console.log(err)
+  }
+}
 
 
 
@@ -52,5 +71,6 @@ export default function* defaultSaga() {
   yield [
     takeLatest(UPDATE_DETAILS, updateDetails),
     takeLatest(UPLOAD_PROFILE_IMAGE, uploadProfileImage),
+    takeLatest(GET_PROFILE_DATA, getProfileData),
   ];
 }

@@ -12,7 +12,9 @@ import { compose } from 'redux';
 import { ToastContainer, toast } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+
+import { Redirect } from 'react-router'
 import makeSelectResetPassword, { makeSelectResetError, makeSelectResetSuccess } from './selectors';
 import { resetError, resetSuccess, resetPassword } from './actions';
 import reducer from './reducer';

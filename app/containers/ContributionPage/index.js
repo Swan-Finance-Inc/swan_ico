@@ -70,8 +70,6 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     this.amtInvested = this.amtInvested.bind(this);
     this.validator = this.validator.bind(this);
     this.validatorWallet = this.validatorWallet.bind(this);
-
-
   }
 
   // End Constructor
@@ -626,9 +624,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                 <div className="contribution">
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                      {/* <p><h2>{this.state.stage}</h2></p> */}
                       <p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>
-                      <h5>1 RUC COIN = {this.state.tokenPrice} $</h5>
+                      <h5>1 RUC COIN ={this.state.tokenPrice}$</h5>
                     </div>
                   </div>
                   <div className="row">
@@ -646,14 +643,26 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                               // <option value="EUR">EUR</option>
                             }
                             </select>
+
                           </span>
-                          <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Tokens</span>
-                          {
-                            this.state.curr !== 'Dollar' ?
-                            <span style={{float: 'left'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.ethToDollar.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.btcToDollar).toFixed(2) : (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null} $</span>
-                            : null
-                          }
-                          <br/>
+                        </div>
+                        <div className='row howMuch'>
+
+
+                        <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Tokens</span>
+                        {
+                          this.state.curr !== 'Dollar' ?
+                          <span style={{float: 'left'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.ethToDollar.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.btcToDollar).toFixed(2) : (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null} $</span>
+                          : null
+                        }
+                        <br/>
+
+
+
+
+
+
+
                         </div>
                           <div className="form-group">
                             <label htmlFor="amt" className="form-label">How much {this.state.curr} you would like to invest?</label>

@@ -12,11 +12,11 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectProfilePage, { makeSelectDetails, makeSelectUpdateSuccess ,makeSelectImageReturn } from './selectors';
+import makeSelectProfilePage, { makeSelectDetails, makeSelectUpdateSuccess ,makeSelectImageReturn, makeSelectUserInfo } from './selectors';
 import makeSelectDashBoardWelcomePage from 'containers/DashBoardWelcomePage/selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { updateDetails, resetSuccess ,uploadProfileImage } from './actions';
+import { updateDetails, resetSuccess ,uploadProfileImage, getProfileData } from './actions';
 import { ToastContainer, toast } from 'react-toastify';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -55,6 +55,10 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
 
   handleInput(e){
     if(e.target.name == 'loginAlert'){
+      this.setState({
+        [e.target.name] : e.target.checked
+      })
+    }else if(e.target.name == 'latestNewsAlert') {
       this.setState({
         [e.target.name] : e.target.checked
       })
@@ -99,10 +103,12 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       ethAddress,
       valid: true
     }
+
   }
   componentDidMount(){
     this.setState({
       referalUrl:`https://tokensale.ruc.io/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
+      profilePicUrl:this.props.userInfo.userInfo.imageProfile
     })
   }
 
@@ -155,7 +161,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   render() {
     console.log(this.props," props in  profile");
     console.log(this.state," state in  profile");
-  const   { profilePicUrl } = this.state;
+    {}
+  const   { profilePicUrl } = this.state
   console.log(profilePicUrl," iiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
     const { phone } = this.state;
     return (
@@ -320,7 +327,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 {/* Signature link */}
                 <div className="row form-group">
                   <div className="col-sm-3">
-                    <label htmlFor="signature"><span style={{fontWeight:'500'}}>Signature Username</span></label>
+                    <label htmlFor="signature"><span style={{fontWeight:'500', fontSize:'16px'}}>Signature Username</span></label>
                   </div>
                   <div className="col-sm-9">
                     <input className="form-control" type="text" name="signature" id="signature" placeholder="Signature Username" onChange={this.handleInput} value={this.state.signature}/>
@@ -372,7 +379,8 @@ const mapStateToProps = createStructuredSelector({
   profilepage: makeSelectProfilePage(),
   userInfo: makeSelectDashBoardWelcomePage(),
   updateSuccess: makeSelectUpdateSuccess(),
-  ImageRet:makeSelectImageReturn()
+  ImageRet:makeSelectImageReturn(),
+  updateUserInfo:makeSelectUserInfo(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -381,6 +389,7 @@ function mapDispatchToProps(dispatch) {
     updateDetail : (data) => dispatch(updateDetails(data)),
     resetSuccess : (data) => dispatch(resetSuccess(data)),
     uploadProfileImage : (data) => dispatch(uploadProfileImage(data)),
+    getProfileData: (data) => dispatch(getProfileData(data))
 
   };
 }

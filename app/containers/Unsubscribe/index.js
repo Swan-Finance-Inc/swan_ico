@@ -66,7 +66,7 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
             <div className="section-border dark_border"></div>
             <div className="moveCenter col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
               <label className="mr-10" for="email">Email</label>
-              <input className="inputFieldEmail" type="input" name="email" value={this.state.email}/>
+              <input className="inputFieldEmail" type="input" name="email" value={this.state.email} disabled/>
             </div>
 
 {/*

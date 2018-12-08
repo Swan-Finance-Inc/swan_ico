@@ -17,7 +17,9 @@ import makeSelectResendConfirmationPage from './selectors';
 import reducer from './reducer';
 import saga, { resend } from './saga';
 import { toast, ToastContainer } from 'react-toastify';
-import { Link, Redirect } from 'react-router-dom';
+// import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router'
 import { resendMail } from './actions';
 import { makeSelectResendError, makeSelectResendSuccess } from './selectors';
 import ReCAPTCHA from 'react-google-recaptcha';

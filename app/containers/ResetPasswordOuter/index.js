@@ -11,7 +11,9 @@ import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { passwordReset } from 'containers/App/actions';
 import { ToastContainer, toast } from 'react-toastify';
-import { Redirect } from 'react-router-dom';
+// import { Redirect } from 'react-router-dom';
+
+import { Redirect } from 'react-router'
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectResetPasswordOuter, { makeSelectResetToken, makeSelectResetError, makeSelectResetSuccess, makeSelectResetErrorMessage, makeSelectResetSuccessMessage } from './selectors';

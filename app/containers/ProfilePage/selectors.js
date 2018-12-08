@@ -36,11 +36,17 @@ const makeSelectImageReturn = () => createSelector(
   selectProfilePageDomain,
   (substate) => substate.get('profileimgRet')
 )
+
+const makeSelectUserInfo = () => createSelector(
+  selectProfilePageDomain,
+  (substate) => substate.get('userInfo')
+)
 export default makeSelectProfilePage;
 export {
   selectProfilePageDomain,
   makeSelectDetails,
   makeSelectUpdateSuccess,
   makeSelectProfileImage,
-  makeSelectImageReturn
+  makeSelectImageReturn,
+  makeSelectUserInfo
 };

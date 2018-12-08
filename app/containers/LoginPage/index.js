@@ -10,7 +10,9 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
 import { ToastContainer, toast } from 'react-toastify';
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router'
+// import { Redirect, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom'
 import injectSaga from 'utils/injectSaga';
 import { push } from 'react-router-redux';
 import { css } from 'glamor';

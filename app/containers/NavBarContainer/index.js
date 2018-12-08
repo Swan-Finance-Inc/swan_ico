@@ -102,10 +102,12 @@ export class NavBarContainer extends React.PureComponent {
             <div className="logo"><Link to="/"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="RUC" /></Link></div>
           </div>
           <div className="header-right hidden-xs">
+                {
+                  // <Link to="/dashboard/notification"  onClick={this.routeToNotifications} ><span  className="NotificationBell"><BellIcon width='30' color={'#D3A94A'} active={false} animate={false} /></span>
+                  //     <span className='badgeClass' style={{color:"#fff"}}><Badge>{2}</Badge></span>   </Link>
+                }
 
-        <Link to="/dashboard/notification"  onClick={this.routeToNotifications} ><span  className="NotificationBell"><BellIcon width='30' color={'#D3A94A'} active={false} animate={false} /></span>
-            <span className='badgeClass' style={{color:"#fff"}}><Badge>{2}</Badge></span>
-        </Link>
+
             <Nav pullRight >
             <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">
             <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectEnglish}><i ></i>English</MenuItem>
