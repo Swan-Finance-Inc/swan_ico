@@ -14,14 +14,16 @@ export function* getData() {
     };
     const apiData = yield call(api.user.getContributionData, headers);
    // console.log(apiData);
+   console.log(apiData,"data in saa")
     if (apiData.success) {
-      console.log(apiData);
+      console.log(apiData.data,"in saga");
       yield put(successData(apiData.data));
     }
   } catch (error) {
    // console.log(error);
   }
 }
+
 export function* contribute() {
   try {
     const headers = {

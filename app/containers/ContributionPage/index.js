@@ -78,46 +78,22 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
   componentDidMount() {
     this.props.getData();
-    const data = this.props.successData;
-    // const interval = setInterval(() => this.updatetime(), 1000);
-    let tokensPerEther = data.ethUsd / data.tokenUsd;
-    let tokensPerBitcoin = data.btcUsd / data.tokenUsd;
-    let tokensPerUsd = 1/data.tokenUsd;
-    let tokensPerEur = 1/data.tokenUsd * data.eurUsd;
-    const fromAddress = this.props.userInfo.userInfo.ethAddress;
-    this.setState({
-      eurToDollar: data.eurUsd,
-      ethToDollar: data.ethUsd,
-      btcToDollar: data.btcUsd,
-      tokensPerEther: tokensPerEther,
-      tokensPerBitcoin: tokensPerBitcoin,
-      tokensPerUsd: tokensPerUsd,
-      ethAddress: data.ethAddress,
-      btcAddress: data.btcAddress,
-      tokensPerEur: tokensPerEur,
-      tokenPrice: data.tokenUsd,
-      // interval,
-      bonus: data.bonus,
-      stage: data.stage,
-      minInvest: data.minInvest,
-      fromAddress,
-      valid: true
-
-    });
+    console.log("Getting data");
+  
   }
 
   componentWillReceiveProps(nextProps) {
-
-
+    console.log(nextProps.contributionpage,"page");
+    console.log(nextProps.successData,"deposit")
     const data = nextProps.successData;
     this.setState({
       eurToDollar: data.eurUsd,
       ethToDollar: data.ethUsd,
       btcToDollar: data.btcUsd,
-      tokensPerEther: data.ethUsd / data.tokenUsd,
-      tokensPerBitcoin: data.btcUsd / data.tokenUsd,
-      tokensPerUsd: 1/data.tokenUsd,
-      tokensPerEur: 1/data.tokenUsd * data.eurUsd,
+      tokensPerEther: data.tokenPerEther,
+      tokensPerBitcoin: data.tokenPerBtc,
+      tokensPerUsd: 1 / data.tokenUsd,
+      tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
       time: nextProps.deadline,
@@ -625,6 +601,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
                       <p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>
+                      <p style={{color:'#ff0000'}}>Current Token Sale: {this.state.stage}</p>
                       <h5>1 RUC COIN ={this.state.tokenPrice}$</h5>
                     </div>
                   </div>
@@ -652,7 +629,11 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                         <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Tokens</span>
                         {
                           this.state.curr !== 'Dollar' ?
-                          <span style={{float: 'left'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.ethToDollar.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.btcToDollar).toFixed(2) : (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null} $</span>
+                          <span style={{float: 'left'}}>1
+                            {this.state.curr} = {(this.state.curr === 'Ethereum') ?
+                             this.state.ethToDollar : (this.state.curr === 'Bitcoin') ? 
+                             (this.state.btcToDollar).toFixed(2) :
+                              (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null} $</span>
                           : null
                         }
                         <br/>
@@ -734,6 +715,7 @@ const mapStateToProps = createStructuredSelector({
   global: makeGlobalParent(),
   transactionId: makeSelectTransactionId(),
   userInfo: makeSelectDashBoardWelcomePage()
+
 });
 
 function mapDispatchToProps(dispatch) {

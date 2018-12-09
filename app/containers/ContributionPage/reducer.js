@@ -29,6 +29,8 @@ const initialState = fromJS({
     bonus: false,
     stage: false,
     minInvest: false,
+    tokenPerEther: 0,
+    tokenPerBtc: 0,
 
   },
   failure: false,
@@ -89,6 +91,8 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['success', 'privateSaleTokenUsd'], action.data.privateSaleTokenUsd)
         .setIn(['success', 'discountSaleTokenUsd'], action.data.discountSaleTokenUsd)
         .setIn(['success', 'mainSaleTokenUsd'], action.data.mainSaleTokenUsd)
+        .setIn(['success', 'tokenPerEther'], action.data.tokenPerEther)
+        .setIn(['success', 'tokenPerBtc'], action.data.tokenPerBtc)
         .set('failure', false);
     case SUCCESS_PAYMENT:
       return state
