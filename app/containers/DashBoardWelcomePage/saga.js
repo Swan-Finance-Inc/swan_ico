@@ -70,9 +70,9 @@ export function* deleteUser() {
     const apiData = yield call(api.user.deleteUser, headers);
  console.log(apiData,"apiData in saga");
     if(apiData.success) {
-      // localStorage.removeItem('token');
-      //  yield put(deleteUserSuccessAction());
-      //  yield put(push('/signin'));
+      localStorage.removeItem('token');
+       yield put(deleteUserSuccessAction());
+       yield put(push('/signin'));
 
     }
     if(!apiData.success)

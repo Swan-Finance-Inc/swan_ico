@@ -173,9 +173,13 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                                   </div>
                                  </span>
                                  </p>
-                                 <div className='col-sm-12'>
+                                 <div className='row'>
+                                 <div className="col-md-6 col-sm-12">
                                  <span className="gas1">SET GAS LIMIT:{this.props.gasLimit?this.props.gasLimit:` 120000`}</span>
+                                 </div>
+                                 <div className="col-md-6 col-sm-12">
                                  <span className="gas2">SET GAS PRICE:{this.props.gasPrice?this.props.gasPrice: 95} GWei</span>
+                                 </div>
                                  </div>
                                   </div>
                                 </div>

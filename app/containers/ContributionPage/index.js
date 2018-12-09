@@ -90,8 +90,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       eurToDollar: data.eurUsd,
       ethToDollar: data.ethUsd,
       btcToDollar: data.btcUsd,
-      tokensPerEther: data.tokenPerEther,
-      tokensPerBitcoin: data.tokenPerBtc,
+      tokensPerEther: data.tokenPerEther  / (10 ** 18),
+      tokensPerBitcoin: data.tokenPerBtc  / (10 ** 18),
       tokensPerUsd: 1 / data.tokenUsd,
       tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
       ethAddress: data.ethAddress,
@@ -100,7 +100,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       bonus: data.bonus,
       stage: data.stage,
       minInvest: data.minInvest,
-      tokenPrice: data.tokenUsd
+      tokenPrice: data.tokenUsd  / (10 ** 18)
     });
     if (nextProps.successPayment) {
       console.log(nextProps.successPayment);
