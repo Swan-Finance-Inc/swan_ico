@@ -1,6 +1,6 @@
 import axios from 'axios';
- //const BaseUrl = 'http://13.229.146.169:4040/api/v1/'
- const BaseUrl = 'http://localhost:7020/api/v1/'
+ const BaseUrl = 'http://13.229.146.169:4040/api/v1/';
+ //const BaseUrl = 'http://localhost:7020/api/v1/'
 export default {
   user: {
     deleteUser:(headers)=>
