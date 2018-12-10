@@ -12,15 +12,16 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectProfilePage, { makeSelectDetails, makeSelectUpdateSuccess ,makeSelectImageReturn, makeSelectUserInfo } from './selectors';
+import makeSelectProfilePage, { makeSelectDetails, makeSelectUpdateSuccess ,makeSelectImageReturn, makeSelectUserInfo, makeSelectLoading } from './selectors';
 import makeSelectDashBoardWelcomePage from 'containers/DashBoardWelcomePage/selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { updateDetails, resetSuccess ,uploadProfileImage, getProfileData } from './actions';
+import { updateDetails, resetSuccess ,uploadProfileImage, getProfileData, getProfileRemove } from './actions';
 import { ToastContainer, toast } from 'react-toastify';
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import { parseNumber, formatNumber, isValidNumber } from 'libphonenumber-js'
+import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 
 export class ProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
@@ -103,12 +104,12 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       ethAddress,
       valid: true
     }
-
+        this.props.getProfileData();
   }
   componentDidMount(){
     this.setState({
       referalUrl:`https://tokensale.ruc.io/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
-      profilePicUrl:this.props.userInfo.userInfo.imageProfile
+      // profilePicUrl:this.props.userInfo.userInfo.imageProfile
     })
   }
 
@@ -117,8 +118,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     if(!isValidNumber(this.state.phone)){
       toast.error('Phone number is invalid');
     }else if(this.state.valid){
-      const { fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, signature, loginAlert, ethAddress } = this.state;
-      this.props.updateDetail({fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, signature, loginAlert,ethAddress});
+      const { fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, signature, loginAlert, ethAddress,latestNewsAlert } = this.state;
+      this.props.updateDetail({fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, signature, loginAlert,ethAddress, latestNewsAlert});
     }else{
       toast.error('Please enter valid ETH Wallet address');
     }
@@ -139,6 +140,13 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         profilePicUrl:nextProps.ImageRet.imageUrl
       })
       nextProps.resetSuccess();
+    }
+    if(nextProps.updateUserInfo){
+      console.log(" isnide update profile info")
+       this.setState({
+         profilePicUrl:nextProps.updateUserInfo.imageProfile
+       })
+       nextProps.getProfileRemove();
     }
   }
   uploadProfileImage=()=>{
@@ -161,11 +169,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   render() {
     console.log(this.props," props in  profile");
     console.log(this.state," state in  profile");
-    {}
+  const { loading } = this.props
   const   { profilePicUrl } = this.state
   console.log(profilePicUrl," iiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
     const { phone } = this.state;
-    return (
+    return(
       <div id="content" className="ui-content ui-content-aside-overlay">
       <div className="ui-content-body">
         <div className="ui-container container-fluid">
@@ -173,6 +181,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
               <div className="panel-heading">Update Profile</div>
                 <div className="panel-body" style={{fontSize:'16px'}}>
           <div className=" contribution row">
+          {loading?<LoadingSpinner />:
             <div className="col-sm-12">
               <div className="row text-center">
                 {/* <h2>UPDATE PROFILE</h2> */}
@@ -361,13 +370,14 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 </div>
               </form>
             </div>
+           }
           </div>
           </div>
           </div>
         </div>
       </div>
       </div>
-    );
+    )
   }
 }
 
@@ -381,6 +391,7 @@ const mapStateToProps = createStructuredSelector({
   updateSuccess: makeSelectUpdateSuccess(),
   ImageRet:makeSelectImageReturn(),
   updateUserInfo:makeSelectUserInfo(),
+  loading:makeSelectLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -389,7 +400,8 @@ function mapDispatchToProps(dispatch) {
     updateDetail : (data) => dispatch(updateDetails(data)),
     resetSuccess : (data) => dispatch(resetSuccess(data)),
     uploadProfileImage : (data) => dispatch(uploadProfileImage(data)),
-    getProfileData: (data) => dispatch(getProfileData(data))
+    getProfileData: (data) => dispatch(getProfileData(data)),
+    getProfileRemove: (data) => dispatch(getProfileRemove(data)),
 
   };
 }

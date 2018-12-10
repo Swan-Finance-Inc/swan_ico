@@ -41,6 +41,10 @@ const makeSelectUserInfo = () => createSelector(
   selectProfilePageDomain,
   (substate) => substate.get('userInfo')
 )
+const makeSelectLoading = () => createSelector(
+  selectProfilePageDomain,
+  (substate) => substate.get('loading')
+)
 export default makeSelectProfilePage;
 export {
   selectProfilePageDomain,
@@ -48,5 +52,6 @@ export {
   makeSelectUpdateSuccess,
   makeSelectProfileImage,
   makeSelectImageReturn,
-  makeSelectUserInfo
+  makeSelectUserInfo,
+  makeSelectLoading
 };

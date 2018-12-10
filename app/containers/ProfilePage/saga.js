@@ -54,7 +54,7 @@ export function* getProfileData(){
     console.log(apiData,'api data....')
     if(apiData.success){
       console.log(" Succeasaaaaaaa");
-      yield put(getProfileSuccess(apiData.userInfo))
+      yield put(getProfileSuccess(apiData.useInfo))
   }
   }
   catch(err){

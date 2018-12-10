@@ -3,10 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-{
-  // import { Redirect } from 'react-router-dom';
-}
-import { Redirect } from 'react-router'
+import { Redirect } from 'react-router-dom';
 import { Modal, Button } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';

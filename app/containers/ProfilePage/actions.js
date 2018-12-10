@@ -12,7 +12,8 @@ import {
   UPLOAD_PROFILE_IMAGE,
   UPLOAD_PROFILE_IMAGE_SUCCESS,
   GET_PROFILE_DATA,
-  GET_PROFILE_SUCCESS
+  GET_PROFILE_SUCCESS,
+  GET_PROFILE_REMOVE
 } from './constants';
 import { REGISTER } from 'redux-persist';
 
@@ -29,8 +30,15 @@ export function getProfileData(data) {
   }
 }
 export function getProfileSuccess(data) {
+  console.log(" kukukukukukuku ")
   return {
     type: GET_PROFILE_SUCCESS,
+    data
+  }
+}
+export function getProfileRemove(data) {
+  return {
+    type: GET_PROFILE_REMOVE,
     data
   }
 }

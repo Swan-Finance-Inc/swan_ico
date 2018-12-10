@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import { toast, ToastContainer } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectContributionPage, {makeSelectTransactionId, makeSelectContributionCurrency, makeSelectContributionData, makeSelectContributionSuccess } from './selectors';
+import makeSelectContributionPage, {makeSelectTransactionId, makeSelectContributionCurrency, makeSelectContributionData, makeSelectContributionSuccess, makeSelectLoading } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import { selectAction, getData, confirmPayment, reload,finalizePayment } from './actions';
@@ -21,6 +21,7 @@ import { ContributionConfirm } from '../ContributionConfirm';
 import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
+import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 export class ContributionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
   constructor(props) {
@@ -79,7 +80,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   componentDidMount() {
     this.props.getData();
     console.log("Getting data");
-  
+
   }
 
   componentWillReceiveProps(nextProps) {
@@ -503,6 +504,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
   // End of container functions
   render() {
+    const { loading } = this.props
+    console.log(loading," loading in ");
     // if (this.props.userInfo.userInfo.kycStatus != 'ACCEPTED'){
     //   return (
     //     <div id="content" className="ui-content ui-content-aside-overlay">
@@ -597,6 +600,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
               <div className="col-sm-12">
+              {loading?<LoadingSpinner />:
                 <div className="contribution">
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
@@ -629,9 +633,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                         <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Tokens</span>
                         {
                           this.state.curr !== 'Dollar' ?
-                          <span style={{float: 'left'}}>1
-                            {this.state.curr} = {(this.state.curr === 'Ethereum') ?
-                             this.state.ethToDollar : (this.state.curr === 'Bitcoin') ? 
+                          <span style={{float: 'left'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ?
+                             this.state.ethToDollar : (this.state.curr === 'Bitcoin') ?
                              (this.state.btcToDollar).toFixed(2) :
                               (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null} $</span>
                           : null
@@ -692,6 +695,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                     </div>
                   </div>
                 </div>
+              }
               </div>
             </div>
           </div>
@@ -714,7 +718,8 @@ const mapStateToProps = createStructuredSelector({
   successPayment: makeSelectContributionSuccess(),
   global: makeGlobalParent(),
   transactionId: makeSelectTransactionId(),
-  userInfo: makeSelectDashBoardWelcomePage()
+  userInfo: makeSelectDashBoardWelcomePage(),
+  loading:makeSelectLoading()
 
 });
 

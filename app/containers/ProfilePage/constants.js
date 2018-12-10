@@ -12,3 +12,4 @@ export const UPLOAD_PROFILE_IMAGE = 'app/ProfilePage/UPLOAD_PROFILE_IMAGE';
 export const UPLOAD_PROFILE_IMAGE_SUCCESS = 'app/ProfilePage/UPLOAD_PROFILE_IMAGE_SUCCESS';
 export const GET_PROFILE_DATA = 'app/ProfilePage/GET_PROFILE_DATA';
 export const GET_PROFILE_SUCCESS = 'app/ProfilePage/GET_PROFILE_SUCCESS';
+export const GET_PROFILE_REMOVE = 'app/ProfilePage/GET_PROFILE_REMOVE';

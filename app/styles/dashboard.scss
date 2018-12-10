@@ -76,6 +76,9 @@
 	color:grey;
 	background: transparent;
 }
+.ui-aside li> a:focus {
+background-color: #D6A156 !important;
+}
 .profile-Image {
 	position: relative;
 	width: 150px;
@@ -845,6 +848,9 @@ ol.rule-list li {
 }
 
  @media (min-width: 768px) {
+	 .ui-aside li> a:hover {
+	 background-color: #D6A156 !important;
+	 }
 	 .ui {
 	padding-top: 70px;
 	}
@@ -1331,6 +1337,7 @@ opacity:0;
    }
 	.sidebar-trigger.hamburger-menu a.toggle-btn,  .sidebar-trigger.nav>li>a:hover,  .sidebar-trigger.nav>li>a:focus {
    background-color:transparent;
+
    }
    .sidebar-trigger.nav>li {
 	margin-top: -8px;
