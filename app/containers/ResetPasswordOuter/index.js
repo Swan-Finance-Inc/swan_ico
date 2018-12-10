@@ -12,7 +12,7 @@ import { compose } from 'redux';
 import { passwordReset } from 'containers/App/actions';
 import { ToastContainer, toast } from 'react-toastify';
 // import { Redirect } from 'react-router-dom';
-
+import queryString from 'query-string';
 import { Redirect } from 'react-router'
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
@@ -34,10 +34,14 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
   }
 
   componentDidMount() {
+   
+    let params = queryString.parse(this.props.location.search)
+    console.log(params);
     if (this.props.match.params.token != null) {
     // console.log(this.props.match.params.token);
       this.setState({
         resetToken: this.props.match.params.token,
+        forceReset: params.reset
       });
     } else {
       this.setState({
@@ -79,6 +83,7 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
     const data = {
       token: this.props.match.params.token,
       newPassword: e.target[0].value,
+      reset:this.state.forceReset
     };
 
     if (newPassword == confPassword) {

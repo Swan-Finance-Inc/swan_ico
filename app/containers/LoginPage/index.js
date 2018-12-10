@@ -150,7 +150,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
         // console.log(user);
 
         this.props.loginUser(user);
-        this.props.login();
+        //this.props.login();
     } else {
       this.notify('Something went wrong');
     }

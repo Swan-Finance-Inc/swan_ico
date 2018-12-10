@@ -11,6 +11,7 @@ import {
 
 
 const initialState = fromJS({
+  forceReset:0,
   resetToken: false,
   newPassword: false,
   success: false,
@@ -25,6 +26,7 @@ function resetPasswordOuterReducer(state = initialState, action) {
       return state;
     case RESET_PASSWORD:
       return state
+        .set('forceReset', action.data.reset)
         .set('resetToken', action.data.token)
         .set('newPassword', action.data.newPassword);
     case RESET_SUCCESS:

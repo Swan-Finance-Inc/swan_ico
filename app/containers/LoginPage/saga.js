@@ -22,19 +22,29 @@ import api from 'utils/api';
 
 
 export function* getUser() {
-  // console.log("listening to api hit")
+   console.log("listening to api hit")
   try {
-    // console.log("listening to api hit")
+    console.log("listening to api hit")
 
     const userData = yield select(makeSelectUser());
     // console.log(userData)
     const apiData = yield call(api.user.login, userData);
-    if (apiData.success) {
+    if (apiData.success) {  
+      console.log("i m gere");
+      if(apiData.reset !== undefined) {
+        console.log("i m gere 1");
+        if(!apiData.reset) {
+          console.log("i m gere 2");
+        yield put(push('/forceReset'));
+        }
+      } else {
+        console.log("i m gere 3");
       localStorage.setItem('token', apiData.authToken);
       yield put(userLoaded());
       yield put(twoFactorEnabled(apiData.is2FA_enabled));
       yield put(push('/dashboard'));
       yield put(removeErrorGlobal());
+      }
     } else if (!apiData.success) {
       yield put(userLoadingError(apiData.message));
       yield put(removeErrorMessage());

@@ -25,6 +25,7 @@ import Loading from 'containers/Loading/Loadable';
 import TransactionHistory from 'containers/TransactionHistory/Loadable';
 import ResendConfirmationPage from 'containers/ResendConfirmationPage/Loadable';
 import Unsubscribe from 'containers/Unsubscribe/Loadable';
+import ForceReset from 'containers/ForceReset';
 
 export default function App() {
   return (
@@ -41,6 +42,7 @@ export default function App() {
         <Route path="/signin/verify/:token" component={Loading} />
         <Route path="/signup/refer/:token" component={RegisterPage} />
         <Route path="/unsubscribe" component={Unsubscribe} />
+        <Route path="/forceReset" component={ForceReset} />
         <Route component={NotFoundPage} />
       </Switch>
     </div>

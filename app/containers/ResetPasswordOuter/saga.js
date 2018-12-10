@@ -2,7 +2,7 @@ import { takeLatest, call, put, select } from 'redux-saga/effects';
 import { push } from 'react-router-redux';
 import api from 'utils/api';
 
-import { makeSelectResetToken, makeSelectNewPassword } from './selectors';
+import { makeSelectResetToken, makeSelectNewPassword, makeSelectForceResetToken } from './selectors';
 import { RESET_PASSWORD } from './constants';
 import { resetError, resetSuccess, removeReset } from './actions';
 // Individual exports for testing
@@ -13,9 +13,11 @@ export function* reset() {
   try {
     const userToken = yield select(makeSelectResetToken());
     const userData = yield select(makeSelectNewPassword());
+    const forceReset = yield select(makeSelectForceResetToken());
     // console.log(userToken)
     const body = {
       newPassword: userData,
+      reset: forceReset,
     };
     // console.log(userData);
     const apiData = yield call(api.user.resetWithToken, userToken, body);

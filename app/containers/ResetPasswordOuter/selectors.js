@@ -22,6 +22,11 @@ const makeSelectResetToken = () => createSelector(
   selectResetPasswordOuterDomain,
   (substate) => substate.get('resetToken')
 );
+
+const makeSelectForceResetToken = () => createSelector(
+  selectResetPasswordOuterDomain,
+  (substate) => substate.get('forceReset')
+); 
 const makeSelectNewPassword = () => createSelector(
   selectResetPasswordOuterDomain,
   (substate) => substate.get('newPassword')
@@ -51,4 +56,5 @@ export {
   makeSelectResetSuccess,
   makeSelectResetErrorMessage,
   makeSelectResetSuccessMessage,
+  makeSelectForceResetToken
 };
