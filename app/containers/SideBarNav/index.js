@@ -35,7 +35,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       faqAct: '',
       profileAct: '',
       resetPassAct: '',
-      showSignOut: false
+      showSignOut: false,
+      upload_docs:'',
     };
   }
 
@@ -50,7 +51,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       supportAct: this.props.support,
       faqAct: this.props.faqAct,
       profileAct: this.props.profile,
-      resetPassAct: this.props.resetPass
+      resetPassAct: this.props.resetPass,
+      upload_docs:this.props.upload_docs
     });
   }
   handleLogOut=()=>{
@@ -61,6 +63,12 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
   toggleDashActive=(e)=>{
     this.props.compact();
     this.props.toggleDashActive();
+
+  // console.log('toggling', e);
+  }
+  toggleUpDocsActive=(e)=>{
+    this.props.compact();
+    this.props.toggleUpDocsActive();
 
   // console.log('toggling', e);
   }
@@ -121,7 +129,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       supportAct: nextProps.support,
       faqAct: nextProps.faq,
       profileAct: nextProps.profile,
-      resetPassAct: nextProps.resetPass
+      resetPassAct: nextProps.resetPass,
+      upload_docs:nextProps.upload_docs
     });
   }
 
@@ -202,6 +211,11 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             <li className={this.state.ticketAct}><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span className="has-icon"><i className="fa fa-ticket"></i></span><span>Tickets</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
                 <li className="nav-sub-header"><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span>Tickets</span></Link></li>
+              </ul>
+            </li>
+            <li className={this.state.upload_docs}><Link to="/dashboard/uploadDocs" role="button" onClick={this.toggleUpDocsActive}><span className="has-icon"><i className="fa fa-ticket"></i></span><span>Upload Documents</span></Link>
+              <ul className="nav nav-sub sidebar-niceScroll">
+                <li className="nav-sub-header"><Link to="/dashboard/uploadDocs" role="button" onClick={this.toggleUpDocsActive}><span>Upload Documents</span></Link></li>
               </ul>
             </li>
             <li className={this.state.secAct}><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}><span className="has-icon"><i className="fa fa-lock"></i></span><span>Security</span></Link>

@@ -13,8 +13,7 @@ export function* getData() {
       headers: { 'x-auth-token': localStorage.getItem('token') },
     };
     const apiData = yield call(api.user.getContributionData, headers);
-   // console.log(apiData);
-   console.log(apiData,"data in saa")
+   console.log(apiData," in get data saga");
     if (apiData.success) {
       console.log(apiData.data,"in saga");
       yield put(successData(apiData.data));
@@ -30,13 +29,15 @@ export function* contribute() {
       headers: { 'x-auth-token': localStorage.getItem('token') },
     };
     const body = yield select(makeSelectContributionConfirm());
+    console.log(body," our body in contribute saga")
     const apiData = yield call(api.user.deposit, headers, body);
+    console.log(apiData,"apiData in user.deposit")
     if (apiData.success) {
       yield put(depositSuccess(true));
       yield put(successPayment(apiData));
     }
   } catch (error) {
-    
+  console.log(error)
  }
 }
 export function* finalPayment() {
@@ -53,7 +54,7 @@ export function* finalPayment() {
       yield put(successPayment(apiData));
     }
   } catch (error) {
-    
+
  }
 }
 export function* reloadMe() {
@@ -69,4 +70,3 @@ export default function* defaultSaga() {
     takeLatest(SEND_PAYMENT, finalPayment),
   ];
 }
-

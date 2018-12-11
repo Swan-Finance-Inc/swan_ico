@@ -21,6 +21,7 @@ import ResetPassword from 'containers/ResetPassword';
 import ProfilePage from 'containers/ProfilePage';
 import SideBarNav from 'containers/SideBarNav';
 import CustomLoading from 'components/CustomLoading/Loadable';
+import UploadDocuments from 'containers/UploadDocuments/Loadable'
 import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
@@ -46,7 +47,8 @@ const initialState = {
   ticket: '',
   faq: '',
   profile: '',
-  resetPass: ''
+  resetPass: '',
+  upload_docs:''
 }
 export class DashBoardWelcomePage extends React.PureComponent {
   constructor() {
@@ -70,7 +72,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       showAlert: true,
       showVideo: false,
       notification:'',
-      notifyTransactions: []
+      notifyTransactions: [],
+      upload_docs:''
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -82,6 +85,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.toggleFaqActive = this.toggleFaqActive.bind(this);
     this.toggleProfileActive = this.toggleProfileActive.bind(this);
     this.toggleResetPassActive = this.toggleResetPassActive.bind(this);
+    this.toggleUpDocsActive = this.toggleUpDocsActive.bind(this);
     this.dashActive = this.dashActive.bind(this);
     this.buyPage = this.buyPage.bind(this);
     this.socialSubmit = this.socialSubmit.bind(this);
@@ -150,6 +154,10 @@ export class DashBoardWelcomePage extends React.PureComponent {
       this.setState({
       ...initialState,notification:'active'
       });
+    }else if (this.props.location.pathname == '/dashboard/uploadDocs') {
+      this.setState({
+      ...initialState,upload_docs:'active'
+      });
     }
   }
 
@@ -212,7 +220,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
           ticketActive: '',
           faqActive: '',
           profileActive: '',
-          resetPassActive: ''
+          resetPassActive: '',
+          upload_docs:''
         });
       }
     }
@@ -250,7 +259,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleSecActive() {
@@ -265,7 +275,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleContActive() {
@@ -280,7 +291,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleTranActive() {
@@ -295,7 +307,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleSupportActive() {
@@ -310,7 +323,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   dashActive() {
@@ -325,7 +339,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
     this.notifyTimeout();
   }
@@ -341,7 +356,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: '',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleFaqActive() {
@@ -356,7 +372,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       faq: 'active',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleTicketActive() {
@@ -371,7 +388,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: 'active',
       profile: '',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleProfileActive() {
@@ -386,7 +404,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       profile: 'active',
       resetPass: '',
-      notification:''
+      notification:'',
+      upload_docs:''
     });
   }
   toggleResetPassActive() {
@@ -401,7 +420,24 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       profile: '',
       resetPass: 'active',
-      notification:''
+      notification:'',
+      upload_docs:''
+    });
+  }
+  toggleUpDocsActive() {
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      cont: '',
+      tran: '',
+      support: '',
+      faq: '',
+      ticket: '',
+      profile: '',
+      resetPass: '',
+      notification:'',
+      upload_docs:'active'
     });
   }
   toggleNotificationsActive=()=>{
@@ -417,7 +453,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       ticket: '',
       profile: '',
       resetPass: '',
-      notification:'active'
+      notification:'active',
+      upload_docs:''
     });
   }
   notifyTimeout() {
@@ -506,6 +543,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             open={this.openNav}
             webCompact={this.webScreenCompact}
             dashAct={this.state.dashAct}
+            upload_docs={this.state.upload_docs}
             toggleDashActive={this.toggleDashActive}
             toggleContActive={this.toggleContActive}
             toggleKycActive={this.toggleKycActive}
@@ -516,6 +554,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             toggleProfileActive={this.toggleProfileActive}
             toggleResetPassActive={this.toggleResetPassActive}
             toggleTicketActive={this.toggleTicketActive}
+            toggleUpDocsActive = {this.toggleUpDocsActive}
           />
           {(this.props.location.pathname == '/dashboard') ?
              (this.props.dashboardwelcomepage.loading?<LoadingSpinner />:<div id="content" className="ui-content ui-content-aside-overlay">
@@ -524,9 +563,12 @@ export class DashBoardWelcomePage extends React.PureComponent {
                 <div className="col-sm-6">
                 <h1>Dashboard</h1>
                 </div>
-                <div className="col-sm-6 hidden-xs text-right">
-                  <button className="btn btn-video" style={{marginRight:'20px'}} onClick={this.showVideo}>Video Instruction  <i className="fa fa-play-circle"></i></button>
-                </div>
+                {
+                  // <div className="col-sm-6 hidden-xs text-right">
+                  //   <button className="btn btn-video" style={{marginRight:'20px'}} onClick={this.showVideo}>Video Instruction  <i className="fa fa-play-circle"></i></button>
+                  // </div>
+                }
+
               </div>
               {/*
                 kycStatus === 'ACCEPTED' ? <Link to="/dashboard/contribution" >
@@ -558,6 +600,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   <SupportPage /> :
                   (this.props.location.pathname == '/dashboard/faq') ?
                   <FaqPage /> :
+                  (this.props.location.pathname == '/dashboard/uploadDocs') ?
+                  <UploadDocuments /> :
                   (this.props.location.pathname == '/dashboard/ticket') ?
                   <TicketPage /> :
                   (this.props.location.pathname == '/dashboard/kyc') ?

@@ -74,7 +74,9 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['paymentConfirm', 'fromAddress'], action.data.fromAddress)
         .setIn(['paymentConfirm', 'toAddress'], action.data.toAddress)
         .setIn(['paymentConfirm', 'tokenReceivingAddress'], action.data.tokenReceivingAddress)
-        .setIn(['paymentConfirm', 'usdAmount'], action.data.usdAmount);
+        .setIn(['paymentConfirm', 'usdAmount'], action.data.usdAmount)
+        .setIn(['paymentConfirm', 'rate'], action.data.rate)
+        .setIn(['paymentConfirm', 'phase'], action.data.phase);
       // .setIn(['paymentConfirm', 'transactionHash'], action.data.transactionHash);
     case SUCCESS_DATA:
       return state

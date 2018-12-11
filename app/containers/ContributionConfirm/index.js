@@ -130,6 +130,8 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
 
   // Begin render function
   render() {
+    console.log(this.props," props in contribution confirm")
+    console.log(this.state," state in contribution confirm")
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
         <div className="ui-content-body">

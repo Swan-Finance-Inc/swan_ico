@@ -54,7 +54,11 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           Header: 'RUC Tokens',
           accessor: 'tokens', // Custom cell components!
           className: 'text-right'
-        },
+        },  {
+            Header: 'Phase',
+            accessor: 'phase', // Custom cell components!
+            className: 'text-right'
+          },
 
         {
           Header: 'Tokens Received',
@@ -140,6 +144,8 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     toast.success('Transaction deposited successfully');
   }
   render() {
+    console.log(this.props," props in transaction history");
+    console.log(this.state," state in transaction history");
     let loading = this.props.loading
     return (
 

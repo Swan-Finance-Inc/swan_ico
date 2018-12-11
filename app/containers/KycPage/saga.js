@@ -12,8 +12,9 @@ export function* submitKyc() {
          'x-auth-token': localStorage.getItem('token'),
         },
     };
-    
+
     const data = yield select(makeSelectKycDetails());
+    console.log(data," input fields in UpdateKycSaga")
     const details = {
       fullName : data.fullName,
       dob : data.dob,
@@ -30,7 +31,7 @@ export function* submitKyc() {
       documentNumber : data.doc_number
     }
     const apiData = yield call(api.user.updateKycDetails, headers, details);
-    
+  console.log(apiData," apidata in updateKycDetails")
     if(apiData){
       yield put(submitKycSuccess(apiData));
     }else{
@@ -51,15 +52,15 @@ export function* submitKycDoc() {
          'content-type': 'multipart/form-data'
         },
     };
-    
+
     const data = yield select(makeSelectKycDoc());
     console.log(data);
     const body = new FormData();
 
     body.append(data.field, data.image);
-    
+
     const apiData = yield call(api.user.uploadKycDoc, headers, body);
-    
+
     if(apiData.success){
       yield put(submitKycDocSuccess(apiData));
       console.log('from saga', apiData);

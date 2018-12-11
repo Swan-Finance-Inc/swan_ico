@@ -65,8 +65,8 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
             <h2  className="unsubscribeHeading">Unsubscribe Request</h2>
             <div className="section-border dark_border"></div>
             <div className="moveCenter col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
-              <label className="mr-10" for="email">Email</label>
-              <input className="inputFieldEmail" type="input" name="email" value={this.state.email} disabled/>
+              <label className="mr-10" htmlFor="email">Email</label>
+              <input className="inputFieldEmail" type="email" name="email" value={this.state.email} disabled/>
             </div>
 
 {/*
@@ -79,11 +79,11 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
 <div className="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2 unsubscribeLi">
 <p ><strong> If you have a moment, please let us know why did you unsubscribe </strong></p>
 <ul >
-<li><input type="radio" name="reason" id="many" value="many" />&nbsp;<label for="many">You send too many emails</label></li>
-<li><input type="radio" name="reason" id="irrelevant" value="irrelevant" />&nbsp;<label for="irrelevant">Your content is irrelevant to me</label></li>
-<li><input type="radio" name="reason" id="boring" value="boring" />&nbsp;<label for="boring">Your content is boring</label></li>
-<li><input type="radio" name="reason" id="nolonger" value="nolonger" />&nbsp;<label for="nolonger">I no longer want to receive these emails</label></li>
-<li><input type="radio" name="reason" id="never" value="never" />&nbsp;<label for="never">I never signed up for this mailing list</label></li>
+<li><input type="radio" name="reason" id="many" value="many" />&nbsp;<label htmlFor="many">You send too many emails</label></li>
+<li><input type="radio" name="reason" id="irrelevant" value="irrelevant" />&nbsp;<label htmlFor="irrelevant">Your content is irrelevant to me</label></li>
+<li><input type="radio" name="reason" id="boring" value="boring" />&nbsp;<label htmlFor="boring">Your content is boring</label></li>
+<li><input type="radio" name="reason" id="nolonger" value="nolonger" />&nbsp;<label htmlFor="nolonger">I no longer want to receive these emails</label></li>
+<li><input type="radio" name="reason" id="never" value="never" />&nbsp;<label htmlFor="never">I never signed up for this mailing list</label></li>
 </ul>
 </div>
 <div className="col-lg-6 col-lg-offset-3 col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">

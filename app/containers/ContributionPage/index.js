@@ -44,6 +44,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       ethAddress: false,
       btcAddress: false,
       fromAddress: '',
+      fromAddressEth:'',
       tokenReceiveAddress: false,
       timer: 1800,
       minutes: 30,
@@ -84,8 +85,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.contributionpage,"page");
-    console.log(nextProps.successData,"deposit")
+    console.log(nextProps.successData,"success data")
     const data = nextProps.successData;
     this.setState({
       eurToDollar: data.eurUsd,
@@ -103,10 +103,19 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       minInvest: data.minInvest,
       tokenPrice: data.tokenUsd  / (10 ** 18)
     });
+    this.setState({
+      fromAddressEth:nextProps.userInfo.userInfo.ethAddress
+    })
     if (nextProps.successPayment) {
       console.log(nextProps.successPayment);
 
       // this.notifyDeposit(nextProps.successPayment);
+    }
+    if(nextProps.userInfo.kycDone)
+    {
+      this.setState({
+        ethAddress:nextProps.successData.ethAddress
+      })
     }
   }
 
@@ -115,6 +124,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   // Begin of container functions
 
   onContributionConfirm(e) {
+
     e.preventDefault();
     /*  form = document.getElementById('contriForm'); */
     if( this.state.curr == 'Bitcoin' || this.state.curr == 'Ethereum') {
@@ -122,53 +132,56 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       console.log(typeof(this.state.dollarsInvested));
       if (parseInt(this.state.dollarsInvested) < this.state.minInvest) {
         this.notifyMinimum();
-      } else if (!this.state.valid) {
-        const curr = this.state.curr;
-        toast.error(`Please enter a valid ${curr} address`);
-      } else if (this.state.curr == 'Bitcoin') {
-      // const tokenReceive = document.getElementById('tokenReceive').value;
+      }else if(this.state.curr !='Ethereum'){
+         if (!this.state.valid) {
+         const curr = this.state.curr;
+         toast.error(`Please enter a valid ${curr} address`);
+       }
+      }
+       if(this.state.curr == 'Bitcoin'&&this.state.valid) {
+      const tokenReceive = document.getElementById('tokenReceive').value;
 
-          // if(!this.state.validWallet){
-          //   toast.error('Please enter a valid ERC20 address');
-          // }
-          // else{
+          if(!this.state.validWallet){
+            toast.error('Please enter a valid ERC20 address');
+          }
+          else{
             this.setState({
               confirmContri: true,
               fromAddress,
-              // tokenReceiveAddress: tokenReceive,
+              // tokenReceiveAddress: fromAddress,
             })
-
             const body = {
               tokens: this.state.tokens,
               type: this.state.curr,
               amount: this.state.currencyQuantity,
               fromAddress,
               toAddress: this.state.btcAddress,
-              tokenReceivingAddress: '',
+              tokenReceivingAddress: tokenReceive,
               usdAmount: this.state.dollarsInvested,
+              rate:this.state.btcToDollar,
+              phase:this.state.stage
             };
-
-            // console.log(body);
+            console.log(body,"body bitcoin  in contribution page")
             this.props.confirmPayment(body);
-          // }
+           }
       } else if(this.state.curr == 'Ethereum'){
           this.setState({
             confirmContri: true,
             fromAddress,
             tokenReceiveAddress: fromAddress,
           });
-
           const body = {
             tokens: this.state.tokens,
             type: this.state.curr,
             amount: this.state.currencyQuantity,
-            fromAddress,
+            fromAddress:this.state.fromAddressEth,
             toAddress: this.state.ethAddress,
-            tokenReceivingAddress: fromAddress,
+            tokenReceivingAddress:this.state.fromAddressEth,
             usdAmount: this.state.dollarsInvested,
+            rate:this.state.ethToDollar,
+            phase:this.state.stage
           };
-
-          // console.log(body);
+          console.log(body," body ethereum  in contribution page")
           this.props.confirmPayment(body);
       }
 
@@ -232,8 +245,6 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   }
 
   validator() {
-
-
     const add = document.getElementById('fromAddress').value;
     this.setState({
       fromAddress: add
@@ -264,7 +275,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
        // console.log('done btc');
         this.setState({
           valid: true,
-          validBlank: 'false'
+          validBlank: 'false',
         });
       }else if(add == ''){
        // console.log('Empty');
@@ -336,7 +347,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     if (currencyQuantity.value === 0) {
       currencyQuantity = 0;
     }
-    if (e.target.value === 'BTC') {
+    if(e.target.value === 'BTC') {
         // let add = document.getElementById('fromAddress').value;
 
         this.setState({
@@ -504,6 +515,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
   // End of container functions
   render() {
+    console.log(this.props," props in contribution page")
+    console.log(this.state," state in contribution page")
     const { loading } = this.props
     console.log(loading," loading in ");
     // if (this.props.userInfo.userInfo.kycStatus != 'ACCEPTED'){
@@ -552,6 +565,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       sec={this.state.seconds}
       dollars={this.state.dollarQuantity}
       currency={this.state.curr}
+      ethToDollar = {this.state.ethToDollar}
+      btcToDollar = {this.state.btcToDollar}
       tokens={this.state.tokens}
       currencyQty={this.state.currencyQuantity}
       back={this.comeBack}
@@ -669,11 +684,21 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                             <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
                           </div> */}
                           {
-                            this.state.curr == 'Ethereum' || this.state.curr == 'Bitcoin' ?
+                            this.state.curr == 'Ethereum' ?
                             <div className="form-group">
                             <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
-                            <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left" required/>
-                          </div> : ''
+                            <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} className="form-input form-control text-left" required disabled  />
+                          </div> :  this.state.curr == 'Bitcoin' ?
+                          <div>
+                          <div className="form-group">
+                          <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
+                          <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left" required placeholder='Enter Bitcoin Wallet Address' />
+                        </div>
+                        <div className="form-group">
+                          <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving RUC Tokens</label>
+                          <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" disabled required placeholder='Your Kyc is Not Approoved'/>
+                          </div></div> : <div></div>
+
                           }
 
                           {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
