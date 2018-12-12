@@ -54,7 +54,10 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       otherDoc : 'other',
       showOtherDoc : 'hidden',
       kycStatus : '',
-      valid : true
+      valid : true,
+      submitCheck:true,
+      DocType:'',
+      anotherFlag:true
     }
 
     this.handleFrontImg = this.handleFrontImg.bind(this);
@@ -140,9 +143,18 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   }
 
   handleInput(e){
-    this.setState({
+    e.preventDefault();
+  this.setState({
       [e.target.name] : e.target.value
     })
+
+   if(e.target.id='doc_type'){
+     this.setState({
+       DocType: e.target.value,
+       anotherFlag:true,
+       submitCheck:true
+     })
+   }
 
     if(e.target.name === 'ethAddress'){
       if(e.target.value.match(/^0x[a-fA-F0-9]{40}$/) || e.target.value == ''){
@@ -197,16 +209,36 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   componentWillReceiveProps(nextProps){
     if(nextProps.kycpage.kycDocSuccess){
       if(nextProps.kycpage.kycDocSuccess.image == 'imageFront'){
-        this.setState({
-          frontImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
-          allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded
-        })
-      }
+        if(this.state.DocType=="PASSPORT"){
+          this.setState({
+            frontImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
+            allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
+            submitCheck:false,
+            anotherFlag:false
+          })
+        }
+        else{
+            this.setState({
+              frontImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
+              allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
+              anotherFlag:false
+            })
+          }
+        }
       if(nextProps.kycpage.kycDocSuccess.image == 'imageBack'){
-        this.setState({
-          backImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
-          allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded
-        })
+        if(this.state.DocType=="PASSPORT"){
+          this.setState({
+            frontImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
+            allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
+            submitCheck:this.state.submitCheck
+          })
+        }  else{
+            this.setState({
+              backImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
+              allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
+              submitCheck:false
+            })
+          }
       }
     }
 
@@ -225,6 +257,8 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   }
 
   render() {
+    console.log(this.props,"props in kyc")
+    console.log(this.state,"state in kyc")
     // if(this.state.redirect){
     //   this.props.kycDone();
     //   return (
@@ -444,7 +478,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
                   </div>
                   <div className="row">
                     <div className="col-sm-12 text-center">
-                    <button className="btn btn-primary" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={!this.state.allUploaded} type="submit">SUBMIT</button>
+                    <button className="btn btn-primary" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={(this.state.submitCheck||this.state.anotherFlag)} type="submit">SUBMIT</button>
                     </div>
                   </div>
                 </form>

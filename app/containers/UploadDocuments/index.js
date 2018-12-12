@@ -33,7 +33,7 @@ export class UploadDocuments extends React.PureComponent {
          this.setState({
            frontImgUrl : nextProps.uploaddocuments.kycDocSuccess.imageUrl,
          })
-         toast.success("Image Upload Successfull")
+         toast.success("Document Uploaded Successfully")
          nextProps.resetDocSuccess()
        }
      }

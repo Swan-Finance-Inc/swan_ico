@@ -459,14 +459,14 @@ export class DashBoardWelcomePage extends React.PureComponent {
     });
   }
   notifyTimeout() {
-    toast.error('Transaction timeout ,Please try again and complete transaction within 30 minutes');
+    toast.error('Transaction timeout, Please try again and complete transaction within 30 minutes');
   }
   notify() {
     toast.success('Thanks for the voting. You can refer friends now');
   }
 
   componentWillReceiveProps(nextProps){
-  
+
    if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
      this.setState({
        kycMsg: nextProps.dashboardwelcomepage.userInfo.kycDetails.documentsRequired

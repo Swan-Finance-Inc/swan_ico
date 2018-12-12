@@ -30,14 +30,14 @@ class KycAlert extends React.PureComponent {
         }else if(this.props.kycStatus === 'SUBMITTED'){
             return(
                 <div className="alert alert-success">
-                    <span>Your KYC details are submitted.Our team will soon verify your details.</span>
+                    <span>Your KYC details are submitted. Our team will soon verify your details.</span>
                     <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
                  </div>
             )
         }else if(this.props.kycStatus === 'REPORTED'){
             return(
                 <div className="alert alert-danger">
-                    <span>Your KYC details have some issues.Please check mail regarding issues and <Link to="/dashboard/kyc">submit</Link> the details again.</span>
+                    <span>Your KYC details have some issues. Please check mail regarding issues and <Link to="/dashboard/kyc">submit</Link> the details again.</span>
                     <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
                  </div>
             )

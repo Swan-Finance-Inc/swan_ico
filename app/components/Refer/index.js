@@ -217,7 +217,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                    }
                    <tr>
                      <td>Bonus: </td>
-                     <td>5%</td>
+                     <td>05%</td>
                    </tr>
                 {
                   // <tr>
