@@ -69,7 +69,7 @@ console.log(this.state," state in upload Document ")
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
-        <div className="panel-heading">Upload Documents</div>
+        <div className="panel-heading">Upload More Documents</div>
 
         <div className="row">
           <div className="col-sm-6 form-group">
