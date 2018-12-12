@@ -10,13 +10,13 @@ import { connect } from 'react-redux';
 import { Helmet } from 'react-helmet';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import { ToastContainer, toast } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectUploadDocuments from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { submitDoc } from './actions'
+import { submitDoc, resetDocSuccess } from './actions'
 
 export class UploadDocuments extends React.PureComponent {
  // eslint-disable-line react/prefer-stateless-function
@@ -28,12 +28,13 @@ export class UploadDocuments extends React.PureComponent {
    }
  }
   componentWillReceiveProps(nextProps){
-    console.log(nextProps.uploaddocuments.kycDocSuccess.imageUrl,"image")
      if(nextProps.uploaddocuments.kycDocSuccess){
        if(nextProps.uploaddocuments.kycDocSuccess.image == 'extraDoc'){
          this.setState({
            frontImgUrl : nextProps.uploaddocuments.kycDocSuccess.imageUrl,
          })
+         toast.success("Image Upload Successfull")
+         nextProps.resetDocSuccess()
        }
      }
    }
@@ -56,13 +57,15 @@ export class UploadDocuments extends React.PureComponent {
      }
    }
   render() {
-
+console.log(this.props," props in upload Document")
+console.log(this.state," state in upload Document ")
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
       <Helmet>
-        <title>Upload Documents</title>
+        <title>Upload Extra Documents</title>
         <meta name="description" content="Description of Upload Document" />
       </Helmet>
+      <ToastContainer position="top-center" autoClose={6000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover />
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
@@ -97,7 +100,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    submitDoc : (data) => dispatch(submitDoc(data))
+    submitDoc : (data) => dispatch(submitDoc(data)),
+    resetDocSuccess:(data) => dispatch(resetDocSuccess(data))
   };
 }
 

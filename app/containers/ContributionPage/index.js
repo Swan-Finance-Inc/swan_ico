@@ -111,12 +111,6 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
       // this.notifyDeposit(nextProps.successPayment);
     }
-    if(nextProps.userInfo.kycDone)
-    {
-      this.setState({
-        ethAddress:nextProps.successData.ethAddress
-      })
-    }
   }
 
   // End of Life Cycle methods

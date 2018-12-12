@@ -256,7 +256,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                         </div>
                       </div>
                       <div className="form-group">
-                        <label className="control-label col-sm-2"><h4>Transaction Id:</h4></label>
+                        <label className="control-label col-sm-2"><span className='ticketTransacId'>Transaction Id:</span></label>
                         <div className="col-sm-10">
                           <input type="text" className="form-control"  placeholder='Optional'/>
                         </div>

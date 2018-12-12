@@ -213,11 +213,13 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span>Tickets</span></Link></li>
               </ul>
             </li>
-            <li className={this.state.upload_docs}><Link to="/dashboard/uploadDocs" role="button" onClick={this.toggleUpDocsActive}><span className="has-icon"><i className="fa fa-ticket"></i></span><span>Upload Documents</span></Link>
-              <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><Link to="/dashboard/uploadDocs" role="button" onClick={this.toggleUpDocsActive}><span>Upload Documents</span></Link></li>
-              </ul>
-            </li>
+            {
+            // <li className={this.state.upload_docs}><Link to="/dashboard/uploadDocs" role="button" onClick={this.toggleUpDocsActive}><span className="has-icon"><i className="fa fa-ticket"></i></span><span>Upload Documents</span></Link>
+            //   <ul className="nav nav-sub sidebar-niceScroll">
+            //     <li className="nav-sub-header"><Link to="/dashboard/uploadDocs" role="button" onClick={this.toggleUpDocsActive}><span>Upload Documents</span></Link></li>
+            //   </ul>
+            // </li>
+          }
             <li className={this.state.secAct}><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}><span className="has-icon"><i className="fa fa-lock"></i></span><span>Security</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
                 <li className="nav-sub-header"><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}><span>Security</span></Link></li>

@@ -8,7 +8,7 @@ import {
   DEFAULT_ACTION,
   SUBMIT_DOC,
   SUBMIT_DOC_SUCCESS,
-  RESET_SUCCESS
+  RESET_DOC_SUCCESS
 } from './constants';
 
 export function defaultAction() {
@@ -30,8 +30,9 @@ export function submitKycDocSuccess(data) {
   }
 }
 
-export function resetSuccess() {
+export function resetDocSuccess(data) {
   return {
-    type: RESET_SUCCESS
+    type: RESET_DOC_SUCCESS,
+    data
   }
 }

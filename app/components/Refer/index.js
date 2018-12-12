@@ -178,55 +178,64 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
             <h2 style={{fontSize:'20px'}} className="panel-subHead">Pre-Sale</h2>
             <table className="table table-bordered sale">
               <tbody>
-                <tr>
-                  <td>Start date: </td>
-                  <td>19th November, 2018 GMT</td>
-                </tr>
-                <tr>
-                  <td>End date: </td>
-                  <td>16th December, 2018 GMT</td>
-                </tr>
+            {
+              // <tr>
+              //   <td>Start date: </td>
+              //   <td>19th November, 2018 GMT</td>
+              // </tr>
+              // <tr>
+              //   <td>End date: </td>
+              //   <td>16th December, 2018 GMT</td>
+              // </tr>
+            }
                 <tr>
                   <td>Bonus: </td>
-                  <td>30%</td>
+                  <td>20%</td>
                 </tr>
-                <tr>
-                  <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                  <td>15000 RUC</td>
-                </tr>
+              {
+                // <tr>
+                //   <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
+                //   <td>15000 RUC</td>
+                // </tr>
+              }
                 </tbody>
               </table>
 
               <h2 style={{fontSize:'20px'}}>Crowd Sale</h2>
               <table className="table table-bordered sale">
                 <tbody>
-                  <tr>
-                    <td>Start date: </td>
-                    <td>2nd January, 2019 GMT</td>
-                  </tr>
-                  <tr>
-                    <td>End date: </td>
-                    <td>31st January, 2019 GMT</td>
-                  </tr>
-                  <tr>
-                    <td>Bonus(Ist week): </td>
-                    <td>15%</td>
-                  </tr>
-                  <tr>
-                    <td>Bonus(2nd week): </td>
-                    <td>10%</td>
-                  </tr>
-                  <tr>
-                    <td>Bonus(3rd &amp; 4th week): </td>
-                    <td>0%</td>
-                  </tr>
-                  <tr>
-                    <td>Minimum Purchase: </td>
-                    <td>500 RUC</td>
-                  </tr>
+                   {
+                     // <tr>
+                     //   <td>Start date: </td>
+                     //   <td>2nd January, 2019 GMT</td>
+                     // </tr>
+                     // <tr>
+                     //   <td>End date: </td>
+                     //   <td>31st January, 2019 GMT</td>
+                     // </tr>
+
+                   }
+                   <tr>
+                     <td>Bonus: </td>
+                     <td>5%</td>
+                   </tr>
+                {
+                  // <tr>
+                  //   <td>Bonus(2nd week): </td>
+                  //   <td>10%</td>
+                  // </tr>
+                  // <tr>
+                  //   <td>Bonus(3rd &amp; 4th week): </td>
+                  //   <td>0%</td>
+                  // </tr>
+                  // <tr>
+                  //   <td>Minimum Purchase: </td>
+                  //   <td>500 RUC</td>
+                  // </tr>
+                }
                 </tbody>
               </table>
-              <div className="text-center">Token Price: <strong>1 RUC = $0.1</strong></div>
+              <div className="text-center">Token Price: <strong>1 RUC = $0.20</strong></div>
               <div className="text-center">We Accept: <strong>BTC, ETH</strong></div>
               <div className="text-center">Currently Processed: <strong>0 RUC TOKENS</strong></div>
           </div>

@@ -9,7 +9,7 @@ import {
   DEFAULT_ACTION,
   SUBMIT_DOC,
   SUBMIT_DOC_SUCCESS,
-  RESET_SUCCESS
+  RESET_DOC_SUCCESS
 } from './constants';
 
 const initialState = fromJS({});
@@ -22,6 +22,9 @@ function uploadDocumentsReducer(state = initialState, action) {
         return state.set('kycDoc', action.data)
       case SUBMIT_DOC_SUCCESS:
         return state.set('kycDocSuccess', action.data)
+      case RESET_DOC_SUCCESS:
+        return state.set('kycDocSuccess', false)
+
     default:
       return state;
   }
