@@ -454,7 +454,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       profile: '',
       resetPass: '',
       notification:'active',
-      upload_docs:''
+      upload_docs:'',
+      kycMsg:'',
     });
   }
   notifyTimeout() {
@@ -465,6 +466,12 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
+  
+   if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
+     this.setState({
+       kycMsg: nextProps.dashboardwelcomepage.userInfo.kycDetails.documentsRequired
+     })
+   }
     if(nextProps.kycDone){
       this.props.loadProfileAction();
       this.props.resetKycDone();
@@ -558,7 +565,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
           />
           {(this.props.location.pathname == '/dashboard') ?
              (this.props.dashboardwelcomepage.loading?<LoadingSpinner />:<div id="content" className="ui-content ui-content-aside-overlay">
-              <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} closeAlert={this.closeAlert} showAlert={this.state.showAlert}/>
+              <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} msg={this.state.kycMsg }  closeAlert={this.closeAlert} showAlert={this.state.showAlert}/>
               <div className="row">
                 <div className="col-sm-6">
                 <h1>Dashboard</h1>

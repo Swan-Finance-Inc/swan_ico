@@ -28,8 +28,9 @@ export class UploadDocuments extends React.PureComponent {
    }
  }
   componentWillReceiveProps(nextProps){
+    console.log(nextProps.uploaddocuments.kycDocSuccess.imageUrl,"image")
      if(nextProps.uploaddocuments.kycDocSuccess){
-       if(nextProps.uploaddocuments.kycDocSuccess.image == 'imageFront'){
+       if(nextProps.uploaddocuments.kycDocSuccess.image == 'extraDoc'){
          this.setState({
            frontImgUrl : nextProps.uploaddocuments.kycDocSuccess.imageUrl,
          })
@@ -51,7 +52,7 @@ export class UploadDocuments extends React.PureComponent {
          })
        }
        reader.readAsDataURL(file);
-       this.props.submitDoc({ image : file, field : 'imageFront' })
+       this.props.submitDoc({ image : file, field : 'extraDoc' })
      }
    }
   render() {

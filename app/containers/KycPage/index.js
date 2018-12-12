@@ -275,6 +275,29 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       </div>
       )
     }
+
+    if(!this.props.userInfo.userInfo.kycStatus == 'DOCUMENTS'){
+      this.props.kycActive();
+      return (
+        <div id="content" className="ui-content ui-content-aside-overlay">
+        <Helmet>
+          <title>Kyc Page</title>
+          <meta name="description" content="Description of Kyc Page" />
+        </Helmet>
+        <div className="ui-content-body">
+        <div className="ui-container container-fluid">
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="alert alert-success text-center">
+                <h5>More Documents Required.</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+      )
+    }
     const { fullName, email, dob, gender, phone, ethAddress, citizenship, country, state, city, address, address2, doc_type, doc_number } = this.state;
     this.props.kycActive()
     return (

@@ -19,6 +19,14 @@ class KycAlert extends React.PureComponent {
                     <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
                  </div>
             )
+        }
+        if(this.props.kycStatus === 'DOCUMENTS'){
+            return(
+                <div className="alert alert-danger">
+                    <span> <Link to="/dashboard/uploadDocs">{this.props.msg}</Link></span>
+                    <span className="cross"><i className="fa fa-close"  onClick={this.props.closeAlert}></i></span>
+                 </div>
+            )
         }else if(this.props.kycStatus === 'SUBMITTED'){
             return(
                 <div className="alert alert-success">
