@@ -2,7 +2,7 @@ import { call, put, select, takeLatest, takeEvery } from 'redux-saga/effects';
 import api from 'utils/api';
 import { SUBMIT_KYC, SUBMIT_KYC_DOC, GET_KYC_DETAILS } from './constants';
 import { makeSelectKycDetails, makeSelectKycDoc } from './selectors';
-import { submitKycSuccess, submitKycDocSuccess } from './actions';
+import { submitKycSuccess, submitKycDocSuccess, submitKycDocSuccessRemove } from './actions';
 import { push } from 'react-router-redux';
 
 export function* submitKyc() {
@@ -63,6 +63,8 @@ export function* submitKycDoc() {
 
     if(apiData.success){
       yield put(submitKycDocSuccess(apiData));
+      yield put(submitKycDocSuccessRemove());
+
       console.log('from saga', apiData);
     }else{
       console.log(err);

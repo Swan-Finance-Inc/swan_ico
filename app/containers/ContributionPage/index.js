@@ -93,7 +93,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       btcToDollar: data.btcUsd,
       tokensPerEther: data.tokenPerEther  / (10 ** 18),
       tokensPerBitcoin: data.tokenPerBtc  / (10 ** 18),
-      tokensPerUsd: 1 / data.tokenUsd,
+      tokensPerUsd:  data.tokenUsd /(10 ** 18) ,
       tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
@@ -644,7 +644,7 @@ gobackDollar=(e)=>{
                 </div>
                 <div className='row'>
                 <div className='col-sm-12 minimunReqContainer'>
-                <span className="minimunReqText">The Minimum enrollment amount required from each investor for this offering is 10000.00 USD. Token price: 0.15 USD</span>
+                <span className="minimunReqText">The Minimum enrollment amount required from each investor for this offering is {this.props.successData.minInvest} USD. Token price: {this.props.successData.tokenUsd} USD</span>
                 </div>
                 </div>
                 <div className='row'>
@@ -675,23 +675,21 @@ gobackDollar=(e)=>{
                   //   </div>
                   // </div>
                 }
-                <div className='row'>
-                <form id="contriForm" onSubmit={()=>console.log("formSubmit of Dollar Clicked")} >
-                  <div className="frm-block">
-                  <div className="form-group">
-                  <div className="form-group">
-                    <label htmlFor="amt" className="form-label">Enter the Transaction number of Bank account</label>
-                    <input id="amt" onChange={this.amtInvested} type="number" className="form-input form-control" required/>
-                  </div>
-                  </div>
-                  </div>
-                  </form>
+              <div className='buttonInputContainer'>
+              <div className='row'>
+              <div className='col-md-6'>
+                <div className="form-group enterBankAcc">
+                  <label htmlFor="amt" className="form-label">Enter the Transaction number of Bank account</label>
+                  <input id="amt" onChange={this.amtInvested} type="number" className="form-input form-control" required/>
                 </div>
-
-              <div className="btn-row">
-                <button className="form-button btn btn-primary" >Confirm</button>
-                <button className="form-button btn btn-primary" style={{ margin: '10px' }} onClick={this.gobackDollar}>Go Back</button>
-
+                </div>
+              </div>
+            <div className='row'>
+            <div className='col-md-6'>
+              <button className="form-button btn btn-primary" >Confirm</button>
+              <button className="form-button btn btn-primary" style={{ margin: '10px' }} onClick={this.gobackDollar}>Go Back</button>
+            </div>
+            </div>
               </div>
               </div>
               </div>
@@ -722,7 +720,7 @@ gobackDollar=(e)=>{
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
                       <p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>
                       <p style={{color:'#ff0000'}}>Current Token Sale: {this.state.stage}</p>
-                      <h5>1 RUC COIN ={this.state.tokenPrice}$</h5>
+                      <h5>1 RUC TOKEN ={this.state.tokenPrice}$</h5>
                     </div>
                   </div>
                   <div className="row">
@@ -756,13 +754,6 @@ gobackDollar=(e)=>{
                           : null
                         }
                         <br/>
-
-
-
-
-
-
-
                         </div>
                           <div className="form-group">
                             <label htmlFor="amt" className="form-label">How much {this.state.curr} you would like to invest?</label>

@@ -36,6 +36,8 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       frontImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
       backImg : '',
       backImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
+      selfieUrl:'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
+      residenProofUrl:'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
       fullName : this.props.userInfo.userInfo.fullName,
       email : this.props.userInfo.userInfo.email,
       dob: '',
@@ -58,7 +60,13 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       valid : true,
       submitCheck:true,
       DocType:'',
-      anotherFlag:true
+      anotherFlag:true,
+      selfeFile:'',
+      residentProofFile:'',
+      frontimgFlag:false,
+      backImageFlag:false,
+      selfieFlag:false,
+      residentFlag:false,
     }
 
     this.handleFrontImg = this.handleFrontImg.bind(this);
@@ -124,6 +132,40 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
         this.props.submitKycDoc({ image : file, field : 'imageFront' })
       }
     }
+    handleSelfieImg=(e)=> {
+        e.preventDefault();
+        var reader = new FileReader();
+        var file = e.target.files[0];
+        if(file.size > 2*1024*1024){
+          toast.error('File size should be less than 2MB');
+        }else{
+          reader.onloadend = () => {
+            this.setState({
+              selfieUrl : '/assets/img/uploading.svg',
+              selfeFile : file
+            })
+          }
+          reader.readAsDataURL(file);
+          this.props.submitKycDoc({ image : file, field : 'selfie' })
+        }
+      }
+    handleResidenProof=(e)=> {
+          e.preventDefault();
+          var reader = new FileReader();
+          var file = e.target.files[0];
+          if(file.size > 2*1024*1024){
+            toast.error('File size should be less than 2MB');
+          }else{
+            reader.onloadend = () => {
+              this.setState({
+                residenProofUrl : '/assets/img/uploading.svg',
+                residentProofFile : file
+              })
+            }
+            reader.readAsDataURL(file);
+            this.props.submitKycDoc({ image : file, field : 'residentProof' })
+          }
+        }
 
   handleBackImg(e) {
     e.preventDefault();
@@ -185,58 +227,75 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   selectRegion (val) {
     this.setState({ state: val });
   }
+
 handleInput2=(e)=>{
   if(e.target.id='doc_type'){
+  let  frontImginp = document.getElementById("frontId")
+  let  backImginp = document.getElementById("backId")
+  let  selfieinp = document.getElementById("selfieId")
+  let residentinp = document.getElementById("residentId")
+
+
+    frontImginp.value='';
+    backImginp.value='';
+    selfieinp.value='';
+    residentinp.value='';
+
     this.setState({
       DocType: e.target.value,
-      anotherFlag:true,
-      submitCheck:true,
+      frontimgFlag:false,
+      backImageFlag:false,
+      selfieFlag:false,
+      residentFlag:false,
       frontImgUrl :'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
       backImgUrl :'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
+      selfieUrl:'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
+      residenProofUrl:'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
       doc_number:'',
       doc_type:e.target.value
     })
   }
 }
+
+
   componentWillReceiveProps(nextProps){
     if(nextProps.kycpage.kycDocSuccess){
       if(nextProps.kycpage.kycDocSuccess.image == 'imageFront'){
-        if(this.state.DocType=="PASSPORT"){
           this.setState({
             frontImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
             allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
-            submitCheck:false,
-            anotherFlag:false
+            frontimgFlag:true,
           })
+            toast.success("Front Image uploaded Successfully")
             nextProps.submitKycDocSuccessRemove()
-        }
-        else{
-            this.setState({
-              frontImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
-              allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
-              anotherFlag:false
-            })
-              nextProps.submitKycDocSuccessRemove()
-          }
-  }
+      }
       if(nextProps.kycpage.kycDocSuccess.image == 'imageBack'){
-        if(this.state.DocType=="PASSPORT"){
           this.setState({
             backImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
             allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
-            submitCheck:this.state.submitCheck
+            backImageFlag:true
           })
+            toast.success("Back Image uploaded Successfully")
             nextProps.submitKycDocSuccessRemove()
-        } else{
-            this.setState({
-              backImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
-              allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
-              submitCheck:false
-            })
-              nextProps.submitKycDocSuccessRemove()
-          }
       }
-
+      if(nextProps.kycpage.kycDocSuccess.image == 'selfie'){
+          this.setState({
+            selfieUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
+            allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
+            selfieFlag:true
+          })
+          toast.success("Selfie uploaded Successfully")
+          nextProps.submitKycDocSuccessRemove()
+      }
+      if(nextProps.kycpage.kycDocSuccess.image == 'residentProof'){
+          this.setState({
+            residenProofUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
+            allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
+            residentFlag:true,
+          })
+            toast.success("Resident Proof uploaded Successfully")
+            nextProps.submitKycDocSuccessRemove()
+      }
   }
 
     if(nextProps.kycpage.submitKycSuccess){
@@ -256,6 +315,7 @@ handleInput2=(e)=>{
   render() {
     console.log(this.props,"props in kyc")
     console.log(this.state,"state in kyc")
+    const {frontimgFlag,backImageFlag,selfieFlag,residentFlag} = this.state
     // if(this.state.redirect){
     //   this.props.kycDone();
     //   return (
@@ -459,12 +519,22 @@ handleInput2=(e)=>{
                     <div className="col-sm-6 form-group">
                       <label htmlFor="front_id"><h5>UPLOAD FRONT ID<sup>*</sup></h5></label>
                       <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.frontImgUrl} alt="front id" id="front_img_src"/>
-                      <input type="file" accept="image/png, image/jpeg" name="front_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleFrontImg} />
+                      <input type="file" accept="image/png, image/jpeg" id='frontId' name="front_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleFrontImg} />
                     </div>
                       <div className="col-sm-6 form-group">
                         <label htmlFor="back_id"><h5>UPLOAD BACK ID{!(this.state.DocType=='PASSPORT')?<sup>*</sup>:" "}</h5></label>
                         <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.backImgUrl} alt="back id" id="back_img_src"/>
-                        <input type="file" accept="image/png, image/jpeg" name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} />
+                        <input type="file" accept="image/png, image/jpeg" name="back_id" id='backId' style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} />
+                      </div>
+                      <div className="col-sm-6 form-group">
+                        <label htmlFor="back_id"><h5>UPLOAD SELFIE<sup>*</sup></h5></label>
+                        <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.selfieUrl} alt="back id" id="back_img_src"/>
+                        <input type="file" accept="image/png, image/jpeg, .pdf" id='selfieId' name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleSelfieImg} />
+                      </div>
+                      <div className="col-sm-6 form-group">
+                        <label htmlFor="back_id"><h5>UPLOAD RESIDENTIAL PROOF<sup>*</sup></h5></label>
+                        <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.residenProofUrl} alt="back id" id="back_img_src"/>
+                        <input type="file" accept="image/png, image/jpeg" name="back_id" id='residentId' style={{margin:'10px 0px 0px 30px'}} onChange={this.handleResidenProof} />
                       </div>
                   </div>
                   <div className="row">
@@ -474,7 +544,7 @@ handleInput2=(e)=>{
                   </div>
                   <div className="row">
                     <div className="col-sm-12 text-center">
-                    <button className="btn btn-primary" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={(this.state.submitCheck||this.state.anotherFlag)} type="submit">SUBMIT</button>
+                    <button className="btn btn-primary" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={(this.state.DocType="PASSPORT")?!(frontimgFlag&&selfieFlag&&residentFlag):!(frontimgFlag&&selfieFlag&&residentFlag&&backImageFlag)} type="submit">SUBMIT</button>
                     </div>
                   </div>
                 </form>
