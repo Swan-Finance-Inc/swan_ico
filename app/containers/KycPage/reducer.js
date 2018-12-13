@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION, SUBMIT_KYC, SUBMIT_KYC_SUCCESS,RESET_SUCCESS,SUBMIT_KYC_DOC,SUBMIT_KYC_DOC_SUCCESS,GET_KYC_DETAILS
+  DEFAULT_ACTION, SUBMIT_KYC, SUBMIT_KYC_SUCCESS,RESET_SUCCESS,SUBMIT_KYC_DOC,SUBMIT_KYC_DOC_SUCCESS,GET_KYC_DETAILS, KYC_DOC_SUCCESS_REMOVE
 } from './constants';
 
 const initialState = fromJS({});
@@ -25,6 +25,8 @@ function kycPageReducer(state = initialState, action) {
       return state.set('kycDoc', action.data)
     case SUBMIT_KYC_DOC_SUCCESS:
       return state.set('kycDocSuccess', action.data)
+    case KYC_DOC_SUCCESS_REMOVE:
+      return state.set('kycDocSuccess', false)
     default:
       return state;
   }

@@ -123,6 +123,13 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
   // Begin of container functions
 
+gobackDollar=(e)=>{
+  this.setState({
+      usdEurContributionConfirm : false
+  })
+}
+
+
   onContributionConfirm(e) {
 
     e.preventDefault();
@@ -580,26 +587,120 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       </div>
       );
     }
-    if (this.state.usdEurContributionConfirm) {
-      return (
-        <div id="content" className="ui-content ui-content-aside-overlay">
-        <Helmet>
-          <title>Contributions</title>
-          <meta name="description" content="Description of Contributions" />
-        </Helmet>
-          <div className="ui-content-body">
-          <div className="ui-container container-fluid">
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="alert alert-success text-center">
-                  <h4>Contribution in USD and EUR is temporarily disabled.<br/></h4>
+          {
+            // <div id="content" className="ui-content ui-content-aside-overlay">
+            // <Helmet>
+            //   <title>Contributions</title>
+            //   <meta name="description" content="Description of Contributions" />
+            // </Helmet>
+            //   <div className="ui-content-body">
+            //   <div className="ui-container container-fluid">
+            //     <div className="row">
+            //       <div className="col-sm-12">
+            //         <div className="alert alert-success text-center">
+            //           <h4>Contribution in USD and EUR is temporarily disabled.<br/></h4>
+            //         </div>
+            //       </div>
+            //     </div>
+            //   </div>
+            // </div>
+            // </div>
+          }
+
+    {
+        if (this.state.usdEurContributionConfirm) {
+        return (
+          <div id="content" className="ui-content ui-content-aside-overlay">
+            <Helmet>
+              <title>Contributions</title>
+              <meta name="description" content="Description of Contributions" />
+            </Helmet>
+              <div className="ui-content-body">
+              <div className="ui-container container-fluid">
+              <div className="panel panel-default">
+              <div className="panel-heading">Make Investment</div>
+              <div className="panel-body" style={{fontSize:'16px'}}>
+              <div className='row'>
+              {
+                // <div className="row">
+                //   <div className='col-sm-12'>
+                //   <span className="makeInvestment">Make Investment</span>
+                //   </div>
+                // </div>
+              }
+
+                <div className="row">
+                <div className='col-sm-12 makeinvestextcontainer'>
+                <span className="makeinvesTExt">You have chosen to make a contribution via a SWIFT transfer.
+                 Please make this transfer using the banking information below.
+                  if you need Instructions on how to make a SWIFT transfer,
+                   the following article is helpful for automatic or bank branch initiated transfer:</span>
                 </div>
+                </div>
+                <div className='row'>
+                <div className='col-sm-12 litagContainer'>
+                <span className="litagText"><a href='#'>How to Make an International Wire Transfer</a></span>
+                </div>
+                </div>
+                <div className='row'>
+                <div className='col-sm-12 minimunReqContainer'>
+                <span className="minimunReqText">The Minimum enrollment amount required from each investor for this offering is 10000.00 USD. Token price: 0.15 USD</span>
+                </div>
+                </div>
+                <div className='row'>
+                <div className='col-sm-12 companyDataContainer'>
+                <div className='row'><div className='col-sm-4'>Company</div><div className='col-sm-8'>Alpha Three Invest GmbH Postplatz 1 6300 Zug Switzerland</div> </div>
+                  <div className='row'><div className='col-sm-4'>UID</div><div className='col-sm-8'>CHE_233.094.641</div></div>
+                  <div className='row'><div className='col-sm-4'>Comercial register number</div><div className='col-sm-8'>CH-170.987-6</div></div>
+                  <div className='row'><div className='col-sm-4'>Bank</div><div className='col-sm-8'>CREDIT SUISSE(Switzerland) Ltd. Zug</div></div>
+                  <div className='row'><div className='col-sm-4'>Clearing Number</div><div className='col-sm-8'>0727</div></div>
+                  <div className='row'><div className='col-sm-4'>BIC/ SWIFT</div><div className='col-sm-8'>CRESCHZZ810</div></div>
+                  <div className='row'><div className='col-sm-4'>IBAN</div><div className='col-sm-8'>NL91ABNA0417164305</div></div>
+                </div>
+                </div>
+                <div className='row'>
+                <div className="col-sm-12 afterCompleteContainer">
+                <span className='afterCompleteText'>
+                After completing your investment (through a funds transfer) please check the box below to continue.
+                 You'll be notified once receipt of funds is confirmed
+                 </span>
+                </div>
+                </div>
+                {
+                  //   <div className='row'>
+                  //   <div className='col-md-12 checkboxContainer'>
+                  //   <span><input type='checkbox'></input> I have enrolled by contributing the amount above using my declared account/wallet</span>
+                  //   </div>
+                  //   <div>
+                  //   </div>
+                  // </div>
+                }
+                <div className='row'>
+                <form id="contriForm" onSubmit={()=>console.log("formSubmit of Dollar Clicked")} >
+                  <div className="frm-block">
+                  <div className="form-group">
+                  <div className="form-group">
+                    <label htmlFor="amt" className="form-label">Enter the Transaction number of Bank account</label>
+                    <input id="amt" onChange={this.amtInvested} type="number" className="form-input form-control" required/>
+                  </div>
+                  </div>
+                  </div>
+                  </form>
+                </div>
+
+              <div className="btn-row">
+                <button className="form-button btn btn-primary" >Confirm</button>
+                <button className="form-button btn btn-primary" style={{ margin: '10px' }} onClick={this.gobackDollar}>Go Back</button>
+
+              </div>
+              </div>
+              </div>
               </div>
             </div>
-          </div>
-        </div>
-        </div>
-      )
+            </div>
+            </div>
+        )
+      }
     }
     console.log(this.state);
     return (
@@ -634,8 +735,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                             <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input" required>
                               <option value="ETH">ETH</option>
                               <option value="BTC">BTC</option>
-                              {
-                              // <option value="USD">USD</option>
+                              <option value="USD">USD</option>
+                            {
                               // <option value="EUR">EUR</option>
                             }
                             </select>

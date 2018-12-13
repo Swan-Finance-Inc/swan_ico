@@ -17,11 +17,12 @@ import makeSelectKycPage, { makeSelectSubmitKycSuccess } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
-import { submitKyc, submitKycDoc, resetSuccess } from './actions';
+import { submitKyc, submitKycDoc, resetSuccess, submitKycDocSuccessRemove } from './actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { Redirect, Link } from 'react-router-dom';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { kycDone, loadProfileAction } from '../DashBoardWelcomePage/actions';
+
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 
@@ -47,7 +48,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       city: '',
       address: '',
       address2: '',
-      doc_type: '',
+      doc_type: 'PASSPORT',
       doc_number: '',
       redirect : false,
       allUploaded : false,
@@ -143,32 +144,9 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   }
 
   handleInput(e){
-    e.preventDefault();
-  this.setState({
-      [e.target.name] : e.target.value
-    })
-
-   if(e.target.id='doc_type'){
      this.setState({
-       DocType: e.target.value,
-       anotherFlag:true,
-       submitCheck:true,
-       frontImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
-       backImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_back.png', 
-     })
-   }
-
-    if(e.target.name === 'ethAddress'){
-      if(e.target.value.match(/^0x[a-fA-F0-9]{40}$/) || e.target.value == ''){
-        this.setState({
-          valid: true
-        })
-      }else{
-        this.setState({
-          valid: false
-        })
-      }
-    }
+         [e.target.name] : e.target.value
+       })
   }
 
   submitKycDetails(e) {
@@ -207,7 +185,19 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   selectRegion (val) {
     this.setState({ state: val });
   }
-
+handleInput2=(e)=>{
+  if(e.target.id='doc_type'){
+    this.setState({
+      DocType: e.target.value,
+      anotherFlag:true,
+      submitCheck:true,
+      frontImgUrl :'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
+      backImgUrl :'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
+      doc_number:'',
+      doc_type:e.target.value
+    })
+  }
+}
   componentWillReceiveProps(nextProps){
     if(nextProps.kycpage.kycDocSuccess){
       if(nextProps.kycpage.kycDocSuccess.image == 'imageFront'){
@@ -218,6 +208,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
             submitCheck:false,
             anotherFlag:false
           })
+            nextProps.submitKycDocSuccessRemove()
         }
         else{
             this.setState({
@@ -225,8 +216,9 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
               allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
               anotherFlag:false
             })
+              nextProps.submitKycDocSuccessRemove()
           }
-        }
+  }
       if(nextProps.kycpage.kycDocSuccess.image == 'imageBack'){
         if(this.state.DocType=="PASSPORT"){
           this.setState({
@@ -234,15 +226,18 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
             allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
             submitCheck:this.state.submitCheck
           })
-        }  else{
+            nextProps.submitKycDocSuccessRemove()
+        } else{
             this.setState({
               backImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
               allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
               submitCheck:false
             })
+              nextProps.submitKycDocSuccessRemove()
           }
       }
-    }
+
+  }
 
     if(nextProps.kycpage.submitKycSuccess){
       if(nextProps.kycpage.submitKycSuccess.success){
@@ -445,32 +440,31 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
                     <div className="col-sm-6">
                       <div className="form-group">
                       <label htmlFor="doc_type"><h5>TYPE<sup>*</sup></h5></label>
-                        <select id="doc_type" name="doc_type" className="form-control" onChange={this.handleInput} onClick={this.handleshowOtherDoc} required>
+                        <select id="doc_type" name="doc_type" className="form-control" onChange={this.handleInput2} onClick={this.handleshowOtherDoc} required>
                           <option value="" hidden>Select Any Document</option>
                           <option value="PASSPORT">PASSPORT</option>
                           <option value={this.state.otherDoc}>ANY NATIONAL ID</option>
                         </select>
-                        <input type={this.state.showOtherDoc} id="doc_type" name="doc_type" onChange={this.handleInput} placeholder="Enter National ID" className="form-control" style={{marginTop:"20px"}} required/>
+                        <input type={this.state.showOtherDoc} id="doc_type" name="doc_type" onChange={this.handleInput} value={this.state.doc_type} placeholder="Enter National ID" className="form-control" style={{marginTop:"20px"}} required/>
                       </div>
                       <div className="form-group">
                       </div>
                     </div>
                       <div className="col-sm-6 form-group">
                       <label htmlFor="number"><h5>NUMBER<sup>*</sup></h5></label>
-                      <input className="form-control" type="text" id="number" placeholder="ID number" name="doc_number" onChange={this.handleInput} required/>
-
+                      <input className="form-control" type="text" id="number" placeholder="ID number" name="doc_number" value={this.state.doc_number} onChange={this.handleInput} required/>
                       </div>
                   </div>
                   <div className="row">
                     <div className="col-sm-6 form-group">
                       <label htmlFor="front_id"><h5>UPLOAD FRONT ID<sup>*</sup></h5></label>
                       <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.frontImgUrl} alt="front id" id="front_img_src"/>
-                      <input type="file" accept="image/png, image/jpeg" name="front_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleFrontImg} required/>
+                      <input type="file" accept="image/png, image/jpeg" name="front_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleFrontImg} />
                     </div>
                       <div className="col-sm-6 form-group">
                         <label htmlFor="back_id"><h5>UPLOAD BACK ID{!(this.state.DocType=='PASSPORT')?<sup>*</sup>:" "}</h5></label>
                         <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.backImgUrl} alt="back id" id="back_img_src"/>
-                        <input type="file" accept="image/png, image/jpeg" name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} required/>
+                        <input type="file" accept="image/png, image/jpeg" name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} />
                       </div>
                   </div>
                   <div className="row">
@@ -511,7 +505,8 @@ function mapDispatchToProps(dispatch) {
     submitKyc : (data) => dispatch(submitKyc(data)),
     kycDone: () => dispatch(kycDone()),
     submitKycDoc : (data) => dispatch(submitKycDoc(data)),
-    resetSuccess : () => dispatch(resetSuccess())
+    resetSuccess : () => dispatch(resetSuccess()),
+    submitKycDocSuccessRemove:()=>dispatch(submitKycDocSuccessRemove())
   };
 }
 

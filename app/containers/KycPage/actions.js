@@ -10,7 +10,8 @@ import {
   SUBMIT_KYC_SUCCESS,
   RESET_SUCCESS,
   SUBMIT_KYC_DOC,
-  SUBMIT_KYC_DOC_SUCCESS
+  SUBMIT_KYC_DOC_SUCCESS,
+  KYC_DOC_SUCCESS_REMOVE
 } from './constants';
 
 export function defaultAction() {
@@ -41,6 +42,12 @@ export function submitKycDoc(data) {
 export function submitKycDocSuccess(data) {
   return {
     type: SUBMIT_KYC_DOC_SUCCESS,
+    data
+  }
+}
+export function submitKycDocSuccessRemove(data) {
+  return {
+    type: KYC_DOC_SUCCESS_REMOVE,
     data
   }
 }
