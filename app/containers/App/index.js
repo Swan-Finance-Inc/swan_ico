@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-
+import { ToastContainer } from 'react-toastify';
 import NotFoundPage from 'containers/NotFoundPage/Loadable';
 import LoginPage from 'containers/LoginPage/Loadable';
 import RegisterPage from 'containers/RegisterPage/Loadable';
@@ -44,6 +44,7 @@ export default function App() {
         <Route path="/unsubscribe" component={Unsubscribe} />
         <Route path="/forceReset" component={ForceReset} />
         <Route component={NotFoundPage} />
+        <ToastContainer position="top-center" autoClose={6000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover />
       </Switch>
     </div>
   );

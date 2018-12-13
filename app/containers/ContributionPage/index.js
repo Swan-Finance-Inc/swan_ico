@@ -111,7 +111,13 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
       // this.notifyDeposit(nextProps.successPayment);
     }
-  }
+   //  if(nextProps.userInfo.kycDone)
+   // {
+   //   this.setState({
+   //     ethAddress:nextProps.successData.ethAddress
+   //   })
+   // }
+ }
 
   // End of Life Cycle methods
 
@@ -681,7 +687,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                             this.state.curr == 'Ethereum' ?
                             <div className="form-group">
                             <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
-                            <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} className="form-input form-control text-left" required disabled  />
+                            <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left" required   />
                           </div> :  this.state.curr == 'Bitcoin' ?
                           <div>
                           <div className="form-group">
@@ -690,7 +696,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
                         </div>
                         <div className="form-group">
                           <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving RUC Tokens</label>
-                          <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" disabled required placeholder='Your Kyc is Not Approoved'/>
+                          <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" disabled required placeholder='Your Kyc is Not Done'/>
                           </div></div> : <div></div>
 
                           }

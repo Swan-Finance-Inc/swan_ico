@@ -2,7 +2,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import api from 'utils/api';
 import { CREATE_TICKET, GET_TICKETS, SEND_MESSAGE, GET_MESSAGES } from './constants';
 import { makeSelectCreateTicket, makeSelectMessage, makeSelectTicketId } from './selectors';
-import { createTicketSuccess, ticketSuccess, messageSuccess, getMessagesSuccess } from './actions';
+import { createTicketSuccess, ticketSuccess, messageSuccess, getMessagesSuccess, resetTicketSuccess } from './actions';
 
 export function* createTicket(){
   try{
@@ -18,6 +18,7 @@ export function* createTicket(){
     if(apiData){
       console.log(apiData);
       yield put(createTicketSuccess(apiData));
+      yield put(resetTicketSuccess());
     }
   }catch(err){
     console.log(err)

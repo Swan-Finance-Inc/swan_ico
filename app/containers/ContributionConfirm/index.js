@@ -170,17 +170,20 @@ export class ContributionConfirm extends React.PureComponent { // eslint-disable
                                 </CopyToClipboard>
                                   </div>
                                   <div className="col-sm-6" style={{paddingTop:'10px'}}>
-                                    {this.state.copy ? <p>TX hash copied.</p> : ''}
+                                    {this.state.copy ? <p>Address Copied</p> : ''}
                                   </div>
                                   </div>
                                  </span>
                                  </p>
                                  <div className='row'>
-                                 <div className="col-md-6 col-sm-12">
-                                 <span className="gas1">SET GAS LIMIT:{this.props.gasLimit?this.props.gasLimit:` 120000`}</span>
+                                 <div className="col-md-6 ">
+                                   {
+                                     // <div className="col-md-4 col-md-offset-1 ">
+                                   }
+                                 <span className="gas1">SET GAS LIMIT:{this.props.gasLimit?this.props.gasLimit:`120000`}</span>
                                  </div>
-                                 <div className="col-md-6 col-sm-12">
-                                 <span className="gas2">SET GAS PRICE:{this.props.gasPrice?this.props.gasPrice: 95} GWei</span>
+                                 <div className="col-md-6 ">
+                                 <span className="gas2">SET GAS PRICE:{this.props.gasPrice?this.props.gasPrice:95} GWei</span>
                                  </div>
                                  </div>
                                   </div>

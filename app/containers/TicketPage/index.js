@@ -141,7 +141,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
         this.setState({
           data: nextProps.tickets.tickets
         })
-        nextProps.resetTicketSuccess();
+        // nextProps.resetTicketSuccess();
       }
     }
 
@@ -187,7 +187,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
               </div>
               <div className="row">
                 <div className="col-sm-12">
-              {loading?<LoadingSpinner />:    <ReactTable
+              {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} />:    <ReactTable
                             className="-striped -highlight"
                             showPaginationBottom={true}
                             style={{ marginTop: '20px', fontSize: '12px', cursor: 'pointer' }}

@@ -152,7 +152,9 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
      this.setState({
        DocType: e.target.value,
        anotherFlag:true,
-       submitCheck:true
+       submitCheck:true,
+       frontImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
+       backImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_back.png', 
      })
    }
 
@@ -228,7 +230,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       if(nextProps.kycpage.kycDocSuccess.image == 'imageBack'){
         if(this.state.DocType=="PASSPORT"){
           this.setState({
-            frontImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
+            backImgUrl : nextProps.kycpage.kycDocSuccess.imageUrl,
             allUploaded : nextProps.kycpage.kycDocSuccess.allUploaded,
             submitCheck:this.state.submitCheck
           })
@@ -466,7 +468,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
                       <input type="file" accept="image/png, image/jpeg" name="front_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleFrontImg} required/>
                     </div>
                       <div className="col-sm-6 form-group">
-                        <label htmlFor="back_id"><h5>UPLOAD BACK ID<sup>*</sup></h5></label>
+                        <label htmlFor="back_id"><h5>UPLOAD BACK ID{!(this.state.DocType=='PASSPORT')?<sup>*</sup>:" "}</h5></label>
                         <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.backImgUrl} alt="back id" id="back_img_src"/>
                         <input type="file" accept="image/png, image/jpeg" name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} required/>
                       </div>

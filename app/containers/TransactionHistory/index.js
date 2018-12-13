@@ -176,7 +176,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                       <button className="btn btn-primary b1" disabled={this.state.disablePrevious} onClick={this.previousChange}> Previous Page </button>
                       <button className="btn btn-primary b2" style={{ right: '16px', position: 'absolute' }} onClick={this.pageChange} disabled={this.state.disableNext}>Next Page </button>
 
-                    {loading?<LoadingSpinner /> :<ReactTable
+                    {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
                         showPaginationBottom={false}
                         style={{ marginTop: '20px', fontSize: '12px', cursor: 'default' }}
                         data={this.state.data}
