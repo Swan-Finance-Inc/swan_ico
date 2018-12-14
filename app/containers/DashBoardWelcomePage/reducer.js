@@ -13,11 +13,14 @@ import {
   KYC_DONE,
   RESET_KYC_DONE,
   DELETE_USER,
-  DELETE_USER_SUCCESS
+  DELETE_USER_SUCCESS,
+  CODE_ERROR_REMOVE,
+  CODE_ERROR
 } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
+  errorGlobal:false,
   loading: false,
   error: false,
   errorMessage: false,
@@ -66,6 +69,16 @@ function dashBoardWelcomePageReducer(state = initialState, action) {
     case RESET_KYC_DONE:
       return state
         .set('kycDone', false);
+    case CODE_ERROR:
+    {
+      console.log(" in reducer of eror action ")
+      return state
+        .set('errorGlobal', action.data);
+    }
+
+    case CODE_ERROR_REMOVE:
+      return state
+        .set('errorGlobal', false);
     default:
       return state;
   }

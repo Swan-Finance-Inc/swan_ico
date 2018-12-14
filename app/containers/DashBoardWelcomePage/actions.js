@@ -61,3 +61,15 @@ export function resetKycDone() {
     type: RESET_KYC_DONE
   }
 }
+export function codeErrorAction(data) {
+  console.log(" in code error of action ")
+  return {
+    type: CODE_ERROR,
+    data
+  }
+}
+export function codeErrorRemove() {
+  return {
+    type: CODE_ERROR_REMOVE
+  }
+}

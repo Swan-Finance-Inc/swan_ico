@@ -3,6 +3,8 @@ import axios from 'axios';
   // const BaseUrl = 'http://localhost:7020/api/v1/'
 export default {
   user: {
+    getReferData:(headers)=>
+    axios.get(`${BaseUrl}user/getUserRefers`,headers).then((res) => res.data).catch((err) => err.response.data),
     deleteUser:(headers)=>
     axios.delete(`${BaseUrl}local/deleteUser`,headers).then((res) => res.data).catch((err) => err.response.data),
     createTicket: (headers, data) =>

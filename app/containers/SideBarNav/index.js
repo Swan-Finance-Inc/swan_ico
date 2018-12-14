@@ -37,6 +37,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       resetPassAct: '',
       showSignOut: false,
       upload_docs:'',
+      myReferal:''
     };
   }
 
@@ -52,9 +53,17 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       faqAct: this.props.faqAct,
       profileAct: this.props.profile,
       resetPassAct: this.props.resetPass,
-      upload_docs:this.props.upload_docs
+      upload_docs:this.props.upload_docs,
+      myReferal:this.props.myReferal
     });
   }
+
+  togglemyReferal=()=>{
+    this.props.compact();
+    this.props.togglemyReferal();
+  }
+
+
   handleLogOut=()=>{
   // console.log('logginouttt...');
     this.props.logOut();
@@ -130,7 +139,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       faqAct: nextProps.faq,
       profileAct: nextProps.profile,
       resetPassAct: nextProps.resetPass,
-      upload_docs:nextProps.upload_docs
+      upload_docs:nextProps.upload_docs,
+      myReferal:this.props.myReferal
     });
   }
 
@@ -206,6 +216,11 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             <li className={this.state.tranAct}><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}><span className="has-icon"><i className="fa fa-history"></i></span><span>Transactions</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
                 <li className="nav-sub-header"><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive} ><span>Transactions</span></Link></li>
+              </ul>
+            </li>
+            <li className={this.state.myReferal}><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}><span className="has-icon"><i className="fa fa-history"></i></span><span>Referrals</span></Link>
+              <ul className="nav nav-sub sidebar-niceScroll">
+                <li className="nav-sub-header"><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal} ><span>Referrals</span></Link></li>
               </ul>
             </li>
             <li className={this.state.ticketAct}><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}><span className="has-icon"><i className="fa fa-ticket"></i></span><span>Tickets</span></Link>

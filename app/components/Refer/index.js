@@ -48,8 +48,11 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
     const { percent } = this.state;
     return (
       <div>
+      {
+        // {this.props.code.status?   <div className="panel panel-default">
+      }
 
-      {this.props.code.status?   <div className="panel panel-default">
+      {true?   <div className="panel panel-default">
           <div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free RUC Tokens</div>
           <div className="panel-body">
         <div className="row">
@@ -172,7 +175,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
         </div>
       </div>
       </div> :''}
-      <div className="panel panel-default">
+    {this.props.icoFlag?  <div className="panel panel-default">
           <div className="panel-heading">ICO Details</div>
           <div className="panel-body" style={{fontSize:'16px'}}>
 
@@ -182,7 +185,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
 
                    <tr>
                      <td>Token Price:</td>
-                     <td>1 RUC = $0.20</td>
+                     <td>1 RUC = $0.10</td>
                    </tr>
                    <tr>
                      <td>We Accept: </td>
@@ -263,7 +266,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               }
 
           </div>
-       </div>
+       </div>:''}
       </div>
     );
   }

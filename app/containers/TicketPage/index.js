@@ -195,7 +195,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                             columns={this.state.columns}
                             onPageChange={this.pageChange}
                             pageSizeOptions={[5, 10]}
-                            noDataText={'NO Tickets Found'}
+                            noDataText={'No Tickets Found'}
                             rowsText={'Tickets'}
                             defaultPageSize={10}
 

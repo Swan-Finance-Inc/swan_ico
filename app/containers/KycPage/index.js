@@ -195,15 +195,11 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     e.preventDefault();
     if(!this.state.valid){
       toast.error('Please enter valid ETH Wallet Address');
-    }else if(!this.state.allUploaded){
-      toast.error('Please fill all the details to submit.')
-    }
-    else if(!isValidNumber(this.state.phone)){
+    }else if(!isValidNumber(this.state.phone)){
       toast.error('Phone number is invalid');
     }else{
       const { fullName, email, dob, gender, phone, ethAddress, citizenship, country, state, city, address, address2, doc_type, doc_number } = this.state;
       const kycDetails = {fullName, email, dob, gender, ethAddress, phone, citizenship, country, state, city, address, address2, doc_type, doc_number}
-
       this.props.submitKyc(kycDetails);
     }
   }

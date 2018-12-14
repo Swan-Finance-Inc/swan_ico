@@ -28,9 +28,14 @@ const makeSelectKycDone = () => createSelector(
   selectDashBoardWelcomePageDomain,
   (substate) => substate.get('kycDone')
 )
+const makeSelectErrorGlobal = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('errorGlobal')
+)
 export default makeSelectDashBoardWelcomePage;
 export {
   selectDashBoardWelcomePageDomain,
   makeSelectSocial,
-  makeSelectKycDone
+  makeSelectKycDone,
+  makeSelectErrorGlobal
 };

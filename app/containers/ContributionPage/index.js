@@ -57,7 +57,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       validWallet: '',
       validBlank: '',
       validWalletBlank: '',
-      bonus: '',
+      bonus: 0,
       stage: '',
       minInvest: 100,
       contribution: false
@@ -91,9 +91,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       eurToDollar: data.eurUsd,
       ethToDollar: data.ethUsd,
       btcToDollar: data.btcUsd,
-      tokensPerEther: data.tokenPerEther  / (10 ** 18),
-      tokensPerBitcoin: data.tokenPerBtc  / (10 ** 18),
-      tokensPerUsd:  data.tokenUsd /(10 ** 18) ,
+      tokensPerEther: data.tokenPerEther,
+      tokensPerBitcoin: data.tokenPerBtc,
+      tokensPerUsd:  data.tokenUsd ,
       tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
@@ -101,7 +101,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       bonus: data.bonus,
       stage: data.stage,
       minInvest: data.minInvest,
-      tokenPrice: data.tokenUsd  / (10 ** 18)
+      tokenPrice: data.tokenUsd
     });
     this.setState({
       fromAddressEth:nextProps.userInfo.userInfo.ethAddress
@@ -158,7 +158,7 @@ gobackDollar=(e)=>{
               // tokenReceiveAddress: fromAddress,
             })
             const body = {
-              tokens: this.state.tokens,
+              tokens: this.state.tokensWithBonus,
               type: this.state.curr,
               amount: this.state.currencyQuantity,
               fromAddress,
@@ -178,7 +178,7 @@ gobackDollar=(e)=>{
             tokenReceiveAddress: fromAddress,
           });
           const body = {
-            tokens: this.state.tokens,
+            tokens: this.state.tokensWithBonus,
             type: this.state.curr,
             amount: this.state.currencyQuantity,
             fromAddress:this.state.fromAddressEth,
@@ -767,8 +767,12 @@ gobackDollar=(e)=>{
                           </div> */}
 
                           <div className="form-group">
-                            <label htmlFor="tokens" className="form-label">TOTAL RUC Tokens</label>
+                            <label htmlFor="tokens" className="form-label">RUC Tokens</label>
                             <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right" disabled required/>
+                          </div>
+                          <div className="form-group">
+                            <label htmlFor="tokensWithBonus" className="form-label">RUC Tokens With Bonus ({this.state.bonus}%)</label>
+                            <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
                           </div>
 
                           {/* <div className="form-group">
