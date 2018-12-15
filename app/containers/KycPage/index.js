@@ -38,8 +38,8 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       backImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
       selfieUrl:'https://s3.amazonaws.com/websiteimagesrama/id_back.png',
       residenProofUrl:'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
-      fullName : this.props.userInfo.userInfo.fullName,
-      email : this.props.userInfo.userInfo.email,
+      fullName : '',
+      email : '',
       dob: '',
       gender: '',
       phone : '',
@@ -95,6 +95,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   // }
   componentDidMount(){
     console.log(" in component did mount ")
+    console.log("User infor",this.props.userInfo.userInfo.kycDetails.fullName)
     this.setState({
       fullName : this.props.userInfo.userInfo.kycDetails.fullName,
       email : this.props.userInfo.userInfo.kycDetails.email,
@@ -278,6 +279,7 @@ handleInput2=(e)=>{
 
 
   componentWillReceiveProps(nextProps){
+    console.log("User infor next",nextProps.userInfo.userInfo.kycDetails.fullName)
     if(nextProps.kycpage.kycDocSuccess){
       if(nextProps.kycpage.kycDocSuccess.image == 'imageFront'){
           this.setState({

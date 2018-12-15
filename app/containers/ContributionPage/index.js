@@ -93,7 +93,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       btcToDollar: data.btcUsd,
       tokensPerEther: data.tokenPerEther,
       tokensPerBitcoin: data.tokenPerBtc,
-      tokensPerUsd:  data.tokenUsd ,
+      tokensPerUsd:  1 / data.tokenUsd,
       tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
@@ -704,7 +704,7 @@ gobackDollar=(e)=>{
                           {
                             this.state.curr == 'Ethereum' ?
                             <div className="form-group">
-                            <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
+                            <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
                             <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left" required   />
                           </div> :  this.state.curr == 'Bitcoin' ?
                           <div>
