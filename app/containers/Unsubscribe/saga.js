@@ -3,6 +3,7 @@ import { take, call, put, select, takeLatest } from 'redux-saga/effects';
 import { UNSUBSCRIBE_USER_ACTION } from './constants';
 import { unsubscribeUserAction ,unsubscribeUserActionSuccess, unsubscribeUserActionSuccessClear } from './actions';
 import { selectUnsubscribeDetails } from './selectors';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 
 export function* unsubscribeUserSaga() {
@@ -28,6 +29,7 @@ export function* unsubscribeUserSaga() {
       yield put(unsubscribeUserActionSuccessClear());
     }
   }catch(err){
+    yield put(codeErrorAction());
     console.log(err)
   }
 }

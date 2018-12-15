@@ -13,6 +13,8 @@ import {
   RESET_KYC_DONE,
   DELETE_USER,
   DELETE_USER_SUCCESS,
+  CODE_ERROR,
+  CODE_ERROR_REMOVE
 } from './constants';
 
 export function deleteUserSuccessAction() {
@@ -68,8 +70,9 @@ export function codeErrorAction(data) {
     data
   }
 }
-export function codeErrorRemove() {
+export function codeErrorRemove(data){
   return {
-    type: CODE_ERROR_REMOVE
+    type: CODE_ERROR_REMOVE,
+    data
   }
 }

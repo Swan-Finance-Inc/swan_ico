@@ -9,6 +9,7 @@ import api from 'utils/api';
 import { FORGOT_PASSWORD } from './constants';
 import makeSelectForgotPassword from './selectors';
 import { mailSent, mailError } from './actions';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 // Individual exports for testing
 
@@ -26,6 +27,7 @@ export function* forgotPassword() {
       yield put(mailSent(false));
     }
   } catch (err) {
+    yield put(codeErrorAction());
     // console.log("api failed");
     // console.log(err)
   }

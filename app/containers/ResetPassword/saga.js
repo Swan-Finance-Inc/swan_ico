@@ -5,6 +5,7 @@ import { passwordResetInner, passwordResetInnerRemove } from 'containers/App/act
 import makeSelectResetPassword from './selectors';
 import { RESET_PASSWORD } from './constants';
 import { resetError } from './actions';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 
 // Individual exports for testing
@@ -38,6 +39,7 @@ export function* reset() {
     }
     yield put(passwordResetInnerRemove());
   } catch (err) {
+    yield put(codeErrorAction());
     // console.log("api failed");
     // console.log(err)
   }

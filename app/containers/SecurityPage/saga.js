@@ -4,7 +4,7 @@ import { twoFactorEnabled, twoFactorDisabled } from 'containers/App/actions';
 import { makeSelectVerify } from './selectors';
 import { ENABLE_2FA, VERIFY_2FA, DISABLE_2FA } from './constants';
 import { success2fa, response2fa, removeResponse } from './actions';
-
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 export function* securityChanged() {
   try {
@@ -26,6 +26,7 @@ export function* securityChanged() {
       yield put(success2fa(data));
     }
   } catch (err) {
+  yield put(codeErrorAction(data));
   // console.log("api failed");
   // console.log(err)
 
@@ -55,6 +56,7 @@ export function* verify2fa() {
     }
     // console.log(body)
   } catch (err) {
+    yield put(codeErrorAction(data));
     // console.log("api failed");
     // console.log(err)
   }
@@ -77,6 +79,7 @@ export function* disabling2fa() {
       yield put(twoFactorDisabled(true));
     }
   } catch (err) {
+    yield put(codeErrorAction(data));
     // console.log("api failed");
     // console.log(err)
   }

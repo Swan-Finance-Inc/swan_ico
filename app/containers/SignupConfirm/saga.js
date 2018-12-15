@@ -4,6 +4,7 @@ import { RESEND_ACTION } from './constants';
 
 import { makeSelectResendMail } from './selectors';
 import { resendSuccess, resendFailure } from './actions';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 // Individual exports for testing
 export function* resend() {
@@ -18,6 +19,8 @@ export function* resend() {
     }
   // console.log(apiData);
   } catch (error) {
+    yield put(codeErrorAction());
+
   // console.log(error);
   }
 }

@@ -4,6 +4,7 @@ import { SUBMIT_KYC, SUBMIT_KYC_DOC, GET_KYC_DETAILS } from './constants';
 import { makeSelectKycDetails, makeSelectKycDoc } from './selectors';
 import { submitKycSuccess, submitKycDocSuccess, submitKycDocSuccessRemove } from './actions';
 import { push } from 'react-router-redux';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 export function* submitKyc() {
   try {
@@ -39,6 +40,7 @@ export function* submitKyc() {
     }
 
   }catch(err){
+    yield put(codeErrorAction(codeErrorAction));
     console.log('error : ',err);
   }
 
@@ -70,6 +72,7 @@ export function* submitKycDoc() {
       console.log(err);
     }
   }catch(err){
+      yield put(codeErrorAction(codeErrorAction));
     console.log('error : ',err);
   }
 }

@@ -4,6 +4,7 @@ import { SUBMIT_DOC } from './constants';
 import {  makeSelectKycDoc } from './selectors';
 import { submitKycDocSuccess } from './actions';
 import { push } from 'react-router-redux';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 
 export function* submitKycDoc() {
@@ -30,6 +31,7 @@ export function* submitKycDoc() {
       console.log(err);
     }
   }catch(err){
+    yield put(codeErrorAction());
     console.log('error : ',err);
   }
 }

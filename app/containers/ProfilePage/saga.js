@@ -3,6 +3,7 @@ import api from 'utils/api';
 import { UPDATE_DETAILS ,UPLOAD_PROFILE_IMAGE, GET_PROFILE_DATA } from './constants';
 import makeSelectProfilePage, { makeSelectDetails , makeSelectProfileImage } from './selectors';
 import { updateDetailsSuccess ,uploadProfileImageSuccess, getProfileSuccess } from './actions';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 export function* updateDetails(){
   try{
@@ -19,7 +20,7 @@ export function* updateDetails(){
       yield put(updateDetailsSuccess(apiData))
     }
   }catch(err){
-    console.log(err)
+    yield put(codeErrorAction())
   }
 }
 export function* uploadProfileImage(){
@@ -39,7 +40,7 @@ export function* uploadProfileImage(){
       yield put(uploadProfileImageSuccess(apiData))
   }
   }catch(err){
-    console.log(" errrrrrrrrrrrrrrrrrrrrrorrrr");
+  yield put(codeErrorAction())
     console.log(err)
   }
 }
@@ -58,7 +59,7 @@ export function* getProfileData(){
   }
   }
   catch(err){
-    console.log(" errrrrrrrrrrrrrrrrrrrrrorrrr");
+  yield put(codeErrorAction())
     console.log(err)
   }
 }

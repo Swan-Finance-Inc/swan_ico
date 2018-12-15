@@ -3,6 +3,7 @@ import api from 'utils/api';
 import { successTransactions } from './actions';
 import { makeSelectPage } from './selectors';
 import { GET_TRANSACTIONS } from './constants';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 export function* getTransaction() {
   try {
     const headers = {
@@ -14,7 +15,7 @@ export function* getTransaction() {
       yield put(successTransactions(apiData));
     }
   } catch (error) {
-    // console.log('heelooo', error);
+    yield put(codeErrorAction());
   }
 }
 // Individual exports for testing

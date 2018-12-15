@@ -3,6 +3,7 @@ import api from 'utils/api';
 import { SUBMIT_SUPPORT } from './constants';
 import { makeSelectSupportData, makeSelectSupportSuccess } from './selectors';
 import { submitSupportSuccess } from './actions';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 export function* submitSupport(){
   try{
@@ -14,12 +15,13 @@ export function* submitSupport(){
 
     const data = yield select(makeSelectSupportData());
     const apiData = yield call(api.user.support, headers, data);
-    
+
     if(apiData){
       yield put(submitSupportSuccess(apiData));
     }
   }catch(err){
-    console.log(err)
+      yield put(codeErrorAction());
+
   }
 }
 

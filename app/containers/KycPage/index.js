@@ -93,7 +93,30 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   //     })
   //   }
   // }
+  componentDidMount(){
+    console.log(" in component did mount ")
+    this.setState({
+      fullName : this.props.userInfo.userInfo.kycDetails.fullName,
+      email : this.props.userInfo.userInfo.kycDetails.email,
+      dob: this.props.userInfo.userInfo.dob,
+      gender: this.props.userInfo.userInfo.gender,
+      phone : this.props.userInfo.userInfo.phone,
+      ethAddress : this.props.userInfo.userInfo.ethAddress,
+      citizenship : this.props.userInfo.userInfo.kycDetails.citizenship,
+      country : this.props.userInfo.userInfo.kycDetails.country,
+      state : this.props.userInfo.userInfo.kycDetails.state,
+      city: this.props.userInfo.userInfo.kycDetails.city,
+      address: this.props.userInfo.userInfo.kycDetails.address,
+      address2: this.props.userInfo.userInfo.kycDetails.address2,
+      // doc_number:this.props.userInfo.userInfo.kycDetails.documentNumber,
+      // DocType:this.props.userInfo.userInfo.kycDetails.documentType,
+      // frontImgUrl :this.props.userInfo.userInfo.kycDetails.imageFront,
+      // backImgUrl :this.props.userInfo.userInfo.kycDetails.imageBack,
+      // selfieUrl:this.props.userInfo.userInfo.kycDetails.selfie,
+      // residenProofUrl:this.props.userInfo.userInfo.kycDetails.residentProof,
 
+    })
+  }
   handleOtherDoc(e) {
     e.preventDefault();
 
@@ -420,8 +443,8 @@ handleInput2=(e)=>{
                     </div>
                     <div className="col-sm-6 form-group">
                       <label htmlFor="gender"><h5>GENDER<sup>*</sup></h5></label>
-                      <select id="gender" name="gender" className="form-control" onChange={this.handleInput} required>
-                        <option value="" hidden>Choose One</option>
+                      <select id="gender" name="gender" className="form-control" value={this.state.gender} onChange={this.handleInput} required>
+                        <option  hidden>Choose One</option>
                         <option value="MALE">MALE</option>
                         <option value="FEMALE">FEMALE</option>
                         <option value="DECLINE TO STATE">DECLINE TO STATE</option>
@@ -496,7 +519,7 @@ handleInput2=(e)=>{
                     <div className="col-sm-6">
                       <div className="form-group">
                       <label htmlFor="doc_type"><h5>TYPE<sup>*</sup></h5></label>
-                        <select id="doc_type" name="doc_type" className="form-control" onChange={this.handleInput2} onClick={this.handleshowOtherDoc} required>
+                        <select id="doc_type" name="doc_type" className="form-control" value={this.state.DocType} onChange={this.handleInput2} onClick={this.handleshowOtherDoc} required>
                           <option value="" hidden>Select Any Document</option>
                           <option value="PASSPORT">PASSPORT</option>
                           <option value={this.state.otherDoc}>ANY NATIONAL ID</option>

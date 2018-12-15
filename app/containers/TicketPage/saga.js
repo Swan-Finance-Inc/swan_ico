@@ -3,7 +3,7 @@ import api from 'utils/api';
 import { CREATE_TICKET, GET_TICKETS, SEND_MESSAGE, GET_MESSAGES } from './constants';
 import { makeSelectCreateTicket, makeSelectMessage, makeSelectTicketId } from './selectors';
 import { createTicketSuccess, ticketSuccess, messageSuccess, getMessagesSuccess, resetTicketSuccess } from './actions';
-
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 export function* createTicket(){
   try{
     const headers = {
@@ -37,6 +37,7 @@ export function* getTickets() {
       yield put(ticketSuccess(apiData));
     }
   }catch(err){
+    yield put(codeErrorAction());
     console.log(err)
   }
 }
@@ -57,6 +58,7 @@ export function* sendMessage() {
     }
 
   }catch(err){
+    yield put(codeErrorAction());
     console.log(err)
   }
 }
@@ -78,6 +80,7 @@ export function* getMessages() {
 
   }catch(err){
     console.log(err)
+      yield put(codeErrorAction());
   }
 }
 

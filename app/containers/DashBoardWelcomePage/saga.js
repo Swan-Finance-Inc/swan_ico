@@ -17,6 +17,7 @@ import { push } from 'react-router-redux';
 import { emailVerified, twoFactorEnabled  } from 'containers/App/actions';
 import { makeSelectSocial } from 'containers/DashBoardWelcomePage/selectors';
 import { deleteUserSuccessAction } from 'containers/DashBoardWelcomePage/actions';
+import { codeErrorAction } from './actions'
 
 import api from 'utils/api';
 
@@ -37,6 +38,7 @@ export function* loadProfile() {
       yield put(profileLoaded(apiData.useInfo));
     }
   } catch (err) {
+      yield put(codeErrorAction());
     // console.log("api failed");
     // console.log(err)
   }
@@ -57,6 +59,7 @@ export function* submitSocial() {
   }
   catch (err) {
     console.log('twitter and telegram submit failed', err);
+      yield put(codeErrorAction());
   }
 }
 export function* deleteUser() {
@@ -84,6 +87,7 @@ export function* deleteUser() {
     }
   }
   catch (err) {
+      yield put(codeErrorAction());
     console.log("Error in catch",err);
   }
 }

@@ -7,7 +7,7 @@ import api from 'utils/api';
 import {
   userRegistered, registerError, removeErrorMessage, removeSuccessMessage,
 } from 'containers/RegisterPage/actions';
-
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 // Individual exports for testing
 export function* register() {
   // console.log("hearing to signup")
@@ -31,6 +31,7 @@ export function* register() {
 
     // yield put(push('/auth/signin'));
   } catch (err) {
+    yield put(codeErrorAction());
     // console.log("api failed");
     // console.log(err)
 
@@ -41,4 +42,3 @@ export default function* registerUser() {
   // See example in containers/HomePage/saga.js
   yield takeLatest(REGISTER_USER, register);
 }
-

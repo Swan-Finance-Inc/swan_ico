@@ -5,7 +5,7 @@ import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { GET_DATA, CONFIRM_PAYMENT, RELOAD_PAGE, SEND_PAYMENT } from './constants';
 import { successData, successPayment, successFinalizePayment } from './actions';
 import { makeSelectContributionConfirm, makeSelectFinalTransaction } from './selectors';
-
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 export function* getData() {
   try {
    // console.log('listening');
@@ -20,6 +20,7 @@ export function* getData() {
     }
   } catch (error) {
    // console.log(error);
+   yield put(codeErrorAction());
   }
 }
 
@@ -37,6 +38,7 @@ export function* contribute() {
       yield put(successPayment(apiData));
     }
   } catch (error) {
+     yield put(codeErrorAction());
   console.log(error)
  }
 }
@@ -46,7 +48,7 @@ export function* finalPayment() {
       headers: { 'x-auth-token': localStorage.getItem('token') },
     };
     const body = yield select(makeSelectFinalTransaction());
-    console.log(body)
+    console.log(body,"  body in Final Payment     ")
     const apiData = yield call(api.user.depositWithHash, headers, body);
     if (apiData.success) {
       yield put(successFinalizePayment(true));
@@ -54,7 +56,7 @@ export function* finalPayment() {
       yield put(successPayment(apiData));
     }
   } catch (error) {
-
+ yield put(codeErrorAction());
  }
 }
 export function* reloadMe() {

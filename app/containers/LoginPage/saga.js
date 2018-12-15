@@ -19,7 +19,7 @@ import {
 } from 'containers/LoginPage/selectors';
 import { twoFactorEnabled, removeErrorGlobal } from 'containers/App/actions';
 import api from 'utils/api';
-
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 export function* getUser() {
    console.log("listening to api hit")
@@ -29,7 +29,7 @@ export function* getUser() {
     const userData = yield select(makeSelectUser());
     // console.log(userData)
     const apiData = yield call(api.user.login, userData);
-    if (apiData.success) {  
+    if (apiData.success) {
       console.log("i m gere");
       if(apiData.reset !== undefined) {
         console.log("i m gere 1");
@@ -51,6 +51,7 @@ export function* getUser() {
       yield put(removeErrorGlobal());
     }
   } catch (err) {
+    yield put(codeErrorAction());
     // console.log("api failed");
     // console.log(err);
     // yield put(userLoadingError(err));

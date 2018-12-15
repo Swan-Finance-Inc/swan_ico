@@ -58,7 +58,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     });
   }
 
-  togglemyReferal=()=>{
+  togglemyReferal=(e)=>{
     this.props.compact();
     this.props.togglemyReferal();
   }
@@ -140,7 +140,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       profileAct: nextProps.profile,
       resetPassAct: nextProps.resetPass,
       upload_docs:nextProps.upload_docs,
-      myReferal:this.props.myReferal
+      myReferal:nextProps.myReferal
     });
   }
 

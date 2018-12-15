@@ -4,7 +4,7 @@ import { GET_REFERAL_DATA } from './constants';
 import {  } from './selectors';
 import { getReferSuccess } from './actions';
 import { push } from 'react-router-redux';
-import { codeErrorAction,codeErrorRemove } from '../DashBoardWelcomePage/actions'
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 
 export function* getReferalData() {
@@ -25,7 +25,7 @@ export function* getReferalData() {
     }
   }catch(err){
     yield put(codeErrorAction(err))
-    yield put(codeErrorRemove(err))
+
   }
 }
 

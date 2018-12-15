@@ -5,6 +5,7 @@ import api from 'utils/api';
 import { makeSelectResetToken, makeSelectNewPassword, makeSelectForceResetToken } from './selectors';
 import { RESET_PASSWORD } from './constants';
 import { resetError, resetSuccess, removeReset } from './actions';
+import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 // Individual exports for testing
 
 export function* reset() {
@@ -31,6 +32,7 @@ export function* reset() {
     }
     // console.log(apiData);
   } catch (err) {
+      yield put(codeErrorAction());
     // console.log("api failed");
     // console.log(err)
   }

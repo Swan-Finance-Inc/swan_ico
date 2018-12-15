@@ -27,7 +27,7 @@ import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
-import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction } from './actions';
+import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove } from './actions';
 import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal }from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
@@ -49,8 +49,8 @@ const initialState = {
   faq: '',
   profile: '',
   resetPass: '',
-  upload_docs:'',
-  myReferal:''
+  upload_docs: '',
+  myReferal: ''
 }
 export class DashBoardWelcomePage extends React.PureComponent {
   constructor() {
@@ -506,7 +506,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
   componentWillReceiveProps(nextProps){
   if(nextProps.globalError){
-    toast.error(nextProps.globalError.message)
+    toast.error("Something went Wrong. Please Refresh")
+    nextProps.codeErrorRemove()
   }
    if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
      this.setState({
@@ -657,7 +658,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/ticket') ?
                   <TicketPage /> :
                   (this.props.location.pathname == '/dashboard/kyc') ?
-                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive}/> :
+                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} /> :
                   (this.props.location.pathname == '/dashboard/transactionHistory') ?
                     <TransactionHistory message={this.props.global.depositSuccess} /> :
                     (this.props.location.pathname == '/dashboard/notification') ?
@@ -711,7 +712,7 @@ function mapDispatchToProps(dispatch) {
     submitSocial: (data) => dispatch(submitSocial(data)),
     resetKycDone: () => dispatch(resetKycDone()),
     deleteUserAction: () => dispatch(deleteUserAction()),
-
+    codeErrorRemove:()=>dispatch(codeErrorRemove()),
   };
 }
 
