@@ -649,7 +649,12 @@ gobackDollar=(e)=>{
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
                       <p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>
-                      <p style={{color:'#ff0000'}}>Current Token Sale: {this.state.stage}</p>
+                      <p style={{color:'#ff0000'}}>Current Token Sale:
+                       {this.state.stage === 'privateSaleRound1' && "Private Sale Round One"}
+                       {this.state.stage === 'privateSaleRound2' && "Private Sale Round One"}
+                       {this.state.stage === 'preSale' && "Pre Sale"}
+                       {this.state.stage === 'crowdSale' && "Crowdsale"}</p>
+
                       <h5>1 RUC TOKEN ={this.state.tokenPrice}$</h5>
                     </div>
                   </div>
