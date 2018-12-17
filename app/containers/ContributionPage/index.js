@@ -60,7 +60,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       bonus: 0,
       stage: '',
       minInvest: 100,
-      contribution: false
+      contribution: false,
+      body:{}
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -169,7 +170,10 @@ gobackDollar=(e)=>{
               phase:this.state.stage
             };
             console.log(body,"body bitcoin  in contribution page")
-            this.props.confirmPayment(body);
+            this.setState({
+              body
+            })
+
            }
       } else if(this.state.curr == 'Ethereum'){
           this.setState({
@@ -189,7 +193,10 @@ gobackDollar=(e)=>{
             phase:this.state.stage
           };
           console.log(body," body ethereum  in contribution page")
-          this.props.confirmPayment(body);
+          this.setState({
+            body
+          })
+          
       }
 
     }else {
@@ -213,7 +220,9 @@ gobackDollar=(e)=>{
             phase:this.state.stage
           };
           console.log(body," body usd in contribution page")
-          this.props.confirmPayment(body);
+          this.setState({
+            body
+          })
         }
       }
   }
@@ -225,12 +234,11 @@ gobackDollar=(e)=>{
 
 
   confirm(data) {
-    // console.log(this.props.transactionId)
-    let body = {
-      transactionId: this.props.transactionId,
-      transactionHash:data,
-    }
-    this.props.finalizePayment(body);
+    let body = this.state.body;
+    body.transactionHash = data;
+    console.log(data,"hash");
+    console.log(body,"body")
+    this.props.confirmPayment(body);
   }
 
   comeBack() {

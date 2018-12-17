@@ -35,6 +35,8 @@ export function* contribute() {
     console.log(apiData,"apiData in user.deposit")
     if (apiData.success) {
       yield put(depositSuccess(true));
+      yield put(successFinalizePayment(true));
+      yield put(push('/dashboard/transactionHistory'));
       yield put(successPayment(apiData));
     }
   } catch (error) {
