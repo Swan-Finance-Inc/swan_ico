@@ -190,7 +190,8 @@ gobackDollar=(e)=>{
             tokenReceivingAddress:this.state.fromAddressEth,
             usdAmount: this.state.dollarsInvested,
             rate:this.state.ethToDollar,
-            phase:this.state.stage
+            phase:this.state.stage,
+            tokenPrice : this.state.tokenPrice
           };
           console.log(body," body ethereum  in contribution page")
           this.setState({
@@ -217,7 +218,8 @@ gobackDollar=(e)=>{
             tokenReceivingAddress:this.state.fromAddressEth,
             usdAmount: this.state.dollarsInvested,
             rate:this.state.ethToDollar,
-            phase:this.state.stage
+            phase:this.state.stage,
+            tokenPrice : this.state.tokenPrice
           };
           console.log(body," body usd in contribution page")
           this.setState({

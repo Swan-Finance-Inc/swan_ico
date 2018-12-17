@@ -43,6 +43,7 @@ const initialState = fromJS({
     tokenReceivingAddress: false,
     usdAmount: false,
     transactionHash: false,
+    tokenPrice:0
   },
   paymentSuccess: false,
   paymentFailure: false,
@@ -77,7 +78,8 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['paymentConfirm', 'usdAmount'], action.data.usdAmount)
         .setIn(['paymentConfirm', 'rate'], action.data.rate)
         .setIn(['paymentConfirm', 'phase'], action.data.phase)
-        .setIn(['paymentConfirm', 'transactionHash'], action.data.transactionHash);
+        .setIn(['paymentConfirm', 'transactionHash'], action.data.transactionHash)
+        .setIn(['paymentConfirm', 'tokenPrice'], action.data.tokenPrice);
     case SUCCESS_DATA:
       return state
         .set('loading', false)
