@@ -64,12 +64,6 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
              accessor: 'rate', // Custom cell components!
              className: 'text-right'
            },
-
-        {
-          Header: 'Tokens Received',
-          accessor: 'tokensTransferred', // Custom cell components!
-          className: 'text-center'
-        },
         {
           Header: 'Time',
           accessor: 'created_at',
