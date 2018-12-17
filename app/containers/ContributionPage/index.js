@@ -648,7 +648,7 @@ gobackDollar=(e)=>{
                 <div className="contribution">
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                     <p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>
+                    {!this.state.minInvest==0? <p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>:''}
                       <p style={{color:'#ff0000'}}>Current Token Sale: {this.state.stage}</p>
                       <h5>1 RUC TOKEN ={this.state.tokenPrice}$</h5>
                     </div>
