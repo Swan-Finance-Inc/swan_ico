@@ -109,7 +109,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   componentDidMount(){
     this.setState({
       referalUrl:`https://tokensale.ruc.io/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
-      // profilePicUrl:this.props.userInfo.userInfo.imageProfile
+     profilePicUrl:this.props.userInfo.userInfo.imageProfile
     })
   }
 

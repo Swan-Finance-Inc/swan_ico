@@ -96,9 +96,11 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   componentDidMount(){
     console.log(" in component did mount ")
     console.log("User infor",this.props.userInfo.userInfo.kycDetails.fullName)
+    console.log(" dob in didmount ",this.props.userInfo.userInfo.dob);
+    console.log("userinfo",this.props.userInfo.userInfo);
     this.setState({
-      fullName : this.props.userInfo.userInfo.kycDetails.fullName,
-      email : this.props.userInfo.userInfo.kycDetails.email,
+      fullName : this.props.userInfo.userInfo.fullName,
+      email : this.props.userInfo.userInfo.email,
       dob: this.props.userInfo.userInfo.dob,
       gender: this.props.userInfo.userInfo.gender,
       phone : this.props.userInfo.userInfo.phone,
@@ -464,8 +466,8 @@ handleInput2=(e)=>{
                         error={ phone ? (isValidNumber(phone) ? undefined : 'Invalid phone number') : '' }/>
                     </div>
                     <div className="col-sm-6 form-group">
-                      <label htmlFor="ethAddress"><h5>ETH WALLET ADDRESS</h5></label>
-                      <input className="form-control" type="text" name="ethAddress" id="ethAddress" placeholder="Enter ETH wallet address" title="Please enter valid eth address" value={ethAddress} onChange={this.handleInput}/>
+                      <label htmlFor="ethAddress"><h5>ETH WALLET ADDRESS<sup>*</sup></h5></label>
+                      <input className="form-control" type="text" name="ethAddress" id="ethAddress" placeholder="Enter ETH wallet address" title="Please enter valid eth address" value={ethAddress} onChange={this.handleInput} required/>
                       { !this.state.valid ? <p style={{color: '#f00'}}>Please enter Valid ETH address.</p> : '' }
                     </div>
                   </div>
