@@ -52,7 +52,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
         // {this.props.code.status?   <div className="panel panel-default">
       }
 
-      {true?   <div className="panel panel-default">
+      {!!this.props.code.status?   <div className="panel panel-default">
           <div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free RUC Tokens</div>
           <div className="panel-body">
         <div className="row">
