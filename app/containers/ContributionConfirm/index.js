@@ -353,13 +353,13 @@ export class ContributionConfirm extends React.PureComponent {
                                                 this.props.ethAddress
                                               }
                                             >
-                                              {this.props.ethAddress}
+                                              {this.props.currency=="Etherium"?this.props.ethAddress:this.props.btcAddress}
                                             </h4>
                                             {/* <button style={{margin:"10px" ,borderRadius:"30px"}} className="form-buy-button" onClick={this.copyFunction}> */}
                                             <div className="row">
                                               <div className="col-sm-6">
                                                 <CopyToClipboard
-                                                  text={this.props.ethAddress}
+                                                  text={this.props.currency=="Etherium"?this.props.ethAddress:this.props.btcAddress}
                                                   onCopy={() =>
                                                     this.setState({
                                                       copy: true
@@ -429,10 +429,10 @@ export class ContributionConfirm extends React.PureComponent {
                                     : "ETH"}{" "}
                                   to this address
                                 </li>
-                                <li>
-                                  Don't make payment through exchange.You can
+                                  {this.props.currency=='Ethereum'? <li>
+                            Don't make payment through exchange.You can
                                   use Metmask, MyEtherWallet, Mist Wallet etc
-                                </li>
+                                </li>:""}
                                 <li>
                                   To avoid delays, you must paste and confirm
                                   your Blockchain TX Code as soon as available

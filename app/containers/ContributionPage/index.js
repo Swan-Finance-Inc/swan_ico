@@ -167,7 +167,8 @@ gobackDollar=(e)=>{
               tokenReceivingAddress: tokenReceive,
               usdAmount: this.state.dollarsInvested,
               rate:this.state.btcToDollar,
-              phase:this.state.stage
+              phase:this.state.stage,
+              tokenPrice : this.state.tokenPrice
             };
             console.log(body,"body bitcoin  in contribution page")
             this.setState({
@@ -650,14 +651,13 @@ gobackDollar=(e)=>{
                 <div className="contribution">
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                      {this.state.minInvest!=0?<p style={{color:'#ff0000'}}>Minimum investment {this.state.minInvest}$</p>:''}
-                      <p style={{color:'#ff0000'}}>Current Token Sale:
+                      {this.state.minInvest!=0?<p style={{color:'#ff0000'}}>Minimum investment ${this.state.minInvest}</p>:''}
+                      <p style={{color:'#ff0000'}}>Current Token Sale :&nbsp;
                        {this.state.stage === 'privateSaleRound1' && "Private Sale Round One"}
                        {this.state.stage === 'privateSaleRound2' && "Private Sale Round One"}
                        {this.state.stage === 'preSale' && "Pre Sale"}
                        {this.state.stage === 'crowdSale' && "Crowdsale"}</p>
-
-                      <h5>1 RUC TOKEN ={this.state.tokenPrice}$</h5>
+                      <h5>1 RUC TOKEN =${this.state.tokenPrice}</h5>
                     </div>
                   </div>
                   <div className="row">
