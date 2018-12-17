@@ -193,39 +193,46 @@ export class ContributionConfirm extends React.PureComponent {
                     <div className="row">
                       <div className="col-sm-12 companyDataContainer">
                         <div className="row">
-                          <div className="col-sm-4">Company</div>
-                          <div className="col-sm-8">
-                            Alpha Three Invest GmbH Postplatz 1 6300 Zug
-                            Switzerland
-                          </div>{" "}
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">UID</div>
-                          <div className="col-sm-8">CHE_233.094.641</div>
+                          <div className="col-sm-4">Bank Name</div>
+                          <div className="col-sm-8">United Overseas Bank</div>
                         </div>
                         <div className="row">
                           <div className="col-sm-4">
-                            Comercial register number
+                            Bank Code
                           </div>
-                          <div className="col-sm-8">CH-170.987-6</div>
+                          <div className="col-sm-8">7375</div>
                         </div>
                         <div className="row">
-                          <div className="col-sm-4">Bank</div>
+                          <div className="col-sm-4">Branch Name</div>
                           <div className="col-sm-8">
-                            CREDIT SUISSE(Switzerland) Ltd. Zug
+                          UOB Orchard
                           </div>
                         </div>
                         <div className="row">
-                          <div className="col-sm-4">Clearing Number</div>
-                          <div className="col-sm-8">0727</div>
+                          <div className="col-sm-4">Branch Code</div>
+                          <div className="col-sm-8">068</div>
                         </div>
                         <div className="row">
-                          <div className="col-sm-4">BIC/ SWIFT</div>
-                          <div className="col-sm-8">CRESCHZZ810</div>
+                          <div className="col-sm-4">Branch Address</div>
+                          <div className="col-sm-8"><div>230 Orchard Road</div>
+                            <div>#01-230 Faber House</div>
+                            <div>Singapore 238854</div>
+                            <br/>
+                          </div>
                         </div>
                         <div className="row">
-                          <div className="col-sm-4">IBAN</div>
-                          <div className="col-sm-8">NL91ABNA0417164305</div>
+                          <div className="col-sm-4">Swift Code</div>
+                          <div className="col-sm-8">UOVBSGSG</div>
+                        </div>
+                        <div className="row">
+                          <div className="col-sm-4">Account Number</div>
+                          <div className="col-sm-8"><div>380-330-688-3(SGD)</div>
+                            <div>380-946-743-9(USD)</div>
+                          </div>
+                        </div>
+                        <div className="row">
+                          <div className="col-sm-4">Account Name</div>
+                          <div className="col-sm-8">RAMA ENTERTAINMENTS PTE LTD</div>
                         </div>
                       </div>
                     </div>
@@ -247,11 +254,11 @@ export class ContributionConfirm extends React.PureComponent {
                       //   </div>
                       // </div>
                     }
-                   
+
                       <div className="buttonInputContainer">
                         <div className="row">
                           <div className="col-md-6">
-                          <form onSubmit={this.confirmPayment}> 
+                          <form onSubmit={this.confirmPayment}>
                             <div className="form-group enterBankAcc">
                               <label
                                 htmlFor="bankAccNumber"
@@ -265,12 +272,12 @@ export class ContributionConfirm extends React.PureComponent {
                                 className="form-input form-control"
                                 required
                               />
-                             
+
                             </div>
                             <input
                               type="submit"
                               className="form-button btn btn-primary"
-                            
+
                               value="Confirm"
 
                             />
@@ -279,9 +286,9 @@ export class ContributionConfirm extends React.PureComponent {
                         </div>
                         <div className="row">
                           <div className="col-md-6">
-                          
-                              
-                            
+
+
+
                             <button
                               className="form-button btn btn-primary"
                               style={{ margin: "10px" }}
@@ -292,7 +299,7 @@ export class ContributionConfirm extends React.PureComponent {
                           </div>
                         </div>
                       </div>
-                   
+
                   </div>
                 </div>
               </div>
