@@ -68,9 +68,10 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
               className: 'status'
             },
             {
-              Header: 'Tokens',
-              accessor: 'tokens', // Custom cell components!
-              className: 'email'
+              Header: 'Tokens can be earned',
+              accessor: (row)=>(row.tokens)+((row.tokens)*(row.referBonus*0.01)), // Custom cell components!
+              className: 'email',
+              id:'tokensCanbeEarned'
             },
             {
               Header: 'Created At',
@@ -120,53 +121,56 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
         {this.props.code.amountPercent!=0?<Refer  code={this.props.code} icoFlag ={false} />:""}
-          <div className="panel panel-default">
-        <div className="panel-heading">Users</div>
-          <div className="row">
-          <div className='col-sm-10 col-sm-offset-1'>
-      {!loading?<ReactTable
-                       className="-striped -highlight"
-                       showPaginationBottom={true}
-                       style={{ marginTop: '20px', fontSize: '12px', cursor: 'pointer' }}
-                       data={this.state.users}
-                       columns={this.state.userCollumn}
-                       pageSizeOptions={[5, 10]}
-                       noDataText={'No user Found'}
-                       rowsText={'users'}
-                       defaultPageSize={10}
-                       getTdProps={(state, rowInfo, column, instance) => ({
-                         onClick: (e, handleOriginal) => {
-                           console.log(rowInfo)
-                           // console.log("It was in this row:", rowInfo);
-                           // this.props.getMessages(rowInfo.original.ticketId);
-                           // this.setState({
-                           //
-                           //   currentTicketDetails : {
-                           //     subject: rowInfo.original.subject,
-                           //     messages: rowInfo.original.messages,
-                           //     createdAt: rowInfo.original.createdAt,
-                           //     status: rowInfo.original.status,
-                           //     ticketId: rowInfo.original.ticketId
-                           //   },
-                           //   currentTicketMessages: rowInfo.original.messages
-                           // })
-                           // this.handleShowTicket();
-                           // IMPORTANT! React-Table uses onClick internally to trigger
-                           // events like expanding SubComponents and pivots.
-                           // By default a custom 'onClick' handler will override this functionality.
-                           // If you want to fire the original onClick handler, call the
-                           // 'handleOriginal' function.
-                           if (handleOriginal) {
-                             handleOriginal();
-                           }
-                         }
-                       })}
-                       defaultPageSize={5}
-                       showPaginationBottom={true}
-                     />:<LoadingSpinner style = {{alignItems:"center",marginTop:"35px",marginBottom:"45px", background:"#fff"}} />}
-          </div>
-          </div>
-          </div>
+        {
+          //     <div className="panel panel-default">
+          //   <div className="panel-heading">Users</div>
+          //     <div className="row">
+          //     <div className='col-sm-10 col-sm-offset-1'>
+          // {!loading?<ReactTable
+          //                  className="-striped -highlight"
+          //                  showPaginationBottom={true}
+          //                  style={{ marginTop: '20px', fontSize: '12px', cursor: 'pointer' }}
+          //                  data={this.state.users}
+          //                  columns={this.state.userCollumn}
+          //                  pageSizeOptions={[5, 10]}
+          //                  noDataText={'No user Found'}
+          //                  rowsText={'users'}
+          //                  defaultPageSize={10}
+          //                  getTdProps={(state, rowInfo, column, instance) => ({
+          //                    onClick: (e, handleOriginal) => {
+          //                      console.log(rowInfo)
+          //                      // console.log("It was in this row:", rowInfo);
+          //                      // this.props.getMessages(rowInfo.original.ticketId);
+          //                      // this.setState({
+          //                      //
+          //                      //   currentTicketDetails : {
+          //                      //     subject: rowInfo.original.subject,
+          //                      //     messages: rowInfo.original.messages,
+          //                      //     createdAt: rowInfo.original.createdAt,
+          //                      //     status: rowInfo.original.status,
+          //                      //     ticketId: rowInfo.original.ticketId
+          //                      //   },
+          //                      //   currentTicketMessages: rowInfo.original.messages
+          //                      // })
+          //                      // this.handleShowTicket();
+          //                      // IMPORTANT! React-Table uses onClick internally to trigger
+          //                      // events like expanding SubComponents and pivots.
+          //                      // By default a custom 'onClick' handler will override this functionality.
+          //                      // If you want to fire the original onClick handler, call the
+          //                      // 'handleOriginal' function.
+          //                      if (handleOriginal) {
+          //                        handleOriginal();
+          //                      }
+          //                    }
+          //                  })}
+          //                  defaultPageSize={5}
+          //                  showPaginationBottom={true}
+          //                />:<LoadingSpinner style = {{alignItems:"center",marginTop:"35px",marginBottom:"45px", background:"#fff"}} />}
+          //     </div>
+          //     </div>
+          //     </div>
+        }
+
           <div className="panel panel-default">
         <div className="panel-heading">Transactions</div>
           <div className="row">
