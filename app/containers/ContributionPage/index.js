@@ -168,7 +168,8 @@ gobackDollar=(e)=>{
               usdAmount: this.state.dollarsInvested,
               rate:this.state.btcToDollar,
               phase:this.state.stage,
-              tokenPrice : this.state.tokenPrice
+              tokenPrice : this.state.tokenPrice,
+              rate:this.state.btcToDollar,
             };
             console.log(body,"body bitcoin  in contribution page")
             this.setState({
