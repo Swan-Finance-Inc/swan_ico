@@ -653,8 +653,8 @@ gobackDollar=(e)=>{
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
                       {this.state.minInvest!=0?<p style={{color:'#ff0000'}}>Minimum investment ${this.state.minInvest}</p>:''}
                       <p style={{color:'#ff0000'}}>Current Token Sale :&nbsp;
-                       {this.state.stage === 'privateSaleRound1' && "Private Sale Round One"}
-                       {this.state.stage === 'privateSaleRound2' && "Private Sale Round One"}
+                       {this.state.stage === 'privateSaleRound1' && "Private Sale Round 1"}
+                       {this.state.stage === 'privateSaleRound2' && "Private Sale Round 2"}
                        {this.state.stage === 'preSale' && "Pre Sale"}
                        {this.state.stage === 'crowdSale' && "Crowdsale"}</p>
                       <h5>1 RUC TOKEN =${this.state.tokenPrice}</h5>
@@ -684,10 +684,10 @@ gobackDollar=(e)=>{
                         <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Tokens</span>
                         {
                           this.state.curr !== 'Dollar' ?
-                          <span style={{float: 'left'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ?
+                          <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?
                              this.state.ethToDollar : (this.state.curr === 'Bitcoin') ?
                              (this.state.btcToDollar).toFixed(2) :
-                              (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null} $</span>
+                              (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null}</span>
                           : null
                         }
                         <br/>

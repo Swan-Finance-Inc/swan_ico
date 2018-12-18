@@ -23,7 +23,6 @@ import reducer from './reducer';
 import saga from './saga';
 import makeSelectTransactionHistory, { makeSelectTransactions, makeSelectNextPage ,makeSelectTransLoading } from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
-
 export class TransactionHistory extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -59,10 +58,28 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           Header: 'RUC Tokens',
           accessor: 'tokens', // Custom cell components!
           className: 'text-right'
-        },  {
+        },
+        {
+          Header: 'Token Price',
+          accessor: 'tokenPrice', // Custom cell components!
+          className: 'text-center'
+        },
+
+         {
+
             Header: 'Phase',
             accessor: 'phase', // Custom cell components!
-            className: 'text-right'
+            className: 'text-center',
+            Cell: ({ value }) => {
+              if(value=="privateSaleRound1")
+              return "Private Sale Round 1"
+              else if(value=="privateSaleRound2")
+              return 'Private Sale Round 2'
+              else if(value=="crowdSale")
+              return 'Crowd Sale'
+              else if(value=="preSale")
+              return 'Pre Sale'
+            }
           },
           {
              Header: 'Rate',
@@ -97,7 +114,21 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
       this.props.deposit(false);
     }
   }
+ getColumnWidth=(accessor, headerText)=>{
+ let {data} = this.state;
+ let max = 0;
+ const maxWidth = 400;
+ const magicSpacing = 18;
 
+ for (var i = 0; i < data.length; i++) {
+     if (data[i] !== undefined && data[i][accessor] !== null) {
+         if (stringify(data[i][accessor] || 'null').length > max) {
+             max = stringify(data[i][accessor] || 'null').length;
+         }
+     }
+ }
+ return Math.min(maxWidth, Math.max(max, headerText.length) * magicSpacing);
+ }
 
   componentWillReceiveProps(nextProps) {
     this.setState({

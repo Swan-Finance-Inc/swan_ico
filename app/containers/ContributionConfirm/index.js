@@ -353,13 +353,13 @@ export class ContributionConfirm extends React.PureComponent {
                                                 this.props.ethAddress
                                               }
                                             >
-                                              {this.props.currency=="Etherium"?this.props.ethAddress:this.props.btcAddress}
+                                              {this.props.currency=="Ethereum"?this.props.ethAddress:this.props.btcAddress}
                                             </h4>
                                             {/* <button style={{margin:"10px" ,borderRadius:"30px"}} className="form-buy-button" onClick={this.copyFunction}> */}
                                             <div className="row">
                                               <div className="col-sm-6">
                                                 <CopyToClipboard
-                                                  text={this.props.currency=="Etherium"?this.props.ethAddress:this.props.btcAddress}
+                                                  text={this.props.currency=="Ethereum"?this.props.ethAddress:this.props.btcAddress}
                                                   onCopy={() =>
                                                     this.setState({
                                                       copy: true
