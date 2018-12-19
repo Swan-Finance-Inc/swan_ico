@@ -95,7 +95,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
           <div className="col-sm-6 col-sm-offset-3">
             <div className="resend">
               <h1>Resend Confirmation Success</h1>
-              <p>
+              <p className="pleaseCheck">
                 Please check your email for verification link.
               </p>
             </div>
@@ -136,7 +136,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
               <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                 <div className="resend">
                   <h1>Resend Confirmation Instruction</h1>
-                  <p className="subtitle">Please enter your email address. We will send you an email with Confirmation Instructions.</p>
+                  <p className="subtl">Please enter your email address. We will send you an email with Confirmation Instructions.</p>
                 </div>
                 <div className="signin-card-body">
                   <form onSubmit={this.submitMail} id="forgotPassForm">
