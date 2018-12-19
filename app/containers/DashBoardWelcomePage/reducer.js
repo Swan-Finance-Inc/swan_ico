@@ -73,7 +73,7 @@ function dashBoardWelcomePageReducer(state = initialState, action) {
     {
       console.log(" in reducer of eror action ")
       return state
-        .set('errorGlobal', action.data);
+        .set('errorGlobal', true);
     }
 
     case CODE_ERROR_REMOVE:

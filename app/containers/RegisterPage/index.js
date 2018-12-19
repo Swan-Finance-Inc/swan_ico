@@ -38,8 +38,8 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       success: false,
       mail: '',
       show: false,
-      password_class:'fa fa-fw fa-eye',
-      conf_password_class:'fa fa-fw fa-eye'
+      password_class:'fa fa-fw fa-eye-slash',
+      conf_password_class:'fa fa-fw fa-eye-slash'
 
     };
     this.formSubmit = this.formSubmit.bind(this);

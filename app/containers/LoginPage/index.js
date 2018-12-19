@@ -33,7 +33,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     this.state = {
       'g-recaptcha-response': '',
       captcha : false,
-      password_class:'fa fa-fw fa-eye'
+      password_class:'fa fa-fw fa-eye-slash'
     }
     this.formSubmit = this.formSubmit.bind(this);
     this.notify = this.notify.bind(this);

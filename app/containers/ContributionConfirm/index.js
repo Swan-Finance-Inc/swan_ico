@@ -274,21 +274,16 @@ export class ContributionConfirm extends React.PureComponent {
                               />
 
                             </div>
-                            <input
-                              type="submit"
-                              className="form-button btn btn-primary"
-
-                              value="Confirm"
-
-                            />
-                             </form>
-                          </div>
-                        </div>
-                        <div className="row">
+                          <div className='row'>
                           <div className="col-md-6">
-
-
-
+                          <input
+                            type="submit"
+                            className="form-button btn btn-primary"
+                            value="Confirm"
+                            style={{ margin: "10px" }}
+                          />
+                          </div>
+                          <div className="col-md-6">
                             <button
                               className="form-button btn btn-primary"
                               style={{ margin: "10px" }}
@@ -297,6 +292,12 @@ export class ContributionConfirm extends React.PureComponent {
                               Go Back
                             </button>
                           </div>
+                          </div>
+                             </form>
+                          </div>
+                        </div>
+                        <div className="row">
+
                         </div>
                       </div>
 

@@ -17,6 +17,8 @@ export function* getData() {
     if (apiData.success) {
       console.log(apiData.data,"in saga");
       yield put(successData(apiData.data));
+    }else{
+      yield put(codeErrorAction());
     }
   } catch (error) {
    // console.log(error);
@@ -38,6 +40,8 @@ export function* contribute() {
       yield put(successFinalizePayment(true));
       yield put(push('/dashboard/transactionHistory'));
       yield put(successPayment(apiData));
+    }else{
+      yield put(codeErrorAction());
     }
   } catch (error) {
      yield put(codeErrorAction());
@@ -56,6 +60,8 @@ export function* finalPayment() {
       yield put(successFinalizePayment(true));
       yield put(push('/dashboard/transactionHistory'));
       yield put(successPayment(apiData));
+    }else {
+      yield put(codeErrorAction());
     }
   } catch (error) {
  yield put(codeErrorAction());

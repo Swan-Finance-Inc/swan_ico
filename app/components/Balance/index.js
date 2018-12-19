@@ -25,7 +25,7 @@ class Balance extends React.PureComponent {
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3>Total Balance</h3>
-              <div className="balance">{Math.round(this.props.userInfo.tokens.total)}</div>
+              <div className="balance">{(this.props.userInfo.tokens.total)}</div>
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
@@ -60,7 +60,7 @@ class Balance extends React.PureComponent {
                 <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3>Creative Stakes</h3>
-              <div className="balance">{Math.round(this.props.userInfo.tokens.bounty.creative)}</div>
+              <div className="balance">{(this.props.userInfo.tokens.bounty.creative)}</div>
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
@@ -84,7 +84,7 @@ class Balance extends React.PureComponent {
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3>Translation Stakes</h3>
-              <div className="balance">{Math.round(this.props.userInfo.tokens.bounty.translation)}</div>
+              <div className="balance">{(this.props.userInfo.tokens.bounty.translation)}</div>
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
