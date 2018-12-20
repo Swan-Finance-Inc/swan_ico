@@ -79,7 +79,8 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['paymentConfirm', 'rate'], action.data.rate)
         .setIn(['paymentConfirm', 'phase'], action.data.phase)
         .setIn(['paymentConfirm', 'transactionHash'], action.data.transactionHash)
-        .setIn(['paymentConfirm', 'tokenPrice'], action.data.tokenPrice);
+        .setIn(['paymentConfirm', 'tokenPrice'], action.data.tokenPrice)
+        .setIn(['paymentConfirm', 'bonus'], action.data.bonus);
     case SUCCESS_DATA:
       return state
         .set('loading', false)
