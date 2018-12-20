@@ -74,7 +74,7 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
             },
             {
               Header: 'Tokens can be earned',
-              accessor: (row)=>((row.tokens)*(row.referBonus*0.01)), // Custom cell components!
+              accessor: (row)=> ((row.referBonus * 0.01) * (row.tokens * 100/(row.bonus +100))), // Custom cell components!
               className: 'email',
               id:'tokensCanbeEarned'
             },
