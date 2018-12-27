@@ -14,7 +14,7 @@ class Balance extends React.PureComponent {
     return (
       <div>
         <div className="panel panel-default">
-        <div className="panel-heading">Your Balance</div>
+        <div className="panel-heading blueBG">Your Balance</div>
         <div className="panel-body">
         <div className="row">
           <div className="col-sm-12">

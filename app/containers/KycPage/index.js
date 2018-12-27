@@ -567,7 +567,7 @@ handleInput2=(e)=>{
                   </div>
                   <div className="row">
                     <div className="col-sm-12 text-center">
-                    <button className="btn btn-primary" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={(this.state.DocType="PASSPORT")?!(frontimgFlag&&selfieFlag&&residentFlag):!(frontimgFlag&&selfieFlag&&residentFlag&&backImageFlag)} type="submit">SUBMIT</button>
+                    <button className="btn-primary blueBG" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={(this.state.DocType="PASSPORT")?!(frontimgFlag&&selfieFlag&&residentFlag):!(frontimgFlag&&selfieFlag&&residentFlag&&backImageFlag)} type="submit">SUBMIT</button>
                     </div>
                   </div>
                 </form>

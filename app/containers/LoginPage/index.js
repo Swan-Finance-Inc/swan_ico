@@ -22,6 +22,7 @@ import { makeGlobalParent } from '../App/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import ReCAPTCHA from 'react-google-recaptcha';
+import logo from '../../images/logo.svg';
 
 import { userLoggedIn, removeErrorGlobal, twoFactorDisabled, removeOuterError, passwordResetInnerRemove } from '../App/actions';
 import { loginUser, removeErrorMessage, emailStateClear } from './actions';
@@ -189,12 +190,12 @@ showPassWord= (e)=>{
           <header className="header">
             <div className="container">
               <div className="row">
-                <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
+                <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                   <div className="logo"><Link to="/"> <img
-                    src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="RUC"
+                    src={ logo } alt="RUC"
                   /></Link></div>
                 </div>
-                <div className="col-xs-7 col-sm-6 col-md-10">
+                <div className="col-xs-5 col-sm-6 col-md-8">
                   <div className="header-right">
 
                     <div className="header-btn-group">

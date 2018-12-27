@@ -22,6 +22,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { registerUser } from './actions';
 import { Modal } from 'react-bootstrap';
+import logo from '../../images/logo.svg';
 
 export class RegisterPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -211,17 +212,17 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       <div className="signin">
         <div className="wrapper">
           <ToastContainer position="top-center" autoClose={10000000000000000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-          <header className="header">
+          <header className="header navBarColorBlue">
             <div className="container">
               <div className="row">
-                <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
+                <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                   <div className="logo">
                     <Link to="/signin">
-                      <img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="ruc" />
+                      <img src={ logo } alt="ruc" />
                     </Link>
                   </div>
                 </div>
-                <div className="col-xs-7 col-sm-6 col-md-10">
+                <div className="col-xs-5 col-sm-6 col-md-8">
                   <div className="header-right">
 
                     <div className="header-btn-group">

@@ -15,6 +15,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectNavBarContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
+import logo from '../../images/logo.svg';
 // import { signOut }  from './actions';
 import { userLoggedOut } from '../App/actions';
 import { push } from 'react-router-redux';
@@ -96,10 +97,10 @@ export class NavBarContainer extends React.PureComponent {
   render() {
     console.log(this.props.history," tttttttttttttttttttttttttttttt");
     return (
-      <header>
+      <header >
         <Navbar fluid fixedTop style={{borderWidth: '0'}} className="navbar-back">
           <div className="header-left">
-            <div className="logo"><Link to="/"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="RUC" /></Link></div>
+            <div className="logo"><Link to="/"><img src={ logo } alt="RUC" /></Link></div>
           </div>
           <div className="header-right hidden-xs">
                 {
