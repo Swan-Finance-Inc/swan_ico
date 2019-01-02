@@ -658,7 +658,7 @@ gobackDollar=(e)=>{
                       <p style={{color:'#ff0000'}}>Current Token Sale :&nbsp;
                       {this.state.stage === 'privateSaleRound1'?"Private Sale Round 1":this.state.stage === 'privateSaleRound2'?"Private Sale Round 2":this.state.stage === 'preSale'?"Pre Sale":this.state.stage === 'crowdSale'?"Crowdsale":this.state.stage}
                       </p>
-                      <h5>1 RUC TOKEN =${this.state.tokenPrice}</h5>
+                      <h5>1 Pexo TOKEN =${this.state.tokenPrice}</h5>
                     </div>
                   </div>
                   <div className="row">
@@ -682,7 +682,7 @@ gobackDollar=(e)=>{
                         <div className='row howMuch'>
 
 
-                        <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} RUC Tokens</span>
+                        <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} Pexo Tokens</span>
                         {
                           this.state.curr !== 'Dollar' ?
                           <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?
@@ -705,16 +705,16 @@ gobackDollar=(e)=>{
                           </div> */}
 
                           <div className="form-group">
-                            <label htmlFor="tokens" className="form-label">RUC Tokens</label>
+                            <label htmlFor="tokens" className="form-label">Pexo Tokens</label>
                             <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right" disabled required/>
                           </div>
                           <div className="form-group">
-                            <label htmlFor="tokensWithBonus" className="form-label">RUC Tokens With Bonus ({this.state.bonus}%)</label>
+                            <label htmlFor="tokensWithBonus" className="form-label">Pexo Tokens With Bonus ({this.state.bonus}%)</label>
                             <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
                           </div>
 
                           {/* <div className="form-group">
-                            <label htmlFor="tokensWithBonus" className="form-label">TOTAL RUC Tokens</label>
+                            <label htmlFor="tokensWithBonus" className="form-label">TOTAL Pexo Tokens</label>
                             <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
                           </div> */}
                           {
@@ -729,7 +729,7 @@ gobackDollar=(e)=>{
                           <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left" required placeholder='Enter Bitcoin Wallet Address' />
                         </div>
                         <div className="form-group">
-                          <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving RUC Tokens</label>
+                          <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving Pexo Tokens</label>
                           <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" disabled required placeholder='Your Kyc is Not Done'/>
                           </div></div> : <div></div>
 
@@ -738,7 +738,7 @@ gobackDollar=(e)=>{
                           {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
                           {/* {(this.state.curr == 'Bitcoin') ?
                           (<div className="form-group">
-                            <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving RUC Tokens</label>
+                            <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving Pexo Tokens</label>
                             <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" required/>
                             </div>) : <div></div>
                             } */}

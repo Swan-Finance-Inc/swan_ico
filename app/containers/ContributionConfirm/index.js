@@ -341,7 +341,7 @@ export class ContributionConfirm extends React.PureComponent {
                                   </strong>{" "}
                                   for purchase of{" "}
                                   <strong>
-                                    {this.props.tokens} RUC Tokens
+                                    {this.props.tokens} Pexo Tokens
                                   </strong>
                                   <div className="mt-10">
                                     <div className="mt-20">

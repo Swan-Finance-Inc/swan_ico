@@ -1,6 +1,6 @@
 
 .wrapper {
-	background-color: #3b495c;
+	background-color: #16212B;
 }
 header .container {
 	position:relative;
@@ -67,7 +67,7 @@ header .container {
 
 .header {
 	// background: transparent;
-	background: rgb(62, 0, 96);
+	background: #101922;
 	box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 	-webkit-box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 }
@@ -85,7 +85,7 @@ header .container {
 	background-size: cover;
 	// background-image: url("/assets/img/hero-banner.png");
 	// background-color: #000;
-	background-color: rgb(62, 0, 96);
+	background-color:#16212B ;
 	background-attachment: fixed;
 	&.login{
 

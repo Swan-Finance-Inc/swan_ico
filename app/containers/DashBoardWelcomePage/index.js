@@ -8,6 +8,7 @@ import { Modal, Button } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import FaqPage from 'components/FaqPage/Loadable';
+import HowToBuy from 'components/HowToBuy/Loadable';
 import Balance from 'components/Balance/Loadable';
 import Refer from 'components/Refer/Loadable';
 import KycAlert from 'components/KycAlert/Loadable';
@@ -50,7 +51,8 @@ const initialState = {
   profile: '',
   resetPass: '',
   upload_docs: '',
-  myReferal: ''
+  myReferal: '',
+  buy:''
 }
 export class DashBoardWelcomePage extends React.PureComponent {
   constructor() {
@@ -76,7 +78,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       notifyTransactions: [],
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -86,6 +89,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.toggleTicketActive = this.toggleTicketActive.bind(this);
     this.toggleSupportActive = this.toggleSupportActive.bind(this);
     this.toggleFaqActive = this.toggleFaqActive.bind(this);
+    this.toggleHowToBuyActive = this.toggleHowToBuyActive.bind(this);
     this.toggleProfileActive = this.toggleProfileActive.bind(this);
     this.toggleResetPassActive = this.toggleResetPassActive.bind(this);
     this.toggleUpDocsActive = this.toggleUpDocsActive.bind(this);
@@ -154,7 +158,12 @@ export class DashBoardWelcomePage extends React.PureComponent {
       this.setState({
       ...initialState,faq:'active'
       });
-    } else if (this.props.location.pathname == '/dashboard/profile') {
+    }
+    else if (this.props.location.pathname == '/dashboard/whitePaper') {
+     this.setState({
+     ...initialState,buy:'active'
+     });
+   } else if (this.props.location.pathname == '/dashboard/profile') {
       this.setState({
       ...initialState,profile:'active'
       });
@@ -230,7 +239,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
           profileActive: '',
           resetPassActive: '',
           upload_docs:'',
-          myReferal:''
+          myReferal:'',
+          buy:''
         });
       }
     }
@@ -256,6 +266,24 @@ export class DashBoardWelcomePage extends React.PureComponent {
       compact: 'ui',
     });
   }
+  toggleHowToBuyActive() {
+    this.setState({
+      dash: '',
+      kyc: '',
+      sec: '',
+      cont: '',
+      tran: '',
+      support: '',
+      ticket: '',
+      faq: '',
+      profile: '',
+      resetPass: '',
+      notification:'',
+      upload_docs:'',
+      myReferal:'',
+      buy:'active'
+    });
+  }
   toggleDashActive() {
     this.setState({
       dash: 'active',
@@ -270,7 +298,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleSecActive() {
@@ -287,7 +316,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleContActive() {
@@ -304,7 +334,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleTranActive() {
@@ -321,7 +352,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleSupportActive() {
@@ -338,7 +370,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   dashActive() {
@@ -355,7 +388,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
     this.notifyTimeout();
   }
@@ -373,7 +407,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleFaqActive() {
@@ -390,7 +425,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleTicketActive() {
@@ -407,7 +443,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleProfileActive() {
@@ -424,7 +461,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleResetPassActive() {
@@ -441,7 +479,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: 'active',
       notification:'',
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   toggleUpDocsActive() {
@@ -458,7 +497,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'active',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   togglemyReferal() {
@@ -475,7 +515,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       resetPass: '',
       notification:'',
       upload_docs:'',
-      myReferal:'active'
+      myReferal:'active',
+      buy:''
     });
   }
   toggleNotificationsActive=()=>{
@@ -494,7 +535,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'active',
       upload_docs:'',
       kycMsg:'',
-      myReferal:''
+      myReferal:'',
+      buy:''
     });
   }
   notifyTimeout() {
@@ -587,6 +629,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             faq={this.state.faq}
             ticket={this.state.ticket}
             profile= {this.state.profile}
+            buy={this.state.buy}
             resetPass = {this.state.resetPass}
             compact={this.compactNav}
             open={this.openNav}
@@ -606,6 +649,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             toggleTicketActive={this.toggleTicketActive}
             toggleUpDocsActive = {this.toggleUpDocsActive}
             togglemyReferal ={this.togglemyReferal}
+            toggleHowToBuyActive ={this.toggleHowToBuyActive}
           />
           {(this.props.location.pathname == '/dashboard') ?
              (this.props.dashboardwelcomepage.loading?<LoadingSpinner />:<div id="content" className="ui-content ui-content-aside-overlay">
@@ -661,11 +705,19 @@ export class DashBoardWelcomePage extends React.PureComponent {
                     <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} /> :
                   (this.props.location.pathname == '/dashboard/transactionHistory') ?
                     <TransactionHistory message={this.props.global.depositSuccess} /> :
-                    (this.props.location.pathname == '/dashboard/notification') ?
+                  (this.props.location.pathname == '/dashboard/notification') ?
                       <Notification  />:
+                  (this.props.location.pathname == '/dashboard/whitePaper') ?
+                        <HowToBuy  />:
 '' }
-          <div id="footer" className="ui-footer">© 2018 RUC, All Rights Reserved</div>
-          <div className="sticky-telegram-logo"><a href=" https://t.me/rucofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+          <div id="footer" style={{position:'fixed'}}  className="ui-footer">© 2018 Pexo, All Rights Reserved</div>
+      {
+        // <div className=' row teleRight'>
+        // <div className="sticky-telegram-logo"><a href=" https://t.me/rucofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+        // </div>
+      }
+
+
           { this.state.notifyTransactions.length > 0 ?
           <div className="notify-deposit fade-in" id="notify">
           <p><strong>{this.state.notifyTransactions[this.state.notifyTransactions.length-1].address}</strong><br/>

@@ -37,7 +37,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       resetPassAct: '',
       showSignOut: false,
       upload_docs:'',
-      myReferal:''
+      myReferal:'',
+      buyAct:''
     };
   }
 
@@ -54,9 +55,11 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       profileAct: this.props.profile,
       resetPassAct: this.props.resetPass,
       upload_docs:this.props.upload_docs,
-      myReferal:this.props.myReferal
+      myReferal:this.props.myReferal,
+      buyAct:this.props.buy
     });
   }
+
 
   togglemyReferal=(e)=>{
     this.props.compact();
@@ -102,6 +105,12 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.props.toggleTranActive();
   // console.log('toggling', e);
   }
+
+  toggleHowToBuyActive=(e)=>{
+    this.props.compact();
+    this.props.toggleHowToBuyActive();
+
+    }
   toggleSecActive=(e)=>{
     this.props.compact();
     this.props.toggleSecActive();
@@ -140,7 +149,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       profileAct: nextProps.profile,
       resetPassAct: nextProps.resetPass,
       upload_docs:nextProps.upload_docs,
-      myReferal:nextProps.myReferal
+      myReferal:nextProps.myReferal,
+      buyAct:nextProps.buy
     });
   }
 
@@ -240,16 +250,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}><span>Security</span></Link></li>
               </ul>
             </li>
-            {/* <li className={this.state.supportAct}><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span></Link>
-              <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span>Support</span></Link></li>
-              </ul>
-            </li>
-            <li className={this.state.faqAct}><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>FAQ</span></Link>
-              <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><a><span>FAQ</span></a></li>
-              </ul>
-            </li> */}
+
             {
               window.innerWidth < 768 ? <li className={this.state.profileAct}><Link to="/dashboard/profile" role="button" onClick={this.toggleProfileActive}><span className="has-icon"><i className="fa fa-user"></i></span><span>Update Profile</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
@@ -263,12 +264,37 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><Link to="/dashboard/resetpassword" role="button" onClick={this.toggleResetPassActive}><span>Reset Password</span></Link></li>
               </ul>
             </li> : null
-            }
-            <li><a  onClick={this.showSignOut}  style={{cursor:'pointer'}} ><span className="has-icon"><i className="fa fa-sign-out"></i></span><span>Sign Out</span></a>
+          }
+          {
+            // <li><a  onClick={this.showSignOut}  style={{cursor:'pointer'}} ><span className="has-icon"><i className="fa fa-sign-out"></i></span><span>Sign Out</span></a>
+            //   <ul className="nav nav-sub sidebar-niceScroll">
+            //     <li className="nav-sub-header"><a><span>Sign Out</span></a></li>
+            //   </ul>
+            // </li>
+          }
+
+            <hr></hr>
+           <span className='configuration'>INFO</span>
+            <li className={this.state.buy}><Link to="#" role="button"><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>How To Buy?</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><a><span>Sign Out</span></a></li>
+                <li className="nav-sub-header"><a><span>How To Buy?</span></a></li>
               </ul>
             </li>
+            <li className={this.state.buy}><Link to="/dashboard/whitePaper" role="button"><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>White Paper</span></Link>
+              <ul className="nav nav-sub sidebar-niceScroll">
+                <li className="nav-sub-header"><a><span>How To Buy?</span></a></li>
+              </ul>
+            </li>
+            <li className={this.state.faqAct}><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>FAQ</span></Link>
+              <ul className="nav nav-sub sidebar-niceScroll">
+                <li className="nav-sub-header"><a><span>FAQ</span></a></li>
+              </ul>
+            </li>
+            <li className={this.state.supportAct}><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span><span className='infoSpan'>info@pexo.com</span></Link>
+                 <ul className="nav nav-sub sidebar-niceScroll">
+                   <li className="nav-sub-header"><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span>Support</span></Link></li>
+                 </ul>
+               </li>
           </ul>
         </aside>
         </div>

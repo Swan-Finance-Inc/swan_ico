@@ -27,7 +27,7 @@ export function* getUser() {
     console.log("listening to api hit")
 
     const userData = yield select(makeSelectUser());
-    // console.log(userData)
+    console.log(userData," ujuuuuuuuu")
     const apiData = yield call(api.user.login, userData);
     if (apiData.success) {
       console.log("i m gere");
