@@ -1,15 +1,15 @@
 {
   "apps": [{
-    "name": "ico_user_RUC",
+    "name": "ico_user_pexo",
     "script": "server",
     "instances": "max",
     "exec_mode": "cluster",
     "env": {
-      "PORT": 7022,
+      "PORT": 6036,
       "NODE_ENV": "production"
     },
     "env_production": {
-      "PORT": 7022,
+      "PORT": 6036,
       "NODE_ENV": "production"
     }
   }]
