@@ -7,7 +7,7 @@
 import React from 'react';
 import { Button, Well, Collapse } from 'react-bootstrap';
 // import styled from 'styled-components';
-
+import { Helmet } from 'react-helmet';
 
 class FaqPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
@@ -25,6 +25,10 @@ class FaqPage extends React.PureComponent { // eslint-disable-line react/prefer-
   render() {
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
+      <Helmet>
+        <title>FAQ(frequently Asked Question)</title>
+        <meta name="description" content="Description of My WhitePaper" />
+      </Helmet>
       <div className="ui-content-body">
         <div className="ui-container container-fluid">
             <div className="row">
@@ -89,7 +93,7 @@ class FaqPage extends React.PureComponent { // eslint-disable-line react/prefer-
               <div className="row">
                 <div className="col-sm-12">
                 <Button onClick={() => this.setState({ open5: !this.state.open5 })} className="form-control" style={{marginBottom: '20px'}}>
-                  Which is better Bitcoin or Ethereum?  
+                  Which is better Bitcoin or Ethereum?
                 </Button>
                 <Collapse in={this.state.open5}>
                   <div>

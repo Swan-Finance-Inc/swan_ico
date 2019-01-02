@@ -3,6 +3,7 @@
 import React from 'react';
 import { Button, Well, Collapse } from 'react-bootstrap';
 // import styled from 'styled-components';
+import { Helmet } from 'react-helmet';
 
 
 class HowToBuy extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -17,6 +18,10 @@ class HowToBuy extends React.PureComponent { // eslint-disable-line react/prefer
   render() {
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
+      <Helmet>
+        <title>WhitePaper</title>
+        <meta name="description" content="Description of My WhitePaper" />
+      </Helmet>
       <div className="ui-content-body">
         <div className="ui-container container-fluid">
         <div className="panel panel-default">

@@ -17,6 +17,10 @@ import makeSelectSignupConfirm, { makeSelectFailureMessage, makeSelectSuccessMes
 import reducer from './reducer';
 import saga from './saga';
 import { resendAction } from './actions';
+import logo from '../../images/logo2.png';
+
+
+
 export class SignupConfirm extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -50,7 +54,7 @@ export class SignupConfirm extends React.PureComponent { // eslint-disable-line 
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
 
-                <div className="logo"><Link to="/"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="ruc" /></Link></div>
+                <div className="logo"><Link to="/"><img src={ logo } alt="pexo" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>
@@ -70,7 +74,7 @@ export class SignupConfirm extends React.PureComponent { // eslint-disable-line 
                 <div className="signin-card-body">
                   <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
                   <p>If you DON’T see our emails, please check your SPAM folder.</p>
-                  <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@ruc.io</p>
+                  <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@pexo.io</p>
                 </div>
               </div>
             </div>

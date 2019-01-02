@@ -63,6 +63,10 @@ export class Support extends React.PureComponent { // eslint-disable-line react/
     const {submitSuccess} = this.state;
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
+      <Helmet>
+        <title>Support</title>
+        <meta name="description" content="Description of My Support" />
+      </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
             <div className="" style={{ marginBottom: '500px' }}>
