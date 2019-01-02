@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
-
+import logo from '../../images/logo2.png';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectForceReset from './selectors';
@@ -26,8 +26,8 @@ export class ForceReset extends React.Component { // eslint-disable-line react/p
             <div className="row">
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
-               
-                <div className="logo"><Link to="/"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="RUC" /></Link></div>
+
+                <div className="logo"><Link to="/"><img src={ logo } alt="Pexo" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10">
                 <div className="header-right">
@@ -47,7 +47,7 @@ export class ForceReset extends React.Component { // eslint-disable-line react/p
                   <h1>Your password has been expired.</h1>
                   <h1 className="subtitle">Please check your email to reset your password.</h1>
                 </div>
-                
+
               </div>
             </div>
           </div>

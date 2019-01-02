@@ -19,6 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { unsubscribeUserAction } from "./actions";
 import { makeSelectDetails } from '../ProfilePage/selectors';
+import logo from '../../images/logo2.png';
 
 export class Unsubscribe extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 
@@ -51,7 +52,7 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
 
-                <div className="logo"><Link to="/"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="ruc" /></Link></div>
+                <div className="logo"><Link to="/"><img src={logo} alt="Pexo" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>

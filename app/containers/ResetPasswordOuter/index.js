@@ -20,6 +20,7 @@ import makeSelectResetPasswordOuter, { makeSelectResetToken, makeSelectResetErro
 import reducer from './reducer';
 import saga from './saga';
 import { resetPassword } from './actions';
+import logo from '../../images/logo2.png';
 
 export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -34,7 +35,7 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
   }
 
   componentDidMount() {
-   
+
     let params = queryString.parse(this.props.location.search)
     console.log(params);
     if (this.props.match.params.token != null) {
@@ -124,7 +125,7 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
             <div className="row">
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
                 <ToastContainer position="top-center" type="error" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="logo"><img src="https://s3.amazonaws.com/websiteimagesrama/logo.png" alt="RUC" /></div>
+                <div className="logo"><img src={logo} alt="Pexo" /></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>

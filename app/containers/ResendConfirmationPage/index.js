@@ -23,7 +23,7 @@ import { Redirect } from 'react-router'
 import { resendMail } from './actions';
 import { makeSelectResendError, makeSelectResendSuccess } from './selectors';
 import ReCAPTCHA from 'react-google-recaptcha';
-import logo from '../../images/logo.svg';
+import logo from '../../images/logo2.png';
 
 export class ResendConfirmationPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
@@ -119,7 +119,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
 
               <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="logo"><Link to="/"><img src={ logo } alt="RUC" /></Link></div>
+                <div className="logo"><Link to="/"><img src={ logo } alt="pexo" /></Link></div>
               </div>
               <div className="col-xs-5 col-sm-6 col-md-8">
                 <div className="header-right">
