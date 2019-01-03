@@ -6,14 +6,28 @@
 	display:block;
 	white-space:nowrap;
 }
+.socailLinks{
+	// float: right;
+	margin-left: 30px;
+	margin-right: 10px;
+}
 .gas1{
  color:#DAA520;
  font-weight: 500;
  position: relative;
  left: -10px;
 }
+.updateSubmit{
+	margin-top: 15px!important;
+}
 .teleRight{
 	float: right!important;
+}
+.referalPageLink{
+	font-size: 12px;
+}
+.referalPageLink:hover{
+color:blue
 }
 .infoSpan {
 	display:block;
@@ -224,7 +238,7 @@ transition: all .301s;
 	display:block;
 	float:none;
 	text-align:right;
-	background:linear-gradient(to bottom, #73DC7D , #73DC7D) !important;
+	background:linear-gradient(to bottom, #101922 , #101922) !important;
 }
 .sidebar-trigger.nav>li>a:hover, .sidebar-trigger.nav>li>a:focus {
 	background-color: #283e4a;
@@ -1160,9 +1174,9 @@ ol.rule-list li {
 
 .sticky-telegram-logo {
 	position: fixed;
-    left: 20px;
-    bottom: 20px;
-	z-index: 20;
+    right: 20px;
+    bottom: 25px;
+		z-index: 20;
 }
 
 .sticky-telegram-logo a {
@@ -1759,7 +1773,7 @@ font-size: 25px;
 	background: none;
 }
 
-// .btn-primary:hover {
-// 	color: #fff;
-// 	background:#000!important;
-// }
+.btn-primary:hover {
+	color: #fff;
+	background:#519580!important;
+}

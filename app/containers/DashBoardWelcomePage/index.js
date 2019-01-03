@@ -28,12 +28,13 @@ import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
-import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove } from './actions';
-import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal }from './selectors';
+import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq } from './actions';
+import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData }from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
 import { resetSuccess } from '../KycPage/actions';
 import $ from 'jquery'
+import "../../../node_modules/react-toggle-switch/dist/css/switch.min.css"
 
 import reducer from './reducer';
 import saga from './saga';
@@ -79,7 +80,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notifyTransactions: [],
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      faqData:[]
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -105,6 +107,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
   componentWillMount() {
     this.props.loadProfileAction();
+    this.props.loadFaq()
     console.log(this.props);
   }
 
@@ -536,7 +539,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       upload_docs:'',
       kycMsg:'',
       myReferal:'',
-      buy:''
+      buy:'',
     });
   }
   notifyTimeout() {
@@ -560,6 +563,12 @@ export class DashBoardWelcomePage extends React.PureComponent {
       this.props.loadProfileAction();
       this.props.resetKycDone();
       this.toggleDashActive();
+    }
+    if(nextProps.faqData){
+      this.setState({
+          faqData:nextProps.faqData
+      })
+      console.log(" inside will Recieve props faqData",nextProps)
     }
   }
 
@@ -672,7 +681,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
               */}
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
-                  <Balance userInfo={this.props.dashboardwelcomepage.userInfo} />
+                  <Balance      toggleContActive={this.toggleContActive}  compact={this.compactNav}   togglemyReferal ={this.togglemyReferal}   toggleTranActive={this.toggleTranActive}  userInfo={this.props.dashboardwelcomepage.userInfo} />
                   <Refer  code={this.props.dashboardwelcomepage.userInfo} icoFlag={true} />
 
                 </div>
@@ -694,7 +703,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/support') ?
                   <SupportPage /> :
                   (this.props.location.pathname == '/dashboard/faq') ?
-                  <FaqPage /> :
+                  <FaqPage faqData={this.state.faqData} /> :
                   (this.props.location.pathname == '/dashboard/uploadDocs') ?
                   <UploadDocuments /> :
                   (this.props.location.pathname == '/dashboard/myReferal') ?
@@ -710,12 +719,21 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/whitePaper') ?
                         <HowToBuy  />:
 '' }
-          <div id="footer" style={{position:'fixed'}}  className="ui-footer">© 2018 Pexo, All Rights Reserved</div>
-      {
-        // <div className=' row teleRight'>
-        // <div className="sticky-telegram-logo"><a href=" https://t.me/rucofficial" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
-        // </div>
-      }
+        <div className='row'>
+        <div id="footer" style={{position:'fixed'}}  className="ui-footer">
+        © 2018 Pexo, All Rights Reserved
+        <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
+        <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
+        <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
+
+        </div>
+        </div>
+
+        <div className='row'>
+        <div className='col-md-1 col-md-offset-6'>
+        <div className="sticky-telegram-logo"><a href=" https://t.me/pexoSupport" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+        </div>
+        </div>
 
 
           { this.state.notifyTransactions.length > 0 ?
@@ -754,7 +772,8 @@ const mapStateToProps = createStructuredSelector({
   dashboardwelcomepage: makeSelectDashBoardWelcomePage(),
   global: makeGlobalParent(),
   kycDone: makeSelectKycDone(),
-  globalError:makeSelectErrorGlobal()
+  globalError:makeSelectErrorGlobal(),
+  faqData:makeSelectFaqData()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -765,6 +784,8 @@ function mapDispatchToProps(dispatch) {
     resetKycDone: () => dispatch(resetKycDone()),
     deleteUserAction: () => dispatch(deleteUserAction()),
     codeErrorRemove:()=>dispatch(codeErrorRemove()),
+    loadFaq:()=>dispatch(loadFaq()),
+
   };
 }
 

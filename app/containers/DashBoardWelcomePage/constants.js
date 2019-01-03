@@ -14,3 +14,5 @@ export const DELETE_USER = 'app/DashBoardWelcomePage/DELETE_USER';
 export const DELETE_USER_SUCCESS = 'app/DashBoardWelcomePage/DELETE_USER_SUCCESS';
 export const CODE_ERROR = 'app/DashBoardWelcomePage/CODE_ERROR';
 export const CODE_ERROR_REMOVE = 'app/DashBoardWelcomePage/CODE_ERROR_REMOVE';
+export const LOAD_FAQ = 'app/DashBoardWelcomePage/LOAD_FAQ';
+export const LOAD_FAQ_SUCCESS = 'app/DashBoardWelcomePage/LOAD_FAQ_SUCCESS';

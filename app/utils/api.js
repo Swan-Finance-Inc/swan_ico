@@ -6,6 +6,8 @@ import axios from 'axios';
 
 export default {
   user: {
+    getFaq:(headers)=>
+    axios.get(`${BaseUrl}user/faq`,headers).then((res) => res.data).catch((err) => err.response.data),
     getReferData:(headers)=>
     axios.get(`${BaseUrl}user/getUserRefers`,headers).then((res) => res.data).catch((err) => err.response.data),
     deleteUser:(headers)=>

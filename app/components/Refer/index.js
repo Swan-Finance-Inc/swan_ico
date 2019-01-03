@@ -75,20 +75,20 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <div className="referral">
 
 
-                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}`} quote={`Pexo.io introduces a unique tokensale platform for the Community.You can earn upto 2000 Pexo Tokens , Sign-up`}>
+                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=facebook`} quote={`Pexo.io introduces a unique tokensale platform for the Community.You can earn upto 2000 Pexo Tokens , Sign-up`}>
                       <FacebookIcon size={42} round />
 
                     </FacebookShareButton>
 
-                    <TwitterShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}`} title={SHARE_POST}>
+                    <TwitterShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=twitter`} title={SHARE_POST}>
                       <TwitterIcon size={42} round />
 
                     </TwitterShareButton>
-                    <TelegramShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}`} title={SHARE_POST}>
+                    <TelegramShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=telegram`} title={SHARE_POST}>
                       <TelegramIcon size={42} round />
 
                     </TelegramShareButton>
-                    <WhatsappShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}`} title={SHARE_POST}>
+                    <WhatsappShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=whatsapp`} title={SHARE_POST}>
                       <WhatsappIcon size={42} round />
 
                     </WhatsappShareButton>
@@ -99,7 +99,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                         }
                       }
                       url={
-                        `https://tokensale.Pexo.io/signup/refer/${this.state.code}`
+                        `https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=linkedin`
                       }
                       title={
                         `Pexo.io introduces a unique tokensale platform for the Community. You can earn upto 2000 Pexo Tokens , Sign-up
@@ -112,7 +112,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                     >
                       <LinkedinIcon size={42} round />
                     </LinkedinShareButton>
-                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}`} title={`Pexo.io introduces a unique tokensale platform for the Community. You can earn upto 2000 Pexo Tokens , Sign-up
+                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=reddit`} title={`Pexo.io introduces a unique tokensale platform for the Community. You can earn upto 2000 Pexo Tokens , Sign-up
                           now by clicking on https://tokensale.Pexo.io/signup/refer/${this.state.code}`}>
                       <RedditIcon size={42} round />
                     </RedditShareButton>
@@ -185,11 +185,11 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
 
                    <tr>
                      <td>Token Price:</td>
-                     <td>1 Pexo = $0.10</td>
+                     <td>1 Pexo = $0.25</td>
                    </tr>
                    <tr>
                      <td>We Accept: </td>
-                     <td>BTC, ETH and USD</td>
+                     <td>BTC and ETH</td>
                    </tr>
               </tbody>
             </table>

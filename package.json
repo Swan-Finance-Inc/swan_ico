@@ -256,6 +256,8 @@
     "react-share": "^2.2.0",
     "react-table": "^6.8.6",
     "react-toastify": "^3.3.2",
+    "react-toggle": "^4.0.2",
+    "react-toggle-switch": "^3.0.4",
     "react-webcam": "^0.2.0",
     "reactstrap": "^4.8.0",
     "redux": "3.6.0",

@@ -38,7 +38,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       showSignOut: false,
       upload_docs:'',
       myReferal:'',
-      buyAct:''
+      buyAct:'',
+      PrivacyPolicy:''
     };
   }
 
@@ -51,7 +52,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       ticketAct: this.props.ticket,
       secAct: this.props.sec,
       supportAct: this.props.support,
-      faqAct: this.props.faqAct,
+      faqAct: this.props.faq,
       profileAct: this.props.profile,
       resetPassAct: this.props.resetPass,
       upload_docs:this.props.upload_docs,
@@ -135,6 +136,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.props.compact();
     this.props.toggleResetPassActive();
   }
+
 
   componentWillReceiveProps(nextProps) {
     this.setState({
@@ -282,7 +284,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             </li>
             <li className={this.state.buy}><Link to="/dashboard/whitePaper" role="button"><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>White Paper</span></Link>
               <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><a><span>How To Buy?</span></a></li>
+                <li className="nav-sub-header"><a><span>White Paper</span></a></li>
               </ul>
             </li>
             <li className={this.state.faqAct}><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>FAQ</span></Link>
@@ -290,7 +292,12 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><a><span>FAQ</span></a></li>
               </ul>
             </li>
-            <li className={this.state.supportAct}><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span><span className='infoSpan'>info@pexo.com</span></Link>
+            <li className={this.state.PrivacyPolicy}><Link to="#" role="button" onClick={()=>console.log("Privacy Policy Clicked")}><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>Privacy Policy</span></Link>
+              <ul className="nav nav-sub sidebar-niceScroll">
+                <li className="nav-sub-header"><a><span>Privacy Policy</span></a></li>
+              </ul>
+            </li>
+            <li className={this.state.supportAct}><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span><span className='infoSpan'>info@pexo.io</span></Link>
                  <ul className="nav nav-sub sidebar-niceScroll">
                    <li className="nav-sub-header"><Link to="/dashboard/support" role="button" onClick={this.toggleSupportActive}><span>Support</span></Link></li>
                  </ul>

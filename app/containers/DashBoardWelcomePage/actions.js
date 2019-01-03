@@ -14,9 +14,22 @@ import {
   DELETE_USER,
   DELETE_USER_SUCCESS,
   CODE_ERROR,
-  CODE_ERROR_REMOVE
+  CODE_ERROR_REMOVE,
+  LOAD_FAQ,
+  LOAD_FAQ_SUCCESS
 } from './constants';
 
+export function loadFaqSuccess(data) {
+  return {
+    type: LOAD_FAQ_SUCCESS,
+    data
+  };
+}
+export function loadFaq() {
+  return {
+    type: LOAD_FAQ,
+  };
+}
 export function deleteUserSuccessAction() {
   return {
     type: DELETE_USER_SUCCESS,

@@ -9,8 +9,27 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 class Balance extends React.PureComponent {
+  toggleTranActive=(e)=>{
+    this.props.compact();
+    this.props.toggleTranActive();
+  // console.log('toggling', e);
+  }
+  togglemyReferal=(e)=>{
+    this.props.compact();
+    this.props.togglemyReferal();
+  }
+  toggleContriActive=(e)=>{
+    // if(this.props.kycStatus == 'ACCEPTED'){
+      this.props.compact();
+      this.props.toggleContActive();
+    // }else{
+      // toast.error('Please complete your kyc to contribute.')
+    // }
+  }
+
   render() {
     console.log('tokens: ', this.props.userInfo.tokens);
+    console.log(this.props,"props in refer")
     return (
       <div>
         <div className="panel panel-default">
@@ -26,26 +45,33 @@ class Balance extends React.PureComponent {
             <div className="bal-card">
               <h3>Total Balance</h3>
               <div className="balance">{(this.props.userInfo.tokens.total)}</div>
+              <div className='link referalPageLink'><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}><u>View Transactions</u></Link></div>
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3>Referral Tokens Earned</h3>
               <div className="balance">{this.props.userInfo.tokens.referral}</div>
+              <div className='referalPageLink link'><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}><u>View Referral Transactions</u> </Link></div>
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3># of Confirmed Referrals</h3>
               <div className="balance">{this.props.userInfo.referral.success}</div>
+                <div>&nbsp; &nbsp; &nbsp;</div>
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3># of Pending Referrals</h3>
               <div className="balance">{this.props.userInfo.referral.pending}</div>
+              <div>&nbsp; &nbsp; &nbsp;</div>
             </div>
           </div>
+        </div>
+        <div className='row'>
+        <div className='text-center'><Link to='/dashboard/contribution' role="button" onClick={this.toggleContriActive}><button disabled={this.props.userInfo.kycStatus!=="ACCEPTED"}  className="btn btn-primary"  style={{borderRadius: '25px', padding: '10px 60px', marginTop:'10px'}}>Invest Now</button></Link></div>
         </div>
         </div>
         </div>

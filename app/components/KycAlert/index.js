@@ -48,6 +48,15 @@ class KycAlert extends React.PureComponent {
                     <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
                  </div>
             )
+        }else if(this.props.kycStatus === 'ACCEPTED'){
+            return(
+                <div className="alert alert-success">
+                    <span>Verified Account</span>
+                    {
+                      // <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
+                    }
+                 </div>
+            )
         }
         else{
             return(<div></div>);

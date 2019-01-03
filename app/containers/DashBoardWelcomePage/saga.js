@@ -8,10 +8,12 @@ import {
   LOAD_PROFILE,
   SUBMIT_SOCIAL,
   DELETE_USER,
+  LOAD_FAQ
 } from 'containers/DashBoardWelcomePage/constants';
 import {
   profileLoaded,
   loadProfileAction,
+  loadFaqSuccess
 } from 'containers/DashBoardWelcomePage/actions';
 import { push } from 'react-router-redux';
 import { emailVerified, twoFactorEnabled  } from 'containers/App/actions';
@@ -91,10 +93,29 @@ export function* deleteUser() {
     console.log("Error in catch",err);
   }
 }
+export function* loadFaq() {
+  try {
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+
+    const apiData = yield call(api.user.getFaq, headers);
+    if(apiData.success) {
+      yield put(loadFaqSuccess(apiData));
+    }
+  }
+  catch (err) {
+    console.log('error in load profile', err);
+      yield put(codeErrorAction());
+  }
+}
 export default function* defaultSaga() {
   yield [
     takeLatest(LOAD_PROFILE, loadProfile),
     takeLatest(SUBMIT_SOCIAL, submitSocial),
-    takeLatest(DELETE_USER, deleteUser)
+    takeLatest(DELETE_USER, deleteUser),
+    takeLatest(LOAD_FAQ, loadFaq)
+
   ];
 }

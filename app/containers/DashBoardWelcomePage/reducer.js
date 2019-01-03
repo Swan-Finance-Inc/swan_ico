@@ -15,7 +15,8 @@ import {
   DELETE_USER,
   DELETE_USER_SUCCESS,
   CODE_ERROR_REMOVE,
-  CODE_ERROR
+  CODE_ERROR,
+  LOAD_FAQ_SUCCESS
 } from './constants';
 
 // The initial state of the App
@@ -37,14 +38,18 @@ const initialState = fromJS({
     }
   },
   kycDone: false,
-  ethAddress: ''
+  ethAddress: '',
+  faqData:false
 });
 
 function dashBoardWelcomePageReducer(state = initialState, action) {
   switch (action.type) {
-    case DELETE_USER_SUCCESS:
+  case DELETE_USER_SUCCESS:
       return state
         .set('loading', false);
+  case LOAD_FAQ_SUCCESS:
+      return state
+        .set('faqData', action.data.result);
     case DELETE_USER:
       return state
         .set('loading', true);
