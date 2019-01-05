@@ -81,7 +81,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       upload_docs:'',
       myReferal:'',
       buy:'',
-      faqData:[]
+      faqData:[],
+      isBlocked:false
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -556,7 +557,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
    if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
      this.setState({
-       kycMsg: nextProps.dashboardwelcomepage.userInfo.kycDetails.documentsRequired
+       kycMsg: nextProps.dashboardwelcomepage.userInfo.kycDetails.documentsRequired,
+       isBlocked:nextProps.dashboardwelcomepage.userInfo.isBlocked
      })
    }
     if(nextProps.kycDone){
@@ -584,6 +586,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   render() {
+
     console.log(this.props," props in");
     console.log(this.state,"state in ");
     console.log(this.state.notifyTransactions);
@@ -609,6 +612,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
 
     const { kycStatus } = this.props.dashboardwelcomepage.userInfo;
+    if(this.state.isBlocked){
+      localStorage.removeItem('token')
+    }
     if (!localStorage.token) {
       return <Redirect to="/" />;
     }

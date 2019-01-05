@@ -55,7 +55,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           className: 'text-center'
         },
         {
-          Header: 'RUC Tokens',
+          Header: 'Pexo Tokens',
           accessor: 'tokens', // Custom cell components!
           className: 'text-right'
         },

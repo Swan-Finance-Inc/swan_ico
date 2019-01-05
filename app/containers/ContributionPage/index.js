@@ -746,7 +746,8 @@ gobackDollar=(e)=>{
                         {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
                          {/* { (this.state.curr == 'Ethereum') ? <span><strong style={{color:"#ff0000"}}>Note:</strong> Please provide ERC-20 compatible wallet address</span> : null }  */}
                           <div className="btn-row">
-                            <button className="form-button btn-primary" type="submit" >Continue</button>
+                          {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && <div><sup>Submit Kyc To Continue</sup></div>}
+                            <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'} >Continue</button>
                           </div>
                         </div>
                       </form>
