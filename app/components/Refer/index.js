@@ -193,72 +193,155 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                    </tr>
               </tbody>
             </table>
-          {
-            // <h2 style={{fontSize:'20px'}} className="panel-subHead">Pre-Sale</h2>
-            // <table className="table table-bordered sale">
-            //   <tbody>
-            // {
-            //   // <tr>
-            //   //   <td>Start date: </td>
-            //   //   <td>19th November, 2018 GMT</td>
-            //   // </tr>
-            //   // <tr>
-            //   //   <td>End date: </td>
-            //   //   <td>16th December, 2018 GMT</td>
-            //   // </tr>
-            // }
-            // {
-            //   // <tr>
-            //   //   <td>Bonus: </td>
-            //   //   <td>20%</td>
-            //   // </tr>
-            //
-            // }
-            //
-            //   {
-            //     // <tr>
-            //     //   <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-            //     //   <td>15000 Pexo</td>
-            //     // </tr>
-            //   }
-            //     </tbody>
-            //   </table>
-            //
-            //   <h2 style={{fontSize:'20px'}}>Crowd Sale</h2>
-            //   <table className="table table-bordered sale">
-            //     <tbody>
-            //        {
-            //          // <tr>
-            //          //   <td>Start date: </td>
-            //          //   <td>2nd January, 2019 GMT</td>
-            //          // </tr>
-            //          // <tr>
-            //          //   <td>End date: </td>
-            //          //   <td>31st January, 2019 GMT</td>
-            //          // </tr>
-            //
-            //        }
-            //        <tr>
-            //          <td>Bonus: </td>
-            //          <td>05%</td>
-            //        </tr>
-            //     {
-            //       // <tr>
-            //       //   <td>Bonus(2nd week): </td>
-            //       //   <td>10%</td>
-            //       // </tr>
-            //       // <tr>
-            //       //   <td>Bonus(3rd &amp; 4th week): </td>
-            //       //   <td>0%</td>
-            //       // </tr>
-            //       // <tr>
-            //       //   <td>Minimum Purchase: </td>
-            //       //   <td>500 Pexo</td>
-            //       // </tr>
-            //     }
-            //     </tbody>
-            //   </table>
-          }
+
+            <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 1</h2>
+            <table className="table table-bordered sale">
+              <tbody>
+
+              <tr>
+                <td>Start date: </td>
+                <td>9th January, 2019 GMT</td>
+              </tr>
+              <tr>
+                <td>End date: </td>
+                <td>31st January, 2019 GMT</td>
+              </tr>
+              <tr>
+                <td>Discount: </td>
+                <td>75%</td>
+              </tr>
+                <tr>
+                  <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
+                  <td>400 Pexo</td>
+                </tr>
+                </tbody>
+            </table>
+              <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 3</h2>
+              <table className="table table-bordered sale">
+                <tbody>
+                <tr>
+                  <td>Start date: </td>
+                  <td>1st February, 2019 GMT</td>
+                </tr>
+                <tr>
+                  <td>End date: </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Discount: </td>
+                  <td>40%</td>
+                </tr>
+                  <tr>
+                    <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
+                    <td>400 Pexo</td>
+                  </tr>
+                  </tbody>
+                </table>
+                <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 3</h2>
+                <table className="table table-bordered sale">
+                  <tbody>
+
+                  <tr>
+                    <td>Start date: </td>
+                    <td>9th January, 2019 GMT</td>
+                  </tr>
+                  <tr>
+                    <td>End date: </td>
+                    <td></td>
+                  </tr>
+                  <tr>
+                    <td>Discount: </td>
+                    <td>20%</td>
+                  </tr>
+                    <tr>
+                      <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
+                      <td>400 Pexo</td>
+                    </tr>
+                  </tbody>
+              </table>
+
+              <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 4</h2>
+              <table className="table table-bordered sale">
+                <tbody>
+
+                <tr>
+                  <td>Start date: </td>
+                  <td>9th January, 2019 GMT</td>
+                </tr>
+                <tr>
+                  <td>End date: </td>
+                  <td></td>
+                </tr>
+                <tr>
+                  <td>Discount: </td>
+                  <td>10%</td>
+                </tr>
+                  <tr>
+                    <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
+                    <td>400 Pexo</td>
+                  </tr>
+                  </tbody>
+            </table>
+                  <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 5</h2>
+                  <table className="table table-bordered sale">
+                    <tbody>
+
+                    <tr>
+                      <td>Start date: </td>
+                      <td>9th January, 2019 GMT</td>
+                    </tr>
+                    <tr>
+                      <td>End date: </td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>Discount: </td>
+                      <td>No Discount</td>
+                    </tr>
+                      <tr>
+                        <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
+                        <td>400 Pexo</td>
+                      </tr>
+                      </tbody>
+                </table>
+
+            {
+              // <h2 style={{fontSize:'20px'}}>Crowd Sale</h2>
+              // <table className="table table-bordered sale">
+              //   <tbody>
+              //      {
+              //        // <tr>
+              //        //   <td>Start date: </td>
+              //        //   <td>2nd January, 2019 GMT</td>
+              //        // </tr>
+              //        // <tr>
+              //        //   <td>End date: </td>
+              //        //   <td>31st January, 2019 GMT</td>
+              //        // </tr>
+              //
+              //      }
+              //      <tr>
+              //        <td>Bonus: </td>
+              //        <td>05%</td>
+              //      </tr>
+              //   {
+              //     // <tr>
+              //     //   <td>Bonus(2nd week): </td>
+              //     //   <td>10%</td>
+              //     // </tr>
+              //     // <tr>
+              //     //   <td>Bonus(3rd &amp; 4th week): </td>
+              //     //   <td>0%</td>
+              //     // </tr>
+              //     // <tr>
+              //     //   <td>Minimum Purchase: </td>
+              //     //   <td>500 Pexo</td>
+              //     // </tr>
+              //   }
+              //   </tbody>
+              // </table>
+
+            }
               {
                 // <div className="text-center">Token Price: <strong>1 Pexo = $0.20</strong></div>
                 // <div className="text-center">We Accept: <strong>BTC, ETH</strong></div>

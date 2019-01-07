@@ -23,6 +23,11 @@ import reducer from './reducer';
 import saga from './saga';
 import makeSelectTransactionHistory, { makeSelectTransactions, makeSelectNextPage ,makeSelectTransLoading } from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment';
+
+
 export class TransactionHistory extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
@@ -85,10 +90,20 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           accessor: 'created_at',
           filter: <h3>hello</h3>,
         },
+        {
+          Header: 'Type',
+          accessor: 'type',
+          filter: <h3>hello</h3>,
+        }
 
       ],
-
-      page: 1,
+      transactionParam:{
+        page: 1,
+        type:'',
+        createdUl:'',
+        createdLl:''
+      },
+      filterFlag:true,
       disableNext: false,
       disablePrevious: true,
     };
@@ -100,7 +115,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
 
 
   componentDidMount() {
-    this.props.transactions(this.state.page);
+    this.props.transactions(this.state.transactionParam);
 
   // console.log(this.props);
     if (this.props.message) {
@@ -137,9 +152,11 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
   }
   pageChange() {
     this.setState({
-      page: this.state.page + 1,
-    });
-    if (this.state.page + 1 > 1) {
+      ...this.state,transactionParam:{
+        ...this.state.transactionParam,page:this.state.page + 1
+      }
+    })
+    if (this.state.transactionParam.page + 1 > 1) {
       this.setState({
         disablePrevious: false,
       });
@@ -148,7 +165,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
         disablePrevious: true,
       });
     }
-    this.props.transactions(this.state.page + 1);
+    this.props.transactions(this.state.transactionParam.page + 1);
   }
   pageSizeChange(e) {
     // console.log('page size change');
@@ -157,20 +174,139 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     this.props.transactions(page);
   }
   previousChange() {
-    if (this.state.page > 1) {
+    if (this.state.transactionParam.page > 1) {
       this.setState({
-        page: this.state.page - 1,
-      });
-      if (this.state.page - 1 == 1) {
+        ...this.state,transactionParam:{
+          ...this.state.transactionParam,page:this.state.page - 1
+      }});
+      if (this.state.transactionParam.page - 1 == 1) {
         this.setState({
           disablePrevious: true,
         });
       }
-      this.props.transactions(this.state.page - 1);
+      this.props.transactions(this.state.transactionParam.page - 1);
     }
   }
+
+  clearFilter=(e)=>{
+    e.preventDefault();
+    switch(e.target.id) {
+      case 'clearType' :
+      document.getElementById('typeFilter').selectedIndex = 0;
+      this.setState({
+        ...this.state,transactionParam:{
+          ...this.state.transactionParam,
+          type:'',
+        },
+        disablePrevious:true
+      }, () => {
+        console.log(this.state," in clearFilter clearType")
+        this.props.transactions(this.state.transactionParam);
+      })
+      break;
+      case 'clearCreated' :
+    {
+      // document.getElementById('createdMinFilter').value = null;
+      // document.getElementById('createdMaxFilter').value = null;
+    }
+      this.setState({
+        transactionParam : {
+          page : 1,
+          createdLl : '',
+          createdUl : ''
+        },
+        disablePrevious: true
+      }, () => {
+        console.log(this.state," in clearFilter clearCreated")
+        this.props.transactions(this.state.transactionParam);
+      });
+      break;
+    }
+  }
+  handleMinCreatedFilter=(date)=>{
+      this.setState({
+        ...this.state,transactionParam:{
+          ...this.state.transactionParam,
+          createdLl:moment(date).format("YYYY-MM-DD"),
+        },
+        disablePrevious: true
+    }, () => {
+      console.log(this.state.transactionParam," in handlle minefilter token--")
+        if(this.state.transactionParam.createdUl!==''){
+          console.log(this.state.transactionParam.createdUl,"-----------------------------")
+          if(moment(this.state.transactionParam.createdUl).isSameOrAfter(this.state.transactionParam.createdLl,"day")){
+            this.props.transactions(this.state.transactionParam);
+          }
+         else{
+           toast.error("Min Date cannot be Greater than Max Date")
+         }
+       } else {
+         this.props.transactions(this.state.transactionParam);
+       }
+
+    });
+  }
+  handleMaxCreatedFilter=(date)=>{
+    this.setState({
+      ...this.state,transactionParam:{
+        ...this.state.transactionParam,
+        createdUl:moment(date).format("YYYY-MM-DD"),
+      },
+      disablePrevious: true
+    }, () => {
+      console.log(this.state.transactionParam," in handle maxCreatedFilter")
+      if(this.state.transactionParam.createdLl!==''){
+        console.log(this.state.transactionParam.createdLl," -------------------------------------------")
+        if(moment(this.state.transactionParam.createdUl).isSameOrAfter(this.state.transactionParam.createdLl,"day")){
+            this.props.transactions(this.state.transactionParam)
+        }
+        else{
+          toast.error("Min Date cannot be Greater than Max Date")
+        }
+      }else {
+          this.props.transactions(this.state.transactionParam)
+      }
+
+
+    });
+  }
+  handleTypeFilter=(e)=>{
+    // console.log(e.target.value);
+    this.setState({
+      ...this.state,transactionParam:{
+        ...this.state.transactionParam,type:e.target.value,page:1
+      },
+        disablePrevious: true,
+    }, () => {
+      console.log(this.state," in type filter handler")
+      this.props.transactions(this.state.transactionParam)
+    });
+  }
+
+
+
   notify() {
     toast.success('Transaction deposited successfully');
+  }
+  handleFilters=(e)=>{
+    console.log(" inside handleFilters ")
+    if(this.state.filterFlag){
+        this.setState({
+          ...this.state,
+          transactionParam : {
+            page: 1,
+            type:'',
+            createdUl:'',
+            createdLl:''
+          },
+          filterFlag:!this.state.filterFlag
+        })
+    }
+    else {
+      this.setState({
+        filterFlag:!this.state.filterFlag
+      })
+    }
   }
   render() {
     console.log(this.props," props in transaction history");
@@ -201,10 +337,69 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                   </div>
                   <div className="row">
                     <div className="col-sm-12">
-
                       <button className="btn-primary b1" style={{ height: '42px', width: '151px' }} disabled={this.state.disablePrevious} onClick={this.previousChange}> Previous Page </button>
                       <button className="btn-primary b2" style={{ height: '42px', width: '151px', right: '16px', position: 'absolute', backgroundColor: 'rgb(62, 0, 96)!important' }} onClick={this.pageChange} disabled={this.state.disableNext}>Next Page </button>
+                      </div>
+                      <div className='col-sm-12'>
+                      <div className='text-center'>
+                        <button className="btn  filters" onClick={this.handleFilters} >{this.state.filterFlag?'Remove Filters':'Add Filters'}</button>
+                      </div>
+                      </div>
+                  {  this.state.filterFlag &&   <div className='col-sm-12'>
+                    <div className="col-sm-3 col-sm-offset-1">
+                      <div className="filter-card">
+                        <label htmlFor="kycFilter"><h5>Transaction Type:</h5></label>
+                        <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                          <option value="" disabled selected hidden>Select</option>
+                          <option value='Ethereum'>ETHEREUM</option>
+                          <option value='Bitcoin'>BITCOIN</option>
+                          <option value='USD'>USD</option>
+                        </select>
+                        <span className='clear'><a onClick={this.clearFilter} id="clearType">Clear</a></span>
+                      </div>
+                    </div>
+                    <div className="col-sm-5 col-sm-offset-3">
+                      <div className="filter-card">
+                        <div className='text-center'><label htmlFor="createdFilter"><h5>Created At</h5></label></div>
+                          <div className="row">
+                            <div className="col-sm-5 col-xs-5 col-xs-5">
+                            <DatePicker
+                            className='form-control text-center filter-input'
+                            onChange={this.handleMinCreatedFilter}
+                            value={this.state.transactionParam.createdLl}
+                            placeholderText='min'
+                             />
+                             {
+                                 // <input id="createdMinFilter" type="date" onChange={this.handleMinCreatedFilter} className="form-control text-center filter-input" placeholder="min"/>
+                             }
 
+                            </div>
+                            <div className="col-sm-2 col-xs-2">
+                              <span>-</span>
+                            </div>
+                            <div className="col-sm-5 col-xs-5 col-xs-5">
+                            <DatePicker
+                            className='form-control text-center filter-input'
+                            onChange={this.handleMaxCreatedFilter}
+                            value={this.state.transactionParam.createdUl}
+                            placeholderText='max'
+                             />
+                              {
+                                // <input id="createdMaxFilter" type="date" onChange={this.handleMaxCreatedFilter} className="form-control text-center filter-input" placeholder="max"/>
+                              }
+                            </div>
+                            </div>
+                            <div className="row">
+                              <div className="col-sm-12">
+                            <span className='clear'><a onClick={this.clearFilter} id="clearCreated">Clear</a></span>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                  }
+                    <div className='col-sm-12'>
                     {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
                         showPaginationBottom={false}
                         style={{ marginTop: '20px', fontSize: '12px', cursor: 'default' }}
@@ -218,6 +413,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
 
                       />}
                     </div>
+
                   </div>
                 </div>
               </div>

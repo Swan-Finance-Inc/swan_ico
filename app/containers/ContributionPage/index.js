@@ -671,8 +671,9 @@ gobackDollar=(e)=>{
                             <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input" required>
                               <option value="ETH">ETH</option>
                               <option value="BTC">BTC</option>
-                              <option value="USD">USD</option>
+
                             {
+                                // <option value="USD">USD</option>
                               // <option value="EUR">EUR</option>
                             }
                             </select>

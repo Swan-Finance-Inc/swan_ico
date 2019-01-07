@@ -573,7 +573,6 @@ export class DashBoardWelcomePage extends React.PureComponent {
       console.log(" inside will Recieve props faqData",nextProps)
     }
   }
-
   closeAlert(){
     console.log('SHow alert');
     this.setState({
@@ -694,7 +693,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
               </div>
 
             </div>) : (this.props.location.pathname == '/dashboard/security') ?
-              <SecurityPage /> :
+              <SecurityPage activityStatus ={this.props.dashboardwelcomepage.userInfo.saveActivityLogs} loadProfileAction = {this.props.loadProfileAction} /> :
               (this.props.location.pathname == '/dashboard/profile') ?
               <ProfilePage /> :
               (this.props.location.pathname == '/dashboard/resetpassword') ?
@@ -731,7 +730,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
         <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
         <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
         <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
-
+        <i className="fa fa-android" style={{cursor:'pointer'}}><a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank'> Download App here</a></i>
         </div>
         </div>
 

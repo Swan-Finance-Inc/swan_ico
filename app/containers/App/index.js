@@ -26,6 +26,9 @@ import TransactionHistory from 'containers/TransactionHistory/Loadable';
 import ResendConfirmationPage from 'containers/ResendConfirmationPage/Loadable';
 import Unsubscribe from 'containers/Unsubscribe/Loadable';
 import ForceReset from 'containers/ForceReset';
+import Activity from 'containers/Activity/Loadable';
+
+
 
 export default function App() {
   return (
@@ -35,6 +38,7 @@ export default function App() {
         <Route exact path="/signin" component={LoginPage} />
         <Route exact path="/signup" component={RegisterPage} />
         <Route path="/dashboard" component={DashBoardWelcomePage} />
+        <Route path="/activity" component={Activity} />
         <Route path="/resetPassword/forgot/:token" component={ResetPassword} />
         <Route path="/forgotPassword" component={ForgotPassword} />
         <Route path="/resendConfirmation" component={ResendConfirmationPage} />

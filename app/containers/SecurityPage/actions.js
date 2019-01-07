@@ -12,8 +12,30 @@ import {
   VERIFY_2FA,
   REMOVE_RESPONSE,
   RESPONSE_2FA,
+  SAVE_ACTIVITY,
+  SAVE_ACTIVITY_SUCCESS,
+  SAVE_ACTIVITY_REMOVE
 } from './constants';
 
+
+export function removeActivitySuccess(data) {
+  return {
+    type: SAVE_ACTIVITY_REMOVE,
+    data,
+  };
+}
+export function saveActivitySuccess(data) {
+  return {
+    type: SAVE_ACTIVITY_SUCCESS,
+    data,
+  };
+}
+export function saveActivity(data) {
+  return {
+    type: SAVE_ACTIVITY,
+    data,
+  };
+}
 export function defaultAction() {
   return {
     type: DEFAULT_ACTION,

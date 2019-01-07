@@ -6,10 +6,29 @@
 	display:block;
 	white-space:nowrap;
 }
+.filters {
+  position: relative;
+  top: 0px;
+  margin-bottom: 5%;
+}
+.filters:hover{
+  background-color: darkgrey;
+}
 .socailLinks{
 	// float: right;
 	margin-left: 30px;
 	margin-right: 10px;
+}
+.filter-card a {
+    color: #519580;
+    font-size: 12px;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+	}
+.clear {
+	position: relative;
+	left:40%;
 }
 .gas1{
  color:#DAA520;
@@ -1308,7 +1327,10 @@ opacity:0;
    padding-top: 70px;
    }
 	.logo img {
-   max-width: 190px;
+		max-width: 175px !important;
+		width: 50% !important;
+		height: 40px !important;
+		margin-left: 35px !important;
    // width: 100%;
    }
 	.ui-content-body {

@@ -6,7 +6,7 @@
 
 import { fromJS } from 'immutable';
 import {
-  DEFAULT_ACTION, ENABLE_2FA, DISABLE_2FA, SUCCESS_2FA,VERIFY_2FA, RESPONSE_2FA,REMOVE_RESPONSE
+  DEFAULT_ACTION, ENABLE_2FA, DISABLE_2FA, SUCCESS_2FA,VERIFY_2FA, RESPONSE_2FA,REMOVE_RESPONSE, SAVE_ACTIVITY_SUCCESS, SAVE_ACTIVITY, SAVE_ACTIVITY_REMOVE
 } from './constants';
 
 const initialState = fromJS({
@@ -17,10 +17,21 @@ const initialState = fromJS({
   verified:false,
   errorMessage:false,
   error:false,
+  saveActivityRet:false,
+  saveActivity:false
 });
 
 function securityPageReducer(state = initialState, action) {
   switch (action.type) {
+    case SAVE_ACTIVITY:
+      return state
+        .set('saveActivity',action.data)
+    case SAVE_ACTIVITY_SUCCESS:
+      return state
+        .set('saveActivityRet',action.data)
+    case SAVE_ACTIVITY_REMOVE:
+    return state
+      .set('saveActivityRet',false)
     case ENABLE_2FA:
       return state
        .set('enable2fa',true)
@@ -42,11 +53,11 @@ function securityPageReducer(state = initialState, action) {
     case RESPONSE_2FA:
     return state
     .set('response',action.data);
-   
+
    case REMOVE_RESPONSE:
       return state
        .set('response',false);
-      
+
     default:
       return state;
   }

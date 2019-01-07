@@ -14,6 +14,9 @@ const initialState = fromJS({
   page: '',
   nextPage: false,
   loading:false,
+  type:'',
+  minCreatedAt:'',
+  maxCreatedAt:''
 });
 
 function transactionHistoryReducer(state = initialState, action) {
@@ -28,7 +31,10 @@ function transactionHistoryReducer(state = initialState, action) {
     case GET_TRANSACTIONS:
       return state
         .set('loading',true)
-        .set('page', action.data);
+        .set('page', action.data.page)
+        .set('type',action.data.type?action.data.type:'')
+        .set('minCreatedAt',action.data.createdLl?action.data.createdLl:'')
+        .set('maxCreatedAt',action.data.createdUl?action.data.createdUl:'')
     default:
       return state;
   }

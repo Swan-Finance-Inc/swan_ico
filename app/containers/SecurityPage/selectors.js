@@ -48,6 +48,15 @@ const makeSelectQrKey = () => createSelector(
   selectSecurityPageDomain,
   (substate) => substate.get('qrKey')
 )
+const makeSelectActivityRet = () => createSelector(
+  selectSecurityPageDomain,
+  (substate) => substate.get('saveActivityRet')
+)
+const makeSelectSaveActivity = () => createSelector(
+  selectSecurityPageDomain,
+  (substate) => substate.get('saveActivity')
+)
+
 
 export default makeSelectSecurityPage;
 export {
@@ -58,5 +67,7 @@ export {
   makeSelectVerify,
   makeSelectVerified,
   makeSelectResponse,
-  makeSelectQrKey
+  makeSelectQrKey,
+  makeSelectActivityRet,
+  makeSelectSaveActivity
 };

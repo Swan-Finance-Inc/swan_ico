@@ -35,6 +35,22 @@ const makeSelectTransLoading = () => createSelector(
   selectTransactionHistoryDomain,
   (substate) => substate.get('loading')
 );
+const makeSelectTransType = () => createSelector(
+  selectTransactionHistoryDomain,
+  (substate) => substate.get('type')
+);
+const makeSelectMinCreated = () => createSelector(
+  selectTransactionHistoryDomain,
+  (substate) => substate.get('minCreatedAt')
+);
+const makeSelectMaxCreated = () => createSelector(
+  selectTransactionHistoryDomain,
+  (substate) => substate.get('maxCreatedAt')
+);
+
+
+
+
 
 export default makeSelectTransactionHistory;
 export {
@@ -42,5 +58,8 @@ export {
   makeSelectTransactions,
   makeSelectPage,
   makeSelectNextPage,
-  makeSelectTransLoading
+  makeSelectTransLoading,
+  makeSelectTransType,
+  makeSelectMinCreated,
+  makeSelectMaxCreated
 };

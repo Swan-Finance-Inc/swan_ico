@@ -12,13 +12,14 @@ import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectSecurityPage, { makeSelectEnable, makeSelectResponse, makeSelectDisable, makeSelectQr, makeSelectVerified, makeSelectQrKey } from './selectors';
-import { enable2fa, disable2fa, success2fa, verify2fa } from './actions';
+import makeSelectSecurityPage, { makeSelectEnable, makeSelectResponse, makeSelectDisable, makeSelectQr, makeSelectVerified, makeSelectQrKey, makeSelectActivityRet } from './selectors';
+import { enable2fa, disable2fa, success2fa, verify2fa, saveActivity, removeActivitySuccess } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import { makeGlobalParent } from '../App/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Activity from 'containers/Activity/Loadable';
 
 export class SecurityPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -29,7 +30,9 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
       imageBase64: '',
       check: false,
       enabled: false,
-      copy: false
+      copy: false,
+      activityLog:this.props.activityStatus,
+      showLogs:false
     };
     this.verifyAuth = this.verifyAuth.bind(this);
     this.disableAuth = this.disableAuth.bind(this);
@@ -49,7 +52,20 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
     }
   }
   componentWillReceiveProps(nextProps) {
-
+  if(nextProps.saveActivityRet){
+    if(nextProps.saveActivityRet.success){
+      toast.success(nextProps.saveActivityRet.message)
+      this.setState({
+        activityLog:nextProps.saveActivityRet.saveActivityLogs
+      })
+      nextProps.removeActivitySuccess()
+      nextProps.loadProfileAction()
+    }
+    else{
+      toast.error(nextProps.saveActivityRet.message)
+      nextProps.removeActivitySuccess()
+    }
+  }
     // console.log(nextProps)
     this.setState({
       imageBase64: nextProps.qrCode,
@@ -108,8 +124,21 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
       check: false,
     });
   }
+  handleSaveActivityLog=(e)=>{
+    console.log(" inside save Activity log Handler")
+    this.props.saveActivity({
+      saveActivityLogs:!this.state.activityLog
+    })
+  }
+  handleShowLogs=(e)=>{
+    this.setState({
+      showLogs:!this.state.showLogs
+    })
+  }
 
   render() {
+    console.log(this.state," State in security Page")
+    console.log(this.props," props in security Page")
     if(this.props.response){
       if(this.props.response.success){
         this.notifySuccess(this.props.response.message);
@@ -193,6 +222,29 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
               </div>
             </div>
           </div>
+          <div className="panel panel-default">
+            <div className="panel-heading">Save Activity Log</div>
+              <div className="panel-body" style={{fontSize:'16px'}}>
+            <div className="row">
+              <div className="col-sm-12">
+              <div className="checkbox">
+                <label>
+                  <input id="activityLog" checked={this.state.activityLog} type="checkbox" onChange={this.handleSaveActivityLog} />
+                    Save My Activity Log
+                </label>
+              </div>
+              </div>
+            </div>
+            <div className='row'>
+            <div className='text-center'>
+            <button className="btn  filters" onClick={this.handleShowLogs} >{this.state.showLogs?'Hide Logs':'Show Logs'}</button>
+            </div>
+            </div>
+            <div className='row'>
+            {this.state.showLogs && <Activity />}
+            </div>
+          </div>
+        </div>
         </div>
       </div>
       </div>
@@ -213,7 +265,8 @@ const mapStateToProps = createStructuredSelector({
   disabled: makeSelectDisable(),
   verified: makeSelectVerified(),
   response: makeSelectResponse(),
-  qrKey: makeSelectQrKey()
+  qrKey: makeSelectQrKey(),
+  saveActivityRet:makeSelectActivityRet()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -223,6 +276,10 @@ function mapDispatchToProps(dispatch) {
     disable2fa: () => dispatch(disable2fa()),
     success2fa: (data) => dispatch(success2fa(data)),
     verify2fa: (data) => dispatch(verify2fa(data)),
+    saveActivity: (data) => dispatch(saveActivity(data)),
+    removeActivitySuccess: (data) => dispatch(removeActivitySuccess(data)),
+
+
 
   };
 }

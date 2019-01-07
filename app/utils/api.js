@@ -6,6 +6,10 @@ import axios from 'axios';
 
 export default {
   user: {
+    getActivityLogs:(headers)=>
+    axios.get(`${BaseUrl}user/logs`,headers).then((res) => res.data).catch((err) => err.response.data),
+    saveActivity: (headers, body) =>
+      axios.put(`${BaseUrl}user/logs`,body, headers ).then((res) => res.data).catch((err) => err.response.data),
     getFaq:(headers)=>
     axios.get(`${BaseUrl}user/faq`,headers).then((res) => res.data).catch((err) => err.response.data),
     getReferData:(headers)=>
@@ -59,8 +63,8 @@ export default {
         .then((res) => res.data.user),
     resetPasswordRequest: (email) =>
       axios.post('/api/auth/reset_password_request', { email }),
-    fetchUserTransactions: (headers, page) =>
-      axios.get(`${BaseUrl}user/transactions?page=${page}`, headers).then((res) => res.data).catch((err) => err.response.data),
+    fetchUserTransactions: (headers, page, type, ll, ul) =>
+      axios.get(`${BaseUrl}user/transactions?page=${page}&type=${type}&minCreatedAt=${ll}&maxCreatedAt=${ul}`, headers).then((res) => res.data).catch((err) => err.response.data),
     submitSocialDetails: (headers, socialDetails) =>
       axios.put(`${BaseUrl}user/profile`, socialDetails, headers).then((res) => res.data).catch((err) => err.response.data),
     updateKycDetails: (headers, details) =>

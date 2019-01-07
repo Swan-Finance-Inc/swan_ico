@@ -1,9 +1,9 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects';
 import api from 'utils/api';
 import { twoFactorEnabled, twoFactorDisabled } from 'containers/App/actions';
-import { makeSelectVerify } from './selectors';
-import { ENABLE_2FA, VERIFY_2FA, DISABLE_2FA } from './constants';
-import { success2fa, response2fa, removeResponse } from './actions';
+import { makeSelectVerify, makeSelectSaveActivity } from './selectors';
+import { ENABLE_2FA, VERIFY_2FA, DISABLE_2FA, SAVE_ACTIVITY } from './constants';
+import { success2fa, response2fa, removeResponse, saveActivitySuccess } from './actions';
 import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 export function* securityChanged() {
@@ -84,6 +84,32 @@ export function* disabling2fa() {
     // console.log(err)
   }
 }
+export function* saveActivity() {
+  try {
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+    console.log(headers," ddsnfjdsfjkdsfjkdsfjkdsjfkdsjkfjksdfjksdf")
+    const saveActivityLogs = yield select(makeSelectSaveActivity());
+
+   const body = {
+     saveActivityLogs:saveActivityLogs.saveActivityLogs
+   }
+   console.log(body," body in saga");
+    const apiData = yield call(api.user.saveActivity, headers, body);
+    console.log(apiData," apiData")
+
+    if (apiData.success) {
+      yield put(saveActivitySuccess(apiData));
+    } else if (!apiData.success) {
+      yield put(codeErrorAction(data));
+    }
+  } catch (err) {
+    yield put(codeErrorAction(data));
+    // console.log("api failed");
+    console.log(err)
+  }
+}
 
 
 export default function* defaultSaga() {
@@ -92,6 +118,6 @@ export default function* defaultSaga() {
   yield [takeLatest(ENABLE_2FA, securityChanged),
     takeLatest(VERIFY_2FA, verify2fa),
     takeLatest(DISABLE_2FA, disabling2fa),
-
+    takeLatest(SAVE_ACTIVITY, saveActivity),
   ];
 }

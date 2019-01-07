@@ -1,7 +1,7 @@
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import api from 'utils/api';
 import { successTransactions } from './actions';
-import { makeSelectPage } from './selectors';
+import { makeSelectPage, makeSelectTransType, makeSelectMinCreated, makeSelectMaxCreated } from './selectors';
 import { GET_TRANSACTIONS } from './constants';
 import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 export function* getTransaction() {
@@ -10,7 +10,13 @@ export function* getTransaction() {
       headers: { 'x-auth-token': localStorage.getItem('token') },
     };
     const page = yield select(makeSelectPage());
-    const apiData = yield call(api.user.fetchUserTransactions, headers, page);
+    let type = yield select(makeSelectTransType());
+    let ll  = yield select(makeSelectMinCreated());
+    let ul = yield select(makeSelectMaxCreated());
+    console.log(type, " type in saga of transactions");
+    console.log(page, " page in saga of transactions");
+
+    const apiData = yield call(api.user.fetchUserTransactions, headers, page, type, ll, ul);
     if (apiData.success) {
       yield put(successTransactions(apiData));
     }

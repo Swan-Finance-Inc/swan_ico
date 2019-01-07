@@ -22,7 +22,7 @@ import { makeGlobalParent } from '../App/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import ReCAPTCHA from 'react-google-recaptcha';
-import logo from '../../images/logo2.png';
+import logo from '../../images/logoo.gif';
 
 import { userLoggedIn, removeErrorGlobal, twoFactorDisabled, removeOuterError, passwordResetInnerRemove } from '../App/actions';
 import { loginUser, removeErrorMessage, emailStateClear } from './actions';
