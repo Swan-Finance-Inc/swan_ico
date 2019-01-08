@@ -14,3 +14,5 @@ export const REMOVE_RESPONSE = 'app/SecurityPage/REMOVE_RESPONSE';
 export const SAVE_ACTIVITY = 'app/SecurityPage/SAVE_ACTIVITY';
 export const SAVE_ACTIVITY_SUCCESS = 'app/SecurityPage/SAVE_ACTIVITY_SUCCESS';
 export const SAVE_ACTIVITY_REMOVE = 'app/SecurityPage/SAVE_ACTIVITY_REMOVE';
+export const LOAD_ACTIVITY_STATUS = 'app/SecurityPage/LOAD_ACTIVITY_STATUS';
+export const LOAD_ACTIVITY_SUCCESS = 'app/SecurityPage/LOAD_ACTIVITY_SUCCESS';

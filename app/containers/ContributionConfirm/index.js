@@ -133,180 +133,184 @@ export class ContributionConfirm extends React.PureComponent {
     console.log(this.state, " state in contribution confirm");
     if (this.props.usdEurContributionConfirm) {
       return (
-        <div id="content" className="ui-content ui-content-aside-overlay">
-          <div className="ui-content-body">
-            <div className="ui-container container-fluid">
-              <div className="panel panel-default">
-                <div className="panel-heading">Make Investment</div>
-                <div className="panel-body" style={{ fontSize: "16px" }}>
-                  <div className="row">
-                    {
-                      // <div className="row">
-                      //   <div className='col-sm-12'>
-                      //   <span className="makeInvestment">Make Investment</span>
-                      //   </div>
-                      // </div>
-                    }
-
-                    <div className="row">
-                      <div className="col-sm-12">
-                        <div className="goBackImagecontainer">
-                          <span className="goBackIcon">
-                            <img
-                              onClick={this.goBack}
-                              src="/assets/img/waka.svg"
-                              alt="goBack"
-                            />
-                          </span>
-                        </div>
-                      </div>
-                      <div className="col-sm-12 makeinvestextcontainer">
-                        <span className="makeinvesTExt">
-                          You have chosen to make a contribution via a SWIFT
-                          transfer. Please make this transfer using the banking
-                          information below. if you need Instructions on how to
-                          make a SWIFT transfer, the following article is
-                          helpful for automatic or bank branch initiated
-                          transfer:
-                        </span>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12 litagContainer">
-                        <span className="litagText">
-                          <a href="#">
-                            How to Make an International Wire Transfer
-                          </a>
-                        </span>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12 minimunReqContainer">
-                        <span className="minimunReqText">
-                          The Minimum enrollment amount required from each
-                          investor for this offering is{" "}
-                          {this.props.successData.minInvest} USD. Token price:{" "}
-                          {this.props.successData.tokenUsd} USD
-                        </span>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12 companyDataContainer">
-                        <div className="row">
-                          <div className="col-sm-4">Bank Name</div>
-                          <div className="col-sm-8">United Overseas Bank</div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">
-                            Bank Code
-                          </div>
-                          <div className="col-sm-8">7375</div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">Branch Name</div>
-                          <div className="col-sm-8">
-                          UOB Orchard
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">Branch Code</div>
-                          <div className="col-sm-8">068</div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">Branch Address</div>
-                          <div className="col-sm-8"><div>230 Orchard Road</div>
-                            <div>#01-230 Faber House</div>
-                            <div>Singapore 238854</div>
-                            <br/>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">Swift Code</div>
-                          <div className="col-sm-8">UOVBSGSG</div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">Account Number</div>
-                          <div className="col-sm-8"><div>380-330-688-3(SGD)</div>
-                            <div>380-946-743-9(USD)</div>
-                          </div>
-                        </div>
-                        <div className="row">
-                          <div className="col-sm-4">Account Name</div>
-                          <div className="col-sm-8">RAMA ENTERTAINMENTS PTE LTD</div>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="row">
-                      <div className="col-sm-12 afterCompleteContainer">
-                        <span className="afterCompleteText">
-                          After completing your investment (through a funds
-                          transfer) please check the box below to continue.
-                          You'll be notified once receipt of funds is confirmed
-                        </span>
-                      </div>
-                    </div>
-                    {
-                      //   <div className='row'>
-                      //   <div className='col-md-12 checkboxContainer'>
-                      //   <span><input type='checkbox'></input> I have enrolled by contributing the amount above using my declared account/wallet</span>
-                      //   </div>
-                      //   <div>
-                      //   </div>
-                      // </div>
-                    }
-
-                      <div className="buttonInputContainer">
-                        <div className="row">
-                          <div className="col-md-6">
-                          <form onSubmit={this.confirmPayment}>
-                            <div className="form-group enterBankAcc">
-                              <label
-                                htmlFor="bankAccNumber"
-                                className="form-label"
-                              >
-                                Enter the Transaction number of Bank account
-                              </label>
-                              <input
-                                id="txhash"
-                                type="number"
-                                className="form-input form-control"
-                                required
-                              />
-
-                            </div>
-                          <div className='row'>
-                          <div className="col-md-6">
-                          <input
-                            type="submit"
-                            className="form-button btn btn-primary"
-                            value="Confirm"
-                            style={{ margin: "10px" }}
-                          />
-                          </div>
-                          <div className="col-md-6">
-                            <button
-                              className="form-button btn btn-primary"
-                              style={{ margin: "10px" }}
-                              onClick={this.goBack}
-                            >
-                              Go Back
-                            </button>
-                          </div>
-                          </div>
-                             </form>
-                          </div>
-                        </div>
-                        <div className="row">
-
-                        </div>
-                      </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div>
         </div>
+
+        // <div id="content" className="ui-content ui-content-aside-overlay">
+        //   <div className="ui-content-body">
+        //     <div className="ui-container container-fluid">
+        //       <div className="panel panel-default">
+        //         <div className="panel-heading">Make Investment</div>
+        //         <div className="panel-body" style={{ fontSize: "16px" }}>
+        //           <div className="row">
+        //             {
+        //               // <div className="row">
+        //               //   <div className='col-sm-12'>
+        //               //   <span className="makeInvestment">Make Investment</span>
+        //               //   </div>
+        //               // </div>
+        //             }
+        //
+        //             <div className="row">
+        //               <div className="col-sm-12">
+        //                 <div className="goBackImagecontainer">
+        //                   <span className="goBackIcon">
+        //                     <img
+        //                       onClick={this.goBack}
+        //                       src="/assets/img/waka.svg"
+        //                       alt="goBack"
+        //                     />
+        //                   </span>
+        //                 </div>
+        //               </div>
+        //               <div className="col-sm-12 makeinvestextcontainer">
+        //                 <span className="makeinvesTExt">
+        //                   You have chosen to make a contribution via a SWIFT
+        //                   transfer. Please make this transfer using the banking
+        //                   information below. if you need Instructions on how to
+        //                   make a SWIFT transfer, the following article is
+        //                   helpful for automatic or bank branch initiated
+        //                   transfer:
+        //                 </span>
+        //               </div>
+        //             </div>
+        //             <div className="row">
+        //               <div className="col-sm-12 litagContainer">
+        //                 <span className="litagText">
+        //                   <a href="#">
+        //                     How to Make an International Wire Transfer
+        //                   </a>
+        //                 </span>
+        //               </div>
+        //             </div>
+        //             <div className="row">
+        //               <div className="col-sm-12 minimunReqContainer">
+        //                 <span className="minimunReqText">
+        //                   The Minimum enrollment amount required from each
+        //                   investor for this offering is{" "}
+        //                   {this.props.successData.minInvest} USD. Token price:{" "}
+        //                   {this.props.successData.tokenUsd} USD
+        //                 </span>
+        //               </div>
+        //             </div>
+        //             <div className="row">
+        //               <div className="col-sm-12 companyDataContainer">
+        //                 <div className="row">
+        //                   <div className="col-sm-4">Bank Name</div>
+        //                   <div className="col-sm-8">United Overseas Bank</div>
+        //                 </div>
+        //                 <div className="row">
+        //                   <div className="col-sm-4">
+        //                     Bank Code
+        //                   </div>
+        //                   <div className="col-sm-8">7375</div>
+        //                 </div>
+        //                 <div className="row">
+        //                   <div className="col-sm-4">Branch Name</div>
+        //                   <div className="col-sm-8">
+        //                   UOB Orchard
+        //                   </div>
+        //                 </div>
+        //                 <div className="row">
+        //                   <div className="col-sm-4">Branch Code</div>
+        //                   <div className="col-sm-8">068</div>
+        //                 </div>
+        //                 <div className="row">
+        //                   <div className="col-sm-4">Branch Address</div>
+        //                   <div className="col-sm-8"><div>230 Orchard Road</div>
+        //                     <div>#01-230 Faber House</div>
+        //                     <div>Singapore 238854</div>
+        //                     <br/>
+        //                   </div>
+        //                 </div>
+        //                 <div className="row">
+        //                   <div className="col-sm-4">Swift Code</div>
+        //                   <div className="col-sm-8">UOVBSGSG</div>
+        //                 </div>
+        //                 <div className="row">
+        //                   <div className="col-sm-4">Account Number</div>
+        //                   <div className="col-sm-8"><div>380-330-688-3(SGD)</div>
+        //                     <div>380-946-743-9(USD)</div>
+        //                   </div>
+        //                 </div>
+        //                 <div className="row">
+        //                   <div className="col-sm-4">Account Name</div>
+        //                   <div className="col-sm-8">Pexo</div>
+        //                 </div>
+        //               </div>
+        //             </div>
+        //             <div className="row">
+        //               <div className="col-sm-12 afterCompleteContainer">
+        //                 <span className="afterCompleteText">
+        //                   After completing your investment (through a funds
+        //                   transfer) please check the box below to continue.
+        //                   You'll be notified once receipt of funds is confirmed
+        //                 </span>
+        //               </div>
+        //             </div>
+        //             {
+        //               //   <div className='row'>
+        //               //   <div className='col-md-12 checkboxContainer'>
+        //               //   <span><input type='checkbox'></input> I have enrolled by contributing the amount above using my declared account/wallet</span>
+        //               //   </div>
+        //               //   <div>
+        //               //   </div>
+        //               // </div>
+        //             }
+        //
+        //               <div className="buttonInputContainer">
+        //                 <div className="row">
+        //                   <div className="col-md-6">
+        //                   <form onSubmit={this.confirmPayment}>
+        //                     <div className="form-group enterBankAcc">
+        //                       <label
+        //                         htmlFor="bankAccNumber"
+        //                         className="form-label"
+        //                       >
+        //                         Enter the Transaction number of Bank account
+        //                       </label>
+        //                       <input
+        //                         id="txhash"
+        //                         type="number"
+        //                         className="form-input form-control"
+        //                         required
+        //                       />
+        //
+        //                     </div>
+        //                   <div className='row'>
+        //                   <div className="col-md-6">
+        //                   <input
+        //                     type="submit"
+        //                     className="form-button btn btn-primary"
+        //                     value="Confirm"
+        //                     style={{ margin: "10px" }}
+        //                   />
+        //                   </div>
+        //                   <div className="col-md-6">
+        //                     <button
+        //                       className="form-button btn btn-primary"
+        //                       style={{ margin: "10px" }}
+        //                       onClick={this.goBack}
+        //                     >
+        //                       Go Back
+        //                     </button>
+        //                   </div>
+        //                   </div>
+        //                      </form>
+        //                   </div>
+        //                 </div>
+        //                 <div className="row">
+        //
+        //                 </div>
+        //               </div>
+        //
+        //           </div>
+        //         </div>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
+
       );
     } else {
       return (

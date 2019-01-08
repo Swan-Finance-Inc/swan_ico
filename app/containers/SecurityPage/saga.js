@@ -2,8 +2,8 @@ import { takeLatest, call, put, select } from 'redux-saga/effects';
 import api from 'utils/api';
 import { twoFactorEnabled, twoFactorDisabled } from 'containers/App/actions';
 import { makeSelectVerify, makeSelectSaveActivity } from './selectors';
-import { ENABLE_2FA, VERIFY_2FA, DISABLE_2FA, SAVE_ACTIVITY } from './constants';
-import { success2fa, response2fa, removeResponse, saveActivitySuccess } from './actions';
+import { ENABLE_2FA, VERIFY_2FA, DISABLE_2FA, SAVE_ACTIVITY, LOAD_ACTIVITY_STATUS } from './constants';
+import { success2fa, response2fa, removeResponse, saveActivitySuccess, loadActivitySuccess } from './actions';
 import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 
 export function* securityChanged() {
@@ -26,7 +26,7 @@ export function* securityChanged() {
       yield put(success2fa(data));
     }
   } catch (err) {
-  yield put(codeErrorAction(data));
+  yield put(codeErrorAction(err));
   // console.log("api failed");
   // console.log(err)
 
@@ -56,7 +56,7 @@ export function* verify2fa() {
     }
     // console.log(body)
   } catch (err) {
-    yield put(codeErrorAction(data));
+    yield put(codeErrorAction(err));
     // console.log("api failed");
     // console.log(err)
   }
@@ -79,7 +79,7 @@ export function* disabling2fa() {
       yield put(twoFactorDisabled(true));
     }
   } catch (err) {
-    yield put(codeErrorAction(data));
+    yield put(codeErrorAction(err));
     // console.log("api failed");
     // console.log(err)
   }
@@ -105,6 +105,33 @@ export function* saveActivity() {
       yield put(codeErrorAction(data));
     }
   } catch (err) {
+    yield put(codeErrorAction(err));
+    // console.log("api failed");
+    console.log(err)
+  }
+}
+
+export function* loadActivity() {
+  try {
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+    console.log(headers," ddsnfjdsfjkdsfjkdsfjkdsjfkdsjkfjksdfjksdf")
+   //  const saveActivityLogs = yield select(makeSelectSaveActivity());
+   //
+   // const body = {
+   //   saveActivityLogs:saveActivityLogs.saveActivityLogs
+   // }
+   // console.log(body," body in saga");
+    // const apiData = yield call(api.user.loadActivityStatus, headers, body);
+    // console.log(apiData," apiData")
+
+  //   if (apiData.success) {
+  //     yield put(loadActivitySuccess(apiData));
+  //   } else if (!apiData.success) {
+  //     yield put(codeErrorAction(data));
+  //   }
+  } catch (err) {
     yield put(codeErrorAction(data));
     // console.log("api failed");
     console.log(err)
@@ -119,5 +146,7 @@ export default function* defaultSaga() {
     takeLatest(VERIFY_2FA, verify2fa),
     takeLatest(DISABLE_2FA, disabling2fa),
     takeLatest(SAVE_ACTIVITY, saveActivity),
+    takeLatest(LOAD_ACTIVITY_STATUS, loadActivity),
+
   ];
 }

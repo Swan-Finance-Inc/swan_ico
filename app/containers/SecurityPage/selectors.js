@@ -56,6 +56,14 @@ const makeSelectSaveActivity = () => createSelector(
   selectSecurityPageDomain,
   (substate) => substate.get('saveActivity')
 )
+const makeSelectLoadActivitySuccess = () => createSelector(
+  selectSecurityPageDomain,
+  (substate) => substate.get('loadActivitySuccess')
+)
+const makeSelectActivityStatus = () => createSelector(
+  selectSecurityPageDomain,
+  (substate) => substate.get('ActivityStatus')
+)
 
 
 export default makeSelectSecurityPage;
@@ -69,5 +77,7 @@ export {
   makeSelectResponse,
   makeSelectQrKey,
   makeSelectActivityRet,
-  makeSelectSaveActivity
+  makeSelectSaveActivity,
+  makeSelectLoadActivitySuccess,
+  makeSelectActivityStatus
 };

@@ -61,7 +61,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       stage: '',
       minInvest: 100,
       contribution: false,
-      body:{}
+      body:{},
+      isBonusOrDiscount:'',
+      discount:''
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -102,7 +104,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       bonus: data.bonus,
       stage: data.stage,
       minInvest: data.minInvest,
-      tokenPrice: data.tokenUsd
+      tokenPrice: data.tokenUsd,
+      isBonusOrDiscount:data.isBonusOrDiscount,
+      discount:data.discount
     });
     this.setState({
       fromAddressEth:nextProps.userInfo.userInfo.ethAddress
@@ -393,27 +397,66 @@ gobackDollar=(e)=>{
         // currencyQuantity.value = this.state.dollarsInvested / this.state.btcToDollar;
         if (add.match(/^[13][a-km-zA-HJ-NP-Z0-9]{26,33}$/)) {
           // console.log('done btc');
-          this.setState({
-            valid: true,
-            validBlank: 'false',
-            curr: 'Bitcoin',
-            currencyQuantity: currencyQuantity.value,
-            dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
-            tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
-            tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
-          });
+                if(this.state.isBonusOrDiscount==='staticDiscount'){
+                this.setState({
+                  valid: true,
+                  validBlank: 'false',
+                  curr: 'Bitcoin',
+                  currencyQuantity: currencyQuantity.value,
+                  dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
+                  tokens: (currencyQuantity.value*this.state.btcToDollar)/this.state.tokenPrice,
+                  tokensWithBonus: (currencyQuantity.value*this.state.btcToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+                })
+                }
+                else{
+                  this.setState({
+                    valid: true,
+                    validBlank: 'false',
+                    curr: 'Bitcoin',
+                    currencyQuantity: currencyQuantity.value,
+                    dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
+                    tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
+                    tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
+                  });
+                }
+
+
+
         }else if(add == ''){
          // console.log('Empty');
+           if(this.state.isBonusOrDiscount==='staticDiscount'){
+             this.setState({
+               validBlank: 'true',
+               curr: 'Bitcoin',
+               currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
+               dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
+               tokens: (currencyQuantity.value*this.state.btcToDollar)/this.state.tokenPrice,
+               tokensWithBonus: (currencyQuantity.value*this.state.btcToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+             })
+           } else {
+             this.setState({
+               validBlank: 'true',
+               curr: 'Bitcoin',
+               currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
+               dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
+               tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
+               tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
+             })
+           }
+
+        }else {
+          // console.log('not done');
+        if(this.state.isBonusOrDiscount==='staticDiscount'){
           this.setState({
-            validBlank: 'true',
+            valid: false,
             curr: 'Bitcoin',
             currencyQuantity: this.state.dollarsInvested / this.state.btcToDollar,
             dollarsInvested: currencyQuantity.value * this.state.btcToDollar,
-            tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
-            tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
-          })
-        }else {
-          // console.log('not done');
+            tokens: (currencyQuantity.value*this.state.btcToDollar)/this.state.tokenPrice,
+            tokensWithBonus: (currencyQuantity.value*this.state.btcToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+          });
+        }
+        else {
           this.setState({
             valid: false,
             curr: 'Bitcoin',
@@ -422,6 +465,7 @@ gobackDollar=(e)=>{
             tokens: currencyQuantity.value * this.state.tokensPerBitcoin,
             tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
           });
+        }
         }
     } else  if(e.target.value === 'ETH') {
       let currencyQuantity = document.getElementById('amt');
@@ -432,38 +476,81 @@ gobackDollar=(e)=>{
         validBlank: true
       })
       if (add.match(/^0x[a-fA-F0-9]{40}$/)) {
+        console.log(" inside  ethererererer------------------------ add match")
        // console.log('done eth');
-        this.setState({
-          valid: true,
-          validBlank: 'false',
+       if(this.state.isBonusOrDiscount==='staticDiscount'){
+         console.log(" inside  etherium type",this.state)
+         this.setState({
+           valid: true,
+           validBlank: 'false',
+           curr: 'Ethereum',
+           validWallet: true,
+           currencyQuantity: this.state.amtInvested,
+          dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+          tokens: (currencyQuantity.value*this.state.ethToDollar)/this.state.tokenPrice,
+          tokensWithBonus: (currencyQuantity.value*this.state.ethToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+         });
+       }else{
+         this.setState({
+           valid: true,
+           validBlank: 'false',
+           curr: 'Ethereum',
+           validWallet: true,
+           currencyQuantity: this.state.amtInvested,
+          dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+          tokens: currencyQuantity.value * this.state.tokensPerEther,
+          tokensWithBonus: currencyQuantity.value * this.state.tokensPerEther + currencyQuantity.value * this.state.tokensPerEther * 0.01 * this.state.bonus
+         });
+       }
+
+      }else if(add == ''){
+        // console.log('Empty');
+        if(this.state.isBonusOrDiscount==='staticDiscount'){
+
+          this.setState({
+          validBlank: 'true',
           curr: 'Ethereum',
-          validWallet: true,
           currencyQuantity: this.state.amtInvested,
+          dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+          tokens: (currencyQuantity.value*this.state.ethToDollar)/this.state.tokenPrice,
+          tokensWithBonus: (currencyQuantity.value*this.state.ethToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+          })
+        }
+        else {
+          this.setState({
+            validBlank: 'true',
+            curr: 'Ethereum',
+          currencyQuantity: this.state.amtInvested,
+          dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+          tokens: currencyQuantity.value * this.state.tokensPerEther,
+          tokensWithBonus: (currencyQuantity.value * this.state.tokensPerEther) + ((currencyQuantity.value * this.state.tokensPerEther) * (this.state.bonus / 100)),
+          })
+        }
+      }else {
+       // console.log('not done');
+       if(this.state.isBonusOrDiscount==='staticDiscount'){
+         this.setState({
+           valid: false,
+           validBlank: 'false',
+           curr: 'Ethereum',
+         currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
+         dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+         tokens: (currencyQuantity.value*this.state.btcToDollar)/this.state.tokenPrice,
+         tokensWithBonus: (currencyQuantity.value*this.state.btcToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+         });
+       }
+       else{
+         this.setState({
+           valid: false,
+           validBlank: 'false',
+           curr: 'Ethereum',
+         currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
          dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
          tokens: currencyQuantity.value * this.state.tokensPerEther,
          tokensWithBonus: currencyQuantity.value * this.state.tokensPerEther + currencyQuantity.value * this.state.tokensPerEther * 0.01 * this.state.bonus
-        });
-      }else if(add == ''){
-        // console.log('Empty');
-        this.setState({
-          validBlank: 'true',
-          curr: 'Ethereum',
-        currencyQuantity: this.state.amtInvested,
-        dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
-        tokens: currencyQuantity.value * this.state.tokensPerEther,
-        tokensWithBonus: (currencyQuantity.value * this.state.tokensPerEther) + ((currencyQuantity.value * this.state.tokensPerEther) * (this.state.bonus / 100)),
-        })
-      }else {
-       // console.log('not done');
-        this.setState({
-          valid: false,
-          validBlank: 'false',
-          curr: 'Ethereum',
-        currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
-        dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
-        tokens: currencyQuantity.value * this.state.tokensPerEther,
-        tokensWithBonus: currencyQuantity.value * this.state.tokensPerEther + currencyQuantity.value * this.state.tokensPerEther * 0.01 * this.state.bonus
-        });
+         });
+       }
+
       }
 
 
@@ -501,20 +588,42 @@ gobackDollar=(e)=>{
      });
      if (this.state.curr == 'Ethereum') {
       //  currencyQuant.value = e.target.value / this.state.ethToDollar;
-       this.setState({
-         currencyQuantity: currencyQuant.value,
-         dollarsInvested: currencyQuant.value * this.state.ethToDollar,
-         tokens: this.state.tokensPerEther * currencyQuant.value,
-         tokensWithBonus: this.state.tokensPerEther * currencyQuant.value + this.state.tokensPerEther * currencyQuant.value * 0.01 * this.state.bonus
-       });
+        if(this.state.isBonusOrDiscount==='staticDiscount'){
+            console.log(this.state," inside staticDiscount ")
+          this.setState({
+            currencyQuantity: currencyQuant.value,
+            dollarsInvested: currencyQuant.value * this.state.ethToDollar,
+            tokens: (currencyQuant.value*this.state.ethToDollar)/this.state.tokenPrice,
+            tokensWithBonus: (currencyQuant.value*this.state.ethToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+          });
+        }else {
+          this.setState({
+            currencyQuantity: currencyQuant.value,
+            dollarsInvested: currencyQuant.value * this.state.ethToDollar,
+            tokens: this.state.tokensPerEther * currencyQuant.value,
+            tokensWithBonus: this.state.tokensPerEther * currencyQuant.value + this.state.tokensPerEther * currencyQuant.value * 0.01 * this.state.bonus
+          });
+        }
+
+
      } else if (this.state.curr == 'Bitcoin') {
       //  currencyQuant.value = e.target.value / this.state.btcToDollar;
+      if(this.state.isBonusOrDiscount==='staticDiscount'){
+          console.log(this.state," inside bitcoin staticDiscount ")
+        this.setState({
+          currencyQuantity: currencyQuant.value,
+          dollarsInvested: currencyQuant.value * this.state.btcToDollar,
+          tokens: (currencyQuant.value*this.state.btcToDollar)/this.state.tokenPrice,
+          tokensWithBonus: (currencyQuant.value*this.state.btcToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+       });
+     }else {
        this.setState({
          currencyQuantity: currencyQuant.value,
          dollarsInvested: currencyQuant.value * this.state.btcToDollar,
          tokens: currencyQuant.value * this.state.tokensPerBitcoin,
          tokensWithBonus: this.state.tokensPerBitcoin * currencyQuant.value + this.state.tokensPerBitcoin * currencyQuant.value * 0.01 * this.state.bonus
       });
+     }
      } else if (this.state.curr == 'Dollar') {
        this.setState({
          currencyQuantity: currencyQuant.value,
@@ -602,7 +711,7 @@ gobackDollar=(e)=>{
       currency={this.state.curr}
       ethToDollar = {this.state.ethToDollar}
       btcToDollar = {this.state.btcToDollar}
-      tokens={this.state.tokens}
+      tokens={this.state.tokensWithBonus}
       currencyQty={this.state.currencyQuantity}
       back={this.comeBack}
       btcAddress={this.props.successData.btcAddress}
@@ -696,7 +805,7 @@ gobackDollar=(e)=>{
                         </div>
                           <div className="form-group">
                             <label htmlFor="amt" className="form-label">How much {this.state.curr} you would like to invest?</label>
-                            <input id="amt" onChange={this.amtInvested} type="number" className="form-input form-control" required/>
+                            <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control" required/>
                           </div>
 
                           {/* <div className="form-group">
@@ -710,7 +819,7 @@ gobackDollar=(e)=>{
                             <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right" disabled required/>
                           </div>
                           <div className="form-group">
-                            <label htmlFor="tokensWithBonus" className="form-label">Pexo Tokens With Bonus ({this.state.bonus}%)</label>
+                            <label htmlFor="tokensWithBonus" className="form-label">Pexo Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
                             <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
                           </div>
 

@@ -98,6 +98,8 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['success', 'mainSaleTokenUsd'], action.data.mainSaleTokenUsd)
         .setIn(['success', 'tokenPerEther'], action.data.tokenPerEther)
         .setIn(['success', 'tokenPerBtc'], action.data.tokenPerBtc)
+        .setIn(['success', 'isBonusOrDiscount'], action.data.isBonusOrDiscount)
+        .setIn(['success', 'discount'], action.data.staticDiscount)
         .set('failure', false);
     case SUCCESS_PAYMENT:
       return state

@@ -14,9 +14,19 @@ import {
   RESPONSE_2FA,
   SAVE_ACTIVITY,
   SAVE_ACTIVITY_SUCCESS,
-  SAVE_ACTIVITY_REMOVE
+  SAVE_ACTIVITY_REMOVE,
+  LOAD_ACTIVITY_STATUS,
+  LOAD_ACTIVITY_SUCCESS
 } from './constants';
 
+
+
+export function loadActivitySuccess(data) {
+  return {
+    type: LOAD_ACTIVITY_SUCCESS,
+    data,
+  };
+}
 
 export function removeActivitySuccess(data) {
   return {
@@ -24,6 +34,14 @@ export function removeActivitySuccess(data) {
     data,
   };
 }
+export function loadActivityStatus(data) {
+  return {
+    type: LOAD_ACTIVITY_STATUS,
+    data,
+  };
+}
+
+
 export function saveActivitySuccess(data) {
   return {
     type: SAVE_ACTIVITY_SUCCESS,

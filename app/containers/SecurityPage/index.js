@@ -12,8 +12,9 @@ import { compose } from 'redux';
 import { Helmet } from 'react-helmet';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectSecurityPage, { makeSelectEnable, makeSelectResponse, makeSelectDisable, makeSelectQr, makeSelectVerified, makeSelectQrKey, makeSelectActivityRet } from './selectors';
-import { enable2fa, disable2fa, success2fa, verify2fa, saveActivity, removeActivitySuccess } from './actions';
+import makeSelectSecurityPage, { makeSelectEnable, makeSelectResponse, makeSelectDisable, makeSelectQr,
+   makeSelectVerified, makeSelectQrKey, makeSelectActivityRet, makeSelectLoadActivitySuccess, makeSelectActivityStatus } from './selectors';
+import { enable2fa, disable2fa, success2fa, verify2fa, saveActivity, removeActivitySuccess, loadActivityStatus } from './actions';
 import reducer from './reducer';
 import saga from './saga';
 import { makeGlobalParent } from '../App/selectors';
@@ -31,7 +32,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
       check: false,
       enabled: false,
       copy: false,
-      activityLog:this.props.activityStatus,
+      activityLog:false,
       showLogs:false
     };
     this.verifyAuth = this.verifyAuth.bind(this);
@@ -44,12 +45,32 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
     // console.log(this.props.global.fa_enabled)
     // console.log(this.props.global.fa_disabled)
     // console.log(this.state.enabled)
-    if (this.props.global.fa_enabled) {
+    // this.props.loadActivityStatus()
+        if (this.props.global.fa_enabled) {
       document.getElementById('2fa').checked = true;
       this.setState({
         enabled: true,
       });
     }
+    if(this.props.ActivityStatus){
+      this.setState({
+        activityLog:true
+      })
+    }
+    // else if(this.props.activityStatus) {
+    //   this.setState({
+    //       activityLog:this.props.activityStatus
+    //   })
+    // }
+    else{
+      this.setState({
+          activityLog:this.props.activityStatus
+      })
+    }
+    // if(this.props.activityStatus || this.props.ActivityStatus){
+    // document.getElementById('activityLog').checked = true;
+    //
+    // }
   }
   componentWillReceiveProps(nextProps) {
   if(nextProps.saveActivityRet){
@@ -59,7 +80,6 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
         activityLog:nextProps.saveActivityRet.saveActivityLogs
       })
       nextProps.removeActivitySuccess()
-      nextProps.loadProfileAction()
     }
     else{
       toast.error(nextProps.saveActivityRet.message)
@@ -266,7 +286,9 @@ const mapStateToProps = createStructuredSelector({
   verified: makeSelectVerified(),
   response: makeSelectResponse(),
   qrKey: makeSelectQrKey(),
-  saveActivityRet:makeSelectActivityRet()
+  saveActivityRet:makeSelectActivityRet(),
+  loadActivitySucces:makeSelectLoadActivitySuccess(),
+  ActivityStatus:makeSelectActivityStatus()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -278,9 +300,7 @@ function mapDispatchToProps(dispatch) {
     verify2fa: (data) => dispatch(verify2fa(data)),
     saveActivity: (data) => dispatch(saveActivity(data)),
     removeActivitySuccess: (data) => dispatch(removeActivitySuccess(data)),
-
-
-
+    loadActivityStatus: (data) => dispatch(loadActivityStatus(data))
   };
 }
 

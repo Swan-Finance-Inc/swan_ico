@@ -353,7 +353,6 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                           <option value="" disabled selected hidden>Select</option>
                           <option value='Ethereum'>ETHEREUM</option>
                           <option value='Bitcoin'>BITCOIN</option>
-                          <option value='USD'>USD</option>
                         </select>
                         <span className='clear'><a onClick={this.clearFilter} id="clearType">Clear</a></span>
                       </div>
