@@ -173,7 +173,9 @@ gobackDollar=(e)=>{
               rate:this.state.btcToDollar,
               phase:this.state.stage,
               tokenPrice : this.state.tokenPrice,
-              bonus:this.state.bonus
+              bonus:this.state.bonus,
+              discount:this.state.discount,
+              isBonusOrDiscount:this.state.isBonusOrDiscount
             };
             console.log(body,"body bitcoin  in contribution page")
             this.setState({
@@ -198,7 +200,9 @@ gobackDollar=(e)=>{
             rate:this.state.ethToDollar,
             phase:this.state.stage,
             tokenPrice : this.state.tokenPrice,
-            bonus:this.state.bonus
+            bonus:this.state.bonus,
+            discount:this.state.discount,
+            isBonusOrDiscount:this.state.isBonusOrDiscount
           };
           console.log(body," body ethereum  in contribution page")
           this.setState({

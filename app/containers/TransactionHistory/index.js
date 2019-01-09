@@ -94,6 +94,29 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           Header: 'Type',
           accessor: 'type',
           filter: <h3>hello</h3>,
+        },
+        {
+          Header: 'Bonus /Discount',
+          accessor: 'isBonusOrDiscount',
+          className:'text-center',
+          Cell:({value})=>{
+            if(value==='staticDiscount')
+            return "Discount"
+            else {
+              return "Bonus"
+            }
+          }
+
+        },
+        {
+          Header: 'Discount(%)',
+          accessor: 'discount',
+          filter: <h3>hello</h3>,
+        },
+        {
+          Header: 'Bonus(%)',
+          accessor: 'bonus',
+          filter: <h3>hello</h3>,
         }
 
       ],
