@@ -40,12 +40,25 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       mail: '',
       show: false,
       password_class:'fa fa-fw fa-eye-slash',
-      conf_password_class:'fa fa-fw fa-eye-slash'
+      conf_password_class:'fa fa-fw fa-eye-slash',
+      channel:''
 
     };
     this.formSubmit = this.formSubmit.bind(this);
   }
   componentDidMount() {
+
+    if(this.props.location.search!=''){
+      let index = this.props.location.search.substring(9)
+       this.setState({
+         channel:index
+       })
+    }
+    else {
+      this.setState({
+        channel:''
+      })
+    }
     if (this.props.match.params.token != null) {
       // console.log(this.props.match.params.token);
       this.setState({
@@ -88,6 +101,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
   passwordMatch() {
     const pass = document.getElementById('password').value;
     const password = document.getElementById('repeat_password').value;
+    console.log(password," password ----")
     if (password === '') {
       this.setState({
         match: '',
@@ -122,7 +136,8 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
       rfcode: this.state.referToken,
       termsAccepted: terms.checked,
       isUs: usCitizen.checked,
-      captcha: this.state['g-recaptcha-response']
+      captcha: this.state['g-recaptcha-response'],
+      channel:this.state.channel
     };
     console.log(name);
     console.log(name.trim());
@@ -202,6 +217,8 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 
 
   render() {
+    console.log(this.props," porps in Register Page")
+    console.log(this.state," state in Register Page")
     if (localStorage.token) {
       return <Redirect to="/dashboard" />;
     }

@@ -144,14 +144,14 @@ gobackDollar=(e)=>{
       console.log(typeof(this.state.dollarsInvested));
       if (parseInt(this.state.dollarsInvested) < this.state.minInvest) {
         this.notifyMinimum();
-      }else if(this.state.curr !='Ethereum'){
-         if (!this.state.valid) {
-         const curr = this.state.curr;
-         toast.error(`Please enter a valid ${curr} address`);
+      }else if(this.state.curr == 'Bitcoin'&&this.state.valid) {
+       if(this.state.curr !='Ethereum'){
+           if (!this.state.valid) {
+           const curr = this.state.curr;
+           toast.error(`Please enter a valid ${curr} address`);
+         }
        }
-      }
-       if(this.state.curr == 'Bitcoin'&&this.state.valid) {
-      const tokenReceive = document.getElementById('tokenReceive').value;
+        const tokenReceive = document.getElementById('tokenReceive').value;
 
           if(!this.state.validWallet){
             toast.error('Please enter a valid ERC20 address');
@@ -861,7 +861,8 @@ gobackDollar=(e)=>{
                          {/* { (this.state.curr == 'Ethereum') ? <span><strong style={{color:"#ff0000"}}>Note:</strong> Please provide ERC-20 compatible wallet address</span> : null }  */}
                           <div className="btn-row">
                           {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && <div><sup>Submit Kyc To Continue</sup></div>}
-                            <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'} >Continue</button>
+                          {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No Transactions During {this.props.successData.stage}</sup></div>}
+                            <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} >Continue</button>
                           </div>
                         </div>
                       </form>

@@ -82,11 +82,6 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
               Header: 'Created At',
               accessor: 'created_at', // Custom cell components!
               className: 'created_at'
-            },
-            {
-              Header: 'Referral Channel',
-              accessor: 'channel', // Custom cell components!
-              className: 'created_at'
             }
           ],
           code:'',

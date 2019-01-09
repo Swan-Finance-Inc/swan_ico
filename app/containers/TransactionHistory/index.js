@@ -423,7 +423,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                   }
                     <div className='col-sm-12'>
                     {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
-                        showPaginationBottom={false}
+                        showPaginationBottom={true}
                         style={{ marginTop: '20px', fontSize: '12px', cursor: 'default' }}
                         data={this.state.data}
                         columns={this.state.columns}
@@ -431,7 +431,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                         pageSizeOptions={[5, 10]}
                         noDataText={'No transactions found'}
                         rowsText={'transactions'}
-                        defaultPageSize={10}
+                        defaultPageSize={15}
 
                       />}
                     </div>
