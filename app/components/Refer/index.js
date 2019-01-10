@@ -216,7 +216,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 </tr>
                 </tbody>
             </table>
-              <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 3</h2>
+              <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 2</h2>
               <table className="table table-bordered sale">
                 <tbody>
                 <tr>

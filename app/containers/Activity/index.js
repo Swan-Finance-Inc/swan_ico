@@ -39,6 +39,11 @@ export class Activity extends React.PureComponent { // eslint-disable-line react
                   Header: 'Created Date',
                   accessor: 'created_at',
                   className: 'text-center'
+                },
+                {
+                  Header: 'IP',
+                  accessor: 'userLogDetail.ip',
+                  className: 'text-center'
                 }
               ]
           }

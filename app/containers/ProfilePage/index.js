@@ -213,21 +213,28 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   const   { profilePicUrl } = this.state
   console.log(profilePicUrl," iiiiiiiiiiiiiiiiiiiiiiiiiiiiii");
     const { phone } = this.state;
+
+    // let stylePersonal, styleNotification, styleWallet;
+
+
+
     return(
       <div id="content" className="ui-content ui-content-aside-overlay">
       <div className="ui-content-body">
         <div className="ui-container container-fluid">
         <div className="panel panel-default">
-              <div className="panel-heading">Update Profile</div>
+              <div className="panel-heading">Manage Profile</div>
                 <div className="panel-body" style={{fontSize:'16px'}}>
           <div className=" contribution row">
           {loading?<LoadingSpinner />:
             <div className="col-sm-12">
               <div className="row text-center">
                 {/* <h2>UPDATE PROFILE</h2> */}
+                {/*
                 <div className="fillDetail">
-                <h5 style={{color:'#888'}}>Please fill the details down below.<hr/></h5>
-              </div>
+                  <h5 style={{color:'#888'}}>Please fill the details down below.<hr/></h5>
+                </div>
+                */}
               </div>
               <form onSubmit={this.updateDetails}>
 
@@ -235,9 +242,24 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
               <div className="row">
               <div className="col-md-12">
                 <div style={{display:'flex',flexDirection:'row'}}>
-                <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div>
-                <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div>
-                <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>WALLET</h2></div>
+                  { this.state.currentView === 'personal' ? (
+                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10}}>PERSONAL</h2></div>
+                  ) : (
+                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div>
+                  )}
+                  { this.state.currentView === 'notifications' ? (
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div>
+                  ) : (
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div>
+                  )}
+                  { this.state.currentView === 'wallet' ? (
+                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10}}>WALLET</h2></div>
+                  ) : (
+                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>WALLET</h2></div>
+                  )}
+                  {/* <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div> */}
+                  {/* <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div> */}
+                  {/* <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>WALLET</h2></div> */}
                 </div>
                 <hr style={{height:"1px",border:"none",color:"#000",backgroundColor:"#000"}}/>
 

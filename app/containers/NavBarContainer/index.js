@@ -64,9 +64,9 @@ export class NavBarContainer extends React.PureComponent {
   selectEnglish=()=>{
     console.log("select english clicked");
   }
-  selectChinese=()=>{
-    console.log("select Chinese clicked");
-  }
+  // selectChinese=()=>{
+  //   console.log("select Chinese clicked");
+  // }
 
   closeSignOut() {
     this.setState({
@@ -112,10 +112,10 @@ export class NavBarContainer extends React.PureComponent {
             <Nav pullRight >
             <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">
             <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectEnglish}><i ></i>English</MenuItem>
-            <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectChinese}><i ></i>Chinese</MenuItem>
+            {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectChinese}><i ></i>Chinese</MenuItem> */}
             </NavDropdown>
                 <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
-                <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Update Profile</MenuItem>
+                <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Manage Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showDeleteProfile}><i className="fa fa-user-times"></i>Delete Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showSignOut}><i className="fa fa-power-off"></i>Sign Out</MenuItem>
