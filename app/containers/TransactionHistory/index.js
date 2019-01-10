@@ -427,12 +427,11 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                         style={{ marginTop: '20px', fontSize: '12px', cursor: 'default' }}
                         data={this.state.data}
                         columns={this.state.columns}
-                        onPageChange={this.pageChange}
+                        // onPageChange={this.pageChange}
                         pageSizeOptions={[5, 10]}
                         noDataText={'No transactions found'}
                         rowsText={'transactions'}
-                        defaultPageSize={15}
-
+                        defaultPageSize={5}
                       />}
                     </div>
 

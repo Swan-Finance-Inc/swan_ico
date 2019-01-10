@@ -199,7 +199,7 @@ showPassWord= (e)=>{
                   <div className="header-right">
 
                     <div className="header-btn-group ">
-                      <div className="header-btn"><Link to="/signup">Create Account</Link></div>
+                      <div className="header-btn"><Link to="/signup">Sign Up</Link></div>
                     </div>
                   </div>
                 </div>

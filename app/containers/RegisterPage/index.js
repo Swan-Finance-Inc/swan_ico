@@ -256,7 +256,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
               <div className="row">
                 <div className="col-sm-6 col-sm-offset-3 ">
                   <div className="card-header">
-                    <h1>Create Account</h1>
+                    <h1>Sign Up</h1>
                   </div>
                   <div className="signin-card-body">
                     <form id="signupform" onSubmit={this.formSubmit} >
