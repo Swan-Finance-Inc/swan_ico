@@ -466,8 +466,8 @@ handleInput2=(e)=>{
                         error={ phone ? (isValidNumber(phone) ? undefined : 'Invalid phone number') : '' }/>
                     </div>
                     <div className="col-sm-6 form-group">
-                      <label htmlFor="ethAddress"><h5>ETH WALLET ADDRESS<sup>*</sup></h5></label>
-                      <input className="form-control" type="text" name="ethAddress" id="ethAddress" placeholder="Enter ETH wallet address" title="Please enter valid eth address" value={ethAddress} onChange={this.handleInput} required/>
+                      <label htmlFor="ethAddress"><h5>ETH WALLET ADDRESS (ERC20)<sup>*</sup></h5></label>
+                      <input className="form-control" type="text" name="ethAddress" id="ethAddress" placeholder="Enter ETH wallet address (ERC20)" title="Please enter valid eth address" value={ethAddress} onChange={this.handleInput} required/>
                       { !this.state.valid ? <p style={{color: '#f00'}}>Please enter Valid ETH address.</p> : '' }
                     </div>
                   </div>

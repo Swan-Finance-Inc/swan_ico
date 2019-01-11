@@ -7,8 +7,15 @@
 import React from 'react';
 // import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Info from "../Info"
 
 class Balance extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      infoShow: false
+    };
+  }
   toggleTranActive=(e)=>{
     this.props.compact();
     this.props.toggleTranActive();
@@ -27,13 +34,21 @@ class Balance extends React.PureComponent {
     // }
   }
 
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
+  }
+
   render() {
-    console.log('tokens: ', this.props.userInfo.tokens);
-    console.log(this.props,"props in refer")
     return (
       <div>
         <div className="panel panel-default">
-        <div className="panel-heading blueBG">Your Balance</div>
+        <div className="panel-heading blueBG">
+          <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+          Your Balance
+        </div>
         <div className="panel-body">
         <div className="row">
           <div className="col-sm-12">
@@ -45,14 +60,32 @@ class Balance extends React.PureComponent {
             <div className="bal-card">
               <h3>Total Balance</h3>
               <div className="balance">{(this.props.userInfo.tokens.total)}</div>
-              <div className='link referalPageLink'><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}><u>View Transactions</u></Link></div>
+              {
+                !!this.props.userInfo.tokens.total ?
+                  (
+                    <div className='link referalPageLink'><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}><u>View Transactions</u></Link></div>
+                  ) :
+                  (
+                    <div>&nbsp; &nbsp; &nbsp;</div>
+                  )
+              }
+              {/* <div className='link referalPageLink'><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}><u>View Transactions</u></Link></div> */}
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3>Referral Tokens Earned</h3>
               <div className="balance">{this.props.userInfo.tokens.referral}</div>
-              <div className='referalPageLink link'><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}><u>View Referral Transactions</u> </Link></div>
+              {
+                !!this.props.userInfo.tokens.referral ?
+                  (
+                    <div className='referalPageLink link'><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}><u>View Referral Transactions</u> </Link></div>
+                  ) :
+                  (
+                    <div>&nbsp; &nbsp; &nbsp;</div>
+                  )
+              }
+              {/* <div className='referalPageLink link'><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}><u>View Referral Transactions</u> </Link></div> */}
             </div>
           </div>
           <div className="col-sm-6 col-md-3">
@@ -76,7 +109,10 @@ class Balance extends React.PureComponent {
         </div>
         </div>
             <div className="panel panel-default">
-                <div className="panel-heading">Bounty Stakes</div>
+              <div className="panel-heading blueBG">
+                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                Bounty Stakes
+              </div>
                 <div className="panel-body">
                 <div className="row">
                   <div className="col-sm-12"><p>To participate in bounty <a href="https://www.google.com" target="_blank" className="link">click here</a>.</p></div>

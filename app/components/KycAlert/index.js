@@ -11,6 +11,7 @@ import { Link } from 'react-router-dom';
 class KycAlert extends React.PureComponent {
 
   render() {
+
     if(this.props.showAlert){
         if(this.props.kycStatus === 'PENDING'){
             return(
@@ -20,7 +21,7 @@ class KycAlert extends React.PureComponent {
                  </div>
             )
         }
-        if(this.props.kycStatus === 'DOCUMENTS'){
+        else if(this.props.kycStatus === 'DOCUMENTS'){
             return(
                 <div className="alert alert-danger">
                     <span> <Link to="/dashboard/uploadDocs">{this.props.msg}</Link></span>
@@ -44,7 +45,13 @@ class KycAlert extends React.PureComponent {
         }else if(this.props.kycStatus === 'REJECTED'){
             return(
                 <div className="alert alert-danger">
-                    <span>Your KYC request is Rejected. Please check your mail regarding issues and <Link to="/dashboard/kyc">submit</Link> the details again.</span>
+
+                    <span>Your KYC request is Rejected. Please check your mail regarding issues and <Link to="/dashboard/kyc">submit</Link> the details again.</span><br />
+                    {!!this.props.rejectMsg ?
+                      <span> Reason for rejection: {this.props.rejectMsg}</span> :
+                      <span></span>
+                    }
+
                     <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
                  </div>
             )

@@ -82,7 +82,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       myReferal:'',
       buy:'',
       faqData:[],
-      isBlocked:false
+      isBlocked:false,
+      rejectMsg: null
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -551,6 +552,25 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   componentWillReceiveProps(nextProps){
+    console.log('NEXT PROPS : ', nextProps);
+    // console.log('reasonArr : ', nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason);
+    // console.log('reason : ', nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason[nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason.length - 1]);
+    if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
+      console.log('kycDetails : ', nextProps.dashboardwelcomepage.userInfo.kycDetails);
+      if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason) {
+        console.log('rejectReason : ', nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason);
+        const rejectArr = nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason;
+        console.log('rejectArr : ', rejectArr);
+        console.log('reaseon : ', rejectArr[rejectArr.length - 1]);
+        console.log('Change State');
+        this.setState({
+            rejectMsg: rejectArr[rejectArr.length - 1]
+          },
+          ()=>console.log('state : ', this.state.rejectMsg)
+        );
+      }
+    }
+
   if(nextProps.globalError){
     toast.error("Something went Wrong. Please Refresh")
     nextProps.codeErrorRemove()
@@ -667,7 +687,17 @@ export class DashBoardWelcomePage extends React.PureComponent {
           />
           {(this.props.location.pathname == '/dashboard') ?
              (this.props.dashboardwelcomepage.loading?<LoadingSpinner />:<div id="content" className="ui-content ui-content-aside-overlay">
-              <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} msg={this.state.kycMsg }  closeAlert={this.closeAlert} showAlert={this.state.showAlert}/>
+             {/* AJ comment*/}
+             {/*{
+                (this.props.dashboardwelcomepage.userInfo.kycDetails.rejectReason.length > 0) ?
+                  this.setState({
+                    kycMsg: this.props.dashboardwelcomepage.userInfo.kycDetails.rejectReason[this.props.dashboardwelcomepage.userInfo.kycDetails.rejectReason.length - 1]
+                  }) :
+                  this.setState({
+                    kycMsg: null
+                  })
+              } */}
+              <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} msg={this.state.kycMsg } rejectMsg={this.state.rejectMsg} closeAlert={this.closeAlert} showAlert={this.state.showAlert}/>
               <div className="row">
                 <div className="col-sm-6">
                 <h1>Dashboard</h1>
