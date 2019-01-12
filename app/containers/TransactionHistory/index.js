@@ -26,12 +26,15 @@ import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
+import Info from "../../components/Info";
 
 
 export class TransactionHistory extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
     this.state = {
+      // @aj
+      infoShow: false,
       data: [],
       columns: [
         {
@@ -134,6 +137,14 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     this.pageChange = this.pageChange.bind(this);
 
     this.previousChange = this.previousChange.bind(this);
+  }
+
+  //@aj
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
   }
 
 
@@ -348,7 +359,11 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
-        <div className="panel-heading">Transactions</div>
+          <div className="panel-heading blueBG">
+            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            Transactions
+          </div>
+          {/* <div className="panel-heading">Transactions</div> */}
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
               <div className="col-sm-12">

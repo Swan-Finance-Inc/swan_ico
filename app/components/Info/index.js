@@ -1,3 +1,9 @@
+/**
+*
+* FaqPage
+*
+*/
+
 import React from 'react';
 import { Button, Well, Collapse, Modal } from 'react-bootstrap';
 import Switch from 'react-toggle-switch'
@@ -25,18 +31,12 @@ class Info extends React.PureComponent { // eslint-disable-line react/prefer-sta
       open:true
     })
   }
-  toggleSwitch=(e)=>{
-    this.setState({
-        switched:false
-    })
-    this.props.hanldeToggle()
-  }
 
   render() {
     console.log(" inside info Component ")
     return (
       <div>
-        <i className="fa fa-info" style={{float:'right',marginRight:'20px'}} onClick={this.show} ></i>
+        <i className="fa fa-info" style={{float:'right',marginRight:'20px', cursor:'pointer'}} onClick={this.show} ></i>
         <div className="static-modal">
           <Modal show={this.state.open} bsSize="large" onHide={this.hide}>
           <Modal.Header>

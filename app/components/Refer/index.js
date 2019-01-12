@@ -20,6 +20,7 @@ import {
   RedditIcon,
 } from 'react-share';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
+import Info from "../Info";
 
 const SHARE_POST = 'Pexo introduces a unique tokensale platform for the Community.You can earn upto 2000 Pexo Tokens , Sign-up';
 
@@ -29,6 +30,8 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
     this.state = {
       code: '',
       copied: false,
+      // @aj
+      infoShow: false
     };
   }
 
@@ -42,6 +45,13 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
 
     /* Copy the text inside the text field */
     document.execCommand('copy');
+  }
+
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
   }
 
   render() {
@@ -176,7 +186,11 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
       </div>
       </div> :''}
     {this.props.icoFlag?  <div className="panel panel-default">
-          <div className="panel-heading">ICO Details</div>
+          {/*<div className="panel-heading">ICO Details</div>*/}
+          <div className="panel-heading blueBG">
+            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            ICO Details
+          </div>
           <div className="panel-body" style={{fontSize:'16px'}}>
 
 

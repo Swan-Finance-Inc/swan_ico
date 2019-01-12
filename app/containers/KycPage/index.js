@@ -22,6 +22,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { Redirect, Link } from 'react-router-dom';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
 import { kycDone, loadProfileAction } from '../DashBoardWelcomePage/actions';
+import Info from "../../components/Info";
 
 import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
@@ -32,6 +33,8 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     super(props)
 
     this.state = {
+      // @aj
+      infoShow: false,
       frontImg : '',
       frontImgUrl : 'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
       backImg : '',
@@ -93,6 +96,14 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
   //     })
   //   }
   // }
+
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
+  }
+
   componentDidMount(){
     console.log(" in component did mount ")
     console.log("User infor",this.props.userInfo.userInfo.kycDetails.fullName)
@@ -423,7 +434,11 @@ handleInput2=(e)=>{
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
-        <div className="panel-heading">KYC Verification</div>
+            {/*<div className="panel-heading">KYC Verification</div>*/}
+            <div className="panel-heading blueBG">
+              <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+              KYC Verification
+            </div>
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
               <div className="col-sm-12">

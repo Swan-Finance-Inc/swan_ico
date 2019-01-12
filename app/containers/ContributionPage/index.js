@@ -22,11 +22,14 @@ import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
+import Info from "../../components/Info";
 export class ContributionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
   constructor(props) {
     super(props);
     this.state = {
+      //@aj
+      infoShow: false,
       confirmContri: false,
       usdEurContributionConfirm: false,
       curr: 'Ethereum',
@@ -75,6 +78,14 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     this.amtInvested = this.amtInvested.bind(this);
     this.validator = this.validator.bind(this);
     this.validatorWallet = this.validatorWallet.bind(this);
+  }
+
+  // @aj
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
   }
 
   // End Constructor
@@ -759,7 +770,11 @@ gobackDollar=(e)=>{
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
-          <div className="panel-heading">Contribution</div>
+          {/* <div className="panel-heading">Contribution</div> */}
+          <div className="panel-heading blueBG">
+            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            Contribution
+          </div>
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
               <div className="col-sm-12">

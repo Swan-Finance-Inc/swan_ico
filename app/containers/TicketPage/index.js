@@ -23,6 +23,7 @@ import { createTicket, resetTicketSuccess, showTickets, sendMessage, getMessages
 import { ToastContainer, toast } from 'react-toastify';
 import UserMessage from 'components/UserMessage';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
+import Info from "../../components/Info";
 
 
 export class TicketPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -30,6 +31,8 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
     super(props);
 
     this.state = {
+      //@aj
+      infoShow: false,
       data: [],
       columns: [
         {
@@ -66,6 +69,14 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
     this.handleShowTicket = this.handleShowTicket.bind(this);
     this.handleCloseTicket = this.handleCloseTicket.bind(this);
     this.sendMessage = this.sendMessage.bind(this);
+  }
+
+  //@aj
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
   }
 
   handleShowTicket() {
@@ -178,7 +189,11 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                 </div>
               </div>
               <div className="panel panel-info">
-        <div className="panel-heading">TICKETS</div>
+              {/* <div className="panel-heading">TICKETS</div> */}
+          <div className="panel-heading blueBG">
+            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            TICKETS
+          </div>
           <div className="panel-body" style={{fontSize:'16px'}}>
               <div className="row">
                 <div className="col-sm-12">

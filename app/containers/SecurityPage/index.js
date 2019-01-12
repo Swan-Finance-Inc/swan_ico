@@ -21,6 +21,7 @@ import { makeGlobalParent } from '../App/selectors';
 import { ToastContainer, toast } from 'react-toastify';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Activity from 'containers/Activity/Loadable';
+import Info from "../../components/Info";
 
 export class SecurityPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -28,6 +29,8 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
     this.securityCheck = this.securityCheck.bind(this);
     this.disableCheck = this.disableCheck.bind(this);
     this.state = {
+      //@aj
+      infoShow: false,
       imageBase64: '',
       check: false,
       enabled: false,
@@ -37,6 +40,13 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
     };
     this.verifyAuth = this.verifyAuth.bind(this);
     this.disableAuth = this.disableAuth.bind(this);
+  }
+
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
   }
 
   componentDidMount() {
@@ -182,7 +192,11 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
           <div className="ui-container container-fluid">
             <div className="" style={{ marginBottom: '500px' }}>
             <div className="panel panel-default">
-              <div className="panel-heading">Two-Factor Authentication</div>
+              {/*<div className="panel-heading">Two-Factor Authentication</div>*/}
+              <div className="panel-heading blueBG">
+                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                Two-Factor Authentication
+              </div>
                 <div className="panel-body" style={{fontSize:'16px'}}>
               <div className="row">
                 <div className="col-sm-12">
@@ -243,7 +257,11 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
             </div>
           </div>
           <div className="panel panel-default">
-            <div className="panel-heading">Save Activity Log</div>
+            {/*<div className="panel-heading">Save Activity Log</div>*/}
+            <div className="panel-heading blueBG">
+              <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+              Save Activity Log
+            </div>
               <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
               <div className="col-sm-12">

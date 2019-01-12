@@ -17,7 +17,8 @@ import injectReducer from 'utils/injectReducer';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import makeSelectMyReferal, { makeSelectMyReferalloading, makeSelectMyReferalData } from './selectors';
 import Refer from 'components/Refer/Loadable';
-import { getReferalData } from './actions'
+import { getReferalData } from './actions';
+import Info from "../../components/Info";
 
 import reducer from './reducer';
 import saga from './saga';
@@ -26,6 +27,7 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
   constructor(props){
     super(props)
     this.state= {
+      infoShow: false,
       users:[
         {
             "local": {
@@ -113,6 +115,13 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
     }
   }
 
+  handleInfoModal = () => {
+    this.setState({
+      infoShow: !this.state.infoShow
+    });
+    console.log('infoShow : ', this.state.infoShow);
+  }
+
   render() {
     console.log(this.props," props in myreferal")
     console.log(this.state," state in myreferal")
@@ -177,7 +186,11 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
         }
 
           <div className="panel panel-default">
-        <div className="panel-heading">Transactions</div>
+          {/* <div className="panel-heading">Transactions</div> */}
+          <div className="panel-heading blueBG">
+            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            Transactions
+          </div>
           <div className="row">
             <div className='col-sm-10 col-sm-offset-1'>
           {!loading?  <ReactTable
