@@ -299,9 +299,21 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><a href='http://pexo.io/privacypolicy' target='_blank'><span>Privacy Policy</span></a></li>
               </ul>
             </li>
-            <li className={this.state.supportAct}><a href="mailto:info@pexo.io"><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span><span className='infoSpan'>info@pexo.io</span></a>
+              <li className={this.state.contAct}><Link to="/dashboard/news" role="button" onClick={this.toggleContriActive} ><span className="has-icon"><i className="fa fa-newspaper-o"></i></span><span>News</span></Link>
+                <ul className="nav nav-sub sidebar-niceScroll">
+                  <li className="nav-sub-header"><Link to="/dashboard/news" role="button" onClick={this.toggleContriActive}><span>News</span></Link></li>
+                </ul>
+              </li>
+
+              <li className={this.state.contAct}><Link to="/dashboard/announcement" role="button" onClick={this.toggleContriActive} ><span className="has-icon"><i className="fa fa-bullhorn"></i></span><span>Announcements</span></Link>
+                <ul className="nav nav-sub sidebar-niceScroll">
+                  <li className="nav-sub-header"><Link to="/dashboard/announcement" role="button" onClick={this.toggleContriActive}><span>Announcements</span></Link></li>
+                </ul>
+              </li>
+
+            <li className={this.state.supportAct}><a href="mailto:support@pexo.io"><span className="has-icon"><i className="fa fa-life-ring"></i></span><span>Support</span><span className='infoSpan'>support@pexo.io</span></a>
                  <ul className="nav nav-sub sidebar-niceScroll">
-                   <li className="nav-sub-header"><a href="mailto:info@pexo.io"><span>Support</span></a></li>
+                   <li className="nav-sub-header"><a href="mailto:support@pexo.io"><span>Support</span></a></li>
                  </ul>
                </li>
           </ul>

@@ -16,7 +16,7 @@ import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import makeSelectMyReferal, { makeSelectMyReferalloading, makeSelectMyReferalData } from './selectors';
-import Refer from 'components/Refer/Loadable';
+import Refer from 'components/Refer';
 import { getReferalData } from './actions';
 import Info from "../../components/Info";
 
@@ -134,8 +134,11 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
       </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-        {this.props.code.amountPercent!=0?<Refer  code={this.props.code} icoFlag ={false} />:""}
-        {
+          {
+            console.log('refer social ****----*****----***', this.props.code.amountPercent)
+          }
+        {this.props.code.amountPercent > 0 ? <Refer code={this.props.code} icoFlag ={false} />:""}
+        {/*
           //     <div className="panel panel-default">
           //   <div className="panel-heading">Users</div>
           //     <div className="row">
@@ -183,7 +186,7 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
           //     </div>
           //     </div>
           //     </div>
-        }
+        */}
 
           <div className="panel panel-default">
           {/* <div className="panel-heading">Transactions</div> */}

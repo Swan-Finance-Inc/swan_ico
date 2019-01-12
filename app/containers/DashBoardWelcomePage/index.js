@@ -756,7 +756,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 '' }
         <div className='row'>
         <div id="footer" style={{position:'fixed'}}  className="ui-footer">
-        © 2018 Pexo, All Rights Reserved
+        © 2019 Pexo, All Rights Reserved
         <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
         <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
         <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
@@ -767,7 +767,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
         <div className='row'>
         <div className='col-md-1 col-md-offset-6'>
-        <div className="sticky-telegram-logo"><a href=" https://t.me/pexoSupport" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+        <div className="sticky-telegram-logo"><a href="http://t.me/pexochat" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
         </div>
         </div>
 

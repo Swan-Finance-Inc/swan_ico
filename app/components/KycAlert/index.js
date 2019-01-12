@@ -16,7 +16,7 @@ class KycAlert extends React.PureComponent {
         if(this.props.kycStatus === 'PENDING'){
             return(
                 <div className="alert alert-danger">
-                    <span>Please <Link to="/dashboard/kyc">complete</Link> your KYC.</span>
+                    <span><Link to="/dashboard/kyc">Click here</Link> to complete your KYC.</span>
                     <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
                  </div>
             )

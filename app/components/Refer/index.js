@@ -63,7 +63,11 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
       }
 
       {!!this.props.code.status?   <div className="panel panel-default">
-          <div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free Pexo Tokens</div>
+          {/*<div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free Pexo Tokens</div>*/}
+          <div className="panel-heading blueBG">
+            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            Refer & Earn - Invite Your Friends & Get Free Pexo Tokens
+          </div>
           <div className="panel-body">
         <div className="row">
           <div className="col-sm-12">

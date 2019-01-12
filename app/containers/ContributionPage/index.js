@@ -786,7 +786,7 @@ gobackDollar=(e)=>{
                       <p style={{color:'#ff0000'}}>Current Token Sale :&nbsp;
                       {this.state.stage === 'privateSaleRound1'?"Private Sale Round 1":this.state.stage === 'privateSaleRound2'?"Private Sale Round 2":this.state.stage === 'preSale'?"Pre Sale":this.state.stage === 'crowdSale'?"Crowdsale":this.state.stage}
                       </p>
-                      <h5>1 Pexo TOKEN =${this.state.tokenPrice}</h5>
+                      <h5>1 PEXO TOKEN =${this.state.tokenPrice}</h5>
                     </div>
                   </div>
                   <div className="row">
@@ -875,8 +875,8 @@ gobackDollar=(e)=>{
                         {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
                          {/* { (this.state.curr == 'Ethereum') ? <span><strong style={{color:"#ff0000"}}>Note:</strong> Please provide ERC-20 compatible wallet address</span> : null }  */}
                           <div className="btn-row">
-                          {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && <div><sup>Submit Kyc</sup></div>}
-                          {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && <div><sup>Wait for kyc approval</sup></div>}
+                          {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && <div><sup>Submit KYC to continue</sup></div>}
+                          {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && <div><sup>Wait for KYC approval</sup></div>}
                           {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No Transactions During {this.props.successData.stage}</sup></div>}
                             <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} >Continue</button>
                           </div>
