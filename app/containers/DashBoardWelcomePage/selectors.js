@@ -36,8 +36,15 @@ const makeSelectFaqData = () => createSelector(
   selectDashBoardWelcomePageDomain,
   (substate) => substate.get('faqData')
 )
+const makeSelectNewsData = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('newsData')
+)
 
-
+const makeSelectAnnouncementsData = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('announcementsData')
+)
 
 export default makeSelectDashBoardWelcomePage;
 export {
@@ -45,5 +52,7 @@ export {
   makeSelectSocial,
   makeSelectKycDone,
   makeSelectErrorGlobal,
-  makeSelectFaqData
+  makeSelectFaqData,
+  makeSelectNewsData,
+  makeSelectAnnouncementsData
 };

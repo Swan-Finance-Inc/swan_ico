@@ -16,7 +16,11 @@ import {
   CODE_ERROR,
   CODE_ERROR_REMOVE,
   LOAD_FAQ,
-  LOAD_FAQ_SUCCESS
+  LOAD_FAQ_SUCCESS,
+  LOAD_NEWS,
+  LOAD_NEWS_SUCCESS,
+  LOAD_ANNOUNCEMENTS,
+  LOAD_ANNOUNCEMENTS_SUCCESS
 } from './constants';
 
 export function loadFaqSuccess(data) {
@@ -30,6 +34,31 @@ export function loadFaq() {
     type: LOAD_FAQ,
   };
 }
+
+export function loadAnnouncementsSuccess(data) {
+  return {
+    type: LOAD_ANNOUNCEMENTS_SUCCESS,
+    data
+  };
+}
+export function loadAnnouncements() {
+  return {
+    type: LOAD_ANNOUNCEMENTS,
+  };
+}
+
+export function loadNewsSuccess(data) {
+  return {
+    type: LOAD_NEWS_SUCCESS,
+    data
+  };
+}
+export function loadNews() {
+  return {
+    type: LOAD_NEWS,
+  };
+}
+
 export function deleteUserSuccessAction() {
   return {
     type: DELETE_USER_SUCCESS,

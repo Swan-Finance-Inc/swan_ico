@@ -33,6 +33,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       ticketAct: '',
       supportAct: '',
       faqAct: '',
+      newsAct: '',
+      announcementsAct: '',
       profileAct: '',
       resetPassAct: '',
       showSignOut: false,
@@ -53,6 +55,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       secAct: this.props.sec,
       supportAct: this.props.support,
       faqAct: this.props.faq,
+      announcementsAct: this.props.announcements,
+      newsAct: this.props.news,
       profileAct: this.props.profile,
       resetPassAct: this.props.resetPass,
       upload_docs:this.props.upload_docs,
@@ -137,12 +141,23 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.props.toggleResetPassActive();
   }
 
+  toggleNewsActive=(e) => {
+    this.props.compact();
+    this.props.toggleNewsActive();
+  }
+
+  toggleAnnouncementsActive=(e) => {
+    this.props.compact();
+    this.props.toggleAnnouncementsActive();
+  }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       dashAct: nextProps.dash,
       contAct: nextProps.cont,
       kycAct: nextProps.kyc,
+      announcementsAct: this.props.announcements,
+      newsAct: this.props.news,
       tranAct: nextProps.tran,
       secAct: nextProps.sec,
       ticketAct: nextProps.ticket,
@@ -299,15 +314,15 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                 <li className="nav-sub-header"><a href='http://pexo.io/privacypolicy' target='_blank'><span>Privacy Policy</span></a></li>
               </ul>
             </li>
-              <li className={this.state.contAct}><Link to="/dashboard/news" role="button" onClick={this.toggleContriActive} ><span className="has-icon"><i className="fa fa-newspaper-o"></i></span><span>News</span></Link>
+              <li className={this.state.newsAct}><Link to="/dashboard/news" role="button" onClick={this.toggleNewsActive} ><span className="has-icon"><i className="fa fa-newspaper-o"></i></span><span>News</span></Link>
                 <ul className="nav nav-sub sidebar-niceScroll">
-                  <li className="nav-sub-header"><Link to="/dashboard/news" role="button" onClick={this.toggleContriActive}><span>News</span></Link></li>
+                  <li className="nav-sub-header"><Link to="/dashboard/news" role="button" onClick={this.toggleNewsActive}><span>News</span></Link></li>
                 </ul>
               </li>
 
-              <li className={this.state.contAct}><Link to="/dashboard/announcement" role="button" onClick={this.toggleContriActive} ><span className="has-icon"><i className="fa fa-bullhorn"></i></span><span>Announcements</span></Link>
+              <li className={this.state.announcementsAct}><Link to="/dashboard/announcements" role="button" onClick={this.toggleAnnouncementsActive} ><span className="has-icon"><i className="fa fa-bullhorn"></i></span><span>Announcements</span></Link>
                 <ul className="nav nav-sub sidebar-niceScroll">
-                  <li className="nav-sub-header"><Link to="/dashboard/announcement" role="button" onClick={this.toggleContriActive}><span>Announcements</span></Link></li>
+                  <li className="nav-sub-header"><Link to="/dashboard/announcements" role="button" onClick={this.toggleAnnouncementsActive}><span>Announcements</span></Link></li>
                 </ul>
               </li>
 

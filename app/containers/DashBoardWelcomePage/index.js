@@ -11,6 +11,8 @@ import FaqPage from 'components/FaqPage/Loadable';
 import HowToBuy from 'components/HowToBuy/Loadable';
 import Balance from 'components/Balance/Loadable';
 import Refer from 'components/Refer/Loadable';
+import News from 'components/News/Loadable';
+import Announcements from 'components/Announcements/Loadable';
 import KycAlert from 'components/KycAlert/Loadable';
 import NavBarContainer from 'containers/NavBarContainer';
 import TransactionHistory from 'containers/TransactionHistory';
@@ -28,8 +30,8 @@ import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
-import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq } from './actions';
-import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData }from './selectors';
+import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq, loadNews, loadAnnouncements } from './actions';
+import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData, makeSelectNewsData, makeSelectAnnouncementsData }from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
 import { resetSuccess } from '../KycPage/actions';
@@ -49,6 +51,8 @@ const initialState = {
   support: '',
   ticket: '',
   faq: '',
+  news: '',
+  announcements: '',
   profile: '',
   resetPass: '',
   upload_docs: '',
@@ -69,6 +73,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       cont: '',
       tran: '',
       faq: '',
+      news: '',
+      announcements: '',
       ticket: '',
       profile: '',
       resetPass: '',
@@ -82,6 +88,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       myReferal:'',
       buy:'',
       faqData:[],
+      newsData:[],
+      announcementsData: [],
       isBlocked:false,
       rejectMsg: null
     };
@@ -93,6 +101,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.toggleTicketActive = this.toggleTicketActive.bind(this);
     this.toggleSupportActive = this.toggleSupportActive.bind(this);
     this.toggleFaqActive = this.toggleFaqActive.bind(this);
+    this.toggleNewsActive = this.toggleNewsActive.bind(this);
+    this.toggleAnnouncementsActive = this.toggleAnnouncementsActive.bind(this);
     this.toggleHowToBuyActive = this.toggleHowToBuyActive.bind(this);
     this.toggleProfileActive = this.toggleProfileActive.bind(this);
     this.toggleResetPassActive = this.toggleResetPassActive.bind(this);
@@ -109,7 +119,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
   componentWillMount() {
     this.props.loadProfileAction();
-    this.props.loadFaq()
+    this.props.loadFaq();
+    this.props.loadNews();
+    this.props.loadAnnouncements();
     console.log(this.props);
   }
 
@@ -162,6 +174,14 @@ export class DashBoardWelcomePage extends React.PureComponent {
     } else if (this.props.location.pathname == '/dashboard/faq') {
       this.setState({
       ...initialState,faq:'active'
+      });
+    } else if (this.props.location.pathname == '/dashboard/news') {
+      this.setState({
+      ...initialState, news:'active'
+      });
+    } else if (this.props.location.pathname == '/dashboard/announcements') {
+      this.setState({
+      ...initialState, announcements:'active'
       });
     }
     else if (this.props.location.pathname == '/dashboard/whitePaper') {
@@ -241,6 +261,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
           supportActive: '',
           ticketActive: '',
           faqActive: '',
+          newsActive: '',
+          announcementsActive: '',
           profileActive: '',
           resetPassActive: '',
           upload_docs:'',
@@ -281,6 +303,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -299,6 +323,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -317,6 +343,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -335,6 +363,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -353,6 +383,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -371,6 +403,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: 'active',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -389,6 +423,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -408,6 +444,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: '',
+      news: '',
+      announcements: '',
       profile: '',
       resetPass: '',
       notification:'',
@@ -426,6 +464,48 @@ export class DashBoardWelcomePage extends React.PureComponent {
       support: '',
       ticket: '',
       faq: 'active',
+      news: '',
+      announcements: '',
+      profile: '',
+      resetPass: '',
+      notification:'',
+      upload_docs:'',
+      myReferal:'',
+      buy:''
+    });
+  }
+  toggleNewsActive() {
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      cont: '',
+      tran: '',
+      support: '',
+      ticket: '',
+      faq: '',
+      news: 'active',
+      announcements: '',
+      profile: '',
+      resetPass: '',
+      notification:'',
+      upload_docs:'',
+      myReferal:'',
+      buy:''
+    });
+  }
+  toggleAnnouncementsActive() {
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      cont: '',
+      tran: '',
+      support: '',
+      ticket: '',
+      faq: '',
+      news: '',
+      announcements: 'active',
       profile: '',
       resetPass: '',
       notification:'',
@@ -443,6 +523,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       faq: '',
+      news: '',
+      announcements: '',
       ticket: 'active',
       profile: '',
       resetPass: '',
@@ -461,6 +543,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       faq: '',
+      news: '',
+      announcements: '',
       ticket: '',
       profile: 'active',
       resetPass: '',
@@ -479,6 +563,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       faq: '',
+      news: '',
+      announcements: '',
       ticket: '',
       profile: '',
       resetPass: 'active',
@@ -497,6 +583,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       faq: '',
+      news: '',
+      announcements: '',
       ticket: '',
       profile: '',
       resetPass: '',
@@ -515,6 +603,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       faq: '',
+      news: '',
+      announcements: '',
       ticket: '',
       profile: '',
       resetPass: '',
@@ -534,6 +624,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       tran: '',
       support: '',
       faq: '',
+      news: '',
+      announcements: '',
       ticket: '',
       profile: '',
       resetPass: '',
@@ -591,6 +683,18 @@ export class DashBoardWelcomePage extends React.PureComponent {
           faqData:nextProps.faqData
       })
       console.log(" inside will Recieve props faqData",nextProps)
+    }
+    if(nextProps.newsData){
+      this.setState({
+          newsData:nextProps.newsData
+      })
+      console.log(" inside will Recieve props newsData",nextProps)
+    }
+    if(nextProps.announcementsData){
+      this.setState({
+          announcementsData:nextProps.announcementsData
+      })
+      console.log(" inside will Recieve props announcementsData",nextProps)
     }
   }
   closeAlert(){
@@ -661,6 +765,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
             kyc={this.state.kyc}
             support={this.state.support}
             faq={this.state.faq}
+            news={this.state.news}
+            announcements={this.state.announcements}
             ticket={this.state.ticket}
             profile= {this.state.profile}
             buy={this.state.buy}
@@ -678,6 +784,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
             toggleTranActive={this.toggleTranActive}
             toggleSupportActive={this.toggleSupportActive}
             toggleFaqActive={this.toggleFaqActive}
+            toggleAnnouncementsActive={this.toggleAnnouncementsActive}
+            toggleNewsActive={this.toggleNewsActive}
             toggleProfileActive={this.toggleProfileActive}
             toggleResetPassActive={this.toggleResetPassActive}
             toggleTicketActive={this.toggleTicketActive}
@@ -753,6 +861,10 @@ export class DashBoardWelcomePage extends React.PureComponent {
                       <Notification  />:
                   (this.props.location.pathname == '/dashboard/whitePaper') ?
                         <HowToBuy  />:
+                  (this.props.location.pathname == '/dashboard/news') ?
+                        <News newsData={this.state.newsData} />:
+                  (this.props.location.pathname == '/dashboard/announcements') ?
+                        <Announcements announcementsData={this.state.announcementsData} />:
 '' }
         <div className='row'>
         <div id="footer" style={{position:'fixed'}}  className="ui-footer">
@@ -760,7 +872,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
         <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
         <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
         <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
-        <i className="fa fa-android fa-2x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank' style={{ fontSize: '12px'}}> Download App here</a></i>
+        <i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank' style={{ fontSize: '12px'}}> Download App here</a></i>
 
         </div>
         </div>
@@ -809,7 +921,9 @@ const mapStateToProps = createStructuredSelector({
   global: makeGlobalParent(),
   kycDone: makeSelectKycDone(),
   globalError:makeSelectErrorGlobal(),
-  faqData:makeSelectFaqData()
+  faqData:makeSelectFaqData(),
+  newsData: makeSelectNewsData(),
+  announcementsData: makeSelectAnnouncementsData()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -821,7 +935,8 @@ function mapDispatchToProps(dispatch) {
     deleteUserAction: () => dispatch(deleteUserAction()),
     codeErrorRemove:()=>dispatch(codeErrorRemove()),
     loadFaq:()=>dispatch(loadFaq()),
-
+    loadNews:()=>dispatch(loadNews()),
+    loadAnnouncements:()=>dispatch(loadAnnouncements()),
   };
 }
 

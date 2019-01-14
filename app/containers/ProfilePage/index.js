@@ -243,19 +243,19 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
               <div className="col-md-12">
                 <div style={{display:'flex',flexDirection:'row'}}>
                   { this.state.currentView === 'personal' ? (
-                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10}}>PERSONAL</h2></div>
+                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px'}}>PERSONAL</h2></div>
                   ) : (
-                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div>
+                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>PERSONAL</h2></div>
                   )}
                   { this.state.currentView === 'notifications' ? (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px'}}>NOTIFICATIONS</h2></div>
                   ) : (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>NOTIFICATIONS</h2></div>
                   )}
                   { this.state.currentView === 'wallet' ? (
-                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10}}>WALLET</h2></div>
+                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px'}}>WALLET</h2></div>
                   ) : (
-                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>WALLET</h2></div>
+                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>WALLET</h2></div>
                   )}
                   {/* <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div> */}
                   {/* <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div> */}

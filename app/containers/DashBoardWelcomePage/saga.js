@@ -8,12 +8,16 @@ import {
   LOAD_PROFILE,
   SUBMIT_SOCIAL,
   DELETE_USER,
-  LOAD_FAQ
+  LOAD_FAQ,
+  LOAD_NEWS,
+  LOAD_ANNOUNCEMENTS
 } from 'containers/DashBoardWelcomePage/constants';
 import {
   profileLoaded,
   loadProfileAction,
-  loadFaqSuccess
+  loadFaqSuccess,
+  loadNewsSuccess,
+  loadAnnouncementsSuccess
 } from 'containers/DashBoardWelcomePage/actions';
 import { push } from 'react-router-redux';
 import { emailVerified, twoFactorEnabled  } from 'containers/App/actions';
@@ -110,12 +114,52 @@ export function* loadFaq() {
       yield put(codeErrorAction());
   }
 }
+
+export function* loadAnnouncements() {
+  try {
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+    console.log('loadAnnouncements saga');
+
+    const apiData = yield call(api.user.getAnnouncements, headers);
+    if(apiData.success) {
+      console.log('loadAnnouncementsSuccess saga success: ', apiData);
+      yield put(loadAnnouncementsSuccess(apiData));
+    }
+  }
+  catch (err) {
+    console.log('error in load profile', err);
+      yield put(codeErrorAction());
+  }
+}
+
+export function* loadNews() {
+  try {
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+
+    const apiData = yield call(api.user.getNews, headers);
+    if(apiData.success) {
+      yield put(loadNewsSuccess(apiData));
+    }
+  }
+  catch (err) {
+    console.log('error in load profile', err);
+      yield put(codeErrorAction());
+  }
+}
+
 export default function* defaultSaga() {
   yield [
     takeLatest(LOAD_PROFILE, loadProfile),
     takeLatest(SUBMIT_SOCIAL, submitSocial),
     takeLatest(DELETE_USER, deleteUser),
-    takeLatest(LOAD_FAQ, loadFaq)
-
+    takeLatest(LOAD_FAQ, loadFaq),
+    takeLatest(LOAD_NEWS, loadNews),
+    takeLatest(LOAD_ANNOUNCEMENTS, loadAnnouncements)
   ];
 }

@@ -13,6 +13,10 @@ export default {
       axios.put(`${BaseUrl}user/logs`,body, headers ).then((res) => res.data).catch((err) => err.response.data),
     getFaq:(headers)=>
     axios.get(`${BaseUrl}user/faq`,headers).then((res) => res.data).catch((err) => err.response.data),
+    getNews:(headers)=>
+    axios.get(`${BaseUrl}user/news`,headers).then((res) => res.data).catch((err) => err.response.data),
+    getAnnouncements:(headers)=>
+    axios.get(`${BaseUrl}user/announcements`,headers).then((res) => res.data).catch((err) => err.response.data),
     getReferData:(headers)=>
     axios.get(`${BaseUrl}user/getUserRefers`,headers).then((res) => res.data).catch((err) => err.response.data),
     deleteUser:(headers)=>

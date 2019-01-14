@@ -16,7 +16,9 @@ import {
   DELETE_USER_SUCCESS,
   CODE_ERROR_REMOVE,
   CODE_ERROR,
-  LOAD_FAQ_SUCCESS
+  LOAD_FAQ_SUCCESS,
+  LOAD_NEWS_SUCCESS,
+  LOAD_ANNOUNCEMENTS_SUCCESS
 } from './constants';
 
 // The initial state of the App
@@ -39,7 +41,9 @@ const initialState = fromJS({
   },
   kycDone: false,
   ethAddress: '',
-  faqData:false
+  faqData:false,
+  newsData:false,
+  announcementsData: false
 });
 
 function dashBoardWelcomePageReducer(state = initialState, action) {
@@ -50,6 +54,13 @@ function dashBoardWelcomePageReducer(state = initialState, action) {
   case LOAD_FAQ_SUCCESS:
       return state
         .set('faqData', action.data.result);
+  case LOAD_ANNOUNCEMENTS_SUCCESS:
+      return state
+        .set('announcementsData', action.data.result);
+
+  case LOAD_NEWS_SUCCESS:
+      return state
+        .set('newsData', action.data.result);
     case DELETE_USER:
       return state
         .set('loading', true);

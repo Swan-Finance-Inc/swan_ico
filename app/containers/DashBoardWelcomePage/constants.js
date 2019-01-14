@@ -16,3 +16,7 @@ export const CODE_ERROR = 'app/DashBoardWelcomePage/CODE_ERROR';
 export const CODE_ERROR_REMOVE = 'app/DashBoardWelcomePage/CODE_ERROR_REMOVE';
 export const LOAD_FAQ = 'app/DashBoardWelcomePage/LOAD_FAQ';
 export const LOAD_FAQ_SUCCESS = 'app/DashBoardWelcomePage/LOAD_FAQ_SUCCESS';
+export const LOAD_NEWS = 'app/DashBoardWelcomePage/LOAD_NEWS';
+export const LOAD_NEWS_SUCCESS = 'app/DashBoardWelcomePage/LOAD_NEWS_SUCCESS';
+export const LOAD_ANNOUNCEMENTS = 'app/DashBoardWelcomePage/LOAD_ANNOUNCEMENTS';
+export const LOAD_ANNOUNCEMENTS_SUCCESS = 'app/DashBoardWelcomePage/LOAD_ANNOUNCEMENTS_SUCCESS';
