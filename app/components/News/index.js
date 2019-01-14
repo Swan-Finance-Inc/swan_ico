@@ -43,7 +43,25 @@ class News extends React.PureComponent { // eslint-disable-line react/prefer-sta
                   <Collapse in={this.state[item._id]}>
                     <div>
                       <Well>
-                      {item.subject}
+                      {
+                        !!item.imageUri ?
+                          (
+                            <div className="row">
+                              <div className="col-sm-12">
+                                <img className="img-responsive news-image"  src={item.imageUri} alt="imageUri" id="imageUri"  style={{ margin: 'auto' }}/><hr/>
+                              </div>
+                            </div>
+                          )
+                          :
+                          null
+                      }
+
+                      <div className="row">
+                        <div className="col-sm-12">
+                          {item.subject}
+                        </div>
+                      </div>
+
                       </Well>
                     </div>
                   </Collapse>
