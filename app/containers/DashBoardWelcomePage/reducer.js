@@ -18,7 +18,11 @@ import {
   CODE_ERROR,
   LOAD_FAQ_SUCCESS,
   LOAD_NEWS_SUCCESS,
-  LOAD_ANNOUNCEMENTS_SUCCESS
+  LOAD_ANNOUNCEMENTS_SUCCESS,
+  TOGGLE_INFO_ACTIVE,
+  TOGGLE_INFO_ACTIVE_SUCCESS,
+  TOGGLE_INFO_ACTIVE_GET,
+  TOGGLE_INFO_ACTIVE_GET_SUCCESS
 } from './constants';
 
 // The initial state of the App
@@ -43,11 +47,31 @@ const initialState = fromJS({
   ethAddress: '',
   faqData:false,
   newsData:false,
-  announcementsData: false
+  announcementsData: false,
+  toggleInfoActive:false
+
 });
 
 function dashBoardWelcomePageReducer(state = initialState, action) {
   switch (action.type) {
+  //@aj
+  case TOGGLE_INFO_ACTIVE:
+    console.log('TOGGLE_INFO_ACTIVE data : ', action.data);
+      return state
+        .set('toggleInfoActive', action.data);
+  case TOGGLE_INFO_ACTIVE_SUCCESS:
+    console.log('TOGGLE_INFO_ACTIVE data : ', action.data);
+      return state
+        .set('toggleInfoActive', action.data);
+  case TOGGLE_INFO_ACTIVE_GET:
+    console.log('TOGGLE_INFO_ACTIVE_GET data : ', action.data);
+      return state;
+
+  case TOGGLE_INFO_ACTIVE_GET_SUCCESS:
+    console.log('TOGGLE_INFO_ACTIVE_GET_SUCCESS data : ', action.data);
+      return state
+        .set('toggleInfoActive', action.data);
+  //@aj
   case DELETE_USER_SUCCESS:
       return state
         .set('loading', false);

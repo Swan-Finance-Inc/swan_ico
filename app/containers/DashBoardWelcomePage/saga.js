@@ -10,22 +10,77 @@ import {
   DELETE_USER,
   LOAD_FAQ,
   LOAD_NEWS,
-  LOAD_ANNOUNCEMENTS
+  LOAD_ANNOUNCEMENTS,
+  TOGGLE_INFO_ACTIVE,
+  TOGGLE_INFO_ACTIVE_GET
 } from 'containers/DashBoardWelcomePage/constants';
 import {
   profileLoaded,
   loadProfileAction,
   loadFaqSuccess,
   loadNewsSuccess,
-  loadAnnouncementsSuccess
+  loadAnnouncementsSuccess,
+  toggleInfoActiveSuccess,
+  getToggleInfoActiveSuccess
 } from 'containers/DashBoardWelcomePage/actions';
 import { push } from 'react-router-redux';
 import { emailVerified, twoFactorEnabled  } from 'containers/App/actions';
-import { makeSelectSocial } from 'containers/DashBoardWelcomePage/selectors';
+import { makeSelectSocial, makeSelectToggleInfoActive } from 'containers/DashBoardWelcomePage/selectors';
 import { deleteUserSuccessAction } from 'containers/DashBoardWelcomePage/actions';
 import { codeErrorAction } from './actions'
 
 import api from 'utils/api';
+
+export function* toggleInfoActiveSagaGet() {
+  try {
+    console.log('toggleInfoActiveSagaGet');
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+    const apiData = yield call(api.user.toggleInfoIconGet, data, headers);
+    if (apiData) {
+    //  console.log(apiData);
+      if (!!apiData.success) {
+        // Success
+        console.log('toggleInfoActiveSagaGet success : ');
+
+        console.log('apiData : toggleInfoActiveSagaGet : *** : ', apiData);
+        yield put(getToggleInfoActiveSuccess(apiData))
+      }
+    }
+  } catch (err) {
+      yield put(codeErrorAction());
+    // console.log("api failed");
+    // console.log(err)
+  }
+}
+
+export function* toggleInfoActiveSaga() {
+  try {
+    console.log('toggleInfoActiveSaga');
+    const data = yield select(makeSelectToggleInfoActive());
+    console.log('toggleInfoActiveSaga : data : ', data);
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+    const apiData = yield call(api.user.toggleInfoIcon, data, headers);
+    if (apiData) {
+    //  console.log(apiData);
+      if (!!apiData.success) {
+        // Success
+
+        console.log('apiData : toggleInfoActiveSaga : *** : ', apiData);
+        yield put(toggleInfoActiveSuccess(apiData))
+      }
+    }
+  } catch (err) {
+      yield put(codeErrorAction());
+    // console.log("api failed");
+    // console.log(err)
+  }
+}
+
 
 export function* loadProfile() {
   try {
@@ -160,6 +215,9 @@ export default function* defaultSaga() {
     takeLatest(DELETE_USER, deleteUser),
     takeLatest(LOAD_FAQ, loadFaq),
     takeLatest(LOAD_NEWS, loadNews),
-    takeLatest(LOAD_ANNOUNCEMENTS, loadAnnouncements)
+    takeLatest(LOAD_ANNOUNCEMENTS, loadAnnouncements),
+    takeLatest(TOGGLE_INFO_ACTIVE, toggleInfoActiveSaga),
+    takeLatest(TOGGLE_INFO_ACTIVE_GET, toggleInfoActiveSagaGet)
+
   ];
 }

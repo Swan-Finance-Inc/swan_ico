@@ -20,8 +20,50 @@ import {
   LOAD_NEWS,
   LOAD_NEWS_SUCCESS,
   LOAD_ANNOUNCEMENTS,
-  LOAD_ANNOUNCEMENTS_SUCCESS
+  LOAD_ANNOUNCEMENTS_SUCCESS,
+  TOGGLE_INFO_ACTIVE,
+  TOGGLE_INFO_ACTIVE_SUCCESS,
+  TOGGLE_INFO_ACTIVE_GET,
+  TOGGLE_INFO_ACTIVE_GET_SUCCESS
 } from './constants';
+
+export function getToggleInfoActive() {
+  console.log('action : ');
+  return {
+    type: TOGGLE_INFO_ACTIVE_GET
+  };
+}
+
+export function getToggleInfoActiveSuccess() {
+  console.log('action : ');
+  return {
+    type: TOGGLE_INFO_ACTIVE_GET_SUCCESS,
+    data
+  };
+}
+
+export function toggleInfoActive(data) {
+  console.log('action : ', data);
+  return {
+    type: TOGGLE_INFO_ACTIVE,
+    data
+  };
+}
+
+// export function toggleInfoActive(data) {
+//   console.log('action : ', data);
+//   return {
+//     type: TOGGLE_INFO_ACTIVE,
+//     data
+//   };
+// }
+
+export function toggleInfoActiveSuccess(data) {
+  return {
+    type: TOGGLE_INFO_ACTIVE_SUCCESS,
+    data
+  };
+}
 
 export function loadFaqSuccess(data) {
   return {

@@ -41,12 +41,22 @@ class Balance extends React.PureComponent {
     console.log('infoShow : ', this.state.infoShow);
   }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
   render() {
     return (
       <div>
         <div className="panel panel-default">
         <div className="panel-heading blueBG">
-          <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+          {/* <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} /> */}
+          {
+            !!this.props.flag ?
+              <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+              :
+              null
+          }
           Your Balance
         </div>
         <div className="panel-body">
@@ -110,7 +120,13 @@ class Balance extends React.PureComponent {
         </div>
             <div className="panel panel-default">
               <div className="panel-heading blueBG">
-                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />*/}
+                {
+                  !!this.props.flag ?
+                    <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                    :
+                    null
+                }
                 Bounty Stakes
               </div>
                 <div className="panel-body">

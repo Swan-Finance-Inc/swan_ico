@@ -32,7 +32,7 @@ export class NavBarContainer extends React.PureComponent {
     this.state = {
       name: 'Username',
       showSignOut: false,
-      deleteProfile:false,
+      deleteProfile:false
     };
   }
 
@@ -94,8 +94,14 @@ export class NavBarContainer extends React.PureComponent {
    this.props.routeToNotifications()
   }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
+
   render() {
     console.log(this.props.history," tttttttttttttttttttttttttttttt");
+
     return (
       <header >
         <Navbar fluid fixedTop style={{borderWidth: '0'}} className="navbar-back">
@@ -117,6 +123,7 @@ export class NavBarContainer extends React.PureComponent {
                 <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Manage Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem>
+                <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetInfo}><i className={this.props.flag===false?"fa fa-toggle-off":"fa fa-toggle-on"}></i>Reset Info flag</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showDeleteProfile}><i className="fa fa-user-times"></i>Delete Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showSignOut}><i className="fa fa-power-off"></i>Sign Out</MenuItem>
               </NavDropdown>

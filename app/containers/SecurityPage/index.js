@@ -166,6 +166,10 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
     })
   }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
   render() {
     console.log(this.state," State in security Page")
     console.log(this.props," props in security Page")
@@ -193,8 +197,15 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
             <div className="" style={{ marginBottom: '500px' }}>
             <div className="panel panel-default">
               {/*<div className="panel-heading">Two-Factor Authentication</div>*/}
+              {console.log('SECURITY PAGE : *** ', this.props.flag)}
               <div className="panel-heading blueBG">
-                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                {
+                  !!this.props.flag ?
+                    <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                    :
+                    null
+                }
+
                 Two-Factor Authentication
               </div>
                 <div className="panel-body" style={{fontSize:'16px'}}>
@@ -259,7 +270,13 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
           <div className="panel panel-default">
             {/*<div className="panel-heading">Save Activity Log</div>*/}
             <div className="panel-heading blueBG">
-              <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+              {/* <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} /> */}
+              {
+                !!this.props.flag ?
+                  <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                  :
+                  null
+              }
               Save Activity Log
             </div>
               <div className="panel-body" style={{fontSize:'16px'}}>

@@ -7,6 +7,11 @@ const BaseUrl = 'https://tokensaleapis.pexo.io/api/v1/';
 
 export default {
   user: {
+
+    toggleInfoIcon:(data,headers)=>
+      axios.put(`${BaseUrl}toggleIsInfoActive`,data, headers).then((res) => res.data).catch((err) => err.response.data),
+    toggleInfoIconGet:(headers)=>
+      axios.get(`${BaseUrl}toggleIsInfoActive`, headers).then((res) => res.data).catch((err) => err.response.data),
     getActivityLogs:(headers)=>
     axios.get(`${BaseUrl}user/logs`,headers).then((res) => res.data).catch((err) => err.response.data),
     saveActivity: (headers, body) =>

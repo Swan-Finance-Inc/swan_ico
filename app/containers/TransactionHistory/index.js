@@ -342,6 +342,10 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
       })
     }
   }
+
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
   render() {
     console.log(this.props," props in transaction history");
     console.log(this.state," state in transaction history");
@@ -360,7 +364,13 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           <div className="ui-container container-fluid">
           <div className="panel panel-default">
           <div className="panel-heading blueBG">
-            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />*/}
+            {
+              !!this.props.flag ?
+                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                :
+                null
+            }
             Transactions
           </div>
           {/* <div className="panel-heading">Transactions</div> */}

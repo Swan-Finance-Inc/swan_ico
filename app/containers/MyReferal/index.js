@@ -122,6 +122,10 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
     console.log('infoShow : ', this.state.infoShow);
   }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
   render() {
     console.log(this.props," props in myreferal")
     console.log(this.state," state in myreferal")
@@ -191,7 +195,13 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
           <div className="panel panel-default">
           {/* <div className="panel-heading">Transactions</div> */}
           <div className="panel-heading blueBG">
-            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />*/}
+            {
+              !!this.props.flag ?
+                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                :
+                null
+            }
             Transactions
           </div>
           <div className="row">

@@ -24,6 +24,11 @@ const makeSelectSocial = () => createSelector(
   (substate) => substate.get('socialDetails')
 )
 
+const makeSelectIsInfoActive = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('socialDetails')
+)
+
 const makeSelectKycDone = () => createSelector(
   selectDashBoardWelcomePageDomain,
   (substate) => substate.get('kycDone')
@@ -46,6 +51,11 @@ const makeSelectAnnouncementsData = () => createSelector(
   (substate) => substate.get('announcementsData')
 )
 
+const makeSelectToggleInfoActive = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('toggleInfoActive')
+)
+
 export default makeSelectDashBoardWelcomePage;
 export {
   selectDashBoardWelcomePageDomain,
@@ -54,5 +64,6 @@ export {
   makeSelectErrorGlobal,
   makeSelectFaqData,
   makeSelectNewsData,
-  makeSelectAnnouncementsData
+  makeSelectAnnouncementsData,
+  makeSelectToggleInfoActive
 };

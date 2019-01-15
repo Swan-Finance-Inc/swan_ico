@@ -672,6 +672,10 @@ gobackDollar=(e)=>{
   //   }
   // }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
   // End of container functions
   render() {
     console.log(this.props," props in contribution page")
@@ -772,7 +776,13 @@ gobackDollar=(e)=>{
           <div className="panel panel-default">
           {/* <div className="panel-heading">Contribution</div> */}
           <div className="panel-heading blueBG">
-            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />*/}
+            {
+              !!this.props.flag ?
+                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                :
+                null
+            }
             Contribution
           </div>
           <div className="panel-body" style={{fontSize:'16px'}}>

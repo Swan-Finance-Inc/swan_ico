@@ -54,6 +54,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
     console.log('infoShow : ', this.state.infoShow);
   }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
   render() {
     const { percent } = this.state;
     return (
@@ -192,7 +196,13 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
     {this.props.icoFlag?  <div className="panel panel-default">
           {/*<div className="panel-heading">ICO Details</div>*/}
           <div className="panel-heading blueBG">
-            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />*/}
+            {
+              !!this.props.flag ?
+                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                :
+                null
+            }
             ICO Details
           </div>
           <div className="panel-body" style={{fontSize:'16px'}}>

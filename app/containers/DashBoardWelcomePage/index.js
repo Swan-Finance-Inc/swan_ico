@@ -30,8 +30,8 @@ import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
-import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq, loadNews, loadAnnouncements } from './actions';
-import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData, makeSelectNewsData, makeSelectAnnouncementsData }from './selectors';
+import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq, loadNews, loadAnnouncements, toggleInfoActive, getToggleInfoActive } from './actions';
+import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData, makeSelectNewsData, makeSelectAnnouncementsData, makeSelectToggleInfoActive }from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
 import { resetSuccess } from '../KycPage/actions';
@@ -91,7 +91,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       newsData:[],
       announcementsData: [],
       isBlocked:false,
-      rejectMsg: null
+      rejectMsg: null,
+      infoFlag: false
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -127,6 +128,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
   componentDidMount() {
     const outer = this;
+    this.props.getToggleInfoActiveAction();
     this.contract.events.transactionNotify()
     .on('data', function (event) {
       const transaction = {
@@ -663,6 +665,20 @@ export class DashBoardWelcomePage extends React.PureComponent {
       }
     }
 
+    if(!!nextProps.toggleInfoActiveData) {
+      console.log('toggleInfoActiveData data : **** -----**** value ****', nextProps.toggleInfoActiveData.isInfoActive);
+      this.setState({
+        infoFlag: nextProps.toggleInfoActiveData.isInfoActive
+      });
+      console.log('this.state.infoFlag : ', this.state.infoFlag);
+    }
+
+    // if(!!nextProps.dashboardwelcomepage.userInfo) {
+    //   this.setState({
+    //     infoFlag: nextProps.dashboardwelcomepage.userInfo.isInfoActive
+    //   })
+    // }
+
   if(nextProps.globalError){
     toast.error("Something went Wrong. Please Refresh")
     nextProps.codeErrorRemove()
@@ -708,6 +724,15 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.props.deleteUserAction()
   }
 
+  toggleInfo = () => {
+    // console.log('DATA toggle info dashboard : ', data);
+    const data = {
+      isInfoActive: !this.state.infoFlag
+    };
+    console.log('data : ', data);
+    this.props.toggleInfoActiveAction(data);
+  }
+
   render() {
 
     console.log(this.props," props in");
@@ -749,7 +774,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     }
     return (
       <div>
-        <NavBarContainer routeToNotifications={this.toggleNotificationsActive} username={this.props.dashboardwelcomepage.userInfo.fullName} handleDeleteUser={this.handleDeleteUser} />
+        <NavBarContainer routeToNotifications={this.toggleNotificationsActive} username={this.props.dashboardwelcomepage.userInfo.fullName} handleDeleteUser={this.handleDeleteUser} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
         <div id="ui" className={this.state.compact}>
         <Helmet>
           <title>User|Dashboard</title>
@@ -824,14 +849,14 @@ export class DashBoardWelcomePage extends React.PureComponent {
               */}
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
-                  <Balance      toggleContActive={this.toggleContActive}  compact={this.compactNav}   togglemyReferal ={this.togglemyReferal}   toggleTranActive={this.toggleTranActive}  userInfo={this.props.dashboardwelcomepage.userInfo} />
-                  <Refer  code={this.props.dashboardwelcomepage.userInfo} icoFlag={true} />
+                  <Balance      toggleContActive={this.toggleContActive}  compact={this.compactNav}   togglemyReferal ={this.togglemyReferal}   toggleTranActive={this.toggleTranActive}  userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
+                  <Refer  code={this.props.dashboardwelcomepage.userInfo} icoFlag={true} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
 
                 </div>
               </div>
 
             </div>) : (this.props.location.pathname == '/dashboard/security') ?
-              <SecurityPage activityStatus ={this.props.dashboardwelcomepage.userInfo.saveActivityLogs} loadProfileAction = {this.props.loadProfileAction} /> :
+              <SecurityPage activityStatus ={this.props.dashboardwelcomepage.userInfo.saveActivityLogs} loadProfileAction = {this.props.loadProfileAction} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
               (this.props.location.pathname == '/dashboard/profile') ?
               <ProfilePage /> :
               (this.props.location.pathname == '/dashboard/resetpassword') ?
@@ -842,7 +867,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                     </div>
                   </div>
                 </div> : (this.props.location.pathname == '/dashboard/contribution') ?
-                  <ContributionPage /> :
+                  <ContributionPage flag={this.state.infoFlag} toggleInfo={this.toggleInfo} /> :
                   (this.props.location.pathname == '/dashboard/support') ?
                   <SupportPage /> :
                   (this.props.location.pathname == '/dashboard/faq') ?
@@ -850,13 +875,13 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/uploadDocs') ?
                   <UploadDocuments /> :
                   (this.props.location.pathname == '/dashboard/myReferal') ?
-                  <MyReferal code={this.props.dashboardwelcomepage.userInfo} /> :
+                  <MyReferal code={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/ticket') ?
-                  <TicketPage /> :
+                  <TicketPage flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/kyc') ?
-                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} /> :
+                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/transactionHistory') ?
-                    <TransactionHistory message={this.props.global.depositSuccess} /> :
+                    <TransactionHistory message={this.props.global.depositSuccess} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/notification') ?
                       <Notification  />:
                   (this.props.location.pathname == '/dashboard/whitePaper') ?
@@ -864,7 +889,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/news') ?
                         <News newsData={this.state.newsData} />:
                   (this.props.location.pathname == '/dashboard/announcements') ?
-                        <Announcements announcementsData={this.state.announcementsData} />:
+                        <Announcements announcementsData={this.state.announcementsData}/>:
 '' }
         <div className='row'>
         <div id="footer" style={{position:'fixed'}}  className="ui-footer">
@@ -872,7 +897,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
         <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
         <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
         <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
-        <i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank' style={{ fontSize: '12px'}}> Download App here</a></i>
+        <a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a>
 
         </div>
         </div>
@@ -923,7 +948,8 @@ const mapStateToProps = createStructuredSelector({
   globalError:makeSelectErrorGlobal(),
   faqData:makeSelectFaqData(),
   newsData: makeSelectNewsData(),
-  announcementsData: makeSelectAnnouncementsData()
+  announcementsData: makeSelectAnnouncementsData(),
+  toggleInfoActiveData: makeSelectToggleInfoActive()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -937,6 +963,9 @@ function mapDispatchToProps(dispatch) {
     loadFaq:()=>dispatch(loadFaq()),
     loadNews:()=>dispatch(loadNews()),
     loadAnnouncements:()=>dispatch(loadAnnouncements()),
+    toggleInfoActiveAction:(data)=>dispatch(toggleInfoActive(data)),
+    getToggleInfoActiveAction:()=>dispatch(getToggleInfoActive())
+
   };
 }
 

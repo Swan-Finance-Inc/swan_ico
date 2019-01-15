@@ -20,3 +20,7 @@ export const LOAD_NEWS = 'app/DashBoardWelcomePage/LOAD_NEWS';
 export const LOAD_NEWS_SUCCESS = 'app/DashBoardWelcomePage/LOAD_NEWS_SUCCESS';
 export const LOAD_ANNOUNCEMENTS = 'app/DashBoardWelcomePage/LOAD_ANNOUNCEMENTS';
 export const LOAD_ANNOUNCEMENTS_SUCCESS = 'app/DashBoardWelcomePage/LOAD_ANNOUNCEMENTS_SUCCESS';
+export const TOGGLE_INFO_ACTIVE = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE';
+export const TOGGLE_INFO_ACTIVE_SUCCESS = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE_SUCCESS';
+export const TOGGLE_INFO_ACTIVE_GET = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE_GET';
+export const TOGGLE_INFO_ACTIVE_GET_SUCCESS = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE_GET_SUCCESS';

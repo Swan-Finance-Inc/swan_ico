@@ -346,6 +346,10 @@ handleInput2=(e)=>{
     }
   }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
   render() {
     console.log(this.props,"props in kyc")
     console.log(this.state,"state in kyc")
@@ -436,7 +440,14 @@ handleInput2=(e)=>{
           <div className="panel panel-default">
             {/*<div className="panel-heading">KYC Verification</div>*/}
             <div className="panel-heading blueBG">
-              <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+              {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />*/}
+              {
+                !!this.props.flag ?
+                  <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                  :
+                  null
+              }
+
               KYC Verification
             </div>
           <div className="panel-body" style={{fontSize:'16px'}}>

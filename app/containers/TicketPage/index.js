@@ -173,6 +173,10 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
     }
   }
 
+  resetInfo=()=>{
+    this.props.toggleInfo()
+  }
+
   render() {
     var loading = this.props.loading
     return (
@@ -191,7 +195,13 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
               <div className="panel panel-info">
               {/* <div className="panel-heading">TICKETS</div> */}
           <div className="panel-heading blueBG">
-            <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+            {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} /> */}
+            {
+              !!this.props.flag ?
+                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                :
+                null
+            }
             TICKETS
           </div>
           <div className="panel-body" style={{fontSize:'16px'}}>
