@@ -50,7 +50,7 @@ class Info extends React.PureComponent { // eslint-disable-line react/prefer-sta
                   </div>
                   <div className='row' >
                   <div className='text-center'>
-                   <Switch  onClick={this.props.hanldeToggle} on={this.props.toggleFlag} />
+                   <Switch  onClick={this.props.hanldeToggle} on={this.state.switched} />
                    </div>
                   </div>
                 </div>

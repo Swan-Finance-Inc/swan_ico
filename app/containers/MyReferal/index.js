@@ -195,10 +195,10 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
           <div className="panel panel-default">
           {/* <div className="panel-heading">Transactions</div> */}
           <div className="panel-heading blueBG">
-            {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />*/}
+            {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />*/}
             {
               !!this.props.flag ?
-                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
                 :
                 null
             }

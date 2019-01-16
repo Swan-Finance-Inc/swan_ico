@@ -195,10 +195,10 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
               <div className="panel panel-info">
               {/* <div className="panel-heading">TICKETS</div> */}
           <div className="panel-heading blueBG">
-            {/*<Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} /> */}
+            {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} /> */}
             {
               !!this.props.flag ?
-                <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
                 :
                 null
             }

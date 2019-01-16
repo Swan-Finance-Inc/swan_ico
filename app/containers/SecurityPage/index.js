@@ -201,7 +201,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
               <div className="panel-heading blueBG">
                 {
                   !!this.props.flag ?
-                    <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                    <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
                     :
                     null
                 }
@@ -270,10 +270,10 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
           <div className="panel panel-default">
             {/*<div className="panel-heading">Save Activity Log</div>*/}
             <div className="panel-heading blueBG">
-              {/* <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} /> */}
+              {/* <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} /> */}
               {
                 !!this.props.flag ?
-                  <Info hanldeToggle={this.handleInfoModal} toggleFlag={this.state.infoShow} />
+                  <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
                   :
                   null
               }
