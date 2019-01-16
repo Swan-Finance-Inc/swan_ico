@@ -141,7 +141,7 @@ export class MyReferal extends React.PureComponent { // eslint-disable-line reac
           {
             console.log('refer social ****----*****----***', this.props.code.amountPercent)
           }
-        {this.props.code.amountPercent > 0 ? <Refer code={this.props.code} icoFlag ={false} />:""}
+        {this.props.code.amountPercent > 0 ? <Refer flag={this.props.flag} toggleInfo={this.props.toggleInfo} code={this.props.code} icoFlag ={false} />:""}
         {/*
           //     <div className="panel panel-default">
           //   <div className="panel-heading">Users</div>
