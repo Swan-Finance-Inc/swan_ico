@@ -34,7 +34,7 @@ export function getToggleInfoActive() {
   };
 }
 
-export function getToggleInfoActiveSuccess() {
+export function getToggleInfoActiveSuccess(data) {
   console.log('action : ');
   return {
     type: TOGGLE_INFO_ACTIVE_GET_SUCCESS,

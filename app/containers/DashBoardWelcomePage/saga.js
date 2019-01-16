@@ -38,7 +38,7 @@ export function* toggleInfoActiveSagaGet() {
     const headers = {
       headers: { 'x-auth-token': localStorage.getItem('token') },
     };
-    const apiData = yield call(api.user.toggleInfoIconGet, data, headers);
+    const apiData = yield call(api.user.toggleInfoIconGet, headers);
     if (apiData) {
     //  console.log(apiData);
       if (!!apiData.success) {
