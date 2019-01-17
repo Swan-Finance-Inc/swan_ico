@@ -33,7 +33,7 @@ class News extends React.PureComponent { // eslint-disable-line react/prefer-sta
               <div className="col-sm-12 text-center">
                   <h2>NEWS</h2><hr/>
               </div>
-              <div className='col-sm-8 col-sm-offset-2'>
+              <div className='col-sm-12'>
               {this.props.newsData.map((item,i)=>(
                 <div className="row">
                   <div className="col-sm-12">

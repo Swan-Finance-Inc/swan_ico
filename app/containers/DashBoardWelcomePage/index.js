@@ -897,7 +897,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
         <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
         <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
         <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
-        <a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a>
+        {/* <a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a> */}
 
         </div>
         </div>

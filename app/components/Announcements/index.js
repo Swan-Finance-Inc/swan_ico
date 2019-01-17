@@ -33,7 +33,7 @@ class Announcements extends React.PureComponent { // eslint-disable-line react/p
               <div className="col-sm-12 text-center">
                   <h2>ANNOUNCEMENTS</h2><hr/>
               </div>
-              <div className='col-sm-8 col-sm-offset-2'>
+              <div className='col-sm-12'>
               {this.props.announcementsData.map((item,i)=>(
                 <div className="row">
                   <div className="col-sm-12">
