@@ -1235,6 +1235,52 @@ ol.rule-list li {
 	z-index: -1;
 }
 
+//@aj
+.androidStickyP {
+	color: black;
+	z-index: 25;
+}
+
+.sticky-android-logo {
+	position: fixed;
+    right: 20px;
+    bottom: 150px;
+		z-index: 20;
+}
+
+.sticky-android-logo a {
+    background-size: 50px 50px;
+    height: 50px;
+    width: 50px;
+}
+.sticky-android-logo a {
+	background: url('https://s3-ap-southeast-1.amazonaws.com/pexo-bucket/androidCircle.svg') no-repeat 0 0;
+	background-size: 75px 75px;
+	display: block;
+	width: 75px;
+	height: 75px;
+	text-indent: -9999px;
+	overflow: hidden;
+}
+.sticky-android-logo a::before {
+	background: #3b96ca;
+	background: -moz-linear-gradient(top, #3b96ca 0, #4fafe4 100%);
+	background: -webkit-linear-gradient(top, #3b96ca 0, #4fafe4 100%);
+	background: linear-gradient(to bottom, #3b96ca 0, #4fafe4 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3b96ca', endColorstr='#4fafe4', GradientType=0);
+	animation: chat-out 1.5s infinite;
+	content: "";
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	-webkit-border-radius: 50%;
+	border-radius: 50%;
+	z-index: 5;
+}
+//@aj
+
 .notify-deposit {
 	position: fixed;
 	left: 20px;

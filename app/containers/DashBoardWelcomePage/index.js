@@ -903,6 +903,17 @@ export class DashBoardWelcomePage extends React.PureComponent {
         </div>
 
         <div className='row'>
+          <div className='col-md-1 col-md-offset-6'>
+            <div className="sticky-android-logo">
+              <a href="https://play.google.com/store/apps/details?id=com.pexo&hl=en" target="_blank" className="sticky-android-icon">
+                // <i className="fa fa-android fa-3x" aria-hidden="true"></i>
+                <p className='androidStickyP'>Download app here</p>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div className='row'>
         <div className='col-md-1 col-md-offset-6'>
         <div className="sticky-telegram-logo"><a href="http://t.me/pexochat" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
         </div>
