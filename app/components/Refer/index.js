@@ -231,7 +231,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
             <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 1</h2>
             <table className="table table-bordered sale">
               <tbody>
-
+              {/*
               <tr>
                 <td>Start date: </td>
                 <td>9th January, 2019 GMT</td>
@@ -240,6 +240,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 <td>End date: </td>
                 <td>31st January, 2019 GMT</td>
               </tr>
+              */}
               <tr>
                 <td>Discount: </td>
                 <td>75%</td>
@@ -253,6 +254,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 2</h2>
               <table className="table table-bordered sale">
                 <tbody>
+                {/*
                 <tr>
                   <td>Start date: </td>
                   <td>1st February, 2019 GMT</td>
@@ -261,6 +263,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <td>End date: </td>
                   <td></td>
                 </tr>
+                */}
                 <tr>
                   <td>Discount: </td>
                   <td>40%</td>
@@ -274,7 +277,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 3</h2>
                 <table className="table table-bordered sale">
                   <tbody>
-
+                  {/*
                   <tr>
                     <td>Start date: </td>
                     <td>9th January, 2019 GMT</td>
@@ -283,6 +286,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                     <td>End date: </td>
                     <td></td>
                   </tr>
+                  */}
                   <tr>
                     <td>Discount: </td>
                     <td>20%</td>
@@ -297,7 +301,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 4</h2>
               <table className="table table-bordered sale">
                 <tbody>
-
+                {/*
                 <tr>
                   <td>Start date: </td>
                   <td>9th January, 2019 GMT</td>
@@ -306,6 +310,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <td>End date: </td>
                   <td></td>
                 </tr>
+                */}
                 <tr>
                   <td>Discount: </td>
                   <td>10%</td>
@@ -319,7 +324,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 5</h2>
                   <table className="table table-bordered sale">
                     <tbody>
-
+                    {/*
                     <tr>
                       <td>Start date: </td>
                       <td>9th January, 2019 GMT</td>
@@ -328,6 +333,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                       <td>End date: </td>
                       <td></td>
                     </tr>
+                    */}
                     <tr>
                       <td>Discount: </td>
                       <td>No Discount</td>
