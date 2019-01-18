@@ -40,6 +40,9 @@ class Info extends React.PureComponent { // eslint-disable-line react/prefer-sta
         <div className="static-modal">
           <Modal show={this.state.open} bsSize="large" onHide={this.hide}>
           <Modal.Header>
+            <div className="col-sm-12 text-right">
+                <i className="fa fa-close" style={{cursor:'pointer'}} onClick={() => {this.setState({ open:false })}}></i>
+            </div>
             <Modal.Title><div className='text-center'>INFORMATION</div></Modal.Title>
           </Modal.Header>
             <Modal.Body>

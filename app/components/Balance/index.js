@@ -114,7 +114,19 @@ class Balance extends React.PureComponent {
           </div>
         </div>
         <div className='row'>
-        <div className='text-center'><Link to='/dashboard/contribution' role="button" onClick={this.toggleContriActive}><button disabled={this.props.userInfo.kycStatus!=="ACCEPTED"}  className="btn btn-primary"  style={{borderRadius: '25px', padding: '10px 60px', marginTop:'10px'}}>Invest Now</button></Link></div>
+          {
+            this.props.userInfo.kycStatus !== "ACCEPTED" ?
+                null
+              :
+              (<div className='text-center'>
+                <Link to='/dashboard/contribution' role="button" onClick={this.toggleContriActive}>
+                  <button className="btn btn-primary"  style={{borderRadius: '25px', padding: '10px 60px', marginTop:'10px'}}>
+                    Invest Now
+                  </button>
+                </Link>
+              </div>)
+          }
+          {/*<div className='text-center'><Link to='/dashboard/contribution' role="button" onClick={this.toggleContriActive}><button disabled={this.props.userInfo.kycStatus!=="ACCEPTED"}  className="btn btn-primary"  style={{borderRadius: '25px', padding: '10px 60px', marginTop:'10px'}}>Invest Now</button></Link></div> */}
         </div>
         </div>
         </div>
