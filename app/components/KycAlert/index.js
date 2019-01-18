@@ -58,7 +58,7 @@ class KycAlert extends React.PureComponent {
         }else if(this.props.kycStatus === 'ACCEPTED'){
             return(
                 <div className="alert alert-success">
-                    <span>Verified Account</span>
+                    <span>Verified Account. Now you can start investing by clicking on Invest Now button.</span>
                     {
                       // <span className="cross"><i className="fa fa-close" onClick={this.props.closeAlert}></i></span>
                     }
