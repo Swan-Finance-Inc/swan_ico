@@ -249,6 +249,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
                   <td>400 Pexo</td>
                 </tr>
+                <tr>
+                  <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
+                  <td> $0.062</td>
+                </tr>
                 </tbody>
             </table>
               <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 2</h2>
@@ -272,6 +276,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                     <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
                     <td>400 Pexo</td>
                   </tr>
+                  <tr>
+                    <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
+                    <td> $0.150</td>
+                  </tr>
                   </tbody>
                 </table>
                 <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 3</h2>
@@ -294,6 +302,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                     <tr>
                       <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
                       <td>400 Pexo</td>
+                    </tr>
+                    <tr>
+                      <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
+                      <td> $0.200</td>
                     </tr>
                   </tbody>
               </table>
@@ -319,6 +331,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                     <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
                     <td>400 Pexo</td>
                   </tr>
+                  <tr>
+                    <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
+                    <td> $0.225</td>
+                  </tr>
                   </tbody>
             </table>
                   <h2 style={{fontSize:'20px'}} className="panel-subHead">Phase 5</h2>
@@ -341,6 +357,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                       <tr>
                         <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
                         <td>400 Pexo</td>
+                      </tr>
+                      <tr>
+                        <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
+                        <td> $0.250</td>
                       </tr>
                       </tbody>
                 </table>
