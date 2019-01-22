@@ -69,7 +69,7 @@ class Balance extends React.PureComponent {
           <div className="col-sm-6 col-md-3">
             <div className="bal-card">
               <h3>Total Balance</h3>
-              <div className="balance">{(this.props.userInfo.tokens.total)} => {(this.props.userInfo.transactionInfo[0].totalBalanceUsd)} USD</div>
+              <div className="balance">{(this.props.userInfo.tokens.total)} => {(this.props.userInfo.totalBalanceUsd)} USD</div>
               {
                 !!this.props.userInfo.tokens.total ?
                   (
