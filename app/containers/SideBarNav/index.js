@@ -299,9 +299,9 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
               </ul>
             </li>
             */}
-            <li className={this.state.buy}><a href='https://s3.ap-southeast-1.amazonaws.com/pexo-bucket/White_Paperv-3_v1.pdf' target='_blank'><span className="has-icon"><i className="fa fa-file-code-o"></i></span><span>White Paper</span></a>
+            <li className={this.state.buy}><a href='https://s3-ap-southeast-1.amazonaws.com/pexo-bucket/White_Paperv-4.pdf' target='_blank'><span className="has-icon"><i className="fa fa-file-code-o"></i></span><span>White Paper</span></a>
               <ul className="nav nav-sub sidebar-niceScroll">
-                <li className="nav-sub-header"><a href='https://s3.ap-southeast-1.amazonaws.com/pexo-bucket/White_Paperv-3_v1.pdf' target='_blank'><span>White Paper</span></a></li>
+                <li className="nav-sub-header"><a href='https://s3-ap-southeast-1.amazonaws.com/pexo-bucket/White_Paperv-4.pdf' target='_blank'><span>White Paper</span></a></li>
               </ul>
             </li>
             <li className={this.state.faqAct}><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>FAQ</span></Link>

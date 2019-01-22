@@ -893,7 +893,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 '' }
         <div className='row'>
         <div id="footer" style={{position:'fixed'}}  className="ui-footer">
-        © 2019 Pexo, All Rights Reserved
+        © 2019 Pexo Trading oü , All Rights Reserved
         <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
         <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
         <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
