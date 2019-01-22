@@ -158,7 +158,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       var file = e.target.files[0];
       console.log(file," file ---booga booga")
       if(file.size > 5*1024*1024){
-        toast.error('File size should be less than 2MB');
+        toast.error('File size should be less than 5MB');
       }else{
         reader.onloadend = () => {
           this.setState({
@@ -175,7 +175,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
         var reader = new FileReader();
         var file = e.target.files[0];
         if(file.size > 5*1024*1024){
-          toast.error('File size should be less than 2MB');
+          toast.error('File size should be less than 5MB');
         }else{
           reader.onloadend = () => {
             this.setState({
@@ -192,7 +192,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
           var reader = new FileReader();
           var file = e.target.files[0];
           if(file.size > 5*1024*1024){
-            toast.error('File size should be less than 2MB');
+            toast.error('File size should be less than 5MB');
           }else{
             reader.onloadend = () => {
               this.setState({
@@ -210,7 +210,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     var reader = new FileReader();
     var file = e.target.files[0];
     if(file.size > 5*1024*1024){
-      toast.error('File size should be less than 2MB');
+      toast.error('File size should be less than 5MB');
     }else{
       reader.onloadend = () => {
         this.setState({

@@ -196,8 +196,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     e.preventDefault();
     var reader = new FileReader();
     var file = e.target.files[0];
-    if(file.size > 2*1024*1024){
-      toast.error('File size should be less than 2MB');
+    if(file.size > 5*1024*1024){
+      toast.error('File size should be less than 5MB');
     }else{
         this.setState({
           profilePicUrl : '/assets/img/uploading.svg',
