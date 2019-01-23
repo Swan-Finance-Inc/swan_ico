@@ -589,7 +589,7 @@ handleInput2=(e)=>{
                   </div>
                   <div className="row">
                     <div className="col-sm-12 text-center">
-                      <h5>Maximum Upload file size is <span style={{color: '#f00'}}>2MB</span></h5>
+                      <h5>Maximum Upload file size is <span style={{color: '#f00'}}>5MB</span></h5>
                     </div>
                   </div>
                   <div className="row">
