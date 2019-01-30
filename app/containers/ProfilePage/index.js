@@ -274,7 +274,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="col-sm-9">
         <button onClick={this.uploadProfileImage} className='changeImage' >Change Image</button>
-        <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg} required/>
+        <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg}/>
         </div>
         </div>
         <div className="row form-group">
