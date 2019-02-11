@@ -251,7 +251,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 </tr>
                 <tr>
                   <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
-                  <td> $0.062</td>
+                  <td> $0.25</td>
                 </tr>
                 </tbody>
             </table>
@@ -278,7 +278,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   </tr>
                   <tr>
                     <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
-                    <td> $0.150</td>
+                    <td> $0.60</td>
                   </tr>
                   </tbody>
                 </table>
@@ -305,7 +305,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                     </tr>
                     <tr>
                       <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
-                      <td> $0.200</td>
+                      <td> $0.80</td>
                     </tr>
                   </tbody>
               </table>
@@ -333,7 +333,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   </tr>
                   <tr>
                     <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
-                    <td> $0.225</td>
+                    <td> $0.90</td>
                   </tr>
                   </tbody>
             </table>
@@ -360,7 +360,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                       </tr>
                       <tr>
                         <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
-                        <td> $0.250</td>
+                        <td> $1</td>
                       </tr>
                       </tbody>
                 </table>
