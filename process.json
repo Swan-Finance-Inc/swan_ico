@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "ico_user_pexo",
+    "name": "ico_user_centralex",
     "script": "server",
     "instances": "max",
     "exec_mode": "cluster",

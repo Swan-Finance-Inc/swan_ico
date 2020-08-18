@@ -235,7 +235,7 @@ export class ContributionConfirm extends React.PureComponent {
         //                 </div>
         //                 <div className="row">
         //                   <div className="col-sm-4">Account Name</div>
-        //                   <div className="col-sm-8">Pexo</div>
+        //                   <div className="col-sm-8">centralex</div>
         //                 </div>
         //               </div>
         //             </div>
@@ -345,7 +345,7 @@ export class ContributionConfirm extends React.PureComponent {
                                   </strong>{" "}
                                   for purchase of{" "}
                                   <strong>
-                                    {this.props.tokens} Pexo Tokens
+                                    {this.props.tokens} Centralex Tokens
                                   </strong>
                                   <div className="mt-10">
                                     <div className="mt-20">

@@ -235,7 +235,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
                 <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                   <div className="logo">
                     <Link to="/signin">
-                      <img src={ logo } alt="Pexo" />
+                      <img src={ logo } alt="centralex" />
                     </Link>
                   </div>
                 </div>
@@ -283,12 +283,12 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 
                            <input id="terms" className="boolean required form-check-input" required label="false" data-title="Please confirm" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="user[accepted_policies]" />
 
-                     &nbsp; I consent to receive email updates from Pexo.</label>
+                     &nbsp; I consent to receive email updates from centralex.</label>
                       </div>
                       <div className="form-group">
                         <label className="form-check-label" htmlFor="usCitizen">
                           <input id="usCitizen" className="boolean required form-check-input" required label="false" data-title="Please confirm" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="usCitizen" />
-                             &nbsp; I’m not US citizen and agree to the policy of Pexo token sale.
+                             &nbsp; I’m not US citizen and agree to the policy of centralex token sale.
                         </label>
                       </div>
 

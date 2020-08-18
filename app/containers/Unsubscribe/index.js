@@ -52,7 +52,7 @@ export class Unsubscribe extends React.PureComponent { // eslint-disable-line re
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
 
-                <div className="logo"><Link to="/"><img src={logo} alt="Pexo" /></Link></div>
+                <div className="logo"><Link to="/"><img src={logo} alt="Centralex" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10"></div>
             </div>

@@ -115,7 +115,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   }
   componentDidMount(){
     this.setState({
-      referalUrl:`https://tokensale.Pexo.io/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
+      referalUrl:`https://tokensale.centralex.io/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
      profilePicUrl:this.props.userInfo.userInfo.imageProfile
     })
   }

@@ -107,7 +107,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
 
               <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="logo"><Link to="/"><img src={logo} alt="Pexo" /></Link></div>
+                <div className="logo"><Link to="/"><img src={logo} alt="centralex" /></Link></div>
               </div>
               <div className="col-xs-5 col-sm-6 col-md-8">
                 <div className="header-right">

@@ -22,7 +22,7 @@ import {
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Info from "../Info";
 
-const SHARE_POST = 'Pexo introduces a unique tokensale platform for the Community.You can earn upto 2000 Pexo Tokens , Sign-up';
+const SHARE_POST = 'Centralex introduces a unique tokensale platform for the Community.You can earn upto 2000 centralex Tokens , Sign-up';
 
 class Refer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -38,7 +38,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
         componentDidMount(){
           this.setState({
             code : this.props.code.referral.code,
-            link : `https://tokensale.Pexo.io/signup/refer/${this.props.code.referral.code}`,
+            link : `https://tokensale.centralex.io/signup/refer/${this.props.code.referral.code}`,
             percent:this.props.code.amountPercent
           })
     // copyText.select();
@@ -67,7 +67,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
       }
 
       {!!this.props.code.status?   <div className="panel panel-default">
-          {/*<div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free Pexo Tokens</div>*/}
+          {/*<div className="panel-heading">Refer & Earn - Invite Your Friends & Get Free centralex Tokens</div>*/}
           <div className="panel-heading blueBG">
             {/* <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} /> */}
             {
@@ -76,7 +76,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 :
                 null
             }
-            Refer & Earn - Invite Your Friends & Get Free Pexo Tokens
+            Refer & Earn - Invite Your Friends & Get Free Centralex Tokens
           </div>
           <div className="panel-body">
         <div className="row">
@@ -85,10 +85,10 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               <div className="row">
                 <div className="col-sm-12 col-md-6 col-md-offset-3">
 
-                  <p>Share your unique referral link with your friends and you will earn free Pexo Tokens.</p>
+                  <p>Share your unique referral link with your friends and you will earn free Centralex Tokens.</p>
                   <p>Refer bonus is {percent}% of tokens purchased by the referee</p>
                   <div className="referral-link">
-                  <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.Pexo.io/signup/refer/${this.state.code}`} id="myInput" />
+                  <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.centralex.io/signup/refer/${this.state.code}`} id="myInput" />
                     <CopyToClipboard text={this.state.link}
                       onCopy={() => this.setState({copied: true})}>
                       <button>Copy Link</button>
@@ -99,20 +99,20 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <div className="referral">
 
 
-                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=facebook`} quote={`Pexo.io introduces a unique tokensale platform for the Community.You can earn upto 2000 Pexo Tokens , Sign-up`}>
+                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.centralex.io/signup/refer/${this.state.code}?channel=facebook`} quote={`centralex.io introduces a unique tokensale platform for the Community.You can earn upto 2000 centralex Tokens , Sign-up`}>
                       <FacebookIcon size={42} round />
 
                     </FacebookShareButton>
 
-                    <TwitterShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=twitter`} title={SHARE_POST}>
+                    <TwitterShareButton style={{ marginRight: '10px' }} url={`https://tokensale.centralex.io/signup/refer/${this.state.code}?channel=twitter`} title={SHARE_POST}>
                       <TwitterIcon size={42} round />
 
                     </TwitterShareButton>
-                    <TelegramShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=telegram`} title={SHARE_POST}>
+                    <TelegramShareButton style={{ marginRight: '10px' }} url={`https://tokensale.centralex.io/signup/refer/${this.state.code}?channel=telegram`} title={SHARE_POST}>
                       <TelegramIcon size={42} round />
 
                     </TelegramShareButton>
-                    <WhatsappShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=whatsapp`} title={SHARE_POST}>
+                    <WhatsappShareButton style={{ marginRight: '10px' }} url={`https://tokensale.centralex.io/signup/refer/${this.state.code}?channel=whatsapp`} title={SHARE_POST}>
                       <WhatsappIcon size={42} round />
 
                     </WhatsappShareButton>
@@ -123,21 +123,21 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                         }
                       }
                       url={
-                        `https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=linkedin`
+                        `https://tokensale.centralex.io/signup/refer/${this.state.code}?channel=linkedin`
                       }
                       title={
-                        `Pexo.io introduces a unique tokensale platform for the Community. You can earn upto 2000 Pexo Tokens , Sign-up
-                          now by clicking on https://tokensale.Pexo.io/signup/refer/${this.state.code}`
+                        `centralex.io introduces a unique tokensale platform for the Community. You can earn upto 2000 centralex Tokens , Sign-up
+                          now by clicking on https://tokensale.centralex.io/signup/refer/${this.state.code}`
                       }
                       description={
-                        `Pexo.io introduces a unique earning platform for the Community. You can earn upto 2000 Pexo Tokens , Sign-up
-                          now by clicking on https://tokensale.Pexo.io/signup/refer/${this.state.code}`
+                        `centralex.io introduces a unique earning platform for the Community. You can earn upto 2000 centralex Tokens , Sign-up
+                          now by clicking on https://tokensale.centralex.io/signup/refer/${this.state.code}`
                       }
                     >
                       <LinkedinIcon size={42} round />
                     </LinkedinShareButton>
-                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.Pexo.io/signup/refer/${this.state.code}?channel=reddit`} title={`Pexo.io introduces a unique tokensale platform for the Community. You can earn upto 2000 Pexo Tokens , Sign-up
-                          now by clicking on https://tokensale.Pexo.io/signup/refer/${this.state.code}`}>
+                    <RedditShareButton style={{ marginRight: '10px' }} url={`https://tokensale.centralex.io/signup/refer/${this.state.code}?channel=reddit`} title={`centralex.io introduces a unique tokensale platform for the Community. You can earn upto 2000 centralex Tokens , Sign-up
+                          now by clicking on https://tokensale.centralex.io/signup/refer/${this.state.code}`}>
                       <RedditIcon size={42} round />
                     </RedditShareButton>
 
@@ -187,8 +187,8 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               //         <li>Maximum 2000 Tokens can be earned through referral program.</li>
               //         <li>Limited Tokens will be allocated under referral program.</li>
               //         <li>Multiple accounts are not allowed. Anyone having multiple accounts will be disqualified from the referral program, and no Tokens will be rewarded for any of the accounts.</li>
-              //         <li>Please join our official <a href=" https://t.me/Pexoofficial" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/Pexo/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/Pexo" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/Pexo" className="link" target="_blank">Reddit Page</a>.</li>
-              //         <li>Pexo reserves the right to add, alter, modify, change or vary all of above rules or end it altogether, at any time without prior notice and without assigning any reason whatsoever.</li>
+              //         <li>Please join our official <a href=" https://t.me/centralexofficial" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/centralex/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/centralex" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/centralex" className="link" target="_blank">Reddit Page</a>.</li>
+              //         <li>centralex reserves the right to add, alter, modify, change or vary all of above rules or end it altogether, at any time without prior notice and without assigning any reason whatsoever.</li>
               //       </ol>
               //     </div>
               //   </div>
@@ -219,7 +219,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
 
                    <tr>
                      <td>Token Price:</td>
-                     <td>1 Pexo = $0.25</td>
+                     <td>1 centralex = $0.25</td>
                    </tr>
                    <tr>
                      <td>We Accept: </td>
@@ -247,7 +247,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               </tr>
                 <tr>
                   <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                  <td>400 Pexo</td>
+                  <td>400 centralex</td>
                 </tr>
                 <tr>
                   <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
@@ -274,7 +274,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 </tr>
                   <tr>
                     <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                    <td>400 Pexo</td>
+                    <td>400 centralex</td>
                   </tr>
                   <tr>
                     <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
@@ -301,7 +301,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   </tr>
                     <tr>
                       <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                      <td>400 Pexo</td>
+                      <td>400 centralex</td>
                     </tr>
                     <tr>
                       <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
@@ -329,7 +329,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 </tr>
                   <tr>
                     <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                    <td>400 Pexo</td>
+                    <td>400 centralex</td>
                   </tr>
                   <tr>
                     <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
@@ -356,7 +356,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                     </tr>
                       <tr>
                         <td>Minimum Purchase: &nbsp;&nbsp;&nbsp;</td>
-                        <td>400 Pexo</td>
+                        <td>400 centralex</td>
                       </tr>
                       <tr>
                         <td>Token Price: &nbsp;&nbsp;&nbsp;</td>
@@ -395,7 +395,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               //     // </tr>
               //     // <tr>
               //     //   <td>Minimum Purchase: </td>
-              //     //   <td>500 Pexo</td>
+              //     //   <td>500 centralex</td>
               //     // </tr>
               //   }
               //   </tbody>
@@ -403,9 +403,9 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
 
             }
               {
-                // <div className="text-center">Token Price: <strong>1 Pexo = $0.20</strong></div>
+                // <div className="text-center">Token Price: <strong>1 centralex = $0.20</strong></div>
                 // <div className="text-center">We Accept: <strong>BTC, ETH</strong></div>
-                // <div className="text-center">Currently Processed: <strong>0 Pexo TOKENS</strong></div>
+                // <div className="text-center">Currently Processed: <strong>0 centralex TOKENS</strong></div>
               }
 
           </div>

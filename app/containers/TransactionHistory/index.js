@@ -63,7 +63,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           className: 'text-center'
         },
         {
-          Header: 'Pexo Tokens',
+          Header: 'Centralex Tokens',
           accessor: 'tokens', // Custom cell components!
           className: 'text-right'
         },

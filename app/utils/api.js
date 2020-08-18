@@ -3,7 +3,7 @@ import axios from 'axios';
 // const BaseUrl = 'http://localhost:7070/api/v1/';
   // const BaseUrl = 'https://apis.ruc.io/api/v1/';
   // const BaseUrl = 'http://52.77.212.79:7070/api/v1/';
-const BaseUrl = 'https://tokensaleapis.pexo.io/api/v1/';
+const BaseUrl = 'https://tokensaleapis.centralex.io/api/v1/';
 
 export default {
   user: {

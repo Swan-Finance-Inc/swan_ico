@@ -893,11 +893,11 @@ export class DashBoardWelcomePage extends React.PureComponent {
 '' }
         <div className='row'>
         <div id="footer" style={{position:'fixed'}}  className="ui-footer">
-        © 2019 Pexo Trading oü , All Rights Reserved
-        <a className='socailLinks' href='https://www.facebook.com/Pexoexchange/' target="_blank">facebook</a>
-        <a className='socailLinks' href='https://twitter.com/pexoSupport' target="_blank">twitter</a>
-        <a className='socailLinks' href='https://Linkedin.com/company/pexo' target="_blank">LinkedIn</a>
-        {/* <a href='https://play.google.com/store/apps/details?id=com.pexo&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a> */}
+        © 2019 Centralex Trading oü , All Rights Reserved
+        <a className='socailLinks' href='https://www.facebook.com/centralexexchange/' target="_blank">facebook</a>
+        <a className='socailLinks' href='https://twitter.com/centralexSupport' target="_blank">twitter</a>
+        <a className='socailLinks' href='https://Linkedin.com/company/centralex' target="_blank">LinkedIn</a>
+        {/* <a href='https://play.google.com/store/apps/details?id=com.centralex&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a> */}
 
         </div>
         </div>
@@ -905,7 +905,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
         <div className='row'>
           <div className='col-md-1 col-md-offset-6'>
             <div className="sticky-android-logo">
-              <a href="https://s3-ap-southeast-1.amazonaws.com/pexo-bucket/app-debug-16.apk" target="_blank" className="sticky-android-icon">
+              <a href="https://s3-ap-southeast-1.amazonaws.com/centralex-bucket/app-debug-16.apk" target="_blank" className="sticky-android-icon">
                 // <i className="fa fa-android fa-3x" aria-hidden="true"></i>
                 <p className='androidStickyP'>Download app here</p>
               </a>
@@ -915,7 +915,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
         <div className='row'>
         <div className='col-md-1 col-md-offset-6'>
-        <div className="sticky-telegram-logo"><a href="http://t.me/pexochat" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+        <div className="sticky-telegram-logo"><a href="http://t.me/centralexchat" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
         </div>
         </div>
 

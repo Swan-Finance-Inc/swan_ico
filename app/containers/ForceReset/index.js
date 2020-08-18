@@ -27,7 +27,7 @@ export class ForceReset extends React.Component { // eslint-disable-line react/p
 
               <div className="col-xs-5 col-sm-6 col-sm-6 col-md-2 clearfix">
 
-                <div className="logo"><Link to="/"><img src={ logo } alt="Pexo" /></Link></div>
+                <div className="logo"><Link to="/"><img src={ logo } alt="centralex" /></Link></div>
               </div>
               <div className="col-xs-7 col-sm-6 col-md-10">
                 <div className="header-right">

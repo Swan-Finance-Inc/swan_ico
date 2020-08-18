@@ -103,7 +103,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
             <div className="signin-card-body">
               <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
               <p className="subtitle">If you DON’T see our emails, please check your SPAM folder.</p>
-              <p className="subtitle" > To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@Pexo.io</p>
+              <p className="subtitle" > To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@centralex.io</p>
             </div>
           </div>
         </div>
@@ -119,7 +119,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
 
               <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="logo"><Link to="/"><img src={ logo } alt="pexo" /></Link></div>
+                <div className="logo"><Link to="/"><img src={ logo } alt="centralex" /></Link></div>
               </div>
               <div className="col-xs-5 col-sm-6 col-md-8">
                 <div className="header-right">
