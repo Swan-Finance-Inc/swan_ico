@@ -4,7 +4,7 @@ coverage
 node_modules
 stats.json
 docs
-
+package-lock.json
 # Cruft
 .DS_Store
 npm-debug.log

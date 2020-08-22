@@ -1,9 +1,9 @@
 import axios from 'axios';
 // const BaseUrl = 'http://13.229.146.169:4040/api/v1/';
-// const BaseUrl = 'http://localhost:7070/api/v1/';
+ const BaseUrl = 'http://localhost:7070/api/v1/';
   // const BaseUrl = 'https://apis.ruc.io/api/v1/';
   // const BaseUrl = 'http://52.77.212.79:7070/api/v1/';
-const BaseUrl = 'https://tokensaleapis.centralex.io/api/v1/';
+//const BaseUrl = 'https://tokensaleapis.centralex.io/api/v1/';
 
 export default {
   user: {
@@ -79,6 +79,10 @@ export default {
       axios.put(`${BaseUrl}user/profile`, socialDetails, headers).then((res) => res.data).catch((err) => err.response.data),
     updateKycDetails: (headers, details) =>
       axios.patch(`${BaseUrl}user/kycDetails`, details, headers).then((res) => res.data).catch((err) => err.response.data),
+    fractalKYC: (headers, details) =>
+      axios.patch(`${BaseUrl}user/fractalKYC`, details, headers).then((res) => res.data).catch((err) => err.response.data),
+    updateFractalKyc: (headers, details) =>
+      axios.patch(`${BaseUrl}user/updateFractalKyc`, details, headers).then((res) => res.data).catch((err) => err.response.data),
     uploadKycDoc: (headers, doc) =>
       axios.patch(`${BaseUrl}user/kycDocs`, doc, headers).then((res) => res.data).catch((err) => err.response.data),
     updateProfile: (headers, doc) =>

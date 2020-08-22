@@ -27,6 +27,7 @@ import ResendConfirmationPage from 'containers/ResendConfirmationPage/Loadable';
 import Unsubscribe from 'containers/Unsubscribe/Loadable';
 import ForceReset from 'containers/ForceReset';
 import Activity from 'containers/Activity/Loadable';
+import KycPage from 'containers/KycPage/Loadable';
 
 
 
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/signup/refer/:token" component={RegisterPage} />
         <Route path="/unsubscribe" component={Unsubscribe} />
         <Route path="/forceReset" component={ForceReset} />
+        <Route path="/dashboard/kyc" component={KycPage} />
         <Route component={NotFoundPage} />
         <ToastContainer position="top-center" autoClose={6000} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover />
       </Switch>

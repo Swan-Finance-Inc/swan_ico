@@ -217,7 +217,7 @@ export class RegisterPage extends React.PureComponent { // eslint-disable-line r
 
 
   render() {
-    console.log(this.props," porps in Register Page")
+    console.log(this.props," props in Register Page")
     console.log(this.state," state in Register Page")
     if (localStorage.token) {
       return <Redirect to="/dashboard" />;

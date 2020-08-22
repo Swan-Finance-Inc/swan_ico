@@ -28,16 +28,31 @@ const makeSelectSubmitKycSuccess = () => createSelector(
   selectKycPageDomain,
   (substate) => substate.get('submitKycSuccess')
 )
+const makeSelectSubmitKycFractal = () => createSelector(
+  selectKycPageDomain,
+  (substate) => substate.get('fractalKYC')
+)
+
 
 const makeSelectKycDoc = () => createSelector(
   selectKycPageDomain,
   (substate) => substate.get('kycDoc')
 )
-
+const makeSelectUpdateKycFractal = () => createSelector(
+  selectKycPageDomain,
+  (substate) => substate.get('updateFractal')
+)
+const makeSelectUpdateKycFractalSuccess = () => createSelector(
+  selectKycPageDomain,
+  (substate) => substate.get('updateFractalSuccess')
+)
 export default makeSelectKycPage;
 export {
   selectKycPageDomain,
   makeSelectKycDetails,
   makeSelectSubmitKycSuccess,
   makeSelectKycDoc,
+  makeSelectSubmitKycFractal,
+  makeSelectUpdateKycFractal,
+  makeSelectUpdateKycFractalSuccess
 };

@@ -879,7 +879,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/ticket') ?
                   <TicketPage flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/kyc') ?
-                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
+                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo} location={this.props.location} /> :
                   (this.props.location.pathname == '/dashboard/transactionHistory') ?
                     <TransactionHistory message={this.props.global.depositSuccess} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/notification') ?

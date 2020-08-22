@@ -11,7 +11,10 @@ import {
   RESET_SUCCESS,
   SUBMIT_KYC_DOC,
   SUBMIT_KYC_DOC_SUCCESS,
-  KYC_DOC_SUCCESS_REMOVE
+  KYC_DOC_SUCCESS_REMOVE,
+  FRACTAL_KYC,
+  UPDATE_FRACTAL_KYC,
+  UPDATE_FRACTAL_KYC_SUCCESS,
 } from './constants';
 
 export function defaultAction() {
@@ -55,5 +58,24 @@ export function submitKycDocSuccessRemove(data) {
 export function resetSuccess() {
   return {
     type: RESET_SUCCESS
+  }
+}
+
+export function fractalKYC(data) {
+  return {
+    type: FRACTAL_KYC,
+    data
+  }
+}
+export function updateFractalKyc(data) {
+  return {
+    type: UPDATE_FRACTAL_KYC,
+    data
+  }
+}
+export function updateFractalKycSuccess(data) {
+  return {
+    type: UPDATE_FRACTAL_KYC_SUCCESS,
+    data
   }
 }

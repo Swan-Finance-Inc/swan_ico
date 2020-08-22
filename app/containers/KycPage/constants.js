@@ -11,3 +11,6 @@ export const RESET_SUCCESS = 'app/KycPage/RESET_SUCCESS';
 export const SUBMIT_KYC_DOC = 'app/KycPage/SUBMIT_KYC_DOC';
 export const SUBMIT_KYC_DOC_SUCCESS = 'app/KycPage/SUBMIT_KYC_DOC_SUCCESS';
 export const KYC_DOC_SUCCESS_REMOVE = 'app/KycPage/KYC_DOC_SUCCESS_REMOVE';
+export const FRACTAL_KYC = 'app/KycPage/FRACTAL_KYC';
+export const UPDATE_FRACTAL_KYC = 'app/KycPage/UPDATE_FRACTAL_KYC';
+export const UPDATE_FRACTAL_KYC_SUCCESS = 'app/KycPage/UPDATE_FRACTAL_KYC_SUCCESS';
