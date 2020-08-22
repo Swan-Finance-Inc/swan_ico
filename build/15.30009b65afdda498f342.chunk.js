@@ -1,1 +1,425 @@
-webpackJsonp([15],{"./app/containers/UploadDocuments/index.js":function(e,t,n){"use strict";function o(){var e=arguments.length>0&&void 0!==arguments[0]?arguments[0]:P,t=arguments[1];switch(t.type){case w:return e;case U:return e.set("kycDoc",t.data);case C:return e.set("kycDocSuccess",t.data);case I:return e.set("kycDocSuccess",!1);default:return e}}function r(e){return{type:U,data:e}}function a(e){return{type:C,data:e}}function s(e){return{type:I,data:e}}function c(){var e,t,n,o;return regeneratorRuntime.wrap(function(r){for(;;)switch(r.prev=r.next){case 0:return r.prev=0,e={headers:{"x-auth-token":localStorage.getItem("token"),"content-type":"multipart/form-data"}},r.next=4,Object(E.c)(O());case 4:return t=r.sent,console.log(t),n=new FormData,n.append(t.field,t.image),r.next=10,Object(E.a)(N.a.user.uploadKycDoc,e,n);case 10:if(o=r.sent,!o.success){r.next=17;break}return r.next=14,Object(E.b)(a(o));case 14:console.log("from saga",o),r.next=18;break;case 17:console.log(err);case 18:r.next=25;break;case 20:return r.prev=20,r.t0=r.catch(0),r.next=24,Object(E.b)(Object(T.a)());case 24:console.log("error : ",r.t0);case 25:case"end":return r.stop()}},F,this,[[0,20]])}function i(){return regeneratorRuntime.wrap(function(e){for(;;)switch(e.prev=e.next){case 0:return e.next=2,[Object(E.d)(U,c)];case 2:case"end":return e.stop()}},B,this)}function u(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function l(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function d(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}function p(e){return{dispatch:e,submitDoc:function(t){return e(r(t))},resetDocSuccess:function(t){return e(s(t))}}}Object.defineProperty(t,"__esModule",{value:!0});var m=n("./node_modules/react/react.js"),f=n.n(m),g=(n("./node_modules/prop-types/index.js"),n("./node_modules/react-redux/es/index.js")),b=n("./node_modules/react-helmet/lib/Helmet.js"),v=n("./node_modules/reselect/es/index.js"),y=n("./node_modules/redux/es/index.js"),h=n("./node_modules/react-toastify/lib/index.js"),j=n("./app/utils/injectSaga.js"),D=n("./app/utils/injectReducer.js"),x=function(e){return e.get("uploadDocuments")},_=function(){return Object(v.a)(x,function(e){return e.toJS()})},O=function(){return Object(v.a)(x,function(e){return e.get("kycDoc")})},S=_,k=n("./node_modules/immutable/dist/immutable.js"),w="app/UploadDocuments/DEFAULT_ACTION",U="app/UploadDocuments/SUBMIT_DOC",C="app/UploadDocuments/SUBMIT_DOC_SUCCESS",I="app/UploadDocuments/RESET_DOC_SUCCESS",P=Object(k.fromJS)({}),R=o,E=n("./node_modules/redux-saga/es/effects.js"),N=n("./app/utils/api.js"),T=(n("./node_modules/react-router-redux/index.js"),n("./app/containers/DashBoardWelcomePage/actions.js")),F=regeneratorRuntime.mark(c),B=regeneratorRuntime.mark(i);n.d(t,"UploadDocuments",function(){return W});var M=function(){var e="function"==typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103;return function(t,n,o,r){var a=t&&t.defaultProps,s=arguments.length-3;if(n||0===s||(n={}),n&&a)for(var c in a)void 0===n[c]&&(n[c]=a[c]);else n||(n=a||{});if(1===s)n.children=r;else if(s>1){for(var i=Array(s),u=0;u<s;u++)i[u]=arguments[u+3];n.children=i}return{$$typeof:e,type:t,key:void 0===o?null:""+o,ref:null,props:n,_owner:null}}}(),A=function(){function e(e,t){for(var n=0;n<t.length;n++){var o=t[n];o.enumerable=o.enumerable||!1,o.configurable=!0,"value"in o&&(o.writable=!0),Object.defineProperty(e,o.key,o)}}return function(t,n,o){return n&&e(t.prototype,n),o&&e(t,o),t}}(),z=M(b.Helmet,{},void 0,M("title",{},void 0,"Upload Extra Documents"),M("meta",{name:"description",content:"Description of Upload Document"})),H=M(h.ToastContainer,{position:"top-center",autoClose:6e3,hideProgressBar:!1,newestOnTop:!0,closeOnClick:!0,pauseOnHover:!0}),J=M("div",{className:"panel-heading"},void 0,"Upload More Documents"),L=M("label",{htmlFor:"front_id"},void 0,M("h5",{},void 0,"Documnets",M("sup",{},void 0,"*"))),W=function(e){function t(e){u(this,t);var n=l(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return n.handleFrontImg=function(e){e.preventDefault();var t=new FileReader,o=e.target.files[0];o.size>5242880?h.toast.error("File size should be less than 5MB"):(t.onloadend=function(){n.setState({frontImgUrl:"/assets/img/uploading.svg",frontImg:o})},t.readAsDataURL(o),n.props.submitDoc({image:o,field:"extraDoc"}))},n.state={frontImgUrl:"https://s3.amazonaws.com/websiteimagesrama/id_front.png",frontImg:""},n}return d(t,e),A(t,[{key:"componentWillReceiveProps",value:function(e){e.uploaddocuments.kycDocSuccess&&"extraDoc"==e.uploaddocuments.kycDocSuccess.image&&(this.setState({frontImgUrl:e.uploaddocuments.kycDocSuccess.imageUrl}),h.toast.success("Document Uploaded Successfully"),e.resetDocSuccess())}},{key:"render",value:function(){return console.log(this.props," props in upload Document"),console.log(this.state," state in upload Document "),M("div",{id:"content",className:"ui-content ui-content-aside-overlay"},void 0,z,H,M("div",{className:"ui-content-body"},void 0,M("div",{className:"ui-container container-fluid"},void 0,M("div",{className:"panel panel-default"},void 0,J,M("div",{className:"row"},void 0,M("div",{className:"col-sm-6 form-group"},void 0,L,M("img",{className:"img-responsive",style:{width:"400px",height:"250px"},src:this.state.frontImgUrl,alt:"front id",id:"front_img_src"}),M("input",{type:"file",accept:"image/png, image/jpeg",name:"front_id",style:{margin:"10px 0px 0px 30px"},onChange:this.handleFrontImg,required:!0})))))))}}]),t}(f.a.PureComponent),$=Object(v.b)({uploaddocuments:S()}),q=Object(g.b)($,p),K=Object(D.a)({key:"uploadDocuments",reducer:R}),G=Object(j.a)({key:"uploadDocuments",saga:i});t.default=Object(y.compose)(K,G,q)(W)}});
+webpackJsonp([15],{
+
+/***/ "./app/containers/UploadDocuments/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+
+// EXTERNAL MODULE: ./node_modules/react/react.js
+var react = __webpack_require__("./node_modules/react/react.js");
+var react_default = /*#__PURE__*/__webpack_require__.n(react);
+
+// EXTERNAL MODULE: ./node_modules/prop-types/index.js
+var prop_types = __webpack_require__("./node_modules/prop-types/index.js");
+var prop_types_default = /*#__PURE__*/__webpack_require__.n(prop_types);
+
+// EXTERNAL MODULE: ./node_modules/react-redux/es/index.js + 14 modules
+var es = __webpack_require__("./node_modules/react-redux/es/index.js");
+
+// EXTERNAL MODULE: ./node_modules/react-helmet/lib/Helmet.js
+var Helmet = __webpack_require__("./node_modules/react-helmet/lib/Helmet.js");
+var Helmet_default = /*#__PURE__*/__webpack_require__.n(Helmet);
+
+// EXTERNAL MODULE: ./node_modules/reselect/es/index.js
+var reselect_es = __webpack_require__("./node_modules/reselect/es/index.js");
+
+// EXTERNAL MODULE: ./node_modules/redux/es/index.js + 6 modules
+var redux_es = __webpack_require__("./node_modules/redux/es/index.js");
+
+// EXTERNAL MODULE: ./node_modules/react-toastify/lib/index.js
+var lib = __webpack_require__("./node_modules/react-toastify/lib/index.js");
+var lib_default = /*#__PURE__*/__webpack_require__.n(lib);
+
+// EXTERNAL MODULE: ./app/utils/injectSaga.js + 2 modules
+var injectSaga = __webpack_require__("./app/utils/injectSaga.js");
+
+// EXTERNAL MODULE: ./app/utils/injectReducer.js + 1 modules
+var injectReducer = __webpack_require__("./app/utils/injectReducer.js");
+
+// CONCATENATED MODULE: ./app/containers/UploadDocuments/selectors.js
+
+
+/**
+ * Direct selector to the uploadDocuments state domain
+ */
+var selectUploadDocumentsDomain = function selectUploadDocumentsDomain(state) {
+  return state.get('uploadDocuments');
+};
+
+/**
+ * Other specific selectors
+ */
+
+/**
+ * Default selector used by UploadDocuments
+ */
+
+var selectors_makeSelectUploadDocuments = function makeSelectUploadDocuments() {
+  return Object(reselect_es["a" /* createSelector */])(selectUploadDocumentsDomain, function (substate) {
+    return substate.toJS();
+  });
+};
+var selectors_makeSelectKycDoc = function makeSelectKycDoc() {
+  return Object(reselect_es["a" /* createSelector */])(selectUploadDocumentsDomain, function (substate) {
+    return substate.get('kycDoc');
+  });
+};
+
+/* harmony default export */ var selectors = (selectors_makeSelectUploadDocuments);
+
+// EXTERNAL MODULE: ./node_modules/immutable/dist/immutable.js
+var immutable = __webpack_require__("./node_modules/immutable/dist/immutable.js");
+var immutable_default = /*#__PURE__*/__webpack_require__.n(immutable);
+
+// CONCATENATED MODULE: ./app/containers/UploadDocuments/constants.js
+/*
+ *
+ * UploadDocuments constants
+ *
+ */
+
+var DEFAULT_ACTION = 'app/UploadDocuments/DEFAULT_ACTION';
+var SUBMIT_DOC = 'app/UploadDocuments/SUBMIT_DOC';
+var SUBMIT_DOC_SUCCESS = 'app/UploadDocuments/SUBMIT_DOC_SUCCESS';
+var RESET_DOC_SUCCESS = 'app/UploadDocuments/RESET_DOC_SUCCESS';
+// CONCATENATED MODULE: ./app/containers/UploadDocuments/reducer.js
+/*
+ *
+ * UploadDocuments reducer
+ *
+ */
+
+
+
+
+var initialState = Object(immutable["fromJS"])({});
+
+function uploadDocumentsReducer() {
+  var state = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : initialState;
+  var action = arguments[1];
+
+  switch (action.type) {
+    case DEFAULT_ACTION:
+      return state;
+    case SUBMIT_DOC:
+      return state.set('kycDoc', action.data);
+    case SUBMIT_DOC_SUCCESS:
+      return state.set('kycDocSuccess', action.data);
+    case RESET_DOC_SUCCESS:
+      return state.set('kycDocSuccess', false);
+
+    default:
+      return state;
+  }
+}
+
+/* harmony default export */ var reducer = (uploadDocumentsReducer);
+// EXTERNAL MODULE: ./node_modules/redux-saga/es/effects.js
+var effects = __webpack_require__("./node_modules/redux-saga/es/effects.js");
+
+// EXTERNAL MODULE: ./app/utils/api.js
+var api = __webpack_require__("./app/utils/api.js");
+
+// CONCATENATED MODULE: ./app/containers/UploadDocuments/actions.js
+/*
+ *
+ * UploadDocuments actions
+ *
+ */
+
+
+
+function defaultAction() {
+  return {
+    type: DEFAULT_ACTION
+  };
+}
+function actions_submitDoc(data) {
+  return {
+    type: SUBMIT_DOC,
+    data: data
+  };
+}
+
+function submitKycDocSuccess(data) {
+  return {
+    type: SUBMIT_DOC_SUCCESS,
+    data: data
+  };
+}
+
+function actions_resetDocSuccess(data) {
+  return {
+    type: RESET_DOC_SUCCESS,
+    data: data
+  };
+}
+// EXTERNAL MODULE: ./node_modules/react-router-redux/index.js
+var react_router_redux = __webpack_require__("./node_modules/react-router-redux/index.js");
+var react_router_redux_default = /*#__PURE__*/__webpack_require__.n(react_router_redux);
+
+// EXTERNAL MODULE: ./app/containers/DashBoardWelcomePage/actions.js
+var actions = __webpack_require__("./app/containers/DashBoardWelcomePage/actions.js");
+
+// CONCATENATED MODULE: ./app/containers/UploadDocuments/saga.js
+var _marked = /*#__PURE__*/regeneratorRuntime.mark(submitKycDoc),
+    _marked2 = /*#__PURE__*/regeneratorRuntime.mark(defaultSaga);
+
+
+
+
+
+
+
+
+
+function submitKycDoc() {
+  var headers, data, body, apiData;
+  return regeneratorRuntime.wrap(function submitKycDoc$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          _context.prev = 0;
+          headers = {
+            headers: {
+              'x-auth-token': localStorage.getItem('token'),
+              'content-type': 'multipart/form-data'
+            }
+          };
+          _context.next = 4;
+          return Object(effects["c" /* select */])(selectors_makeSelectKycDoc());
+
+        case 4:
+          data = _context.sent;
+
+          console.log(data);
+          body = new FormData();
+
+
+          body.append(data.field, data.image);
+
+          _context.next = 10;
+          return Object(effects["a" /* call */])(api["a" /* default */].user.uploadKycDoc, headers, body);
+
+        case 10:
+          apiData = _context.sent;
+
+          if (!apiData.success) {
+            _context.next = 17;
+            break;
+          }
+
+          _context.next = 14;
+          return Object(effects["b" /* put */])(submitKycDocSuccess(apiData));
+
+        case 14:
+          console.log('from saga', apiData);
+          _context.next = 18;
+          break;
+
+        case 17:
+          console.log(err);
+
+        case 18:
+          _context.next = 25;
+          break;
+
+        case 20:
+          _context.prev = 20;
+          _context.t0 = _context['catch'](0);
+          _context.next = 24;
+          return Object(effects["b" /* put */])(Object(actions["a" /* codeErrorAction */])());
+
+        case 24:
+          console.log('error : ', _context.t0);
+
+        case 25:
+        case 'end':
+          return _context.stop();
+      }
+    }
+  }, _marked, this, [[0, 20]]);
+}
+
+// Individual exports for testing
+function defaultSaga() {
+  return regeneratorRuntime.wrap(function defaultSaga$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          _context2.next = 2;
+          return [Object(effects["d" /* takeEvery */])(SUBMIT_DOC, submitKycDoc)];
+
+        case 2:
+        case 'end':
+          return _context2.stop();
+      }
+    }
+  }, _marked2, this);
+}
+// CONCATENATED MODULE: ./app/containers/UploadDocuments/index.js
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UploadDocuments", function() { return UploadDocuments_UploadDocuments; });
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+ *
+ * UploadDocuments
+ *
+ */
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var _ref = _jsx(Helmet["Helmet"], {}, void 0, _jsx('title', {}, void 0, 'Upload Extra Documents'), _jsx('meta', {
+  name: 'description',
+  content: 'Description of Upload Document'
+}));
+
+var _ref2 = _jsx(lib["ToastContainer"], {
+  position: 'top-center',
+  autoClose: 6000,
+  hideProgressBar: false,
+  newestOnTop: true,
+  closeOnClick: true,
+  pauseOnHover: true
+});
+
+var _ref3 = _jsx('div', {
+  className: 'panel-heading'
+}, void 0, 'Upload More Documents');
+
+var _ref4 = _jsx('label', {
+  htmlFor: 'front_id'
+}, void 0, _jsx('h5', {}, void 0, 'Documnets', _jsx('sup', {}, void 0, '*')));
+
+var UploadDocuments_UploadDocuments = function (_React$PureComponent) {
+  _inherits(UploadDocuments, _React$PureComponent);
+
+  // eslint-disable-line react/prefer-stateless-function
+  function UploadDocuments(props) {
+    _classCallCheck(this, UploadDocuments);
+
+    var _this = _possibleConstructorReturn(this, (UploadDocuments.__proto__ || Object.getPrototypeOf(UploadDocuments)).call(this, props));
+
+    _this.handleFrontImg = function (e) {
+      e.preventDefault();
+      var reader = new FileReader();
+      var file = e.target.files[0];
+      if (file.size > 5 * 1024 * 1024) {
+        lib["toast"].error('File size should be less than 5MB');
+      } else {
+        reader.onloadend = function () {
+          _this.setState({
+            frontImgUrl: '/assets/img/uploading.svg',
+            frontImg: file
+          });
+        };
+        reader.readAsDataURL(file);
+        _this.props.submitDoc({ image: file, field: 'extraDoc' });
+      }
+    };
+
+    _this.state = {
+      frontImgUrl: 'https://s3.amazonaws.com/websiteimagesrama/id_front.png',
+      frontImg: ''
+    };
+    return _this;
+  }
+
+  _createClass(UploadDocuments, [{
+    key: 'componentWillReceiveProps',
+    value: function componentWillReceiveProps(nextProps) {
+      if (nextProps.uploaddocuments.kycDocSuccess) {
+        if (nextProps.uploaddocuments.kycDocSuccess.image == 'extraDoc') {
+          this.setState({
+            frontImgUrl: nextProps.uploaddocuments.kycDocSuccess.imageUrl
+          });
+          lib["toast"].success("Document Uploaded Successfully");
+          nextProps.resetDocSuccess();
+        }
+      }
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      console.log(this.props, " props in upload Document");
+      console.log(this.state, " state in upload Document ");
+      return _jsx('div', {
+        id: 'content',
+        className: 'ui-content ui-content-aside-overlay'
+      }, void 0, _ref, _ref2, _jsx('div', {
+        className: 'ui-content-body'
+      }, void 0, _jsx('div', {
+        className: 'ui-container container-fluid'
+      }, void 0, _jsx('div', {
+        className: 'panel panel-default'
+      }, void 0, _ref3, _jsx('div', {
+        className: 'row'
+      }, void 0, _jsx('div', {
+        className: 'col-sm-6 form-group'
+      }, void 0, _ref4, _jsx('img', {
+        className: 'img-responsive',
+        style: { width: '400px', height: '250px' },
+        src: this.state.frontImgUrl,
+        alt: 'front id',
+        id: 'front_img_src'
+      }), _jsx('input', {
+        type: 'file',
+        accept: 'image/png, image/jpeg',
+        name: 'front_id',
+        style: { margin: '10px 0px 0px 30px' },
+        onChange: this.handleFrontImg,
+        required: true
+      })))))));
+    }
+  }]);
+
+  return UploadDocuments;
+}(react_default.a.PureComponent);
+
+var mapStateToProps = Object(reselect_es["b" /* createStructuredSelector */])({
+  uploaddocuments: selectors()
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch: dispatch,
+    submitDoc: function submitDoc(data) {
+      return dispatch(actions_submitDoc(data));
+    },
+    resetDocSuccess: function resetDocSuccess(data) {
+      return dispatch(actions_resetDocSuccess(data));
+    }
+  };
+}
+
+var withConnect = Object(es["b" /* connect */])(mapStateToProps, mapDispatchToProps);
+
+var withReducer = Object(injectReducer["a" /* default */])({ key: 'uploadDocuments', reducer: reducer });
+var withSaga = Object(injectSaga["a" /* default */])({ key: 'uploadDocuments', saga: defaultSaga });
+
+/* harmony default export */ var containers_UploadDocuments = __webpack_exports__["default"] = (Object(redux_es["compose"])(withReducer, withSaga, withConnect)(UploadDocuments_UploadDocuments));
+
+/***/ })
+
+});

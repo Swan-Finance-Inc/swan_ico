@@ -1,1 +1,116 @@
-webpackJsonp([18],{"./app/components/News/index.js":function(e,o,t){"use strict";function n(e,o,t){return o in e?Object.defineProperty(e,o,{value:t,enumerable:!0,configurable:!0,writable:!0}):e[o]=t,e}function r(e,o){if(!(e instanceof o))throw new TypeError("Cannot call a class as a function")}function i(e,o){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!o||"object"!=typeof o&&"function"!=typeof o?e:o}function a(e,o){if("function"!=typeof o&&null!==o)throw new TypeError("Super expression must either be null or a function, not "+typeof o);e.prototype=Object.create(o&&o.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),o&&(Object.setPrototypeOf?Object.setPrototypeOf(e,o):e.__proto__=o)}Object.defineProperty(o,"__esModule",{value:!0});var s=t("./node_modules/react/react.js"),c=t.n(s),l=t("./node_modules/react-bootstrap/es/index.js"),u=function(){var e="function"==typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103;return function(o,t,n,r){var i=o&&o.defaultProps,a=arguments.length-3;if(t||0===a||(t={}),t&&i)for(var s in i)void 0===t[s]&&(t[s]=i[s]);else t||(t=i||{});if(1===a)t.children=r;else if(a>1){for(var c=Array(a),l=0;l<a;l++)c[l]=arguments[l+3];t.children=c}return{$$typeof:e,type:o,key:void 0===n?null:""+n,ref:null,props:t,_owner:null}}}(),d=function(){function e(e,o){for(var t=0;t<o.length;t++){var n=o[t];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(o,t,n){return t&&e(o.prototype,t),n&&e(o,n),o}}(),f=u("div",{className:"col-sm-12 text-center"},void 0,u("h2",{},void 0,"NEWS"),u("hr",{})),p=u("hr",{}),v=function(e){function o(e){r(this,o);var t=i(this,(o.__proto__||Object.getPrototypeOf(o)).call(this,e));return t.state={open:!1,open2:!1,open3:!1,open4:!1,open5:!1},t}return a(o,e),d(o,[{key:"render",value:function(){var e=this;return console.log(this.props," props in dashboard/news"),console.log(this.state," state in dashboard/news"),u("div",{id:"content",className:"ui-content ui-content-aside-overlay"},void 0,u("div",{className:"ui-content-body"},void 0,u("div",{className:"ui-container container-fluid"},void 0,u("div",{className:"row"},void 0,f,u("div",{className:"col-sm-12"},void 0,this.props.newsData.map(function(o,t){return u("div",{className:"row"},void 0,u("div",{className:"col-sm-12"},void 0,u(l.a,{onClick:function(){return e.setState(n({},o._id,!e.state[o._id]))},className:"form-control",style:{marginBottom:"20px"}},void 0,o.title),u(l.b,{in:e.state[o._id]},void 0,u("div",{},void 0,u(l.h,{},void 0,o.imageUri?u("div",{className:"row"},void 0,u("div",{className:"col-sm-12"},void 0,u("img",{className:"img-responsive news-image",src:o.imageUri,alt:"imageUri",id:"imageUri",style:{margin:"auto"}}),p)):null,u("div",{className:"row"},void 0,u("div",{className:"col-sm-12"},void 0,o.subject)))))))}))))))}}]),o}(c.a.PureComponent);o.default=v}});
+webpackJsonp([18],{
+
+/***/ "./app/components/News/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/react.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_bootstrap__ = __webpack_require__("./node_modules/react-bootstrap/es/index.js");
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+*
+* News
+*
+*/
+
+
+
+// import styled from 'styled-components';
+
+
+var _ref = _jsx('div', {
+  className: 'col-sm-12 text-center'
+}, void 0, _jsx('h2', {}, void 0, 'NEWS'), _jsx('hr', {}));
+
+var _ref2 = _jsx('hr', {});
+
+var News = function (_React$PureComponent) {
+  _inherits(News, _React$PureComponent);
+
+  // eslint-disable-line react/prefer-stateless-function
+  function News(props) {
+    _classCallCheck(this, News);
+
+    var _this = _possibleConstructorReturn(this, (News.__proto__ || Object.getPrototypeOf(News)).call(this, props));
+
+    _this.state = {
+      open: false,
+      open2: false,
+      open3: false,
+      open4: false,
+      open5: false
+    };
+    return _this;
+  }
+
+  _createClass(News, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      console.log(this.props, " props in dashboard/news");
+      console.log(this.state, " state in dashboard/news");
+      return _jsx('div', {
+        id: 'content',
+        className: 'ui-content ui-content-aside-overlay'
+      }, void 0, _jsx('div', {
+        className: 'ui-content-body'
+      }, void 0, _jsx('div', {
+        className: 'ui-container container-fluid'
+      }, void 0, _jsx('div', {
+        className: 'row'
+      }, void 0, _ref, _jsx('div', {
+        className: 'col-sm-12'
+      }, void 0, this.props.newsData.map(function (item, i) {
+        return _jsx('div', {
+          className: 'row'
+        }, void 0, _jsx('div', {
+          className: 'col-sm-12'
+        }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_1_react_bootstrap__["a" /* Button */], {
+          onClick: function onClick() {
+            return _this2.setState(_defineProperty({}, item._id, !_this2.state[item._id]));
+          },
+          className: 'form-control',
+          style: { marginBottom: '20px' }
+        }, void 0, item.title), _jsx(__WEBPACK_IMPORTED_MODULE_1_react_bootstrap__["b" /* Collapse */], {
+          'in': _this2.state[item._id]
+        }, void 0, _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_1_react_bootstrap__["h" /* Well */], {}, void 0, !!item.imageUri ? _jsx('div', {
+          className: 'row'
+        }, void 0, _jsx('div', {
+          className: 'col-sm-12'
+        }, void 0, _jsx('img', {
+          className: 'img-responsive news-image',
+          src: item.imageUri,
+          alt: 'imageUri',
+          id: 'imageUri',
+          style: { margin: 'auto' }
+        }), _ref2)) : null, _jsx('div', {
+          className: 'row'
+        }, void 0, _jsx('div', {
+          className: 'col-sm-12'
+        }, void 0, item.subject)))))));
+      }))))));
+    }
+  }]);
+
+  return News;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.PureComponent);
+
+/* harmony default export */ __webpack_exports__["default"] = (News);
+
+/***/ })
+
+});

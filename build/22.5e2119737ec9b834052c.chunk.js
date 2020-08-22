@@ -1,1 +1,100 @@
-webpackJsonp([22],{"./app/components/FaqPage/index.js":function(e,t,o){"use strict";function n(e,t,o){return t in e?Object.defineProperty(e,t,{value:o,enumerable:!0,configurable:!0,writable:!0}):e[t]=o,e}function r(e,t){if(!(e instanceof t))throw new TypeError("Cannot call a class as a function")}function i(e,t){if(!e)throw new ReferenceError("this hasn't been initialised - super() hasn't been called");return!t||"object"!=typeof t&&"function"!=typeof t?e:t}function a(e,t){if("function"!=typeof t&&null!==t)throw new TypeError("Super expression must either be null or a function, not "+typeof t);e.prototype=Object.create(t&&t.prototype,{constructor:{value:e,enumerable:!1,writable:!0,configurable:!0}}),t&&(Object.setPrototypeOf?Object.setPrototypeOf(e,t):e.__proto__=t)}Object.defineProperty(t,"__esModule",{value:!0});var s=o("./node_modules/react/react.js"),c=o.n(s),l=o("./node_modules/react-bootstrap/es/index.js"),u=function(){var e="function"==typeof Symbol&&Symbol.for&&Symbol.for("react.element")||60103;return function(t,o,n,r){var i=t&&t.defaultProps,a=arguments.length-3;if(o||0===a||(o={}),o&&i)for(var s in i)void 0===o[s]&&(o[s]=i[s]);else o||(o=i||{});if(1===a)o.children=r;else if(a>1){for(var c=Array(a),l=0;l<a;l++)c[l]=arguments[l+3];o.children=c}return{$$typeof:e,type:t,key:void 0===n?null:""+n,ref:null,props:o,_owner:null}}}(),f=function(){function e(e,t){for(var o=0;o<t.length;o++){var n=t[o];n.enumerable=n.enumerable||!1,n.configurable=!0,"value"in n&&(n.writable=!0),Object.defineProperty(e,n.key,n)}}return function(t,o,n){return o&&e(t.prototype,o),n&&e(t,n),t}}(),p=u("div",{className:"col-sm-12 text-center"},void 0,u("h2",{},void 0,"FREQUENTLY ASKED QUESTIONS"),u("hr",{})),d=function(e){function t(e){r(this,t);var o=i(this,(t.__proto__||Object.getPrototypeOf(t)).call(this,e));return o.state={open:!1,open2:!1,open3:!1,open4:!1,open5:!1},o}return a(t,e),f(t,[{key:"render",value:function(){var e=this;return console.log(this.props," props in faqPage"),console.log(this.state," state in faqPage"),u("div",{id:"content",className:"ui-content ui-content-aside-overlay"},void 0,u("div",{className:"ui-content-body"},void 0,u("div",{className:"ui-container container-fluid"},void 0,u("div",{className:"row"},void 0,p,u("div",{className:"col-sm-12"},void 0,this.props.faqData.map(function(t,o){return u("div",{className:"row"},void 0,u("div",{className:"col-sm-12"},void 0,u(l.a,{onClick:function(){return e.setState(n({},t._id,!e.state[t._id]))},className:"form-control",style:{marginBottom:"20px"}},void 0,t.question),u(l.b,{in:e.state[t._id]},void 0,u("div",{},void 0,u(l.h,{},void 0,t.answer)))))}))))))}}]),t}(c.a.PureComponent);t.default=d}});
+webpackJsonp([22],{
+
+/***/ "./app/components/FaqPage/index.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react__ = __webpack_require__("./node_modules/react/react.js");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0_react___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0_react__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_react_bootstrap__ = __webpack_require__("./node_modules/react-bootstrap/es/index.js");
+var _jsx = function () { var REACT_ELEMENT_TYPE = typeof Symbol === "function" && Symbol.for && Symbol.for("react.element") || 0xeac7; return function createRawReactElement(type, props, key, children) { var defaultProps = type && type.defaultProps; var childrenLength = arguments.length - 3; if (!props && childrenLength !== 0) { props = {}; } if (props && defaultProps) { for (var propName in defaultProps) { if (props[propName] === void 0) { props[propName] = defaultProps[propName]; } } } else if (!props) { props = defaultProps || {}; } if (childrenLength === 1) { props.children = children; } else if (childrenLength > 1) { var childArray = Array(childrenLength); for (var i = 0; i < childrenLength; i++) { childArray[i] = arguments[i + 3]; } props.children = childArray; } return { $$typeof: REACT_ELEMENT_TYPE, type: type, key: key === undefined ? null : '' + key, ref: null, props: props, _owner: null }; }; }();
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+/**
+*
+* FaqPage
+*
+*/
+
+
+
+// import styled from 'styled-components';
+
+
+var _ref = _jsx('div', {
+  className: 'col-sm-12 text-center'
+}, void 0, _jsx('h2', {}, void 0, 'FREQUENTLY ASKED QUESTIONS'), _jsx('hr', {}));
+
+var FaqPage = function (_React$PureComponent) {
+  _inherits(FaqPage, _React$PureComponent);
+
+  // eslint-disable-line react/prefer-stateless-function
+  function FaqPage(props) {
+    _classCallCheck(this, FaqPage);
+
+    var _this = _possibleConstructorReturn(this, (FaqPage.__proto__ || Object.getPrototypeOf(FaqPage)).call(this, props));
+
+    _this.state = {
+      open: false,
+      open2: false,
+      open3: false,
+      open4: false,
+      open5: false
+    };
+    return _this;
+  }
+
+  _createClass(FaqPage, [{
+    key: 'render',
+    value: function render() {
+      var _this2 = this;
+
+      console.log(this.props, " props in faqPage");
+      console.log(this.state, " state in faqPage");
+      return _jsx('div', {
+        id: 'content',
+        className: 'ui-content ui-content-aside-overlay'
+      }, void 0, _jsx('div', {
+        className: 'ui-content-body'
+      }, void 0, _jsx('div', {
+        className: 'ui-container container-fluid'
+      }, void 0, _jsx('div', {
+        className: 'row'
+      }, void 0, _ref, _jsx('div', {
+        className: 'col-sm-12'
+      }, void 0, this.props.faqData.map(function (item, i) {
+        return _jsx('div', {
+          className: 'row'
+        }, void 0, _jsx('div', {
+          className: 'col-sm-12'
+        }, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_1_react_bootstrap__["a" /* Button */], {
+          onClick: function onClick() {
+            return _this2.setState(_defineProperty({}, item._id, !_this2.state[item._id]));
+          },
+          className: 'form-control',
+          style: { marginBottom: '20px' }
+        }, void 0, item.question), _jsx(__WEBPACK_IMPORTED_MODULE_1_react_bootstrap__["b" /* Collapse */], {
+          'in': _this2.state[item._id]
+        }, void 0, _jsx('div', {}, void 0, _jsx(__WEBPACK_IMPORTED_MODULE_1_react_bootstrap__["h" /* Well */], {}, void 0, item.answer)))));
+      }))))));
+    }
+  }]);
+
+  return FaqPage;
+}(__WEBPACK_IMPORTED_MODULE_0_react___default.a.PureComponent);
+
+/* harmony default export */ __webpack_exports__["default"] = (FaqPage);
+
+/***/ })
+
+});
