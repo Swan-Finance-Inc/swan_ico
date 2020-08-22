@@ -1,9 +1,33 @@
 import axios from 'axios';
 // const BaseUrl = 'http://13.229.146.169:4040/api/v1/';
- const BaseUrl = 'http://localhost:7070/api/v1/';
+// const BaseUrl = 'http://localhost:7070/api/v1/';
   // const BaseUrl = 'https://apis.ruc.io/api/v1/';
   // const BaseUrl = 'http://52.77.212.79:7070/api/v1/';
 //const BaseUrl = 'https://tokensaleapis.centralex.io/api/v1/';
+
+
+let BaseUrl;
+const pathLocation = window.location.host;
+if(!!pathLocation) {
+   console.log('pathLocation : ', pathLocation);
+//   if(pathLocation === 'play.quillhash.com') {
+//     console.log('PROD');
+//     // Production baseUrl
+//     BaseUrl = 'https://play-apis.quillhash.com/api/v1/'
+//   } else 
+if(pathLocation === '54.151.217.0:6036'){
+    console.log("TEST")
+    //Testing baseUrl
+    BaseUrl = 'http://54.151.217.0:7070/api/v1/'
+  } 
+  else{
+    console.log('TEST using prod http-API');
+    //For localhost or other baseURL
+    //BaseUrl = 'http://localhost:3000/api/v1/';
+     BaseUrl = 'http://localhost:7070/api/v1/'
+  }
+}
+
 
 export default {
   user: {
