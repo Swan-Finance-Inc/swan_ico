@@ -1,7 +1,7 @@
 {
-  "name": "RUC-ico-user-dashboard",
+  "name": "Centralex-ico-user-dashboard",
   "version": "3.5.0",
-  "description": "RUC ico user dashboard",
+  "description": "Centralex ico user dashboard",
   "repository": {
     "type": "git",
     "url": "git://github.com/react-boilerplate/react-boilerplate.git"
