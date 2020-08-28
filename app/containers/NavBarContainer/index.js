@@ -15,7 +15,7 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectNavBarContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import logo from '../../images/logoo.gif';
+import logo from '../../images/CWHLogo.png';
 // import { signOut }  from './actions';
 import { userLoggedOut } from '../App/actions';
 import { push } from 'react-router-redux';

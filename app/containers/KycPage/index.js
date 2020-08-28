@@ -526,7 +526,7 @@ handleInput2=(e)=>{
             </button>
             </div>
             </div>
-            <div className="row">
+             {/* <div className="row">
               <div className="col-sm-12">
                 <div className="row"><div className="col-sm-6"><h3>PERSONAL DETAILS</h3></div>
                 <div className="col-sm-6"><h5 style={{color:'#f00'}} className="text-right">(*) denotes required field.</h5></div><hr/></div>
@@ -583,11 +583,7 @@ handleInput2=(e)=>{
                     </div>
                     <div className="col-sm-6 form-group">
                       <label htmlFor="country"><h5>COUNTRY<sup>*</sup></h5></label>
-                        {/* <select id="country" name="country" className="form-control" required>
-                          <option value="" hidden>Choose One</option>
-                          <option value="indian">INDIAN</option>
-                          <option value="us">US</option>
-                        </select> */}
+                        
                         <CountryDropdown
                           classes="form-control"
                           value={country}
@@ -597,7 +593,7 @@ handleInput2=(e)=>{
                   <div className="row">
                     <div className="col-sm-6 form-group">
                       <label htmlFor="state"><h5>STATE<sup>*</sup></h5></label>
-                      {/* <input className="form-control" type="text" name="state" id="state" placeholder="Enter state" required/> */}
+                      
                       <RegionDropdown
                         classes="form-control"
                         country={country}
@@ -672,8 +668,9 @@ handleInput2=(e)=>{
                     </div>
                   </div>
                 </form>
-              </div>
-            </div>
+              </div> 
+              
+            </div> */}
           </div>
         </div>
       </div>

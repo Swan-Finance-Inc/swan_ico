@@ -1,3 +1,10 @@
+# Platform Requirements
+
+-   Operating system : Ubuntu 18.04
+-   Nodejs Verison : 12.18.0
+-   NPM version : 6.14.5
+
+
 npm install
 npm start
 

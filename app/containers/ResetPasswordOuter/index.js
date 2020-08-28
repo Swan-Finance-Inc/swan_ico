@@ -20,7 +20,7 @@ import makeSelectResetPasswordOuter, { makeSelectResetToken, makeSelectResetErro
 import reducer from './reducer';
 import saga from './saga';
 import { resetPassword } from './actions';
-import logo from '../../images/logoo.gif';
+import logo from '../../images/CWHLogo.png';
 
 export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {

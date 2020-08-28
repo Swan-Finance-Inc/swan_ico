@@ -22,7 +22,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { registerUser } from './actions';
 import { Modal } from 'react-bootstrap';
-import logo from '../../images/logoo.gif';
+import logo from '../../images/CWHLogo.png';
 
 export class RegisterPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {

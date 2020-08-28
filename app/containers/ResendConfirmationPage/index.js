@@ -23,7 +23,7 @@ import { Redirect } from 'react-router'
 import { resendMail } from './actions';
 import { makeSelectResendError, makeSelectResendSuccess } from './selectors';
 import ReCAPTCHA from 'react-google-recaptcha';
-import logo from '../../images/logoo.gif';
+import logo from '../../images/CWHLogo.png';
 
 export class ResendConfirmationPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){

@@ -19,7 +19,7 @@ import reducer from './reducer';
 import saga from './saga';
 import { unsubscribeUserAction } from "./actions";
 import { makeSelectDetails } from '../ProfilePage/selectors';
-import logo from '../../images/logoo.gif';
+import logo from '../../images/CWHLogo.png';
 
 export class Unsubscribe extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
 

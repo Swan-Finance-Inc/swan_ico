@@ -17,7 +17,7 @@ import makeSelectSignupConfirm, { makeSelectFailureMessage, makeSelectSuccessMes
 import reducer from './reducer';
 import saga from './saga';
 import { resendAction } from './actions';
-import logo from '../../images/logoo.gif';
+import logo from '../../images/CWHLogo.png';
 
 
 
