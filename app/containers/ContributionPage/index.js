@@ -66,7 +66,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       contribution: false,
       body:{},
       isBonusOrDiscount:'',
-      discount:''
+      discount:'',
+      loading: true
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -117,7 +118,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       minInvest: data.minInvest,
       tokenPrice: data.tokenUsd,
       isBonusOrDiscount:data.isBonusOrDiscount,
-      discount:data.discount
+      discount:data.discount,
+      loading: false
     });
     this.setState({
       fromAddressEth:nextProps.userInfo.userInfo.ethAddress
@@ -681,6 +683,9 @@ gobackDollar=(e)=>{
     console.log(this.props," props in contribution page")
     console.log(this.state," state in contribution page")
     const { loading } = this.props
+    // this.setState({
+    //   loading : this.props
+    // });
     console.log(loading," loading in ");
     // if (this.props.userInfo.userInfo.kycStatus != 'ACCEPTED'){
     //   return (
@@ -788,7 +793,7 @@ gobackDollar=(e)=>{
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
               <div className="col-sm-12">
-              {loading?<LoadingSpinner />:
+              {this.loading?<LoadingSpinner />:
                 <div className="contribution">
                   <div className="row">
                     <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
