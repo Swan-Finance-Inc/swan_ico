@@ -27,7 +27,8 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from 'moment';
 import Info from "../../components/Info";
-
+import MyPaginnation from "../../components/MyPaginnation";
+import EmptyFile from "../../images/EmptyFile.svg";
 
 export class TransactionHistory extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -187,17 +188,22 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
   pageChange() {
     this.setState({
       ...this.state,transactionParam:{
-        ...this.state.transactionParam,page:this.state.page + 1
+        ...this.state.transactionParam,page:this.state.transactionParam.page + 1
       }
     })
     if (this.state.transactionParam.page + 1 > 1) {
       this.setState({
         disablePrevious: false,
+      },
+      () => {
+        console.log(this.state)
       });
     } else {
       this.setState({
         disablePrevious: true,
-      });
+      }
+      );
+      
     }
     this.props.transactions(this.state.transactionParam.page + 1);
   }
@@ -351,8 +357,6 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     console.log(this.state," state in transaction history");
     let loading = this.props.loading
     return (
-
-
       <div id="content" className="ui-content ui-content-aside-overlay">
       <Helmet>
         <title>Transactions</title>
@@ -362,110 +366,211 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
         {/* { <h1>Transactions</h1> } */}
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-          <div className="panel panel-default">
-          <div className="panel-heading blueBG">
-            {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />*/}
-            {
-              !!this.props.flag ?
-                <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
-                :
-                null
-            }
-            Transactions
-          </div>
-          {/* <div className="panel-heading">Transactions</div> */}
-          <div className="panel-body" style={{fontSize:'16px'}}>
-            <div className="row">
-              <div className="col-sm-12">
-                <div className="contribution" >
-                  <div className="row">
-                    <div className="col-sm-12 col-md-6 col-md-offset-3 text-center ">
-
-                    </div>
+            <div className="contribution-card" style={{ marginBottom : '30px' }}>
+              <div className="row">
+                  <div className="col-sm-12">
+                      <div className="customCard-header transaction-container">
+                        <h2 className="trasnaction">Transactions</h2>
+                        <span id="Clear-all"><a onClick={this.clearFilter} id="clearType">Clear All</a></span>
+                      </div>  
                   </div>
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <button className="btn-primary b1" style={{ height: '42px', width: '151px' }} disabled={this.state.disablePrevious} onClick={this.previousChange}> Previous Page </button>
-                      <button className="btn-primary b2" style={{ height: '42px', width: '151px', right: '16px', position: 'absolute', backgroundColor: 'rgb(62, 0, 96)!important' }} onClick={this.pageChange} disabled={this.state.disableNext}>Next Page </button>
-                      </div>
-                      <div className='col-sm-12'>
-                      <div className='text-center'>
-                        <button className="btn  filters" onClick={this.handleFilters} >{this.state.filterFlag?'Remove Filters':'Add Filters'}</button>
-                      </div>
-                      </div>
-                  {  this.state.filterFlag &&   <div className='col-sm-12'>
-                    <div className="col-sm-3 col-sm-offset-1">
-                      <div className="filter-card">
-                        <label htmlFor="kycFilter"><h5>Transaction Type:</h5></label>
+                  <div className="col-sm-4">
+                      <div className="transactions-filters">
+                        <div className="transactions-filters-card">
+                        <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>Transaction Type:</h4></label>
                         <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
-                          <option value="" disabled selected hidden>Select</option>
+                          <option value="" disabled selected hidden></option>
                           <option value='Ethereum'>ETHEREUM</option>
                           <option value='Bitcoin'>BITCOIN</option>
                         </select>
-                        <span className='clear'><a onClick={this.clearFilter} id="clearType">Clear</a></span>
+                        </div>
                       </div>
-                    </div>
-                    <div className="col-sm-5 col-sm-offset-3">
-                      <div className="filter-card">
-                        <div className='text-center'><label htmlFor="createdFilter"><h5>Created At</h5></label></div>
-                          <div className="row">
-                            <div className="col-sm-5 col-xs-5 col-xs-5">
+                  </div>
+                  <div className="col-sm-8">
+                    <div className="transactions-filters">
+                    <div className="transactions-filters-card">
+                        <div><label htmlFor="createdFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>Created At:</h4></label></div>
+                            <div  className="clear-input-control-width">
                             <DatePicker
+                            style={{width: '84%' }}
                             className='form-control text-center filter-input'
                             onChange={this.handleMinCreatedFilter}
                             value={this.state.transactionParam.createdLl}
-                            placeholderText='min'
+                            placeholderText='start'
                              />
                              {
                                  // <input id="createdMinFilter" type="date" onChange={this.handleMinCreatedFilter} className="form-control text-center filter-input" placeholder="min"/>
                              }
 
                             </div>
-                            <div className="col-sm-2 col-xs-2">
-                              <span>-</span>
+                            <div>
+                              <span className="to">To</span>
                             </div>
-                            <div className="col-sm-5 col-xs-5 col-xs-5">
+                            <div className="clear-input-control-width">
                             <DatePicker
                             className='form-control text-center filter-input'
                             onChange={this.handleMaxCreatedFilter}
                             value={this.state.transactionParam.createdUl}
-                            placeholderText='max'
+                            placeholderText='end'
                              />
                               {
                                 // <input id="createdMaxFilter" type="date" onChange={this.handleMaxCreatedFilter} className="form-control text-center filter-input" placeholder="max"/>
                               }
                             </div>
-                            </div>
-                            <div className="row">
-                              <div className="col-sm-12">
-                            <span className='clear'><a onClick={this.clearFilter} id="clearCreated">Clear</a></span>
-                              </div>
-                            </div>
                         </div>
                     </div>
-                    </div>
-
-                  }
-                    <div className='col-sm-12'>
-                    {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
-                        showPaginationBottom={true}
-                        style={{ marginTop: '20px', fontSize: '12px', cursor: 'default' }}
-                        data={this.state.data}
-                        columns={this.state.columns}
-                        // onPageChange={this.pageChange}
-                        pageSizeOptions={[5, 10]}
-                        noDataText={'No transactions found'}
-                        rowsText={'transactions'}
-                        defaultPageSize={5}
-                      />}
-                    </div>
-
                   </div>
+              <div className="col-sm-12">
+              <div className="transactions-filters" style={{ paddingTop : '0px' }}>
+                <div className="transactions-filters-card">
+                <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>No Of Transactions:</h4></label>
+                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                  <option value="" disabled selected hidden></option>
+                  <option value='5'>5</option>
+                  <option value='10'>10</option>
+                </select>
                 </div>
               </div>
+              </div>  
+              
+              <div className='col-sm-12'>
+                  {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
+                      showPaginationBottom={false}
+                      style={{ height : this.state.data.length > 0 ? '100%' : '400px' , marginTop : '20px'}}
+                      data={this.state.data}
+                      columns={this.state.columns}
+                      onPageChange={this.pageChange}
+                     pageSizeOptions={[5, 10]}
+                     noDataText={
+                      <div>
+                      <img src={EmptyFile} style={{ height: '143px' }} />
+                      <p>No Tickets Found</p>
+                      </div>
+                    }
+                      rowsText={'transactions'}
+                      defaultPageSize={5}
+                    />}
+             </div>
+              </div>
             </div>
-          </div>
-        </div>
+              
+            <div className="col-sm-12 text-center my-pagibation">
+            <MyPaginnation
+              data={this.state.data}
+              onPageChange={this.pageChange}
+              previousChange={this.previousChange}
+              disablePrevious={this.state.disablePrevious}
+              />
+            </div>
+
+
+
+       {  
+        // <div className="panel panel-default">
+        //   <div className="panel-heading blueBG">
+        //     {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />*/}
+        //     {
+        //       !this.props.flag ?
+        //         <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
+        //         :
+        //         null
+        //     }
+        //     Transactions
+        //   </div>
+        //   {/* <div className="panel-heading">Transactions</div> */}
+        //   <div className="panel-body" style={{fontSize:'16px'}}>
+        //     <div className="row">
+        //       <div className="col-sm-12">
+        //         <div className="contribution" >
+        //           <div className="row">
+        //             <div className="col-sm-12 col-md-6 col-md-offset-3 text-center ">
+
+        //             </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-12">
+        //               <button className="btn-primary b1" style={{ height: '42px', width: '151px' }} disabled={this.state.disablePrevious} onClick={this.previousChange}> Previous Page </button>
+        //               <button className="btn-primary b2" style={{ height: '42px', width: '151px', right: '16px', position: 'absolute', backgroundColor: 'rgb(62, 0, 96)!important' }} onClick={this.pageChange} disabled={this.state.disableNext}>Next Page </button>
+        //               </div>
+        //               <div className='col-sm-12'>
+        //               <div className='text-center'>
+        //                 <button className="btn  filters" onClick={this.handleFilters} >{this.state.filterFlag?'Remove Filters':'Add Filters'}</button>
+        //               </div>
+        //               </div>
+        //           {  this.state.filterFlag &&   <div className='col-sm-12'>
+        //             <div className="col-sm-3 col-sm-offset-1">
+        //               <div className="filter-card">
+        //                 <label htmlFor="kycFilter"><h5>Transaction Type:</h5></label>
+        //                 <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
+        //                   <option value="" disabled selected hidden>Select</option>
+        //                   <option value='Ethereum'>ETHEREUM</option>
+        //                   <option value='Bitcoin'>BITCOIN</option>
+        //                 </select>
+        //                 <span className='clear'><a onClick={this.clearFilter} id="clearType">Clear</a></span>
+        //               </div>
+        //             </div>
+        //             <div className="col-sm-5 col-sm-offset-3">
+        //               <div className="filter-card">
+        //                 <div className='text-center'><label htmlFor="createdFilter"><h5>Created At</h5></label></div>
+        //                   <div className="row">
+        //                     <div className="col-sm-5 col-xs-5 col-xs-5">
+        //                     <DatePicker
+        //                     className='form-control text-center filter-input'
+        //                     onChange={this.handleMinCreatedFilter}
+        //                     value={this.state.transactionParam.createdLl}
+        //                     placeholderText='min'
+        //                      />
+        //                      {
+        //                          // <input id="createdMinFilter" type="date" onChange={this.handleMinCreatedFilter} className="form-control text-center filter-input" placeholder="min"/>
+        //                      }
+
+        //                     </div>
+        //                     <div className="col-sm-2 col-xs-2">
+        //                       <span>-</span>
+        //                     </div>
+        //                     <div className="col-sm-5 col-xs-5 col-xs-5">
+        //                     <DatePicker
+        //                     className='form-control text-center filter-input'
+        //                     onChange={this.handleMaxCreatedFilter}
+        //                     value={this.state.transactionParam.createdUl}
+        //                     placeholderText='max'
+        //                      />
+        //                       {
+        //                         // <input id="createdMaxFilter" type="date" onChange={this.handleMaxCreatedFilter} className="form-control text-center filter-input" placeholder="max"/>
+        //                       }
+        //                     </div>
+        //                     </div>
+        //                     <div className="row">
+        //                       <div className="col-sm-12">
+        //                     <span className='clear'><a onClick={this.clearFilter} id="clearCreated">Clear</a></span>
+        //                       </div>
+        //                     </div>
+        //                 </div>
+        //             </div>
+        //             </div>
+
+        //           }
+        //             <div className='col-sm-12'>
+        //             {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
+        //                 showPaginationBottom={true}
+        //                 style={{ marginTop: '20px', fontSize: '12px', cursor: 'default' }}
+        //                 data={this.state.data}
+        //                 columns={this.state.columns}
+        //                 // onPageChange={this.pageChange}
+        //                 pageSizeOptions={[5, 10]}
+        //                 noDataText={'No transactions found'}
+        //                 rowsText={'transactions'}
+        //                 defaultPageSize={5}
+        //               />}
+        //             </div>
+
+        //           </div>
+        //         </div>
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
+        }
       </div>
       </div>
       </div>

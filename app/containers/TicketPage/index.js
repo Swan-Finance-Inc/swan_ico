@@ -24,7 +24,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import UserMessage from 'components/UserMessage';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import Info from "../../components/Info";
-
+import EmptyFile from "../../images/EmptyFile.svg";
 
 export class TicketPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
@@ -187,77 +187,164 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
       </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
+
+             <div className="contribution-card" style={{ marginBottom : '30px' }}>
               <div className="row">
-                <div className="col-sm-12">
-                    {/* <h2>TICKETS</h2> */}
-                </div>
-              </div>
-              <div className="panel panel-info">
-              {/* <div className="panel-heading">TICKETS</div> */}
-          <div className="panel-heading blueBG">
-            {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} /> */}
-            {
-              !!this.props.flag ?
-                <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
-                :
-                null
-            }
-            TICKETS
-          </div>
-          <div className="panel-body" style={{fontSize:'16px'}}>
-              <div className="row">
-                <div className="col-sm-12">
-                  <button className="btn btn-primary" onClick={this.showCreateTicket}>New Ticket</button>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-sm-12">
+                  <div className="col-sm-12">
+                      <div className="customCard-header transaction-container">
+                        <h2 className="trasnaction">Tickets</h2>
+                        <span id="Clear-all"><a onClick={this.clearFilter} id="clearType">Clear All</a></span>
+                      </div>  
+                  </div>
+                  <div className="col-sm-4">
+                      <div className="transactions-filters">
+                        <div className="transactions-filters-card">
+                        <label htmlFor="kycFilter" id="transaction-type"><h4>No Of Tickets:</h4></label>
+                        <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                          <option value="" disabled selected hidden></option>
+                          <option value='1'>1</option>
+                          <option value='2'>2</option>
+                        </select>
+                        </div>
+                      </div>
+                  </div>
+                  <div className="col-sm-7">
+                      <button className="btn btn-primary new-ticket" onClick={this.showCreateTicket}>New Ticket</button>
+                  </div>
+             </div> 
+             <div className="row">
+                <div className="col-sm-12 ">
               {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} />:    <ReactTable
-                            className="-striped -highlight"
-                            showPaginationBottom={true}
-                            style={{ marginTop: '20px', fontSize: '12px', cursor: 'pointer' }}
-                            data={this.state.data}
-                            columns={this.state.columns}
-                            onPageChange={this.pageChange}
-                            pageSizeOptions={[5, 10]}
-                            noDataText={'No Tickets Found'}
-                            rowsText={'Tickets'}
-                            defaultPageSize={10}
+                className="-striped -highlight"
+                showPaginationBottom={true}
+                style={{ marginTop: '20px', fontSize: '12px', cursor: 'pointer' }}
+                data={this.state.data}
+                columns={this.state.columns}
+                onPageChange={this.pageChange}
+                pageSizeOptions={[5, 10]}
+                noDataText={
+                <div>
+                <img src={EmptyFile} style={{ height: '143px' }} />
+                <p>No Tickets Found</p>
+                </div>
+              }
+                rowsText={'Tickets'}
+                defaultPageSize={10}
 
-                            getTdProps={(state, rowInfo, column, instance) => ({
-                              onClick: (e, handleOriginal) => {
-                                console.log(rowInfo)
-                                // console.log("It was in this row:", rowInfo);
-                                this.props.getMessages(rowInfo.original.ticketId);
-                                this.setState({
+                getTdProps={(state, rowInfo, column, instance) => ({
+                  onClick: (e, handleOriginal) => {
+                    console.log(rowInfo)
+                    // console.log("It was in this row:", rowInfo);
+                    this.props.getMessages(rowInfo.original.ticketId);
+                    this.setState({
 
-                                  currentTicketDetails : {
-                                    subject: rowInfo.original.subject,
-                                    messages: rowInfo.original.messages,
-                                    createdAt: rowInfo.original.createdAt,
-                                    status: rowInfo.original.status,
-                                    ticketId: rowInfo.original.ticketId
-                                  },
-                                  currentTicketMessages: rowInfo.original.messages
-                                })
-                                this.handleShowTicket();
-                                // IMPORTANT! React-Table uses onClick internally to trigger
-                                // events like expanding SubComponents and pivots.
-                                // By default a custom 'onClick' handler will override this functionality.
-                                // If you want to fire the original onClick handler, call the
-                                // 'handleOriginal' function.
-                                if (handleOriginal) {
-                                  handleOriginal();
-                                }
-                              }
-                            })}
-                          />}
+                      currentTicketDetails : {
+                        subject: rowInfo.original.subject,
+                        messages: rowInfo.original.messages,
+                        createdAt: rowInfo.original.createdAt,
+                        status: rowInfo.original.status,
+                        ticketId: rowInfo.original.ticketId
+                      },
+                      currentTicketMessages: rowInfo.original.messages
+                    })
+                    this.handleShowTicket();
+                    // IMPORTANT! React-Table uses onClick internally to trigger
+                    // events like expanding SubComponents and pivots.
+                    // By default a custom 'onClick' handler will override this functionality.
+                    // If you want to fire the original onClick handler, call the
+                    // 'handleOriginal' function.
+                    if (handleOriginal) {
+                      handleOriginal();
+                    }
+                  }
+                })}
+              />}
                 </div>
               </div>
-              </div>
-              </div>
+             </div>        
+
+
+
+
+{              
+          //     <div className="row">
+          //       <div className="col-sm-12">
+          //           {/* <h2>TICKETS</h2> */}
+          //       </div>
+          //     </div>
+
+          //     <div className="panel panel-info">
+          //     {/* <div className="panel-heading">TICKETS</div> */}
+          // <div className="panel-heading blueBG">
+          //   {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} /> */}
+          //   {
+          //     !!this.props.flag ?
+          //       <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
+          //       :
+          //       null
+          //   }
+          //   TICKETS
+          // </div>
+          // <div className="panel-body" style={{fontSize:'16px'}}>
+          //     <div className="row">
+          //       <div className="col-sm-12">
+          //         <button className="btn btn-primary" onClick={this.showCreateTicket}>New Ticket</button>
+          //       </div>
+          //     </div>
+          //     <div className="row">
+          //       <div className="col-sm-12">
+          //     {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} />:    <ReactTable
+          //                   className="-striped -highlight"
+          //                   showPaginationBottom={true}
+          //                   style={{ marginTop: '20px', fontSize: '12px', cursor: 'pointer' }}
+          //                   data={this.state.data}
+          //                   columns={this.state.columns}
+          //                   onPageChange={this.pageChange}
+          //                   pageSizeOptions={[5, 10]}
+          //                   noDataText={'No Tickets Found'}
+          //                   rowsText={'Tickets'}
+          //                   defaultPageSize={10}
+
+          //                   getTdProps={(state, rowInfo, column, instance) => ({
+          //                     onClick: (e, handleOriginal) => {
+          //                       console.log(rowInfo)
+          //                       // console.log("It was in this row:", rowInfo);
+          //                       this.props.getMessages(rowInfo.original.ticketId);
+          //                       this.setState({
+
+          //                         currentTicketDetails : {
+          //                           subject: rowInfo.original.subject,
+          //                           messages: rowInfo.original.messages,
+          //                           createdAt: rowInfo.original.createdAt,
+          //                           status: rowInfo.original.status,
+          //                           ticketId: rowInfo.original.ticketId
+          //                         },
+          //                         currentTicketMessages: rowInfo.original.messages
+          //                       })
+          //                       this.handleShowTicket();
+          //                       // IMPORTANT! React-Table uses onClick internally to trigger
+          //                       // events like expanding SubComponents and pivots.
+          //                       // By default a custom 'onClick' handler will override this functionality.
+          //                       // If you want to fire the original onClick handler, call the
+          //                       // 'handleOriginal' function.
+          //                       if (handleOriginal) {
+          //                         handleOriginal();
+          //                       }
+          //                     }
+          //                   })}
+          //                 />}
+          //       </div>
+          //     </div>
+          //     </div>
+          //     </div>
+}
+
             </div>
           </div>
+
+
+
+
           <div className="static-modal">
             <Modal show={this.state.show} onHide={this.closeCreateTicket} bsSize="large" dialogClassName="createTicketModal">
               <Modal.Body>
