@@ -769,7 +769,6 @@ gobackDollar=(e)=>{
             // </div>
           }
 
-    console.log(this.state);
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
       <Helmet>
