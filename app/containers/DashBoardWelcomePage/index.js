@@ -37,6 +37,7 @@ import SupportPage from 'containers/Support';
 import { resetSuccess } from '../KycPage/actions';
 import $ from 'jquery'
 import "../../../node_modules/react-toggle-switch/dist/css/switch.min.css"
+import Spinner from "../../components/Spinner";
 
 import reducer from './reducer';
 import saga from './saga';
@@ -67,7 +68,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.webScreenCompact = this.webScreenCompact.bind(this);
     this.state = {
       compact: 'ui',
-      dash: '',
+      dash: 'active',
       kyc: '',
       sec: '',
       cont: '',
@@ -143,7 +144,6 @@ export class DashBoardWelcomePage extends React.PureComponent {
     if (this.props.location.pathname == '/dashboard') {
       this.setState({
       ...initialState,dash: 'active'
-
       });
     } else if (this.props.location.pathname == '/dashboard/contribution') {
       this.setState({
@@ -356,24 +356,24 @@ export class DashBoardWelcomePage extends React.PureComponent {
     });
   }
   toggleContActive() {
-    this.setState({
-      dash: '',
-      sec: '',
-      kyc: '',
-      cont:'active',
-      tran: '',
-      support: '',
-      ticket: '',
-      faq: '',
-      news: '',
-      announcements: '',
-      profile: '',
-      resetPass: '',
-      notification:'',
-      upload_docs:'',
-      myReferal:'',
-      buy:''
-    });
+            this.setState({
+              dash: '',
+              sec: '',
+              kyc: '',
+              cont: 'active',
+              tran: '',
+              support: '',
+              ticket: '',
+              faq: '',
+              news: '',
+              announcements: '',
+              profile: '',
+              resetPass: '',
+              notification:'',
+              upload_docs:'',
+              myReferal:'',
+              buy:''
+            });
   }
   toggleTranActive() {
     this.setState({
@@ -597,6 +597,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     });
   }
   togglemyReferal() {
+    console.log(" inside toogle");
     this.setState({
       dash: '',
       sec: '',
@@ -614,8 +615,10 @@ export class DashBoardWelcomePage extends React.PureComponent {
       upload_docs:'',
       myReferal:'active',
       buy:''
-    });
+    }
+    );
   }
+
   toggleNotificationsActive=()=>{
     console.log(" inside toogle");
     this.setState({
@@ -649,6 +652,14 @@ export class DashBoardWelcomePage extends React.PureComponent {
     console.log('NEXT PROPS : ', nextProps);
     // console.log('reasonArr : ', nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason);
     // console.log('reason : ', nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason[nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason.length - 1]);
+    if(nextProps.dashboardwelcomepage.userInfo.referral){
+      this.setState({
+        //...this.state,
+        referralCode : nextProps.dashboardwelcomepage.userInfo.referral.code
+      }
+      )
+    }
+    
     if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
       console.log('kycDetails : ', nextProps.dashboardwelcomepage.userInfo.kycDetails);
       if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails.rejectReason) {
@@ -735,9 +746,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
   render() {
 
-    console.log(this.props," props in");
-    console.log(this.state,"state in ");
-    console.log(this.state.notifyTransactions);
+   // console.log(this.props," props innnnnnnnn");
+    console.log(this.state,"state innnnn ");
+   // console.log(this.state.notifyTransactions);
     if(this.state.notifyTransactions.length == 1){
       setTimeout(function(){
         $("#notify").addClass("hidden");
@@ -831,17 +842,19 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   })
               } */}
               <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} msg={this.state.kycMsg } rejectMsg={this.state.rejectMsg} closeAlert={this.closeAlert} showAlert={this.state.showAlert}/>
-              <div className="row">
-                <div className="col-sm-6">
-                <h1>Dashboard</h1>
-                </div>
-                {
-                  // <div className="col-sm-6 hidden-xs text-right">
-                  //   <button className="btn btn-video" style={{marginRight:'20px'}} onClick={this.showVideo}>Video Instruction  <i className="fa fa-play-circle"></i></button>
-                  // </div>
-                }
+              {
+              //   <div className="row">
+              //   <div className="col-sm-6">
+              //   <h1>Dashboard</h1>
+              //   </div>
+              //   {
+              //     // <div className="col-sm-6 hidden-xs text-right">
+              //     //   <button className="btn btn-video" style={{marginRight:'20px'}} onClick={this.showVideo}>Video Instruction  <i className="fa fa-play-circle"></i></button>
+              //     // </div>
+              //   }
 
-              </div>
+              // </div>
+              }
               {/*
                 kycStatus === 'ACCEPTED' ? <Link to="/dashboard/contribution" >
                 <button onClick={this.buyPage} className="form-buy-button"> <span>Buy Tokens</span></button>
@@ -849,8 +862,12 @@ export class DashBoardWelcomePage extends React.PureComponent {
               */}
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
-                  <Balance      toggleContActive={this.toggleContActive}  compact={this.compactNav}   togglemyReferal ={this.togglemyReferal}   toggleTranActive={this.toggleTranActive}  userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
-                  <Refer  code={this.props.dashboardwelcomepage.userInfo} icoFlag={true} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
+                  <Balance      toggleContActive={this.toggleContActive}  compact={this.compactNav}   togglemyReferal ={this.togglemyReferal}   toggleTranActive={this.toggleTranActive}  userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo} 
+                  referralCode={this.state.referralCode}
+                  />
+                 {
+                 // <Refer  code={this.props.dashboardwelcomepage.userInfo} icoFlag={true} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
+                  }
 
                 </div>
               </div>
@@ -875,7 +892,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/uploadDocs') ?
                   <UploadDocuments /> :
                   (this.props.location.pathname == '/dashboard/myReferal') ?
-                  <MyReferal code={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
+                  <MyReferal code={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo} referralCode={this.state.referralCode}
+                   /> :
                   (this.props.location.pathname == '/dashboard/ticket') ?
                   <TicketPage flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/kyc') ?

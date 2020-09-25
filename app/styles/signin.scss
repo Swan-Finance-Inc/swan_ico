@@ -72,8 +72,11 @@ header .container {
 	-webkit-box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 }
 .header .header-btn>a {
-	background-color:#fff;
-	color:#1C1466;
+	// background-color:#fff;
+	// color:#1C1466;
+	color: #fff;
+    text-transform: uppercase;
+    font: normal normal bold 14px/17px Lato;
 }
 .header-right p {
 	font-family:'Poppins', sans-serif;
@@ -85,14 +88,15 @@ header .container {
 	background-size: cover;
 	// background-image: url("/assets/img/hero-banner.png");
 	// background-color: #000;
-	background-color:#223A52 ;
+	//background-color:#223A52 ;
+	background-color: #2D6DCD;
 	background-attachment: fixed;
 	&.login{
 
 		//height:100vh;
 	}
-
-	padding-top: 80px;
+	padding-top: 84px;
+	//padding-top: 80px;
 	position:relative;
 	display:-ms-flexbox;
 	display:-webkit-flex;
@@ -210,26 +214,46 @@ color:#ffff !important;
  -webkit-transition:border-color .2s ease;
  transition:border-color .2s ease;
 }
-.form-captcha {
 
+#createAccount{
+	font-weight: 500;
+    font: normal bold 27px Lato;
+    margin: 10px 0px;
 }
-.form-button {
-	background: color #0074e6;
-	border:0;
-	display:inline-block;
-	margin:0 auto;
-	border-radius:50px;
-	-webkit-border-radius:50px;
-	height:50px;
-	line-height:50px;
-	padding:0 60px;
-	font-size:14px;
-	font-weight:500;
-	color:#fff;
-	cursor:pointer;
-	text-transform:uppercase;
- -webkit-transition:box-shadow .2s ease, border .2s ease;
- transition:box-shadow .2s ease, border .2s ease;
+
+
+
+.login-button {
+// 	background: color #0074e6;
+// 	border:0;
+// 	display:inline-block;
+// 	margin:0 auto;
+// 	border-radius:50px;
+// 	-webkit-border-radius:50px;
+// 	height:50px;
+// 	line-height:50px;
+// 	padding:0 60px;
+// 	font-size:14px;
+// 	font-weight:500;
+// 	color:#fff;
+// 	cursor:pointer;
+// 	text-transform:uppercase;
+//  -webkit-transition:box-shadow .2s ease, border .2s ease;
+//  transition:box-shadow .2s ease, border .2s ease;
+	width: 317px;
+	height: 53px;
+	background: #2D6DCD 0% 0% no-repeat padding-box;
+	border-radius: 4px;
+	opacity: 1;
+	outline: none;
+	border: none;
+	color: #fff;
+	font-size: 24px;
+	font-weight: 600;
+	&:focus{
+		outline: none;
+	}
+
 }
 .form-button:focus, .form-button:hover {
 	cursor:pointer;
@@ -238,8 +262,11 @@ color:#ffff !important;
 }
 .signin-block{min-height:100vh;}
 .forgot {
-	margin:10px 0 0;
-	text-align:center;
+	margin:10px 0px 0px 0px;
+	text-align:left;
+}
+.forgot a{
+	color: #2D6DCD !important;
 }
 .get-started {
 	color:#FFF;

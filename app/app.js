@@ -17,7 +17,7 @@ import createHistory from 'history/createBrowserHistory';
 // import 'sanitize.css/sanitize.css';
 import "bootstrap/dist/css/bootstrap.css";
 // import 'semantic-ui-css/semantic.min.css'
-
+import "antd/dist/antd.css";
 // Import Semantic UI CSS
 // import 'semantic-ui-css/semantic.min.css';
 

@@ -503,180 +503,197 @@ handleInput2=(e)=>{
       </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-          <div className="panel panel-default">
-            {/*<div className="panel-heading">KYC Verification</div>*/}
-            <div className="panel-heading blueBG">
-              {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />*/}
-              {
-                !!this.props.flag ?
-                  <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
-                  :
-                  null
-              }
+          {
+        //     <div className="panel panel-default">
+        //     {/*<div className="panel-heading">KYC Verification</div>*/}
+        //     <div className="panel-heading blueBG">
+        //       {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />*/}
+        //       {
+        //         !!this.props.flag ?
+        //           <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
+        //           :
+        //           null
+        //       }
 
-              KYC Verification
-            </div>
-          <div className="panel-body" style={{fontSize:'16px'}}>
-            <div className="row">
-           <div className="col-md-6 col-sm-6 col-xs-6"> KYC Status: {this.state.kycStatus}</div>
-           <div className="col-md-6 col-sm-6 col-xs-6 text-right"> KYC Journey Completed: {this.state.kycJourneyCompleted?"Yes":"No"}</div>
-            <div className="col-md-12 col-sm-12 col-xs-12 text-center">
-            <button onClick={this.hitFractal} className="fractal-id-btn text-center">
-              Start KYC with <span style={{color: "#EE7326"}}>Fractal</span>
-            </button>
-            </div>
-            </div>
-             {/* <div className="row">
-              <div className="col-sm-12">
-                <div className="row"><div className="col-sm-6"><h3>PERSONAL DETAILS</h3></div>
-                <div className="col-sm-6"><h5 style={{color:'#f00'}} className="text-right">(*) denotes required field.</h5></div><hr/></div>
-                <form onSubmit={this.submitKycDetails}>
-                  <div className="row">
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="fullName"><h5>FULL NAME<sup>*</sup></h5></label>
-                      <input className="form-control" type="text" name="fullName" id="fullName" value={fullName} onChange={this.handleInput} required/>
-                    </div>
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="email"><h5>EMAIL<sup>*</sup></h5></label>
-                      <input className="form-control" type="email" name="email" id="email" value={email} onChange={this.handleInput} disabled required/>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="dob"><h5>DATE OF BIRTH<sup>*</sup></h5></label>
-                      <input className="form-control" placeholder="dd/mm/yyyy" type="date" name="dob" id="dob" value={dob} onChange={this.handleInput} required/>
-                    </div>
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="gender"><h5>GENDER<sup>*</sup></h5></label>
-                      <select id="gender" name="gender" className="form-control" value={this.state.gender} onChange={this.handleInput} required>
-                        <option  hidden>Choose One</option>
-                        <option value="MALE">MALE</option>
-                        <option value="FEMALE">FEMALE</option>
-                        <option value="DECLINE TO STATE">DECLINE TO STATE</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="phone"><h5>PHONE NUMBER<sup>*</sup></h5></label>
-                      <PhoneInput id="phone"
-                        placeholder="Enter phone number"
-                        name="phone"
-                        value={ phone }
-                        onChange={ phone => this.setState({ phone }) }
-                        error={ phone ? (isValidNumber(phone) ? undefined : 'Invalid phone number') : '' }/>
-                    </div>
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="ethAddress"><h5>ETH WALLET ADDRESS (ERC20)<sup>*</sup></h5></label>
-                      <input className="form-control" type="text" name="ethAddress" id="ethAddress" placeholder="Enter ETH wallet address (ERC20)" title="Please enter valid eth address" value={ethAddress} onChange={this.handleInput} required/>
-                      { !this.state.valid ? <p style={{color: '#f00'}}>Please enter Valid ETH address.</p> : '' }
-                    </div>
-                  </div>
-                  <div className="row"><div className="col-sm-12"><h3>ADDRESS</h3><hr/></div></div>
-                  <div className="row">
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="citizenship"><h5>CITIZENSHIP<sup>*</sup></h5></label>
-                      <CountryDropdown
-                          classes="form-control"
-                          value={citizenship}
-                          onChange={this.selectCitizenship} />
-                    </div>
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="country"><h5>COUNTRY<sup>*</sup></h5></label>
+        //       KYC Verification
+        //     </div>
+        //   <div className="panel-body" style={{fontSize:'16px'}}>
+        //     <div className="row">
+        //    <div className="col-md-6 col-sm-6 col-xs-6"> KYC Status: {this.state.kycStatus}</div>
+        //    <div className="col-md-6 col-sm-6 col-xs-6 text-right"> KYC Journey Completed: {this.state.kycJourneyCompleted?"Yes":"No"}</div>
+        //     <div className="col-md-12 col-sm-12 col-xs-12 text-center">
+        //     <button onClick={this.hitFractal} className="fractal-id-btn text-center">
+        //       Start KYC with <span style={{color: "#EE7326"}}>Fractal</span>
+        //     </button>
+        //     </div>
+        //     </div>
+        //      {/* <div className="row">
+        //       <div className="col-sm-12">
+        //         <div className="row"><div className="col-sm-6"><h3>PERSONAL DETAILS</h3></div>
+        //         <div className="col-sm-6"><h5 style={{color:'#f00'}} className="text-right">(*) denotes required field.</h5></div><hr/></div>
+        //         <form onSubmit={this.submitKycDetails}>
+        //           <div className="row">
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="fullName"><h5>FULL NAME<sup>*</sup></h5></label>
+        //               <input className="form-control" type="text" name="fullName" id="fullName" value={fullName} onChange={this.handleInput} required/>
+        //             </div>
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="email"><h5>EMAIL<sup>*</sup></h5></label>
+        //               <input className="form-control" type="email" name="email" id="email" value={email} onChange={this.handleInput} disabled required/>
+        //             </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="dob"><h5>DATE OF BIRTH<sup>*</sup></h5></label>
+        //               <input className="form-control" placeholder="dd/mm/yyyy" type="date" name="dob" id="dob" value={dob} onChange={this.handleInput} required/>
+        //             </div>
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="gender"><h5>GENDER<sup>*</sup></h5></label>
+        //               <select id="gender" name="gender" className="form-control" value={this.state.gender} onChange={this.handleInput} required>
+        //                 <option  hidden>Choose One</option>
+        //                 <option value="MALE">MALE</option>
+        //                 <option value="FEMALE">FEMALE</option>
+        //                 <option value="DECLINE TO STATE">DECLINE TO STATE</option>
+        //               </select>
+        //             </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="phone"><h5>PHONE NUMBER<sup>*</sup></h5></label>
+        //               <PhoneInput id="phone"
+        //                 placeholder="Enter phone number"
+        //                 name="phone"
+        //                 value={ phone }
+        //                 onChange={ phone => this.setState({ phone }) }
+        //                 error={ phone ? (isValidNumber(phone) ? undefined : 'Invalid phone number') : '' }/>
+        //             </div>
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="ethAddress"><h5>ETH WALLET ADDRESS (ERC20)<sup>*</sup></h5></label>
+        //               <input className="form-control" type="text" name="ethAddress" id="ethAddress" placeholder="Enter ETH wallet address (ERC20)" title="Please enter valid eth address" value={ethAddress} onChange={this.handleInput} required/>
+        //               { !this.state.valid ? <p style={{color: '#f00'}}>Please enter Valid ETH address.</p> : '' }
+        //             </div>
+        //           </div>
+        //           <div className="row"><div className="col-sm-12"><h3>ADDRESS</h3><hr/></div></div>
+        //           <div className="row">
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="citizenship"><h5>CITIZENSHIP<sup>*</sup></h5></label>
+        //               <CountryDropdown
+        //                   classes="form-control"
+        //                   value={citizenship}
+        //                   onChange={this.selectCitizenship} />
+        //             </div>
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="country"><h5>COUNTRY<sup>*</sup></h5></label>
                         
-                        <CountryDropdown
-                          classes="form-control"
-                          value={country}
-                          onChange={this.selectCountry} />
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="state"><h5>STATE<sup>*</sup></h5></label>
+        //                 <CountryDropdown
+        //                   classes="form-control"
+        //                   value={country}
+        //                   onChange={this.selectCountry} />
+        //             </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="state"><h5>STATE<sup>*</sup></h5></label>
                       
-                      <RegionDropdown
-                        classes="form-control"
-                        country={country}
-                        value={state}
-                        onChange={this.selectRegion} />
-                    </div>
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="city"><h5>CITY<sup>*</sup></h5></label>
-                      <input className="form-control" type="text" name="city" id="city" value={city} onChange={this.handleInput} placeholder="Enter city" required/>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="address"><h5>ADDRESS<sup>*</sup></h5></label>
-                      <input className="form-control" type="text" name="address" id="address" value={address} onChange={this.handleInput} placeholder="Enter address" required/>
-                    </div>
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="address2"><h5>ADDRESS 2</h5></label>
-                      <input className="form-control" type="text" name="address2" id="address2" value={address2} onChange={this.handleInput} placeholder="Enter address 2"/>
-                    </div>
-                  </div>
-                  <div className="row"><div className="col-sm-12"><h3>DOCUMENT</h3><hr/></div></div>
-                  <div className="row">
-                    <div className="col-sm-6">
-                      <div className="form-group">
-                      <label htmlFor="doc_type"><h5>TYPE<sup>*</sup></h5></label>
-                        <select id="doc_type" name="doc_type" className="form-control" value={this.state.DocType} onChange={this.handleInput2} onClick={this.handleshowOtherDoc} required>
-                          <option value="" hidden>Select Any Document</option>
-                          <option value="PASSPORT">PASSPORT</option>
-                          <option value={this.state.otherDoc}>ANY NATIONAL ID</option>
-                        </select>
-                        <input type={this.state.showOtherDoc} id="doc_type" name="doc_type" onChange={this.handleInput} value={this.state.doc_type} placeholder="Enter National ID" className="form-control" style={{marginTop:"20px"}} required/>
-                      </div>
-                      <div className="form-group">
-                      </div>
-                    </div>
-                      <div className="col-sm-6 form-group">
-                      <label htmlFor="number"><h5>NUMBER<sup>*</sup></h5></label>
-                      <input className="form-control" type="text" id="number" placeholder="ID number" name="doc_number" value={this.state.doc_number} onChange={this.handleInput} required/>
-                      </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-6 form-group">
-                      <label htmlFor="front_id"><h5>UPLOAD FRONT ID<sup>*</sup></h5></label>
-                      <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.frontImgUrl} alt="front id" id="front_img_src"/>
-                      <input type="file" accept="image/png, image/jpeg" id='frontId' name="front_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleFrontImg} />
-                    </div>
-                      <div className="col-sm-6 form-group">
-                        <label htmlFor="back_id"><h5>UPLOAD BACK ID{!(this.state.DocType=='PASSPORT')?<sup>*</sup>:" "}</h5></label>
-                        <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.backImgUrl} alt="back id" id="back_img_src"/>
-                        <input type="file" accept="image/png, image/jpeg" name="back_id" id='backId' style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} />
-                      </div>
-                      <div className="col-sm-6 form-group">
-                        <label htmlFor="back_id"><h5>UPLOAD SELFIE<sup>*</sup></h5></label>
-                        <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.selfieUrl} alt="back id" id="back_img_src"/>
-                        <input type="file" accept="image/png, image/jpeg, .pdf" id='selfieId' name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleSelfieImg} />
-                      </div>
-                      <div className="col-sm-6 form-group">
-                        <label htmlFor="back_id"><h5>UPLOAD RESIDENTIAL PROOF<sup>*</sup></h5></label>
-                        <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.residenProofUrl} alt="back id" id="back_img_src"/>
-                        <input type="file" accept="image/png, image/jpeg" name="back_id" id='residentId' style={{margin:'10px 0px 0px 30px'}} onChange={this.handleResidenProof} />
-                      </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-12 text-center">
-                      <h5>Maximum Upload file size is <span style={{color: '#f00'}}>5MB</span></h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-12 text-center">
-                    <button className="btn-primary blueBG" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={(this.state.DocType="PASSPORT")?!(frontimgFlag&&selfieFlag&&residentFlag):!(frontimgFlag&&selfieFlag&&residentFlag&&backImageFlag)} type="submit">SUBMIT</button>
-                    </div>
-                  </div>
-                </form>
-              </div> 
+        //               <RegionDropdown
+        //                 classes="form-control"
+        //                 country={country}
+        //                 value={state}
+        //                 onChange={this.selectRegion} />
+        //             </div>
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="city"><h5>CITY<sup>*</sup></h5></label>
+        //               <input className="form-control" type="text" name="city" id="city" value={city} onChange={this.handleInput} placeholder="Enter city" required/>
+        //             </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="address"><h5>ADDRESS<sup>*</sup></h5></label>
+        //               <input className="form-control" type="text" name="address" id="address" value={address} onChange={this.handleInput} placeholder="Enter address" required/>
+        //             </div>
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="address2"><h5>ADDRESS 2</h5></label>
+        //               <input className="form-control" type="text" name="address2" id="address2" value={address2} onChange={this.handleInput} placeholder="Enter address 2"/>
+        //             </div>
+        //           </div>
+        //           <div className="row"><div className="col-sm-12"><h3>DOCUMENT</h3><hr/></div></div>
+        //           <div className="row">
+        //             <div className="col-sm-6">
+        //               <div className="form-group">
+        //               <label htmlFor="doc_type"><h5>TYPE<sup>*</sup></h5></label>
+        //                 <select id="doc_type" name="doc_type" className="form-control" value={this.state.DocType} onChange={this.handleInput2} onClick={this.handleshowOtherDoc} required>
+        //                   <option value="" hidden>Select Any Document</option>
+        //                   <option value="PASSPORT">PASSPORT</option>
+        //                   <option value={this.state.otherDoc}>ANY NATIONAL ID</option>
+        //                 </select>
+        //                 <input type={this.state.showOtherDoc} id="doc_type" name="doc_type" onChange={this.handleInput} value={this.state.doc_type} placeholder="Enter National ID" className="form-control" style={{marginTop:"20px"}} required/>
+        //               </div>
+        //               <div className="form-group">
+        //               </div>
+        //             </div>
+        //               <div className="col-sm-6 form-group">
+        //               <label htmlFor="number"><h5>NUMBER<sup>*</sup></h5></label>
+        //               <input className="form-control" type="text" id="number" placeholder="ID number" name="doc_number" value={this.state.doc_number} onChange={this.handleInput} required/>
+        //               </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-6 form-group">
+        //               <label htmlFor="front_id"><h5>UPLOAD FRONT ID<sup>*</sup></h5></label>
+        //               <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.frontImgUrl} alt="front id" id="front_img_src"/>
+        //               <input type="file" accept="image/png, image/jpeg" id='frontId' name="front_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleFrontImg} />
+        //             </div>
+        //               <div className="col-sm-6 form-group">
+        //                 <label htmlFor="back_id"><h5>UPLOAD BACK ID{!(this.state.DocType=='PASSPORT')?<sup>*</sup>:" "}</h5></label>
+        //                 <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.backImgUrl} alt="back id" id="back_img_src"/>
+        //                 <input type="file" accept="image/png, image/jpeg" name="back_id" id='backId' style={{margin:'10px 0px 0px 30px'}} onChange={this.handleBackImg} />
+        //               </div>
+        //               <div className="col-sm-6 form-group">
+        //                 <label htmlFor="back_id"><h5>UPLOAD SELFIE<sup>*</sup></h5></label>
+        //                 <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.selfieUrl} alt="back id" id="back_img_src"/>
+        //                 <input type="file" accept="image/png, image/jpeg, .pdf" id='selfieId' name="back_id" style={{margin:'10px 0px 0px 30px'}} onChange={this.handleSelfieImg} />
+        //               </div>
+        //               <div className="col-sm-6 form-group">
+        //                 <label htmlFor="back_id"><h5>UPLOAD RESIDENTIAL PROOF<sup>*</sup></h5></label>
+        //                 <img className="img-responsive" style={{width:'400px',height:'250px'}} src={this.state.residenProofUrl} alt="back id" id="back_img_src"/>
+        //                 <input type="file" accept="image/png, image/jpeg" name="back_id" id='residentId' style={{margin:'10px 0px 0px 30px'}} onChange={this.handleResidenProof} />
+        //               </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-12 text-center">
+        //               <h5>Maximum Upload file size is <span style={{color: '#f00'}}>5MB</span></h5>
+        //             </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-12 text-center">
+        //             <button className="btn-primary blueBG" style={{borderRadius: '25px', padding: '10px 80px'}} disabled={(this.state.DocType="PASSPORT")?!(frontimgFlag&&selfieFlag&&residentFlag):!(frontimgFlag&&selfieFlag&&residentFlag&&backImageFlag)} type="submit">SUBMIT</button>
+        //             </div>
+        //           </div>
+        //         </form>
+        //       </div> 
               
-            </div> */}
+        //     </div> */}
+        //   </div>
+        // </div>
+          }
+
+          <div className="row">
+            <div className="col-sm-12">
+              <div className="kyc-verification">
+                  <h3 className="kyc-verification-header">KYC Verification</h3>
+                  <h4 className="kyc-status">KYC Status :{this.state.kycStatus}</h4>
+                  <h4 className="kyc-status">KYC Journey Completed: {this.state.kycJourneyCompleted?"Yes":"No"}</h4>
+                  <div className="text-center">
+                    <button className="invest kyc-factorial"
+                    onClick={this.hitFractal} 
+                    >Start KYC With Fractal</button>
+                  </div>
+              </div>
+            </div>  
           </div>
-        </div>
       </div>
       </div>
       </div>
-    );
+    )
   }
 }
 

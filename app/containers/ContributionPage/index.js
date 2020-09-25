@@ -777,134 +777,246 @@ gobackDollar=(e)=>{
       </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-          <div className="panel panel-default">
-          {/* <div className="panel-heading">Contribution</div> */}
-          <div className="panel-heading blueBG">
-            {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />*/}
-            {
-              !!this.props.flag ?
-                <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
-                :
-                null
-            }
-            Contribution
-          </div>
-          <div className="panel-body" style={{fontSize:'16px'}}>
+          <div className="contribution-card">
             <div className="row">
               <div className="col-sm-12">
-              {this.loading?<LoadingSpinner />:
-                <div className="contribution">
-                  <div className="row">
-                    <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
-                      {this.state.minInvest!=0?<p style={{color:'#ff0000'}}>Minimum investment ${this.state.minInvest}</p>:''}
-                      <p style={{color:'#ff0000'}}>Current Token Sale :&nbsp;
-                      {this.state.stage === 'privateSaleRound1'?"Private Sale Round 1":this.state.stage === 'privateSaleRound2'?"Private Sale Round 2":this.state.stage === 'preSale'?"Pre Sale":this.state.stage === 'crowdSale'?"Crowdsale":this.state.stage}
-                      </p>
-                      <h5>1 Centralex TOKEN =${this.state.tokenPrice}</h5>
-                    </div>
-                  </div>
-                  <div className="row">
-                    <div className="col-sm-12">
-                      <form id="contriForm" onSubmit={this.onContributionConfirm} >
-                        <div className="frm-block">
-                        <div className="form-group">
-                          <label htmlFor="currency" className="form-label">Select your currency</label>
-                          <span className="select-wrapper">
-                            <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input" required>
-                              <option value="ETH">ETH</option>
-                              <option value="BTC">BTC</option>
-
-                            {
-                                // <option value="USD">USD</option>
-                              // <option value="EUR">EUR</option>
-                            }
-                            </select>
-
-                          </span>
-                        </div>
-                        <div className='row howMuch'>
-
-
-                        <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} Centralex Tokens</span>
-                        {
-                          this.state.curr !== 'Dollar' ?
-                          <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?
-                             this.state.ethToDollar : (this.state.curr === 'Bitcoin') ?
-                             (this.state.btcToDollar).toFixed(2) :
-                              (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null}</span>
-                          : null
-                        }
-                        <br/>
-                        </div>
-                          <div className="form-group">
-                            <label htmlFor="amt" className="form-label">How much {this.state.curr} you would like to invest?</label>
-                            <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control" required/>
-                          </div>
-
-                          {/* <div className="form-group">
-                            <label htmlFor="currencyqty" className="form-label">Amount in {this.state.curr}</label>
-                            <input id="currencyqty" type="text" value={this.state.currencyQuantity} className="form-input form-control text-right" disabled required/>
-
-                          </div> */}
-
-                          <div className="form-group">
-                            <label htmlFor="tokens" className="form-label">Centralex Tokens</label>
-                            <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right" disabled required/>
-                          </div>
-                          <div className="form-group">
-                            <label htmlFor="tokensWithBonus" className="form-label">Centralex Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
-                            <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
-                          </div>
-
-                          {/* <div className="form-group">
-                            <label htmlFor="tokensWithBonus" className="form-label">TOTAL Centralex Tokens</label>
-                            <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
-                          </div> */}
-                          {
-                            this.state.curr == 'Ethereum' ?
-                            <div className="form-group">
-                            <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
-                            <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left" required   />
-                          </div> :  this.state.curr == 'Bitcoin' ?
-                          <div>
-                          <div className="form-group">
-                          <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
-                          <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left" required placeholder='Enter Bitcoin Wallet Address' />
-                        </div>
-                        <div className="form-group">
-                          <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving Centralex Tokens</label>
-                          <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" disabled required placeholder='Your Kyc is Not Done'/>
-                          </div></div> : <div></div>
-
-                          }
-
-                          {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
-                          {/* {(this.state.curr == 'Bitcoin') ?
-                          (<div className="form-group">
-                            <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving Centralex Tokens</label>
-                            <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" required/>
-                            </div>) : <div></div>
-                            } */}
-
-                        {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
-                         {/* { (this.state.curr == 'Ethereum') ? <span><strong style={{color:"#ff0000"}}>Note:</strong> Please provide ERC-20 compatible wallet address</span> : null }  */}
-                          <div className="btn-row">
-                          {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && <div><sup>Submit KYC to continue</sup></div>}
-                          {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && <div><sup>Wait for KYC approval</sup></div>}
-                          {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
-                            <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} >Continue</button>
-                          </div>
-                        </div>
-                      </form>
-
-                    </div>
-                  </div>
+                  <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' }}>Contribution</h4>
+                  <hr className="contribution-hr" />
                 </div>
-              }
+              </div>
+            <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>
+            <div className="kyc-status-before-contribution">
+            {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && <div className="kyc-submit">Submit KYC to continue</div>}
+            {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && <div className="kyc-submit"><sup>Wait for KYC approval</sup></div>}
+            </div>
+            </div>
+            <div className="row">
+              <div className="col-sm-12">
+                <div style={{ marginTop : '40px', marginBottom : '30px' , paddingLeft : '20px'}}>
+                <h5 className="main-color--blue">1 Centralex TOKEN =${this.state.tokenPrice}</h5>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+
+            <div className="row">
+              <div className="col-sm-6">
+                <div style={{ paddingLeft : '20px'}} className="select-currency">
+                <div className="form-group">
+                    <label htmlFor="currency" className="form-label main-color--blue">Select your currency</label>
+                    <span className="select-wrapper">
+                      <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input form-one-style" required>
+                        <option value="ETH">ETH</option>
+                        <option value="BTC">BTC</option>
+
+                      {
+                          // <option value="USD">USD</option>
+                        // <option value="EUR">EUR</option>
+                      }
+                      </select>
+
+                    </span>
+                  </div>
+                  <div className='row howMuch' style={{ display: 'flex',flexDirection: 'column',
+                   paddingLeft: '20px', paddingTop: '10px'}}>
+                  <div className="trade-in-centralex">
+                  <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} Centralex Tokens</span>
+                  {
+                    this.state.curr !== 'Dollar' ?
+                    <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?
+                        this.state.ethToDollar : (this.state.curr === 'Bitcoin') ?
+                        (this.state.btcToDollar).toFixed(2) :
+                        (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null}</span>
+                    : null
+                  }
+                  <br/>
+                  </div>
+                  {
+                      this.state.curr == 'Ethereum' ?
+                      <div className="form-group">
+                      <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
+                      <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left form-one-style" required   />
+                    </div> :  this.state.curr == 'Bitcoin' ?
+                    <div>
+                    <div className="form-group">
+                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
+                    <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter Bitcoin Wallet Address' />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="acceptingAddress" className="form-label main-color--blue">ETH address for Receiving Centralex Tokens</label>
+                    <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left form-one-style" disabled required placeholder='Your Kyc is Not Done'/>
+                    </div></div> : <div></div>
+                          }
+                  </div>
+                </div>
+              </div>
+                    
+
+              <div className="col-sm-6">
+                <div>
+                     <div className="form-group align-left-label">
+                  <label htmlFor="amt" className="form-label main-color--blue">How much {this.state.curr} you would like to invest?</label>
+                  <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control form-one-style " required/>
+                </div>
+
+                {/* <div className="form-group">
+                  <label htmlFor="currencyqty" className="form-label">Amount in {this.state.curr}</label>
+                  <input id="currencyqty" type="text" value={this.state.currencyQuantity} className="form-input form-control text-right" disabled required/>
+
+                </div> */}
+
+                <div className="form-group align-left-label">
+                  <label htmlFor="tokens" className="form-label main-color--blue">Centralex Tokens</label>
+                  <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right form-one-style" disabled required/>
+                </div>
+                <div className="form-group align-left-label">
+                  <label htmlFor="tokensWithBonus" className="form-label main-color--blue">Centralex Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
+                  <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right form-one-style" disabled required/>
+                </div>
+                </div>
+              </div>
+            </div>
+              
+            <div className="row">
+              <div className="col-sm-12 text-center" style={{ marginBottom : '30px' , marginTop : '0px' }}>
+              {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
+              {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
+              {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
+              <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} >Continue</button>
+              </div>
+              </div>
+            </div>
+        {
+        //   <div className="panel panel-default">
+        //   {/* <div className="panel-heading">Contribution</div> */}
+        //   <div className="panel-heading blueBG">
+        //     {/*<Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />*/}
+        //     {
+        //       !!this.props.flag ?
+        //         <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
+        //         :
+        //         null
+        //     }
+        //     Contribution
+        //   </div>
+        //   <div className="panel-body" style={{fontSize:'16px'}}>
+        //     <div className="row">
+        //       <div className="col-sm-12">
+        //       {this.loading?<LoadingSpinner />:
+        //         <div className="contribution">
+        //           <div className="row">
+        //             <div className="col-sm-12 col-md-6 col-md-offset-3 text-center">
+        //               {this.state.minInvest!=0?<p style={{color:'#ff0000'}}>Minimum investment ${this.state.minInvest}</p>:''}
+        //               <p style={{color:'#ff0000'}}>Current Token Sale :&nbsp;
+        //               {this.state.stage === 'privateSaleRound1'?"Private Sale Round 1":this.state.stage === 'privateSaleRound2'?"Private Sale Round 2":this.state.stage === 'preSale'?"Pre Sale":this.state.stage === 'crowdSale'?"Crowdsale":this.state.stage}
+        //               </p>
+        //               <h5>1 Centralex TOKEN =${this.state.tokenPrice}</h5>
+        //             </div>
+        //           </div>
+        //           <div className="row">
+        //             <div className="col-sm-12">
+        //               <form id="contriForm" onSubmit={this.onContributionConfirm} >
+        //                 <div className="frm-block">
+        //                 <div className="form-group">
+        //                   <label htmlFor="currency" className="form-label" style={{fontSize : '12px'}}>Select your currency</label>
+        //                   <span className="select-wrapper">
+        //                     <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input" required>
+        //                       <option value="ETH">ETH</option>
+        //                       <option value="BTC">BTC</option>
+
+        //                     {
+        //                         // <option value="USD">USD</option>
+        //                       // <option value="EUR">EUR</option>
+        //                     }
+        //                     </select>
+
+        //                   </span>
+        //                 </div>
+        //                 <div className='row howMuch'>
+        //                 <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} Centralex Tokens</span>
+        //                 {
+        //                   this.state.curr !== 'Dollar' ?
+        //                   <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?
+        //                      this.state.ethToDollar : (this.state.curr === 'Bitcoin') ?
+        //                      (this.state.btcToDollar).toFixed(2) :
+        //                       (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null}</span>
+        //                   : null
+        //                 }
+        //                 <br/>
+        //                 </div>
+
+        //                   <div className="form-group">
+        //                     <label htmlFor="amt" className="form-label">How much {this.state.curr} you would like to invest?</label>
+        //                     <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control" required/>
+        //                   </div>
+
+        //                   {/* <div className="form-group">
+        //                     <label htmlFor="currencyqty" className="form-label">Amount in {this.state.curr}</label>
+        //                     <input id="currencyqty" type="text" value={this.state.currencyQuantity} className="form-input form-control text-right" disabled required/>
+
+        //                   </div> */}
+
+        //                   <div className="form-group">
+        //                     <label htmlFor="tokens" className="form-label">Centralex Tokens</label>
+        //                     <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right" disabled required/>
+        //                   </div>
+        //                   <div className="form-group">
+        //                     <label htmlFor="tokensWithBonus" className="form-label">Centralex Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
+        //                     <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
+        //                   </div>
+
+        //                   {/* <div className="form-group">
+        //                     <label htmlFor="tokensWithBonus" className="form-label">TOTAL Centralex Tokens</label>
+        //                     <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right" disabled required/>
+        //                   </div> */}
+        //                   {
+        //                     this.state.curr == 'Ethereum' ?
+        //                     <div className="form-group">
+        //                     <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
+        //                     <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left" required   />
+        //                   </div> :  this.state.curr == 'Bitcoin' ?
+        //                   <div>
+        //                   <div className="form-group">
+        //                   <label htmlFor="sendingAddress" className="form-label">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
+        //                   <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left" required placeholder='Enter Bitcoin Wallet Address' />
+        //                 </div>
+        //                 <div className="form-group">
+        //                   <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving Centralex Tokens</label>
+        //                   <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" disabled required placeholder='Your Kyc is Not Done'/>
+        //                   </div></div> : <div></div>
+
+        //                   }
+
+        //                   {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
+        //                   {/* {(this.state.curr == 'Bitcoin') ?
+        //                   (<div className="form-group">
+        //                     <label htmlFor="acceptingAddress" className="form-label">ETH address for Receiving Centralex Tokens</label>
+        //                     <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left" required/>
+        //                     </div>) : <div></div>
+        //                     } */}
+
+        //                 {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
+        //                  {/* { (this.state.curr == 'Ethereum') ? <span><strong style={{color:"#ff0000"}}>Note:</strong> Please provide ERC-20 compatible wallet address</span> : null }  */}
+        //                   <div className="btn-row">
+        //                   {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && <div><sup>Submit KYC to continue</sup></div>}
+        //                   {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && <div><sup>Wait for KYC approval</sup></div>}
+        //                   {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
+                           
+        //                     <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} >Continue</button>
+                          
+        //                   </div>
+        //                 </div>
+        //               </form>
+
+        //             </div>
+        //           </div>
+        //         </div>
+        //       }
+        //       </div>
+        //     </div>
+        //   </div>
+        // </div>
+        }
+   
         </div>
         </div>
       </div>
