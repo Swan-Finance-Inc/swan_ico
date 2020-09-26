@@ -777,7 +777,7 @@ gobackDollar=(e)=>{
       </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-          <div className="contribution-card">
+          <div className="contribution-card" style={{ marginBottom : '2em' }}>
             <div className="row">
               <div className="col-sm-12">
                   <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' }}>Contribution</h4>
@@ -785,10 +785,16 @@ gobackDollar=(e)=>{
                 </div>
               </div>
             <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>
+            {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && 
             <div className="kyc-status-before-contribution">
-            {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && <div className="kyc-submit">Submit KYC to continue</div>}
-            {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && <div className="kyc-submit"><sup>Wait for KYC approval</sup></div>}
+            <div className="kyc-submit">Submit KYC to continue</div>
             </div>
+            }
+            {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && 
+            <div className="kyc-status-before-contribution">
+            <div className="kyc-submit"><sup>Wait for KYC approval</sup></div>
+            </div>
+            }
             </div>
             <div className="row">
               <div className="col-sm-12">

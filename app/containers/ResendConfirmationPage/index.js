@@ -137,7 +137,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
               <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                 <div className="resend">
                   <h1>Resend Confirmation Instruction</h1>
-                  <p className="subtl">Please enter your email address. We will send you an email with Confirmation Instructions.</p>
+                  <p className="subtl" style={{ textAlign : 'center' }} >Please enter your email address. We will send you an email with Confirmation Instructions.</p>
                 </div>
                 <div className="signin-card-body">
                   <form onSubmit={this.submitMail} id="forgotPassForm">
@@ -149,7 +149,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
                       <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk" onChange={this.onChange} />
                     </div>
                     <div className="text-center">
-                      <button type="submit" className="form-button">Submit</button>
+                      <button type="submit" className="form-button resend-confirm-button">Submit</button>
                     </div>
                   </form>
                 </div>

@@ -115,11 +115,15 @@ export class NavBarContainer extends React.PureComponent {
                 }
 
 
-            <Nav pullRight >
-            <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">
-            <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectEnglish}><i ></i>English</MenuItem>
-            {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectChinese}><i ></i>Chinese</MenuItem> */}
-            </NavDropdown>
+            <Nav pullRight  className="profile-nav-bar">
+            {
+            //   //<NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">
+            // {/*<NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">*/}
+            
+            // {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectEnglish}><i ></i>English</MenuItem> */}
+            // {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectChinese}><i ></i>Chinese</MenuItem> */}
+            // /</Nav>/</NavDropdown>
+            }
                 <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Manage Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem>
@@ -129,7 +133,6 @@ export class NavBarContainer extends React.PureComponent {
               </NavDropdown>
             </Nav>
           </div>
-
         </Navbar>
         <div className="static-modal">
             <Modal show={this.state.showSignOut} onHide={this.closeSignOut} bsSize="small" dialogClassName="modal-signout">

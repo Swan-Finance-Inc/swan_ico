@@ -444,7 +444,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                      noDataText={
                       <div>
                       <img src={EmptyFile} style={{ height: '143px' }} />
-                      <p>No Tickets Found</p>
+                      <p className="left">No Transactions Found</p>
                       </div>
                     }
                       rowsText={'transactions'}

@@ -40,6 +40,13 @@ header .container {
 	justify-content:flex-end;
 	margin-left: 20px;
 	margin-top: 15px;
+
+
+	a:hover{
+		box-shadow: none !important;
+		cursor: pointer;
+	}
+
 }
 .header-btn {
 	margin-top: 3px;
@@ -57,12 +64,14 @@ header .container {
 	position:relative;
 	transition:1s cubic-bezier(0.5, 1.7, 0.35, 0.8);
 	-webkit-transition:1s cubic-bezier(0.5, 1.7, 0.35, 0.8);
+	cursor: pointer;
 }
 .header-btn a:hover {
 	background-color:#978FFF;
 	border-color:#978FFF;
 	box-shadow:rgba(0, 0, 0, 0.2) 0 10px 20px;
 	-webkit-box-shadow:rgba(0, 0, 0, 0.2) 0 10px 20px;
+	cursor: pointer;
 }
 
 .header {

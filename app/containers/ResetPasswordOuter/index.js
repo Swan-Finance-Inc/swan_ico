@@ -21,6 +21,8 @@ import reducer from './reducer';
 import saga from './saga';
 import { resetPassword } from './actions';
 import logo from '../../images/CWHLogo.png';
+import TextFieldInput from "../../components/TextFieldInput";
+import ReCAPTCHA from 'react-google-recaptcha';
 
 export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -29,6 +31,10 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
       resetToken: '',
       errorPassword: '',
       match: '',
+      confPassword : '',
+      newPassword : '',
+      'g-recaptcha-response': '',
+      captcha : false
     };
     this.formSubmit = this.formSubmit.bind(this);
     this.passwordMatch = this.passwordMatch.bind(this);
@@ -61,12 +67,25 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps) {
-      return true;
+
+  onChange = (e) => {
+    // console.log(e);
+    this.setState({
+      'g-recaptcha-response': e,
+    });
+    if (e.length > 0) {
+      this.setState({
+        captcha: true,
+      });
     }
-    return false;
   }
+
+  // shouldComponentUpdate(nextProps) {
+  //   if (nextProps) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   notify(error) {
     toast.error(error);
@@ -77,22 +96,46 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
 
   formSubmit(e) {
     e.preventDefault();
-    const newPassword = e.target[0].value;
-    const confPassword = e.target[1].value;
+    // const newPassword = e.target[0].value;
+    // const confPassword = e.target[1].value;
 
-    // console.log(newPassword)
-    const data = {
-      token: this.props.match.params.token,
-      newPassword: e.target[0].value,
-      reset:this.state.forceReset
-    };
+    const { newPassword ,confPassword ,captcha } = this.state;
 
-    if (newPassword == confPassword) {
-      this.props.reset(data);
-      this.props.passwordReset();
-    } else {
+    if(!captcha){
+      this.notify('Please verify you are not the robot');
+    }
+    else if(!newPassword){
+      this.notify('Please enter the new password');
+    }
+    else if(!confPassword){
+      this.notify('Please enter the confirm password');
+    }
+    else if(newPassword !== confPassword ){
       this.notify('Password do not match');
     }
+    else{
+      const data = {
+        token: this.props.match.params.token,
+        newPassword: newPassword,
+        reset:this.state.forceReset
+      };
+      this.props.reset(data);
+      this.props.passwordReset();
+    }
+
+    // console.log(newPassword)
+    // const data = {
+    //   token: this.props.match.params.token,
+    //   newPassword: e.target[0].value,
+    //   reset:this.state.forceReset
+    // };
+
+    // if (newPassword == confPassword) {
+    //   this.props.reset(data);
+    //   this.props.passwordReset();
+    // } else {
+    //   this.notify('Password do not match');
+    // }
   }
   passwordMatch() {
     const pass = document.getElementById('newPassword').value;
@@ -141,17 +184,70 @@ export class ResetPasswordOuter extends React.PureComponent { // eslint-disable-
                 </div>
                 <div className="signin-card-body">
                   <form onSubmit={this.formSubmit}>
-                    <div className="form-group">
-                      <label htmlFor="newPassword" className="form-label">New Password</label>
-                      <input id="newPassword" type="password" className="form-input form-control" name="newPassword" placeholder="Enter New Password" required />
+                  <div>
+                    <TextFieldInput
+                      type="password"
+                      name="newPassword"
+                      label="New password"
+                      value={this.state.newPassword}
+                      variant="outlined"
+                      required={true}
+                      handleChange={(e) => {
+                        this.setState({
+                          [e.target.name]: e.target.value
+                        })
+
+                      }}
+                      auth={true}
+                      inputStyle={{
+                        fontSize: '15px',
+                        fontWeight: '900',
+                        color: '#748e94'
+                      }}
+                    />
                     </div>
-                    <div className="form-group">
-                      <label htmlFor="confPassword" className="form-label">Confirm Password</label>
-                      <input id="confPassword" onChange={this.passwordMatch} type="password" className="form-input form-control" name="confPassword" placeholder="Confirm New Password" required />
-                    </div>
-                    {(this.state.match == true) ? <p style={{ color: '#00bb27' }}>Password matched</p> : (this.state.match === '') ? <p style={{ color: '#0000fe' }}></p> : <p style={{ color: '#ff0000' }}>Password do not match</p>}
+                    <div style={{ marginTop : '10px' }}>
+                      <TextFieldInput
+                        type="password"
+                        name="confPassword"
+                        label="Confirm password"
+                        value={this.state.confPassword}
+                        variant="outlined"
+                        required={true}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+                        }}
+                        auth={true}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#748e94'
+                        }}
+                      />
+                      </div>
+                      <div className="text-center mt-10">
+                         <ReCAPTCHA type="image" ref="recaptcha"
+                         className="forgot-recaptcha-container"
+                           required sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk" onChange={this.onChange} />
+                       </div>
+                    {
+                    // <div className="form-group">
+                    //   <label htmlFor="newPassword" className="form-label">New Password</label>
+                    //   <input id="newPassword" type="password" className="form-input form-control" name="newPassword" placeholder="Enter New Password" required />
+                    // </div>
+                    
+                    // <div className="form-group">
+                    //   <label htmlFor="confPassword" className="form-label">Confirm Password</label>
+                    //   <input id="confPassword" onChange={this.passwordMatch} type="password" className="form-input form-control" name="confPassword" placeholder="Confirm New Password" required />
+                    // </div>
+                    // {(this.state.match == true) ? <p style={{ color: '#00bb27' }}>Password matched</p> : (this.state.match === '') ? <p style={{ color: '#0000fe' }}></p> : <p style={{ color: '#ff0000' }}>Password do not match</p>
+                    }
+                    
+                    
                     <div className="text-center">
-                      <button type="submit" className="form-button">Reset Password</button>
+                      <button type="submit" className="reset-password-button">Reset Password</button>
                     </div>
                   </form>
                 </div>

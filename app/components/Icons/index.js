@@ -1,5 +1,6 @@
-import PropTypes from 'prop-types';
-import React from 'react';
+//import { Settings } from "@material-ui/icons";
+import PropTypes from "prop-types";
+import React from "react";
 
 export const DashBoard = ({ color }) => {
   return (
@@ -7,7 +8,8 @@ export const DashBoard = ({ color }) => {
       xmlns="http://www.w3.org/2000/svg"
       width="44.832"
       height="35.866"
-      viewBox="0 0 44.832 35.866">
+      viewBox="0 0 44.832 35.866"
+    >
       <g fill={color} transform="translate(0 -0.904)">
         <g transform="translate(0 0.904)">
           <path
@@ -25,7 +27,12 @@ export const DashBoard = ({ color }) => {
             d="M52.208,39.933H41.747a.747.747,0,0,1,0-1.494h9.714V22.747a.747.747,0,0,1,1.494,0V39.186A.747.747,0,0,1,52.208,39.933Z"
             transform="translate(-11.859 -9.298)"
           />
-          <rect className="a" width="8.966" height="2.242" transform="translate(17.933 30.635)" />
+          <rect
+            className="a"
+            width="8.966"
+            height="2.242"
+            transform="translate(17.933 30.635)"
+          />
           <path
             className="a"
             d="M44.107,37.646H6.747A.747.747,0,0,1,6,36.9V10.747A.747.747,0,0,1,6.747,10H34.961a.747.747,0,1,1,0,1.494H7.494V36.152H43.36V18.75a.747.747,0,1,1,1.494,0V36.9A.747.747,0,0,1,44.107,37.646Z"
@@ -46,9 +53,24 @@ export const DashBoard = ({ color }) => {
             d="M51.314,16.885v-.852a3.736,3.736,0,0,1-1.494-.389l.269-1.046a3.258,3.258,0,0,0,1.494.4c.508,0,.859-.2.859-.56s-.291-.553-.949-.747c-.964-.321-1.614-.747-1.614-1.644a1.651,1.651,0,0,1,1.494-1.592V9.57h.882v.747a3.325,3.325,0,0,1,1.3.3l-.262,1.016a2.869,2.869,0,0,0-1.308-.247c-.583,0-.747.247-.747.5s.314.486,1.076.747c1.068.374,1.494.867,1.494,1.674A1.711,1.711,0,0,1,52.2,15.966v.919Z"
             transform="translate(-14.089 -6.155)"
           />
-          <rect className="a" width="3.295" height="6.725" transform="translate(12.702 18.68)" />
-          <rect className="a" width="3.295" height="9.714" transform="translate(20.391 15.691)" />
-          <rect className="a" width="3.295" height="13.45" transform="translate(28.087 11.955)" />
+          <rect
+            className="a"
+            width="3.295"
+            height="6.725"
+            transform="translate(12.702 18.68)"
+          />
+          <rect
+            className="a"
+            width="3.295"
+            height="9.714"
+            transform="translate(20.391 15.691)"
+          />
+          <rect
+            className="a"
+            width="3.295"
+            height="13.45"
+            transform="translate(28.087 11.955)"
+          />
         </g>
       </g>
     </svg>
@@ -56,12 +78,17 @@ export const DashBoard = ({ color }) => {
 };
 
 DashBoard.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 };
 
 export const KYC = ({ color }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="30.208" viewBox="0 0 45 30.208">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="45"
+      height="30.208"
+      viewBox="0 0 45 30.208"
+    >
       <g fill={color} transform="translate(0 -84)">
         <path
           className="a"
@@ -108,13 +135,17 @@ export const KYC = ({ color }) => {
 };
 
 KYC.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 };
 
 export const Contribution = ({ color }) => {
-  console.log(color,'hi color')
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="34.126" height="45" viewBox="0 0 34.126 45">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="34.126"
+      height="45"
+      viewBox="0 0 34.126 45"
+    >
       <g fill={color} transform="translate(-1861.377 14.34)">
         <g transform="translate(1836.14 62)">
           <g transform="translate(25.237 -76.34)">
@@ -136,7 +167,185 @@ export const Contribution = ({ color }) => {
 };
 
 Contribution.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
+};
+
+export const Annoucement = ({ color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="39"
+      height="34.049"
+      viewBox="0 0 39 34.049"
+    >
+      <g id="Group_72" data-name="Group 72" transform="translate(0 -32.5)">
+        <path
+          id="Path_308"
+          data-name="Path 308"
+          d="M29.9,39.755V34.919a2.411,2.411,0,0,0-4.821-.077,20.939,20.939,0,0,1-11.17,4.433v-.754a2.3,2.3,0,0,0-2.294-2.3h-3.6a2.3,2.3,0,0,0-2.294,2.3v.823a6.511,6.511,0,0,0,0,12.926v.823a2.305,2.305,0,0,0,1.535,2.172V65.787a.761.761,0,0,0,.759.762h1.8a2.565,2.565,0,0,0,2.557-2.568V55.265a2.305,2.305,0,0,0,1.535-2.172v-.754a20.94,20.94,0,0,1,11.17,4.433,2.411,2.411,0,0,0,4.821-.077V51.859a6.678,6.678,0,0,0,0-12.1ZM11.215,50.793h-2.8V40.821h2.8ZM7.242,38.521a.778.778,0,0,1,.775-.779h3.6a.778.778,0,0,1,.775.779V39.3H7.242ZM1.519,45.807a4.981,4.981,0,0,1,4.964-4.986H6.9v9.972H6.483A4.981,4.981,0,0,1,1.519,45.807Zm9.336,18.174a1.043,1.043,0,0,1-1.038,1.045H8.777V55.4h2.078ZM12.39,53.093a.778.778,0,0,1-.775.779h-3.6a.778.778,0,0,1-.775-.779v-.777H12.39Zm15.991,3.6a.893.893,0,1,1-1.785,0V49.229a.759.759,0,1,0-1.519,0v5.618a22.056,22.056,0,0,0-11.927-4.055h-.416V40.821h.416a22.056,22.056,0,0,0,11.927-4.055v5.618a.759.759,0,1,0,1.519,0V34.919a.893.893,0,1,1,1.785,0V56.695ZM29.9,50.122V41.492a5.153,5.153,0,0,1,0,8.631Z"
+          fill={color}
+        />
+        <path
+          id="Path_309"
+          data-name="Path 309"
+          d="M473.719,197.2h-1.606a.777.777,0,1,0,0,1.554h1.606a.777.777,0,1,0,0-1.554Z"
+          transform="translate(-435.496 -152.162)"
+          fill={color}
+
+        />
+        <path
+          id="Path_310"
+          data-name="Path 310"
+          d="M461.681,117.633a.774.774,0,0,0,.549-.227l1.6-1.6a.777.777,0,1,0-1.1-1.1l-1.6,1.6a.777.777,0,0,0,.549,1.327Z"
+          transform="translate(-425.875 -75.746)"
+          fill={color}
+
+        />
+        <path
+          id="Path_311"
+          data-name="Path 311"
+          d="M462.231,259.545a.777.777,0,0,0-1.1,1.1l1.6,1.6a.777.777,0,0,0,1.1-1.1Z"
+          transform="translate(-425.875 -209.576)"
+          fill={color}
+
+        />
+        <path
+          id="Path_312"
+          data-name="Path 312"
+          d="M331.006,197.2a.777.777,0,0,0-.777.777v0a.777.777,0,1,0,.777-.782Z"
+          transform="translate(-305.096 -152.162)"
+          fill={color}
+
+        />
+      </g>
+    </svg>
+  );
+};
+
+Annoucement.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
+
+export const News = ({ color }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="39" height="38.771" viewBox="0 0 39 38.771">
+  <g id="Group_69" data-name="Group 69" transform="translate(0 -1.5)">
+    <g id="Group_68" data-name="Group 68" transform="translate(0 1.5)">
+      <path id="Path_281" data-name="Path 281" d="M35.082,22.768A16.354,16.354,0,0,0,31.463,6.713c-.011-.012-.022-.024-.033-.035-.123-.132-.248-.262-.377-.391a16.323,16.323,0,0,0-23.412.325.758.758,0,0,0-.151.162A16.347,16.347,0,0,0,3.917,22.768,4.652,4.652,0,0,0,0,27.356v8.27a4.65,4.65,0,0,0,4.644,4.645H16.074a.762.762,0,1,0,0-1.523H4.644a3.125,3.125,0,0,1-3.12-3.122v-8.27a3.125,3.125,0,0,1,3.12-3.122H34.356a3.125,3.125,0,0,1,3.12,3.122v8.27a3.125,3.125,0,0,1-3.12,3.122H22.917a.762.762,0,0,0,0,1.523H34.356A4.65,4.65,0,0,0,39,35.626v-8.27a4.652,4.652,0,0,0-3.918-4.588Zm-7.14-.057a29.456,29.456,0,0,0,.383-4.105H34.3a14.739,14.739,0,0,1-.8,4.105Zm-7.681,0V18.605H26.8a27.77,27.77,0,0,1-.4,4.105Zm-7.658,0a27.928,27.928,0,0,1-.4-4.105h6.539v4.105Zm-7.1,0a14.734,14.734,0,0,1-.8-4.105h5.969a29.573,29.573,0,0,0,.384,4.105ZM8.293,8.16a19.877,19.877,0,0,0,3.575,1.371,27.549,27.549,0,0,0-1.195,7.551H4.7A14.76,14.76,0,0,1,8.293,8.16Zm26,8.922H28.324A27.548,27.548,0,0,0,27.13,9.531,19.909,19.909,0,0,0,30.706,8.16,14.758,14.758,0,0,1,34.3,17.082ZM18.737,9a27.679,27.679,0,0,1-4.857-.551c.182-.441.378-.865.587-1.269,1.2-2.309,2.69-3.723,4.27-4.069V9Zm0,1.524v6.562H12.2A25.883,25.883,0,0,1,13.349,9.9a28.95,28.95,0,0,0,5.388.622Zm1.523,0A28.956,28.956,0,0,0,25.649,9.9,25.883,25.883,0,0,1,26.8,17.082h-6.54Zm0-1.524V3.107c1.58.346,3.074,1.759,4.271,4.069.209.4.4.828.587,1.269A27.684,27.684,0,0,1,20.261,9Zm6.355-.911c-.224-.562-.467-1.1-.732-1.609A12.569,12.569,0,0,0,24,3.724a14.825,14.825,0,0,1,5.591,3.282A19.1,19.1,0,0,1,26.615,8.085Zm-13.5-1.609c-.264.51-.508,1.048-.732,1.609A19.079,19.079,0,0,1,9.406,7.006,14.822,14.822,0,0,1,15,3.724,12.574,12.574,0,0,0,13.114,6.475Z" transform="translate(0 -1.5)"         fill={color}/>
+      <path id="Path_282" data-name="Path 282" d="M61.633,342.261v4.4L58.058,341.8a.772.772,0,0,0-1.395.458v6.757a.772.772,0,0,0,1.545,0v-4.4l3.576,4.861a.772.772,0,0,0,1.395-.458v-6.757a.772.772,0,1,0-1.545,0Z" transform="translate(-52.286 -315.772)"           fill={color}/>
+      <path id="Path_283" data-name="Path 283" d="M171.055,343.034a.772.772,0,1,0,0-1.545h-3.127a.773.773,0,0,0-.772.772v6.757a.773.773,0,0,0,.772.772h3.127a.772.772,0,1,0,0-1.545H168.7v-1.833h2.354a.772.772,0,1,0,0-1.545H168.7v-1.835Z" transform="translate(-154.447 -315.773)"  fill={color}/>
+      <path id="Path_284" data-name="Path 284" d="M259.5,349.543a.772.772,0,0,0,1.34-.525v-6.757a.772.772,0,1,0-1.545,0v4.785l-1.4-1.515-.022-.022-.02-.021a.772.772,0,0,0-1.092.043l-1.4,1.515v-4.785a.772.772,0,1,0-1.545,0v6.757a.773.773,0,0,0,1.34.525l2.174-2.351Z" transform="translate(-234.537 -315.773)" fill={color}/>
+      <path id="Path_285" data-name="Path 285" d="M375.018,348.247h-3.282a.772.772,0,0,0,0,1.545h3.282a2.461,2.461,0,0,0,0-4.922h-1.594a.917.917,0,0,1,0-1.835h3.282a.772.772,0,0,0,0-1.545h-3.282a2.462,2.462,0,0,0,0,4.925h1.594a.916.916,0,0,1,0,1.833Z" transform="translate(-342.857 -315.774)" fill="#2d6dcd"/>
+      <path id="Path_286" data-name="Path 286" d="M246.729,490.5a.772.772,0,1,0,0,1.545h0a.772.772,0,0,0,0-1.545Z" transform="translate(-227.233 -453.273)" fill={color} />
+    </g>
+  </g>
+</svg>
+  );
+};
+
+News.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
+
+export const PrivatePolicy = ({ color }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="39.5" height="35.711" viewBox="0 0 39.5 35.711">
+    <g id="Group_70" data-name="Group 70" transform="translate(0.25 -23.75)">
+      <path id="Path_287" data-name="Path 287" d="M34.887,24H9.669A3.954,3.954,0,0,0,5.7,27.925L5.537,50.132H.615A.64.64,0,0,0,0,50.789v3.056a5.355,5.355,0,0,0,5.053,5.329v.037H26.289v-.041c.158.006.253.041.362.041h.015a5.338,5.338,0,0,0,5.307-5.366V34.421h6.411A.647.647,0,0,0,39,33.757V28.149A4.142,4.142,0,0,0,34.887,24ZM5.329,57.947h0a4.093,4.093,0,0,1-4.061-4.1V51.395H21.316v2.439a5.345,5.345,0,0,0,1.56,3.793,2.276,2.276,0,0,1,.332.32Zm25.382-4.1a4.078,4.078,0,0,1-4.045,4.1h-.013a4.1,4.1,0,0,1-4.074-4.113V50.789a.654.654,0,0,0-.632-.657H6.8l.162-22.2a2.69,2.69,0,0,1,2.706-2.666H31.906a4.31,4.31,0,0,0-1.2,2.9ZM37.737,28.16v5H31.974V28.165a2.925,2.925,0,0,1,2.9-2.9h.018a2.879,2.879,0,0,1,2.85,2.893Z" fill={color} stroke="#2d6dcd" stroke-width="0.5"/>
+      <path id="Path_288" data-name="Path 288" d="M164.9,88.576l3.166,2.164a.6.6,0,0,0,.686,0l3.156-2.164a4.769,4.769,0,0,0,1.906-3.638V80.56a.6.6,0,0,0-.327-.551l-4.82-2.371a.6.6,0,0,0-.537,0L163.324,80a.6.6,0,0,0-.327.551v4.385A4.769,4.769,0,0,0,164.9,88.576Zm-.68-7.64,4.183-2.064,4.183,2.07v4a3.538,3.538,0,0,1-1.371,2.623L168.4,89.489l-2.808-1.928a3.536,3.536,0,0,1-1.368-2.623Z" transform="translate(-149.985 -49.463)" fill={color} stroke="#2d6dcd" stroke-width="0.5"/>
+      <path id="Path_289" data-name="Path 289" d="M202.955,143.62a.613.613,0,0,0,.435.184h0a.615.615,0,0,0,.434-.182l2.442-2.443a.614.614,0,0,0-.868-.869l-2.006,2.006-.8-.81a.614.614,0,0,0-.873.865Z" transform="translate(-185.564 -106.931)" fill={color} stroke="#2d6dcd" stroke-width="0.5"/>
+      <path id="Path_290" data-name="Path 290" d="M148.35,272H133.614a.614.614,0,1,0,0,1.228H148.35a.614.614,0,1,0,0-1.228Z" transform="translate(-122.287 -228.401)" fill={color} stroke="#2d6dcd" stroke-width="0.5"/>
+      <path id="Path_291" data-name="Path 291" d="M148.35,309H133.614a.614.614,0,1,0,0,1.228H148.35a.614.614,0,1,0,0-1.228Z" transform="translate(-122.287 -262.477)" fill={color} stroke="#2d6dcd" stroke-width="0.5"/>
+    </g>
+  </svg>
+  );
+};
+
+PrivatePolicy.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
+
+export const WhitePaper = ({ color }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="39.502" height="39.5" viewBox="0 0 39.502 39.5">
+    <g id="Group_71" data-name="Group 71" transform="translate(-15.75 -15.75)">
+      <path id="Path_292" data-name="Path 292" d="M152,88h6.174v1.235H152Z" transform="translate(-124.839 -66.444)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_293" data-name="Path 293" d="M112,88h1.235v1.235H112Z" transform="translate(-88.187 -66.444)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_294" data-name="Path 294" d="M144,136h6.791v1.235H144Z" transform="translate(-117.483 -110.233)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_295" data-name="Path 295" d="M72,136h3.7v1.235H72Z" transform="translate(-51.678 -110.233)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_296" data-name="Path 296" d="M208,184h9.26v1.235H208Z" transform="translate(-176.139 -154.327)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_297" data-name="Path 297" d="M120,184h4.939v1.235H120Z" transform="translate(-95.485 -154.327)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_298" data-name="Path 298" d="M72,184h2.469v1.235H72Z" transform="translate(-51.678 -154.327)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_299" data-name="Path 299" d="M184,240h8.643v1.235H184Z" transform="translate(-154.141 -205.769)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_300" data-name="Path 300" d="M72,240h6.791v1.235H72Z" transform="translate(-51.678 -205.769)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_301" data-name="Path 301" d="M160,296h7.408v1.235H160Z" transform="translate(-132.153 -257.211)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_302" data-name="Path 302" d="M72,296h4.939v1.235H72Z" transform="translate(-51.678 -257.211)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_303" data-name="Path 303" d="M72,352h3.087v1.235H72Z" transform="translate(-51.678 -308.653)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_304" data-name="Path 304" d="M106.349,74.549l-4.58-2.469a.676.676,0,0,0-.893.23l-.006.011L89.092,92.693h0a.589.589,0,0,0-.081.3v4.939H72v1.235H89.666a.682.682,0,0,0,.38-.115l4.58-3.087a.628.628,0,0,0,.193-.207h0L106.6,75.381A.6.6,0,0,0,106.349,74.549ZM93.992,94.61l-1.09-.588,7.6-13.267,1.146.618Zm-3.444-1.857L98.2,79.516l1.161.626-7.6,13.267Zm8.279-14.321L99.6,77.1l3.444,1.857-.773,1.336ZM90.321,97.345V94.053l2.714,1.463Zm13.35-19.478-3.444-1.857,1.472-2.547,3.444,1.857Z" transform="translate(-51.678 -51.677)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_305" data-name="Path 305" d="M136,352h4.939v1.235H136Z" transform="translate(-110.175 -308.653)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_306" data-name="Path 306" d="M224,352h2.469v1.235H224Z" transform="translate(-191.039 -308.653)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+      <path id="Path_307" data-name="Path 307" d="M46.275,51.75A1.965,1.965,0,0,1,44.3,53.7H19.291a1.965,1.965,0,0,1-1.974-1.95V19.25a1.965,1.965,0,0,1,1.974-1.95h16.68a2.014,2.014,0,0,1,.432.047V23.8a3.274,3.274,0,0,0,3.291,3.25h1.974v-1.3H39.694a1.965,1.965,0,0,1-1.974-1.95V18.219l6.789,6.7L45.439,24,38.3,16.952A3.29,3.29,0,0,0,35.971,16H19.291A3.274,3.274,0,0,0,16,19.25v32.5A3.274,3.274,0,0,0,19.291,55H44.3a3.274,3.274,0,0,0,3.291-3.25v-7.8H46.275Z" transform="translate(0 0)" fill={color} stroke="#2d6dce" stroke-width="0.5"/>
+    </g>
+  </svg>
+  
+  );
+};
+
+WhitePaper.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
+
+
+export const Info = ({ color }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" viewBox="0 0 39 39">
+    <g id="Group_54" data-name="Group 54" transform="translate(-21 -974)">
+      <g id="Path_280" data-name="Path 280" transform="translate(21 974)" fill="#fff">
+        <path d="M 19.5 38 C 17.0020809173584 38 14.57940006256104 37.51100158691406 12.2992696762085 36.54658889770508 C 10.0964298248291 35.61486053466797 8.117859840393066 34.28081130981445 6.418529987335205 32.58147048950195 C 4.719190120697021 30.88213920593262 3.385139942169189 28.9035701751709 2.453409910202026 26.70072937011719 C 1.488999962806702 24.42060089111328 1 21.9979190826416 1 19.5 C 1 17.0020809173584 1.488999962806702 14.57940006256104 2.453409910202026 12.2992696762085 C 3.385139942169189 10.0964298248291 4.719190120697021 8.117859840393066 6.418529987335205 6.418529987335205 C 8.117859840393066 4.719190120697021 10.0964298248291 3.385139942169189 12.2992696762085 2.453409910202026 C 14.57940006256104 1.488999962806702 17.0020809173584 1 19.5 1 C 21.9979190826416 1 24.42060089111328 1.488999962806702 26.70072937011719 2.453409910202026 C 28.9035701751709 3.385139942169189 30.88213920593262 4.719190120697021 32.58147048950195 6.418529987335205 C 34.28081130981445 8.117859840393066 35.61486053466797 10.0964298248291 36.54658889770508 12.2992696762085 C 37.51100158691406 14.57940006256104 38 17.0020809173584 38 19.5 C 38 21.9979190826416 37.51100158691406 24.42060089111328 36.54658889770508 26.70072937011719 C 35.61486053466797 28.9035701751709 34.28081130981445 30.88213920593262 32.58147048950195 32.58147048950195 C 30.88213920593262 34.28081130981445 28.9035701751709 35.61486053466797 26.70072937011719 36.54658889770508 C 24.42060089111328 37.51100158691406 21.9979190826416 38 19.5 38 Z" stroke="none"/>
+        <path d="M 19.5 2 C 14.82558059692383 2 10.43095016479492 3.820320129394531 7.125629425048828 7.125629425048828 C 3.820320129394531 10.43095016479492 2 14.82558059692383 2 19.5 C 2 24.17441940307617 3.820320129394531 28.56904983520508 7.125629425048828 31.87437057495117 C 10.43095016479492 35.17967987060547 14.82558059692383 37 19.5 37 C 24.17441940307617 37 28.56904983520508 35.17967987060547 31.87437057495117 31.87437057495117 C 35.17967987060547 28.56904983520508 37 24.17441940307617 37 19.5 C 37 14.82558059692383 35.17967987060547 10.43095016479492 31.87437057495117 7.125629425048828 C 28.56904983520508 3.820320129394531 24.17441940307617 2 19.5 2 M 19.5 0 C 30.26955032348633 0 39 8.730449676513672 39 19.5 C 39 30.26955032348633 30.26955032348633 39 19.5 39 C 8.730449676513672 39 0 30.26955032348633 0 19.5 C 0 8.730449676513672 8.730449676513672 0 19.5 0 Z" stroke="none" fill="#2d6dcd"/>
+      </g>
+      <text id="_" data-name="?" transform="translate(35 980)" fill="#2d6dcd" font-size="24" font-family="Lato-Bold, Lato" font-weight="700"><tspan x="0" y="24">?</tspan></text>
+    </g>
+  </svg>  
+  );
+};
+
+Info.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
+
+
+export const Support = ({ color }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="39" height="35.191" viewBox="0 0 39 35.191">
+    <g id="Group_53" data-name="Group 53" transform="translate(0 -25)">
+      <path id="Path_252" data-name="Path 252" d="M39,44.424a5.823,5.823,0,0,0-5.093-6,3.441,3.441,0,0,0-2.4-2.336A12.322,12.322,0,0,0,19.5,25,12.322,12.322,0,0,0,7.488,36.087a3.44,3.44,0,0,0-2.4,2.336q-.148.012-.294.032V31.018a1.143,1.143,0,0,0-2.285,0V39.37A6.177,6.177,0,0,0,0,44.424a5.823,5.823,0,0,0,5.093,6,3.441,3.441,0,0,0,2.384,2.333,6.026,6.026,0,0,0,5.929,5h.264a3.586,3.586,0,0,0,3.392,2.438h4.875a3.58,3.58,0,0,0,0-7.16H17.063a3.586,3.586,0,0,0-3.392,2.438h-.264A3.739,3.739,0,0,1,9.8,52.692a3.433,3.433,0,0,0,2.313-3.241V39.4a3.433,3.433,0,0,0-2.327-3.245A10.026,10.026,0,0,1,19.5,27.285a10.026,10.026,0,0,1,9.716,8.866A3.433,3.433,0,0,0,26.889,39.4V49.451a3.432,3.432,0,0,0,3.428,3.428h.3a3.433,3.433,0,0,0,3.286-2.455A5.823,5.823,0,0,0,39,44.424ZM17.063,55.316h4.875a1.295,1.295,0,1,1,0,2.59H17.063a1.295,1.295,0,1,1,0-2.59ZM2.285,44.424a3.673,3.673,0,0,1,2.666-3.678V48.1A3.673,3.673,0,0,1,2.285,44.424Zm7.541,5.027a1.144,1.144,0,0,1-1.143,1.143h-.3a1.144,1.144,0,0,1-1.143-1.143V39.4a1.144,1.144,0,0,1,1.143-1.143h.3A1.144,1.144,0,0,1,9.826,39.4Zm21.938,0a1.144,1.144,0,0,1-1.143,1.143h-.3a1.144,1.144,0,0,1-1.143-1.143V39.4a1.144,1.144,0,0,1,1.143-1.143h.3A1.144,1.144,0,0,1,31.764,39.4ZM34.049,48.1V40.746a3.87,3.87,0,0,1,0,7.356Z" transform="translate(0 0)" fill="#2d6dcd"/>
+    </g>
+  </svg>
+  
+  );
+};
+
+Support.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
+
+export const Settings = ({ color }) => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="32.001" height="32" viewBox="0 0 32.001 32">
+    <path id="Icon_ionic-md-settings" data-name="Icon ionic-md-settings" d="M31.526,20.975a10.006,10.006,0,0,0,.082-1.6c0-.56-.082-1.04-.082-1.6l3.436-2.64a.735.735,0,0,0,.164-1.04l-3.273-5.52a.8.8,0,0,0-.982-.32l-4.091,1.6A11.909,11.909,0,0,0,24,8.255l-.573-4.24a.877.877,0,0,0-.818-.64H16.061a.877.877,0,0,0-.818.64l-.654,4.24a13.856,13.856,0,0,0-2.782,1.6l-4.091-1.6a.766.766,0,0,0-.982.32L3.46,14.1a.966.966,0,0,0,.164,1.04l3.519,2.64c0,.56-.082,1.04-.082,1.6s.082,1.04.082,1.6l-3.436,2.64a.735.735,0,0,0-.164,1.04l3.273,5.52a.8.8,0,0,0,.982.32l4.091-1.6a11.908,11.908,0,0,0,2.782,1.6l.654,4.24a.793.793,0,0,0,.818.64h6.546a.877.877,0,0,0,.818-.64l.655-4.24a13.848,13.848,0,0,0,2.782-1.6l4.091,1.6a.766.766,0,0,0,.982-.32l3.273-5.52a.965.965,0,0,0-.164-1.04Zm-12.192,4a5.6,5.6,0,1,1,0-11.2,5.6,5.6,0,1,1,0,11.2Z" transform="translate(-3.375 -3.375)" fill={color}/>
+  </svg>
+  );
+};
+
+Settings.propTypes = {
+  color: PropTypes.string.isRequired,
 };
 
 export const Transactions = ({ color }) => {
@@ -145,7 +354,8 @@ export const Transactions = ({ color }) => {
       xmlns="http://www.w3.org/2000/svg"
       width="38.836"
       height="33.075"
-      viewBox="0 0 38.836 33.075">
+      viewBox="0 0 38.836 33.075"
+    >
       <g fill={color} transform="translate(0 -37.627)">
         <g transform="translate(0 37.627)">
           <g transform="translate(0 0)">
@@ -177,12 +387,17 @@ export const Transactions = ({ color }) => {
 };
 
 Transactions.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 };
 
 export const Security = ({ color }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="35.042" height="45" viewBox="0 0 35.042 45">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="35.042"
+      height="45"
+      viewBox="0 0 35.042 45"
+    >
       <g fill={color} transform="translate(-41.096)">
         <path
           className="a"
@@ -200,12 +415,17 @@ export const Security = ({ color }) => {
 };
 
 Security.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 };
 
 export const Tickets = ({ color }) => {
   return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="45"
+      height="45"
+      viewBox="0 0 45 45"
+    >
       <g fill={color} transform="translate(0 -0.001)">
         <g transform="translate(0 0.001)">
           <path
@@ -245,7 +465,7 @@ export const Tickets = ({ color }) => {
 };
 
 Tickets.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 };
 
 export const Referral = ({ color }) => {
@@ -254,7 +474,8 @@ export const Referral = ({ color }) => {
       xmlns="http://www.w3.org/2000/svg"
       width="38.016"
       height="38.016"
-      viewBox="0 0 38.016 38.016">
+      viewBox="0 0 38.016 38.016"
+    >
       <g fill={color} transform="translate(-1 -1)">
         <path
           className="a"
@@ -276,6 +497,5 @@ export const Referral = ({ color }) => {
 };
 
 Referral.propTypes = {
-  color: PropTypes.string.isRequired
+  color: PropTypes.string.isRequired,
 };
-

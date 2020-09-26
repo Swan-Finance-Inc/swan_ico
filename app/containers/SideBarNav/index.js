@@ -21,7 +21,9 @@ import { makeSelectLocation } from 'containers/App/selectors';
 import { toast } from 'react-toastify';
 import { Modal, Button } from 'react-bootstrap';
 
-import { Contribution, DashBoard, KYC, Referral, Security, Tickets, Transactions } from '../../components/Icons/index';
+import { Contribution, DashBoard, KYC, Referral, Security, Tickets, Transactions ,
+  Annoucement , News , PrivatePolicy, WhitePaper, Info, Settings,Support
+} from '../../components/Icons/index';
 
 export class SideBarNav extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -260,22 +262,43 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             <hr></hr>
 
             <span className='configuration black'>INFO</span>
+            <li className={`${this.state.buy} nav-item`} ><Link to="https://s3-ap-southeast-1.amazonaws.com/centralex-bucket/White_Paperv-4.pdf" role="button"  target='_blank'>
+               <WhitePaper color={this.state.secAct ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.buy}`}>White Paper</span> 
+               </Link>
+            </li>
 
-             <li className={this.state.buy}><a href='https://s3-ap-southeast-1.amazonaws.com/centralex-bucket/White_Paperv-4.pdf' target='_blank'><span className="has-icon black"><i className="fa fa-file-code-o"></i></span><span className={`${this.state.buy} black`} >White Paper</span></a>
-             </li>
-             
-            <li className={this.state.faqAct}><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}><span className="has-icon black"><i className="fa fa-question-circle"></i></span><span className={`${this.state.faqAct} black`}>FAQ</span></Link>
-             </li>
-            <li className={this.state.PrivacyPolicy}><a href='https://www.centralex.io/privacy.html' target='_blank'><span className="has-icon black"><i className="fa fa-user-secret"></i></span><span className={`${this.state.PrivacyPolicy} black`}>Privacy Policy</span></a>
-             </li> black
-               <li className={this.state.newsAct}><Link to="/dashboard/news" role="button" onClick={this.toggleNewsActive} ><span className="has-icon black"><i className="fa fa-newspaper-o"></i></span><span className={`${this.state.newsAct} black`} >News</span></Link>
-               </li>
+            <li className={`${this.state.faqAct} nav-item`} ><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}>
+               <Info color={this.state.faqAct ? '#fff' : '#fff'}/>
+               <span className={`ui-nav-text ${this.state.faqAct}`}>FAQ</span> 
+               </Link>
+            </li>
 
-               <li className={this.state.announcementsAct}><Link to="/dashboard/announcements" role="button" onClick={this.toggleAnnouncementsActive} ><span className="has-icon black"><i className="fa fa-bullhorn"></i></span><span className={`${this.state.announcementsAct} black`} >Announcements</span></Link>
-              </li>
+            <li className={`${this.state.PrivacyPolicy} nav-item`} ><Link to="https://www.centralex.io/privacy.html" role="button"  target='_blank'>
+               <PrivatePolicy color={this.state.PrivacyPolicy ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.PrivacyPolicy}`}>Privacy Policy</span> 
+               </Link>
+            </li>
 
-             <li className={this.state.supportAct}><a href="mailto:support@centralex.io"><span className="has-icon black"><i className="fa fa-life-ring"></i></span><span className={`${this.state.supportAct} black`} >Support</span><span className='infoSpan'>support@centralex.io</span></a>
-              </li>
+            <li className={`${this.state.newsAct} nav-item`} ><Link to="/dashboard/news" role="button" onClick={this.toggleNewsActive}>
+               <News color={this.state.newsAct ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.newsAct}`}>News</span> 
+               </Link>
+            </li>
+
+            <li className={`${this.state.announcementsAct} nav-item`} ><Link to="/dashboard/announcements" role="button" onClick={this.toggleAnnouncementsActive}>
+               <Annoucement color={this.state.announcementsAct ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.announcementsAct}`}>Announcements</span> 
+               </Link>
+            </li>
+
+            <li className={`${this.state.supportAct} nav-item`} ><a href="mailto:support@centralex.io">
+               <Support color={this.state.supportAct ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.supportAct}`}>Support</span>
+               <span className='infoSpan'>support@centralex.io</span> 
+               </a>
+            </li>
+  
           </ul>
          </aside>
 

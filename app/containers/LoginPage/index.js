@@ -54,7 +54,11 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     // }
     // console.log(this.props.global.passwordResetSuccess)
 
-    // console.log(this.props.global);
+     console.log(this.props.global, 'hi global');
+
+    if (this.props.error) {
+      this.notify(this.props.errorMessage);
+    }
 
     if (this.props.global.passwordResetSuccess) {
       this.notifySuccess('Your password has been changed successfully');
@@ -65,28 +69,25 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
       this.props.removeOuterError();
     }
 
-    if (this.props.error) {
-      this.notify(this.props.errorMessage);
-    }
     if (this.props.global.initialEmail.length > 0) {
       this.notifySuccess('Your account has been verified.');
-      const email = document.getElementById('emailAddress');
-      email.value = this.props.global.initialEmail;
+      // const email = document.getElementById('emailAddress');
+      // email.value = this.props.global.initialEmail;
     }
   }
   componentWillReceiveProps(nextProps) {
     // console.log("inside component")
-    // console.log('im in will receive props', nextProps)
+    console.log('im in will receive props', nextProps)
     if (nextProps.error) {
       this.notify(nextProps.errorMessage);
     }
   }
 
-  shouldComponentUpdate(nextProps) {
-    if (nextProps) {
-      return true;
-    } false;
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   if (nextProps) {
+  //     return true;
+  //   } false;
+  // }
 
   onChange(e) {
     // console.log(e);
@@ -217,7 +218,7 @@ showPassWord= (e)=>{
                 </div>
                 <div className="col-xs-7 col-sm-6 col-md-10">
                   <div className="header-right">
-                    <div className="header-btn-group ">
+                    <div className="header-btn-group">
                       <div className="header-btn"><Link to="/signup">Sign Up</Link></div>
                     </div>
                   </div>
@@ -307,7 +308,15 @@ showPassWord= (e)=>{
                        </div>
                          <div className="form-group text-center mt-15 ">
                        <label className="form-check-label" htmlFor="user_accepted_policies">
-                        <input id="remember" className="boolean required form-check-input" label="false" data-title="Remember me!" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="remember" style={{ marginRight: '10px' }} />I agree with <strong style={{color :'#2D6DCD' }} > User Agreement </strong>  and  <strong style={{color :'#2D6DCD' }} > Privacy Policy.</strong> 
+                        <input id="remember" className="boolean required form-check-input" label="false" data-title="Remember me!" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="remember" style={{ marginRight: '10px' }} />I agree with 
+                       <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/User+agreement+V1.0.pdf"
+                        target="_blank"
+                       > <strong style={{color :'#2D6DCD' }} > User Agreement </strong> </Link>
+                          and 
+                        <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
+                        target="_blank"
+                        >
+                           <strong style={{color :'#2D6DCD' }} > Privacy Policy.</strong>  </Link>
                           </label>
                      </div>
 

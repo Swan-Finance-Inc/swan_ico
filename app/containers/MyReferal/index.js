@@ -32,6 +32,7 @@ import moment from "moment";
 import MyPaginnation from "../../components/MyPaginnation";
 import EmptyFile from "../../images/EmptyFile.svg";
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import { ToastContainer, toast } from 'react-toastify';
 
 export class MyReferal extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -337,8 +338,8 @@ export class MyReferal extends React.PureComponent {
                         Earn 10% or Up to 250 Tokens <br />
                         For the first purchase by the referred.
                       </p>
-                      <div className="referral-logo-container">
-                        <img src={Referral} className="referral-logo" />
+                      <div className="referral-logo-container" style={{ width : '274px' }}>
+                        <img src={Referral} className="referral-logo" style={{ width : 'inherit' }}/>
                       </div>
                     </div>
                     <div>
@@ -348,25 +349,43 @@ export class MyReferal extends React.PureComponent {
                       >
                         Share the Unique Invite Link
                       </p>
-                      <div className="copy-clipboard" style={{ width: "40%" }}>
-                        <input
-                          id="foo"
-                          value={this.state.referralUrl}
-                          className="my-referral-code copy-clipboard-input"
-                        />
-                        <button className="btn  my-referral-code file-copy" style={{right : '-52px' }}>
-                            <FileCopyOutlinedIcon
-                            style={{ outline : 'none' }}
-                            />
-                        </button>
-                      </div>
+                     {
+                      // <div className="copy-clipboard" style={{ width: "40%" }}>
+                      //   <input
+                      //     id="foo"
+                      //     value={this.state.referralUrl}
+                      //     className="my-referral-code copy-clipboard-input"
+                      //   />
+                      //   <button className="btn  my-referral-code file-copy" style={{right : '-52px' }}>
+                      //       <FileCopyOutlinedIcon
+                      //       style={{ outline : 'none' }}
+                      //       />
+                      //   </button>
+                      // </div>
+                      }
+                       <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
+                            <input value={this.state.referralUrl }
+                              onChange={({target: {value}}) => this.setState({value, copied: false})}
+                              className="copy-input"
+                              />
+                            <CopyToClipboard text={this.state.referralUrl}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="file-copy-conatiner">
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                            </CopyToClipboard>
+                        </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="contribution-card" style={{ marginBottom: "30px" }}>
+            <div className="contribution-card" style={{ marginBottom: "30px" ,marginTop: '15px'}}>
               <div className="row">
                 <div className="col-sm-12">
                   <div className="customCard-header transaction-container">

@@ -243,17 +243,17 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
               <div className="col-md-12">
                 <div style={{display:'flex',flexDirection:'row'}}>
                   { this.state.currentView === 'personal' ? (
-                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px'}}>PERSONAL</h2></div>
+                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}} className="personal"><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>PERSONAL</h2></div>
                   ) : (
                     <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>PERSONAL</h2></div>
                   )}
                   { this.state.currentView === 'notifications' ? (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px'}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>NOTIFICATIONS</h2></div>
                   ) : (
                     <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>NOTIFICATIONS</h2></div>
                   )}
                   { this.state.currentView === 'wallet' ? (
-                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px'}}>WALLET</h2></div>
+                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>WALLET</h2></div>
                   ) : (
                     <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>WALLET</h2></div>
                   )}
@@ -287,7 +287,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="row form-group">
           <div className="col-sm-3">
-            <label htmlFor="fullName"><span style={{fontWeight:'500'}}>FULL NAME</span></label>
+            <label htmlFor="fullName"><span style={{fontWeight:'500'}}>Full Name</span></label>
           </div>
           <div className="col-sm-9">
             <input className="form-control" type="text" name="fullName" id="fullName"  value={this.state.fullName} onChange={this.handleInput}/>
@@ -328,79 +328,81 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 error={ phone ? (isValidNumber(phone) ? undefined : 'Invalid phone number') : '' }/>
           </div>
         </div>
+{
+        // {/* creative link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="creative"><span style={{fontWeight:'500'}}>Creative Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="creative" id="creative" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Creative link" placeholder="Creative link" onChange={this.handleInput} value={this.state.creative}/>
+        //   </div>
+        // </div>
+        // {/* youtube link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="youtube"><span style={{fontWeight:'500'}}>Youtube Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="youtube" id="youtube" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Youtube link" placeholder="Youtube link" onChange={this.handleInput} value={this.state.youtube}/>
+        //   </div>
+        // </div>
+        // {/* Telegram link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="telegram"><span style={{fontWeight:'500'}}>Telegram Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="telegram" id="telegram" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Telegram Profile link" placeholder="Telegram link" onChange={this.handleInput} value={this.state.telegram}/>
+        //   </div>
+        // </div>
+        // {/* Twitter link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="twitter"><span style={{fontWeight:'500'}}>Twitter Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="twitter" id="twitter" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Twitter Profile link" placeholder="Twitter link" onChange={this.handleInput} value={this.state.twitter}/>
+        //   </div>
+        // </div>
+        // {/* Facebook link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="facebook"><span style={{fontWeight:'500'}}>Facebook Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="facebook" id="facebook" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Facebook link" placeholder="Facebook link" onChange={this.handleInput} value={this.state.facebook}/>
+        //   </div>
+        // </div>
+        // {/* Translation link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="translation"><span style={{fontWeight:'500'}}>Translation Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="translation" id="translation" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Translation link" placeholder="Translation link" onChange={this.handleInput} value={this.state.translation}/>
+        //   </div>
+        // </div>
+        // {/* Reddit link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="reddit"><span style={{fontWeight:'500'}}>Reddit Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="reddit" id="reddit" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Reddit Profile link" placeholder="Reddit link" onChange={this.handleInput} value={this.state.reddit}/>
+        //   </div>
+        // </div>
+        // {/* Linkedin link */}
+        // <div className="row form-group">
+        //   <div className="col-sm-3">
+        //     <label htmlFor="linkedIn"><span style={{fontWeight:'500'}}>LinkedIn Link</span></label>
+        //   </div>
+        //   <div className="col-sm-9">
+        //     <input className="form-control" type="text" name="linkedIn" id="linkedIn" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid LinkedIn Profile link" placeholder="LinkedIn link" onChange={this.handleInput} value={this.state.linkedIn}/>
+        //   </div>
+        // </div>
+        }
 
-        {/* creative link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="creative"><span style={{fontWeight:'500'}}>Creative Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="creative" id="creative" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Creative link" placeholder="Creative link" onChange={this.handleInput} value={this.state.creative}/>
-          </div>
-        </div>
-        {/* youtube link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="youtube"><span style={{fontWeight:'500'}}>Youtube Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="youtube" id="youtube" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Youtube link" placeholder="Youtube link" onChange={this.handleInput} value={this.state.youtube}/>
-          </div>
-        </div>
-        {/* Telegram link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="telegram"><span style={{fontWeight:'500'}}>Telegram Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="telegram" id="telegram" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Telegram Profile link" placeholder="Telegram link" onChange={this.handleInput} value={this.state.telegram}/>
-          </div>
-        </div>
-        {/* Twitter link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="twitter"><span style={{fontWeight:'500'}}>Twitter Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="twitter" id="twitter" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Twitter Profile link" placeholder="Twitter link" onChange={this.handleInput} value={this.state.twitter}/>
-          </div>
-        </div>
-        {/* Facebook link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="facebook"><span style={{fontWeight:'500'}}>Facebook Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="facebook" id="facebook" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Facebook link" placeholder="Facebook link" onChange={this.handleInput} value={this.state.facebook}/>
-          </div>
-        </div>
-        {/* Translation link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="translation"><span style={{fontWeight:'500'}}>Translation Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="translation" id="translation" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Translation link" placeholder="Translation link" onChange={this.handleInput} value={this.state.translation}/>
-          </div>
-        </div>
-        {/* Reddit link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="reddit"><span style={{fontWeight:'500'}}>Reddit Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="reddit" id="reddit" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid Reddit Profile link" placeholder="Reddit link" onChange={this.handleInput} value={this.state.reddit}/>
-          </div>
-        </div>
-        {/* Linkedin link */}
-        <div className="row form-group">
-          <div className="col-sm-3">
-            <label htmlFor="linkedIn"><span style={{fontWeight:'500'}}>LinkedIn Link</span></label>
-          </div>
-          <div className="col-sm-9">
-            <input className="form-control" type="text" name="linkedIn" id="linkedIn" pattern="^(http:\/\/www\.|https:\/\/www\.|http:\/\/|https:\/\/)?[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(:[0-9]{1,5})?(\/.*)?$" title="Enter Valid LinkedIn Profile link" placeholder="LinkedIn link" onChange={this.handleInput} value={this.state.linkedIn}/>
-          </div>
-        </div>
         <div className="row form-group">
           <div className="col-sm-3">
             <label htmlFor="referalUrl"><span style={{fontWeight:'500'}}>Referal URL</span></label>

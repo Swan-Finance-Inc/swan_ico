@@ -137,7 +137,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
                       <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk" onChange={this.onChange} />
                     </div>
                     <div className="text-center">
-                      <button type="submit" className="form-button">Submit</button>
+                      <button type="submit" className="form-button forgot-password-button">Submit</button>
                     </div>
                   </form>
                 </div>

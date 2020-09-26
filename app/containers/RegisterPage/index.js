@@ -52,6 +52,7 @@ export class RegisterPage extends React.PureComponent {
       email: "",
       password: "",
       confirmPassword: "",
+      referralId : ''
     };
     this.formSubmit = this.formSubmit.bind(this);
   }
@@ -76,7 +77,16 @@ export class RegisterPage extends React.PureComponent {
         referToken: "",
       });
     }
+
+    const ref = window.location.href.split('/signup')
+    if(ref[1] !== "" ){
+      this.setState({
+        referralId : ref[1].split('/refer/')[1]
+      }) 
+    }
+
   }
+
 
   componentWillReceiveProps(nextProps) {
     // console.log('im in will receive prop', nextProps);
@@ -147,12 +157,12 @@ export class RegisterPage extends React.PureComponent {
     else if(!this.state.password){
       this.notifyError("Please enter the password");
     }
-    else if(!this.state.confirmPassword){
-      this.notifyError("Please enter the confirm password");
-    }
-    else if( this.state.password !== this.state.confirmPassword){
-      this.notifyError("Password Dont match");
-    }
+    // else if(!this.state.confirmPassword){
+    //   this.notifyError("Please enter the confirm password");
+    // }
+    // else if( this.state.password !== this.state.confirmPassword){
+    //   this.notifyError("Password Dont match");
+    // }
     else if (!this.state.captcha) {
       this.notifyError("Please verify that you are not a robot");
     } 
@@ -364,7 +374,7 @@ export class RegisterPage extends React.PureComponent {
                         <TextFieldInput
                           type="password"
                           name="password"
-                          label="password"
+                          label="Choose Password"
                           value={this.state.password}
                           variant="outlined"
                           required={true}
@@ -383,10 +393,10 @@ export class RegisterPage extends React.PureComponent {
                       </div>
                       <div style={{ marginTop: "10px" }}>
                         <TextFieldInput
-                          type="password"
-                          name="confirmPassword"
-                          label="Confirm Password"
-                          value={this.state.confirmPassword}
+                          type="text"
+                          name="referralId"
+                          label="Referral Id(Optional)"
+                          value={this.state.referralId}
                           variant="outlined"
                           required={true}
                           handleChange={(e) => {
@@ -439,8 +449,13 @@ export class RegisterPage extends React.PureComponent {
                             type="checkbox"
                             name="usCitizen"
                           />
-                          &nbsp; I’m not US citizen and agree to the policy of
-                          centralex token sale.
+                          &nbsp; 
+                          I’m not US citizen and agree to the
+                          <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/User+agreement+V1.0.pdf"
+                        target="_blank"><strong className="main-color--blue"> User Agreement</strong></Link>  and 
+                          <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
+                        target="_blank"><strong className="main-color--blue"> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                           Privacy Policy.</strong></Link>
                         </label>
                       </div>
                       <div className="form-group text-center">

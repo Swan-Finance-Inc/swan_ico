@@ -25,6 +25,12 @@ import TextFieldInput from "../../components/TextFieldInput";
 import ethLogo from "../../images/ethLogo.png";
 import { Navbar, Nav, MenuItem, NavDropdown, Modal ,Badge , DropdownButton} from 'react-bootstrap';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import { ToastContainer, toast } from 'react-toastify';
+import littleStar from "../../images/littleStar.svg";
+import bigStar from "../../images/bigStar.svg";
+import Ellipse from '../../images/Ellipse.svg';
+
 class Balance extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -109,7 +115,7 @@ class Balance extends React.PureComponent {
                   <h3 className="balance-card-inner-wrapper-heading">
                     Account Balance
                   </h3>
-                 
+                  
                   <p className="balance-text">
                     Note: Transaction may take up to 24 hours to approve due to
                     our comprehensive verification methods to protect our
@@ -439,34 +445,55 @@ class Balance extends React.PureComponent {
                           <p className="mt-30 referral-content">Earn 10% or Up to 250 Tokens <br />
                             For the first purchase by the referred.</p>
                             <p className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
-                            <div className="code copy-clipboard">
-                            <input id="foo" value={this.state.referalUrl}
-                            className="copy-clipboard-input"
-                            disabled
-                            />
-                            <button className="btn file-copy" style={{ right: '-145px' }}>
-                            <FileCopyOutlinedIcon
-                           // onClick={(e) => console.log(e.target.files ) }
-                            style={{ outline : 'none' }}
-                            />
-                            </button>
                             {
-                            //   <button class="btn" data-clipboard-target="#foo" id="clipboard-target-buttton">
-                            // <img src={mdCopy} className="copy-clip" />
-                            // </button>
+                          //     <div className="code copy-clipboard">
+                          //   <input id="foo" value={this.state.referalUrl}
+                          //   className="copy-clipboard-input"
+                          //   disabled
+                          //   />
+                          //   <button className="btn file-copy" style={{ right: '-145px' }}
+                          //   onCopy={this.state.referalUrl}
+                          //   >
+                          //   <FileCopyOutlinedIcon
+                          //  // onClick={(e) => console.log(e.target.files ) }
+                          //   style={{ outline : 'none' }}
+                          //   />
+                          //   </button>
+                          //   {
+                          //   //   <button class="btn" data-clipboard-target="#foo" id="clipboard-target-buttton">
+                          //   // <img src={mdCopy} className="copy-clip" />
+                          //   // </button>
+                          //   }
+                          //   </div>
                             }
-                            </div>
+                            
                         </div>
                         <div className="referral-logo-container">
                           <img src={Referral} className="referral-logo" />
                         </div>
                       </div>
+                      <div style={{width: '27em' , position: 'relative'}}>
+                            <input value={this.state.referalUrl }
+                              onChange={({target: {value}}) => this.setState({value, copied: false})}
+                              className="copy-input"
+                              />
+                            <CopyToClipboard text={this.state.referalUrl}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="file-copy-conatiner">
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                            </CopyToClipboard>
+                        </div>
                     </div>
                    
                  </div>
             </div>
             <div className="col-lg-5" style={{ marginBottom : '30px' , marginTop : '12px' }}>
-              <div className="balance-card" id="fixed-height">
+              <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
                 <div className="balance-card-inner-wrappper">
                   <h3 className="balance-card-inner-wrapper-heading">
                     ICO Details
@@ -481,10 +508,15 @@ class Balance extends React.PureComponent {
                        <br /> Extra</span>
                     </div>
                     <div className="satalite-logo-container">
+                      <img src={littleStar} className="little-star"/>
                     <img src={Satelite} />
                     </div>
                   </div>
-                  <div className="text-center mt-15">
+                  <img src={littleStar}/>
+                  <img src={bigStar} style={{ float : 'right' }} />
+                  <img src={Ellipse} className="ellipse-one"/>
+                  <img src={Ellipse} className="ellipse-two" />
+                  <div className="text-center">
                     <p className="secondary-text">Total Coins</p>
                     <p className="total-coins">16,000,000</p>
                   </div>
