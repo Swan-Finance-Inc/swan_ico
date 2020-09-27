@@ -24,7 +24,10 @@ import {
   TOGGLE_INFO_ACTIVE,
   TOGGLE_INFO_ACTIVE_SUCCESS,
   TOGGLE_INFO_ACTIVE_GET,
-  TOGGLE_INFO_ACTIVE_GET_SUCCESS
+  TOGGLE_INFO_ACTIVE_GET_SUCCESS,
+  GET_CROWDSALE_DATA,
+  GET_CROWDSALE_DATA_RET,
+  GET_CROWDSALE_DATA_LOADING
 } from './constants';
 
 export function getToggleInfoActive() {
@@ -160,3 +163,24 @@ export function codeErrorRemove(data){
     data
   }
 }
+
+export function getCrowdsaleData(data){
+  return {
+    type: GET_CROWDSALE_DATA,
+    data
+  }
+}
+
+export function getCrowdsaleDataRet(data){
+  return {
+    type: GET_CROWDSALE_DATA_RET,
+    data
+  }
+}
+export function getCrowdsaleDataLoading(data){
+  return {
+    type: GET_CROWDSALE_DATA_LOADING,
+    data
+  }
+}
+

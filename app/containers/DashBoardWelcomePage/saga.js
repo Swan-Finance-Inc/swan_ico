@@ -12,7 +12,8 @@ import {
   LOAD_NEWS,
   LOAD_ANNOUNCEMENTS,
   TOGGLE_INFO_ACTIVE,
-  TOGGLE_INFO_ACTIVE_GET
+  TOGGLE_INFO_ACTIVE_GET,
+  GET_CROWDSALE_DATA
 } from 'containers/DashBoardWelcomePage/constants';
 import {
   profileLoaded,
@@ -21,11 +22,13 @@ import {
   loadNewsSuccess,
   loadAnnouncementsSuccess,
   toggleInfoActiveSuccess,
-  getToggleInfoActiveSuccess
+  getToggleInfoActiveSuccess,
+  getCrowdsaleDataRet,
+  getCrowdsaleDataLoading
 } from 'containers/DashBoardWelcomePage/actions';
 import { push } from 'react-router-redux';
 import { emailVerified, twoFactorEnabled  } from 'containers/App/actions';
-import { makeSelectSocial, makeSelectToggleInfoActive } from 'containers/DashBoardWelcomePage/selectors';
+import { makeSelectSocial, makeSelectToggleInfoActive ,makeSelectGetCrowdsaleData } from 'containers/DashBoardWelcomePage/selectors';
 import { deleteUserSuccessAction } from 'containers/DashBoardWelcomePage/actions';
 import { codeErrorAction } from './actions'
 
@@ -208,6 +211,27 @@ export function* loadNews() {
   }
 }
 
+export function* getCrowdsaleDataSaga() {
+  try {
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+
+    const apiData = yield call(api.user.getCrowdsaleData, headers);
+    if(apiData) {
+      yield put(getCrowdsaleDataRet(apiData));
+      yield put(getCrowdsaleDataLoading(apiData));
+    }
+  }
+  catch (err) {
+    console.log('error in load profile', err);
+      yield put(codeErrorAction());
+  }
+}
+
+
+
 export default function* defaultSaga() {
   yield [
     takeLatest(LOAD_PROFILE, loadProfile),
@@ -217,7 +241,9 @@ export default function* defaultSaga() {
     takeLatest(LOAD_NEWS, loadNews),
     takeLatest(LOAD_ANNOUNCEMENTS, loadAnnouncements),
     takeLatest(TOGGLE_INFO_ACTIVE, toggleInfoActiveSaga),
-    takeLatest(TOGGLE_INFO_ACTIVE_GET, toggleInfoActiveSagaGet)
+    takeLatest(TOGGLE_INFO_ACTIVE_GET, toggleInfoActiveSagaGet),
+    takeLatest(GET_CROWDSALE_DATA, getCrowdsaleDataSaga)
+
 
   ];
 }

@@ -32,7 +32,8 @@ export class ContributionConfirm extends React.PureComponent {
       url: "",
       copied: false,
       valid: true,
-      validBlank: true
+      validBlank: true,
+      currentReceivingWalletAddress : ''
     };
     this.goBack = this.goBack.bind(this);
     this.confirmPayment = this.confirmPayment.bind(this);
@@ -44,15 +45,18 @@ export class ContributionConfirm extends React.PureComponent {
   // Begin life cycle methods
   componentDidMount() {
     if (this.props.currency == "Bitcoin") {
+      let currentReceivingWalletAddress = this.props.currentReceivingWalletAddress  ? this.props.currentReceivingWalletAddress : this.props.btcAddress;
+
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
       const query = queryString.parse(href);
-      query.chl = this.props.btcAddress;
+      query.chl = this.props.currentReceivingWalletAddress  ? this.props.currentReceivingWalletAddress : this.props.btcAddress;
       const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
         query
       )}`;
       this.setState({
-        url: uri
+        url: uri,
+        currentReceivingWalletAddress
       });
     } else {
       const href =
@@ -111,12 +115,14 @@ export class ContributionConfirm extends React.PureComponent {
 
   confirmPayment(e) {
     e.preventDefault();
-    const hash = document.getElementById("txhash").value;
-    if (this.state.valid) {
-      this.props.finalPayment(hash);
-    } else {
-      toast.error("Please enter a valid transaction hash");
-    }
+    // const hash = document.getElementById("txhash").value;
+    // if (this.state.valid) {
+    //   this.props.finalPayment(hash);
+    // } else {
+    //   toast.error("Please enter a valid transaction hash");
+    // }
+
+    this.props.finalPayment(this.state.currentReceivingWalletAddress)
   }
   copyFunction() {
     let range = document.getSelection().getRangeAt(0);
@@ -126,14 +132,14 @@ export class ContributionConfirm extends React.PureComponent {
     toast.success("Address copied");
   }
 
+
+
   // End Container functions
 
   // Begin render function
   render() {
-    console.log(this.props, " props in contribution confirm ");
-    console.log(this.state, " props in contribution confirm ");
-    console.log(this.props, " props in contribution confirm");
-    console.log(this.state, " state in contribution confirm");
+    console.log(this.props,"props in contribution confirm ");
+    console.log(this.state,"props in contribution confirm ");
     if (this.props.usdEurContributionConfirm) {
       return (
         <div>
@@ -357,6 +363,8 @@ export class ContributionConfirm extends React.PureComponent {
                         Scan this Address QR Code from your{" "}
                         {this.props.currency} wallet{" "}
                  </p>
+                 <p className="main-color--blue">
+                 You will receive {(this.props.tokens).toFixed(2)}  Centralex coins </p>
                   <div className="qr-code" style={{ margin : '1em 0' }}>
                       {this.props.currency === "Bitcoin" ? (
                         <img src={this.state.url} alt="" />
@@ -365,148 +373,133 @@ export class ContributionConfirm extends React.PureComponent {
                       )}
                   </div>
                   <hr className="qr-code-hr" />
-                  <div className="confirm-block" style={{maxWidth:'35em'}}>
-                          <ol>
-                            <li className="main-color--blue">
-                              Wallet address to deposit{" "}
-                              <strong>
-                                {this.props.currencyQty}{" "}
-                                {this.props.currency === "Ethereum"
-                                  ? "ETH"
-                                  : "BTC"}
-                              </strong>{" "}
-                              for purchase of{" "}
-                              <strong>
-                                {this.props.tokens} Centralex Tokens
-                              </strong>
-                              <div className="mt-10">
-                                <div className="mt-20">
-                                  <div className="blockchain-tx text-center ">
-                                    <p>
-                                      <span>
-                                        <h4
-                                          id="address"
-                                          defaultValue={
-                                            this.props.ethAddress
-                                          }
-                                        >
-                                          {this.props.currency=="Ethereum"?this.props.ethAddress:this.props.btcAddress}
-                                        </h4>
-                                        {/* <button style={{margin:"10px" ,borderRadius:"30px"}} className="form-buy-button" onClick={this.copyFunction}> */}
-                                        <div className="row">
-                                          <div className="col-sm-6">
-                                            <CopyToClipboard
-                                              text={this.props.currency=="Ethereum"?this.props.ethAddress:this.props.btcAddress}
-                                              onCopy={() =>
-                                                this.setState({
-                                                  copy: true
-                                                })
-                                              }
-                                            >
-                                              <button
-                                                style={{
-                                                  borderRadius: "30px"
-                                                }}
-                                                className="form-button"
-                                              >
-                                                Copy
-                                              </button>
-                                            </CopyToClipboard>
-                                          </div>
-                                          <div
-                                            className="col-sm-6"
-                                            style={{ paddingTop: "10px" }}
-                                          >
-                                            {this.state.copy ? (
-                                              <p>Address Copied</p>
-                                            ) : (
-                                              ""
-                                            )}
-                                          </div>
-                                        </div>
-                                      </span>
-                                    </p>
-                                    {!(
-                                      this.props.currency === "Bitcoin"
-                                    ) ? (
-                                      <div className="row">
-                                        <div className="col-md-6 ">
-                                          <span className="gas1">
-                                            SET GAS LIMIT:
-                                            {this.props.gasLimit
-                                              ? this.props.gasLimit
-                                              : `120000`}
-                                          </span>
-                                        </div>
-                                        <div className="col-md-6 ">
-                                          <span className="gas2">
-                                            SET GAS PRICE:
-                                            {this.props.gasPrice
-                                              ? this.props.gasPrice
-                                              : 95}{" "}
-                                            GWei
-                                          </span>
-                                        </div>
-                                      </div>
-                                    ) : (
-                                      ""
-                                    )}
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
-                            <li className="main-color--blue">
-                              Please visit your cryptocurrency wallet and
-                              make payment to the above address.
-                            </li>
-                            <li className="main-color--blue">
-                              Only send{" "}
-                              {this.props.currency === "Bitcoin"
-                                ? "BTC"
-                                : "ETH"}{" "}
-                              to this address
-                            </li>
-                              {this.props.currency=='Ethereum'? <li className="main-color--blue">
-                        Don't make payment through exchange.You can
-                              use Metmask, MyEtherWallet, Mist Wallet etc
-                            </li>:""}
-                            <li className="main-color--blue">
-                              To avoid delays, you must paste and confirm
-                              your Blockchain TX Code as soon as available
-                              and confirm for our records.
-                            </li>
-                          </ol>
+                  <div className="confirm-block" style={{maxWidth:'35em' , textAlign : 'center' }}>
+                        {  
+                        // <ol>
+                        //     <li className="main-color--blue">
+                        //       Wallet address to deposit{" "}
+                        //       <strong>
+                        //         {this.props.currencyQty}{" "}
+                        //         {this.props.currency === "Ethereum"
+                        //           ? "ETH"
+                        //           : "BTC"}
+                        //       </strong>{" "}
+                        //       for purchase of{" "}
+                        //       <strong>
+                        //         {this.props.tokens} Centralex Tokens
+                        //       </strong>
+                        //       <div className="mt-10">
+                        //         <div className="mt-20">
+                        //           <div className="blockchain-tx text-center ">
+                        //             <p>
+                        //               <span>
+                        //                 <h4
+                        //                   id="address"
+                        //                   defaultValue={
+                        //                     this.props.ethAddress
+                        //                   }
+                        //                 >
+                        //                   {this.props.currency=="Ethereum"?this.props.ethAddress:this.props.btcAddress}
+                        //                 </h4>
+                        //                 {/* <button style={{margin:"10px" ,borderRadius:"30px"}} className="form-buy-button" onClick={this.copyFunction}> */}
+                        //                 <div className="row">
+                        //                   <div className="col-sm-6">
+                        //                     <CopyToClipboard
+                        //                       text={this.props.currency=="Ethereum"?this.props.ethAddress:this.props.btcAddress}
+                        //                       onCopy={() =>
+                        //                         this.setState({
+                        //                           copy: true
+                        //                         })
+                        //                       }
+                        //                     >
+                        //                       <button
+                        //                         style={{
+                        //                           borderRadius: "30px"
+                        //                         }}
+                        //                         className="form-button"
+                        //                       >
+                        //                         Copy
+                        //                       </button>
+                        //                     </CopyToClipboard>
+                        //                   </div>
+                        //                   <div
+                        //                     className="col-sm-6"
+                        //                     style={{ paddingTop: "10px" }}
+                        //                   >
+                        //                     {this.state.copy ? (
+                        //                       <p>Address Copied</p>
+                        //                     ) : (
+                        //                       ""
+                        //                     )}
+                        //                   </div>
+                        //                 </div>
+                        //               </span>
+                        //             </p>
+                        //             {!(
+                        //               this.props.currency === "Bitcoin"
+                        //             ) ? (
+                        //               <div className="row">
+                        //                 <div className="col-md-6 ">
+                        //                   <span className="gas1">
+                        //                     SET GAS LIMIT:
+                        //                     {this.props.gasLimit
+                        //                       ? this.props.gasLimit
+                        //                       : `120000`}
+                        //                   </span>
+                        //                 </div>
+                        //                 <div className="col-md-6 ">
+                        //                   <span className="gas2">
+                        //                     SET GAS PRICE:
+                        //                     {this.props.gasPrice
+                        //                       ? this.props.gasPrice
+                        //                       : 95}{" "}
+                        //                     GWei
+                        //                   </span>
+                        //                 </div>
+                        //               </div>
+                        //             ) : (
+                        //               ""
+                        //             )}
+                        //           </div>
+                        //         </div>
+                        //       </div>
+                        //     </li>
+                        //     <li className="main-color--blue">
+                        //       Please visit your cryptocurrency wallet and
+                        //       make payment to the above address.
+                        //     </li>
+                        //     <li className="main-color--blue">
+                        //       Only send{" "}
+                        //       {this.props.currency === "Bitcoin"
+                        //         ? "BTC"
+                        //         : "ETH"}{" "}
+                        //       to this address
+                        //     </li>
+                        //       {this.props.currency=='Ethereum'? <li className="main-color--blue">
+                        // Don't make payment through exchange.You can
+                        //       use Metmask, MyEtherWallet, Mist Wallet etc
+                        //     </li>:""}
+                        //     <li className="main-color--blue">
+                        //       To avoid delays, you must paste and confirm
+                        //       your Blockchain TX Code as soon as available
+                        //       and confirm for our records.
+                        //     </li>
+                        //   </ol>
+                          }
                           <form onSubmit={this.confirmPayment}>
-                            <div className="blockchain-tx">
-                              <p className="main-color--blue">
-                                Please paste your blockchain TX hash below
-                                and click Confirm:{" "}
-                                <span>
-                                  {this.props.currency === "Bitcoin" ? (
-                                    <h4>{this.props.btcAddress}</h4>
-                                  ) : (
-                                    <h4>{this.props.ethAddress}</h4>
-                                  )}
-                                </span>
-                              </p>
-                              <input
-                                required
-                                id="txhash"
-                                onChange={this.txValidator}
-                                type="text"
-                                className="form-input form-control main-color--blue"
-                                placeholder="Paste hash payment code"
-                              />
+                            <div className="transaction-time">
+                            <p className="main-color--blue">
+                            Time of initiation : { (new Date()).toDateString()}
+                             <br/>
+                             This transaction will expire within 5 hours of initiation.
+                            </p>
+                            <p className="main-color--blue">
+                            Any payments after 5 hours will receive tokens based on the exchange 
+                            rate at that time of payment.
+                            </p>
                             </div>
-                            {this.state.valid || this.state.validBlank ? (
-                              <p />
-                            ) : (
-                              <p style={{ color: "#ff0000" }}>
-                                Please enter a valid Transaction Hash
-                              </p>
-                            )}
-                            <div className="btn-row">
-                              <button
+                            <div className="btn-row confirm-transaction-button">
+                               <button
                                 className="form-button btn btn-primary"
                                 type="submit"
                                 style={{ marginBottom : '20px' }}
@@ -514,6 +507,46 @@ export class ContributionConfirm extends React.PureComponent {
                                 Confirm
                               </button>
                             </div>
+
+                          { 
+                          //  <div className="blockchain-tx">
+                          //     <p className="main-color--blue">
+                          //       Please paste your blockchain TX hash below
+                          //       and click Confirm:{" "}
+                          //       <span>
+                          //         {this.props.currency === "Bitcoin" ? (
+                          //           <h4>{this.props.btcAddress}</h4>
+                          //         ) : (
+                          //           <h4>{this.props.ethAddress}</h4>
+                          //         )}
+                          //       </span>
+                          //     </p>
+                          //     <input
+                          //       required
+                          //       id="txhash"
+                          //       onChange={this.txValidator}
+                          //       type="text"
+                          //       className="form-input form-control main-color--blue"
+                          //       placeholder="Paste hash payment code"
+                          //     />
+                          //   </div>
+                          //   {this.state.valid || this.state.validBlank ? (
+                          //     <p />
+                          //   ) : (
+                          //     <p style={{ color: "#ff0000" }}>
+                          //       Please enter a valid Transaction Hash
+                          //     </p>
+                          //   )}
+                          //   <div className="btn-row">
+                          //     <button
+                          //       className="form-button btn btn-primary"
+                          //       type="submit"
+                          //       style={{ marginBottom : '20px' }}
+                          //     >
+                          //       Confirm
+                          //     </button>
+                          //   </div>
+                            }
                           </form>
                         </div>
                       </div>

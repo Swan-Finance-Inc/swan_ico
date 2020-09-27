@@ -59,6 +59,35 @@ const makeSelectLoading = () => createSelector(
   (substate) => substate.get('loading')
 );
 
+const makeSelectGetHotWallet = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('listHotWallet')
+)
+
+const makeSelectGetHotWalletRet = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('listHotWalletRet')
+)
+
+const makeSelectGetHotWalletLoading = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('listHotWalletLoading')
+)
+
+const makeSelectCreateHotWallet = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('createHotWallet')
+)
+
+const makeSelectCreateHotWalletRet = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('createHotWalletRet')
+)
+
+const makeSelectCreateHotWalletLoading = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('createHotWalletLoading')
+)
 
 export default makeSelectContributionPage;
 export {
@@ -71,5 +100,11 @@ export {
   makeSelectPaymentId,
   makeSelectFinalTransaction,
   makeSelectTransactionId,
-  makeSelectLoading
+  makeSelectLoading,
+  makeSelectGetHotWallet,
+  makeSelectGetHotWalletRet,
+  makeSelectGetHotWalletLoading,
+  makeSelectCreateHotWallet,
+  makeSelectCreateHotWalletRet,
+  makeSelectCreateHotWalletLoading
 };

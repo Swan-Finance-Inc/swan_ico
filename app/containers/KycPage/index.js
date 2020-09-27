@@ -125,18 +125,19 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     console.log(" dob in didmount ",this.props.userInfo.userInfo.dob);
     console.log("userinfo",this.props.userInfo.userInfo);
     this.setState({
-      fullName : this.props.userInfo.userInfo.fullName,
-      email : this.props.userInfo.userInfo.email,
-      dob: this.props.userInfo.userInfo.dob,
-      gender: this.props.userInfo.userInfo.gender,
-      phone : this.props.userInfo.userInfo.phone,
-      ethAddress : this.props.userInfo.userInfo.ethAddress,
-      citizenship : this.props.userInfo.userInfo.kycDetails.citizenship,
-      country : this.props.userInfo.userInfo.kycDetails.country,
-      state : this.props.userInfo.userInfo.kycDetails.state,
-      city: this.props.userInfo.userInfo.kycDetails.city,
-      address: this.props.userInfo.userInfo.kycDetails.address,
-      address2: this.props.userInfo.userInfo.kycDetails.address2,
+      fullName : this.props.userInfo.userInfo.fullName ? this.props.userInfo.userInfo.fullName : '' ,
+      email : this.props.userInfo.userInfo.email? this.props.userInfo.userInfo.email : '',
+      dob: this.props.userInfo.userInfo.dob ? this.props.userInfo.userInfo.dob : '' ,
+      gender: this.props.userInfo.userInfo.gender ? this.props.userInfo.userInfo.gender : '' ,
+      phone : this.props.userInfo.userInfo.phone ? this.props.userInfo.userInfo.phone : '' ,
+      ethAddress : this.props.userInfo.userInfo.ethAddress ? this.props.userInfo.userInfo.ethAddress : '' ,
+      citizenship : this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.citizenship ? this.props.userInfo.userInfo.kycDetails.citizenship : '' ,
+      country : this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.country ? this.props.userInfo.userInfo.kycDetails.country : '' ,
+      state : this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.state ? this.props.userInfo.userInfo.kycDetails.state : '' ,
+      city: this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.city ? this.props.userInfo.userInfo.kycDetails.city : '' ,
+      address: this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.address ? this.props.userInfo.userInfo.kycDetails.address : '' ,
+      address2: this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.address2 ? this.props.userInfo.userInfo.kycDetails.address2 : '',
+      newKycStatus : this.props.userInfo.userInfo.kycStatus ? this.props.userInfo.userInfo.kycStatus : ''
       // doc_number:this.props.userInfo.userInfo.kycDetails.documentNumber,
       // DocType:this.props.userInfo.userInfo.kycDetails.documentType,
       // frontImgUrl :this.props.userInfo.userInfo.kycDetails.imageFront,
@@ -160,7 +161,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     if(parsed.code){
       this.handleFractalKYC(parsed.code);
     } else {
-      this.props.updateFractalKyc(this.props.userInfo.userInfo.email);
+      //this.props.updateFractalKyc(this.props.userInfo.userInfo.email);
     }
   }
   handleOtherDoc(e) {
@@ -326,12 +327,12 @@ handleInput2=(e)=>{
 
   componentWillReceiveProps(nextProps){
     console.log("User infor next",nextProps.userInfo.userInfo.kycDetails.fullName)
-    if(nextProps.updateFractalSuccess){
-      this.setState({
-        kycStatus: nextProps.updateFractalSuccess.kycStatus,
-        kycJourneyCompleted: nextProps.updateFractalSuccess.kycJourneyCompleted
-      })
-    }
+    // if(nextProps.updateFractalSuccess){
+    //   this.setState({
+    //     kycStatus: nextProps.updateFractalSuccess.kycStatus,
+    //     kycJourneyCompleted: nextProps.updateFractalSuccess.kycJourneyCompleted
+    //   })
+    // }
     if(nextProps.kycpage.kycDocSuccess){
       if(nextProps.kycpage.kycDocSuccess.image == 'imageFront'){
           this.setState({
@@ -448,7 +449,7 @@ handleInput2=(e)=>{
       </div>
       )
     }
-    if(!this.props.userInfo.userInfo.kycStatus == 'ACCEPTED'){
+    if(this.props.userInfo.userInfo.kycStatus == 'ACCEPTED'){
       this.props.kycActive();
       return (
         <div id="content" className="ui-content ui-content-aside-overlay">
@@ -680,7 +681,7 @@ handleInput2=(e)=>{
             <div className="col-sm-12">
               <div className="kyc-verification">
                   <h3 className="kyc-verification-header">KYC Verification</h3>
-                  <h4 className="kyc-status">KYC Status :{this.state.kycStatus}</h4>
+                  <h4 className="kyc-status">KYC Status :{this.state.newKycStatus}</h4>
                   <h4 className="kyc-status">KYC Journey Completed: {this.state.kycJourneyCompleted?"Yes":"No"}</h4>
                   <div className="text-center">
                     <button className="invest kyc-factorial"

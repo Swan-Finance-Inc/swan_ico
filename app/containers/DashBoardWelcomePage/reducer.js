@@ -22,7 +22,10 @@ import {
   TOGGLE_INFO_ACTIVE,
   TOGGLE_INFO_ACTIVE_SUCCESS,
   TOGGLE_INFO_ACTIVE_GET,
-  TOGGLE_INFO_ACTIVE_GET_SUCCESS
+  TOGGLE_INFO_ACTIVE_GET_SUCCESS,
+  GET_CROWDSALE_DATA,
+  GET_CROWDSALE_DATA_RET,
+  GET_CROWDSALE_DATA_LOADING
 } from './constants';
 
 // The initial state of the App
@@ -48,7 +51,10 @@ const initialState = fromJS({
   faqData:false,
   newsData:false,
   announcementsData: false,
-  toggleInfoActive:false
+  toggleInfoActive:false,
+  getCrowdsaleData:false,
+  getCrowdsaleDataRet:false,
+  getCrowdsaleDataLoading:false,
 
 });
 
@@ -119,10 +125,21 @@ function dashBoardWelcomePageReducer(state = initialState, action) {
     case CODE_ERROR_REMOVE:
       return state
         .set('errorGlobal', false);
+
+    case GET_CROWDSALE_DATA:
+      return state
+        .set('getCrowdsaleData', action.data)
+        .set('getCrowdsaleDataLoading',true)
+    case GET_CROWDSALE_DATA_RET:
+      return state  
+      .set('getCrowdsaleDataRet', action.data)
+      .set('getCrowdsaleDataLoading',false)
+    case GET_CROWDSALE_DATA_LOADING:
+      return state
+      .set('getCrowdsaleDataLoading',false)
     default:
       return state;
   }
 }
-
 
 export default dashBoardWelcomePageReducer;

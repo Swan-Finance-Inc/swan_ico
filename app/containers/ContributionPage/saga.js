@@ -2,9 +2,12 @@ import api from 'utils/api';
 import { push } from 'react-router-redux';
 import { depositSuccess } from 'containers/App/actions';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { GET_DATA, CONFIRM_PAYMENT, RELOAD_PAGE, SEND_PAYMENT } from './constants';
-import { successData, successPayment, successFinalizePayment } from './actions';
-import { makeSelectContributionConfirm, makeSelectFinalTransaction } from './selectors';
+import { GET_DATA, CONFIRM_PAYMENT, RELOAD_PAGE, SEND_PAYMENT ,LIST_HOT_WALLET,CREATE_HOT_WALLET } from './constants';
+import { successData, successPayment, successFinalizePayment ,listHotWalletRet,
+  listHotWalletLoading, createHotWalletRet,createHotWalletLoading  } from './actions';
+import { makeSelectContributionConfirm, makeSelectFinalTransaction ,makeSelectGetHotWallet,
+  makeSelectCreateHotWallet
+} from './selectors';
 import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 export function* getData() {
   try {
@@ -71,6 +74,49 @@ export function* reloadMe() {
   yield put(push('/dashboard'));
 }
 
+
+export function* listHotWalletSaga() {
+  try {
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+    const data = yield select(makeSelectGetHotWallet());
+
+    const apiData = yield call(api.user.getHotWallet, headers);
+    if(apiData) {
+      yield put(listHotWalletRet(apiData));
+      yield put(listHotWalletLoading(apiData));
+    }
+  }
+  catch (err) {
+    console.log('error in load profile', err);
+      yield put(codeErrorAction());
+  }
+}
+
+
+export function* createHotWalletSaga() {
+  try {
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+    const data = yield select(makeSelectCreateHotWallet());
+
+    const apiData = yield call(api.user.createHotWallet, headers,data);
+    if(apiData) {
+      yield put(createHotWalletRet(apiData));
+      yield put(createHotWalletLoading(apiData));
+    }
+  }
+  catch (err) {
+    console.log('error in load profile', err);
+      yield put(codeErrorAction());
+  }
+}
+
+
 export default function* defaultSaga() {
   // See example in containers/HomePage/saga.js
 
@@ -78,5 +124,8 @@ export default function* defaultSaga() {
     takeLatest(CONFIRM_PAYMENT, contribute),
     takeLatest(RELOAD_PAGE, reloadMe),
     takeLatest(SEND_PAYMENT, finalPayment),
+    takeLatest(LIST_HOT_WALLET, listHotWalletSaga),
+    takeLatest(CREATE_HOT_WALLET, createHotWalletSaga)
+
   ];
 }

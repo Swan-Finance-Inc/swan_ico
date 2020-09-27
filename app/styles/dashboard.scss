@@ -2562,6 +2562,8 @@ font-size: 25px;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	font: normal normal bold 19px Lato;
+	letter-spacing: 0px;
 }
 
 
@@ -2733,6 +2735,17 @@ font-size: 25px;
 	top: 107px;
 	position: relative;
 	left: 60px;
+  }
+
+  .transaction-time{
+	font: normal normal bold 19px Lato;
+	letter-spacing: 0px;
+	color: #2D6DCD;
+  }
+
+
+  .confirm-transaction-button{
+	  border-radius: 4px;
   }
 
 

@@ -13,7 +13,7 @@ class KycAlert extends React.PureComponent {
   render() {
 
     if(this.props.showAlert){
-        if(this.props.kycStatus === 'PENDING'){
+        if(this.props.kycStatus === 'PENDING' || this.props.kycStatus === "incomplete"  ){
             return(
                 <div className="alert alert-danger">
                     <span><Link to="/dashboard/kyc">Click here</Link> to complete your KYC.</span>

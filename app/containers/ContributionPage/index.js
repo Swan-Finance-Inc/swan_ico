@@ -13,10 +13,14 @@ import { compose } from 'redux';
 import { toast, ToastContainer } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectContributionPage, {makeSelectTransactionId, makeSelectContributionCurrency, makeSelectContributionData, makeSelectContributionSuccess, makeSelectLoading } from './selectors';
+import makeSelectContributionPage, {makeSelectTransactionId, makeSelectContributionCurrency, makeSelectContributionData, makeSelectContributionSuccess, makeSelectLoading ,
+makeSelectGetHotWalletLoading, makeSelectGetHotWalletRet,makeSelectCreateHotWalletRet,
+makeSelectCreateHotWalletLoading
+} from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { selectAction, getData, confirmPayment, reload,finalizePayment } from './actions';
+import { selectAction, getData, confirmPayment, reload,finalizePayment,listHotWallet,
+  createHotWallet ,clearContribution } from './actions';
 import { ContributionConfirm } from '../ContributionConfirm';
 import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
@@ -67,7 +71,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       body:{},
       isBonusOrDiscount:'',
       discount:'',
-      loading: true
+      loading: true,
+      hotWalletList : [],
+      iswalletCreating:false
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -95,6 +101,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
   componentDidMount() {
     this.props.getData();
+    this.props.listHotWallet()
     console.log("Getting data");
 
   }
@@ -129,6 +136,33 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
       // this.notifyDeposit(nextProps.successPayment);
     }
+    if(nextProps.getHotWalletRet){
+      if(nextProps.getHotWalletRet.success){
+        this.setState({
+          hotWalletList : nextProps.getHotWalletRet.data
+        })
+      }
+      else{
+        toast.error(nextProps.getHotWalletRet.message) 
+      }
+      nextProps.clearContribution()
+    }
+
+    if(nextProps.createHotWalletRet){
+      if(nextProps.createHotWalletRet.success){
+        this.setState({
+          currentReceivingWalletAddress : nextProps.createHotWalletRet.walletAddress,
+          iswalletCreating : false
+        })
+        toast.info(nextProps.createHotWalletRet.message) 
+      }
+      else{
+        toast.error(nextProps.createHotWalletRet.message) 
+      }
+      nextProps.clearContribution()
+    }
+
+
    //  if(nextProps.userInfo.kycDone)
    // {
    //   this.setState({
@@ -221,7 +255,6 @@ gobackDollar=(e)=>{
           this.setState({
             body
           })
-
       }
 
     }else {
@@ -436,9 +469,6 @@ gobackDollar=(e)=>{
                     tokensWithBonus: currencyQuantity.value * this.state.tokensPerBitcoin + currencyQuantity.value * this.state.tokensPerBitcoin * 0.01 * this.state.bonus
                   });
                 }
-
-
-
         }else if(add == ''){
          // console.log('Empty');
            if(this.state.isBonusOrDiscount==='staticDiscount'){
@@ -678,15 +708,70 @@ gobackDollar=(e)=>{
     this.props.toggleInfo()
   }
 
+
+  checkWallet = () => {
+    let amount =  document.getElementById('amt').value;
+    if(!amount){
+        toast.error("Please enter the amount");
+        return ''
+    }
+
+    if(this.state.hotWalletList.length > 0 ){
+      let hasEthWalletCreated =  this.state.hotWalletList.find(wallet => wallet.ticker !== "BTC" )
+      if(hasEthWalletCreated){ // if btc wallet has not created yet
+        toast.info("Please wait while your btc wallet is being created")
+        this.setState({
+          iswalletCreating : true
+        },
+          () => {
+            this.props.createHotWallet({
+              wallet_type : 'BTC'
+            })
+          }
+        )
+      }
+      else{
+        if(this.state.ethAddress){
+          this.setState({
+            confirmContri : true
+          })
+        }
+      }
+    }
+    else{
+      toast.info("Please wait while your wallet is being created")
+      this.setState({
+        iswalletCreating : true
+      },
+        () => {
+          console.log(this.state)
+          this.props.createHotWallet({
+            wallet_type : 'BTC'
+          })
+        }
+      )
+    }
+  }
+
   // End of container functions
   render() {
-    console.log(this.props," props in contribution page")
-    console.log(this.state," state in contribution page")
+    // console.log(this.props," props in contribution page")
+     console.log(this.state," state in contribution page")
     const { loading } = this.props
     // this.setState({
     //   loading : this.props
     // });
     console.log(loading," loading in ");
+
+    if(this.state.iswalletCreating){
+      return <LoadingSpinner />
+    }
+
+
+
+
+
+
     // if (this.props.userInfo.userInfo.kycStatus != 'ACCEPTED'){
     //   return (
     //     <div id="content" className="ui-content ui-content-aside-overlay">
@@ -745,6 +830,9 @@ gobackDollar=(e)=>{
       finalPayment={this.confirm}
       usdEurContributionConfirm={this.state.usdEurContributionConfirm}
       successData ={this.props.successData}
+      tokensPerBitcoin={this.state.tokensPerBitcoin}
+      currentReceivingWalletAddress={this.state.currentReceivingWalletAddress}
+
       />
       </div>
       );
@@ -843,13 +931,17 @@ gobackDollar=(e)=>{
                       <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left form-one-style" required   />
                     </div> :  this.state.curr == 'Bitcoin' ?
                     <div>
-                    <div className="form-group">
-                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
-                    <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter Bitcoin Wallet Address' />
-                  </div>
+                   {
+                  //   <div className="form-group">
+                  //   <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
+                  //   <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter Bitcoin Wallet Address' />
+                  // </div>
+                  }
                   <div className="form-group">
-                    <label htmlFor="acceptingAddress" className="form-label main-color--blue">ETH address for Receiving Centralex Tokens</label>
-                    <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.tokenReceiveAddress} type="text" className="form-input form-control text-left form-one-style" disabled required placeholder='Your Kyc is Not Done'/>
+                    <label htmlFor="acceptingAddress" className="form-label main-color--blue">{(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'}{' '}
+                     address for Receiving Centralex Tokens</label>
+                    <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.currentReceivingWalletAddress ? this.state.currentReceivingWalletAddress :this.state.btcAddress
+                    } type="text" className="form-input form-control text-left form-one-style"  required />
                     </div></div> : <div></div>
                           }
                   </div>
@@ -861,7 +953,7 @@ gobackDollar=(e)=>{
                 <div>
                      <div className="form-group align-left-label">
                   <label htmlFor="amt" className="form-label main-color--blue">How much {this.state.curr} you would like to invest?</label>
-                  <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control form-one-style " required/>
+                  <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control form-one-style " required />
                 </div>
 
                 {/* <div className="form-group">
@@ -887,7 +979,8 @@ gobackDollar=(e)=>{
               {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
               {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
               {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
-              <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} >Continue</button>
+              <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
+              onClick={() => this.checkWallet()} >Continue</button>
               </div>
               </div>
             </div>
@@ -1043,7 +1136,11 @@ const mapStateToProps = createStructuredSelector({
   global: makeGlobalParent(),
   transactionId: makeSelectTransactionId(),
   userInfo: makeSelectDashBoardWelcomePage(),
-  loading:makeSelectLoading()
+  loading:makeSelectLoading(),
+  getHotWalletRet:makeSelectGetHotWalletRet(),
+  getHotWalletLoading:makeSelectGetHotWalletLoading(),
+  createHotWalletRet:makeSelectCreateHotWalletRet(),
+  createHotWalletLoading:makeSelectCreateHotWalletLoading()
 
 });
 
@@ -1054,7 +1151,10 @@ function mapDispatchToProps(dispatch) {
     getData: () => (dispatch(getData())),
     confirmPayment: (data) => (dispatch(confirmPayment(data))),
     reload: () => (dispatch(reload())),
-    finalizePayment: (data) => (dispatch(finalizePayment(data)))
+    finalizePayment: (data) => (dispatch(finalizePayment(data))),
+    listHotWallet : data => dispatch(listHotWallet(data)),
+    createHotWallet : data => dispatch(createHotWallet(data)),
+    clearContribution : _ => dispatch(clearContribution())
   };
 }
 
@@ -1068,3 +1168,5 @@ export default compose(
   withSaga,
   withConnect,
 )(ContributionPage);
+
+

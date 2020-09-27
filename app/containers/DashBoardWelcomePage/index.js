@@ -30,8 +30,10 @@ import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
-import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq, loadNews, loadAnnouncements, toggleInfoActive, getToggleInfoActive } from './actions';
-import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData, makeSelectNewsData, makeSelectAnnouncementsData, makeSelectToggleInfoActive }from './selectors';
+import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq, loadNews, loadAnnouncements, toggleInfoActive, getToggleInfoActive,getCrowdsaleData } from './actions';
+import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData, makeSelectNewsData, makeSelectAnnouncementsData, makeSelectToggleInfoActive,
+makeSelectGetCrowdsaleDataRet, makeSelectGetCrowdsaleDataLoading
+}from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
 import { resetSuccess } from '../KycPage/actions';
@@ -93,7 +95,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       announcementsData: [],
       isBlocked:false,
       rejectMsg: null,
-      infoFlag: false
+      infoFlag: false,
+      crowdsaleStateData:{}
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -124,6 +127,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.props.loadFaq();
     this.props.loadNews();
     this.props.loadAnnouncements();
+    this.props.getCrowdsaleData()
     console.log(this.props);
   }
 
@@ -356,24 +360,24 @@ export class DashBoardWelcomePage extends React.PureComponent {
     });
   }
   toggleContActive() {
-            this.setState({
-              dash: '',
-              sec: '',
-              kyc: '',
-              cont: 'active',
-              tran: '',
-              support: '',
-              ticket: '',
-              faq: '',
-              news: '',
-              announcements: '',
-              profile: '',
-              resetPass: '',
-              notification:'',
-              upload_docs:'',
-              myReferal:'',
-              buy:''
-            });
+  this.setState({
+    dash: '',
+    sec: '',
+    kyc: '',
+    cont: 'active',
+    tran: '',
+    support: '',
+    ticket: '',
+    faq: '',
+    news: '',
+    announcements: '',
+    profile: '',
+    resetPass: '',
+    notification:'',
+    upload_docs:'',
+    myReferal:'',
+    buy:''
+  });
   }
   toggleTranActive() {
     this.setState({
@@ -659,6 +663,14 @@ export class DashBoardWelcomePage extends React.PureComponent {
       }
       )
     }
+
+    if(nextProps.dashboardwelcomepage.userInfo){
+      this.setState({
+        //...this.state,
+        kycStatus : nextProps.dashboardwelcomepage.userInfo.kycStatus
+      }
+      )
+    }
     
     if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
       console.log('kycDetails : ', nextProps.dashboardwelcomepage.userInfo.kycDetails);
@@ -723,6 +735,15 @@ export class DashBoardWelcomePage extends React.PureComponent {
       })
       console.log(" inside will Recieve props announcementsData",nextProps)
     }
+
+    if(nextProps.crowdsaleDataRet){
+      this.setState({
+          crowdsaleStateData:nextProps.crowdsaleDataRet.data
+      })
+      console.log(" inside will Recieve props announcementsData",nextProps)
+    }
+
+
   }
   closeAlert(){
     console.log('SHow alert');
@@ -863,7 +884,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
                   <Balance      toggleContActive={this.toggleContActive}  compact={this.compactNav}   togglemyReferal ={this.togglemyReferal}   toggleTranActive={this.toggleTranActive}  userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo} 
-                  referralCode={this.state.referralCode}
+                  referralCode={this.state.referralCode} crowdsaleStateData={this.state.crowdsaleStateData}
                   />
                  {
                  // <Refer  code={this.props.dashboardwelcomepage.userInfo} icoFlag={true} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
@@ -978,7 +999,9 @@ const mapStateToProps = createStructuredSelector({
   faqData:makeSelectFaqData(),
   newsData: makeSelectNewsData(),
   announcementsData: makeSelectAnnouncementsData(),
-  toggleInfoActiveData: makeSelectToggleInfoActive()
+  toggleInfoActiveData: makeSelectToggleInfoActive(),
+  crowdsaleDataRet : makeSelectGetCrowdsaleDataRet(),
+  crowdsaleDataLoading:makeSelectGetCrowdsaleDataLoading()
 });
 
 function mapDispatchToProps(dispatch) {
@@ -993,7 +1016,8 @@ function mapDispatchToProps(dispatch) {
     loadNews:()=>dispatch(loadNews()),
     loadAnnouncements:()=>dispatch(loadAnnouncements()),
     toggleInfoActiveAction:(data)=>dispatch(toggleInfoActive(data)),
-    getToggleInfoActiveAction:()=>dispatch(getToggleInfoActive())
+    getToggleInfoActiveAction:()=>dispatch(getToggleInfoActive()),
+    getCrowdsaleData : data => dispatch(getCrowdsaleData(data))
 
   };
 }

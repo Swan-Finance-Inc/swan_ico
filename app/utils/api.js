@@ -127,6 +127,15 @@ export default {
       .then((res) => res.data).catch((err) => err.response.data),
     getMessages: (headers, ticketId) =>
     axios.get(`${BaseUrl}ticket/messages/${ticketId}`, headers)
-      .then((res) => res.data).catch((err) => err.response.data)
+      .then((res) => res.data).catch((err) => err.response.data),
+    getCrowdsaleData: (headers) =>
+    axios.get(`${BaseUrl}user/fetchCrowdsaleState`, headers)
+      .then((res) => res.data).catch((err) => err.response.data),
+    getHotWallet: (headers,data) =>
+    axios.get(`${BaseUrl}wallet/list_wallets`, headers)
+      .then((res) => res.data).catch((err) => err.response.data), 
+    createHotWallet: (headers,data) =>
+    axios.post(`${BaseUrl}wallet/create_wallet`, data ,headers)
+      .then((res) => res.data).catch((err) => err.response.data),                   
     },
 };

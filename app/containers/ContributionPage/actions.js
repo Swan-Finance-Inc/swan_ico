@@ -18,6 +18,13 @@ import {
   RELOAD_PAGE,
   SEND_PAYMENT,
   SUCCESS_SEND_PAYMENT,
+  LIST_HOT_WALLET,
+  LIST_HOT_WALLET_RET,
+  LIST_HOT_WALLET_LOADING,
+  CREATE_HOT_WALLET,
+  CREATE_HOT_WALLET_RET,
+  CREATE_HOT_WALLET_LOADING,
+  CLEAR_CONTRIBUTION
 } from './constants';
 
 export function defaultAction() {
@@ -98,3 +105,51 @@ export function successFinalizePayment(data) {
     data,
   };
 }
+
+export function listHotWallet(data){
+  return {
+    type: LIST_HOT_WALLET,
+    data
+  }
+}
+
+export function listHotWalletRet(data){
+  return {
+    type: LIST_HOT_WALLET_RET,
+    data
+  }
+}
+export function listHotWalletLoading(data){
+  return {
+    type: LIST_HOT_WALLET_LOADING,
+    data
+  }
+}
+
+export function createHotWallet(data){
+  return {
+    type: CREATE_HOT_WALLET,
+    data
+  }
+}
+
+export function createHotWalletRet(data){
+  return {
+    type: CREATE_HOT_WALLET_RET,
+    data
+  }
+}
+export function createHotWalletLoading(data){
+  return {
+    type: CREATE_HOT_WALLET_LOADING,
+    data
+  }
+}
+
+export function clearContribution(data){
+  return {
+    type: CLEAR_CONTRIBUTION
+  }
+}
+
+

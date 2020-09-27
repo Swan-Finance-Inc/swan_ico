@@ -19,3 +19,12 @@ export const RELOAD_PAGE = 'app/ContributionPage/RELOAD_PAGE';
 //Sending payment without hash
 export const SEND_PAYMENT = 'app/ContributionPage/SEND_PAYMENT';
 export const SUCCESS_SEND_PAYMENT = 'app/ContributionPage/SUCCESS_SEND_PAYMENT';
+
+export const LIST_HOT_WALLET = 'app/DashBoardWelcomePage/LIST_HOT_WALLET';
+export const LIST_HOT_WALLET_RET = 'app/DashBoardWelcomePage/LIST_HOT_WALLET_RET';
+export const LIST_HOT_WALLET_LOADING = 'app/DashBoardWelcomePage/LIST_HOT_WALLET_LOADING';
+
+export const CREATE_HOT_WALLET = 'app/DashBoardWelcomePage/CREATE_HOT_WALLET';
+export const CREATE_HOT_WALLET_RET = 'app/DashBoardWelcomePage/CREATE_HOT_WALLET_RET';
+export const CREATE_HOT_WALLET_LOADING = 'app/DashBoardWelcomePage/CREATE_HOT_WALLET_LOADING';
+export const CLEAR_CONTRIBUTION = 'app/DashBoardWelcomePage/CLEAR_CONTRIBUTION';

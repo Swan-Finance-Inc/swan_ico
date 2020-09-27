@@ -24,3 +24,8 @@ export const TOGGLE_INFO_ACTIVE = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE';
 export const TOGGLE_INFO_ACTIVE_SUCCESS = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE_SUCCESS';
 export const TOGGLE_INFO_ACTIVE_GET = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE_GET';
 export const TOGGLE_INFO_ACTIVE_GET_SUCCESS = 'app/DashBoardWelcomePage/TOGGLE_INFO_ACTIVE_GET_SUCCESS';
+
+export const GET_CROWDSALE_DATA = 'app/DashBoardWelcomePage/GET_CROWDSALE_DATA';
+export const GET_CROWDSALE_DATA_RET = 'app/DashBoardWelcomePage/GET_CROWDSALE_DATA_RET';
+export const GET_CROWDSALE_DATA_LOADING = 'app/DashBoardWelcomePage/GET_CROWDSALE_DATA_LOADING';
+

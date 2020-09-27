@@ -14,6 +14,13 @@ import {
   CONFIRM_PAYMENT,
   SUCCESS_PAYMENT,
   FAILURE_PAYMENT, REMOVE_PAYMENT_FAILURE, REMOVE_PAYMENT_SUCCESS, SEND_PAYMENT, SUCCESS_SEND_PAYMENT,
+  LIST_HOT_WALLET,
+  LIST_HOT_WALLET_RET,
+  LIST_HOT_WALLET_LOADING,
+  CREATE_HOT_WALLET,
+  CREATE_HOT_WALLET_RET,
+  CREATE_HOT_WALLET_LOADING,
+  CLEAR_CONTRIBUTION
 } from './constants';
 
 const initialState = fromJS({
@@ -53,6 +60,13 @@ const initialState = fromJS({
     transactionId: false,
     transactionHash: false,
   },
+  listHotWallet:false,
+  listHotWalletRet:false,
+  listHotWalletLoading:false,
+
+  createHotWallet:false,
+  createHotWalletRet:false,
+  createHotWalletLoading:false,
 
 });
 
@@ -131,6 +145,33 @@ function contributionPageReducer(state = initialState, action) {
     case SUCCESS_SEND_PAYMENT:
       return state
         .set('paymentSentSuccess', action.data);
+
+        case LIST_HOT_WALLET:
+          return state
+            .set('listHotWallet', action.data)
+            .set('listHotWalletLoading',true)
+        case LIST_HOT_WALLET_RET:
+          return state  
+          .set('listHotWalletRet', action.data)
+          .set('listHotWalletLoading',false)
+        case LIST_HOT_WALLET_LOADING:
+          return state
+          .set('listHotWalletLoading',false)
+          case CREATE_HOT_WALLET:
+            return state
+              .set('createHotWallet', action.data)
+              .set('createHotWalletLoading',true)
+          case CREATE_HOT_WALLET_RET:
+            return state  
+            .set('createHotWalletRet', action.data)
+            .set('createHotWalletLoading',false)
+          case CREATE_HOT_WALLET_LOADING:
+            return state
+            .set('createHotWalletLoading',false)
+          case CLEAR_CONTRIBUTION:
+            return state
+            .set('createHotWalletRet',false)
+            .set('listHotWalletRet',false)
     default:
       return state;
   }

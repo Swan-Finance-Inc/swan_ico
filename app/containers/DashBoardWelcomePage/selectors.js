@@ -56,6 +56,22 @@ const makeSelectToggleInfoActive = () => createSelector(
   (substate) => substate.get('toggleInfoActive')
 )
 
+const makeSelectGetCrowdsaleData = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('getCrowdsaleData')
+)
+
+const makeSelectGetCrowdsaleDataRet = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('getCrowdsaleDataRet')
+)
+
+const makeSelectGetCrowdsaleDataLoading = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('getCrowdsaleDataLoading')
+)
+
+
 export default makeSelectDashBoardWelcomePage;
 export {
   selectDashBoardWelcomePageDomain,
@@ -65,5 +81,8 @@ export {
   makeSelectFaqData,
   makeSelectNewsData,
   makeSelectAnnouncementsData,
-  makeSelectToggleInfoActive
+  makeSelectToggleInfoActive,
+  makeSelectGetCrowdsaleData,
+  makeSelectGetCrowdsaleDataRet,
+  makeSelectGetCrowdsaleDataLoading
 };

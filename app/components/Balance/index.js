@@ -37,7 +37,8 @@ class Balance extends React.PureComponent {
     this.state = {
       infoShow: false,
       show : false,
-      referalUrl : ''
+      referalUrl : '',
+      balanceType : 'USD'
     };
   }
 
@@ -81,8 +82,12 @@ class Balance extends React.PureComponent {
     console.log(e);
     message.success('Click on Yes');
   }
+
+  componentWillUnmount(){}
   
   render() {
+    console.log(this.state,'state in balance')
+    console.log(this.props,'props in balance')
 
     const menu = (
       <Menu>
@@ -136,65 +141,25 @@ class Balance extends React.PureComponent {
                         Your Balance
                       </h5>
                       <div className="balance">
-                        <span style={{ marginTop: '7px' }}>
-                          USD
-                         { 
-                        //  <span
-                        //   style={{ marginLeft : '10px' , cursor : 'pointer' , position : 'relative' }}
-                        //   onClick={() => this.setState({...this.state, show : !this.state.show })}
-                        //   overlay={this.menu}
-                          
-                        // >
-                        //   <svg
-                        //     className="icon_mid_hover"
-                        //     xmlns="http://www.w3.org/2000/svg"
-                        //     width="10"
-                        //     height="10"
-                        //     viewBox="0 0 22 22"
-                        //     data-toggle="dropdown"
-                        //   >
-                        //     <circle
-                        //       id="Ellipse_54"
-                        //       className="svg_pointer"
-                        //       data-name="Ellipse 54"
-                        //       cx="10.5"
-                        //       cy="10.5"
-                        //       r="10.5"
-                        //       fill="#31708f"
-                        //     />
-                        //     <g
-                        //       className={""
-                        //         // item._id === notificationExpand
-                        //         //   ? 'rotate-angledown-180 '
-                        //         //   : ''
-                        //       }
-                        //     >
-                        //       <path
-                        //         id="Icon_awesome-angle-up"
-                        //         data-name="Icon awesome-angle-up"
-                        //         d="M6.849,18.462,12.113,13.2a.925.925,0,0,0,0-1.312l-.875-.875a.925.925,0,0,0-1.312,0L6.191,14.738,2.46,11.007a.925.925,0,0,0-1.312,0l-.879.875a.925.925,0,0,0,0,1.312l5.264,5.264A.926.926,0,0,0,6.849,18.462Z"
-                        //         transform="translate(4 -3)"
-                        //         fill="#fff"
-                        //       />
-                        //     </g>
-                        //   </svg>
-                        // </span>
-                        }
-                    </span>
-                      <span >
+                      <span style={{ marginTop : '7px' }}>
                       <Nav eventKey={0}>
                     <DropdownButton 
                       eventKey={3} 
                       className="account-balance-dropdown"
+                      title={this.state.balanceType}
                     >
-                      <MenuItem eventKey='1'> CEX token</MenuItem>
+                      <MenuItem eventKey='1' value="cexToken" onClick={() => 
+                        this.setState({balanceType : this.state.balanceType === "USD" ? "CSX Token" : 'USD' }) } >
+                          {this.state.balanceType === "USD" ? "CSX Token" : "USD"   }
+                          </MenuItem>
                      </DropdownButton>
-                  </Nav>  
+                    </Nav>  
                       </span>     
                         <span style={{ fontSize: "32px", marginLeft: "12px" }}>
-                          $ {this.props.userInfo.tokens.total} ~{" "}
-                          {this.props.userInfo.totalBalanceUsd}{" "}
-                        </span>{" "}
+                        {this.state.balanceType === "USD" ? this.props.userInfo.totalBalanceUsd :
+                        this.props.userInfo.tokens.total
+                        }
+                        </span>
                       </div>
                     </div>
                   </div>
@@ -412,7 +377,7 @@ class Balance extends React.PureComponent {
                 <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>
                   <h4 className="exchange-heading">Referral Tokens Earned</h4>
                     <p style={{ marginBottom: "0px", color: "#2D6DCD" ,fontSize: "32px", marginLeft : '10px' }}>
-                    $ 728
+                    {this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo }
                     </p>
                   <div className="col-sm-12" style={{ position : 'relative' }}>
                       <div className="Pending-referrals">
@@ -518,12 +483,13 @@ class Balance extends React.PureComponent {
                   <img src={Ellipse} className="ellipse-two" />
                   <div className="text-center">
                     <p className="secondary-text">Total Coins</p>
-                    <p className="total-coins">16,000,000</p>
+                    <p className="total-coins">{(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0 }</p>
                   </div>
                   <div className="coins-left-container">
                   <div className="progress">
                   <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : '60%' }}>
-                    60%
+                <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
+                  ((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   : '0'  } % </span>
                   </div>
                   </div>
                   </div>

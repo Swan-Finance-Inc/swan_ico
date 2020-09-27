@@ -303,7 +303,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="row form-group">
           <div className="col-sm-3">
-              <label htmlFor="gender"><span style={{fontWeight:'500'}}>GENDER</span></label>
+              <label htmlFor="gender"><span style={{fontWeight:'500'}}>Gender</span></label>
           </div>
           <div className="col-sm-9">
               <select id="gender" name="gender" className="form-control" onChange={this.handleInput} value={this.state.gender}>
