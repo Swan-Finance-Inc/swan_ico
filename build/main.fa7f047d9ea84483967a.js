@@ -3163,7 +3163,8 @@ var BaseUrl = void 0;
 var pathLocation = window.location.host;
 if (!!pathLocation) {
   console.log('pathLocation : ', pathLocation);
-  BaseUrl = 'http://54.151.217.0:7070/api/v1/';
+  // BaseUrl = 'http://54.151.217.0:7070/api/v1/'
+  BaseUrl = ' https://tokensale-backend.centralex.com/api/v1/';
 
   // //   if(pathLocation === 'play.quillhash.com') {
   // //     console.log('PROD');

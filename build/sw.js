@@ -30,7 +30,7 @@ var __wpo = {
       "/icon-72x72.png",
       "/icon-96x96.png",
       "/manifest.json",
-      "/main.916a34ff789c892f2ad7.js",
+      "/main.fa7f047d9ea84483967a.js",
       "/"
     ],
     "additional": [
@@ -120,12 +120,12 @@ var __wpo = {
     "bfafe75340a5fd0377a684323dc4be12cc5ad611": "/23.3e61c002e07bd7afe909.chunk.js",
     "cdd7df295edc99fe6b18e023bf9ccce47c33f5db": "/24.8a52bf7801fceb677e53.chunk.js",
     "ed7abd0d691a90b9a2a7823e9050197647974eed": "/25.95c56c6849ef372ec76f.chunk.js",
-    "eec5d452cea33e49501d152ab7f001354cd64c67": "/main.916a34ff789c892f2ad7.js",
-    "abc33573fb5db7c5e4f6c08cade4aadfb7447c29": "/"
+    "ff5a404a5ead4c6266cc11359480c3b39d0033d5": "/main.fa7f047d9ea84483967a.js",
+    "e3dbf9b460570407f1f1addc97dfed1bc1a4e7ed": "/"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "9/29/2020, 5:10:49 PM",
+  "version": "9/29/2020, 5:21:04 PM",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": false
