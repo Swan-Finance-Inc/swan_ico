@@ -462,7 +462,11 @@ handleInput2=(e)=>{
           <div className="row">
             <div className="col-sm-12">
               <div className="alert alert-success text-center">
-                <h5>Your KYC is done.</h5>
+                <h5 className="alert-success">Your KYC is done.</h5>
+                <p>Now you can start investing by clicking on 
+                 <Link to="/dashboard/contribution" ><span className="alert-success" onClick={() => this.props.toggleContActive() }
+                 > Invest Now </span> </Link> 
+                  button.</p>
               </div>
             </div>
           </div>

@@ -20,7 +20,7 @@ import { toast, ToastContainer } from 'react-toastify';
 // import { Link, Redirect } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { Redirect } from 'react-router'
-import { resendMail } from './actions';
+import { resendMail ,removeMail} from './actions';
 import { makeSelectResendError, makeSelectResendSuccess } from './selectors';
 import ReCAPTCHA from 'react-google-recaptcha';
 import logo from '../../images/CWHLogo.png';
@@ -70,6 +70,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
       }else{
         toast.error(nextProps.resendSuccess.message)
       }
+      nextProps.removeMail()
     }
   }
 
@@ -175,7 +176,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
-    resendMail : (data) => dispatch(resendMail(data))
+    resendMail : (data) => dispatch(resendMail(data)),
+    removeMail : _ => dispatch(removeMail())
   };
 }
 

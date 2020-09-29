@@ -47,14 +47,14 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
   componentDidMount() {
     // console.log("inside component login")
     // console.log(this.props.global);
+    console.log(this.props.global, 'hi global');
     this.props.removeInnerReset();
 
-    // if (this.props.global.passwordReset) {
-    //   this.notifySuccess('Your password has been changed successfully');
-    // }
+    if (this.props.global.passwordReset) {
+      this.notifySuccess('Your password has been changed successfully');
+    }
     // console.log(this.props.global.passwordResetSuccess)
 
-     console.log(this.props.global, 'hi global');
 
     if (this.props.error) {
       this.notify(this.props.errorMessage);

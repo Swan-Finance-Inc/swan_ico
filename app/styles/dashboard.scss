@@ -55,9 +55,11 @@
 .referalPageLink:hover{
 color:blue
 }
-.infoSpan {
+.ui-aside .nav > li > a > span.infoSpan {
 	display:block;
-	margin-left: 11%;
+	margin-left: -5%;
+	color: black;
+	padding-left: 0px !important;
 }
 .buttonInputContainer{
 		margin-left: 10px;
@@ -370,7 +372,7 @@ transition: all .301s;
 	position:fixed;
 	left:0;
 	top:70px;
-	width: 130px;
+	max-width: 130px;
  -webkit-transition: all .299s;
  transition: all .299s;
 	z-index:9;
@@ -873,7 +875,8 @@ ol.rule-list li {
 	position: absolute;
 	right: 0;
 	bottom: 0;
-	left: 0;
+	//left: 0;
+	left: -76px;
 	margin-top: 10px!important;
 	margin-left: 0px;
 	padding-left: 10px;
@@ -1921,6 +1924,7 @@ font-size: 25px;
 
   #fixed-height{
 	  height: auto !important;
+	  min-height: 352px;
   }
 
   .balance-card{
@@ -1929,7 +1933,7 @@ font-size: 25px;
 	  box-shadow: 0px 3px 6px #2D6DCD6E;
 	  border-radius: 5px;
 	  opacity: 1;
-	  height: 290px;
+	  height: 320px;
   }
 
 //my-referral-code copy-clipboard-input
@@ -1979,6 +1983,10 @@ font-size: 25px;
 	  display: flex;
 	  flex-direction: column;
 	  padding-left: 34px !important;
+  }
+
+  .exchange-trading-bottom div { 
+	  display: inline-block;
   }
 
   .refresh{
@@ -2449,6 +2457,7 @@ font-size: 25px;
 	color: black !important;
 	margin-top: 2px;
 	margin-right: 5px;
+	font-size: 14px;
 }
 
 .ui-nav-text.active{
@@ -2520,7 +2529,7 @@ font-size: 25px;
 }
 
 .ui-aside .nav > li > a > span{
-	padding-left: 9px !important;
+	padding-left: 6px !important;
 }
 
 .ui-aside .nav li.active{

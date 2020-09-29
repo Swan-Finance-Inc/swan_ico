@@ -294,8 +294,10 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
 
             <li className={`${this.state.supportAct} nav-item`} ><a href="mailto:support@centralex.io">
                <Support color={this.state.supportAct ? '#fff' : '#2d6dcd'}/>
-               <span className={`ui-nav-text ${this.state.supportAct}`}>Support</span>
-               <span className='infoSpan'>support@centralex.io</span> 
+               <span className={`ui-nav-text ${this.state.supportAct}`} style={{ color : 'black' }}>Support</span>
+               {
+                 //<span className='infoSpan'>support@centralex.io</span> 
+               }
                </a>
             </li>
   

@@ -29,6 +29,9 @@ class index extends React.Component {
             xAxes: [{
                 gridLines : {
                     display : false
+                },
+                ticks: {
+                    display: false
                 }
             }]
         },

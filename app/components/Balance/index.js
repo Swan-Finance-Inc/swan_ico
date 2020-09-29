@@ -38,7 +38,8 @@ class Balance extends React.PureComponent {
       infoShow: false,
       show : false,
       referalUrl : '',
-      balanceType : 'USD'
+      balanceType : 'USD',
+      centralexCoin : ''
     };
   }
 
@@ -84,6 +85,11 @@ class Balance extends React.PureComponent {
   }
 
   componentWillUnmount(){}
+
+
+  handleExchangeCentralexCoin = (e) =>{
+    console.log(e.target.value)
+  }
   
   render() {
     console.log(this.state,'state in balance')
@@ -255,7 +261,7 @@ class Balance extends React.PureComponent {
               >
                 <div
                   className="balance-card-inner-wrappper"
-                  style={{ height: "276px" }}
+                  style={{ height: "321px" }}
                 >
                   <h4 className="exchange-heading">Exchange Rates</h4>
                   <div className="exchange-trading-container">
@@ -267,6 +273,9 @@ class Balance extends React.PureComponent {
                       <div style={{ width : '60%'  , display : 'inline-block'}} >
                       <TextFieldInput
                         type="text"
+                        name="centralexCoin"
+                        value={this.state.centralexCoin}
+                        onChange={(e) => this.handleExchangeCentralexCoin(e)}
                       />
                       {
                       //   <input
@@ -291,29 +300,64 @@ class Balance extends React.PureComponent {
                       Exchange rates refreshed in every 15 mins.
                     </span>
                     <div className="exchange-trading-bottom">
-                      <div className="btn-group mt-30">
-                        <button
-                          type="button"
-                          className="btn btn-default exchange-button"
-                          style={{ width: "181px", textAlign: "left" ,padding: '8px',
-                          border: "1px solid #979BA2" }}
-                        >
-                          <span><img style={{ width: '26px' }} src={ethLogo} />
-                          <span style={{ marginLeft : '3px' ,color : '#7F7F7F'  }} >Eth</span>
-                           </span>
-                        </button>
-                        <button
-                          type="button"
-                          className="btn btn-default dropdown-toggle"
-                          aria-haspopup="true"
-                          aria-expanded="false"
-                          style={{ padding: '11px',
-                          border: "1px solid #979BA2" }}
-                          //onClick={handleMenu}
-                        >
-                          <span className="caret"></span>
-                        </button>
+                      <div style={{ display : 'flex' }}>
+                    <p style={{ marginBottom: "0px", color: "#2D6DCD" , display : 'inline-block',marginTop : '10px' }}>
+                        BTC
+                      </p>
+                      <p style={{ marginBottom: "0px", color: "#2D6DCD",display : 'inline-block' , marginLeft : '165px',marginTop : '10px' }}>
+                        ETH
+                      </p>
                       </div>
+                      <div style={{ width : '45%' , marginTop : '-10px' }}>
+                      <TextFieldInput
+                      type="text"
+                      value="0"
+                      inputStyle={{
+                        fontSize: "15px",
+                        fontWeight: "900",
+                        color: "#748e94",
+                      }}
+                      auth={true}
+                      />
+                      </div>
+                      <div style={{ width : '45%' , marginLeft : '5%', marginTop : '-10px'  }}>
+                      <TextFieldInput
+                      type="text"
+                      value="0"
+                      inputStyle={{
+                        fontSize: "15px",
+                        fontWeight: "900",
+                        color: "#748e94",
+                      }}
+                      auth={true}
+                      />
+                      </div>
+                      
+                     { 
+                    //  <div className="btn-group mt-30">
+                    //     <button
+                    //       type="button"
+                    //       className="btn btn-default exchange-button"
+                    //       style={{ width: "181px", textAlign: "left" ,padding: '8px',
+                    //       border: "1px solid #979BA2" }}
+                    //     >
+                    //       <span><img style={{ width: '26px' }} src={ethLogo} />
+                    //       <span style={{ marginLeft : '3px' ,color : '#7F7F7F'  }} >Eth</span>
+                    //        </span>
+                    //     </button>
+                    //     <button
+                    //       type="button"
+                    //       className="btn btn-default dropdown-toggle"
+                    //       aria-haspopup="true"
+                    //       aria-expanded="false"
+                    //       style={{ padding: '11px',
+                    //       border: "1px solid #979BA2" }}
+                    //       //onClick={handleMenu}
+                    //     >
+                    //       <span className="caret"></span>
+                    //     </button>
+                    //   </div>
+                      }
                     </div>
                   </div>
                 </div>
@@ -344,16 +388,16 @@ class Balance extends React.PureComponent {
                     Tokens Earned by Referral (This week)
                   </h5>
                   <div className="token-earned-by-monthly-yearly">
-                  <Dropdown overlay={menu}>
+                  <Dropdown overlay={menu} disabled>
                   <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    Monthly <DownOutlined />
+                    Daily <DownOutlined />
                   </a>
                 </Dropdown>
-                <Dropdown overlay={menu}>
+                <Dropdown overlay={menu} disabled>
                   <a className="ant-dropdown-link"
                   style={{marginLeft : '50px' }}
                   onClick={e => e.preventDefault()}>
-                    Yearly <DownOutlined />
+                    Weekly <DownOutlined />
                   </a>
                 </Dropdown>
                 </div>
@@ -377,7 +421,10 @@ class Balance extends React.PureComponent {
                 <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>
                   <h4 className="exchange-heading">Referral Tokens Earned</h4>
                     <p style={{ marginBottom: "0px", color: "#2D6DCD" ,fontSize: "32px", marginLeft : '10px' }}>
-                    {this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo }
+                    {
+                    //this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo 
+                    }
+                    100
                     </p>
                   <div className="col-sm-12" style={{ position : 'relative' }}>
                       <div className="Pending-referrals">
@@ -399,7 +446,7 @@ class Balance extends React.PureComponent {
           </div>
           <div className="row">
             <div className="col-lg-7"style={{ marginBottom : '30px' , marginTop : '12px' }} >
-                 <div className="balance-card" style={{ height : '347px' }}>
+                 <div className="balance-card" style={{ height : '352px' }}>
                     <div className="balance-card-inner-wrappper">
                       <div style={{ display : 'flex' , justifyContent : 'space-between' }}>
                         <div>

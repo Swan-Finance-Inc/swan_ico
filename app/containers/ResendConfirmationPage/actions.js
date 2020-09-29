@@ -8,7 +8,8 @@ import {
   DEFAULT_ACTION,
   RESEND_MAIL,
   RESEND_MAIL_ERROR,
-  RESEND_MAIL_SUCCESS
+  RESEND_MAIL_SUCCESS,
+  REMOVE_MAIL
 } from './constants';
 
 export function defaultAction() {
@@ -34,6 +35,14 @@ export function resendError(data) {
 export function resendSuccess(data) {
   return {
     type: RESEND_MAIL_SUCCESS,
+    data
+  }
+}
+
+
+export function removeMail(data) {
+  return {
+    type: REMOVE_MAIL,
     data
   }
 }

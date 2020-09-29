@@ -862,7 +862,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                     kycMsg: null
                   })
               } */}
-              <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} msg={this.state.kycMsg } rejectMsg={this.state.rejectMsg} closeAlert={this.closeAlert} showAlert={this.state.showAlert}/>
+              <KycAlert kycStatus={this.props.dashboardwelcomepage.userInfo.kycStatus} msg={this.state.kycMsg } rejectMsg={this.state.rejectMsg} closeAlert={this.closeAlert} showAlert={this.state.showAlert} toggleContActive={this.toggleContActive} />
               {
               //   <div className="row">
               //   <div className="col-sm-6">
@@ -918,7 +918,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   (this.props.location.pathname == '/dashboard/ticket') ?
                   <TicketPage flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/kyc') ?
-                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo} location={this.props.location} /> :
+                    <KycPage dashActive={this.toggleDashActive} kycActive={this.toggleKycActive} userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo} location={this.props.location} toggleContActive={this.toggleContActive} /> :
                   (this.props.location.pathname == '/dashboard/transactionHistory') ?
                     <TransactionHistory message={this.props.global.depositSuccess} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/> :
                   (this.props.location.pathname == '/dashboard/notification') ?

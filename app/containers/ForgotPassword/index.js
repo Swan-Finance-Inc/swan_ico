@@ -47,12 +47,12 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
       this.props.error(false);
     }
   }
-  shouldComponentUpdate(nextProps) {
-    if (nextProps) {
-      return true;
-    }
-    return false;
-  }
+  // shouldComponentUpdate(nextProps) {
+  //   if (nextProps) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
 
   onChange = (e) => {
     this.setState({
