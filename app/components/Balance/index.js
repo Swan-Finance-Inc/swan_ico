@@ -39,7 +39,10 @@ class Balance extends React.PureComponent {
       show : false,
       referalUrl : '',
       balanceType : 'USD',
-      centralexCoin : ''
+      centralexCoinQuantity : '',
+      CenInBtc : "",
+      CenInEth : "",
+      crowdsaleDetails : {}
     };
   }
 
@@ -67,6 +70,14 @@ class Balance extends React.PureComponent {
     // }
   };
 
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps)
+    this.setState({
+      ...this.state,
+      crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails
+    })
+  }
+
   handleInfoModal = () => {
     this.setState({
       infoShow: !this.state.infoShow,
@@ -86,10 +97,49 @@ class Balance extends React.PureComponent {
 
   componentWillUnmount(){}
 
-
-  handleExchangeCentralexCoin = (e) =>{
-    console.log(e.target.value)
+  handleCentralexCoinExchange = (e) => {
+   
+      this.setState({
+        ...this.state,
+        [e.target.name] : e.target.value
+      },
+        () => {
+          this.exchangeCenInBtc();
+          this.exchangeCenInEth();
+        }
+      )
   }
+
+
+  exchangeCenInBtc = () => {
+    const { crowdsaleDetails } = this.state;
+    let centralexCoinQuantity = this.state.centralexCoinQuantity;
+
+    let cenInDollar =  (Number(centralexCoinQuantity) * crowdsaleDetails.tokenUsd)
+    let CenInBtc = cenInDollar ? (cenInDollar  / (crowdsaleDetails.btcUsd)) :''
+    
+    this.setState({
+      CenInBtc
+    })
+
+  }
+
+  exchangeCenInEth = () => {
+    const { crowdsaleDetails } = this.state;
+    let centralexCoinQuantity = this.state.centralexCoinQuantity;
+
+    let cenInDollar =  (Number(centralexCoinQuantity) * crowdsaleDetails.tokenUsd)
+    let CenInEth = cenInDollar ? (cenInDollar / ( crowdsaleDetails.ethUsd)) : ''
+  
+    this.setState({
+      CenInEth
+    })
+  }
+
+
+
+
+
   
   render() {
     console.log(this.state,'state in balance')
@@ -272,10 +322,17 @@ class Balance extends React.PureComponent {
                       <div>
                       <div style={{ width : '60%'  , display : 'inline-block'}} >
                       <TextFieldInput
-                        type="text"
-                        name="centralexCoin"
-                        value={this.state.centralexCoin}
-                        onChange={(e) => this.handleExchangeCentralexCoin(e)}
+                        type="number"
+                        name="centralexCoinQuantity"
+                        className="centralexCoinQuantity"
+                        value={this.state.centralexCoinQuantity}
+                        handleChange={e => this.handleCentralexCoinExchange(e) }
+                        inputStyle={{
+                          fontSize: "15px",
+                          fontWeight: "900",
+                          color: "#748e94",
+                        }}
+                        auth={true}
                       />
                       {
                       //   <input
@@ -300,38 +357,43 @@ class Balance extends React.PureComponent {
                       Exchange rates refreshed in every 15 mins.
                     </span>
                     <div className="exchange-trading-bottom">
-                      <div style={{ display : 'flex' }}>
-                    <p style={{ marginBottom: "0px", color: "#2D6DCD" , display : 'inline-block',marginTop : '10px' }}>
+                      <div style={{ marginTop : '-10px' }}>
+                      <TextFieldInput
+                      type="number"
+                      value={this.state.CenInBtc}
+                      inputStyle={{
+                        fontSize: "15px",
+                        fontWeight: "900",
+                        color: "#748e94",
+                        width : 'inherit'
+                      }}
+                      auth={true}
+                      disabled
+                      />
+                      </div>
+                      <div style={{ display : 'inline-block' }}>
+                        <p style={{ marginBottom: "0px", color: "#2D6DCD" , display : 'inline-block',marginTop : '10px',marginLeft : '10px' }}>
                         BTC
                       </p>
-                      <p style={{ marginBottom: "0px", color: "#2D6DCD",display : 'inline-block' , marginLeft : '165px',marginTop : '10px' }}>
-                        ETH
-                      </p>
                       </div>
-                      <div style={{ width : '45%' , marginTop : '-10px' }}>
-                      <TextFieldInput
-                      type="text"
-                      value="0"
-                      inputStyle={{
-                        fontSize: "15px",
-                        fontWeight: "900",
-                        color: "#748e94",
-                      }}
-                      auth={true}
-                      />
-                      </div>
-                      <div style={{ width : '45%' , marginLeft : '5%', marginTop : '-10px'  }}>
-                      <TextFieldInput
-                      type="text"
-                      value="0"
-                      inputStyle={{
-                        fontSize: "15px",
-                        fontWeight: "900",
-                        color: "#748e94",
-                      }}
-                      auth={true}
-                      />
-                      </div>
+                      <div style={{  marginTop : '-10px'  }}>
+                        <TextFieldInput
+                        type="number"
+                        value={this.state.CenInEth}
+                        inputStyle={{
+                          fontSize: "15px",
+                          fontWeight: "900",
+                          color: "#748e94",
+                        }}
+                        auth={true}
+                        disabled
+                        />
+                        </div>
+                        <div style={{ display : 'inline-block' }}>
+                          <p style={{ marginBottom: "0px", color: "#2D6DCD" , marginLeft : '10px'}}>
+                            ETH
+                          </p>
+                          </div>
                       
                      { 
                     //  <div className="btn-group mt-30">

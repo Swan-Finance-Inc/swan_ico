@@ -721,6 +721,7 @@ gobackDollar=(e)=>{
       if(hasEthWalletCreated){ // if btc wallet has not created yet
         toast.info("Please wait while your btc wallet is being created")
         this.setState({
+          confirmContri : true,
           iswalletCreating : true
         },
           () => {
@@ -729,22 +730,15 @@ gobackDollar=(e)=>{
             })
           }
         )
-      }
-      else{
-        if(this.state.ethAddress){
-          this.setState({
-            confirmContri : true
-          })
         }
-      }
     }
     else{
       toast.info("Please wait while your wallet is being created")
       this.setState({
+        confirmContri : true,
         iswalletCreating : true
       },
         () => {
-          console.log(this.state)
           this.props.createHotWallet({
             wallet_type : 'BTC'
           })
@@ -938,10 +932,9 @@ gobackDollar=(e)=>{
                   // </div>
                   }
                   <div className="form-group">
-                    <label htmlFor="acceptingAddress" className="form-label main-color--blue">{(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'}{' '}
+                    <label htmlFor="acceptingAddress" className="form-label main-color--blue">{(this.state.curr == 'Ethereum') ? 'BTC' : 'ETH'}{' '}
                      address for Receiving Centralex Tokens</label>
-                    <input id="tokenReceive" onChange={this.validatorWallet} value={this.state.currentReceivingWalletAddress ? this.state.currentReceivingWalletAddress :this.state.btcAddress
-                    } type="text" className="form-input form-control text-left form-one-style"  required />
+                    <input id="tokenReceive" onChange={this.validatorWallet}  type="text" className="form-input form-control text-left form-one-style"  required />
                     </div></div> : <div></div>
                           }
                   </div>

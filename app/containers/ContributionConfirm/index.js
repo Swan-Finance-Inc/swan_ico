@@ -45,12 +45,10 @@ export class ContributionConfirm extends React.PureComponent {
   // Begin life cycle methods
   componentDidMount() {
     if (this.props.currency == "Bitcoin") {
-      let currentReceivingWalletAddress = this.props.currentReceivingWalletAddress  ? this.props.currentReceivingWalletAddress : this.props.btcAddress;
-
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
       const query = queryString.parse(href);
-      query.chl = this.props.currentReceivingWalletAddress  ? this.props.currentReceivingWalletAddress : this.props.btcAddress;
+      query.chl = this.props.currentReceivingWalletAddress;
       const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
         query
       )}`;
@@ -498,15 +496,17 @@ export class ContributionConfirm extends React.PureComponent {
                             rate at that time of payment.
                             </p>
                             </div>
-                            <div className="btn-row confirm-transaction-button">
-                               <button
-                                className="form-button btn btn-primary"
-                                type="submit"
-                                style={{ marginBottom : '20px' }}
-                              >
-                                Confirm
-                              </button>
-                            </div>
+                            {
+                            //   <div className="btn-row confirm-transaction-button">
+                            //    <button
+                            //     className="form-button btn btn-primary"
+                            //     type="submit"
+                            //     style={{ marginBottom : '20px' }}
+                            //   >
+                            //     Confirm
+                            //   </button>
+                            // </div>
+                            }
 
                           { 
                           //  <div className="blockchain-tx">
