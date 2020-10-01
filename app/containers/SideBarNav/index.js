@@ -262,7 +262,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             <hr></hr>
 
             <span className='configuration black'>INFO</span>
-            <li className={`${this.state.buy} nav-item`} ><Link to="https://s3-ap-southeast-1.amazonaws.com/centralex-bucket/White_Paperv-4.pdf" role="button"  target='_blank'>
+            <li className={`${this.state.buy} nav-item`} ><Link to="https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf" role="button"  target='_blank'>
                <WhitePaper color={this.state.secAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.buy}`}>White Paper</span> 
                </Link>
@@ -274,7 +274,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                </Link>
             </li>
 
-            <li className={`${this.state.PrivacyPolicy} nav-item`} ><Link to="https://www.centralex.io/privacy.html" role="button"  target='_blank'>
+            <li className={`${this.state.PrivacyPolicy} nav-item`} ><Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf" role="button"  target='_blank'>
                <PrivatePolicy color={this.state.PrivacyPolicy ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.PrivacyPolicy}`}>Privacy Policy</span> 
                </Link>
@@ -393,9 +393,9 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
         //       </ul>
         //     </li>
         //     */}
-        //     <li className={this.state.buy}><a href='https://s3-ap-southeast-1.amazonaws.com/centralex-bucket/White_Paperv-4.pdf' target='_blank'><span className="has-icon"><i className="fa fa-file-code-o"></i></span><span>White Paper</span></a>
+        //     <li className={this.state.buy}><a href='https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf' target='_blank'><span className="has-icon"><i className="fa fa-file-code-o"></i></span><span>White Paper</span></a>
         //       <ul className="nav nav-sub sidebar-niceScroll">
-        //         <li className="nav-sub-header"><a href='https://s3-ap-southeast-1.amazonaws.com/centralex-bucket/White_Paperv-4.pdf' target='_blank'><span>White Paper</span></a></li>
+        //         <li className="nav-sub-header"><a href='https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf' target='_blank'><span>White Paper</span></a></li>
         //       </ul>
         //     </li>
         //     <li className={this.state.faqAct}><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}><span className="has-icon"><i className="fa fa-question-circle"></i></span><span>FAQ</span></Link>
@@ -403,9 +403,9 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
         //         <li className="nav-sub-header"><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}><span>FAQ</span></Link></li>
         //       </ul>
         //     </li>
-        //     <li className={this.state.PrivacyPolicy}><a href='https://www.centralex.io/privacy.html' target='_blank'><span className="has-icon"><i className="fa fa-user-secret"></i></span><span>Privacy Policy</span></a>
+        //     <li className={this.state.PrivacyPolicy}><a href='https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf' target='_blank'><span className="has-icon"><i className="fa fa-user-secret"></i></span><span>Privacy Policy</span></a>
         //       <ul className="nav nav-sub sidebar-niceScroll">
-        //         <li className="nav-sub-header"><a href='https://www.centralex.io/privacy.html' target='_blank'><span>Privacy Policy</span></a></li>
+        //         <li className="nav-sub-header"><a href='https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf' target='_blank'><span>Privacy Policy</span></a></li>
         //       </ul>
         //     </li>
         //       <li className={this.state.newsAct}><Link to="/dashboard/news" role="button" onClick={this.toggleNewsActive} ><span className="has-icon"><i className="fa fa-newspaper-o"></i></span><span>News</span></Link>

@@ -826,6 +826,23 @@ a.toggle-btn {
 .token-container > form > ul li {
 	max-width: 160px;
 }
+
+.normal-button {
+	width: 207px;
+	height: 43px;
+	background: #2D6DCD 0% 0% no-repeat padding-box;
+	border-radius: 4px;
+	opacity: 1;
+	outline: none;
+	border: none;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 200;
+	&:focus{
+		outline: none;
+	}
+}
+
 .form-button {
 	// background-color:#101922!important;
 	//background-color: #03152D;
@@ -1873,7 +1890,7 @@ font-size: 25px;
 
 .btn-primary:hover {
 	color: #fff;
-	background:#519580!important;
+	background:#2c608b!important;
 }
 
 

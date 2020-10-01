@@ -18,17 +18,18 @@ if(!!pathLocation) {
 // //     // Production baseUrl
 // //     BaseUrl = 'https://play-apis.quillhash.com/api/v1/'
 // //   } else 
-// if(pathLocation === '54.151.217.0:6036'){
-//     console.log("TEST")
-//     //Testing baseUrl
-//     BaseUrl = 'http://54.151.217.0:7070/api/v1/'
-//   } 
-//   else{
-//     console.log('TEST using prod http-API');
-//     //For localhost or other baseURL
-//     //BaseUrl = 'http://localhost:3000/api/v1/';
-//      BaseUrl = 'http://localhost:7070/api/v1/'
-//   }
+if(pathLocation === '127.0.0.1:6036'){
+    console.log("TEST")
+    //Testing baseUrl
+    BaseUrl = 'http://localhost:7070/api/v1/'
+    //BaseUrl = 'http://54.151.217.0:7070/api/v1/'
+  } 
+  else{
+    console.log('TEST using prod http-API');
+    //For localhost or other baseURL
+    //BaseUrl = 'http://localhost:3000/api/v1/';
+    BaseUrl = ' https://tokensale-backend.centralex.com/api/v1/'
+  }
  }
 
 

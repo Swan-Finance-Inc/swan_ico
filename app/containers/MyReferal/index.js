@@ -25,7 +25,7 @@ import Info from "../../components/Info";
 import mdCopy from "../../images/md-copy.svg";
 import reducer from "./reducer";
 import saga from "./saga";
-import Referral from "../../images/Referral.png";
+import Referral from "../../images/referral_astro.png";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import moment from "moment";
@@ -115,7 +115,7 @@ export class MyReferal extends React.PureComponent {
     this.props.getReferalData();
     this.setState({
       ...this.state,
-      referralUrl:`https://tokensale.centralex.io/signup/refer/${this.props.referralCode}`
+      referralUrl:`https://tokensale.centralex.com/signup/refer/${this.props.referralCode}`
     })
   }
   componentWillReceiveProps(nextProps) {

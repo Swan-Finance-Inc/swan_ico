@@ -362,6 +362,8 @@ export class ContributionConfirm extends React.PureComponent {
                         {this.props.currency} wallet{" "}
                  </p>
                  <p className="main-color--blue">
+                 Pay: {this.props.currencyQty} </p>
+                 <p className="main-color--blue">
                  You will receive {(this.props.tokens).toFixed(2)}  Centralex coins </p>
                   <div className="qr-code" style={{ margin : '1em 0' }}>
                       {this.props.currency === "Bitcoin" ? (

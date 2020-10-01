@@ -89,7 +89,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   }
 
   componentWillMount(){
-    const { email, fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, signature, loginAlert, ethAddress, notifyMe } = this.props.userInfo.userInfo;
+    const { email, fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, loginAlert, ethAddress, notifyMe } = this.props.userInfo.userInfo;
     this.state = {
       email,
       fullName,
@@ -104,7 +104,6 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       reddit,
       linkedIn,
       translation,
-      signature,
       loginAlert,
       ethAddress,
       valid: true,
@@ -115,7 +114,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   }
   componentDidMount(){
     this.setState({
-      referalUrl:`https://tokensale.centralex.io/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
+      referalUrl:`https://tokensale.centralex.com/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
      profilePicUrl:this.props.userInfo.userInfo.imageProfile
     })
   }
@@ -125,8 +124,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     if(!isValidNumber(this.state.phone)){
       toast.error('Phone number is invalid');
     }else if(this.state.valid){
-      const { fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, signature, loginAlert, ethAddress,notifyMe } = this.state;
-      this.props.updateDetail({fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, signature, loginAlert,ethAddress, notifyMe});
+      const { fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, loginAlert, ethAddress,notifyMe } = this.state;
+      this.props.updateDetail({fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, loginAlert,ethAddress, notifyMe});
     }else{
       toast.error('Please enter valid ETH Wallet address');
     }
@@ -412,14 +411,14 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           </div>
         </div>
         {/* Signature link */}
-        <div className="row form-group">
+        {/* <div className="row form-group">
           <div className="col-sm-3">
             <label htmlFor="signature"><span style={{fontWeight:'500', fontSize:'16px'}}>Signature Username</span></label>
           </div>
           <div className="col-sm-9">
             <input className="form-control" type="text" name="signature" id="signature" placeholder="Signature Username" onChange={this.handleInput} value={this.state.signature}/>
           </div>
-        </div>
+        </div> */}
 
 
         </div>
@@ -474,7 +473,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
               }
                 <div className="row">
                   <div className="col-sm-12 text-center">
-                    <button type="submit" className="form-button updateSubmit">Update </button>
+                    <button type="submit" className="normal-button">Update </button>
                   </div>
                 </div>
               </form>

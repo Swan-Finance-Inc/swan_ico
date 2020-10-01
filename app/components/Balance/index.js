@@ -9,7 +9,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Info from "../Info";
 import Bar from "../../components/Bar";
-import Referral from "../../images/Referral.png"
+import Referral from "../../images/referral_main_page.png"
 import mdCopy from "../../images/md-copy.svg";
 import Planet from "../../images/Planet.svg";
 import Satelite from "../../images/Satelite.svg";
@@ -30,6 +30,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import littleStar from "../../images/littleStar.svg";
 import bigStar from "../../images/bigStar.svg";
 import Ellipse from '../../images/Ellipse.svg';
+import { Left } from "react-bootstrap/lib/Media";
 
 class Balance extends React.PureComponent {
   constructor(props) {
@@ -48,7 +49,7 @@ class Balance extends React.PureComponent {
 
   componentDidMount(){
     this.setState({
-      referalUrl:`https://tokensale.centralex.io/signup/refer/${this.props.referralCode}`
+      referalUrl:`https://tokensale.centralex.com/signup/refer/${this.props.referralCode}`
     })
   }
 
@@ -145,6 +146,18 @@ class Balance extends React.PureComponent {
     console.log(this.state,'state in balance')
     console.log(this.props,'props in balance')
 
+    let btc = this.props.userInfo.tokens.tokensByMode.btc,
+        eth = this.props.userInfo.tokens.tokensByMode.eth,
+        usdt = this.props.userInfo.tokens.tokensByMode.usdt,
+        stellar = this.props.userInfo.tokens.tokensByMode.stellar,
+        total = this.props.userInfo.tokens.total,
+        others = (total-btc-eth-usdt-stellar),
+        btcPercent = Math.round(btc*100/total),
+        ethPercent = Math.round(eth*100/total),
+        usdtPercent = Math.round(usdt*100/total),
+        stellarPercent = Math.round(stellar*100/total),
+        othersPercent = Math.round(others*100/total);
+
     const menu = (
       <Menu>
         <Menu.Item>
@@ -227,16 +240,17 @@ class Balance extends React.PureComponent {
                           font: "normal normal bold 20px/24px Lato",
                           letterSpacing: "0.43px",
                           color: "#B0C9F0",
-                          opacity: 1,
+                          //opacity: 1,
                           marginTop: 0,
-                          fontSize: "16px",
+                          fontSize: "20px",
+                          marginLeft: "27px"
                         }}
                       >
-                        USD/BTC
+                        BTC
                       </h5>
                       <div className="account-balance-statistics">
                       <div style={{ width : '90px' }}>
-                      <CircularProgressbarWithChildren value={74}
+                      <CircularProgressbarWithChildren value={btcPercent}
                         styles={{ 
                           path : {
                             stroke : '#2D6DCD'
@@ -249,14 +263,14 @@ class Balance extends React.PureComponent {
                             color : '#2D6DCD',
                             letterSpacing: '0px'
                           }}>
-                           74%  <strong><br /> BTC</strong>
+                           {btcPercent}%  <strong><br /> BTC</strong>
                         </div>
                       </CircularProgressbarWithChildren>
                       </div>
                       <div className="eth-other-balance-stats">
                       <div style={{ display : 'flex' }}>
                       <div style={{ width : '50px' }}>
-                      <CircularProgressbar value={23}
+                      <CircularProgressbar value={ethPercent}
                         styles={{ 
                           path : {
                             stroke : '#2D6DCD'
@@ -268,7 +282,7 @@ class Balance extends React.PureComponent {
                       <span
                       style={{marginLeft: '12px', width: 'max-content'}}
                       >
-                      <span className="main-color--blue ">23%</span>   
+                      <span className="main-color--blue ">{ethPercent}%</span>   
                         <br />
                         <span className="main-color--blue font-weight-bold ">Ethereum</span>
                         </span>
@@ -276,7 +290,7 @@ class Balance extends React.PureComponent {
                       </div>
                       <div style={{ display : 'flex' , marginTop : '10px' }}>
                       <div style={{ width : '50px' }}>
-                      <CircularProgressbar value={2}
+                      <CircularProgressbar value={othersPercent}
                         styles={{ 
                           path : {
                             stroke : '#2D6DCD'
@@ -288,7 +302,7 @@ class Balance extends React.PureComponent {
                       <span
                       style={{marginLeft: '12px', width: 'max-content'}}
                       >
-                      <span className="main-color--blue ">2%</span>   
+                      <span className="main-color--blue ">{othersPercent}%</span>   
                         <br />
                         <span className="main-color--blue font-weight-bold ">Others</span>
                         </span>

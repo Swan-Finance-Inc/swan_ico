@@ -26,6 +26,7 @@ import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
+import Web3 from 'web3';
 import Info from "../../components/Info";
 export class ContributionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
@@ -73,7 +74,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       discount:'',
       loading: true,
       hotWalletList : [],
-      iswalletCreating:false
+      iswalletCreating:false,
+      metamaskAccount: '',
+      metamaskConnected :false
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -103,6 +106,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     this.props.getData();
     this.props.listHotWallet()
     console.log("Getting data");
+    if(this.state.curr === 'Ethereum'){
+      this.metamaskCall();
+    }
 
   }
 
@@ -428,6 +434,65 @@ gobackDollar=(e)=>{
     document.getElementById('tokens').value = this.state.tokens;
   }
 
+  metamaskCall=async () => {
+    if (window.ethereum !== undefined) {
+      const web3 = new Web3(window.web3.currentProvider);
+        window.ethereum.enable();
+      try {
+        let netId = await web3.eth.net.getId();
+        console.log("network",netId)
+        let contractNetId = 1;
+
+        if(contractNetId !== netId) {
+          toast.error(`Please switch metamask network to MAINNET`);
+          // this.setState({
+          //   errorContract: true,
+          //   errorMessage: `Please switch metamask network to ${this.props.contractData.contractNetwork}`
+          // })
+        } else {
+        //   let metamaskAccounts = '';
+        //   window.ethereum.on('accountsChanged', function () {
+        //     web3.eth.getAccounts(function(error, accounts) {
+        //       if(error){
+        //         console.log("inside ethereum function", error);
+        //       }else{
+        //         console.log("ye kya hai",accounts[0]);
+        //         metamaskAccounts = accounts;}
+                
+        //     });
+        // });
+          const accounts = await web3.eth.getAccounts();
+          console.log('accounts :::::::: ', accounts);
+          //console.log('accounts :::::::: ', metamaskAccounts);
+
+          if(accounts.length === 0) {
+            toast.error('Please unlock metamask or Add the site URL in Connections');
+            // this.setState({
+            //   errorContract: true,
+            //   errorMessage: 'Please unlock metamask. Add the site URL in Settings>Connections'
+            // })
+          
+          } else {
+            this.setState({
+              metamaskAccount : accounts,
+              metamaskConnected : true
+            })
+          }
+        }
+        
+      }catch(err) {
+       console.log("Metamask Integration error", err);
+      }
+    } else {
+      toast.error('Please install metamask or disable privacy feature');
+      // this.setState({
+      //   errorContract: true,
+      //   errorMessage: 'Please install metamask or disable privacy feature'
+      // })
+    }
+  }
+
+
   CurrencyChange(e) {
     /* console.log(e.target.value); */
     let currencyQuantity = document.getElementById('amt');
@@ -517,6 +582,7 @@ gobackDollar=(e)=>{
     } else  if(e.target.value === 'ETH') {
       let currencyQuantity = document.getElementById('amt');
       // let add = document.getElementById('fromAddress').value;
+      this.metamaskCall();
       this.setState({
         fromAddress: this.props.userInfo.userInfo.ethAddress,
         tokenReceiveAddress: false,
@@ -747,6 +813,22 @@ gobackDollar=(e)=>{
     }
   }
 
+  getMetamaskAddress = async() => {
+    const web3 = new Web3(window.web3.currentProvider);
+    const accounts = await web3.eth.getAccounts();
+    console.log('accounts :::::::: ', accounts);
+
+    if(accounts.length === 0) {
+      toast.error('Please unlock metamask or Add the site URL in Connections');
+    } else {
+      this.setState({
+        metamaskAccount : accounts,
+        metamaskConnected : true
+      })
+
+}
+  }
+
   // End of container functions
   render() {
     // console.log(this.props," props in contribution page")
@@ -760,8 +842,12 @@ gobackDollar=(e)=>{
     if(this.state.iswalletCreating){
       return <LoadingSpinner />
     }
+    console.log(".phir....................se............aaya.");
 
 
+    if(this.state.metamaskConnected){
+      this.getMetamaskAddress();
+  }
 
 
 
@@ -895,6 +981,8 @@ gobackDollar=(e)=>{
                       <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input form-one-style" required>
                         <option value="ETH">ETH</option>
                         <option value="BTC">BTC</option>
+                        
+                        
 
                       {
                           // <option value="USD">USD</option>
@@ -922,7 +1010,7 @@ gobackDollar=(e)=>{
                       this.state.curr == 'Ethereum' ?
                       <div className="form-group">
                       <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
-                      <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddressEth} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left form-one-style" required   />
+                      <input id="fromAddress" onChange={this.validator} type="text" value={this.state.metamaskAccount} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left form-one-style" required   />
                     </div> :  this.state.curr == 'Bitcoin' ?
                     <div>
                    {
@@ -972,7 +1060,7 @@ gobackDollar=(e)=>{
               {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
               {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
               {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
-              <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
+              <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
               onClick={() => this.checkWallet()} >Continue</button>
               </div>
               </div>
