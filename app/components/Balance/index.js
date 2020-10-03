@@ -481,40 +481,44 @@ class Balance extends React.PureComponent {
                 </div>
               </div>
             </div>
-            <div
-              className="col-lg-5 col-sm-12"
-              style={{marginTop: '13px' }}
-            >
-              <div
-                className="balance-card"
-                style={{
-                  borderTopRightRadius: 0,
-                  borderTopLeftRadius: 0,
-                  padding: "12px 0px 29px 15px",
-                  height: "348px",
-                }}
-              >
-                <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>
-                  <h4 className="exchange-heading">Referral Tokens Earned</h4>
-                    <p style={{ marginBottom: "0px", color: "#2D6DCD" ,fontSize: "32px", marginLeft : '10px' }}>
-                    {
-                    //this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo 
-                    }
-                    100
-                    </p>
-                  <div className="col-sm-12" style={{ position : 'relative' }}>
-                      <div className="Pending-referrals">
-                        <div id="circle">
-                          <span className="circle-text">3 <span className="Pending-referrals-count"> # of Pending Referrals</span></span>
-                        </div>
-                      </div>
+            <div className="col-lg-5" style={{ marginBottom : '30px' , marginTop : '12px' }}>
+              <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
+                <div className="balance-card-inner-wrappper">
+                  <h3 className="balance-card-inner-wrapper-heading">
+                    ICO Details
+                  </h3>
+                  <div className="ico-details-middle">
+                    <div>
+                    <img src={Planet} />
+                    </div>
+                    <div className="ico-details-circle">
+                      <span className="upto-2-percentage" >Up To <br/>
+                       <span style={{ fontSize : '32px' }} >2%</span>  
+                       <br /> Extra</span>
+                    </div>
+                    <div className="satalite-logo-container">
+                      <img src={littleStar} className="little-star"/>
+                    <img src={Satelite} />
+                    </div>
                   </div>
-                  <div className="col-sm-12" style={{ position : 'relative' }}>
-                      <div className="Confirmed-referrals">
-                        <div id="confirmed-circle">
-                          <span className="confirmed-circle-text">8<span className="Confirmed-referrals-count"># of Confirmed Referrals</span></span>
-                        </div>
-                      </div>
+                  <img src={littleStar}/>
+                  <img src={bigStar} style={{ float : 'right' }} />
+                  <img src={Ellipse} className="ellipse-one"/>
+                  <img src={Ellipse} className="ellipse-two" />
+                  <div className="text-center">
+                    <p className="secondary-text">Total Coins</p>
+                    <p className="total-coins">{(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0 }</p>
+                  </div>
+                  <div className="coins-left-container">
+                  <div className="progress">
+                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : '60%' }}>
+                <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
+                  ((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   : '0'  } % </span>
+                  </div>
+                  </div>
+                  </div>
+                  <div className="text-center mt-30">
+                  <button className="invest">Invest Now</button>
                   </div>
                 </div>
               </div>
@@ -580,44 +584,39 @@ class Balance extends React.PureComponent {
                    
                  </div>
             </div>
-            <div className="col-lg-5" style={{ marginBottom : '30px' , marginTop : '12px' }}>
-              <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
-                <div className="balance-card-inner-wrappper">
-                  <h3 className="balance-card-inner-wrapper-heading">
-                    ICO Details
-                  </h3>
-                  <div className="ico-details-middle">
-                    <div>
-                    <img src={Planet} />
-                    </div>
-                    <div className="ico-details-circle">
-                      <span className="upto-2-percentage" >Up To <br/>
-                       <span style={{ fontSize : '32px' }} >2%</span>  
-                       <br /> Extra</span>
-                    </div>
-                    <div className="satalite-logo-container">
-                      <img src={littleStar} className="little-star"/>
-                    <img src={Satelite} />
-                    </div>
+            <div
+              className="col-lg-5 col-sm-12"
+              style={{marginTop: '13px' }}
+            >
+              <div
+                className="balance-card"
+                style={{
+                  borderTopRightRadius: 0,
+                  borderTopLeftRadius: 0,
+                  padding: "12px 0px 29px 15px",
+                  height: "348px",
+                }}
+              >
+                <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>
+                  <h4 className="exchange-heading">Referral Tokens Earned</h4>
+                    <p style={{ marginBottom: "0px", color: "#2D6DCD" ,fontSize: "32px", marginLeft : '10px' }}>
+                    {
+                    this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo 
+                    }
+                    </p>
+                  <div className="col-sm-12" style={{ position : 'relative' }}>
+                      <div className="Pending-referrals">
+                        <div id="circle">
+                          <span className="circle-text">{this.props.userInfo.referral.pending} <span className="Pending-referrals-count"> # of Pending Referrals</span></span>
+                        </div>
+                      </div>
                   </div>
-                  <img src={littleStar}/>
-                  <img src={bigStar} style={{ float : 'right' }} />
-                  <img src={Ellipse} className="ellipse-one"/>
-                  <img src={Ellipse} className="ellipse-two" />
-                  <div className="text-center">
-                    <p className="secondary-text">Total Coins</p>
-                    <p className="total-coins">{(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0 }</p>
-                  </div>
-                  <div className="coins-left-container">
-                  <div className="progress">
-                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : '60%' }}>
-                <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
-                  ((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   : '0'  } % </span>
-                  </div>
-                  </div>
-                  </div>
-                  <div className="text-center mt-30">
-                  <button className="invest">Invest Now</button>
+                  <div className="col-sm-12" style={{ position : 'relative' }}>
+                      <div className="Confirmed-referrals">
+                        <div id="confirmed-circle">
+                          <span className="confirmed-circle-text">{this.props.userInfo.referral.success}<span className="Confirmed-referrals-count"># of Confirmed Referrals</span></span>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>

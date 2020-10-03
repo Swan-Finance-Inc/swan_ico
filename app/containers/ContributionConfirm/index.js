@@ -54,7 +54,7 @@ export class ContributionConfirm extends React.PureComponent {
       )}`;
       this.setState({
         url: uri,
-        currentReceivingWalletAddress
+        currentReceivingWalletAddress: this.props.currentReceivingWalletAddress
       });
     } else {
       const href =

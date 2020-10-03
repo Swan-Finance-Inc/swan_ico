@@ -25,7 +25,7 @@ import { ContributionConfirm } from '../ContributionConfirm';
 import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
-import LoadingSpinner from 'components/LoadingSpinner/Loadable';
+import {LoadingSpinner} from 'components/LoadingSpinner/Loadable';
 import Web3 from 'web3';
 import Info from "../../components/Info";
 export class ContributionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -105,7 +105,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   componentDidMount() {
     this.props.getData();
     this.props.listHotWallet()
-    console.log("Getting data");
+    console.log("Getting dataAa");
     if(this.state.curr === 'Ethereum'){
       this.metamaskCall();
     }
@@ -113,7 +113,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps.successData,"success data")
+    console.log(nextProps.successData,"success data in contributeepegE");
     const data = nextProps.successData;
     this.setState({
       eurToDollar: data.eurUsd,
@@ -132,32 +132,33 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       tokenPrice: data.tokenUsd,
       isBonusOrDiscount:data.isBonusOrDiscount,
       discount:data.discount,
-      loading: false
-    });
-    this.setState({
+      loading: false,
       fromAddressEth:nextProps.userInfo.userInfo.ethAddress
-    })
+    });
     if (nextProps.successPayment) {
       console.log(nextProps.successPayment);
 
       // this.notifyDeposit(nextProps.successPayment);
     }
-    if(nextProps.getHotWalletRet){
-      if(nextProps.getHotWalletRet.success){
+    if(nextProps.listHotWalletRet.count>0){
+      console.log("getHotWqalletREt", nextProps.listHotWalletRet);
+      if(nextProps.listHotWalletRet.success){
         this.setState({
-          hotWalletList : nextProps.getHotWalletRet.data
+          hotWalletList : nextProps.listHotWalletRet.data,
+          currentReceivingWalletAddress : nextProps.listHotWalletRet.data[0].address
         })
       }
       else{
-        toast.error(nextProps.getHotWalletRet.message) 
+        toast.error(nextProps.listHotWalletRet.message) 
       }
       nextProps.clearContribution()
     }
 
     if(nextProps.createHotWalletRet){
+      console.log("in createWWWallet dibba", nextProps.createHotWallet);
       if(nextProps.createHotWalletRet.success){
         this.setState({
-          currentReceivingWalletAddress : nextProps.createHotWalletRet.walletAddress,
+          currentReceivingWalletAddress : nextProps.createHotWalletRet.address,
           iswalletCreating : false
         })
         toast.info(nextProps.createHotWalletRet.message) 
@@ -776,15 +777,25 @@ gobackDollar=(e)=>{
 
 
   checkWallet = () => {
+
     let amount =  document.getElementById('amt').value;
     if(!amount){
         toast.error("Please enter the amount");
         return ''
     }
 
-    if(this.state.hotWalletList.length > 0 ){
-      let hasEthWalletCreated =  this.state.hotWalletList.find(wallet => wallet.ticker !== "BTC" )
-      if(hasEthWalletCreated){ // if btc wallet has not created yet
+
+    if( this.state.hotWalletList.length > 0 ){
+      let hasBtcWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "BTC")
+      console.log("WWWWWWWWWWWHHHHHHHHHHHHHHHHaaaaaaaaaaaaattttttttttttttSSSSSSSSSSS this: ",hasBtcWalletCreated);
+      if(hasBtcWalletCreated){ //btc wallet already present
+        toast.info("Please wait while your btc wallet is being fetched")
+        console.log("EEEEEEEEEEEEXXXXXXXXXXEEEEEEEEEEEECUTED AAAAAA");
+        this.setState({
+          confirmContri : true
+        })
+      } else { //btc wallet created
+        console.log("EEEEEEEEEEEXXXXXXXXXXXXEEEEEECCCCCCCCCCCCUUUUUUUUUUUUTEEEEEEEEEE BBBBB")
         toast.info("Please wait while your btc wallet is being created")
         this.setState({
           confirmContri : true,
@@ -796,9 +807,9 @@ gobackDollar=(e)=>{
             })
           }
         )
-        }
-    }
-    else{
+      }
+    }else{
+      console.log("EEEEEEEEXXXXXXXXXUUUUUUUECCCCCCCCCCUTED CCCCCCC")
       toast.info("Please wait while your wallet is being created")
       this.setState({
         confirmContri : true,
@@ -811,6 +822,36 @@ gobackDollar=(e)=>{
         }
       )
     }
+
+    // if(this.state.hotWalletList.length > 0 ){
+    //   let hasEthWalletCreated =  this.state.hotWalletList.find(wallet => wallet.ticker !== "BTC" )
+    //   if(hasEthWalletCreated){ // if btc wallet has not created yet
+    //     toast.info("Please wait while your btc wallet is being created")
+    //     this.setState({
+    //       confirmContri : true,
+    //       iswalletCreating : true
+    //     },
+    //       () => {
+    //         this.props.createHotWallet({
+    //           wallet_type : 'BTC'
+    //         })
+    //       }
+    //     )
+    //     }
+    // }
+    // else{
+    //   toast.info("Please wait while your wallet is being created")
+    //   this.setState({
+    //     confirmContri : true,
+    //     iswalletCreating : true
+    //   },
+    //     () => {
+    //       this.props.createHotWallet({
+    //         wallet_type : 'BTC'
+    //       })
+    //     }
+    //   )
+    // }
   }
 
   getMetamaskAddress = async() => {
@@ -818,16 +859,16 @@ gobackDollar=(e)=>{
     const accounts = await web3.eth.getAccounts();
     console.log('accounts :::::::: ', accounts);
 
-    if(accounts.length === 0) {
-      toast.error('Please unlock metamask or Add the site URL in Connections');
-    } else {
+    if(accounts.length !== 0) {
       this.setState({
         metamaskAccount : accounts,
         metamaskConnected : true
       })
 
+    }
+     
 }
-  }
+  
 
   // End of container functions
   render() {
@@ -839,9 +880,16 @@ gobackDollar=(e)=>{
     // });
     console.log(loading," loading in ");
 
-    if(this.state.iswalletCreating){
-      return <LoadingSpinner />
-    }
+//     if(this.state.iswalletCreating){
+//       return(
+//         <div id="content" className="ui-content ui-content-aside-overlay">
+
+//           <div className="ui-content-body">
+//             <div className="ui-container container-fluid">
+//             <LoadingSpinner />
+// </div></div></div> 
+//       );
+//     }
     console.log(".phir....................se............aaya.");
 
 
@@ -887,6 +935,26 @@ gobackDollar=(e)=>{
     //   )
     // }
     if (this.state.confirmContri||this.state.usdEurContributionConfirm){
+      console.log("min",this.state.minutes,
+        "sec",this.state.seconds,
+        "dollars",this.state.dollarQuantity,
+        "currency",this.state.curr,
+        "ethToDollar" ,this.state.ethToDollar,
+        "btcToDollar" ,this.state.btcToDollar,
+        "tokens",this.state.tokensWithBonus,
+        "currencyQty",this.state.currencyQuantity,
+
+        
+        "btcAddress",this.props.successData.btcAddress,
+        "ethAddress",this.props.successData.ethAddress,
+        "fromAddress",this.state.fromAddress,
+        "tokenReceive",this.state.tokenReceiveAddress,
+
+        
+        "usdEurContributionConfirm",this.state.usdEurContributionConfirm,
+        "successData" ,this.props.successData,
+        "tokensPerBitcoin",this.state.tokensPerBitcoin,
+        "currentReceivingWalletAddress",this.state.currentReceivingWalletAddress);
       return (
       <div>
       <Helmet>
@@ -945,6 +1013,7 @@ gobackDollar=(e)=>{
       </Helmet>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
+        {this.state.iswalletCreating? <LoadingSpinner />:
           <div className="contribution-card" style={{ marginBottom : '2em' }}>
             <div className="row">
               <div className="col-sm-12">
@@ -1060,11 +1129,13 @@ gobackDollar=(e)=>{
               {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
               {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
               {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
-              <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
+              <button className="form-button btn-primary" type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
               onClick={() => this.checkWallet()} >Continue</button>
               </div>
               </div>
             </div>
+            }
+            
         {
         //   <div className="panel panel-default">
         //   {/* <div className="panel-heading">Contribution</div> */}
@@ -1199,7 +1270,7 @@ gobackDollar=(e)=>{
    
         </div>
         </div>
-      </div>
+       </div>
     );
   }
 }
@@ -1218,7 +1289,7 @@ const mapStateToProps = createStructuredSelector({
   transactionId: makeSelectTransactionId(),
   userInfo: makeSelectDashBoardWelcomePage(),
   loading:makeSelectLoading(),
-  getHotWalletRet:makeSelectGetHotWalletRet(),
+  listHotWalletRet:makeSelectGetHotWalletRet(),
   getHotWalletLoading:makeSelectGetHotWalletLoading(),
   createHotWalletRet:makeSelectCreateHotWalletRet(),
   createHotWalletLoading:makeSelectCreateHotWalletLoading()
