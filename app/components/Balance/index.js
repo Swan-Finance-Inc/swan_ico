@@ -150,13 +150,26 @@ class Balance extends React.PureComponent {
         eth = this.props.userInfo.tokens.tokensByMode.eth,
         usdt = this.props.userInfo.tokens.tokensByMode.usdt,
         stellar = this.props.userInfo.tokens.tokensByMode.stellar,
-        total = this.props.userInfo.tokens.total,
-        others = (total-btc-eth-usdt-stellar),
-        btcPercent = Math.round(btc*100/total),
-        ethPercent = Math.round(eth*100/total),
-        usdtPercent = Math.round(usdt*100/total),
-        stellarPercent = Math.round(stellar*100/total),
-        othersPercent = Math.round(others*100/total);
+        total = this.props.userInfo.tokens.total;
+        console.log("777777777777777777777: ", total)
+        let others,btcPercent,ethPercent, usdtPercent,stellarPercent, othersPercent;
+        if(total=== 0){
+          others = (total-btc-eth-usdt-stellar),
+          btcPercent = 0,
+          ethPercent = 0,
+          usdtPercent = 0,
+          stellarPercent = 0,
+          othersPercent = 0;
+
+        } else {
+          others = (total-btc-eth-usdt-stellar),
+          btcPercent = Math.round(btc*100/total),
+          ethPercent = Math.round(eth*100/total),
+          usdtPercent = Math.round(usdt*100/total),
+          stellarPercent = Math.round(stellar*100/total),
+          othersPercent = Math.round(others*100/total);
+        }
+
 
     const menu = (
       <Menu>
@@ -513,7 +526,7 @@ class Balance extends React.PureComponent {
                   <div className="progress">
                   <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : '60%' }}>
                 <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
-                  ((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   : '0'  } % </span>
+                  Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   : '0'  } % </span>
                   </div>
                   </div>
                   </div>

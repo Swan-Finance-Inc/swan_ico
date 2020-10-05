@@ -27,6 +27,7 @@ import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
 import {LoadingSpinner} from 'components/LoadingSpinner/Loadable';
 import Web3 from 'web3';
+import { Modal } from 'react-bootstrap';
 import Info from "../../components/Info";
 export class ContributionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
@@ -76,7 +77,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       hotWalletList : [],
       iswalletCreating:false,
       metamaskAccount: '',
-      metamaskConnected :false
+      metamaskConnected :false,
+      open: false,
+      transactionData: ''
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -88,6 +91,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     this.amtInvested = this.amtInvested.bind(this);
     this.validator = this.validator.bind(this);
     this.validatorWallet = this.validatorWallet.bind(this);
+    this.checkWallet = this.checkWallet.bind(this);
   }
 
   // @aj
@@ -442,7 +446,7 @@ gobackDollar=(e)=>{
       try {
         let netId = await web3.eth.net.getId();
         console.log("network",netId)
-        let contractNetId = 1;
+        let contractNetId = 3;
 
         if(contractNetId !== netId) {
           toast.error(`Please switch metamask network to MAINNET`);
@@ -784,6 +788,44 @@ gobackDollar=(e)=>{
         return ''
     }
 
+    if (this.state.curr === "Ethereum"){
+      console.log("sthereum payment started");
+      let receiver = '0xd325765C388CB205a03556EAB331ffA80Acf5130';
+      let sender = '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E';
+      try{
+      let txnhash = web3.eth.sendTransaction({to:receiver,
+        from:sender, 
+       value:web3.toWei(amount, "ether")}
+        ,function (err, res){if(err){console.log("erororooror:: ", err); this.setState({transactionData:err,open:true})}else{console.log("ahahuahahuahuahu: :: :: ", res);this.setState({transactionData:res,open:true})}});
+        console.log("buabuhaubuahbuhbauhabhuabuahbauhbaubhua, ", txnhash);
+      }catch(error){
+        console.log("error in send transactaion", error);
+      }
+    } else
+    // if(this.state.curr === "Ethereum"){
+    //  const trxnHash = await web3.eth.getTransactionCount(this.state.metamaskAccount);
+    //  console.log("thts how we rollin' ", trxnHash);
+//  .then((b=console.log)=>{
+//     console.log(b)
+//     for(var i=0;i<b;i++){
+//             web3.eth.getBlock(b-i).then((Block)=>
+//             {
+
+//             a =[
+//                             Block.hash
+//                  ]
+//                      console.log(a);
+//                  var  iterator =a.values()
+//                  for (let elements of iterator) { 
+//              web3.eth.getTransactionFromBlock(elements).then(console.log)
+
+
+//                 } 
+//              });
+//          }
+//          });
+  //  }
+
 
     if( this.state.hotWalletList.length > 0 ){
       let hasBtcWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "BTC")
@@ -857,8 +899,14 @@ gobackDollar=(e)=>{
   getMetamaskAddress = async() => {
     const web3 = new Web3(window.web3.currentProvider);
     const accounts = await web3.eth.getAccounts();
-    console.log('accounts :::::::: ', accounts);
-
+    //console.log('accou: ', accounts);
+    // try{
+    // const trxnHash = await web3.eth.getTransactionCount(accounts[0]);
+    // console.log("thts how we rollin' ", trxnHash);
+    // }
+    // catch(err){
+    //   console.log("rollin mai error", err);
+    // }
     if(accounts.length !== 0) {
       this.setState({
         metamaskAccount : accounts,
@@ -866,19 +914,24 @@ gobackDollar=(e)=>{
       })
 
     }
+
      
 }
-  
+hide=(e)=>{
+  this.setState({
+    open:false
+  })
+}
 
   // End of container functions
   render() {
     // console.log(this.props," props in contribution page")
-     console.log(this.state," state in contribution page")
+     //console.log(this.state," state in contribution page")
     const { loading } = this.props
     // this.setState({
     //   loading : this.props
     // });
-    console.log(loading," loading in ");
+    //console.log(loading," loading in ");
 
 //     if(this.state.iswalletCreating){
 //       return(
@@ -890,7 +943,7 @@ gobackDollar=(e)=>{
 // </div></div></div> 
 //       );
 //     }
-    console.log(".phir....................se............aaya.");
+    //console.log(".phir....................se............aaya.");
 
 
     if(this.state.metamaskConnected){
@@ -1011,13 +1064,32 @@ gobackDollar=(e)=>{
         <title>Contributions</title>
         <meta name="description" content="Description of Contributions" />
       </Helmet>
+      <div className="static-modal">
+          <Modal show={this.state.open} bsSize="large" onHide={this.hide}>
+          <Modal.Header>
+            <div className="col-sm-12 text-right">
+                <i className="fa fa-close" style={{cursor:'pointer'}} onClick={() => {this.setState({ open:false })}}></i>
+            </div>
+            <Modal.Title><div className='text-center'>INFORMATION</div></Modal.Title>
+          </Modal.Header>
+            <Modal.Body>
+              <div className="container-fluid">
+                <div className="row">
+                  <div className="col-sm-12">
+                    {this.state.transactionData}
+                  </div>
+                </div>
+                </div>
+            </Modal.Body>
+          </Modal>
+        </div>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
         {this.state.iswalletCreating? <LoadingSpinner />:
           <div className="contribution-card" style={{ marginBottom : '2em' }}>
             <div className="row">
               <div className="col-sm-12">
-                  <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' }}>Contribution</h4>
+                  <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' }}>Contribution</h4>Working on ropsten for testing, txnhash in consosle
                   <hr className="contribution-hr" />
                 </div>
               </div>
@@ -1079,7 +1151,7 @@ gobackDollar=(e)=>{
                       this.state.curr == 'Ethereum' ?
                       <div className="form-group">
                       <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
-                      <input id="fromAddress" onChange={this.validator} type="text" value={this.state.metamaskAccount} disabled placeholder='Your Kyc is Not Done' className="form-input form-control text-left form-one-style" required   />
+                      <input id="fromAddress" onChange={this.validator} type="text" value={this.state.metamaskAccount} disabled placeholder='' className="form-input form-control text-left form-one-style" required   />
                     </div> :  this.state.curr == 'Bitcoin' ?
                     <div>
                    {
