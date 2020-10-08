@@ -117,6 +117,8 @@ export default {
       axios.put(`${BaseUrl}user/Profile`, doc, headers).then((res) => res.data).catch((err) => err.response.data),
     support: (headers, data) =>
       axios.post(`${BaseUrl}user/support`, data, headers).then((res) => res.data).catch((err) => err.response.data),
+    getReferralsEarned: (headers) =>
+    axios.get(`${BaseUrl}user/fetchReferralsEarned`, headers).then((res) => res.data).catch((err) => err.response.data),
     // Ticket
     createTicket: (headers, data) =>
     axios.post(`${BaseUrl}ticket`, data, headers)

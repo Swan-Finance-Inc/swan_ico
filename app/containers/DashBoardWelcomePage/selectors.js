@@ -66,6 +66,15 @@ const makeSelectGetCrowdsaleDataRet = () => createSelector(
   (substate) => substate.get('getCrowdsaleDataRet')
 )
 
+const makeSelectGetReferralsEarned = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('getReferralsEarned')
+)
+const makeSelectGetReferralsEarnedRet = () => createSelector(
+  selectDashBoardWelcomePageDomain,
+  (substate) => substate.get('getReferralsEarnedRet')
+)
+
 const makeSelectGetCrowdsaleDataLoading = () => createSelector(
   selectDashBoardWelcomePageDomain,
   (substate) => substate.get('getCrowdsaleDataLoading')
@@ -84,5 +93,7 @@ export {
   makeSelectToggleInfoActive,
   makeSelectGetCrowdsaleData,
   makeSelectGetCrowdsaleDataRet,
-  makeSelectGetCrowdsaleDataLoading
+  makeSelectGetCrowdsaleDataLoading,
+  makeSelectGetReferralsEarned,
+  makeSelectGetReferralsEarnedRet
 };

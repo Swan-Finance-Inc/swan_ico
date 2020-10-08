@@ -30,9 +30,9 @@ import Notification from 'containers/Notification/Loadable';
 import { Helmet } from 'react-helmet';
 import { ToastContainer, toast } from 'react-toastify';
 import { makeGlobalParent } from 'containers/App/selectors';
-import { loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq, loadNews, loadAnnouncements, toggleInfoActive, getToggleInfoActive,getCrowdsaleData } from './actions';
+import { getReferralsEarned, loadProfileAction, submitSocial, resetKycDone, deleteUserAction, codeErrorRemove, loadFaq, loadNews, loadAnnouncements, toggleInfoActive, getToggleInfoActive,getCrowdsaleData } from './actions';
 import makeSelectDashBoardWelcomePage, { makeSelectKycDone, makeSelectErrorGlobal, makeSelectFaqData, makeSelectNewsData, makeSelectAnnouncementsData, makeSelectToggleInfoActive,
-makeSelectGetCrowdsaleDataRet, makeSelectGetCrowdsaleDataLoading
+makeSelectGetCrowdsaleDataRet, makeSelectGetCrowdsaleDataLoading, makeSelectGetReferralsEarnedRet
 }from './selectors';
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import SupportPage from 'containers/Support';
@@ -96,7 +96,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       isBlocked:false,
       rejectMsg: null,
       infoFlag: false,
-      crowdsaleStateData:{}
+      crowdsaleStateData:{},
+      referralsEarned:{},
+      weeklyOrDaily: 'daily'
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
@@ -134,6 +136,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
   componentDidMount() {
     const outer = this;
     this.props.getToggleInfoActiveAction();
+    this.props.getReferralsEarned();
     this.contract.events.transactionNotify()
     .on('data', function (event) {
       const transaction = {
@@ -671,6 +674,13 @@ export class DashBoardWelcomePage extends React.PureComponent {
       }
       )
     }
+
+    if(nextProps.referralsEarnedRet.success){
+      console.log("./././././././././././././././././././././././", nextProps.referralsEarnedRet, "\.\.\.\.\.\.\.\.\.\.\.\.\.\.\.")
+      this.setState({
+        referralsEarned: nextProps.referralsEarnedRet
+      })
+    }
     
     if(!!nextProps.dashboardwelcomepage.userInfo.kycDetails) {
       console.log('kycDetails : ', nextProps.dashboardwelcomepage.userInfo.kycDetails);
@@ -884,7 +894,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
               <div className="ui-content-body">
                 <div className="ui-container container-fluid">
                   <Balance      toggleContActive={this.toggleContActive}  compact={this.compactNav}   togglemyReferal ={this.togglemyReferal}   toggleTranActive={this.toggleTranActive}  userInfo={this.props.dashboardwelcomepage.userInfo} flag={this.state.infoFlag} toggleInfo={this.toggleInfo} 
-                  referralCode={this.state.referralCode} crowdsaleStateData={this.state.crowdsaleStateData}
+                  referralCode={this.state.referralCode} crowdsaleStateData={this.state.crowdsaleStateData} chartType = {this.chartType} referralsEarned={this.state.referralsEarned}
                   />
                  {
                  // <Refer  code={this.props.dashboardwelcomepage.userInfo} icoFlag={true} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
@@ -954,7 +964,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
         <div className='row'>
         <div className='col-md-1 col-md-offset-6'>
-        <div className="sticky-telegram-logo"><a href="http://t.me/centralexchat" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
+        <div className="sticky-telegram-logo"><a href="https://t.me/centralexhk" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
         </div>
         </div>
 
@@ -1001,7 +1011,8 @@ const mapStateToProps = createStructuredSelector({
   announcementsData: makeSelectAnnouncementsData(),
   toggleInfoActiveData: makeSelectToggleInfoActive(),
   crowdsaleDataRet : makeSelectGetCrowdsaleDataRet(),
-  crowdsaleDataLoading:makeSelectGetCrowdsaleDataLoading()
+  crowdsaleDataLoading:makeSelectGetCrowdsaleDataLoading(),
+  referralsEarnedRet: makeSelectGetReferralsEarnedRet(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -1017,6 +1028,7 @@ function mapDispatchToProps(dispatch) {
     loadAnnouncements:()=>dispatch(loadAnnouncements()),
     toggleInfoActiveAction:(data)=>dispatch(toggleInfoActive(data)),
     getToggleInfoActiveAction:()=>dispatch(getToggleInfoActive()),
+    getReferralsEarned: () => (dispatch(getReferralsEarned())),
     getCrowdsaleData : data => dispatch(getCrowdsaleData(data))
 
   };

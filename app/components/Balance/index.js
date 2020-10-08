@@ -43,11 +43,13 @@ class Balance extends React.PureComponent {
       centralexCoinQuantity : '',
       CenInBtc : "",
       CenInEth : "",
-      crowdsaleDetails : {}
+      crowdsaleDetails : {},
+      weeklyOrDaily: 'daily'
     };
   }
 
   componentDidMount(){
+    console.log("dhoompichakdhoom")
     this.setState({
       referalUrl:`https://tokensale.centralex.com/signup/refer/${this.props.referralCode}`
     })
@@ -111,6 +113,13 @@ class Balance extends React.PureComponent {
       )
   }
 
+  chartType = (e) =>{
+    console.log('pooooooooooooooooooooooooooo: ',e.target.name)
+    this.setState({
+      weeklyOrDaily : e.target.name
+    })
+
+  }
 
   exchangeCenInBtc = () => {
     const { crowdsaleDetails } = this.state;
@@ -151,7 +160,6 @@ class Balance extends React.PureComponent {
         usdt = this.props.userInfo.tokens.tokensByMode.usdt,
         stellar = this.props.userInfo.tokens.tokensByMode.stellar,
         total = this.props.userInfo.tokens.total;
-        console.log("777777777777777777777: ", total)
         let others,btcPercent,ethPercent, usdtPercent,stellarPercent, othersPercent;
         if(total=== 0){
           others = (total-btc-eth-usdt-stellar),
@@ -462,7 +470,7 @@ class Balance extends React.PureComponent {
               <div className="balance-card" id="fixed-height">
                 <div
                   className="balance-card-inner-wrappper"
-                >
+                ><div className="">
                   <h5
                     style={{
                       font: "normal normal bold 20px/24px Lato",
@@ -474,23 +482,42 @@ class Balance extends React.PureComponent {
                       fontSize: "16px",
                     }}
                   >
-                    Tokens Earned by Referral (This week)
+                    Tokens Earned by Referral {this.state.weeklyOrDaily==='weekly'?'(This Week)':''}
                   </h5>
-                  <div className="token-earned-by-monthly-yearly">
-                  <Dropdown overlay={menu} disabled>
+                  
+                  
+                    <DropdownButton 
+                      eventKey={4} 
+                      className="account-balance-dropdown"
+                      title={this.state.weeklyOrDaily}
+                    >
+                      <MenuItem eventKey='5' value="weeklyOrDaily" name="daily" onClick={this.chartType } >
+                          Daily
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="weekly" onClick={this.chartType } >
+                          Weekly
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="monthly" onClick={this.chartType } >
+                          Monthly
+                          </MenuItem>
+                     </DropdownButton>
+                     
+                  {/* <Dropdown overlay={menu} disabled>
                   <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                     Daily <DownOutlined />
                   </a>
-                </Dropdown>
-                <Dropdown overlay={menu} disabled>
+                </Dropdown> */}
+                {/* <Dropdown overlay={menu} disabled>
                   <a className="ant-dropdown-link"
                   style={{marginLeft : '50px' }}
                   onClick={e => e.preventDefault()}>
                     Weekly <DownOutlined />
                   </a>
-                </Dropdown>
+                </Dropdown> */}
                 </div>
-                  <Bar />
+              <div>{this.state.weeklyOrDaily==='daily'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
+              {this.state.weeklyOrDaily==='monthly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
+              {this.state.weeklyOrDaily==='weekly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}</div>
                 </div>
               </div>
             </div>
@@ -614,7 +641,7 @@ class Balance extends React.PureComponent {
                   <h4 className="exchange-heading">Referral Tokens Earned</h4>
                     <p style={{ marginBottom: "0px", color: "#2D6DCD" ,fontSize: "32px", marginLeft : '10px' }}>
                     {
-                    this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo 
+                    (this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo).toFixed(2)
                     }
                     </p>
                   <div className="col-sm-12" style={{ position : 'relative' }}>

@@ -13,7 +13,8 @@ import {
   LOAD_ANNOUNCEMENTS,
   TOGGLE_INFO_ACTIVE,
   TOGGLE_INFO_ACTIVE_GET,
-  GET_CROWDSALE_DATA
+  GET_CROWDSALE_DATA,
+  GET_REFERRALS_EARNED
 } from 'containers/DashBoardWelcomePage/constants';
 import {
   profileLoaded,
@@ -24,7 +25,8 @@ import {
   toggleInfoActiveSuccess,
   getToggleInfoActiveSuccess,
   getCrowdsaleDataRet,
-  getCrowdsaleDataLoading
+  getCrowdsaleDataLoading,
+  getReferralsEarnedRet
 } from 'containers/DashBoardWelcomePage/actions';
 import { push } from 'react-router-redux';
 import { emailVerified, twoFactorEnabled  } from 'containers/App/actions';
@@ -230,6 +232,23 @@ export function* getCrowdsaleDataSaga() {
   }
 }
 
+export function* getReferralsEarned() {
+  try {
+
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token') },
+    };
+
+    const apiData = yield call(api.user.getReferralsEarned, headers);
+    if(apiData.success) {
+      yield put(getReferralsEarnedRet(apiData));
+    }
+  }
+  catch (err) {
+    console.log('error in load referrals earned', err);
+      yield put(codeErrorAction());
+  }
+}
 
 
 export default function* defaultSaga() {
@@ -242,7 +261,8 @@ export default function* defaultSaga() {
     takeLatest(LOAD_ANNOUNCEMENTS, loadAnnouncements),
     takeLatest(TOGGLE_INFO_ACTIVE, toggleInfoActiveSaga),
     takeLatest(TOGGLE_INFO_ACTIVE_GET, toggleInfoActiveSagaGet),
-    takeLatest(GET_CROWDSALE_DATA, getCrowdsaleDataSaga)
+    takeLatest(GET_CROWDSALE_DATA, getCrowdsaleDataSaga),
+    takeLatest(GET_REFERRALS_EARNED, getReferralsEarned)
 
 
   ];

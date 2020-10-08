@@ -25,7 +25,9 @@ import {
   TOGGLE_INFO_ACTIVE_GET_SUCCESS,
   GET_CROWDSALE_DATA,
   GET_CROWDSALE_DATA_RET,
-  GET_CROWDSALE_DATA_LOADING
+  GET_CROWDSALE_DATA_LOADING,
+  GET_REFERRALS_EARNED,
+  GET_REFERRALS_EARNED_RET
 } from './constants';
 
 // The initial state of the App
@@ -55,6 +57,8 @@ const initialState = fromJS({
   getCrowdsaleData:false,
   getCrowdsaleDataRet:false,
   getCrowdsaleDataLoading:false,
+  getReferralsEarned: false,
+  getReferralsEarnedRet: false
 
 });
 
@@ -137,6 +141,9 @@ function dashBoardWelcomePageReducer(state = initialState, action) {
     case GET_CROWDSALE_DATA_LOADING:
       return state
       .set('getCrowdsaleDataLoading',false)
+    case GET_REFERRALS_EARNED_RET:
+      return state  
+      .set('getReferralsEarnedRet', action.data)
     default:
       return state;
   }

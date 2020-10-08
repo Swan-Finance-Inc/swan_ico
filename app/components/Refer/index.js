@@ -187,7 +187,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               //         <li>Maximum 2000 Tokens can be earned through referral program.</li>
               //         <li>Limited Tokens will be allocated under referral program.</li>
               //         <li>Multiple accounts are not allowed. Anyone having multiple accounts will be disqualified from the referral program, and no Tokens will be rewarded for any of the accounts.</li>
-              //         <li>Please join our official <a href=" https://t.me/centralexofficial" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/centralex/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/centralex" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/centralex" className="link" target="_blank">Reddit Page</a>.</li>
+              //         <li>Please join our official <a href=" https://t.me/centralexhk" target="_blank" className="link">Telegram group</a> like Our <a href="https://www.facebook.com/centralex/" target="_blank" className="link">Facebook Page</a> and follow official <a href="https://twitter.com/centralex" target="_blank" className="link">Twitter Handle</a> and <a href="https://www.reddit.com/user/centralex" className="link" target="_blank">Reddit Page</a>.</li>
               //         <li>centralex reserves the right to add, alter, modify, change or vary all of above rules or end it altogether, at any time without prior notice and without assigning any reason whatsoever.</li>
               //       </ol>
               //     </div>

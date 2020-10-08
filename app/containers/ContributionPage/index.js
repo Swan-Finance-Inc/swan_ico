@@ -77,7 +77,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       hotWalletList : [],
       iswalletCreating:false,
       metamaskAccount: '',
-      metamaskConnected :false,
+      metamaskConnected :true,
       open: false,
       transactionData: ''
     };
@@ -113,6 +113,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
     if(this.state.curr === 'Ethereum'){
       this.metamaskCall();
     }
+    this.interval = setInterval(() => this.getMetamaskAddress(), 1000);
 
   }
 
@@ -180,6 +181,9 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
    //     ethAddress:nextProps.successData.ethAddress
    //   })
    // }
+ }
+ componentWillUnmount(){
+   clearInterval(this.interval);
  }
 
   // End of Life Cycle methods
@@ -442,7 +446,7 @@ gobackDollar=(e)=>{
   metamaskCall=async () => {
     if (window.ethereum !== undefined) {
       const web3 = new Web3(window.web3.currentProvider);
-        window.ethereum.enable();
+       await window.ethereum.enable();
       try {
         let netId = await web3.eth.net.getId();
         console.log("network",netId)
@@ -467,7 +471,7 @@ gobackDollar=(e)=>{
         //     });
         // });
           const accounts = await web3.eth.getAccounts();
-          console.log('accounts :::::::: ', accounts);
+          console.log('accounts :::::::: ', accounts[0]);
           //console.log('accounts :::::::: ', metamaskAccounts);
 
           if(accounts.length === 0) {
@@ -479,7 +483,7 @@ gobackDollar=(e)=>{
           
           } else {
             this.setState({
-              metamaskAccount : accounts,
+              metamaskAccount : accounts[0],
               metamaskConnected : true
             })
           }
@@ -780,7 +784,7 @@ gobackDollar=(e)=>{
   }
 
 
-  checkWallet = () => {
+  checkWallet = async () => {
 
     let amount =  document.getElementById('amt').value;
     if(!amount){
@@ -789,18 +793,27 @@ gobackDollar=(e)=>{
     }
 
     if (this.state.curr === "Ethereum"){
-      console.log("sthereum payment started");
+      console.log("sthereum payment started", this.state.metamaskAccount);
       let receiver = '0xd325765C388CB205a03556EAB331ffA80Acf5130';
-      let sender = '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E';
+      let sender = this.state.metamaskAccount;
       try{
-      let txnhash = web3.eth.sendTransaction({to:receiver,
+      let txnhash = await web3.eth.sendTransaction({to:receiver,
         from:sender, 
        value:web3.toWei(amount, "ether")}
-        ,function (err, res){if(err){console.log("erororooror:: ", err); this.setState({transactionData:err,open:true})}else{console.log("ahahuahahuahuahu: :: :: ", res);this.setState({transactionData:res,open:true})}});
-        console.log("buabuhaubuahbuhbauhabhuabuahbauhbaubhua, ", txnhash);
+        ,function (err, res){
+          if(err){
+            toast.error(`Error: ${err.message}`)
+            this.setState({transactionData:err, open:true})
+          }else{
+            toast.success(`Trxn Hash:  ${res}`)
+            console.log("txnHash:",res)
+          }
+        });
+        
       }catch(error){
         console.log("error in send transactaion", error);
       }
+      console.log("buabuhaubuahbuhbauhabhuabuahbauhbaubhua, ", txnhash);
     } else
     // if(this.state.curr === "Ethereum"){
     //  const trxnHash = await web3.eth.getTransactionCount(this.state.metamaskAccount);
@@ -899,17 +912,11 @@ gobackDollar=(e)=>{
   getMetamaskAddress = async() => {
     const web3 = new Web3(window.web3.currentProvider);
     const accounts = await web3.eth.getAccounts();
-    //console.log('accou: ', accounts);
-    // try{
-    // const trxnHash = await web3.eth.getTransactionCount(accounts[0]);
-    // console.log("thts how we rollin' ", trxnHash);
-    // }
-    // catch(err){
-    //   console.log("rollin mai error", err);
-    // }
+
+
     if(accounts.length !== 0) {
       this.setState({
-        metamaskAccount : accounts,
+        metamaskAccount : accounts[0],
         metamaskConnected : true
       })
 
@@ -925,6 +932,9 @@ hide=(e)=>{
 
   // End of container functions
   render() {
+        
+
+      
     // console.log(this.props," props in contribution page")
      //console.log(this.state," state in contribution page")
     const { loading } = this.props
@@ -945,10 +955,10 @@ hide=(e)=>{
 //     }
     //console.log(".phir....................se............aaya.");
 
+    // if(this.state.metamaskConnected) {
+    //   this.getMetamaskAddress();
 
-    if(this.state.metamaskConnected){
-      this.getMetamaskAddress();
-  }
+    // }
 
 
 

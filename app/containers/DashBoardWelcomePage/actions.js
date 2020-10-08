@@ -27,7 +27,9 @@ import {
   TOGGLE_INFO_ACTIVE_GET_SUCCESS,
   GET_CROWDSALE_DATA,
   GET_CROWDSALE_DATA_RET,
-  GET_CROWDSALE_DATA_LOADING
+  GET_CROWDSALE_DATA_LOADING,
+  GET_REFERRALS_EARNED,
+  GET_REFERRALS_EARNED_RET
 } from './constants';
 
 export function getToggleInfoActive() {
@@ -135,6 +137,19 @@ export function profileLoaded(data) {
 export function submitSocial(data) {
   return {
     type: SUBMIT_SOCIAL,
+    data
+  };
+}
+
+export function getReferralsEarned() {
+  return {
+    type: GET_REFERRALS_EARNED,
+  };
+}
+
+export function getReferralsEarnedRet(data) {
+  return {
+    type: GET_REFERRALS_EARNED_RET,
     data
   };
 }

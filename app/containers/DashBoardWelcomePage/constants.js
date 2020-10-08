@@ -29,3 +29,6 @@ export const GET_CROWDSALE_DATA = 'app/DashBoardWelcomePage/GET_CROWDSALE_DATA';
 export const GET_CROWDSALE_DATA_RET = 'app/DashBoardWelcomePage/GET_CROWDSALE_DATA_RET';
 export const GET_CROWDSALE_DATA_LOADING = 'app/DashBoardWelcomePage/GET_CROWDSALE_DATA_LOADING';
 
+export const GET_REFERRALS_EARNED = 'app/DashBoardWelcomePage/GET_REFERRALS_EARNED';
+export const GET_REFERRALS_EARNED_RET = 'app/DashBoardWelcomePage/GET_REFERRALS_EARNED_RET';
+
