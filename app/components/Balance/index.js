@@ -336,13 +336,118 @@ class Balance extends React.PureComponent {
                 </div>
               </div>
             </div>
+            <div className="col-lg-5" style={{   }}>
+              <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
+                <div className="balance-card-inner-wrappper">
+                  <h3 className="balance-card-inner-wrapper-heading">
+                    ICO Details
+                  </h3>
+                  <div className="ico-details-middle">
+                    <div>
+                    <img src={Planet} />
+                    </div>
+                    <div className="ico-details-circle">
+                      <span className="upto-2-percentage" >Up To <br/>
+                       <span style={{ fontSize : '32px' }} >2%</span>  
+                       <br /> Extra</span>
+                    </div>
+                    <div className="satalite-logo-container">
+                      <img src={littleStar} className="little-star"/>
+                    <img src={Satelite} />
+                    </div>
+                  </div>
+                  <img src={littleStar}/>
+                  <img src={bigStar} style={{ float : 'right' }} />
+                  <img src={Ellipse} className="ellipse-one"/>
+                  <img src={Ellipse} className="ellipse-two" />
+                  <div className="text-center">
+                    <p className="secondary-text">Total Coins</p>
+                    <p className="total-coins">{(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0 }</p>
+                  </div>
+                  <div className="coins-left-container">
+                  <div className="progress">
+                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : '60%' }}>
+                <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
+                  Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   : '0'  } % </span>
+                  </div>
+                  </div>
+                  </div>
+                  <div className="text-center mt-30">
+                  <button className="invest">Invest Now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+            <div
+              className="col-lg-7 col-sm-12"
+              style={{ 
+                //transform: "translateY(-39px)" ,
+               marginTop : '12px' }}
+            >
+              <div className="balance-card" id="fixed-height">
+                <div
+                  className="balance-card-inner-wrappper"
+                ><div className="">
+                  <h5
+                    style={{
+                      font: "normal normal bold 20px/24px Lato",
+                      letterSpacing: "0.43px",
+                      color: "#B0C9F0",
+                      display: "inline-block",
+                      opacity: 1,
+                      marginTop: 0,
+                      fontSize: "16px",
+                    }}
+                  >
+                    Tokens Earned by Referral {this.state.weeklyOrDaily==='weekly'?'(This Week)':''}
+                  </h5>
+                  
+                  
+                    <DropdownButton 
+                      eventKey={4} 
+                      className="account-balance-dropdown"
+                      title={this.state.weeklyOrDaily}
+                    >
+                      <MenuItem eventKey='5' value="weeklyOrDaily" name="daily" onClick={this.chartType } >
+                          Daily
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="weekly" onClick={this.chartType } >
+                          Weekly
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="monthly" onClick={this.chartType } >
+                          Monthly
+                          </MenuItem>
+                     </DropdownButton>
+                     
+                  {/* <Dropdown overlay={menu} disabled>
+                  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    Daily <DownOutlined />
+                  </a>
+                </Dropdown> */}
+                {/* <Dropdown overlay={menu} disabled>
+                  <a className="ant-dropdown-link"
+                  style={{marginLeft : '50px' }}
+                  onClick={e => e.preventDefault()}>
+                    Weekly <DownOutlined />
+                  </a>
+                </Dropdown> */}
+                </div>
+              <div>{this.state.weeklyOrDaily==='daily'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
+              {this.state.weeklyOrDaily==='monthly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
+              {this.state.weeklyOrDaily==='weekly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}</div>
+                </div>
+              </div>
+            </div>
             <div className="col-lg-5 col-sm-12">
               <div
                 className="balance-card"
-                style={{
-                  borderBottomLeftRadius: 0,
-                  borderBottomRightRadius: 0,
-                }}
+                // style={{
+                //   borderBottomLeftRadius: 0,
+                //   borderBottomRightRadius: 0,
+                // }}
+                style={{ marginBottom : '30px' , marginTop : '12px' }}
               >
                 <div
                   className="balance-card-inner-wrappper"
@@ -461,109 +566,7 @@ class Balance extends React.PureComponent {
                 <hr style={{ borderTop: "1px solid #CEE2FE", width: "90%" }} />
               </div>
             </div>
-            <div
-              className="col-lg-7 col-sm-12"
-              style={{ 
-                //transform: "translateY(-39px)" ,
-               marginTop : '12px' }}
-            >
-              <div className="balance-card" id="fixed-height">
-                <div
-                  className="balance-card-inner-wrappper"
-                ><div className="">
-                  <h5
-                    style={{
-                      font: "normal normal bold 20px/24px Lato",
-                      letterSpacing: "0.43px",
-                      color: "#B0C9F0",
-                      display: "inline-block",
-                      opacity: 1,
-                      marginTop: 0,
-                      fontSize: "16px",
-                    }}
-                  >
-                    Tokens Earned by Referral {this.state.weeklyOrDaily==='weekly'?'(This Week)':''}
-                  </h5>
-                  
-                  
-                    <DropdownButton 
-                      eventKey={4} 
-                      className="account-balance-dropdown"
-                      title={this.state.weeklyOrDaily}
-                    >
-                      <MenuItem eventKey='5' value="weeklyOrDaily" name="daily" onClick={this.chartType } >
-                          Daily
-                          </MenuItem>
-                          <MenuItem eventKey='5' value="weeklyOrDaily" name="weekly" onClick={this.chartType } >
-                          Weekly
-                          </MenuItem>
-                          <MenuItem eventKey='5' value="weeklyOrDaily" name="monthly" onClick={this.chartType } >
-                          Monthly
-                          </MenuItem>
-                     </DropdownButton>
-                     
-                  {/* <Dropdown overlay={menu} disabled>
-                  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
-                    Daily <DownOutlined />
-                  </a>
-                </Dropdown> */}
-                {/* <Dropdown overlay={menu} disabled>
-                  <a className="ant-dropdown-link"
-                  style={{marginLeft : '50px' }}
-                  onClick={e => e.preventDefault()}>
-                    Weekly <DownOutlined />
-                  </a>
-                </Dropdown> */}
-                </div>
-              <div>{this.state.weeklyOrDaily==='daily'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
-              {this.state.weeklyOrDaily==='monthly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
-              {this.state.weeklyOrDaily==='weekly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}</div>
-                </div>
-              </div>
-            </div>
-            <div className="col-lg-5" style={{ marginBottom : '30px' , marginTop : '12px' }}>
-              <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
-                <div className="balance-card-inner-wrappper">
-                  <h3 className="balance-card-inner-wrapper-heading">
-                    ICO Details
-                  </h3>
-                  <div className="ico-details-middle">
-                    <div>
-                    <img src={Planet} />
-                    </div>
-                    <div className="ico-details-circle">
-                      <span className="upto-2-percentage" >Up To <br/>
-                       <span style={{ fontSize : '32px' }} >2%</span>  
-                       <br /> Extra</span>
-                    </div>
-                    <div className="satalite-logo-container">
-                      <img src={littleStar} className="little-star"/>
-                    <img src={Satelite} />
-                    </div>
-                  </div>
-                  <img src={littleStar}/>
-                  <img src={bigStar} style={{ float : 'right' }} />
-                  <img src={Ellipse} className="ellipse-one"/>
-                  <img src={Ellipse} className="ellipse-two" />
-                  <div className="text-center">
-                    <p className="secondary-text">Total Coins</p>
-                    <p className="total-coins">{(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0 }</p>
-                  </div>
-                  <div className="coins-left-container">
-                  <div className="progress">
-                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : '60%' }}>
-                <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
-                  Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   : '0'  } % </span>
-                  </div>
-                  </div>
-                  </div>
-                  <div className="text-center mt-30">
-                  <button className="invest">Invest Now</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+
           <div className="row">
             <div className="col-lg-7"style={{ marginBottom : '30px' , marginTop : '12px' }} >
                  <div className="balance-card" style={{ height : '352px' }}>

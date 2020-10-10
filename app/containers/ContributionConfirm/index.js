@@ -21,6 +21,7 @@ import { ENGINE_METHOD_DH } from "constants";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import {  Steps, Divider} from "antd";
 const { Step } = Steps;
 export class ContributionConfirm extends React.PureComponent {
@@ -33,7 +34,8 @@ export class ContributionConfirm extends React.PureComponent {
       copied: false,
       valid: true,
       validBlank: true,
-      currentReceivingWalletAddress : ''
+      currentReceivingWalletAddress : '',
+      curTime: new Date().toLocaleString()
     };
     this.goBack = this.goBack.bind(this);
     this.confirmPayment = this.confirmPayment.bind(this);
@@ -44,6 +46,10 @@ export class ContributionConfirm extends React.PureComponent {
 
   // Begin life cycle methods
   componentDidMount() {
+      this.intervalID = setInterval(
+        () => this.tick(),
+        1000
+      );
     if (this.props.currency == "Bitcoin") {
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
@@ -71,7 +77,14 @@ export class ContributionConfirm extends React.PureComponent {
   }
 
   // End life cycle methods
-
+  componentWillUnmount(){
+    clearInterval(this.intervalID);
+  }
+  tick() {
+    this.setState({
+      curTime: new Date().toLocaleString()
+    });
+  }
   // Begin Container functions
   txValidator(e) {
     let hash = e.target.value;
@@ -361,17 +374,50 @@ export class ContributionConfirm extends React.PureComponent {
                         Scan this Address QR Code from your{" "}
                         {this.props.currency} wallet{" "}
                  </p>
-                 <p className="main-color--blue">
-                 Pay: {this.props.currencyQty} </p>
-                 <p className="main-color--blue">
-                 You will receive {(this.props.tokens).toFixed(2)}  Centralex coins </p>
-                  <div className="qr-code" style={{ margin : '1em 0' }}>
+                  <div className="qr-code" style={{ }}>
                       {this.props.currency === "Bitcoin" ? (
                         <img src={this.state.url} alt="" />
                       ) : (
                         <img src={this.state.url} alt="" />
                       )}
                   </div>
+                  <p className="main-color--blue">
+                 Send the indicated amount to this {this.props.currency} Address </p>
+                 <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
+                              <input value={`${this.props.currencyQty} BTC`}
+                              onChange={({target: {value}}) => this.setState({value, copied: false})}
+                              className="copy-input" style={{textAlign:'center', font: 'normal 18px Lato'}}
+                              />
+                            <CopyToClipboard text={this.props.currencyQty}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="file-copy-conatiner">
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                            </CopyToClipboard>
+                        </div>
+                        <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
+                            <input value={this.props.currentReceivingWalletAddress }
+                              onChange={({target: {value}}) => this.setState({value, copied: false})}
+                              className="copy-input " style={{textAlign:'center', font: 'normal 18px Lato'}}
+                              />
+                            <CopyToClipboard text={this.props.currentReceivingWalletAddress}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="file-copy-conatiner">
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                            </CopyToClipboard>
+                        </div>
+
+                 <p className="main-color--blue">
+                 You will receive <input value={(this.props.tokens).toFixed(2)} style={{width:'6em'}} /> Centralex coins </p>
                   <hr className="qr-code-hr" />
                   <div className="confirm-block" style={{maxWidth:'35em' , textAlign : 'center' }}>
                         {  
@@ -489,7 +535,7 @@ export class ContributionConfirm extends React.PureComponent {
                           <form onSubmit={this.confirmPayment}>
                             <div className="transaction-time">
                             <p className="main-color--blue">
-                            Time of initiation : { (new Date()).toDateString()}
+                            Time of initiation : {this.state.curTime}
                              <br/>
                              This transaction will expire within 5 hours of initiation.
                             </p>

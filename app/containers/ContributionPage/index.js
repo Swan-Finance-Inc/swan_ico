@@ -1106,7 +1106,7 @@ hide=(e)=>{
             <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>
             {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && 
             <div className="kyc-status-before-contribution">
-            <div className="kyc-submit">Submit KYC to continue</div>
+            <div className="glow-text kyc-submit">Submit KYC to continue</div>
             </div>
             }
             {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && 
