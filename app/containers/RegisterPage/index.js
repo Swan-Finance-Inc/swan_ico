@@ -35,7 +35,7 @@ export class RegisterPage extends React.PureComponent {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.passwordMatch = this.passwordMatch.bind(this);
-
+    this.notifyError = this.notifyError.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.state = {
       "g-recaptcha-response": "",
@@ -290,7 +290,8 @@ export class RegisterPage extends React.PureComponent {
         <div className="wrapper">
           <ToastContainer
             position="top-center"
-            autoClose={10000000000000000}
+            autoClose={2800}
+            type="error"
             hideProgressBar={false}
             newestOnTop
             closeOnClick

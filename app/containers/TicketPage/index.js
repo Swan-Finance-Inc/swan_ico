@@ -100,17 +100,28 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
 
   createTicket(e) {
     e.preventDefault();
+    // const regex = /^([a-zA-Z]+|[a-zA-Z]+\s{1}[a-zA-Z]{1,}|[a-zA-Z]+\s{1}[a-zA-Z]{3,}\s{1}[a-zA-Z]{1,})$/g;
+    var regex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
     const ticket = {
       subject : e.target[0].value,
       message: e.target[2].value,
       transactionId:e.target[1].value
     }
-
-    this.props.createTicket(ticket);
+    if (e.target[0].value.length < 4) {
+      toast.error("Subject should be greater than 3 characters")
+    }
+    else 
+      if(!regex.test(e.target[0].value)){
+        toast.error("Invalid Subject")
+    }
+    else{
+      this.props.createTicket(ticket);
     this.props.getTickets();
     this.setState({
       show: false
     })
+    }
+    
   }
 
   sendMessage(e) {

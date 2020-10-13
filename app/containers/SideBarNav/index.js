@@ -238,8 +238,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                </Link>
             </li>
     
-            <li className={`${this.state.contAct} nav-item`} ><Link to="/dashboard/contribution" role="button" onClick={this.toggleContriActive}>
-               <Contribution color={this.state.contAct ? '#fff' : '#2d6dcd'}/>
+            <li className={`${this.state.contAct} nav-item `} ><Link to="/dashboard/contribution" role="button" onClick={this.toggleContriActive}>
+               <Contribution className = "ui-nav-text" color={this.state.contAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.contAct}`}>Contribution</span> 
                </Link>
             </li><li className={`${this.state.tranAct} nav-item`}  ><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}>
