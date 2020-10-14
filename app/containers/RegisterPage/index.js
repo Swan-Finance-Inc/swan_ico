@@ -141,7 +141,7 @@ export class RegisterPage extends React.PureComponent {
   formSubmit(e) {
     e.preventDefault();
     let user;
-    const terms = document.getElementById("terms");
+    // const terms = document.getElementById("terms");
     const usCitizen = document.getElementById("usCitizen");
     //const name = document.getElementById("fname").value;
     //const name = this.state.fullname;
@@ -172,7 +172,7 @@ export class RegisterPage extends React.PureComponent {
         email: this.state.email,
         password: this.state.password,
         rfcode: this.state.referToken,
-        termsAccepted: terms.checked,
+        // termsAccepted: terms.checked,
         isUs: usCitizen.checked,
         captcha: this.state["g-recaptcha-response"],
         channel: this.state.channel
@@ -418,10 +418,10 @@ export class RegisterPage extends React.PureComponent {
                           className="form-check-label"
                           htmlFor="user_accepted_policies"
                         >
-                          <input
+                          {/* <input
                             id="terms"
                             className="boolean required form-check-input"
-                            required
+                            // required
                             label="false"
                             data-title="Please confirm"
                             data-placement="left"
@@ -430,7 +430,7 @@ export class RegisterPage extends React.PureComponent {
                             aria-required="true"
                             type="checkbox"
                             name="user[accepted_policies]"
-                          />
+                          /> */}
                           &nbsp; I consent to receive email updates from
                           centralex.
                         </label>

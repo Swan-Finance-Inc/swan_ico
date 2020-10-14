@@ -328,7 +328,7 @@ export class MyReferal extends React.PureComponent {
                       }}
                     >
                       <h3
-                        className="balance-card-inner-wrapper-heading"
+                        className="mt-30 balance-card-inner-wrapper-heading"
                         style={{ lineHeight: "1.3" }}
                       >
                         Invite Your Friends <br />& Earn Coins
