@@ -161,8 +161,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       dashAct: nextProps.dash,
       contAct: nextProps.cont,
       kycAct: nextProps.kyc,
-      announcementsAct: this.props.announcements,
-      newsAct: this.props.news,
+      announcementsAct: nextProps.announcements,
+      newsAct: nextProps.news,
       tranAct: nextProps.tran,
       secAct: nextProps.sec,
       ticketAct: nextProps.ticket,
@@ -191,7 +191,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
 
 
   render() {
-    console.log(this.state.contAct,'hoeoeoei')
+    console.log(this.state.supportAct,'hoeoeoei')
     console.log(this.props,'props mkdkslnfndfkjdjvdj')
 
     return (
@@ -262,9 +262,9 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             <hr></hr>
 
             <span className='configuration black'>INFO</span>
-            <li onMouseEnter = {() => { this.state.buy === 'active' ? '' : this.setState({buy : true })} } onMouseLeave = { () =>{this.state.buy === 'active'? '' : this.setState({buy : false }) }} className={`${this.state.buy} nav-item`} ><Link to="https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf" role="button" onClick = {this.toggleHowToBuyActive}  target='_blank'>
-               <WhitePaper color={this.state.buy ? '#fff' : '#2d6dcd'}/>
-               <span className={`ui-nav-text ${this.state.buy}`}>White Paper</span> 
+            <li onMouseEnter = {() => { this.state.buyAct === 'active' ? '' : this.setState({buyAct : true })} } onMouseLeave = { () =>{this.state.buyAct === 'active'? '' : this.setState({buyAct : false }) }} className={`${this.state.buyAct} nav-item`} ><Link to="https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf" role="button" onClick = {this.toggleHowToBuyActive}  target='_blank'>
+               <WhitePaper color={this.state.buyAct ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.buyAct}`}>White Paper</span> 
                </Link>
             </li>
 
@@ -292,7 +292,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                </Link>
             </li>
 
-            <li onMouseEnter = {() => { this.state.supportAct === 'active' ? '' : this.setState({supportAct : true })} } onMouseLeave = { () =>{this.state.supportAct === 'active'? '' : this.setState({supportAct : false }) }} className={`${this.state.supportAct} nav-item`} ><a href="mailto:support@centralex.io"  >
+            <li onMouseEnter = {() => { this.state.supportAct === 'active' ? '' : this.setState({supportAct : true })} } onMouseLeave = { () =>{this.state.supportAct === 'active'? '' : this.setState({supportAct : false }) }} className={`${this.state.supportAct} nav-item`} ><a href="mailto: hello@centralex.com" onClick = {this.toggleSupportActive} >
                <Support color={this.state.supportAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.supportAct}`} style={{ color : 'black' }}>Support</span>
                {

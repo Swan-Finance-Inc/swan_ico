@@ -434,7 +434,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               </div>  
               
               <div className='col-sm-12'>
-                  {/* {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
+                  {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
                       showPaginationBottom={false}
                       style={{ height : this.state.data.length > 0 ? '100%' : '400px' , marginTop : '20px'}}
                       data={this.state.data}
@@ -444,12 +444,12 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                      noDataText={
                       <div>
                       <img src={EmptyFile} style={{ height: '143px' }} />
-                      <p className="left">No Transactions Found</p>
+                      <p className="center">No Records Found</p>
                       </div>
                     }
                       rowsText={'transactions'}
                       defaultPageSize={5}
-                    />} */}
+                    />}
              </div>
               </div>
             </div>

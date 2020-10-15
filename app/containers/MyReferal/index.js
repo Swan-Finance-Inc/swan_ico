@@ -483,7 +483,7 @@ export class MyReferal extends React.PureComponent {
                       style={{
                         marginTop: "20px",
                         fontSize: "12px",
-                        cursor: "pointer",
+                        cursor: this.state.transactions ? "" : "pointer",
                         height : this.state.transactions.length > 0 ? '100%' : '400px' 
                       }}
                       data={this.state.transactions}

@@ -107,8 +107,8 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
       message: e.target[2].value,
       transactionId:e.target[1].value
     }
-    if (e.target[0].value.length < 4) {
-      toast.error("Subject should be greater than 3 characters")
+    if (e.target[0].value.length < 4 || e.target[0].value.length > 20 ) {
+      toast.error("Subject should be between 4 to 20 characters")
     }
     else 
       if(!regex.test(e.target[0].value)){

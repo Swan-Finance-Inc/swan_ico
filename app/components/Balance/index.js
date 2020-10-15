@@ -379,13 +379,13 @@ class Balance extends React.PureComponent {
               </div>
             </div>
           </div>
-
+          <div className="row">
             <div
               className="col-lg-7 col-sm-12"
               style={{ 
                 //transform: "translateY(-39px)" ,
                marginTop : '12px' }}
-            >
+             >
               <div className="balance-card" id="fixed-height">
                 <div
                   className="balance-card-inner-wrappper"
@@ -566,7 +566,7 @@ class Balance extends React.PureComponent {
                 <hr style={{ borderTop: "1px solid #CEE2FE", width: "90%" }} />
               </div>
             </div>
-
+            </div>
           <div className="row">
             <div className="col-lg-7"style={{ marginBottom : '30px' , marginTop : '12px' }} >
                  <div className="balance-card" style={{ height : '352px' }}>
