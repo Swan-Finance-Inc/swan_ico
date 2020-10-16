@@ -45,7 +45,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       upload_docs:'',
       myReferal:'',
       buyAct:'',
-      PrivacyPolicy:''
+      privacy:''
     };
   }
 
@@ -53,6 +53,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.setState({
       dashAct: this.props.dash,
       contAct: this.props.cont,
+      privacyAct: this.props.privacy,
       kycAct: this.props.kyc,
       tranAct: this.props.tran,
       ticketAct: this.props.ticket,
@@ -97,6 +98,15 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     // if(this.props.kycStatus == 'ACCEPTED'){
       this.props.compact();
       this.props.toggleContActive();
+    // }else{
+      // toast.error('Please complete your kyc to contribute.')
+    // }
+  }
+
+  togglePrivacyActive=(e)=>{
+    // if(this.props.kycStatus == 'ACCEPTED'){
+      this.props.compact();
+      this.props.togglePrivacyActive();
     // }else{
       // toast.error('Please complete your kyc to contribute.')
     // }
@@ -156,7 +166,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps,'nexprops')
+    console.log(nextProps,'dsjkvfdkbjvfd')
     this.setState({
       dashAct: nextProps.dash,
       contAct: nextProps.cont,
@@ -172,7 +182,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       resetPassAct: nextProps.resetPass,
       upload_docs:nextProps.upload_docs,
       myReferal:nextProps.myReferal,
-      buyAct:nextProps.buy
+      buyAct:nextProps.buy,
+      privacy: nextProps.privacy
     });
 
   }
@@ -191,7 +202,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
 
 
   render() {
-    console.log(this.state.supportAct,'hoeoeoei')
+    console.log(this.state.privacy,'hoeoeoei')
     console.log(this.props,'props mkdkslnfndfkjdjvdj')
 
     return (
@@ -274,9 +285,9 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                </Link>
             </li>
 
-            <li onMouseEnter = {() => { this.state.PrivacyPolicy === 'active' ? '' : this.setState({PrivacyPolicy : true })} } onMouseLeave = { () =>{this.state.PrivacyPolicy === 'active'? '' : this.setState({PrivacyPolicy : false }) }} className={`${this.state.PrivacyPolicy} nav-item`} ><Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf" role="button"  target='_blank'>
-               <PrivatePolicy color={this.state.PrivacyPolicy ? '#fff' : '#2d6dcd'}/>
-               <span className={`ui-nav-text ${this.state.PrivacyPolicy}`}>Privacy Policy</span> 
+            <li onMouseEnter = {() => { this.state.privacy === 'active' ? '' : this.setState({privacy : true })} } onMouseLeave = { () =>{this.state.privacy === 'active'? '' : this.setState({privacy : false }) }} className={`${this.state.privacy} nav-item`} ><Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf" role="button" onClick = {this.togglePrivacyActive} target='_blank' >
+               <PrivatePolicy color={this.state.privacy ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.privacy}`}>Privacy Policy</span> 
                </Link>
             </li>
 

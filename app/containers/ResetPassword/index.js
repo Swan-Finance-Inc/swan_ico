@@ -94,22 +94,24 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
           <div className="panel-heading">Reset Password</div>
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
-              <div className="col-sm-6 col-sm-offset-3 col-md-10 col-md-offset-1">
+              <div className="col-sm-10 col-sm-offset-1 col-md-8 col-md-offset-2">
                 {/* <div className="card-header">
                   <h1 className="reset-title">Reset Password</h1>
                 </div> */}
                 <div className="contribution" style={{ marginBottom: '200px' }}>
                   <form onSubmit={this.formSubmit}>
                   <div className="row form-group">
-                    <div className="col-sm-4">
+                    <div className="col-sm-4 col-md-4 col-lg-4">
                       <label htmlFor="oldPassword"><span style={{fontWeight: '500'}}>OLD PASSWORD<sup>*</sup></span></label>
                     </div>
-                    <div className="col-sm-8">
+                    <div className="col-sm-8 col-md-8 col-lg-8">
                       <input id="oldPassword" type="password" className="form-input form-control" name="oldPassword" placeholder="Enter Old Password" autoComplete="off" required />
+                    
                     </div>
                   </div>
                   <div className="row form-group">
                     <div className="col-sm-4">
+                    
                       <label htmlFor="newPassword"><span style={{fontWeight: '500'}}>NEW PASSWORD<sup>*</sup></span></label>
                     </div>
                     <div className="col-sm-8">

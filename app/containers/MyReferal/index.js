@@ -363,7 +363,7 @@ export class MyReferal extends React.PureComponent {
                       //   </button>
                       // </div>
                       }
-                       <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
+                       <div style={{width: '69%' , position: 'relative', marginBottom : '20px'}}>
                             <input value={this.state.referralUrl }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input"

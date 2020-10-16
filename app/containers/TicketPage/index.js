@@ -126,7 +126,9 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
 
   sendMessage(e) {
     e.preventDefault();
-
+    if(e.target[0].value.length < 1){
+      return ;
+    }
     const message = {
       message: e.target[0].value,
       ticketId: this.state.currentTicketDetails.ticketId

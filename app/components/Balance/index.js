@@ -568,8 +568,8 @@ class Balance extends React.PureComponent {
             </div>
             </div>
           <div className="row">
-            <div className="col-lg-7"style={{ marginBottom : '30px' , marginTop : '12px' }} >
-                 <div className="balance-card" style={{ height : '352px' }}>
+            <div className="col-lg-7"style={{ marginBottom : '30px' , marginTop : '12px' , height : "auto" }} >
+                 <div className="balance-card" style={{ height : '384px' }}>
                     <div className="balance-card-inner-wrappper">
                       <div style={{ display : 'flex' , justifyContent : 'space-between' }}>
                         <div>
@@ -577,9 +577,9 @@ class Balance extends React.PureComponent {
                           Invite Your Friends <br />
                           & Earn Coins
                           </h3>
-                          <p className="mt-30 referral-content">Earn 10% or Up to 250 Tokens <br />
+                          <p  className="mt-30 referral-content">Earn 10% or Up to 250 Tokens <br />
                             For the first purchase by the referred.</p>
-                            <p className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
+                            <p  className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
                             {
                           //     <div className="code copy-clipboard">
                           //   <input id="foo" value={this.state.referalUrl}
@@ -607,7 +607,7 @@ class Balance extends React.PureComponent {
                           <img src={Referral} className="referral-logo" />
                         </div>
                       </div>
-                      <div style={{width: '27em' , position: 'relative'}}>
+                      <div style={{width: '86%' , position: 'relative'}}>
                             <input value={this.state.referalUrl }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input"
@@ -637,7 +637,7 @@ class Balance extends React.PureComponent {
                   borderTopRightRadius: 0,
                   borderTopLeftRadius: 0,
                   padding: "12px 0px 29px 15px",
-                  height: "348px",
+                  height: "384px",
                 }}
               >
                 <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>

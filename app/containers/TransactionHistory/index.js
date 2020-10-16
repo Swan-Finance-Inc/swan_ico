@@ -233,10 +233,14 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     switch(e.target.id) {
       case 'clearType' :
       document.getElementById('typeFilter').selectedIndex = 0;
+      document.getElementById('pageFilter').selectedIndex = 0;
       this.setState({
         ...this.state,transactionParam:{
           ...this.state.transactionParam,
           type:'',
+          createdUl : '',
+          createdLl : '',
+          page : 1
         },
         disablePrevious:true
       }, () => {
@@ -424,7 +428,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               <div className="transactions-filters" style={{ paddingTop : '0px' }}>
                 <div className="transactions-filters-card">
                 <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>No Of Transactions:</h4></label>
-                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="pageFilter" >
                   <option value="" disabled selected hidden></option>
                   <option value='5'>5</option>
                   <option value='10'>10</option>

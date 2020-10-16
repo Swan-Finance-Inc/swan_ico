@@ -121,6 +121,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
 
   updateDetails(e){
     e.preventDefault()
+    // console.log(this.state.dob , "dkjsahvkfjvbfdk")
+    // let current = new Date();
+    // let diff = Math.abs(current - this.state.dob)
+    // let age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
+    // console.log( current.getFullYear(), "dkjsahvkfjvbfdk")
     if(!isValidNumber(this.state.phone)){
       toast.error('Phone number is invalid');
     }else if(this.state.valid){
@@ -288,7 +293,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           <div className="col-sm-3">
             <label htmlFor="fullName"><span style={{fontWeight:'500'}}>Full Name</span></label>
           </div>
-          <div className="col-sm-9">
+          <div className="col-sm-3">
             <input className="form-control" type="text" name="fullName" id="fullName"  value={this.state.fullName} onChange={this.handleInput}/>
           </div>
         </div>
@@ -296,7 +301,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           <div className="col-sm-3">
             <label htmlFor="dob"><span style={{fontWeight:'500'}}>Date Of Birth</span></label>
           </div>
-          <div className="col-sm-9">
+          <div className="col-sm-3">
             <input className="form-control" type="date" name="dob" id="dob" onChange={this.handleInput} value={this.state.dob} onFocus={() => {this.type='date'}}/>
           </div>
         </div>
@@ -304,7 +309,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           <div className="col-sm-3">
               <label htmlFor="gender"><span style={{fontWeight:'500'}}>Gender</span></label>
           </div>
-          <div className="col-sm-9">
+          <div className="col-sm-3">
               <select id="gender" name="gender" className="form-control" onChange={this.handleInput} value={this.state.gender}>
                 <option value="" hidden>Choose One</option>
                 <option value="MALE">MALE</option>
@@ -317,7 +322,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           <div className="col-sm-3">
             <label htmlFor="phone"><span style={{fontWeight:'500'}}>Phone Number </span></label>
           </div>
-          <div className="col-sm-9">
+          <div className="col-sm-3">
             {/* <input className="form-control" type="text" name="phone" id="phone" onChange={this.handleInput} value={this.state.phone}/> */}
             <PhoneInput id="phone"
                 placeholder="Enter phone number"
@@ -420,7 +425,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           </div>
         </div> */}
 
-
+          <div className="row">
+                  <div className="col-sm-12 text-center">
+                    <button type="submit" id = "personal" className="normal-button">Update </button>
+                  </div>
+                </div>
         </div>
       }
 
@@ -438,7 +447,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       <Switch onClick={this.toggleLatestNewsAlert} on={this.state.notifyMe}/>
       </div>
       </div>
-
+      <div className="row">
+                  <div className="col-sm-12 text-center">
+                    <button type="submit" className="normal-button">Update </button>
+                  </div>
+                </div>
         </div>
       }
 
@@ -454,6 +467,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           { !this.state.valid ? <p style={{color: '#f00'}}>Please enter Valid ETH address.</p> : '' }
         </div>
       </div>
+      <div className="row">
+                  <div className="col-sm-12 text-center">
+                    <button type="submit" className="normal-button">Update </button>
+                  </div>
+                </div>
       </div>
 
     }
@@ -471,11 +489,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 //   </div>
                 // </div>
               }
-                <div className="row">
+                {/* <div className="row">
                   <div className="col-sm-12 text-center">
                     <button type="submit" className="normal-button">Update </button>
                   </div>
-                </div>
+                </div> */}
               </form>
             </div>
            }
