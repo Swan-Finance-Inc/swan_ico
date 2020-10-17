@@ -147,16 +147,22 @@ export class RegisterPage extends React.PureComponent {
     //const name = this.state.fullname;
     // console.log(terms.checked)
     // console.log(this.state.referToken);
-
-    if(!this.state.fullname){
-      this.notifyError("Please enter the name");
+    var nameRegex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    if(this.state.fullname.length < 4 || this.state.fullname.length > 20){
+      this.notifyError("Name should be between 4 to 20 characters");
+    }
+    else
+    if(!nameRegex.test(this.state.fullname)){
+      this.notifyError("Invalid Name")
     }
     else if(!this.state.email){
       this.notifyError("Please enter the email");
     }
-    else if(!this.state.password){
-      this.notifyError("Please enter the password");
+    else if(this.state.password.length < 8 || !passwordRegex.test(this.state.password) ){
+      this.notifyError("Password should contain atleast 8 characters including 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.");
     }
+    
     // else if(!this.state.confirmPassword){
     //   this.notifyError("Please enter the confirm password");
     // }

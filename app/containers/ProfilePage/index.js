@@ -13,6 +13,8 @@ import { compose } from 'redux';
 
 import Toggle from 'react-toggle';
 import injectSaga from 'utils/injectSaga';
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import injectReducer from 'utils/injectReducer';
 import makeSelectProfilePage, { makeSelectDetails, makeSelectUpdateSuccess ,makeSelectImageReturn, makeSelectUserInfo, makeSelectLoading } from './selectors';
 import makeSelectDashBoardWelcomePage from 'containers/DashBoardWelcomePage/selectors';
@@ -56,7 +58,9 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     }
 
     this.handleInput = this.handleInput.bind(this);
-    this.updateDetails = this.updateDetails.bind(this);
+    this.updatePersonal = this.updatePersonal.bind(this);
+    this.updateNotification = this.updateNotification.bind(this);
+    this.updateWallet = this.updateWallet.bind(this);
   };
 
   handleInput(e){
@@ -83,7 +87,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       }
     }else{
       this.setState({
-        [e.target.name] : e.target.value
+        [e.target.name] : e.target.value,
+        copied : false
       })
     }
   }
@@ -119,16 +124,69 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     })
   }
 
-  updateDetails(e){
+  updatePersonal(e){
+    e.preventDefault()
+    let birth = new Date(this.state.dob);
+    let current = new Date();
+    let diff = Math.abs(current.getTime() - birth.getTime())
+    let age = (diff/(1000 * 3600 * 24)) / 365
+    var regex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    if(age <= 18){
+      toast.error('Age should be above 18')
+    }
+    else
+    if(!regex.test(this.state.fullName)){
+      toast.error("Invalid Name")
+    }
+    else
+    if(this.state.fullName.length < 4 || this.state.fullName.length > 20){
+      toast.error("Name should be between 4 to 20 characters")
+    }
+    else
+    if(!isValidNumber(this.state.phone)){
+      toast.error('Phone number is invalid');
+    }else{
+      const { fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation,ethAddress, loginAlert,notifyMe } = this.state;
+      this.props.updateDetail({fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation,ethAddress, loginAlert, notifyMe});
+    }
+    // else{
+    //   toast.error('Please enter valid ETH Wallet address');
+    // }
+  }
+  updateNotification(e){
     e.preventDefault()
     // console.log(this.state.dob , "dkjsahvkfjvbfdk")
     // let current = new Date();
     // let diff = Math.abs(current - this.state.dob)
     // let age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
     // console.log( current.getFullYear(), "dkjsahvkfjvbfdk")
-    if(!isValidNumber(this.state.phone)){
-      toast.error('Phone number is invalid');
-    }else if(this.state.valid){
+    // if(!isValidNumber(this.state.phone)){
+    //   toast.error('Phone number is invalid');
+    // }
+    // else 
+    // if(this.state.valid){
+      const { fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, loginAlert, ethAddress,notifyMe } = this.state;
+      this.props.updateDetail({fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, loginAlert,ethAddress, notifyMe});
+    // }
+    // else{
+    //   toast.error('Please enter valid ETH Wallet address');
+    // }
+  }
+  updateWallet(e){
+    e.preventDefault()
+    // console.log(this.state.dob , "dkjsahvkfjvbfdk")
+    // let current = new Date();
+    // let diff = Math.abs(current - this.state.dob)
+    // let age = Math.floor(diff / (1000 * 60 * 60 * 24 * 365)); 
+    // console.log( current.getFullYear(), "dkjsahvkfjvbfdk")
+    // if(!isValidNumber(this.state.phone)){
+    //   toast.error('Phone number is invalid');
+    // }else
+    if(this.state.ethAddress.length === 0){
+      toast.error('Please enter the wallet address');
+    } 
+    else
+    if(this.state.valid){
       const { fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, loginAlert, ethAddress,notifyMe } = this.state;
       this.props.updateDetail({fullName, dob, gender, phone, telegram, twitter, creative, youtube, facebook, reddit, linkedIn, translation, loginAlert,ethAddress, notifyMe});
     }else{
@@ -182,6 +240,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     }
   }
   uploadProfileImage=()=>{
+    console.log("in handleback")
+
     document.getElementById('profileImage').click()
   }
   toggleLoginAlert = () => {
@@ -198,6 +258,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     }
   handleBackImg=(e)=> {
     e.preventDefault();
+    console.log("in handleback");
+
     var reader = new FileReader();
     var file = e.target.files[0];
     if(file.size > 5*1024*1024){
@@ -211,7 +273,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
   }
 
   render() {
-    console.log(this.props," props in  profile");
+    // console.log(this.props," props in  profile");
     console.log(this.state," state in  profile");
   const { loading } = this.props
   const   { profilePicUrl } = this.state
@@ -240,7 +302,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 </div>
                 */}
               </div>
-              <form onSubmit={this.updateDetails}>
+              {/* <form onSubmit={this.updateDetails}> */}
 
 
               <div className="row">
@@ -272,12 +334,13 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
 
         {this.state.currentView==='personal' &&
         <div>
+          <form onSubmit={this.updatePersonal}>
         <div className="row form-group">
         <div className="col-sm-3">
             <img className="img-responsive profile-Image"  src={profilePicUrl?profilePicUrl:'https://s3.amazonaws.com/websiteimagesrama/dummyProfile.png' } alt="back id" id="back_img_src"  />
         </div>
         <div className="col-sm-9">
-        <button onClick={this.uploadProfileImage} className='changeImage' >Change Image</button>
+        <button type = "button" onClick={this.uploadProfileImage} className='changeImage' >Change Image</button>
         <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg}/>
         </div>
         </div>
@@ -412,7 +475,22 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
             <label htmlFor="referalUrl"><span style={{fontWeight:'500'}}>Referal URL</span></label>
           </div>
           <div className="col-sm-9">
+            <div>
             <input className="form-control" type="text" name="referalUrl" id="referalUrl" title="Your referal url" placeholder="Referal Url" onChange={this.handleInput} value={this.state.referalUrl} disabled/>
+            <div style = {{position : "relative" , bottom : '37px'}} >
+            <CopyToClipboard text={this.state.referalUrl}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}> 
+                              <span >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px' , cursor : "pointer"  }}
+                                />
+                              </span>
+                            </CopyToClipboard>
+                            </div>
+            </div>
+
           </div>
         </div>
         {/* Signature link */}
@@ -430,11 +508,13 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <button type="submit" id = "personal" className="normal-button">Update </button>
                   </div>
                 </div>
+        </form>
         </div>
       }
 
         {this.state.currentView==='notifications' &&
         <div>
+          <form onSubmit={this.updateNotification}>
         <div className="form-group">
           <label htmlFor="sendMail" className="control-label col-sm-8 col-xs-8" >I would like to receive email after every login</label>
           <div className="col-sm-2 col-xs-2">
@@ -452,12 +532,13 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <button type="submit" className="normal-button">Update </button>
                   </div>
                 </div>
+                </form>
         </div>
       }
 
       {this.state.currentView==='wallet' &&
       <div>
-
+          <form onSubmit={this.updateWallet}>
       <div className="row form-group">
         <div className="col-sm-3">
           <label htmlFor="ethAddress"><span style={{fontWeight:'500'}}>ETH Wallet Address</span></label>
@@ -472,6 +553,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <button type="submit" className="normal-button">Update </button>
                   </div>
                 </div>
+                </form>
       </div>
 
     }
@@ -494,7 +576,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <button type="submit" className="normal-button">Update </button>
                   </div>
                 </div> */}
-              </form>
+              {/* </form> */}
             </div>
            }
           </div>
