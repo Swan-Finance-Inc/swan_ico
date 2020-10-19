@@ -270,7 +270,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                <span className={`ui-nav-text ${this.state.secAct}`}>Security</span> 
                </Link>
             </li>
-            <hr></hr>
+            {/* <hr></hr>
 
             <span className='configuration black'>INFO</span>
             <li onMouseEnter = {() => { this.state.buyAct === 'active' ? '' : this.setState({buyAct : true })} } onMouseLeave = { () =>{this.state.buyAct === 'active'? '' : this.setState({buyAct : false }) }} className={`${this.state.buyAct} nav-item`} ><Link to="https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf" role="button" onClick = {this.toggleHowToBuyActive}  target='_blank'>
@@ -310,7 +310,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                  //<span className='infoSpan'>support@centralex.io</span> 
                }
                </a>
-            </li>
+            </li> */}
   
           </ul>
          </aside>

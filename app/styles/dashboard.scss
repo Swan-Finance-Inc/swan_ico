@@ -130,8 +130,7 @@ color:blue
 	margin-right: 15px;
 }
 .signInCaptcha{
-	position: relative;
-	//left:6%;
+	// position: relative;
 }
 .unsubscribePara{
 	color:#ffff!important;
@@ -201,16 +200,19 @@ font-weight: 500;
 @media (max-width:500px ) {
 	.form-captcha{
 	 margin-right: 20px;
+
 	}
 }
 @media (min-width:700px ) {
 	.form-captcha{
 	 margin-left: 2%;
+
 	}
 }
 @media (min-width:980px ) {
 	.form-captcha{
 	 margin-left:50px;
+
 	}
 }
 .header .header-btn > a:hover , .header .header-btn > a:focus {
@@ -743,6 +745,10 @@ a.toggle-btn {
 	border-radius: 2px;
 	margin-left: 10px;
 	margin-top:20px
+}
+
+.socailLinks{
+	font-size: 26px;
 }
 
 .referral-link input[type="text"] {
@@ -1950,7 +1956,7 @@ font-size: 25px;
 	  box-shadow: 0px 3px 6px #2D6DCD6E;
 	  border-radius: 4px;
 	  opacity: 1;
-	  height: 342px;
+	  height: 363px;
   }
 
 //my-referral-code copy-clipboard-input
@@ -2231,12 +2237,13 @@ font-size: 25px;
 }
 
 .kyc-factorial{
-	width: 417px;
+	width: 454px;
 	height: 68px;
-	font: normal 30px Lato;
+	font: normal 24px Lato;
 	letter-spacing: 0.64px;
 	color: #FFFFFF;
 	opacity: 1;
+	border-radius: 4px;
 }
 
 /*  Contribution */
@@ -2740,6 +2747,14 @@ font-size: 25px;
 	.balance-card{
 		margin-top: 12px;
 		height: auto !important ;
+	}
+
+	.main-color--blue{
+		padding: 0px 4px;
+	}
+
+	.last-card{
+		margin-bottom: 12px !important;
 	}
 	
 	.exchange-button{

@@ -157,6 +157,7 @@ header .container {
 	padding:25px;
 	margin: 0 auto 30px auto;
 	max-width:450px;
+	position: relative;
 }
 .card-header h1 {
 	color:#fff;
@@ -377,6 +378,10 @@ label.form-check-label a:hover {
 	 .header-right p {
 	font-size: 13px;
 	margin-top: 5px;
+	}
+
+	.login-button{
+		width: 295px !important;
 	}
 }
 

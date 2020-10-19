@@ -382,7 +382,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                       <div className="transactions-filters">
                         <div className="transactions-filters-card">
                         <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>Transaction Type:</h4></label>
-                        <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                        <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onChange={this.handleTypeFilter}>
                           <option value="" disabled selected hidden></option>
                           <option value='Ethereum'>ETHEREUM</option>
                           <option value='Bitcoin'>BITCOIN</option>

@@ -568,18 +568,18 @@ class Balance extends React.PureComponent {
             {/* </div>
             </div> */}
           <div className="row">
-            <div className="col-lg-7"style={{ marginBottom : '30px' , marginTop : '12px' , height : "auto" }} >
+            <div className="col-lg-7 last-card"style={{ marginBottom : '30px' , marginTop : '12px' , height : "auto" }} >
                  <div className="balance-card" style={{ height : '384px' }}>
                     <div className="balance-card-inner-wrappper">
                       <div style={{ display : 'flex' , justifyContent : 'space-between' }}>
                         <div>
                         <h3 className="balance-card-inner-wrapper-heading" style={{ lineHeight: '1.3'}}>
-                          Invite Your friends <br />
-                           & Earn CenX tokens
+                        Invite Your friends 
+                        <b/> & Earn CenX tokens
                           </h3>
                           <p  className="mt-30 referral-content">
-                            Earn up to 35% on the ongoing referral <br />
-                             bonus of your referred transaction fee. </p>
+                          Earn up to 35% on the ongoing referral bonus <b/>
+                          of your referred transaction fee. </p>
                             <p  className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
                             {
                           //     <div className="code copy-clipboard">

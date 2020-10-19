@@ -1195,11 +1195,11 @@ hide=(e)=>{
                 </div> */}
 
                 <div className="form-group align-left-label">
-                  <label htmlFor="tokens" className="form-label main-color--blue">Centralex Tokens</label>
+                  <label htmlFor="tokens" className="form-label main-color--blue">CenX Tokens</label>
                   <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right form-one-style" disabled required/>
                 </div>
                 <div className="form-group align-left-label">
-                  <label htmlFor="tokensWithBonus" className="form-label main-color--blue">Centralex Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
+                  <label htmlFor="tokensWithBonus" className="form-label main-color--blue">CenX Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
                   <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right form-one-style" disabled required/>
                 </div>
                 </div>

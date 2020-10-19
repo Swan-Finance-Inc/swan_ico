@@ -131,16 +131,17 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     let diff = Math.abs(current.getTime() - birth.getTime())
     let age = (diff/(1000 * 3600 * 24)) / 365
     var regex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
-    if(age <= 18){
-      toast.error('Age should be above 18')
-    }
-    else
+    
     if(!regex.test(this.state.fullName)){
       toast.error("Invalid Name")
     }
     else
     if(this.state.fullName.length < 4 || this.state.fullName.length > 20){
       toast.error("Name should be between 4 to 20 characters")
+    }
+    else
+    if(age <= 18){
+      toast.error('Age should be above 18')
     }
     else
     if(!isValidNumber(this.state.phone)){
