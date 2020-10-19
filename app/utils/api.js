@@ -23,7 +23,11 @@ if(pathLocation === '127.0.0.1:6036'){
     //Testing baseUrl
     BaseUrl = 'http://localhost:7070/api/v1/'
     //BaseUrl = 'http://54.151.217.0:7070/api/v1/'
-  } 
+  } else if(pathLocation === '54.151.217.0:6036'){
+    console.log("TEST using test aPI")
+    //Testing baseUrl
+    BaseUrl = 'http://54.151.217.0:7070/api/v1/'
+  }
   else{
     console.log('TEST using prod http-API');
     //For localhost or other baseURL
