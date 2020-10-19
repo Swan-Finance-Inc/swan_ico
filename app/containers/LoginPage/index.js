@@ -272,7 +272,7 @@ showPassWord= (e)=>{
                             [e.target.name]: e.target.value
                           })
                         }}
-                        auth={true}
+                          auth={true}
                         inputStyle={{
                           fontSize: '15px',
                           fontWeight: '900',

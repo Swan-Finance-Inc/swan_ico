@@ -74,6 +74,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       kyc: '',
       sec: '',
       cont: '',
+      privacy : '',
       tran: '',
       faq: '',
       news: '',
@@ -101,6 +102,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       weeklyOrDaily: 'daily'
     };
     this.toggleContActive = this.toggleContActive.bind(this);
+    this.togglePrivacyActive = this.togglePrivacyActive.bind(this);
     this.toggleDashActive = this.toggleDashActive.bind(this);
     this.toggleSecActive = this.toggleSecActive.bind(this);
     this.toggleTranActive = this.toggleTranActive.bind(this);
@@ -276,7 +278,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
           resetPassActive: '',
           upload_docs:'',
           myReferal:'',
-          buy:''
+          buy:'',
+          privacy : ''
         });
       }
     }
@@ -319,7 +322,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:'active'
+      buy:'active',
+      privacy : ''
     });
   }
   toggleDashActive() {
@@ -339,7 +343,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleSecActive() {
@@ -359,7 +365,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleContActive() {
@@ -379,9 +387,32 @@ export class DashBoardWelcomePage extends React.PureComponent {
     notification:'',
     upload_docs:'',
     myReferal:'',
-    buy:''
+    buy:'',
+    privacy : ''
+
   });
   }
+  togglePrivacyActive() {
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      cont: '',
+      tran: '',
+      support: '',
+      ticket: '',
+      faq: '',
+      news: '',
+      announcements: '',
+      profile: '',
+      resetPass: '',
+      notification:'',
+      upload_docs:'',
+      myReferal:'',
+      buy:'',
+      privacy : 'active'
+    });
+    }
   toggleTranActive() {
     this.setState({
       dash: '',
@@ -399,7 +430,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleSupportActive() {
@@ -419,7 +452,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   dashActive() {
@@ -439,7 +474,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
     this.notifyTimeout();
   }
@@ -460,7 +497,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleFaqActive() {
@@ -480,7 +519,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleNewsActive() {
@@ -500,7 +541,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleAnnouncementsActive() {
@@ -520,7 +563,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleTicketActive() {
@@ -540,7 +585,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleProfileActive() {
@@ -560,7 +607,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleResetPassActive() {
@@ -580,7 +629,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   toggleUpDocsActive() {
@@ -600,7 +651,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'active',
       myReferal:'',
-      buy:''
+      buy:'',
+      privacy : ''
+
     });
   }
   togglemyReferal() {
@@ -621,7 +674,9 @@ export class DashBoardWelcomePage extends React.PureComponent {
       notification:'',
       upload_docs:'',
       myReferal:'active',
-      buy:''
+      buy:'',
+      privacy : ''
+
     }
     );
   }
@@ -646,6 +701,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       kycMsg:'',
       myReferal:'',
       buy:'',
+      privacy : ''
     });
   }
   notifyTimeout() {
@@ -829,6 +885,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             sec={this.state.sec}
             tran={this.state.tran}
             cont={this.state.cont}
+            privacy={this.state.privacy}
             kyc={this.state.kyc}
             support={this.state.support}
             faq={this.state.faq}
@@ -846,6 +903,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             upload_docs={this.state.upload_docs}
             toggleDashActive={this.toggleDashActive}
             toggleContActive={this.toggleContActive}
+            togglePrivacyActive={this.togglePrivacyActive}
             toggleKycActive={this.toggleKycActive}
             toggleSecActive={this.toggleSecActive}
             toggleTranActive={this.toggleTranActive}
@@ -942,20 +1000,23 @@ export class DashBoardWelcomePage extends React.PureComponent {
 '' }
         <div className='row'>
         <div id="footer" style={{position:'fixed'}}  className="ui-footer">
-        © 2019 Centralex Trading oü , All Rights Reserved
-        <a className='socailLinks' href='https://www.facebook.com/centralexexchange/' target="_blank">facebook</a>
-        <a className='socailLinks' href='https://twitter.com/centralexSupport' target="_blank">twitter</a>
-        <a className='socailLinks' href='https://Linkedin.com/company/centralex' target="_blank">LinkedIn</a>
+        © Copyright 2018 - 2020 Centralex Holdings Ltd
+        <a className='socailLinks' href='https://www.facebook.com/centralexexchange/' target="_blank"><i style ={{color : ' #3b5998'}} class="fa fa-facebook-official" aria-hidden="true"></i></a>
+        <a className='socailLinks' href='https://twitter.com/centralexSupport' target="_blank"><i style = {{color : '#00acee'}}  class="fa fa-twitter-square" aria-hidden="true"></i></a>
+        <a className='socailLinks' href='https://Linkedin.com/company/centralex' target="_blank"><i style ={{color : '#0e76a8'}} class="fa fa-linkedin-square" aria-hidden="true"></i></a>
+        <a className='socailLinks' href='https://www.instagram.com/centralexhk/' target="_blank"><i style ={{background : '#d6249f' , background : 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)' , boxShadow : '0px 3px 10px rgba(0,0,0,.25)' , borderRadius : '20px'}} class="fa fa-instagram" aria-hidden="true"></i></a>
+        {/* <a className='socailLinks' href='https://discord.gg/NTDFdMh' target="_blank"><i style ={{color : ''}} class="fa fa-instagram" aria-hidden="true"></i></a> */}
+        <a className='socailLinks' href='https://t.me/centralexhk' target="_blank"><i style ={{color : '#0088cc'}} class="fa fa-telegram" aria-hidden="true"></i></a>
         {/* <a href='https://play.google.com/store/apps/details?id=com.centralex&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a> */}
 
         </div>
         </div>
 
-        <div className='row'>
+        <div className='row' style ={{display : "none"}} >
           <div className='col-md-1 col-md-offset-6'>
             <div className="sticky-android-logo">
               <a href="https://s3-ap-southeast-1.amazonaws.com/centralex-bucket/app-debug-16.apk" target="_blank" className="sticky-android-icon">
-                // <i className="fa fa-android fa-3x" aria-hidden="true"></i>
+                 <i className="fa fa-android fa-3x" aria-hidden="true"></i>
                 <p className='androidStickyP'>Download app here</p>
               </a>
             </div>

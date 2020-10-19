@@ -45,7 +45,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       upload_docs:'',
       myReferal:'',
       buyAct:'',
-      PrivacyPolicy:''
+      privacy:''
     };
   }
 
@@ -53,6 +53,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.setState({
       dashAct: this.props.dash,
       contAct: this.props.cont,
+      privacyAct: this.props.privacy,
       kycAct: this.props.kyc,
       tranAct: this.props.tran,
       ticketAct: this.props.ticket,
@@ -97,6 +98,15 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     // if(this.props.kycStatus == 'ACCEPTED'){
       this.props.compact();
       this.props.toggleContActive();
+    // }else{
+      // toast.error('Please complete your kyc to contribute.')
+    // }
+  }
+
+  togglePrivacyActive=(e)=>{
+    // if(this.props.kycStatus == 'ACCEPTED'){
+      this.props.compact();
+      this.props.togglePrivacyActive();
     // }else{
       // toast.error('Please complete your kyc to contribute.')
     // }
@@ -156,13 +166,13 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
   }
 
   componentWillReceiveProps(nextProps) {
-    console.log(nextProps,'nexprops')
+    console.log(nextProps,'dsjkvfdkbjvfd')
     this.setState({
       dashAct: nextProps.dash,
       contAct: nextProps.cont,
       kycAct: nextProps.kyc,
-      announcementsAct: this.props.announcements,
-      newsAct: this.props.news,
+      announcementsAct: nextProps.announcements,
+      newsAct: nextProps.news,
       tranAct: nextProps.tran,
       secAct: nextProps.sec,
       ticketAct: nextProps.ticket,
@@ -172,7 +182,8 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       resetPassAct: nextProps.resetPass,
       upload_docs:nextProps.upload_docs,
       myReferal:nextProps.myReferal,
-      buyAct:nextProps.buy
+      buyAct:nextProps.buy,
+      privacy: nextProps.privacy
     });
 
   }
@@ -191,7 +202,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
 
 
   render() {
-    console.log(this.state,'hoeoeoei')
+    console.log(this.state.privacy,'hoeoeoei')
     console.log(this.props,'props mkdkslnfndfkjdjvdj')
 
     return (
@@ -225,81 +236,81 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
 
          <aside id="aside" className="ui-aside">
            <ul className="nav ui-nav">
-           <li className={`${this.state.dashAct} nav-item`}
+           <li onMouseEnter = {() => { this.state.dashAct === 'active' ? '' : this.setState({dashAct : true })} } onMouseLeave = { () =>{this.state.dashAct === 'active'? '' : this.setState({dashAct : false }) }} className={`${this.state.dashAct} nav-item`}
             ><Link to="/dashboard" role="button" onClick={this.toggleDashActive}>
                <DashBoard color={this.state.dashAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.dashAct}`} 
                >Dashboard</span> 
                </Link>
             </li>
-            <li className={`${this.state.kycAct} nav-item`} ><Link to="/dashboard/kyc" role="button" onClick={this.toggleKycActive}>
+            <li onMouseEnter = {() => { this.state.kycAct === 'active' ? '' : this.setState({kycAct : true })} } onMouseLeave = { () =>{this.state.kycAct === 'active'? '' : this.setState({kycAct : false }) }} className={`${this.state.kycAct} nav-item`} ><Link to="/dashboard/kyc" role="button" onClick={this.toggleKycActive}>
                <KYC color={this.state.kycAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.kycAct}`}>KYC Verify</span> 
                </Link>
             </li>
     
-            <li className={`${this.state.contAct} nav-item`} ><Link to="/dashboard/contribution" role="button" onClick={this.toggleContriActive}>
-               <Contribution color={this.state.contAct ? '#fff' : '#2d6dcd'}/>
+            <li onMouseEnter = {() => { this.state.contAct === 'active' ? '' : this.setState({contAct : true })} } onMouseLeave = { () =>{this.state.contAct === 'active'? '' : this.setState({contAct : false }) }} className={`${this.state.contAct} nav-item `} ><Link to="/dashboard/contribution" role="button" onClick={this.toggleContriActive}>
+               <Contribution className = "ui-nav-text" color={this.state.contAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.contAct}`}>Contribution</span> 
                </Link>
-            </li><li className={`${this.state.tranAct} nav-item`}  ><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}>
+            </li><li onMouseEnter = {() => { this.state.tranAct === 'active' ? '' : this.setState({tranAct : true })} } onMouseLeave = { () =>{this.state.tranAct === 'active'? '' : this.setState({tranAct : false }) }} className={`${this.state.tranAct} nav-item`}  ><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}>
                 <Transactions color={this.state.tranAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.tranAct}`}>Transactions</span> 
                </Link>
-            </li><li className={`${this.state.myReferal} nav-item`} ><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}>
+            </li><li onMouseEnter = {() => { this.state.myReferal === 'active' ? '' : this.setState({myReferal : true })} } onMouseLeave = { () =>{this.state.myReferal === 'active'? '' : this.setState({myReferal : false }) }} className={`${this.state.myReferal} nav-item`} ><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}>
                <Referral color={this.state.myReferal ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.myReferal}`}>Referrals</span> 
                </Link>
-            </li><li className={`${this.state.ticketAct} nav-item`}><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}>
+            </li><li onMouseEnter = {() => { this.state.ticketAct === 'active' ? '' : this.setState({ticketAct : true })} } onMouseLeave = { () =>{this.state.ticketAct === 'active'? '' : this.setState({ticketAct : false }) }} className={`${this.state.ticketAct} nav-item`}><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}>
                <Tickets color={this.state.ticketAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.ticketAct}`}>Tickets</span> 
                </Link>
-            </li><li className={`${this.state.secAct} nav-item`} ><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}>
+            </li><li onMouseEnter = {() => { this.state.secAct === 'active' ? '' : this.setState({secAct : true })} } onMouseLeave = { () =>{this.state.secAct === 'active'? '' : this.setState({secAct : false }) }} className={`${this.state.secAct} nav-item`} ><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}>
                <Security color={this.state.secAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.secAct}`}>Security</span> 
                </Link>
             </li>
-            <hr></hr>
+            {/* <hr></hr>
 
             <span className='configuration black'>INFO</span>
-            <li className={`${this.state.buy} nav-item`} ><Link to="https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf" role="button"  target='_blank'>
-               <WhitePaper color={this.state.secAct ? '#fff' : '#2d6dcd'}/>
-               <span className={`ui-nav-text ${this.state.buy}`}>White Paper</span> 
+            <li onMouseEnter = {() => { this.state.buyAct === 'active' ? '' : this.setState({buyAct : true })} } onMouseLeave = { () =>{this.state.buyAct === 'active'? '' : this.setState({buyAct : false }) }} className={`${this.state.buyAct} nav-item`} ><Link to="https://cdn1.centralex.io/centralex-whitepaper-exchange.pdf" role="button" onClick = {this.toggleHowToBuyActive}  target='_blank'>
+               <WhitePaper color={this.state.buyAct ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.buyAct}`}>White Paper</span> 
                </Link>
             </li>
 
-            <li className={`${this.state.faqAct} nav-item`} ><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}>
+            <li onMouseEnter = {() => { this.state.faqAct === 'active' ? '' : this.setState({faqAct : true })} } onMouseLeave = { () =>{this.state.faqAct === 'active'? '' : this.setState({faqAct : false }) }} className={`${this.state.faqAct} nav-item`} ><Link to="/dashboard/faq" role="button" onClick={this.toggleFaqActive}>
                <Info color={this.state.faqAct ? '#fff' : '#fff'}/>
                <span className={`ui-nav-text ${this.state.faqAct}`}>FAQ</span> 
                </Link>
             </li>
 
-            <li className={`${this.state.PrivacyPolicy} nav-item`} ><Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf" role="button"  target='_blank'>
-               <PrivatePolicy color={this.state.PrivacyPolicy ? '#fff' : '#2d6dcd'}/>
-               <span className={`ui-nav-text ${this.state.PrivacyPolicy}`}>Privacy Policy</span> 
+            <li onMouseEnter = {() => { this.state.privacy === 'active' ? '' : this.setState({privacy : true })} } onMouseLeave = { () =>{this.state.privacy === 'active'? '' : this.setState({privacy : false }) }} className={`${this.state.privacy} nav-item`} ><Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf" role="button" onClick = {this.togglePrivacyActive} target='_blank' >
+               <PrivatePolicy color={this.state.privacy ? '#fff' : '#2d6dcd'}/>
+               <span className={`ui-nav-text ${this.state.privacy}`}>Privacy Policy</span> 
                </Link>
             </li>
 
-            <li className={`${this.state.newsAct} nav-item`} ><Link to="/dashboard/news" role="button" onClick={this.toggleNewsActive}>
+            <li onMouseEnter = {() => { this.state.newsAct === 'active' ? '' : this.setState({newsAct : true })} } onMouseLeave = { () =>{this.state.newsAct === 'active'? '' : this.setState({newsAct : false }) }} className={`${this.state.newsAct} nav-item`} ><Link to="/dashboard/news" role="button" onClick={this.toggleNewsActive}>
                <News color={this.state.newsAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.newsAct}`}>News</span> 
                </Link>
             </li>
 
-            <li className={`${this.state.announcementsAct} nav-item`} ><Link to="/dashboard/announcements" role="button" onClick={this.toggleAnnouncementsActive}>
+            <li onMouseEnter = {() => { this.state.announcementsAct === 'active' ? '' : this.setState({announcementsAct : true })} } onMouseLeave = { () =>{this.state.announcementsAct === 'active'? '' : this.setState({announcementsAct : false }) }} className={`${this.state.announcementsAct} nav-item`} ><Link to="/dashboard/announcements" role="button" onClick={this.toggleAnnouncementsActive}>
                <Annoucement color={this.state.announcementsAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.announcementsAct}`}>Announcements</span> 
                </Link>
             </li>
 
-            <li className={`${this.state.supportAct} nav-item`} ><a href="mailto:support@centralex.io">
+            <li onMouseEnter = {() => { this.state.supportAct === 'active' ? '' : this.setState({supportAct : true })} } onMouseLeave = { () =>{this.state.supportAct === 'active'? '' : this.setState({supportAct : false }) }} className={`${this.state.supportAct} nav-item`} ><a href="mailto: hello@centralex.com" onClick = {this.toggleSupportActive} >
                <Support color={this.state.supportAct ? '#fff' : '#2d6dcd'}/>
                <span className={`ui-nav-text ${this.state.supportAct}`} style={{ color : 'black' }}>Support</span>
                {
                  //<span className='infoSpan'>support@centralex.io</span> 
                }
                </a>
-            </li>
+            </li> */}
   
           </ul>
          </aside>

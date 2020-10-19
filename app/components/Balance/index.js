@@ -51,7 +51,7 @@ class Balance extends React.PureComponent {
   componentDidMount(){
     console.log("dhoompichakdhoom")
     this.setState({
-      referalUrl:`https://tokensale.centralex.com/signup/refer/${this.props.referralCode}`
+      referalUrl:`https://centralex.com/signup/refer/${this.props.referralCode}`
     })
   }
 
@@ -340,7 +340,7 @@ class Balance extends React.PureComponent {
               <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
                 <div className="balance-card-inner-wrappper">
                   <h3 className="balance-card-inner-wrapper-heading">
-                    ICO Details
+                    ILO Details
                   </h3>
                   <div className="ico-details-middle">
                     <div>
@@ -379,13 +379,13 @@ class Balance extends React.PureComponent {
               </div>
             </div>
           </div>
-
-            <div
+          {/* <div className="row"> */}
+            {/* <div
               className="col-lg-7 col-sm-12"
               style={{ 
                 //transform: "translateY(-39px)" ,
                marginTop : '12px' }}
-            >
+             >
               <div className="balance-card" id="fixed-height">
                 <div
                   className="balance-card-inner-wrappper"
@@ -421,26 +421,26 @@ class Balance extends React.PureComponent {
                           </MenuItem>
                      </DropdownButton>
                      
-                  {/* <Dropdown overlay={menu} disabled>
+                  <Dropdown overlay={menu} disabled>
                   <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
                     Daily <DownOutlined />
                   </a>
-                </Dropdown> */}
-                {/* <Dropdown overlay={menu} disabled>
+                </Dropdown>
+                <Dropdown overlay={menu} disabled>
                   <a className="ant-dropdown-link"
                   style={{marginLeft : '50px' }}
                   onClick={e => e.preventDefault()}>
                     Weekly <DownOutlined />
                   </a>
-                </Dropdown> */}
+                </Dropdown>
                 </div>
               <div>{this.state.weeklyOrDaily==='daily'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
               {this.state.weeklyOrDaily==='monthly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
               {this.state.weeklyOrDaily==='weekly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}</div>
                 </div>
               </div>
-            </div>
-            <div className="col-lg-5 col-sm-12">
+            </div> */}
+            {/* <div className="col-lg-5 col-sm-12">
               <div
                 className="balance-card"
                 // style={{
@@ -564,22 +564,23 @@ class Balance extends React.PureComponent {
                   </div>
                 </div>
                 <hr style={{ borderTop: "1px solid #CEE2FE", width: "90%" }} />
-              </div>
-            </div>
-
+              </div> */}
+            {/* </div>
+            </div> */}
           <div className="row">
-            <div className="col-lg-7"style={{ marginBottom : '30px' , marginTop : '12px' }} >
-                 <div className="balance-card" style={{ height : '352px' }}>
+            <div className="col-lg-7 last-card"style={{ marginBottom : '30px' , marginTop : '12px' , height : "auto" }} >
+                 <div className="balance-card" style={{ height : '384px' }}>
                     <div className="balance-card-inner-wrappper">
                       <div style={{ display : 'flex' , justifyContent : 'space-between' }}>
                         <div>
                         <h3 className="balance-card-inner-wrapper-heading" style={{ lineHeight: '1.3'}}>
-                          Invite Your Friends <br />
-                          & Earn Coins
+                        Invite Your friends 
+                        <b/> & Earn CenX tokens
                           </h3>
-                          <p className="mt-30 referral-content">Earn 10% or Up to 250 Tokens <br />
-                            For the first purchase by the referred.</p>
-                            <p className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
+                          <p  className="mt-30 referral-content">
+                          Earn up to 35% on the ongoing referral bonus <b/>
+                          of your referred transaction fee. </p>
+                            <p  className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
                             {
                           //     <div className="code copy-clipboard">
                           //   <input id="foo" value={this.state.referalUrl}
@@ -607,7 +608,7 @@ class Balance extends React.PureComponent {
                           <img src={Referral} className="referral-logo" />
                         </div>
                       </div>
-                      <div style={{width: '27em' , position: 'relative'}}>
+                      <div style={{width: '86%' , position: 'relative'}}>
                             <input value={this.state.referalUrl }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input"
@@ -637,7 +638,7 @@ class Balance extends React.PureComponent {
                   borderTopRightRadius: 0,
                   borderTopLeftRadius: 0,
                   padding: "12px 0px 29px 15px",
-                  height: "348px",
+                  height: "384px",
                 }}
               >
                 <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>

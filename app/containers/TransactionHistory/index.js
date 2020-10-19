@@ -233,10 +233,14 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     switch(e.target.id) {
       case 'clearType' :
       document.getElementById('typeFilter').selectedIndex = 0;
+      document.getElementById('pageFilter').selectedIndex = 0;
       this.setState({
         ...this.state,transactionParam:{
           ...this.state.transactionParam,
           type:'',
+          createdUl : '',
+          createdLl : '',
+          page : 1
         },
         disablePrevious:true
       }, () => {
@@ -378,7 +382,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                       <div className="transactions-filters">
                         <div className="transactions-filters-card">
                         <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>Transaction Type:</h4></label>
-                        <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                        <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onChange={this.handleTypeFilter}>
                           <option value="" disabled selected hidden></option>
                           <option value='Ethereum'>ETHEREUM</option>
                           <option value='Bitcoin'>BITCOIN</option>
@@ -424,7 +428,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               <div className="transactions-filters" style={{ paddingTop : '0px' }}>
                 <div className="transactions-filters-card">
                 <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>No Of Transactions:</h4></label>
-                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="pageFilter" >
                   <option value="" disabled selected hidden></option>
                   <option value='5'>5</option>
                   <option value='10'>10</option>
@@ -434,7 +438,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               </div>  
               
               <div className='col-sm-12'>
-                  {/* {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
+                  {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
                       showPaginationBottom={false}
                       style={{ height : this.state.data.length > 0 ? '100%' : '400px' , marginTop : '20px'}}
                       data={this.state.data}
@@ -444,12 +448,12 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                      noDataText={
                       <div>
                       <img src={EmptyFile} style={{ height: '143px' }} />
-                      <p className="left">No Transactions Found</p>
+                      <p className="center">No Records Found</p>
                       </div>
                     }
                       rowsText={'transactions'}
                       defaultPageSize={5}
-                    />} */}
+                    />}
              </div>
               </div>
             </div>

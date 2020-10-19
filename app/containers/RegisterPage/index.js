@@ -35,7 +35,7 @@ export class RegisterPage extends React.PureComponent {
     super(props);
     this.onChange = this.onChange.bind(this);
     this.passwordMatch = this.passwordMatch.bind(this);
-
+    this.notifyError = this.notifyError.bind(this);
     this.formSubmit = this.formSubmit.bind(this);
     this.state = {
       "g-recaptcha-response": "",
@@ -141,22 +141,28 @@ export class RegisterPage extends React.PureComponent {
   formSubmit(e) {
     e.preventDefault();
     let user;
-    const terms = document.getElementById("terms");
+    // const terms = document.getElementById("terms");
     const usCitizen = document.getElementById("usCitizen");
     //const name = document.getElementById("fname").value;
     //const name = this.state.fullname;
     // console.log(terms.checked)
     // console.log(this.state.referToken);
-
-    if(!this.state.fullname){
-      this.notifyError("Please enter the name");
+    var nameRegex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
+    if(this.state.fullname.length < 4 || this.state.fullname.length > 20){
+      this.notifyError("Name should be between 4 to 20 characters");
+    }
+    else
+    if(!nameRegex.test(this.state.fullname)){
+      this.notifyError("Invalid Name")
     }
     else if(!this.state.email){
       this.notifyError("Please enter the email");
     }
-    else if(!this.state.password){
-      this.notifyError("Please enter the password");
+    else if(this.state.password.length < 8 || !passwordRegex.test(this.state.password) ){
+      this.notifyError("Password should contain atleast 8 characters including 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.");
     }
+    
     // else if(!this.state.confirmPassword){
     //   this.notifyError("Please enter the confirm password");
     // }
@@ -172,7 +178,7 @@ export class RegisterPage extends React.PureComponent {
         email: this.state.email,
         password: this.state.password,
         rfcode: this.state.referToken,
-        termsAccepted: terms.checked,
+        // termsAccepted: terms.checked,
         isUs: usCitizen.checked,
         captcha: this.state["g-recaptcha-response"],
         channel: this.state.channel
@@ -290,7 +296,8 @@ export class RegisterPage extends React.PureComponent {
         <div className="wrapper">
           <ToastContainer
             position="top-center"
-            autoClose={10000000000000000}
+            autoClose={2800}
+            type="error"
             hideProgressBar={false}
             newestOnTop
             closeOnClick
@@ -417,10 +424,10 @@ export class RegisterPage extends React.PureComponent {
                           className="form-check-label"
                           htmlFor="user_accepted_policies"
                         >
-                          <input
+                          {/* <input
                             id="terms"
                             className="boolean required form-check-input"
-                            required
+                            // required
                             label="false"
                             data-title="Please confirm"
                             data-placement="left"
@@ -429,7 +436,7 @@ export class RegisterPage extends React.PureComponent {
                             aria-required="true"
                             type="checkbox"
                             name="user[accepted_policies]"
-                          />
+                          /> */}
                           &nbsp; I consent to receive email updates from
                           centralex.
                         </label>

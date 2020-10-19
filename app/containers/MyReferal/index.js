@@ -328,15 +328,16 @@ export class MyReferal extends React.PureComponent {
                       }}
                     >
                       <h3
-                        className="balance-card-inner-wrapper-heading"
+                        className="mt-30 balance-card-inner-wrapper-heading"
                         style={{ lineHeight: "1.3" }}
                       >
-                        Invite Your Friends <br />& Earn Coins
+                        Invite your friends and <br/> earn up to
+                         35% in CenX tokens.
                       </h3>
                       <hr className="invite-hr" />
                       <p className="mt-30 referral-content">
-                        Earn 10% or Up to 250 Tokens <br />
-                        For the first purchase by the referred.
+                      Earn up to 35% on the ongoing referral
+                      <br/> bonus of your referred transaction fee.
                       </p>
                       <div className="referral-logo-container" style={{ width : '274px' }}>
                         <img src={Referral} className="referral-logo" style={{ width : 'inherit' }}/>
@@ -363,7 +364,7 @@ export class MyReferal extends React.PureComponent {
                       //   </button>
                       // </div>
                       }
-                       <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
+                       <div style={{width: '69%' , position: 'relative', marginBottom : '20px'}}>
                             <input value={this.state.referralUrl }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input"
@@ -483,7 +484,7 @@ export class MyReferal extends React.PureComponent {
                       style={{
                         marginTop: "20px",
                         fontSize: "12px",
-                        cursor: "pointer",
+                        cursor: this.state.transactions ? "" : "pointer",
                         height : this.state.transactions.length > 0 ? '100%' : '400px' 
                       }}
                       data={this.state.transactions}

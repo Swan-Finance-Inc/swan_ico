@@ -690,7 +690,7 @@ handleInput2=(e)=>{
                   <div className="text-center">
                     <button className="invest kyc-factorial"
                     onClick={this.hitFractal} 
-                    >Start KYC With Fractal</button>
+                    >Start your KYC Journey with <b>Fractal ID</b></button>
                   </div>
               </div>
             </div>  
