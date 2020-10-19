@@ -77,13 +77,15 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       hotWalletList : [],
       iswalletCreating:false,
       metamaskAccount: '',
-      metamaskConnected :true,
+      metamaskConnected :false,
       open: false,
-      transactionData: ''
+      transactionData: '',
+      paymentMode: 'viaPvtWallet'
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
     this.CurrencyChange = this.CurrencyChange.bind(this);
+    this.paymentModeChange = this.paymentModeChange.bind(this);
     this.currencyQuantityChange = this.currencyQuantityChange.bind(this);
     this.comeBack = this.comeBack.bind(this);
     this.confirm = this.confirm.bind(this);
@@ -108,11 +110,7 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
 
   componentDidMount() {
     this.props.getData();
-    this.props.listHotWallet()
-    console.log("Getting dataAa");
-    if(this.state.curr === 'Ethereum'){
-      this.metamaskCall();
-    }
+    this.props.listHotWallet();
     this.interval = setInterval(() => this.getMetamaskAddress(), 1000);
 
   }
@@ -308,11 +306,25 @@ gobackDollar=(e)=>{
   }
 
 
-  confirm(data) {
-    let body = this.state.body;
-    body.transactionHash = data;
-    console.log(data,"hash");
-    console.log(body,"body")
+  confirm(fromAdd, data) {
+    let body = {
+      tokens: this.state.tokensWithBonus,
+      type: this.state.curr,
+      amount: this.state.currencyQuantity,
+      fromAddress:fromAdd,
+      toAddress: this.props.successData.ethAddress,
+      tokenReceivingAddress:this.state.fromAddressEth,
+      usdAmount: this.state.dollarsInvested,
+      rate:this.state.ethToDollar,
+      phase:this.state.stage,
+      tokenPrice : this.state.tokenPrice,
+      bonus:this.state.bonus,
+      discount:this.state.discount,
+      isBonusOrDiscount:this.state.isBonusOrDiscount,
+      transactionHash : data
+    };
+    console.log("dddddddddddddddddddddddd",data,"hash");
+    console.log("bbbbbbbbbbbbbbbbbbbbbbbb",body,"body")
     this.props.confirmPayment(body);
   }
 
@@ -321,7 +333,8 @@ gobackDollar=(e)=>{
       confirmContri: false,
       curr: 'Ethereum',
       ethToDollar: this.props.successData.ethUsd,
-      usdEurContributionConfirm:false
+      usdEurContributionConfirm:false,
+      paymentMode: 'viaPvtWallet'
     })
 
   }
@@ -491,6 +504,7 @@ gobackDollar=(e)=>{
         
       }catch(err) {
        console.log("Metamask Integration error", err);
+       toast.error(`Metamask Integration error: ${err}`);
       }
     } else {
       toast.error('Please install metamask or disable privacy feature');
@@ -499,6 +513,109 @@ gobackDollar=(e)=>{
       //   errorMessage: 'Please install metamask or disable privacy feature'
       // })
     }
+  }
+  paymentModeChange(e){
+    e.preventDefault();
+    let currencyQuantity = document.getElementById('amt');
+    let add = this.state.fromAddress;
+    console.log(currencyQuantity.value);
+    if (currencyQuantity.value === 0) {
+      currencyQuantity = 0;
+    }
+    // let add = document.getElementById('fromAddress').value;
+    //this.metamaskCall();
+    // this.setState({
+    //   fromAddress: this.props.userInfo.userInfo.ethAddress,
+    //   tokenReceiveAddress: false,
+    //   validBlank: true
+    // })
+    if(e.target.value === 'viaMetamaskExt'){
+      this.metamaskCall();
+    }
+    if (add.match(/^0x[a-fA-F0-9]{40}$/)) {
+      console.log(" inside  ethererererer------------------------ add match")
+     // console.log('done eth');
+     if(this.state.isBonusOrDiscount==='staticDiscount'){
+       console.log(" inside  etherium type",this.state)
+       this.setState({
+         paymentMode : e.target.value,
+         valid: true,
+         validBlank: 'false',
+         curr: 'Ethereum',
+         validWallet: true,
+         currencyQuantity: this.state.amtInvested,
+        dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+        tokens: (currencyQuantity.value*this.state.ethToDollar)/this.state.tokenPrice,
+        tokensWithBonus: (currencyQuantity.value*this.state.ethToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+       });
+     }else{
+       this.setState({
+        paymentMode : e.target.value,
+         valid: true,
+         validBlank: 'false',
+         curr: 'Ethereum',
+         validWallet: true,
+         currencyQuantity: this.state.amtInvested,
+        dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+        tokens: currencyQuantity.value * this.state.tokensPerEther,
+        tokensWithBonus: currencyQuantity.value * this.state.tokensPerEther + currencyQuantity.value * this.state.tokensPerEther * 0.01 * this.state.bonus
+       });
+     }
+
+    }else if(add == ''){
+      // console.log('Empty');
+      if(this.state.isBonusOrDiscount==='staticDiscount'){
+
+        this.setState({
+          paymentMode : e.target.value,
+          validBlank: 'true',
+          curr: 'Ethereum',
+          currencyQuantity: this.state.amtInvested,
+          dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+          tokens: (currencyQuantity.value*this.state.ethToDollar)/this.state.tokenPrice,
+          tokensWithBonus: (currencyQuantity.value*this.state.ethToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+        })
+      }
+      else {
+        this.setState({
+          paymentMode : e.target.value,
+          validBlank: 'true',
+          curr: 'Ethereum',
+          currencyQuantity: this.state.amtInvested,
+          dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+          tokens: currencyQuantity.value * this.state.tokensPerEther,
+          tokensWithBonus: (currencyQuantity.value * this.state.tokensPerEther) + ((currencyQuantity.value * this.state.tokensPerEther) * (this.state.bonus / 100)),
+        })
+      }
+    }else {
+     // console.log('not done');
+     if(this.state.isBonusOrDiscount==='staticDiscount'){
+       this.setState({
+        paymentMode : e.target.value,
+         valid: false,
+         validBlank: 'false',
+         curr: 'Ethereum',
+        currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
+        dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+        tokens: (currencyQuantity.value*this.state.btcToDollar)/this.state.tokenPrice,
+        tokensWithBonus: (currencyQuantity.value*this.state.btcToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+       });
+     }
+     else{
+       this.setState({
+        paymentMode : e.target.value,
+         valid: false,
+         validBlank: 'false',
+         curr: 'Ethereum',
+       currencyQuantity: this.state.dollarsInvested / this.state.ethToDollar,
+       dollarsInvested: currencyQuantity.value * this.state.ethToDollar,
+       tokens: currencyQuantity.value * this.state.tokensPerEther,
+       tokensWithBonus: currencyQuantity.value * this.state.tokensPerEther + currencyQuantity.value * this.state.tokensPerEther * 0.01 * this.state.bonus
+       });
+     }
+
+    }
+
   }
 
 
@@ -591,7 +708,7 @@ gobackDollar=(e)=>{
     } else  if(e.target.value === 'ETH') {
       let currencyQuantity = document.getElementById('amt');
       // let add = document.getElementById('fromAddress').value;
-      this.metamaskCall();
+      //this.metamaskCall();
       this.setState({
         fromAddress: this.props.userInfo.userInfo.ethAddress,
         tokenReceiveAddress: false,
@@ -793,54 +910,32 @@ gobackDollar=(e)=>{
     }
 
     if (this.state.curr === "Ethereum"){
-      console.log("sthereum payment started", this.state.metamaskAccount);
-      let receiver = '0xd325765C388CB205a03556EAB331ffA80Acf5130';
-      let sender = this.state.metamaskAccount;
-      try{
-      let txnhash = await web3.eth.sendTransaction({to:receiver,
-        from:sender, 
-       value:web3.toWei(amount, "ether")}
-        ,function (err, res){
-          if(err){
-            toast.error(`Error: ${err.message}`)
-            this.setState({transactionData:err, open:true})
-          }else{
-            toast.success(`Trxn Hash:  ${res}`)
-            console.log("txnHash:",res)
-          }
-        });
+      // console.log("sthereum payment started", this.state.metamaskAccount);
+      // let receiver = '0xd325765C388CB205a03556EAB331ffA80Acf5130';
+      // let sender = this.state.metamaskAccount;
+      // try{
+      // let txnhash = await web3.eth.sendTransaction({to:receiver,
+      //   from:sender, 
+      //  value:web3.toWei(amount, "ether")}
+      //   ,function (err, res){
+      //     if(err){
+      //       toast.error(`Error: ${err.message}`)
+      //       this.setState({transactionData:err, open:true})
+      //     }else{
+      //       toast.success(`Trxn Hash:  ${res}`)
+      //       console.log("txnHash:",res)
+      //     }
+      //   });
         
-      }catch(error){
-        console.log("error in send transactaion", error);
-      }
-      console.log("buabuhaubuahbuhbauhabhuabuahbauhbaubhua, ", txnhash);
-    } else
-    // if(this.state.curr === "Ethereum"){
-    //  const trxnHash = await web3.eth.getTransactionCount(this.state.metamaskAccount);
-    //  console.log("thts how we rollin' ", trxnHash);
-//  .then((b=console.log)=>{
-//     console.log(b)
-//     for(var i=0;i<b;i++){
-//             web3.eth.getBlock(b-i).then((Block)=>
-//             {
+      // }catch(error){
+      //   console.log("error in send transactaion", error);
+      // }
+      // console.log("buabuhaubuahbuhbauhabhuabuahbauhbaubhua, ", txnhash);
+      this.setState({
+        confirmContri : true
+      })
 
-//             a =[
-//                             Block.hash
-//                  ]
-//                      console.log(a);
-//                  var  iterator =a.values()
-//                  for (let elements of iterator) { 
-//              web3.eth.getTransactionFromBlock(elements).then(console.log)
-
-
-//                 } 
-//              });
-//          }
-//          });
-  //  }
-
-
-    if( this.state.hotWalletList.length > 0 ){
+    } else if( this.state.hotWalletList.length > 0 ){
       let hasBtcWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "BTC")
       console.log("WWWWWWWWWWWHHHHHHHHHHHHHHHHaaaaaaaaaaaaattttttttttttttSSSSSSSSSSS this: ",hasBtcWalletCreated);
       if(hasBtcWalletCreated){ //btc wallet already present
@@ -935,8 +1030,8 @@ hide=(e)=>{
         
 
       
-    // console.log(this.props," props in contribution page")
-     //console.log(this.state," state in contribution page")
+     console.log(this.props," props in contribution page")
+    // console.log(this.state," state in contribution page")
     const { loading } = this.props
     // this.setState({
     //   loading : this.props
@@ -954,11 +1049,6 @@ hide=(e)=>{
 //       );
 //     }
     //console.log(".phir....................se............aaya.");
-
-    // if(this.state.metamaskConnected) {
-    //   this.getMetamaskAddress();
-
-    // }
 
 
 
@@ -1038,11 +1128,14 @@ hide=(e)=>{
       ethAddress={this.props.successData.ethAddress}
       fromAddress={this.state.fromAddress}
       tokenReceive={this.state.tokenReceiveAddress}
+      toAddress = {this.state.toAddress}
+      paymentMode = {this.state.paymentMode}
       finalPayment={this.confirm}
       usdEurContributionConfirm={this.state.usdEurContributionConfirm}
       successData ={this.props.successData}
       tokensPerBitcoin={this.state.tokensPerBitcoin}
       currentReceivingWalletAddress={this.state.currentReceivingWalletAddress}
+      metamaskAccount = {this.state.metamaskAccount}
 
       />
       </div>
@@ -1127,11 +1220,11 @@ hide=(e)=>{
               <div className="col-sm-6">
                 <div style={{ paddingLeft : '20px'}} className="select-currency">
                 <div className="form-group">
-                    <label htmlFor="currency" className="form-label main-color--blue">Select your currency</label>
+                    <label htmlFor="paymentMode" className="form-label main-color--blue">Select your Mode of Payment</label>
                     <span className="select-wrapper">
-                      <select id="currency" name="currency" onChange={this.CurrencyChange} className="form-input form-one-style" required>
-                        <option value="ETH">ETH</option>
-                        <option value="BTC">BTC</option>
+                      <select id="paymentMode" name="paymentMode" onChange={this.paymentModeChange} className="form-input form-one-style" required>
+                        <option value="viaPvtWallet">Independantly from personal wallet</option>
+                        <option value="viaMetamaskExt">Metamask extension in this browser</option>
                         
                         
 
@@ -1157,7 +1250,7 @@ hide=(e)=>{
                   }
                   <br/>
                   </div>
-                  {
+                  {/* {
                       this.state.curr == 'Ethereum' ?
                       <div className="form-group">
                       <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
@@ -1175,7 +1268,18 @@ hide=(e)=>{
                      address for Receiving Centralex Tokens</label>
                     <input id="tokenReceive" onChange={this.validatorWallet}  type="text" className="form-input form-control text-left form-one-style"  required />
                     </div></div> : <div></div>
-                          }
+                          } */}
+                  {
+                    this.state.paymentMode == 'viaPvtWallet' ?
+                    <div className="form-group">
+                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from?</label>
+                    <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' />
+                   </div>:
+                    <div className="form-group">
+                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
+                    <input id="fromAddress" onChange={this.validator} type="text" value={this.state.metamaskAccount} disabled placeholder='' className="form-input form-control text-left form-one-style" required   />
+                  </div>
+                  }
                   </div>
                 </div>
               </div>

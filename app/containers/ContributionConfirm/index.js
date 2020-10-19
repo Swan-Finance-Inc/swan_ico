@@ -23,6 +23,7 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import {  Steps, Divider} from "antd";
+import Web3 from 'web3';
 const { Step } = Steps;
 export class ContributionConfirm extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -35,21 +36,24 @@ export class ContributionConfirm extends React.PureComponent {
       valid: true,
       validBlank: true,
       currentReceivingWalletAddress : '',
-      curTime: new Date().toLocaleString()
+      curTime: new Date().toLocaleString(),
+      txHash : ''
     };
     this.goBack = this.goBack.bind(this);
     this.confirmPayment = this.confirmPayment.bind(this);
     this.copyFunction = this.copyFunction.bind(this);
     this.txValidator = this.txValidator.bind(this);
+    this.makeTransaction = this.makeTransaction.bind(this);
+    //this.makeFinalPayment = this.makeFinalPayment.bind(this);
   }
   // End Constructor
 
   // Begin life cycle methods
   componentDidMount() {
-      this.intervalID = setInterval(
-        () => this.tick(),
-        1000
-      );
+      // this.intervalID = setInterval(
+      //   () => this.tick(),
+      //   1000
+      // );
     if (this.props.currency == "Bitcoin") {
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
@@ -93,7 +97,8 @@ export class ContributionConfirm extends React.PureComponent {
         if (hash.match(/^(0x)?([A-Fa-f0-9]{64})$/)) {
           this.setState({
             valid: true,
-            validBlank: true
+            validBlank: true,
+            txHash: hash
           });
         } else {
           this.setState({
@@ -143,6 +148,56 @@ export class ContributionConfirm extends React.PureComponent {
     toast.success("Address copied");
   }
 
+  makeFinalPayment(sender, hash){
+    //toast.success(`Trxn Hash:  ${res}`);
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaafffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+    this.props.finalPayment(sender, hash)
+  }
+
+  makeTransaction = () => {
+    if(this.props.paymentMode === 'viaMetamaskExt'){
+      //console.log("sthereum payment started", this.props.metamaskAccount);
+      let receiver = this.props.ethAddress;
+      let sender = this.props.metamaskAccount;
+      let amount = this.props.currencyQty;
+      try{
+        //const web3 = new Web3(window.web3.currentProvider);
+        var txnhash = web3.eth.sendTransaction({to:receiver,
+          from:sender, 
+        value:web3.toWei(amount, "ether")}
+          ,function (err, res){
+            if(err){
+              toast.error(`Error: ${err.message}`)
+              //this.setState({transactionData:err, open:true})
+            }else{
+              toast.success(`Trxn Hash:  ${res}`);
+              //this.makeFinalPayment(sender, res)
+              this.props.finalPayment(sender, res)
+              // console.log("txnHash:",res);
+              
+            }
+          }.bind(this));
+        
+      }catch(error){
+        console.log("error in send transactaion", error);
+      }
+      //console.log("buabuhaubuahbuhbauhabhuabuahbauhbaubhua, ", txnhash);
+      
+    } else if(this.props.paymentMode === 'viaPvtWallet'){
+      const hash = document.getElementById("txhash").value;
+        if(!hash){
+          toast.error("Please enter the transaction hash");
+          return ''
+        }
+            if (this.state.valid) {
+              this.props.finalPayment(this.props.fromAddress, hash);
+            } else {
+              toast.error("Please enter a valid transaction hash");
+            }
+        //this.props.finalPayment(hash);
+    }
+  }
+
 
 
   // End Container functions
@@ -150,7 +205,7 @@ export class ContributionConfirm extends React.PureComponent {
   // Begin render function
   render() {
     console.log(this.props,"props in contribution confirm ");
-    console.log(this.state,"props in contribution confirm ");
+    console.log(this.state,"state in contribution confirm ");
     if (this.props.usdEurContributionConfirm) {
       return (
         <div>
@@ -371,8 +426,10 @@ export class ContributionConfirm extends React.PureComponent {
                 <div className="purchase-container">
                   <h4 className="main-color--blue">Confirm Payment</h4>
                   <p className="main-color--blue">
-                        Scan this Address QR Code from your{" "}
-                        {this.props.currency} wallet{" "}
+                    {this.props.paymentMode == 'viaMetamaskExt'?'This is the QR code of Centralex`s Ethereum address':
+                        `Scan this Address QR Code from your${" "}
+                        ${this.props.currency} wallet${" "}`
+                    }
                  </p>
                   <div className="qr-code" style={{ }}>
                       {this.props.currency === "Bitcoin" ? (
@@ -382,9 +439,12 @@ export class ContributionConfirm extends React.PureComponent {
                       )}
                   </div>
                   <p className="main-color--blue">
+                  {this.props.paymentMode == 'viaMetamaskExt'?'Click the button below to ':
+                        ''
+                    }
                  Send the indicated amount to this {this.props.currency} Address </p>
                  <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
-                              <input value={`${this.props.currencyQty} BTC`}
+                              <input value={`${this.props.currencyQty} ETH`}
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input" style={{textAlign:'center', font: 'normal 18px Lato'}}
                               />
@@ -400,11 +460,11 @@ export class ContributionConfirm extends React.PureComponent {
                             </CopyToClipboard>
                         </div>
                         <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
-                            <input value={this.props.currentReceivingWalletAddress }
+                            <input value={this.props.ethAddress }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input " style={{textAlign:'center', font: 'normal 18px Lato'}}
                               />
-                            <CopyToClipboard text={this.props.currentReceivingWalletAddress}
+                            <CopyToClipboard text={this.props.ethAddress}
                               onCopy={() => {this.setState({copied: true});
                                toast.success("Copied");
                               }}>
@@ -418,7 +478,81 @@ export class ContributionConfirm extends React.PureComponent {
 
                  <p className="main-color--blue">
                  You will receive <input value={(this.props.tokens).toFixed(2)} style={{width:'6em'}} /> Centralex coins </p>
+                 {
+                    this.props.paymentMode === 'viaMetamaskExt' ? <div className="btn-row confirm-transaction-button">
+                    <button 
+                     className="form-button btn btn-primary"
+                     style={{ marginBottom : '20px' }}
+                     onClick={() => this.makeTransaction()}
+                   >
+                     Initiate Payment
+                   </button>
+                 </div> : 
+                 <div className="blockchain-tx">
+                 <p className="main-color--blue">
+                   Please paste your transaction's TX hash below
+                   and click Confirm:{" "}
+                 </p>
+                 <input
+                   required
+                   id="txhash"
+                   onChange={this.txValidator}
+                   type="text"
+                   className="form-input form-control main-color--blue"
+                   placeholder="Paste your payment's transaction hash"
+                 />
+                   <button
+                     className="form-button btn btn-primary"
+                     onClick={() => this.makeTransaction()}
+                   >
+                     Confirm
+                   </button>
+                      {this.state.valid || this.state.validBlank ? (
+                        <p />
+                      ) : (
+                        <p style={{ color: "#ff0000" }}>
+                          Please enter a valid Transaction Hash
+                        </p>
+                      )}
+               </div>
+
+                  }
                   <hr className="qr-code-hr" />
+                  
+                            {/* {
+                              <div className="btn-row confirm-transaction-button">
+                               <button
+                                className="form-button btn btn-primary"
+                                type="submit"
+                                style={{ marginBottom : '20px' }}
+                              >
+                                Confirm
+                              </button>
+                            </div>
+                            }
+
+                          { 
+                           <div className="blockchain-tx">
+                              <p className="main-color--blue">
+                                Please paste your blockchain TX hash below
+                                and click Confirm:{" "}
+                                <span>
+                                  {this.props.currency === "Bitcoin" ? (
+                                    <h4>{this.props.btcAddress}</h4>
+                                  ) : (
+                                    <h4>{this.props.ethAddress}</h4>
+                                  )}
+                                </span>
+                              </p>
+                              <input
+                                required
+                                id="txhash"
+                                onChange={this.txValidator}
+                                type="text"
+                                className="form-input form-control main-color--blue"
+                                placeholder="Paste hash payment code"
+                              />
+                            </div> */}
                   <div className="confirm-block" style={{maxWidth:'35em' , textAlign : 'center' }}>
                         {  
                         // <ol>
@@ -532,7 +666,7 @@ export class ContributionConfirm extends React.PureComponent {
                         //     </li>
                         //   </ol>
                           }
-                          <form onSubmit={this.confirmPayment}>
+                          {/* <form onSubmit={this.confirmPayment}> */}
                             <div className="transaction-time">
                             <p className="main-color--blue">
                             Time of initiation : {this.state.curTime}
@@ -595,7 +729,7 @@ export class ContributionConfirm extends React.PureComponent {
                           //     </button>
                           //   </div>
                             }
-                          </form>
+                          {/* </form> */}
                         </div>
                       </div>
                     </div>
