@@ -129,6 +129,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
     }else{
       toast.error('Please enter valid ETH Wallet address');
     }
+     this.props.getProfileData();
   }
   changeView = (view)=>{
      if(view === 'personal') {
