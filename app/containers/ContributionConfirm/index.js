@@ -50,10 +50,10 @@ export class ContributionConfirm extends React.PureComponent {
 
   // Begin life cycle methods
   componentDidMount() {
-      // this.intervalID = setInterval(
-      //   () => this.tick(),
-      //   1000
-      // );
+      this.intervalID = setInterval(
+        () => this.tick(),
+        1000
+      );
     if (this.props.currency == "Bitcoin") {
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
