@@ -147,14 +147,15 @@ export class RegisterPage extends React.PureComponent {
     //const name = this.state.fullname;
     // console.log(terms.checked)
     // console.log(this.state.referToken);
-    var nameRegex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    // var nameRegex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    var nameRegex = /^(?!\s+$)[A-Za-z]+$/ ;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
     if(this.state.fullname.length < 4 || this.state.fullname.length > 20){
       this.notifyError("Name should be between 4 to 20 characters");
     }
     else
     if(!nameRegex.test(this.state.fullname)){
-      this.notifyError("Invalid Name")
+      this.notifyError("Name should contain only alphabets without space")
     }
     else if(!this.state.email){
       this.notifyError("Please enter the email");
@@ -178,7 +179,7 @@ export class RegisterPage extends React.PureComponent {
         email: this.state.email,
         password: this.state.password,
         rfcode: this.state.referToken,
-        // termsAccepted: terms.checked,
+        termsAccepted: true,
         isUs: usCitizen.checked,
         captcha: this.state["g-recaptcha-response"],
         channel: this.state.channel
@@ -422,7 +423,7 @@ export class RegisterPage extends React.PureComponent {
                       <div className="form-group" style={{ marginTop : '10px' , marginBottom : '0px' }}>
                         <label
                           className="form-check-label"
-                          htmlFor="user_accepted_policies"
+                          // htmlFor="user_accepted_policies"
                         >
                           {/* <input
                             id="terms"

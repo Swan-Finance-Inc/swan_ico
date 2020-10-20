@@ -401,7 +401,7 @@ transition: all .301s;
 	margin-top: 2px;
 }
 .ui-aside .nav > li > a {
-	padding: 11px 15px;
+	padding: 8px 8px;
 	white-space: nowrap;
 }
 .ui-aside .nav > li > a > span {
@@ -2211,6 +2211,7 @@ font-size: 25px;
 	&:focus{
 		outline: none;
 	}
+	padding: 12px 75px;
 }
 
 /*  Kyc  */
@@ -2501,7 +2502,7 @@ font-size: 25px;
 	color: black !important;
 	margin-top: 2px;
 	margin-right: 5px;
-	font-size: 14px;
+	font-size: 12px;
 }
 
 .ui-nav-text.active{

@@ -408,11 +408,11 @@ export class MyReferal extends React.PureComponent {
                         className="form-control  filter-input"
                         style={{ padding: "0px" }}
                         id="typeFilter"
-                        onClick={this.handleTypeFilter}
+                        onChange={this.handleTypeFilter}
                       >
                         <option value="" disabled selected hidden></option>
                         <option value="Ethereum">ETHEREUM</option>
-                        <option value="Bitcoin">BITCOIN</option>
+                        {/* <option value="Bitcoin">BITCOIN</option> */}
                       </select>
                     </div>
                   </div>
@@ -467,7 +467,7 @@ export class MyReferal extends React.PureComponent {
                         className="form-control  filter-input"
                         style={{ padding: "0px", width: "10%" }}
                         id="typeFilter"
-                        onClick={this.handleTypeFilter}
+                        onChange={this.handleTypeFilter}
                       >
                         <option value="" disabled selected hidden></option>
                         <option value="5">5</option>

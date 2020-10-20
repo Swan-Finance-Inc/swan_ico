@@ -999,13 +999,13 @@ export class DashBoardWelcomePage extends React.PureComponent {
                         <Announcements announcementsData={this.state.announcementsData}/>:
 '' }
         <div className='row'>
-        <div id="footer" style={{position:'fixed'}}  className="ui-footer">
+        <div id="footer" style={{position:'fixed', zIndex : 10}}  className="ui-footer">
         © Copyright 2018 - 2020 Centralex Holdings Ltd
         <a className='socailLinks' href='https://www.facebook.com/centralexexchange/' target="_blank"><i style ={{color : ' #3b5998'}} class="fa fa-facebook-official" aria-hidden="true"></i></a>
         <a className='socailLinks' href='https://twitter.com/centralexSupport' target="_blank"><i style = {{color : '#00acee'}}  class="fa fa-twitter-square" aria-hidden="true"></i></a>
         <a className='socailLinks' href='https://Linkedin.com/company/centralex' target="_blank"><i style ={{color : '#0e76a8'}} class="fa fa-linkedin-square" aria-hidden="true"></i></a>
         <a className='socailLinks' href='https://www.instagram.com/centralexhk/' target="_blank"><i style ={{background : '#d6249f' , background : 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)' , boxShadow : '0px 3px 10px rgba(0,0,0,.25)' , borderRadius : '20px'}} class="fa fa-instagram" aria-hidden="true"></i></a>
-        {/* <a className='socailLinks' href='https://discord.gg/NTDFdMh' target="_blank"><i style ={{color : ''}} class="fa fa-instagram" aria-hidden="true"></i></a> */}
+        <a className='socailLinks' href='https://discord.gg/NTDFdMh' target="_blank"><i class="fab fa-discord"></i></a>
         <a className='socailLinks' href='https://t.me/centralexhk' target="_blank"><i style ={{color : '#0088cc'}} class="fa fa-telegram" aria-hidden="true"></i></a>
         {/* <a href='https://play.google.com/store/apps/details?id=com.centralex&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a> */}
 

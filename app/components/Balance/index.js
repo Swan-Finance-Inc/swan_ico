@@ -216,7 +216,7 @@ class Balance extends React.PureComponent {
                     our comprehensive verification methods to protect our
                     customers.
                   </p>
-                  <div className="col-sm-6">
+                  <div className="col-sm-12" style ={{display : "flex" , justifyContent : "center" }}  >
                     <div className="balance-botton-inner-wrapper">
                       <h5
                         style={{
@@ -239,8 +239,8 @@ class Balance extends React.PureComponent {
                       title={this.state.balanceType}
                     >
                       <MenuItem eventKey='1' value="cexToken" onClick={() => 
-                        this.setState({balanceType : this.state.balanceType === "USD" ? "CSX Token" : 'USD' }) } >
-                          {this.state.balanceType === "USD" ? "CSX Token" : "USD"   }
+                        this.setState({balanceType : this.state.balanceType === "USD" ? "CENX Token" : 'USD' }) } >
+                          {this.state.balanceType === "USD" ? "CENX Token" : "USD"   }
                           </MenuItem>
                      </DropdownButton>
                     </Nav>  
@@ -253,8 +253,8 @@ class Balance extends React.PureComponent {
                       </div>
                     </div>
                   </div>
-                  <div className="balance-hr" />
-                  <div className="col-sm-5">
+                  {/* <div className="balance-hr" /> */}
+                    {/* <div className="col-sm-5">
                     <div className="balance-botton-inner-wrapper">
                       <h5
                         style={{
@@ -332,7 +332,7 @@ class Balance extends React.PureComponent {
                       </div>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -372,8 +372,8 @@ class Balance extends React.PureComponent {
                   </div>
                   </div>
                   </div>
-                  <div className="text-center mt-30">
-                  <button className="invest">Invest Now</button>
+                  <div style = {{marginBottom : 12}} className="text-center mt-30">
+                  <Link to="/dashboard/contribution" onClick = {this.props.toggleContActive} role="button" className="invest">Invest Now</Link>
                   </div>
                 </div>
               </div>
@@ -617,7 +617,7 @@ class Balance extends React.PureComponent {
                               onCopy={() => {this.setState({copied: true});
                                toast.success("Copied");
                               }}>
-                              <span className="file-copy-conatiner">
+                              <span className="file-copy-conatiner" style = {{height : '-webkit-fill-available'}} >
                               <FileCopyOutlinedIcon
                                 style={{ outline : 'none' ,fontSize : '20px'  }}
                                 />

@@ -18,7 +18,7 @@ class UserMessage extends React.PureComponent { // eslint-disable-line react/pre
       <div key={id}>
       { type == "USER" ?
         <div style={{padding: '5px', margin: '15px' , display : "flex" , justifyContent : "flex-end" , overflowWrap : "anywhere"}} className="text-right">
-          <p style = {{display : "flex" , marginBottom :  "0px"}} ><span className="alert alert-success" style={{borderRadius: '5px', padding: '15px' , marginBottom : "0px"}}>{msg}</span></p>
+          <p style = {{display : "flex" , marginBottom :  "0px"  }} ><span className="alert alert-success" style={{borderRadius: '5px', padding: '15px' , marginBottom : "0px",textAlign : 'left', textAlignLast : 'left'}}>{msg}</span></p>
         </div> :
         <div style={{padding: '5px', margin: '15px'}}>
           <p><span className="alert alert-danger" style={{borderRadius: '5px', padding: '15px'}}>{msg}</span></p>

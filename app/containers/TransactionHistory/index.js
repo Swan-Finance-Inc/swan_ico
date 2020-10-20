@@ -29,10 +29,27 @@ import moment from 'moment';
 import Info from "../../components/Info";
 import MyPaginnation from "../../components/MyPaginnation";
 import EmptyFile from "../../images/EmptyFile.svg";
+var months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
 
+// var years = range(1990, getYear(new Date()) + 1, 1);
+var years = [1990,1991,1992,1993,1994,1995];
 export class TransactionHistory extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
     super(props);
+    
     this.state = {
       // @aj
       infoShow: false,
@@ -356,7 +373,61 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
   resetInfo=()=>{
     this.props.toggleInfo()
   }
+
+    // renderCustomHeader = ({
+    //   date,
+    //   changeYear,
+    //   changeMonth,
+    //   decreaseMonth,
+    //   increaseMonth,
+    //   prevMonthButtonDisabled,
+    //   nextMonthButtonDisabled
+    // }) => {
+    //   console.log("sdkjvasdkvbkhfdsv")
+    //   return(
+    //     <div
+    //       style={{
+    //         margin: 10,
+    //         display: "flex",
+    //         justifyContent: "center"
+    //       }}
+    //     >
+    //       <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+    //         {"<"}
+    //       </button>
+    //       <select
+    //         value={getYear(date)}
+    //         onChange={({ target: { value } }) => changeYear(value)}
+    //       >
+    //         {years.map(option => (
+    //           <option key={option} value={option}>
+    //             {option}
+    //           </option>
+    //         ))}
+    //       </select>
+
+    //       <select
+    //         value={months[getMonth(date)]}
+    //         onChange={({ target: { value } }) =>
+    //           changeMonth(months.indexOf(value))
+    //         }
+    //       >
+    //         {months.map(option => (
+    //           <option key={option} value={option}>
+    //             {option}
+    //           </option>
+    //         ))}
+    //       </select>
+
+    //       <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+    //         {">"}
+    //       </button>
+    //     </div>
+    //   )
+    //         }
   render() {
+
+    
     console.log(this.props," props in transaction history");
     console.log(this.state," state in transaction history");
     let loading = this.props.loading
@@ -385,7 +456,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                         <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onChange={this.handleTypeFilter}>
                           <option value="" disabled selected hidden></option>
                           <option value='Ethereum'>ETHEREUM</option>
-                          <option value='Bitcoin'>BITCOIN</option>
+                          {/* <option value='Bitcoin'>BITCOIN</option> */}
                         </select>
                         </div>
                       </div>
@@ -402,6 +473,67 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                             value={this.state.transactionParam.createdLl}
                             placeholderText='start'
                              />
+                              {/* <DatePicker
+
+                                    renderCustomHeader={({
+                                    date,
+                                        changeYear,
+                                            changeMonth,
+                                          decreaseMonth,
+                                          increaseMonth,
+                                          prevMonthButtonDisabled,
+                                          nextMonthButtonDisabled
+                                  }) => (
+  <div
+    style={{
+      margin: 10,
+      display: "flex",
+      justifyContent: "center"
+    }}
+  >
+    <button onClick={decreaseMonth} disabled={prevMonthButtonDisabled}>
+      {"<"}
+    </button>
+    <select
+      value={getYear(date)}
+      onChange={({ target: { value } }) => changeYear(value)}
+    >
+      {years.map(option => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+
+    <select
+      value={months[getMonth(date)]}
+      onChange={({ target: { value } }) =>
+        changeMonth(months.indexOf(value))
+      }
+    >
+      {months.map(option => (
+        <option key={option} value={option}>
+          {option}
+        </option>
+      ))}
+    </select>
+
+    <button onClick={increaseMonth} disabled={nextMonthButtonDisabled}>
+      {">"}
+    </button>
+  </div>
+)}
+      className='form-control text-center filter-input'
+      // selected={this.state.transactionParam.createdLl}
+      // onChange={date => setStartDate(date)}
+      style={{width: '84%' }}
+
+      onChange={this.handleMinCreatedFilter}
+      value={this.state.transactionParam.createdLl}
+      placeholderText='start'
+
+    /> */}
+                              
                              {
                                  // <input id="createdMinFilter" type="date" onChange={this.handleMinCreatedFilter} className="form-control text-center filter-input" placeholder="min"/>
                              }

@@ -383,8 +383,15 @@ label.form-check-label a:hover {
 	.login-button{
 		width: 295px !important;
 	}
+
+	
 }
 
+@media (max-width : 450px){
+	.signin-block{
+		width : fit-content;
+		}
+}
 
 a {
     color: #333333;
