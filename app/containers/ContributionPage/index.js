@@ -473,7 +473,7 @@ gobackDollar=(e)=>{
         let contractNetId = 3;
 
         if(contractNetId !== netId) {
-          toast.error(`Please switch metamask network to MAINNET`);
+          toast.error(`Please switch metamask network to ROPSTEN`);
           // this.setState({
           //   errorContract: true,
           //   errorMessage: `Please switch metamask network to ${this.props.contractData.contractNetwork}`
