@@ -487,7 +487,7 @@ export class ContributionConfirm extends React.PureComponent {
                         </div>
 
                  <p className="main-color--blue">
-                 You will receive <input value={(this.props.tokens).toFixed(2)} style={{width:'6em'}} /> Centralex coins </p>
+                 You will receive {(this.props.tokens).toFixed(3)} Centralex coins </p>
                  {
                     this.props.paymentMode === 'viaMetamaskExt' ? <div className="btn-row confirm-transaction-button">
                     <button 
@@ -498,25 +498,31 @@ export class ContributionConfirm extends React.PureComponent {
                      Initiate Payment
                    </button>
                  </div> : 
-                 <div style={{textAlign:"center"}} className="blockchain-tx">
+                 <div style={{width: '32em' , position: 'relative'}}>
                  <p className="main-color--blue">
                    Please paste your transaction's TX hash below
                    and click Confirm:{" "}
                  </p>
+                 <div style={{width: '32em' , position: 'relative', marginLeft:'-20px'}}>
                  <input
                    required
                    id="txhash"
                    onChange={this.txValidator}
                    type="text"
-                   className="form-input form-control main-color--blue"
+                   //className="form-input form-control main-color--blue"
                    placeholder="Paste your payment's transaction hash"
+                   className="copy-input" style={{textAlign:'center', font: 'normal 17px Lato'}}
                  />
+                    <span >
                    <button
-                     className="form-button btn btn-primary" 
+                   className="file-copy-conatiner"
+                     style={{ outline : 'none' ,fontSize : '19px'  }}
                      onClick={() => this.makeTransaction()}
                    >
                      Confirm
                    </button>
+                   </span>
+                   </div>
                       {this.state.valid || this.state.validBlank ? (
                         <p />
                       ) : (

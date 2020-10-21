@@ -1950,6 +1950,11 @@ font-size: 25px;
 	  min-height: 352px;
   }
 
+  .large-text{
+	  font-size: 20px;
+	  font-weight: 100px;
+  }
+
   .balance-card{
 	  width: 100%;
 	  background: #FFFFFF 0% 0% no-repeat padding-box;
@@ -1994,7 +1999,7 @@ font-size: 25px;
 	width: 1px;
 	display: inline-block;
     position: relative;
-    left: -267px;
+    //left: -267px;
   }
 
   .exchange-heading{

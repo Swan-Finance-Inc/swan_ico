@@ -1226,7 +1226,7 @@ hide=(e)=>{
           <div className="contribution-card" style={{ marginBottom : '2em' }}>
             <div className="row">
               <div className="col-sm-12">
-                  <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' }}>Contribution</h4><span style={{paddingLeft: "20px"}} >Working on ropsten for testing, txnhash in consosle</span>
+                  <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' }}>Contribution</h4><span style={{paddingLeft: "20px"}} >Working on ropsten for testing, txnhash in console</span>
                   <hr className="contribution-hr" />
                 </div>
               </div>
