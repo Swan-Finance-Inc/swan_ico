@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import { toast, ToastContainer } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectContributionPage, {makeSelectTransactionId, makeSelectContributionCurrency, makeSelectContributionData, makeSelectContributionSuccess, makeSelectLoading ,
+import makeSelectContributionPage, {makeSelectTransactionId, makeSelectContributionCurrency, makeSelectContributionData, makeSelectContributionSuccess,makeSelectContributionNotSuccess, makeSelectLoading ,
 makeSelectGetHotWalletLoading, makeSelectGetHotWalletRet,makeSelectCreateHotWalletRet,
 makeSelectCreateHotWalletLoading
 } from './selectors';
@@ -142,6 +142,10 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       console.log(nextProps.successPayment);
 
       // this.notifyDeposit(nextProps.successPayment);
+    }
+    if (nextProps.successNotPayment) {
+      toast.error(nextProps.successNotPayment.message);
+      nextProps.clearContribution()
     }
     if(nextProps.listHotWalletRet.count>0){
       console.log("getHotWqalletREt", nextProps.listHotWalletRet);
@@ -334,7 +338,10 @@ gobackDollar=(e)=>{
       curr: 'Ethereum',
       ethToDollar: this.props.successData.ethUsd,
       usdEurContributionConfirm:false,
-      paymentMode: 'viaPvtWallet'
+      paymentMode: 'viaPvtWallet',
+      currencyQuantity : 0,
+      tokens : 0,
+      tokensWithBonus: 0
     })
 
   }
@@ -466,7 +473,7 @@ gobackDollar=(e)=>{
         let contractNetId = 3;
 
         if(contractNetId !== netId) {
-          toast.error(`Please switch metamask network to MAINNET`);
+          toast.error(`Please switch metamask network to ROPSTEN`);
           // this.setState({
           //   errorContract: true,
           //   errorMessage: `Please switch metamask network to ${this.props.contractData.contractNetwork}`
@@ -906,8 +913,35 @@ gobackDollar=(e)=>{
     let amount =  document.getElementById('amt').value;
     if(!amount){
         toast.error("Please enter the amount");
+        // toast('txnJash: 0xfa03207cb875340aec8f81408a39994c616c284a13bd2589c453810bb63b4a87', {
+        //   position: "top-center",
+        //   autoClose: 5000,
+        //   hideProgressBar: false,
+        //   closeOnClick: false,
+        //   pauseOnHover: true,
+        //   draggable: true,
+        //   progress: 3,
+        //   className: 'toast-success-container '
+        //   });
+          
         return ''
     }
+    if(amount<=0){
+      toast.error("Amount should be greater than zero");
+        return ''
+    }
+    if(this.state.paymentMode==='viaPvtWallet'){
+    let fromAddress = document.getElementById('fromAddress').value;
+    if(!fromAddress){
+      toast.error("Please enter the ETH Wallet Address");
+      return ''
+    }
+  } else {
+    if(!this.state.metamaskAccount){
+      toast.error("Connect Metamask wallet");
+      return ''
+    }
+  }
 
     if (this.state.curr === "Ethereum"){
       // console.log("sthereum payment started", this.state.metamaskAccount);
@@ -1223,7 +1257,7 @@ hide=(e)=>{
                     <label htmlFor="paymentMode" className="form-label main-color--blue">Select your Mode of Payment</label>
                     <span className="select-wrapper">
                       <select id="paymentMode" name="paymentMode" onChange={this.paymentModeChange} className="form-input form-one-style" required>
-                        <option value="viaPvtWallet">Independantly from personal wallet</option>
+                        <option value="viaPvtWallet">Independently from personal wallet</option>
                         <option value="viaMetamaskExt">Metamask extension in this browser</option>
                         
                         
@@ -1277,7 +1311,7 @@ hide=(e)=>{
                    </div>:
                     <div className="form-group">
                     <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' : 'BTC'} wallet you are sending from? <sup>*</sup></label>
-                    <input id="fromAddress" onChange={this.validator} type="text" value={this.state.metamaskAccount} disabled placeholder='' className="form-input form-control text-left form-one-style" required   />
+                    <input onChange={this.validator} type="text" value={this.state.metamaskAccount} disabled placeholder='' className="form-input form-control text-left form-one-style" required   />
                   </div>
                   }
                   </div>
@@ -1471,6 +1505,7 @@ const mapStateToProps = createStructuredSelector({
   contributionCurrency: makeSelectContributionCurrency(),
   successData: makeSelectContributionData(),
   successPayment: makeSelectContributionSuccess(),
+  successNotPayment : makeSelectContributionNotSuccess(),
   global: makeGlobalParent(),
   transactionId: makeSelectTransactionId(),
   userInfo: makeSelectDashBoardWelcomePage(),

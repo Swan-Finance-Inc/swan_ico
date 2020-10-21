@@ -13,6 +13,7 @@ import {
   FAILURE_DATA,
   CONFIRM_PAYMENT,
   SUCCESS_PAYMENT,
+  NOT_SUCCESS_PAYMENT,
   FAILURE_PAYMENT, REMOVE_PAYMENT_FAILURE, REMOVE_PAYMENT_SUCCESS, SEND_PAYMENT, SUCCESS_SEND_PAYMENT,
   LIST_HOT_WALLET,
   LIST_HOT_WALLET_RET,
@@ -53,6 +54,7 @@ const initialState = fromJS({
     tokenPrice:0
   },
   paymentSuccess: false,
+  paymentNotSuccess : false,
   paymentFailure: false,
   paymentId: false,
   paymentSentSuccess: false,
@@ -122,6 +124,10 @@ function contributionPageReducer(state = initialState, action) {
         .set('paymentSuccess', action.data.success)
         .set('paymentId', action.data.transactionId)
         .set('paymentFailure', false);
+    case NOT_SUCCESS_PAYMENT:
+      return state
+        .set('paymentNotSuccess', action.data)
+        .set('paymentFailure', false);
     case FAILURE_PAYMENT:
       return state
         .set('paymentSuccess', false)
@@ -172,6 +178,7 @@ function contributionPageReducer(state = initialState, action) {
             return state
             .set('createHotWalletRet',false)
             .set('listHotWalletRet',false)
+            .set('paymentNotSuccess', false)
     default:
       return state;
   }

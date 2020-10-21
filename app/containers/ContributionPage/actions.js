@@ -12,6 +12,7 @@ import {
   GET_DATA,
   CONFIRM_PAYMENT,
   SUCCESS_PAYMENT,
+  NOT_SUCCESS_PAYMENT,
   FAILURE_PAYMENT,
   REMOVE_PAYMENT_FAILURE,
   REMOVE_PAYMENT_SUCCESS,
@@ -67,6 +68,12 @@ export function failureData(token) {
 export function successPayment(data) {
   return {
     type: SUCCESS_PAYMENT,
+    data,
+  };
+}
+export function notSuccessPayment(data) {
+  return {
+    type: NOT_SUCCESS_PAYMENT,
     data,
   };
 }
