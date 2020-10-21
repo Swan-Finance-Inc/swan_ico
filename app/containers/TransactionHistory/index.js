@@ -438,6 +438,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               </div>  
               
               <div className='col-sm-12'>
+                {console.log("poor", this.state.data, this.state.columns)}
                   {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
                       showPaginationBottom={false}
                       style={{ height : this.state.data.length > 0 ? '100%' : '400px' , marginTop : '20px'}}
