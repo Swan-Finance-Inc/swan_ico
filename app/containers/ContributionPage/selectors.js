@@ -36,6 +36,10 @@ const makeSelectContributionSuccess = () => createSelector(
   selectContributionPageDomain,
   (substate) => substate.get('paymentSuccess')
 );
+const makeSelectContributionNotSuccess = () => createSelector(
+  selectContributionPageDomain,
+  (substate) => substate.get('paymentNotSuccess')
+);
 const makeSelectPaymentId = () => createSelector(
   selectContributionPageDomain,
   (substate) => substate.get('paymentId')
@@ -97,6 +101,7 @@ export {
   makeSelectContributionConfirm,
   makeSelectContributionFailure,
   makeSelectContributionSuccess,
+  makeSelectContributionNotSuccess,
   makeSelectPaymentId,
   makeSelectFinalTransaction,
   makeSelectTransactionId,

@@ -11,6 +11,7 @@ export const SUCCESS_DATA = 'app/ContributionPage/SUCCESS_DATA';
 export const FAILURE_DATA = 'app/ContributionPage/FAILURE_DATA';
 export const CONFIRM_PAYMENT = 'app/ContributionPage/CONFIRM_PAYMENT';
 export const SUCCESS_PAYMENT = 'app/ContributionPage/SUCCESS_PAYMENT';
+export const NOT_SUCCESS_PAYMENT = 'app/ContributionPage/NOT_SUCCESS_PAYMENT';
 export const FAILURE_PAYMENT = 'app/ContributionPage/FAILURE_PAYMENT';
 export const REMOVE_PAYMENT_SUCCESS = 'app/ContributionPage/REMOVE_PAYMENT_SUCCESS';
 export const REMOVE_PAYMENT_FAILURE = 'app/ContributionPage/REMOVE_PAYMENT_FAILURE';

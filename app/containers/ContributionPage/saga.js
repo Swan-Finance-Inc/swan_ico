@@ -3,7 +3,7 @@ import { push } from 'react-router-redux';
 import { depositSuccess } from 'containers/App/actions';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { GET_DATA, CONFIRM_PAYMENT, RELOAD_PAGE, SEND_PAYMENT ,LIST_HOT_WALLET,CREATE_HOT_WALLET } from './constants';
-import { successData, successPayment, successFinalizePayment ,listHotWalletRet,
+import { successData, successPayment, notSuccessPayment, successFinalizePayment ,listHotWalletRet,
   listHotWalletLoading, createHotWalletRet,createHotWalletLoading  } from './actions';
 import { makeSelectContributionConfirm, makeSelectFinalTransaction ,makeSelectGetHotWallet,
   makeSelectCreateHotWallet
@@ -44,7 +44,8 @@ export function* contribute() {
       yield put(push('/dashboard/transactionHistory'));
       yield put(successPayment(apiData));
     }else{
-      yield put(codeErrorAction());
+      yield put(notSuccessPayment(apiData));
+      //yield put(codeErrorAction());
     }
   } catch (error) {
      yield put(codeErrorAction());

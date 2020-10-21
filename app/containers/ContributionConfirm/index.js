@@ -170,7 +170,17 @@ export class ContributionConfirm extends React.PureComponent {
               toast.error(`Error: ${err.message}`)
               //this.setState({transactionData:err, open:true})
             }else{
-              toast.success(`Trxn Hash:  ${res}`);
+              //toast.success(`Trxn Hash:  ${res}`);
+              toast(`Trxn Hash:  ${res}`, {
+                position: "top-center",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: false,
+                pauseOnHover: true,
+                draggable: true,
+                progress: 3,
+                className: 'toast-success-container '
+                });
               //this.makeFinalPayment(sender, res)
               this.props.finalPayment(sender, res)
               // console.log("txnHash:",res);
@@ -488,7 +498,7 @@ export class ContributionConfirm extends React.PureComponent {
                      Initiate Payment
                    </button>
                  </div> : 
-                 <div className="blockchain-tx">
+                 <div style={{textAlign:"center"}} className="blockchain-tx">
                  <p className="main-color--blue">
                    Please paste your transaction's TX hash below
                    and click Confirm:{" "}
@@ -502,7 +512,7 @@ export class ContributionConfirm extends React.PureComponent {
                    placeholder="Paste your payment's transaction hash"
                  />
                    <button
-                     className="form-button btn btn-primary"
+                     className="form-button btn btn-primary" 
                      onClick={() => this.makeTransaction()}
                    >
                      Confirm

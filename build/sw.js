@@ -31,12 +31,12 @@ var __wpo = {
       "/icon-72x72.png",
       "/icon-96x96.png",
       "/manifest.json",
-      "/main.0fe691b58ec6c2bfed61.js",
+      "/main.47dcd9ceb6391d0ebaca.js",
       "/"
     ],
     "additional": [
-      "/0.c07dd5b6542f31639414.chunk.js",
-      "/1.b7dfee65bbd28b131421.chunk.js",
+      "/0.76ebab7399c5fbd4749c.chunk.js",
+      "/1.5a22a99a497085f46d15.chunk.js",
       "/2.95d343617c946795d469.chunk.js",
       "/3.72987c2e5722dddf93c8.chunk.js",
       "/4.5f5ad36911702a4980f9.chunk.js",
@@ -96,8 +96,8 @@ var __wpo = {
     "1eda04abf9a190365f077e2ce1d90815151a5177": "/icon-72x72.png",
     "3585b232832d19ce8046ceeaa4b0075388f2ad40": "/icon-96x96.png",
     "cea80e84d1510fba55ad650e59265bf4949b351c": "/manifest.json",
-    "5b654105a27d6cc52adc4700d5bf56f7184d0cd3": "/0.c07dd5b6542f31639414.chunk.js",
-    "d5ee18b861834d88e250bc175e76ebdf512a8df3": "/1.b7dfee65bbd28b131421.chunk.js",
+    "29464e8ae82d2e2022620ab9276ed32cf7fd0517": "/0.76ebab7399c5fbd4749c.chunk.js",
+    "c58e37573b97104f8c75dbb2b8f0ce083418bcbd": "/1.5a22a99a497085f46d15.chunk.js",
     "43d9807c9c95213ca71911ba6d8a2af578fc7123": "/2.95d343617c946795d469.chunk.js",
     "23a8ebe8f02bc17acef63e410df80f6f36da1712": "/3.72987c2e5722dddf93c8.chunk.js",
     "4422dcd24763ed879956a1fe5b04245cb4f7bcb0": "/4.5f5ad36911702a4980f9.chunk.js",
@@ -122,12 +122,12 @@ var __wpo = {
     "bfafe75340a5fd0377a684323dc4be12cc5ad611": "/23.3e61c002e07bd7afe909.chunk.js",
     "cdd7df295edc99fe6b18e023bf9ccce47c33f5db": "/24.8a52bf7801fceb677e53.chunk.js",
     "ed7abd0d691a90b9a2a7823e9050197647974eed": "/25.95c56c6849ef372ec76f.chunk.js",
-    "b1b8b1602a7d7c6b30e06d758318b9fb7b22ec0e": "/main.0fe691b58ec6c2bfed61.js",
-    "cb488f095bf33df2cdb82e434b3eec682f440af4": "/"
+    "dba26cc54a0d910f61a001abd7c7f1f36aa65bb4": "/main.47dcd9ceb6391d0ebaca.js",
+    "d3bf0246d90bf1b1233c510e4c8646fe036bab02": "/"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "10/19/2020, 10:54:01 PM",
+  "version": "10/21/2020, 9:56:36 AM",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": false

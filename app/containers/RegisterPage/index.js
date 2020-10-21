@@ -178,7 +178,7 @@ export class RegisterPage extends React.PureComponent {
         email: this.state.email,
         password: this.state.password,
         rfcode: this.state.referToken,
-        // termsAccepted: terms.checked,
+        termsAccepted: true,
         isUs: usCitizen.checked,
         captcha: this.state["g-recaptcha-response"],
         channel: this.state.channel
