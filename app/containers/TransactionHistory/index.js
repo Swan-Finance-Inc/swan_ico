@@ -53,6 +53,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     this.state = {
       // @aj
       infoShow: false,
+      size : '',
       data: [],
       columns: [
         {
@@ -344,6 +345,18 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     });
   }
 
+  handleRowFilter = (e) => {
+    this.setState({
+      ...this.state,transactionParam:{
+        ...this.state.transactionParam,page:e.target.value
+      },
+        disablePrevious: true,
+    }, () => {
+      console.log(this.state," in type filter handler")
+      this.props.transactions(this.state.transactionParam)
+    });
+  }
+
 
 
   notify() {
@@ -560,7 +573,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               <div className="transactions-filters" style={{ paddingTop : '0px' }}>
                 <div className="transactions-filters-card">
                 <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>No Of Transactions:</h4></label>
-                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="pageFilter" >
+                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="pageFilter" onChange = { this.handleRowFilter } >
                   <option value="" disabled selected hidden></option>
                   <option value='5'>5</option>
                   <option value='10'>10</option>
@@ -585,6 +598,8 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                     }
                       rowsText={'transactions'}
                       defaultPageSize={5}
+                    //  pageSize = {this.state.size}
+
                     />}
              </div>
               </div>
