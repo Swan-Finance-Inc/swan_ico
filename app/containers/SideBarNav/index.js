@@ -238,35 +238,35 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
            <ul className="nav ui-nav">
            <li onMouseEnter = {() => { this.state.dashAct === 'active' ? '' : this.setState({dashAct : true })} } onMouseLeave = { () =>{this.state.dashAct === 'active'? '' : this.setState({dashAct : false }) }} className={`${this.state.dashAct} nav-item`}
             ><Link to="/dashboard" role="button" onClick={this.toggleDashActive}>
-               <DashBoard color={this.state.dashAct ? '#fff' : '#2d6dcd'}/>
+               <DashBoard color={this.state.dashAct ? '#fff' : '#465390'}/>
                <span className={`ui-nav-text ${this.state.dashAct}`} 
                >Dashboard</span> 
                </Link>
             </li>
             <li onMouseEnter = {() => { this.state.kycAct === 'active' ? '' : this.setState({kycAct : true })} } onMouseLeave = { () =>{this.state.kycAct === 'active'? '' : this.setState({kycAct : false }) }} className={`${this.state.kycAct} nav-item`} ><Link to="/dashboard/kyc" role="button" onClick={this.toggleKycActive}>
-               <KYC color={this.state.kycAct ? '#fff' : '#2d6dcd'}/>
+               <KYC color={this.state.kycAct ? '#fff' : '#465390'}/>
                <span className={`ui-nav-text ${this.state.kycAct}`}>KYC Verify</span> 
                </Link>
             </li>
     
             <li onMouseEnter = {() => { this.state.contAct === 'active' ? '' : this.setState({contAct : true })} } onMouseLeave = { () =>{this.state.contAct === 'active'? '' : this.setState({contAct : false }) }} className={`${this.state.contAct} nav-item `} ><Link to="/dashboard/contribution" role="button" onClick={this.toggleContriActive}>
-               <Contribution className = "ui-nav-text" color={this.state.contAct ? '#fff' : '#2d6dcd'}/>
+               <Contribution className = "ui-nav-text" color={this.state.contAct ? '#fff' : '#465390'}/>
                <span className={`ui-nav-text ${this.state.contAct}`}>Contribution</span> 
                </Link>
             </li><li onMouseEnter = {() => { this.state.tranAct === 'active' ? '' : this.setState({tranAct : true })} } onMouseLeave = { () =>{this.state.tranAct === 'active'? '' : this.setState({tranAct : false }) }} className={`${this.state.tranAct} nav-item`}  ><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}>
-                <Transactions color={this.state.tranAct ? '#fff' : '#2d6dcd'}/>
+                <Transactions color={this.state.tranAct ? '#fff' : '#465390'}/>
                <span className={`ui-nav-text ${this.state.tranAct}`}>Transactions</span> 
                </Link>
             </li><li onMouseEnter = {() => { this.state.myReferal === 'active' ? '' : this.setState({myReferal : true })} } onMouseLeave = { () =>{this.state.myReferal === 'active'? '' : this.setState({myReferal : false }) }} className={`${this.state.myReferal} nav-item`} ><Link to="/dashboard/myReferal" role="button" onClick={this.togglemyReferal}>
-               <Referral color={this.state.myReferal ? '#fff' : '#2d6dcd'}/>
+               <Referral color={this.state.myReferal ? '#fff' : '#465390'}/>
                <span className={`ui-nav-text ${this.state.myReferal}`}>Referrals</span> 
                </Link>
             </li><li onMouseEnter = {() => { this.state.ticketAct === 'active' ? '' : this.setState({ticketAct : true })} } onMouseLeave = { () =>{this.state.ticketAct === 'active'? '' : this.setState({ticketAct : false }) }} className={`${this.state.ticketAct} nav-item`}><Link to="/dashboard/ticket" role="button" onClick={this.toggleTicketActive}>
-               <Tickets color={this.state.ticketAct ? '#fff' : '#2d6dcd'}/>
+               <Tickets color={this.state.ticketAct ? '#fff' : '#465390'}/>
                <span className={`ui-nav-text ${this.state.ticketAct}`}>Tickets</span> 
                </Link>
             </li><li onMouseEnter = {() => { this.state.secAct === 'active' ? '' : this.setState({secAct : true })} } onMouseLeave = { () =>{this.state.secAct === 'active'? '' : this.setState({secAct : false }) }} className={`${this.state.secAct} nav-item`} ><Link to="/dashboard/security" role="button" onClick={this.toggleSecActive}>
-               <Security color={this.state.secAct ? '#fff' : '#2d6dcd'}/>
+               <Security color={this.state.secAct ? '#fff' : '#465390'}/>
                <span className={`ui-nav-text ${this.state.secAct}`}>Security</span> 
                </Link>
             </li>
