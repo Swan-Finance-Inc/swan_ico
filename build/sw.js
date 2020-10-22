@@ -32,11 +32,11 @@ var __wpo = {
       "/icon-72x72.png",
       "/icon-96x96.png",
       "/manifest.json",
-      "/main.fcfc4b867a3289e022ce.js",
+      "/main.1daf7729c2dc29ddc51f.js",
       "/"
     ],
     "additional": [
-      "/0.c3c30a33c5861ec724d1.chunk.js",
+      "/0.7dca0a1a4b92600d8e1c.chunk.js",
       "/1.176d083f6db80b3b51a2.chunk.js",
       "/2.e2d7c95c0ed25c8a4cf4.chunk.js",
       "/3.83d7b19adb2521c4ff1e.chunk.js",
@@ -98,7 +98,7 @@ var __wpo = {
     "1eda04abf9a190365f077e2ce1d90815151a5177": "/icon-72x72.png",
     "3585b232832d19ce8046ceeaa4b0075388f2ad40": "/icon-96x96.png",
     "cea80e84d1510fba55ad650e59265bf4949b351c": "/manifest.json",
-    "430bdb33afe4622d0eb1f4aaa277b5e2e3653413": "/0.c3c30a33c5861ec724d1.chunk.js",
+    "b855086d0cdf36d0e9015176ccd3e171396f0387": "/0.7dca0a1a4b92600d8e1c.chunk.js",
     "883271a63b6cfa53ab2920d01566a836818d341b": "/1.176d083f6db80b3b51a2.chunk.js",
     "70c51f86c9f420f51c225d57218a5186973a4bc0": "/2.e2d7c95c0ed25c8a4cf4.chunk.js",
     "f52234fb352153bf4dd729c7fc5dad01d3016e4e": "/3.83d7b19adb2521c4ff1e.chunk.js",
@@ -124,12 +124,12 @@ var __wpo = {
     "bfafe75340a5fd0377a684323dc4be12cc5ad611": "/23.3e61c002e07bd7afe909.chunk.js",
     "cdd7df295edc99fe6b18e023bf9ccce47c33f5db": "/24.8a52bf7801fceb677e53.chunk.js",
     "ed7abd0d691a90b9a2a7823e9050197647974eed": "/25.95c56c6849ef372ec76f.chunk.js",
-    "e4bee51e37398b9be6d3bb545760c022cd26b776": "/main.fcfc4b867a3289e022ce.js",
-    "252908293c5c5bd8f9bf35eb80877dab9f41f00b": "/"
+    "1ec6e23ae388833410430f59d183f1cbe3e627a6": "/main.1daf7729c2dc29ddc51f.js",
+    "3c1ad632cf17db8700f8c54b7e4e96c84095a40d": "/"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "10/22/2020, 5:43:02 PM",
+  "version": "10/22/2020, 10:53:16 PM",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": false

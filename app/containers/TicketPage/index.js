@@ -212,7 +212,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                   <div className="col-sm-4">
                       <div className="transactions-filters">
                         <div className="transactions-filters-card">
-                    <label htmlFor="kycFilter" id="transaction-type"><h4 style={{color : '#2D6DCD' }}>No Of Tickets:</h4></label>
+                    <label htmlFor="kycFilter" id="transaction-type"><h4 style={{color : '#B0C9F0' }}>No Of Tickets:</h4></label>
                         <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
                           <option value="" disabled selected hidden></option>
                           <option value='1'>1</option>
@@ -222,7 +222,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                       </div>
                   </div>
                   <div className="col-sm-7">
-                      <button className="btn btn-primary new-ticket" onClick={this.showCreateTicket}>New Ticket</button>
+                      <button  className="btn new-ticket" onClick={this.showCreateTicket}>New Ticket</button>
                   </div>
              </div> 
              <div className="row">

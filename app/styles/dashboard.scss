@@ -2405,8 +2405,8 @@ font-size: 25px;
 
 
 .ReactTable .rt-thead .rt-resizable-header{
-	background: #D6E4FE 0% 0% no-repeat padding-box;
-	border: 1px solid #D6E4FE;
+	background: #c2caf2 0% 0% no-repeat padding-box;
+	border: 1px solid #c2caf2;
 	box-shadow: none;
 }
 
@@ -2416,7 +2416,7 @@ font-size: 25px;
 }
 
 .rt-resizable-header-content{
-	color: #2D6DCD;
+	color: #737db3;
     font: normal 14px Lato;
 }
 
@@ -2441,11 +2441,13 @@ font-size: 25px;
 	box-shadow: 0px 3px 6px #2D6DCD6E;
 	outline: none !important;
 	margin-left: 20px;
-
+	background-color: #465390;
+	color: white;
+	border-radius: 22px !important;
 	&:hover , &:focus {
 		outline: none !important;
-		background-color: #2D6DCD !important;
-		
+		// background-color: #2D6DCD !important;
+		color: white;
 	}
 }
 
