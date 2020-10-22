@@ -408,25 +408,21 @@ var _ref5 = Balance__jsx("div", {
   className: "balance-hr"
 });
 
-var _ref6 = Balance__jsx("br", {});
+var _ref6 = Balance__jsx("strong", {}, void 0, Balance__jsx("br", {}), " Refers");
 
-var _ref7 = Balance__jsx("span", {
-  className: "main-color--blue font-weight-bold "
-}, void 0, "Refers");
-
-var _ref8 = Balance__jsx("h3", {
+var _ref7 = Balance__jsx("h3", {
   className: "balance-card-inner-wrapper-heading"
 }, void 0, "ILO Details");
 
-var _ref9 = Balance__jsx("div", {}, void 0, Balance__jsx("img", {
+var _ref8 = Balance__jsx("div", {}, void 0, Balance__jsx("img", {
   src: Planet_default.a
 }));
 
+var _ref9 = Balance__jsx("br", {});
+
 var _ref10 = Balance__jsx("br", {});
 
-var _ref11 = Balance__jsx("br", {});
-
-var _ref12 = Balance__jsx("div", {
+var _ref11 = Balance__jsx("div", {
   className: "satalite-logo-container"
 }, void 0, Balance__jsx("img", {
   src: littleStar_default.a,
@@ -435,46 +431,46 @@ var _ref12 = Balance__jsx("div", {
   src: Satelite_default.a
 }));
 
-var _ref13 = Balance__jsx("img", {
+var _ref12 = Balance__jsx("img", {
   src: littleStar_default.a
 });
 
-var _ref14 = Balance__jsx("img", {
+var _ref13 = Balance__jsx("img", {
   src: Ellipse_default.a,
   className: "ellipse-one"
 });
 
-var _ref15 = Balance__jsx("img", {
+var _ref14 = Balance__jsx("img", {
   src: Ellipse_default.a,
   className: "ellipse-two"
 });
 
-var _ref16 = Balance__jsx("p", {
+var _ref15 = Balance__jsx("p", {
   className: "secondary-text"
 }, void 0, "Total Coins");
 
-var _ref17 = Balance__jsx("b", {});
+var _ref16 = Balance__jsx("b", {});
 
-var _ref18 = Balance__jsx("p", {
+var _ref17 = Balance__jsx("p", {
   className: "mt-30 referral-content"
 }, void 0, "Earn up to 10% on the ongoing referral bonus ", Balance__jsx("b", {}), "of your referred transaction fee. ");
 
-var _ref19 = Balance__jsx("div", {
+var _ref18 = Balance__jsx("div", {
   className: "referral-logo-container"
 }, void 0, Balance__jsx("img", {
   src: referral_main_page_default.a,
   className: "referral-logo"
 }));
 
-var _ref21 = Balance__jsx("h4", {
+var _ref20 = Balance__jsx("h4", {
   className: "exchange-heading"
 }, void 0, "Referral Tokens Earned");
 
-var _ref22 = Balance__jsx("span", {
+var _ref21 = Balance__jsx("span", {
   className: "Pending-referrals-count"
 }, void 0, " # of Pending Referrals");
 
-var _ref23 = Balance__jsx("span", {
+var _ref22 = Balance__jsx("span", {
   className: "Confirmed-referrals-count"
 }, void 0, "# of Confirmed Referrals");
 
@@ -603,6 +599,8 @@ var Balance_Balance = function (_React$PureComponent) {
 
       console.log(this.state, 'state in balance');
       console.log(this.props, 'props in balance');
+      var crowdsaleDetails = this.state.crowdsaleDetails;
+
       var a = void 0;
       if (this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState) {
         a = Math.round(this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens * 100);
@@ -669,7 +667,7 @@ var Balance_Balance = function (_React$PureComponent) {
         }
       }, void 0, this.state.balanceType === "USD" ? "CENX Token" : "USD")))), Balance__jsx("span", {
         style: { fontSize: "32px", marginLeft: "12px" }
-      }, void 0, this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd).toFixed(3) : this.props.userInfo.tokens.total.toFixed(3))))), Balance__jsx("div", {
+      }, void 0, this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * crowdsaleDetails.tokenUsd).toFixed(3) : this.props.userInfo.tokens.total.toFixed(3))))), Balance__jsx("div", {
         className: "col-sm-5"
       }, void 0, Balance__jsx("div", {
         className: "balance-botton-inner-wrapper",
@@ -705,7 +703,7 @@ var Balance_Balance = function (_React$PureComponent) {
       }, void 0, ethPercent, "%  ", _ref4))), _ref5, Balance__jsx("div", {
         style: { width: '90px' }
       }, void 0, Balance__jsx(dist["CircularProgressbarWithChildren"], {
-        value: others,
+        value: othersPercent,
         styles: {
           path: {
             stroke: '#2D6DCD'
@@ -718,7 +716,7 @@ var Balance_Balance = function (_React$PureComponent) {
           color: '#2D6DCD',
           letterSpacing: '0px'
         }
-      }, void 0, othersPercent, "%"), _ref6, _ref7)))))))), Balance__jsx("div", {
+      }, void 0, othersPercent, "% ", _ref6))))))))), Balance__jsx("div", {
         className: "col-lg-5",
         style: {}
       }, void 0, Balance__jsx("div", {
@@ -727,20 +725,20 @@ var Balance_Balance = function (_React$PureComponent) {
         style: { overflow: 'hidden' }
       }, void 0, Balance__jsx("div", {
         className: "balance-card-inner-wrappper"
-      }, void 0, _ref8, Balance__jsx("div", {
+      }, void 0, _ref7, Balance__jsx("div", {
         className: "ico-details-middle"
-      }, void 0, _ref9, Balance__jsx("div", {
+      }, void 0, _ref8, Balance__jsx("div", {
         className: "ico-details-circle"
       }, void 0, Balance__jsx("span", {
         className: "upto-2-percentage"
-      }, void 0, "Up To ", _ref10, Balance__jsx("span", {
+      }, void 0, "Up To ", _ref9, Balance__jsx("span", {
         style: { fontSize: '32px' }
-      }, void 0, "2%"), _ref11, " Extra")), _ref12), _ref13, Balance__jsx("img", {
+      }, void 0, "2%"), _ref10, " Extra")), _ref11), _ref12, Balance__jsx("img", {
         src: bigStar_default.a,
         style: { float: 'right' }
-      }), _ref14, _ref15, Balance__jsx("div", {
+      }), _ref13, _ref14, Balance__jsx("div", {
         className: "text-center"
-      }, void 0, _ref16, Balance__jsx("p", {
+      }, void 0, _ref15, Balance__jsx("p", {
         className: "total-coins"
       }, void 0, this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0)), Balance__jsx("div", {
         className: "coins-left-container"
@@ -753,7 +751,7 @@ var Balance_Balance = function (_React$PureComponent) {
         "aria-valuemin": "0",
         "aria-valuemax": "100",
         style: { width: a + "%" }
-      }, void 0, Balance__jsx("span", {}, void 0, " ", this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ? Math.round(this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens * 100) : 0, " % ")), a == 0 ? Balance__jsx("span", {
+      }, void 0, Balance__jsx("span", {}, void 0, " ", this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ? Math.round(this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens * 100) : '0', " % ")), a == 0 ? Balance__jsx("span", {
         style: { textAlign: 'center', marginLeft: '50%' }
       }, void 0, "0%") : '')), Balance__jsx("div", {
         style: { marginBottom: 12 },
@@ -778,15 +776,15 @@ var Balance_Balance = function (_React$PureComponent) {
       }, void 0, Balance__jsx("div", {}, void 0, Balance__jsx("h3", {
         className: "balance-card-inner-wrapper-heading",
         style: { lineHeight: '1.3' }
-      }, void 0, "Invite Your friends", _ref17, " & Earn CenX tokens"), _ref18, Balance__jsx("p", {
+      }, void 0, "Invite Your friends", _ref16, " & Earn CenX tokens"), _ref17, Balance__jsx("p", {
         className: "main-color--blue",
         style: { fontSize: '15px' }
-      }, void 0, "Share the Unique Invite Link")), _ref19), Balance__jsx("div", {
+      }, void 0, "Share the Unique Invite Link")), _ref18), Balance__jsx("div", {
         style: { width: '86%', position: 'relative' }
       }, void 0, Balance__jsx("input", {
         value: this.state.referalUrl,
-        onChange: function onChange(_ref20) {
-          var value = _ref20.target.value;
+        onChange: function onChange(_ref19) {
+          var value = _ref19.target.value;
           return _this2.setState({ value: value, copied: false });
         },
         className: "copy-input"
@@ -815,7 +813,7 @@ var Balance_Balance = function (_React$PureComponent) {
       }, void 0, Balance__jsx("div", {
         className: "balance-botton-inner-wrapper",
         style: { marginTop: '-15px' }
-      }, void 0, _ref21, Balance__jsx("p", {
+      }, void 0, _ref20, Balance__jsx("p", {
         style: { marginBottom: "0px", color: "#2D6DCD", fontSize: "32px", marginLeft: '10px' }
       }, void 0, (this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo).toFixed(2)), Balance__jsx("div", {
         className: "col-sm-12",
@@ -826,7 +824,7 @@ var Balance_Balance = function (_React$PureComponent) {
         id: "circle"
       }, void 0, Balance__jsx("span", {
         className: "circle-text"
-      }, void 0, this.props.userInfo.referral.pending, " ", _ref22)))), Balance__jsx("div", {
+      }, void 0, this.props.userInfo.referral.pending, " ", _ref21)))), Balance__jsx("div", {
         className: "col-sm-12",
         style: { position: 'relative' }
       }, void 0, Balance__jsx("div", {
@@ -835,7 +833,7 @@ var Balance_Balance = function (_React$PureComponent) {
         id: "confirmed-circle"
       }, void 0, Balance__jsx("span", {
         className: "confirmed-circle-text"
-      }, void 0, this.props.userInfo.referral.success, _ref23))))))))));
+      }, void 0, this.props.userInfo.referral.success, _ref22))))))))));
     }
   }]);
 

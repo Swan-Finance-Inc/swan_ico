@@ -32,7 +32,7 @@ var __wpo = {
       "/icon-72x72.png",
       "/icon-96x96.png",
       "/manifest.json",
-      "/main.2586a5949ec6a036322a.js",
+      "/main.227bfd6b2aa25d71b382.js",
       "/"
     ],
     "additional": [
@@ -49,7 +49,7 @@ var __wpo = {
       "/10.6fe5d850165b0130efb8.chunk.js",
       "/11.260090743f2cac2a0f93.chunk.js",
       "/12.e64144bbdf03fab027e9.chunk.js",
-      "/13.0e437e97ccbc461a579d.chunk.js",
+      "/13.a0c9a5f530e7f6c4dcd1.chunk.js",
       "/14.1567bd1cf596bb766374.chunk.js",
       "/15.e6f93dc315e1b245d97a.chunk.js",
       "/16.8ad8fb246419be6154d5.chunk.js",
@@ -111,7 +111,7 @@ var __wpo = {
     "349387f3e7030f6fab72c3c673abb57a6a7922ab": "/10.6fe5d850165b0130efb8.chunk.js",
     "bbc47d863a10c99d4a620c502af5d1a45ed06f9a": "/11.260090743f2cac2a0f93.chunk.js",
     "934ed063efb726fb5d4187f06f329a7de78bcac0": "/12.e64144bbdf03fab027e9.chunk.js",
-    "34c02bbd972d5313820ecb55ca67667efdec0345": "/13.0e437e97ccbc461a579d.chunk.js",
+    "f793b31c4efa5d5bfe2f43554a34919d49b69dd0": "/13.a0c9a5f530e7f6c4dcd1.chunk.js",
     "fdd9f139b973a564d0786067f19f78328f7caba8": "/14.1567bd1cf596bb766374.chunk.js",
     "8a3af78ac81225f0a55e994f83628ea6f949073c": "/15.e6f93dc315e1b245d97a.chunk.js",
     "e331f764a0b0b8280df74a9fc2992e8e2e830079": "/16.8ad8fb246419be6154d5.chunk.js",
@@ -124,12 +124,12 @@ var __wpo = {
     "bfafe75340a5fd0377a684323dc4be12cc5ad611": "/23.3e61c002e07bd7afe909.chunk.js",
     "cdd7df295edc99fe6b18e023bf9ccce47c33f5db": "/24.8a52bf7801fceb677e53.chunk.js",
     "ed7abd0d691a90b9a2a7823e9050197647974eed": "/25.95c56c6849ef372ec76f.chunk.js",
-    "d3d329cda90d0f581b3a5deb11e2bb4c741675cc": "/main.2586a5949ec6a036322a.js",
-    "aa9be6172768ae88754e97dce9e2933a46cd31be": "/"
+    "ec1b6415c0324c88921178ac65a041e514ef5c8b": "/main.227bfd6b2aa25d71b382.js",
+    "eacf9d42768d6ecef3d2fda3f8c5ac08f9771089": "/"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "10/22/2020, 2:32:24 AM",
+  "version": "10/22/2020, 2:04:39 PM",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": false

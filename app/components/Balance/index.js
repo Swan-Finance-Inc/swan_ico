@@ -154,6 +154,7 @@ class Balance extends React.PureComponent {
   render() {
     console.log(this.state,'state in balance')
     console.log(this.props,'props in balance')
+    const { crowdsaleDetails } = this.state;
     let a;
     if(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) {
       a = Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)  }else{a=0}  
@@ -248,7 +249,7 @@ class Balance extends React.PureComponent {
                     </Nav>  
                       </span>     
                         <span style={{ fontSize: "32px", marginLeft: "12px" }}>
-                        {this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd).toFixed(3) :
+                        {this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * crowdsaleDetails.tokenUsd).toFixed(3) :
                         this.props.userInfo.tokens.total.toFixed(3)
                         }
                         </span>
@@ -291,7 +292,7 @@ class Balance extends React.PureComponent {
                       </div>
                       <div className="balance-hr" />
                       <div style={{ width : '90px' }}>
-                      <CircularProgressbarWithChildren value={others}
+                      <CircularProgressbarWithChildren value={othersPercent}
                         styles={{ 
                           path : {
                             stroke : '#2D6DCD'
@@ -304,10 +305,10 @@ class Balance extends React.PureComponent {
                             color : '#2D6DCD',
                             letterSpacing: '0px'
                           }}>
-                           {othersPercent}% 
+                           {othersPercent}% <strong><br /> Refers</strong>
                         </div>
-                        <br />
-                        <span className="main-color--blue font-weight-bold ">Refers</span>
+                        {/* <br />
+                        <span className="main-color--blue font-weight-bold ">Refers</span> */}
                         
                       </CircularProgressbarWithChildren>
                       </div>
@@ -391,7 +392,7 @@ class Balance extends React.PureComponent {
                   <div className="progress">
                   <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : `${a}%` }}>
                 <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
-                  Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   :   0  } % </span>
+                  Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   :   '0'  } % </span>
                   </div>
                   {a==0?<span style={{textAlign:'center', marginLeft:'50%'}}>0%</span>:''}
                   </div>
