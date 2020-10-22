@@ -158,15 +158,15 @@ class Balance extends React.PureComponent {
     // if(crowdsaleDetails.tokenUsd){
     //   crowdsaleDetails.tokenUsd = 0
     // }
-    let b;
-    if(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) {
+  //   let b;
+  //   if(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) {
 
     
-    b =  this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd * this.props.userInfo.tokens.total;
+  //   b =  this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd * this.props.userInfo.tokens.total;
 
-  }else {
-    b=0.03 * this.props.userInfo.tokens.total;
-  }
+  // }else {
+  //   b=0.03 * this.props.userInfo.tokens.total;
+  // }
     let a;
     if(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) {
       a = Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)  }else{a=0}  
@@ -261,7 +261,7 @@ class Balance extends React.PureComponent {
                     </Nav>  
                       </span>     
                         <span style={{ fontSize: "32px", marginLeft: "12px" }}>
-                        {this.state.balanceType === "USD" ? (b).toFixed(3) :
+                        {this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * 0.03).toFixed(3) :
                         this.props.userInfo.tokens.total.toFixed(3)
                         }
                         </span>

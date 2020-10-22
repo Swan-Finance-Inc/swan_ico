@@ -603,14 +603,16 @@ var Balance_Balance = function (_React$PureComponent) {
       // if(crowdsaleDetails.tokenUsd){
       //   crowdsaleDetails.tokenUsd = 0
       // }
+      //   let b;
+      //   if(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) {
 
-      var b = void 0;
-      if (this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState) {
 
-        b = this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd * this.props.userInfo.tokens.total;
-      } else {
-        b = 0.03 * this.props.userInfo.tokens.total;
-      }
+      //   b =  this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd * this.props.userInfo.tokens.total;
+
+      // }else {
+      //   b=0.03 * this.props.userInfo.tokens.total;
+      // }
+
       var a = void 0;
       if (this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState) {
         a = Math.round(this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens * 100);
@@ -677,7 +679,7 @@ var Balance_Balance = function (_React$PureComponent) {
         }
       }, void 0, this.state.balanceType === "USD" ? "CENX Token" : "USD")))), Balance__jsx("span", {
         style: { fontSize: "32px", marginLeft: "12px" }
-      }, void 0, this.state.balanceType === "USD" ? b.toFixed(3) : this.props.userInfo.tokens.total.toFixed(3))))), Balance__jsx("div", {
+      }, void 0, this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * 0.03).toFixed(3) : this.props.userInfo.tokens.total.toFixed(3))))), Balance__jsx("div", {
         className: "col-sm-5"
       }, void 0, Balance__jsx("div", {
         className: "balance-botton-inner-wrapper",
