@@ -26,7 +26,7 @@ import reducer from "./reducer";
 import saga from "./saga";
 import { registerUser } from "./actions";
 import { Modal } from "react-bootstrap";
-import logo from "../../images/CWHLogo.png";
+import logo from "../../images/swan-logo.png";
 import TextFieldInput from "../../components/TextFieldInput";
 
 export class RegisterPage extends React.PureComponent {

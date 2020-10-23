@@ -170,7 +170,7 @@ color:blue
 	background: transparent;
 }
 .ui-aside li> a:focus {
-	background-color:#2D6DCD!important;
+	background-color:#3297d5!important;
 }
 .profile-Image {
 	position: relative;
@@ -373,7 +373,7 @@ transition: all .301s;
 	margin-left: -260px;
 	position:fixed;
 	left:0;
-	top:70px;
+	top:58px;
 	max-width: 130px;
  -webkit-transition: all .299s;
  transition: all .299s;
@@ -549,10 +549,10 @@ transition: all .301s;
 	font-size: 13px;
 }
 .navbar-nav>li>a {
-	color: #fff !important;
+	color: #2498D5 !important;
 }
 .nav li a:hover {
-	color: #fff !important;
+	color: #2498D5 !important;
 }
 .dropdown-footer a:hover {
 	color:#000 !important;
@@ -573,7 +573,7 @@ transition: all .301s;
 	display: block;
 }
 .ui-aside li> a:hover {
-background-color:#2D6DCD!important;
+background-color:#3297d5!important;
 }
 .nav-sub .active a {
 	//background-color: inherit;
@@ -852,7 +852,7 @@ a.toggle-btn {
 .form-button {
 	// background-color:#101922!important;
 	//background-color: #03152D;
-	background-color: #2D6DCD;
+	background-color: #465390;
 	// background: linear-gradient(to bottom, #C8C2FF, #519580 );
 	// background: #000;
 	border: 0;
@@ -869,7 +869,8 @@ a.toggle-btn {
 	cursor: pointer;
 	text-transform: uppercase;
 	-webkit-transition: all .5s ease;
-    transition: all .5s ease;
+	transition: all .5s ease;
+	border-radius: 38px;
 }
 .form-button:hover, .form-button:focus{outline: 0; -webkit-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); -moz-box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15); box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);background-color: #4e82d1 ;}
 .note {
@@ -988,13 +989,13 @@ ol.rule-list li {
 
  @media (min-width: 768px) {
 	 .ui-aside li> a:hover {
-	 background-color:#2D6DCD!important;
+	 background-color:#3297d5!important;
 	 }
 	 .ui {
 	padding-top: 70px;
 	}
 	 .ui-content {
-	 padding-left: 130px;
+	 padding-left: 86px;
 	 -webkit-transition: all .299s;
 	 transition: all .299s;
 	}
@@ -1882,7 +1883,7 @@ font-size: 25px;
 
 .navbar-back {
 	// background-image: url("/assets/img/nav.png");
-	background-color: #2D6DCD!important;
+	background-color: #fff!important;
 	background-size: cover;
 }
 
@@ -1938,7 +1939,7 @@ font-size: 25px;
 
   /*   new dashboard css */
   .main-color--blue {
-	color: #2D6DCD;
+	color: #465390;
   }
   
   .font-weight-bold{
@@ -1973,7 +1974,7 @@ font-size: 25px;
 	color: #465390;
   }
   .balance-text{
-	background: #CEE2FE 0% 0% no-repeat padding-box;
+	background: #edeffb 0% 0% no-repeat padding-box;
     opacity: 1;
     color: #465390; //#2D6DCD;
     font-size: 14px;
@@ -2123,7 +2124,7 @@ font-size: 25px;
 }
 
 .Pending-referrals , .Confirmed-referrals{
-	background: #CEE2FE 0% 0% no-repeat padding-box;
+	background: #edeffb 0% 0% no-repeat padding-box;
 	border-radius: 50px 0px 0px 50px;
 	opacity: 1;
 	width: 100%;
@@ -2137,14 +2138,14 @@ font-size: 25px;
 	position: absolute;
     top: 12px;
     left: 31px;
-    color: #2D6DCD;
+    color: #465390;
     letter-spacing: 0.34px;
     font: normal normal bold 16px Lato;
     display: block;
 }
 
 .Confirmed-referrals-count , .Pending-referrals-count{
-	color: #2D6DCD;
+	color: #465390;
 	font: normal normal normal 14px Lato;
 	margin-left: 23px;
     vertical-align: middle;
@@ -2165,7 +2166,7 @@ font-size: 25px;
 
 
 .ico-details-circle{
-	background: lightblue;
+	background: #edeffb;
     border-radius: 50%;
     width: 110px;
     height: 105px;
@@ -2193,7 +2194,7 @@ font-size: 25px;
 	font-weight: 500;
 }
 .total-coins{
-	color: #2D6DCD;
+	color: #465390;
 	font: normal normal bold 23px/28px Lato;
 	letter-spacing: 0px;
 	line-height: 12px;
@@ -2208,13 +2209,14 @@ font-size: 25px;
 	width: 225px;
 	height: 37px;
 	background: #465390 0% 0% no-repeat padding-box;
-	border-radius: 4px;
+	border-radius: 38px;
 	opacity: 1;
 	border: 1px solid;
 	color: #fff;
 	outline: none;
-	&:focus{
+	&:focus , &:hover{
 		outline: none;
+		color: #fff;
 	}
 	padding: 12px 75px;
 }
@@ -2304,8 +2306,8 @@ font-size: 25px;
 	display: flex;
     flex-direction: column;
     padding: 10px 10px 4px 10px;
-    background: #D6E4FE 0% 0% no-repeat padding-box;
-    color: #2D6DCD;
+    background: #edeffb  0% 0% no-repeat padding-box;
+    color: #465390;
     font: normal 16px Lato;
     width: 77%;
     border-radius: 4px;
@@ -2469,7 +2471,8 @@ font-size: 25px;
 }
 
 .ui-nav{
-	transition: all .299s ease;;
+	transition: all .299s ease;
+	width: 80px;
 }
 
 // .ui-nav .active .ui-nav-text{
@@ -2586,7 +2589,7 @@ font-size: 25px;
 
 .ui-aside .nav li.active{
 	color: #fff;
-	background-color:  #2D6DCD;
+	background-color:  #3297d5;
 }
 
 .account-balance-dropdown{

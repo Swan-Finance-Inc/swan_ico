@@ -270,7 +270,7 @@ class Balance extends React.PureComponent {
                   </div>
                   
                   <div className="col-sm-5">
-                    <div className="balance-botton-inner-wrapper" style={{marginLeft:'100px'}}>
+                    <div className="balance-botton-inner-wrapper" >
                       <h5
                         style={{
                           font: "normal normal bold 20px/24px Lato",
@@ -288,7 +288,7 @@ class Balance extends React.PureComponent {
                       <CircularProgressbarWithChildren value={ethPercent}
                         styles={{ 
                           path : {
-                            stroke : '#2D6DCD'
+                            stroke : '#465390'
                           }
                          }}
                          strokeWidth="9"
@@ -307,7 +307,7 @@ class Balance extends React.PureComponent {
                       <CircularProgressbarWithChildren value={othersPercent}
                         styles={{ 
                           path : {
-                            stroke : '#2D6DCD'
+                            stroke : '#465390'
                           }
                          }}
                          strokeWidth="9"
@@ -402,7 +402,7 @@ class Balance extends React.PureComponent {
                   </div>
                   <div className="coins-left-container">
                   <div className="progress">
-                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : `${a}%` }}>
+                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : `${a}%` , color : '#465390' }}>
                 <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
                   Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   :   '0'  } % </span>
                   </div>
@@ -641,9 +641,9 @@ class Balance extends React.PureComponent {
                             }
                             
                         </div>
-                        <div className="referral-logo-container">
+                        {/* <div className="referral-logo-container">
                           <img src={Referral} className="referral-logo" />
-                        </div>
+                        </div> */}
                       </div>
                       <div style={{width: '86%' , position: 'relative'}}>
                             <input value={this.state.referalUrl }
@@ -680,7 +680,7 @@ class Balance extends React.PureComponent {
               >
                 <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>
                   <h4 className="exchange-heading">Referral Tokens Earned</h4>
-                    <p style={{ marginBottom: "0px", color: "#2D6DCD" ,fontSize: "32px", marginLeft : '10px' }}>
+                    <p style={{ marginBottom: "0px", color: "#465390" ,fontSize: "32px", marginLeft : '10px' }}>
                     {
                     (this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo).toFixed(2)
                     }

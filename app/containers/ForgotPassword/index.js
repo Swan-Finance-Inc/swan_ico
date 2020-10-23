@@ -20,7 +20,7 @@ import makeSelectForgotPassword, { makeSelectMail, makeSelectError } from './sel
 import reducer from './reducer';
 import saga from './saga';
 import ReCAPTCHA from 'react-google-recaptcha';
-import logo from '../../images/CWHLogo.png';
+import logo from '../../images/swan-logo.png';
 
 export class ForgotPassword extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {

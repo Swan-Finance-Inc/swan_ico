@@ -7,7 +7,7 @@ export const DashBoard = ({ color }) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="44.832"
-      height="25.866"
+      height="30.866"
       viewBox="0 0 44.832 35.866"
     >
       <g fill={color} transform="translate(0 -0.904)">
@@ -86,7 +86,7 @@ export const KYC = ({ color }) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="45"
-      height="20.208"
+      height="25.208"
       viewBox="0 0 45 30.208"
     >
       <g fill={color} transform="translate(0 -84)">
@@ -353,7 +353,7 @@ export const Transactions = ({ color }) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="38.836"
-      height="23.075"
+      height="28.075"
       viewBox="0 0 38.836 33.075"
     >
       <g fill={color} transform="translate(0 -37.627)">
@@ -395,7 +395,7 @@ export const Security = ({ color }) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="35.042"
-      height="45"
+      height="40"
       viewBox="0 0 35.042 45"
     >
       <g fill={color} transform="translate(-41.096)">
@@ -473,7 +473,7 @@ export const Referral = ({ color }) => {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="38.016"
-      height="28.016"
+      height="33.016"
       viewBox="0 0 38.016 38.016"
     >
       <g fill={color} transform="translate(-1 -1)">

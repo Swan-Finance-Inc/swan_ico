@@ -15,12 +15,14 @@ import injectReducer from 'utils/injectReducer';
 import makeSelectNavBarContainer from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import logo from '../../images/CWHLogo.png';
+import logo from '../../images/swan-logo.png';
+import notifications from '../../images/notification-icon.png'
 // import { signOut }  from './actions';
 import { userLoggedOut } from '../App/actions';
 import { push } from 'react-router-redux';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import BellIcon from 'react-bell-icon';
+import { notification } from 'antd';
 export class NavBarContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -103,17 +105,27 @@ export class NavBarContainer extends React.PureComponent {
     console.log(this.props.history," tttttttttttttttttttttttttttttt");
 
     return (
-      <header >
-        <Navbar fluid fixedTop style={{borderWidth: '0'}} className="navbar-back">
+      <header style = {{height : "60px"}} >
+        <Navbar fluid fixedTop style={{borderWidth: '0' , border : '1px solid #465490'}} className="navbar-back">
           <div className="header-left">
-            <div className="logo "><Link to="/"><img style = {{width : "55%", marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+            <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+            <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
           </div>
           <div className="header-right hidden-xs">
                 {
                   // <Link to="/dashboard/notification"  onClick={this.routeToNotifications} ><span  className="NotificationBell"><BellIcon width='30' color={'#D3A94A'} active={false} animate={false} /></span>
                   //     <span className='badgeClass' style={{color:"#fff"}}><Badge>{2}</Badge></span>   </Link>
                 }
-
+              <Nav pullRight  className="profile-nav-bar">
+            
+                <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title= "Language" id="basic-nav-dropdown">
+                <MenuItem style={{ cursor: 'pointer' }} onClick={ () => console.log("") }>ENGLISH</MenuItem>
+                <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>FRENCH</MenuItem>
+                {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetInfo}><i className={this.props.flag===false?"fa fa-toggle-off":"fa fa-toggle-on"}></i>Reset Info flag</MenuItem> */}
+                <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>GERMAN</MenuItem>
+                <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>RUSSIAN</MenuItem>
+              </NavDropdown>
+            </Nav>
 
             <Nav pullRight  className="profile-nav-bar">
             {
@@ -132,6 +144,10 @@ export class NavBarContainer extends React.PureComponent {
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showSignOut}><i className="fa fa-power-off"></i>Sign Out</MenuItem>
               </NavDropdown>
             </Nav>
+
+            <div style = {{padding : "15px 15px" , marginTop : '5px', cursor : 'pointer'}}>
+              <img src = {notifications} style = {{width : "70%"}} />
+            </div>
           </div>
         </Navbar>
         <div className="static-modal">

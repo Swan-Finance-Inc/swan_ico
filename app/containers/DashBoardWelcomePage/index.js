@@ -1007,7 +1007,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
         <a className='socailLinks' href='https://Linkedin.com/company/centralex' target="_blank"><i style ={{color : '#0e76a8'}} class="fa fa-linkedin-square" aria-hidden="true"></i></a>
         <a className='socailLinks' href='https://www.instagram.com/centralexhk/' target="_blank"><i style ={{background : '#d6249f' , background : 'radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)' , boxShadow : '0px 3px 10px rgba(0,0,0,.25)' , borderRadius : '20px'}} class="fa fa-instagram" aria-hidden="true"></i></a>
         <a className='socailLinks' href='https://discord.gg/NTDFdMh' target="_blank"><img className = 'discord-img' style = {{width : '2.3%'}} src= {discord} ></img></a>
-        {/* <a className='socailLinks' href='https://t.me/centralexhk' target="_blank"><i style ={{color : '#0088cc'}} class="fa fa-telegram" aria-hidden="true"></i></a> */}
+        <a className='socailLinks' href='https://t.me/centralexhk' target="_blank"><i style ={{color : '#0088cc'}} class="fa fa-telegram" aria-hidden="true"></i></a>
         {/* <a href='https://play.google.com/store/apps/details?id=com.centralex&hl=en' target='_blank'><i className="fa fa-android fa-3x" aria-hidden="true" style={{cursor:'pointer',marginLeft:'10px'}}><span style={{ fontSize: '12px'}}>Download App here</span></i></a> */}
 
         </div>
@@ -1024,11 +1024,11 @@ export class DashBoardWelcomePage extends React.PureComponent {
           </div>
         </div>
 
-        <div className='row'>
+        {/* <div className='row'>
         <div className='col-md-1 col-md-offset-6'>
         <div className="sticky-telegram-logo"><a href="https://t.me/centralexhk" className="sticky-telegram-icon" target="_blank">Telegram</a></div>
         </div>
-        </div>
+        </div> */}
 
 
           { this.state.notifyTransactions.length > 0 ?
