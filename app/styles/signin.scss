@@ -77,14 +77,14 @@ header .container {
 
 .header {
 	// background: transparent;
-	background: #2D6DCD;
+	background: #fff;
 	box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 	-webkit-box-shadow:0 4px 5px rgba(0, 0, 0, .1);
 }
 .header .header-btn>a {
 	// background-color:#fff;
 	// color:#1C1466;
-	color: #fff;
+	color: rgb(36, 152, 213);
     text-transform: uppercase;
     font: normal normal bold 14px/17px Lato;
 }
@@ -99,7 +99,7 @@ header .container {
 	// background-image: url("/assets/img/hero-banner.png");
 	// background-color: #000;
 	//background-color:#223A52 ;
-	background-color: #2D6DCD;
+	background-color: #9edeef;
 	background-attachment: fixed;
 	&.login{
 
@@ -253,7 +253,7 @@ color:#ffff !important;
 //  transition:box-shadow .2s ease, border .2s ease;
 	width: 317px;
 	height: 53px;
-	background: #2D6DCD 0% 0% no-repeat padding-box;
+	background: #465390 0% 0% no-repeat padding-box;
 	border-radius: 4px;
 	opacity: 1;
 	outline: none;
@@ -277,7 +277,7 @@ color:#ffff !important;
 	text-align:left;
 }
 .forgot a{
-	color: #2D6DCD !important;
+	color: #465390 !important;
 }
 .get-started {
 	color:#FFF;

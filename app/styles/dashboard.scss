@@ -142,10 +142,10 @@ color:blue
 .changeImage {
 	position: relative;
 	width: auto;
-	padding: 5px;
-	border-radius: 4px;
+	padding: 5px 17px;
+	border-radius: 38px;
 	// background-color: #519580 ;
-	background-color: #2D6DCD!important;
+	background-color: #465390 !important;
 	color: white;
 	border: 0px;
 	top: 70px;
@@ -218,12 +218,14 @@ font-weight: 500;
 .header .header-btn > a:hover , .header .header-btn > a:focus {
 	// background-color: #519580 ;
 	//background-color: #fff;
-	color: #fff;
-	background-color: #2D6DCD;
+	color: rgb(36, 152, 213);
+	background-color: #fff ;
 	outline: none !important;
 	border: 0 !important;
 	transition: none;
 }
+
+
 
 body::-webkit-scrollbar {
     width: 5px;
@@ -836,8 +838,8 @@ a.toggle-btn {
 .normal-button {
 	width: 207px;
 	height: 43px;
-	background: #2D6DCD 0% 0% no-repeat padding-box;
-	border-radius: 4px;
+	background: #465390 0% 0% no-repeat padding-box;
+	border-radius: 38px;
 	opacity: 1;
 	outline: none;
 	border: none;
@@ -1833,10 +1835,14 @@ font-size: 25px;
 	border-bottom: 1px solid #000;
 }
 
+.control-label{
+	color: #465390;
+}
+
 .panel > .panel-heading {
 	font-family: 'Exo', 'Helvetica Neue', Helvetica, Arial, sans-serif !important;
 	// background-image: url("/assets/img/panel.png");
-	background-color: #2D6DCD!important;
+	background-color: #465390!important;
 	background-size: cover;
 	color: #fff;
 	font-weight: 600;

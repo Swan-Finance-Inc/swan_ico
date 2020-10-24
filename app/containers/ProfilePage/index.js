@@ -311,19 +311,19 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
               <div className="col-md-12">
                 <div style={{display:'flex',flexDirection:'row'}}>
                   { this.state.currentView === 'personal' ? (
-                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}} className="personal"><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>PERSONAL</h2></div>
+                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#465390', color: 'white', borderRadius: '5px'}} className="personal"><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>PERSONAL</h2></div>
                   ) : (
-                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>PERSONAL</h2></div>
+                    <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px' , color : '#465390'}}>PERSONAL</h2></div>
                   )}
                   { this.state.currentView === 'notifications' ? (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#465390', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>NOTIFICATIONS</h2></div>
                   ) : (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>NOTIFICATIONS</h2></div>
                   )}
                   { this.state.currentView === 'wallet' ? (
-                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#101922', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>WALLET</h2></div>
+                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#465390', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>WALLET</h2></div>
                   ) : (
-                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px'}}>WALLET</h2></div>
+                    <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>WALLET</h2></div>
                   )}
                   {/* <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div> */}
                   {/* <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div> */}
@@ -348,7 +348,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="row form-group">
           <div className="col-sm-3">
-            <label htmlFor="email"><span style={{fontWeight:'500'}}>Email</span></label>
+            <label htmlFor="email"><span style={{fontWeight:'500',color : '#465390'}}>Email</span></label>
           </div>
           <div className="col-sm-9">
             <input className="form-control" value={this.state.email} type="text" name="email" id="email" disabled/>
@@ -356,7 +356,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="row form-group">
           <div className="col-sm-3">
-            <label htmlFor="fullName"><span style={{fontWeight:'500'}}>Full Name</span></label>
+            <label htmlFor="fullName"><span style={{fontWeight:'500',color : '#465390'}}>Full Name</span></label>
           </div>
           <div className="col-sm-3">
             <input className="form-control" type="text" name="fullName" id="fullName"  value={this.state.fullName} onChange={this.handleInput}/>
@@ -364,7 +364,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="row form-group">
           <div className="col-sm-3">
-            <label htmlFor="dob"><span style={{fontWeight:'500'}}>Date Of Birth</span></label>
+            <label htmlFor="dob"><span style={{fontWeight:'500',color : '#465390'}}>Date Of Birth</span></label>
           </div>
           <div className="col-sm-3">
             <input className="form-control" type="date" name="dob" id="dob" onChange={this.handleInput} value={this.state.dob} onFocus={() => {this.type='date'}}/>
@@ -372,7 +372,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="row form-group">
           <div className="col-sm-3">
-              <label htmlFor="gender"><span style={{fontWeight:'500'}}>Gender</span></label>
+              <label htmlFor="gender"><span style={{fontWeight:'500',color : '#465390'}}>Gender</span></label>
           </div>
           <div className="col-sm-3">
               <select id="gender" name="gender" className="form-control" onChange={this.handleInput} value={this.state.gender}>
@@ -385,7 +385,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         </div>
         <div className="row form-group">
           <div className="col-sm-3">
-            <label htmlFor="phone"><span style={{fontWeight:'500'}}>Phone Number </span></label>
+            <label htmlFor="phone"><span style={{fontWeight:'500',color : '#465390'}}>Phone Number </span></label>
           </div>
           <div className="col-sm-3">
             {/* <input className="form-control" type="text" name="phone" id="phone" onChange={this.handleInput} value={this.state.phone}/> */}
@@ -474,7 +474,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
 
         <div className="row form-group">
           <div className="col-sm-3">
-            <label htmlFor="referalUrl"><span style={{fontWeight:'500'}}>Referal URL</span></label>
+            <label htmlFor="referalUrl"><span style={{fontWeight:'500',color : '#465390'}}>Referal URL</span></label>
           </div>
           <div className="col-sm-9">
             <div>
@@ -543,7 +543,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           <form onSubmit={this.updateWallet}>
       <div className="row form-group">
         <div className="col-sm-3">
-          <label htmlFor="ethAddress"><span style={{fontWeight:'500'}}>ETH Wallet Address</span></label>
+          <label htmlFor="ethAddress"><span style={{fontWeight:'500',color : '#465390'}}>ETH Wallet Address</span></label>
         </div>
         <div className="col-sm-9">
           <input className="form-control" type="text" name="ethAddress" id="ethAddress" placeholder="Valid ETH wallet address" title="Please enter Valid eth address" value={this.state.ethAddress} onChange={this.handleInput} disabled ={this.props.userInfo.userInfo.kycStatus==="ACCEPTED"}/>

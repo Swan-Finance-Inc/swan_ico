@@ -102,7 +102,7 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
                   <form onSubmit={this.formSubmit}>
                   <div className="row form-group">
                     <div className="col-sm-4 col-md-4 col-lg-4">
-                      <label htmlFor="oldPassword"><span style={{fontWeight: '500'}}>OLD PASSWORD<sup>*</sup></span></label>
+                      <label htmlFor="oldPassword"><span style={{fontWeight: '500',color : '#465390'}}>OLD PASSWORD<sup>*</sup></span></label>
                     </div>
                     <div className="col-sm-8 col-md-8 col-lg-8">
                       <input id="oldPassword" type="password" className="form-input form-control" name="oldPassword" placeholder="Enter Old Password" autoComplete="off" required />
@@ -112,7 +112,7 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
                   <div className="row form-group">
                     <div className="col-sm-4">
                     
-                      <label htmlFor="newPassword"><span style={{fontWeight: '500'}}>NEW PASSWORD<sup>*</sup></span></label>
+                      <label htmlFor="newPassword"><span style={{fontWeight: '500',color : '#465390'}}>NEW PASSWORD<sup>*</sup></span></label>
                     </div>
                     <div className="col-sm-8">
                       <input id="newPassword" minLength={6} maxLength={256} type="password" className="form-input form-control" name="newPassword" placeholder="Enter New Password" autoComplete="off" required />
@@ -120,7 +120,7 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
                   </div>
                   <div className="row form-group">
                     <div className="col-sm-4">
-                      <label htmlFor="confPassword"><span style={{fontWeight: '500'}}>CONFIRM PASSWORD<sup>*</sup></span></label>
+                      <label htmlFor="confPassword"><span style={{fontWeight: '500',color : '#465390'}}>CONFIRM PASSWORD<sup>*</sup></span></label>
                     </div>
                     <div className="col-sm-8">
                       <input id="confPassword" minLength={6} maxLength={256} type="password" className="form-input form-control" name="confPassword" placeholder="Confirm New Password" autoComplete="off" required />

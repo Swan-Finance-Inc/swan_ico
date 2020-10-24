@@ -208,15 +208,20 @@ showPassWord= (e)=>{
       <div className="signin">
         <ToastContainer position="top-center" progressClassName={css({ height: '100px' })} type="error" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
         <div className="wrapper">
-          <header className="header">
-            <div className="container">
-              <div className="row">
+          <header className="header" style = {{border : '1px solid #465490'}}>
+            <div className="container" >
+              <div className="row"  >
                 <div className="col-xs-5 col-sm-6  col-md-2 clearfix">
-                  <div className="logo"><Link to="/"> <img
+                  {/* <div className="logo"><Link to="/"> <img
                     src={ logo } alt="centralex"
-                  /></Link></div>
+                  /></Link></div> */}
+                  <div className="header-left">
+                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+                    <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
+                    </div>
                 </div>
                 <div className="col-xs-7 col-sm-6 col-md-10">
+                  
                   <div className="header-right">
                     <div className="header-btn-group">
                       <div className="header-btn"><Link to="/signup">Sign Up</Link></div>
@@ -255,7 +260,7 @@ showPassWord= (e)=>{
                         inputStyle={{
                           fontSize: '15px',
                           fontWeight: '900',
-                          color: '#748e94'
+                          color: '#465390'
                         }}
                       />
                       </div>
@@ -276,7 +281,7 @@ showPassWord= (e)=>{
                         inputStyle={{
                           fontSize: '15px',
                           fontWeight: '900',
-                          color: '#748e94'
+                          color: '#465390'
                         }}
                       />
                       <div className="forgot" style={{ fontSize : '14px' }}><Link to="/forgotPassword">Forgot Password?</Link></div>
@@ -296,7 +301,7 @@ showPassWord= (e)=>{
                         inputStyle={{
                           fontSize: '15px',
                           fontWeight: '900',
-                          color: '#748e94'
+                          color: '#465390'
                         }}
                       />
                       </div>
@@ -311,12 +316,12 @@ showPassWord= (e)=>{
                         <input id="remember" className="boolean required form-check-input" label="false" data-title="Remember me!" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="remember" style={{ marginRight: '10px' }} />I agree with 
                        <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/User+agreement+V1.0.pdf"
                         target="_blank"
-                       > <strong style={{color :'#2D6DCD' }} > User Agreement </strong> </Link>
+                       > <strong style={{color :'#465390' }} > User Agreement </strong> </Link>
                           and 
                         <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
                         target="_blank"
                         >
-                           <strong style={{color :'#2D6DCD' }} > Privacy Policy.</strong>  </Link>
+                           <strong style={{color :'#465390' }} > Privacy Policy.</strong>  </Link>
                           </label>
                      </div>
 

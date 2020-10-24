@@ -100,14 +100,17 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
     }
     return (
       <div className="wrapper">
-        <header className="header signin">
+        <header className="header signin" style = {{border : '1px solid #465490'}}>
 
           <div className="container">
             <div className="row">
 
               <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="logo"><Link to="/"><img style= {{width : '55%'}} src={logo} alt="centralex" /></Link></div>
+                <div className="header-left">
+                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+                    <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
+                    </div>
               </div>
               <div className="col-xs-5 col-sm-6 col-md-8">
                 <div className="header-right">

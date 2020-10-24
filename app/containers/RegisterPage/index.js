@@ -304,15 +304,14 @@ export class RegisterPage extends React.PureComponent {
             closeOnClick
             pauseOnHover={false}
           />
-          <header className="header navBarColorBlue">
+          <header className="header navBarColorBlue" style = {{border : '1px solid #465490'}}>
             <div className="container">
               <div className="row">
                 <div className="col-xs-7 col-sm-6 col-md-2 clearfix">
-                  <div className="logo">
-                    <Link to="/signin">
-                      <img src={logo} alt="centralex" />
-                    </Link>
-                  </div>
+                <div className="header-left">
+                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/signup"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+                    <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
+                    </div>
                 </div>
                 <div className="col-xs-5 col-sm-6 col-md-10">
                   <div className="header-right">
@@ -353,7 +352,7 @@ export class RegisterPage extends React.PureComponent {
                           inputStyle={{
                             fontSize: "15px",
                             fontWeight: "900",
-                            color: "#748e94",
+                            color: "#465390",
                           }}
                         />
                       </div>
@@ -374,7 +373,7 @@ export class RegisterPage extends React.PureComponent {
                           inputStyle={{
                             fontSize: "15px",
                             fontWeight: "900",
-                            color: "#748e94",
+                            color: "#465390",
                           }}
                         />
                       </div>
@@ -395,7 +394,7 @@ export class RegisterPage extends React.PureComponent {
                           inputStyle={{
                             fontSize: "15px",
                             fontWeight: "900",
-                            color: "#748e94",
+                            color: "#465390",
                           }}
                         />
                       </div>
@@ -416,7 +415,7 @@ export class RegisterPage extends React.PureComponent {
                           inputStyle={{
                             fontSize: "15px",
                             fontWeight: "900",
-                            color: "#748e94",
+                            color: "#465390",
                           }}
                         />
                       </div>
