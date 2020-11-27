@@ -138,6 +138,55 @@ KYC.propTypes = {
   color: PropTypes.string.isRequired,
 };
 
+export const Wallet = ({ color }) => {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="45"
+      height="40"
+      viewBox="515 230 40 33"
+      class="dark"
+    >
+      <g fill={color}>
+        <path
+          className="a"
+          d="M105.918 33.815a.89.89 0 0 0-.891-.891h-3.867v1.783h3.866a.891.891 0 0 0 .891-.891z"
+          transform = "matrix(1, 0, 0, 1, 444.712627, 208.269006)"
+          fill={color}
+        />
+        <path
+          className="a"
+          d="M14 39.295a2.281 2.281 0 0 1-2.235-1.845 2.153 2.153 0 0 1-.043-.45 2.331 2.331 0 0 1 2.326-2.277h.674v-1.8h-.656a4.143 4.143 0 0 0-4.143 4.122c.005.507 0 2.1 0 2.474v17.816A2.088 2.088 0 0 0 12 59.419h26.52a2.087 2.087 0 0 0 2.08-2.084V52.81h-8.87a4.379 4.379 0 0 1-4.37-4.451 4.42 4.42 0 0 1 4.44-4.315h8.8V39.52a2.195 2.195 0 0 0-.011-.225z"
+          transform="matrix(1, 0, 0, 1, 510.032623, 208.191005)"
+          fill={color}
+        />
+        <path
+          className="a"
+          d="M75.362 79.206a3.224 3.224 0 0 0 3.22 3.22h8.793v-6.439h-8.793a3.223 3.223 0 0 0-3.22 3.219zm5.309-.832a.871.871 0 0 1 0 1.743h-1.936a.871.871 0 0 1 0-1.743z"
+          transform="matrix(1, 0, 0, 1, 463.255622, 177.455007)"
+          fill={color}
+          />
+        <path
+          className="a"
+          d="M35.539 1.919h-1.566a2.2 2.2 0 0 0-2.2 2.2v11.27h3.761z"
+          transform="matrix(1, 0, 0, 1, 494.383622, 230.476006)"
+          fill={color}
+        />
+        <path
+          className="a"
+          d="M66.947 4.114a2.2 2.2 0 0 0-2.2-2.2h-9.255v13.47h11.455zm-2.071 6.622a.747.747 0 0 1-.747.747h-1.752a.747.747 0 0 1-.748-.747V4.741a.747.747 0 0 1 .748-.747h1.752a.747.747 0 0 1 .747.747z"
+          transform="matrix(1, 0, 0, 1, 477.453624, 230.476006)"
+          fill={color}
+        />
+      </g>
+    </svg>
+  );
+};
+
+Wallet.propTypes = {
+  color: PropTypes.string.isRequired,
+};
+
 export const Contribution = ({ color }) => {
   return (
     <svg

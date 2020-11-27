@@ -17,6 +17,7 @@ import KycAlert from 'components/KycAlert/Loadable';
 import NavBarContainer from 'containers/NavBarContainer';
 import TransactionHistory from 'containers/TransactionHistory';
 import KycPage from 'containers/KycPage';
+import WalletPage from 'containers/Wallet';
 import TicketPage from 'containers/TicketPage';
 import ContributionPage from 'containers/ContributionPage';
 import SecurityPage from 'containers/SecurityPage';
@@ -49,6 +50,7 @@ const ABI = require('./CrowdSale');
 const initialState = {
   dash: '',
   kyc: '',
+  wallet: '',
   sec: '',
   cont: '',
   tran: '',
@@ -73,6 +75,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       compact: 'ui',
       dash: 'active',
       kyc: '',
+      wallet:'',
       sec: '',
       cont: '',
       privacy : '',
@@ -108,6 +111,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.toggleSecActive = this.toggleSecActive.bind(this);
     this.toggleTranActive = this.toggleTranActive.bind(this);
     this.toggleKycActive = this.toggleKycActive.bind(this);
+    this.toggleWalletActive = this.toggleWalletActive.bind(this);
     this.toggleTicketActive = this.toggleTicketActive.bind(this);
     this.toggleSupportActive = this.toggleSupportActive.bind(this);
     this.toggleFaqActive = this.toggleFaqActive.bind(this);
@@ -162,6 +166,10 @@ export class DashBoardWelcomePage extends React.PureComponent {
     } else if (this.props.location.pathname == '/dashboard/kyc') {
       this.setState({
       ...initialState,kyc:'active'
+      });
+    }else if (this.props.location.pathname == '/dashboard/wallet') {
+      this.setState({
+      ...initialState,wallet:'active'
       });
     } else if (this.props.location.pathname == '/dashboard/transactionHistory') {
       this.setState({
@@ -267,6 +275,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
           compact: 'ui',
           dashAct: 'active',
           kycAct: '',
+          wallet: '',
           contAct: '',
           tranActive: '',
           secActive: '',
@@ -310,6 +319,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.setState({
       dash: '',
       kyc: '',
+      wallet: '',
       sec: '',
       cont: '',
       tran: '',
@@ -331,6 +341,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.setState({
       dash: 'active',
       kyc: '',
+      wallet: '',
       sec: '',
       cont: '',
       tran: '',
@@ -353,6 +364,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.setState({
       dash: '',
       kyc: '',
+      wallet: '',
       sec: 'active',
       cont: '',
       tran: '',
@@ -376,6 +388,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     dash: '',
     sec: '',
     kyc: '',
+    wallet: '',
     cont: 'active',
     tran: '',
     support: '',
@@ -398,6 +411,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -419,6 +433,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: 'active',
       support: '',
@@ -441,6 +456,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: 'active',
@@ -463,6 +479,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: 'active',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -486,6 +503,30 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: 'active',
+      wallet: '',
+      cont: '',
+      tran: '',
+      support: '',
+      ticket: '',
+      faq: '',
+      news: '',
+      announcements: '',
+      profile: '',
+      resetPass: '',
+      notification:'',
+      upload_docs:'',
+      myReferal:'',
+      buy:'',
+      privacy : ''
+
+    });
+  }
+  toggleWalletActive() {
+    this.setState({
+      dash: '',
+      sec: '',
+      kyc: '',
+      wallet: 'active',
       cont: '',
       tran: '',
       support: '',
@@ -508,6 +549,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -530,6 +572,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -552,6 +595,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -574,6 +618,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -596,6 +641,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -618,6 +664,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -640,6 +687,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -663,6 +711,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -688,6 +737,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
       dash: '',
       sec: '',
       kyc: '',
+      wallet: '',
       cont: '',
       tran: '',
       support: '',
@@ -888,6 +938,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             cont={this.state.cont}
             privacy={this.state.privacy}
             kyc={this.state.kyc}
+            wallet={this.state.wallet}
             support={this.state.support}
             faq={this.state.faq}
             news={this.state.news}
@@ -906,6 +957,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             toggleContActive={this.toggleContActive}
             togglePrivacyActive={this.togglePrivacyActive}
             toggleKycActive={this.toggleKycActive}
+            toggleWalletActive={this.toggleWalletActive}
             toggleSecActive={this.toggleSecActive}
             toggleTranActive={this.toggleTranActive}
             toggleSupportActive={this.toggleSupportActive}
@@ -975,6 +1027,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
                   </div>
                 </div> : (this.props.location.pathname == '/dashboard/contribution') ?
                   <ContributionPage flag={this.state.infoFlag} toggleInfo={this.toggleInfo} /> :
+                  (this.props.location.pathname == '/dashboard/wallet') ?
+                  <WalletPage flag={this.state.infoFlag} toggleInfo={this.toggleInfo} userInfo={this.props.dashboardwelcomepage.userInfo}/> :
                   (this.props.location.pathname == '/dashboard/support') ?
                   <SupportPage /> :
                   (this.props.location.pathname == '/dashboard/faq') ?

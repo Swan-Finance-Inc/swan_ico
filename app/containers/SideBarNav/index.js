@@ -21,7 +21,7 @@ import { makeSelectLocation } from 'containers/App/selectors';
 import { toast } from 'react-toastify';
 import { Modal, Button } from 'react-bootstrap';
 
-import { Contribution, DashBoard, KYC, Referral, Security, Tickets, Transactions ,
+import { Contribution, DashBoard, KYC, Referral, Security, Tickets, Transactions , Wallet,
   Annoucement , News , PrivatePolicy, WhitePaper, Info, Settings,Support
 } from '../../components/Icons/index';
 
@@ -32,6 +32,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       dashAct: '',
       contAct: '',
       kycAct: '',
+      walletAct: '',
       tranAct: '',
       secAct: '',
       ticketAct: '',
@@ -55,6 +56,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       contAct: this.props.cont,
       privacyAct: this.props.privacy,
       kycAct: this.props.kyc,
+      walletAct: this.props.wallet,
       tranAct: this.props.tran,
       ticketAct: this.props.ticket,
       secAct: this.props.sec,
@@ -119,6 +121,11 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     }
   }
 
+  toggleWalletActive=(e)=>{
+    this.props.compact();
+    this.props.toggleWalletActive();
+  }
+
   toggleTranActive=(e)=>{
     this.props.compact();
     this.props.toggleTranActive();
@@ -171,6 +178,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       dashAct: nextProps.dash,
       contAct: nextProps.cont,
       kycAct: nextProps.kyc,
+      walletAct: nextProps.wallet,
       announcementsAct: nextProps.announcements,
       newsAct: nextProps.news,
       tranAct: nextProps.tran,
@@ -246,6 +254,11 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
             <li onMouseEnter = {() => { this.state.kycAct === 'active' ? '' : this.setState({kycAct : true })} } onMouseLeave = { () =>{this.state.kycAct === 'active'? '' : this.setState({kycAct : false }) }} className={`${this.state.kycAct} nav-item`} ><Link to="/dashboard/kyc" role="button" onClick={this.toggleKycActive}>
                <KYC color={this.state.kycAct ? '#fff' : '#465390'}/>
                {/* <span className={`ui-nav-text ${this.state.kycAct}`}>KYC Verify</span>  */}
+               </Link>
+            </li>
+            <li onMouseEnter = {() => { this.state.walletAct === 'active' ? '' : this.setState({walletAct : true })} } onMouseLeave = { () =>{this.state.walletAct === 'active'? '' : this.setState({walletAct : false }) }} className={`${this.state.walletAct} nav-item`} ><Link to="/dashboard/wallet" role="button" onClick={this.toggleWalletActive}>
+               <Wallet color={this.state.walletAct ? '#fff' : '#465390'}/>
+               {/* <span className={`ui-nav-text ${this.state.walletAct}`}>Wallets</span>  */}
                </Link>
             </li>
     
