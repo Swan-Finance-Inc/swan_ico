@@ -23,7 +23,16 @@ import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import { IconButton } from '@material-ui/core';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import {  Steps, Divider} from "antd";
+// import btclib from 'bitcoinjs-lib';
+const btclib = require('bitcoinjs-lib');
+//import bitcore from 'bitcore-lib';
 import Web3 from 'web3';
+import StellarSdk from 'stellar-sdk';
+// import bitExplorers from 'bitcore-explorers';
+// import bitcoinTransaction from 'bitcoin-transaction';
+import axios from 'axios';
+
+
 const { Step } = Steps;
 export class ContributionConfirm extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -44,45 +53,46 @@ export class ContributionConfirm extends React.PureComponent {
     this.copyFunction = this.copyFunction.bind(this);
     this.txValidator = this.txValidator.bind(this);
     this.makeTransaction = this.makeTransaction.bind(this);
+    this.initiateTransaction = this.initiateTransaction.bind(this);
     //this.makeFinalPayment = this.makeFinalPayment.bind(this);
   }
   // End Constructor
 
   // Begin life cycle methods
   componentDidMount() {
-      this.intervalID = setInterval(
-        () => this.tick(),
-        1000
-      );
-    if (this.props.currency == "Bitcoin") {
+      // this.intervalID = setInterval(
+      //   () => this.tick(),
+      //   1000
+      // );
+    // if (this.props.currency == "Bitcoin") {
+    //   const href =
+    //     "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
+    //   const query = queryString.parse(href);
+    //   query.chl = this.props.currentReceivingWalletAddress;
+    //   const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
+    //     query
+    //   )}`;
+    //   this.setState({
+    //     url: uri,
+    //     currentReceivingWalletAddress: this.props.currentReceivingWalletAddress
+    //   });
+    // } else {
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
       const query = queryString.parse(href);
-      query.chl = this.props.currentReceivingWalletAddress;
-      const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
-        query
-      )}`;
-      this.setState({
-        url: uri,
-        currentReceivingWalletAddress: this.props.currentReceivingWalletAddress
-      });
-    } else {
-      const href =
-        "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
-      const query = queryString.parse(href);
-      query.chl = this.props.ethAddress;
+      query.chl = this.props.currWallet.address;
       const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
         query
       )}`;
       this.setState({
         url: uri
       });
-    }
+    //}
   }
 
   // End life cycle methods
   componentWillUnmount(){
-    clearInterval(this.intervalID);
+    //clearInterval(this.intervalID);
   }
   tick() {
     this.setState({
@@ -154,6 +164,177 @@ export class ContributionConfirm extends React.PureComponent {
     this.props.finalPayment(sender, hash)
   }
 
+  getUTXOdetails = (obj) => {
+    var result = [];
+    var amount = 3000;
+    var TX_FEES = 0.0013;
+    var unspentUTXOS = obj.txrefs;
+    console.log("before sort: ", unspentUTXOS);
+    unspentUTXOS.sort((a, b) => a.value - b.value);
+    console.log("after sort: ", unspentUTXOS);
+    let totalUTXOAmount = 0,
+      i = 0;
+      
+      while (i < unspentUTXOS.length && totalUTXOAmount < amount) {
+        const utxo = unspentUTXOS[i++];
+        totalUTXOAmount += utxo.value;
+        utxo.spent = true;
+        result.push(utxo);
+      }
+
+      		// there was not enough balance in the hot wallet
+		if (totalUTXOAmount < amount) {
+      unspentUTXOS.forEach((utxo) => (utxo.spent = false));
+      toast.error('insufficient balance in wallet')
+			return Promise.reject({
+				message: `not enought balance in hot wallet:`,
+				err: 'insufficient balance in hot wallet',
+			});
+    }
+    
+    const totalAmount = result.reduce((acc, utxo) => acc + utxo.value, 0);
+    const change = (totalAmount - amount - TX_FEES).toFixed();
+    console.log("total amount to be sent", totalAmount, "and change", change);
+    if (change < 0) {
+      toast.error('insufficient balance in wallet to provide fees');
+      return Promise.reject({
+        message: `not enought balance in hot wallet`,
+        err: 'insufficient balance in wallet',
+      });
+    }
+    const NETWORK = btclib.networks.testnet;
+
+    const to = 'mhKiusBhp4KjDo7pKf96zGKioMts1PLEA2';
+    // const txBuilder = new btclib.TransactionBuilder();
+    // txBuilder.addOutput(to, amount);
+    // txBuilder.addOutput('mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC', change);
+
+    // result.forEach((utxo) => txBuilder.addInput(utxo.tx_hash, utxo.tx_output_n));
+    // for (let i = 0; i < result.length; i++) {txBuilder.sign(i, 'tpubD6NzVbkrYhZ4XieVAMFnF3XXwmC4zQQA7pjV4DVaVRomt7Vidi5hs961BYibkPKURAeassEFkVPx3RMXKJJ7v82bJFj34BASWhJeR1UuLED');}
+    // const tx = txBuilder.build();     
+    // const txHex = tx.toHex();
+    // console.log('trxn hex comes: ', txHex);                                                                        
+
+
+		return result;
+  }
+
+  initiateTransaction = async () =>{
+    if(this.props.currency==="Ethereum"){
+        const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
+        let receiver = web3.utils.toChecksumAddress(this.props.ethAddress);
+        let amount = this.props.currencyQty;
+        let sender = web3.utils.toChecksumAddress(this.props.currWallet.address);
+        let pvtKey = this.props.currWallet.private_key;
+        console.log("xxxx", receiver,amount, pvtKey, sender);
+        if(!pvtKey){
+
+            toast.error("Private key not found")
+          return ''
+        }
+        let rawTransaction = {
+          "from": sender,
+        "to": receiver,
+        "value": web3.utils.toHex(web3.utils.toWei(amount, "ether")),
+        "gas": 21000,
+        "chainId": 3
+        }; //--prodChange
+        try
+        {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
+          if(err)
+          {console.log("Error occured in signtrxn",err)
+        toast.error(`${err}`)}
+          else
+          {
+            console.log("Sign trxn res: ", res);
+            web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
+              if(err)
+              {console.log("Error occured in sendDisngnedtrxnn", err)
+            toast.error(`${err}`)}
+              else
+              {
+                console.log("Send signed trxn res: ", res);
+                //this.props.finalPayment(sender, res);
+              }
+            }.bind(this))
+        }
+      }.bind(this));} catch(error){
+        console.log("in catch of viaSwanEthWallet: ",error)
+      }
+    } else if(this.props.currency === "Bitcoin"){
+
+
+      //var key = bitcoin.ECKey.fromWIF('mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC', bitcoin.networks.testnet);
+      //var key =bitcore.PrivateKey('testnet').toWIF();
+      //console.log("bitcocin ki key", key)
+      //var privateKey = bitcore.PrivateKey.fromWIF(key);
+      //var address = privateKey.toAddress();
+      const TESTNET = btclib.networks.testnet;
+      var address = this.props.currWallet.address
+      console.log("then after key: ",this.props.currWallet.private_key, "address:: ", address);
+      var yourAddressPrivateKeyWIF = btclib.PrivateKey('testnet').toWIF();
+      var yourAddresskeyPair = btclib.ECPair.fromWIF(yourAddressPrivateKeyWIF, TESTNET)
+      console.log("match this: ", yourAddresskeyPair.getAddress())
+
+      // var Insight = bitExplorers.Insight;
+      // console.log("Insight aaya: ", Insight)
+      // var insight = new Insight('testnet');
+      // console.log("insight aaya: ", insight)
+      // insight.getUnspentUtxos(address, function(err,utxos){
+      //   if(err){
+      //     console.log("Error in insight getUnspentUtxos ",err )
+      //   } else {
+      //     console.log("THE UTXOS: ", utxos)
+      //   }
+      // })
+
+      //axios.get('https://api.blockcypher.com/v1/btc/test3/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspaentOnly=true')
+      axios.get('https://api.blockcypher.com/v1/btc/test3/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspentOnly=true')
+      .then((res) => res.data)
+      .then((obj) => this.getUTXOdetails(obj))
+      .then(obj => console.log(obj))
+      .catch((err) => console.log(err))
+
+
+    } else if(this.props.currency === "Stellar") {
+      const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+      //StellarSdk.Network.useTestNetwork();
+      console.log("stellar payment initiated");
+      const userKeypair = StellarSdk.Keypair.fromSecret(this.props.currWallet.private_key);
+      const userPublicKey = userKeypair.publicKey();
+      console.log(this.props.currencyQty,"userkey",userPublicKey," and publickey", this.props.currWallet.public_key);
+      const account = await server.loadAccount(userPublicKey);
+      const fee = await server.fetchBaseFee();
+      const amount = this.props.currencyQty;
+
+      const transaction = new StellarSdk.TransactionBuilder(account, { fee: fee
+        ,
+        networkPassphrase: StellarSdk.Networks.TESTNET})
+        // Add a payment operation to the transaction
+        .addOperation(StellarSdk.Operation.payment({
+          destination: 'GBDKEZGRBMBWDKPUILGUDQ737AV7A563QWWDJZVTRJ6LBMYEVRQY2546',
+          asset: StellarSdk.Asset.native(),
+          amount: '100'
+        }))
+        // Make this transaction valid for the next 30 seconds only
+        .setTimeout(30)
+        // Uncomment to add a memo (https://www.stellar.org/developers/learn/concepts/transactions.html)
+        // .addMemo(StellarSdk.Memo.text('Hello world!'))
+        .build();
+
+      // Sign this transaction with the secret key
+      transaction.sign(userKeypair);
+
+      // Let's see the XDR (encoded in base64) of the transaction we just built
+      //console.log("");
+
+      // Submit the transaction to the Horizon server. The Horizon server will then
+      // submit the transaction into the network for us.
+      const transactionResult = await server.submitTransaction(transaction);
+      if (!!transactionResult) {console.log("ho gya stellar transfer::: ", transactionResult)}
+    }
+  }
+
   makeTransaction = () => {
     if(this.props.paymentMode === 'viaMetamaskExt'){
       //console.log("sthereum payment started", this.props.metamaskAccount);
@@ -168,7 +349,7 @@ export class ContributionConfirm extends React.PureComponent {
           ,function (err, res){
             if(err){
               toast.error(`Error: ${err.message}`)
-              //this.setState({transactionData:err, open:true})
+              //this.sets({transactionData:err, open:true})
             }else{
               //toast.success(`Trxn Hash:  ${res}`);
               toast(`Trxn Hash:  ${res}`, {
@@ -488,7 +669,16 @@ export class ContributionConfirm extends React.PureComponent {
 
                  <p className="main-color--blue">
                  You will receive {(this.props.tokens).toFixed(3)} Centralex coins </p>
-                 {
+                 <div className="btn-row confirm-transaction-button">
+                    <button 
+                     className="form-button btn btn-primary"
+                     style={{ marginBottom : '20px' }}
+                     onClick={() => this.initiateTransaction()}
+                   >
+                     Initiate Payment
+                   </button>
+                 </div>
+                 {/* {
                     this.props.paymentMode === 'viaMetamaskExt' ? <div className="btn-row confirm-transaction-button">
                     <button 
                      className="form-button btn btn-primary"
@@ -532,7 +722,7 @@ export class ContributionConfirm extends React.PureComponent {
                       )}
                </div>
 
-                  }
+                  } */}
                   <hr className="qr-code-hr" />
                   
                             {/* {

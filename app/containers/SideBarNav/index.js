@@ -21,7 +21,7 @@ import { makeSelectLocation } from 'containers/App/selectors';
 import { toast } from 'react-toastify';
 import { Modal, Button } from 'react-bootstrap';
 
-import { Contribution, DashBoard, KYC, Referral, Security, Tickets, Transactions , Wallet,
+import { Contribution, DashBoard, KYC, Referral, Security, Tickets, Transactions , Wallet, 
   Annoucement , News , PrivatePolicy, WhitePaper, Info, Settings,Support
 } from '../../components/Icons/index';
 
@@ -33,6 +33,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       contAct: '',
       kycAct: '',
       walletAct: '',
+      investAct: '',
       tranAct: '',
       secAct: '',
       ticketAct: '',
@@ -57,6 +58,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       privacyAct: this.props.privacy,
       kycAct: this.props.kyc,
       walletAct: this.props.wallet,
+      investAct: this.props.invest,
       tranAct: this.props.tran,
       ticketAct: this.props.ticket,
       secAct: this.props.sec,
@@ -126,6 +128,11 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
     this.props.toggleWalletActive();
   }
 
+  toggleInvestActive=(e)=>{
+    this.props.compact();
+    this.props.toggleInvestActive();
+  }
+
   toggleTranActive=(e)=>{
     this.props.compact();
     this.props.toggleTranActive();
@@ -179,6 +186,7 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
       contAct: nextProps.cont,
       kycAct: nextProps.kyc,
       walletAct: nextProps.wallet,
+      investAct: nextProps.invest,
       announcementsAct: nextProps.announcements,
       newsAct: nextProps.news,
       tranAct: nextProps.tran,
@@ -266,7 +274,13 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                <Contribution className = "ui-nav-text" color={this.state.contAct ? '#fff' : '#465390'}/>
                {/* <span className={`ui-nav-text ${this.state.contAct}`}>Contribution</span>  */}
                </Link>
-            </li><li onMouseEnter = {() => { this.state.tranAct === 'active' ? '' : this.setState({tranAct : true })} } onMouseLeave = { () =>{this.state.tranAct === 'active'? '' : this.setState({tranAct : false }) }} className={`${this.state.tranAct} nav-item`}  ><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}>
+            </li>
+            <li onMouseEnter = {() => { this.state.investAct === 'active' ? '' : this.setState({investAct : true })} } onMouseLeave = { () =>{this.state.investAct === 'active'? '' : this.setState({investAct : false }) }} className={`${this.state.investAct} nav-item`} ><Link to="/dashboard/invest" role="button" onClick={this.toggleInvestActive}>
+               <Wallet color={this.state.investAct ? '#fff' : '#465390'}/>
+               {/* <span className={`ui-nav-text ${this.state.walletAct}`}>Wallets</span>  */}
+               </Link>
+            </li>
+            <li onMouseEnter = {() => { this.state.tranAct === 'active' ? '' : this.setState({tranAct : true })} } onMouseLeave = { () =>{this.state.tranAct === 'active'? '' : this.setState({tranAct : false }) }} className={`${this.state.tranAct} nav-item`}  ><Link to="/dashboard/transactionHistory" role="button" onClick={this.toggleTranActive}>
                 <Transactions color={this.state.tranAct ? '#fff' : '#465390'}/>
                {/* <span className={`ui-nav-text ${this.state.tranAct}`}>Transactions</span>  */}
                </Link>
