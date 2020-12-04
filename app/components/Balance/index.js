@@ -23,7 +23,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import TextFieldInput from "../../components/TextFieldInput";
 import ethLogo from "../../images/ethLogo.png";
-import { Navbar, Nav, MenuItem, NavDropdown, Modal ,Badge , DropdownButton} from 'react-bootstrap';
+import { Navbar, Nav, MenuItem, NavDropdown, Modal ,Badge , DropdownButton, Button} from 'react-bootstrap';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import { ToastContainer, toast } from 'react-toastify';
@@ -77,7 +77,7 @@ class Balance extends React.PureComponent {
     console.log(nextProps)
     this.setState({
       ...this.state,
-      crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails
+      // crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails
     })
   }
 
@@ -237,7 +237,7 @@ class Balance extends React.PureComponent {
                         style={{
                           font: "normal normal bold 20px/24px Lato",
                           letterSpacing: "0.43px",
-                          color: "#B0C9F0",
+                          color: "#00296B",
                           opacity: 1,
                           marginTop: 0,
                           fontSize: "16px",
@@ -275,20 +275,23 @@ class Balance extends React.PureComponent {
                         style={{
                           font: "normal normal bold 20px/24px Lato",
                           letterSpacing: "0.43px",
-                          color: "#B0C9F0",
+                          color: "#00296B",
                           opacity: 1,
                           marginTop: 0,
                           fontSize: "16px",
                         }}
                       >
-                       Token Percentage 
+                       USD/BTC
                       </h5>
+                      
+
                       <div className="account-balance-statistics" style={{marginTop:'30px'}}>
+                      <div className="balance-hr" />
                       <div style={{ width : '90px' }}>
                       <CircularProgressbarWithChildren value={ethPercent}
                         styles={{ 
                           path : {
-                            stroke : '#465390'
+                            stroke : '#00296B'
                           }
                          }}
                          strokeWidth="9"
@@ -298,12 +301,11 @@ class Balance extends React.PureComponent {
                             color : '#2D6DCD',
                             letterSpacing: '0px'
                           }}>
-                           {ethPercent}%  <strong><br /> ETH</strong>
+                           {ethPercent}%  <strong className="font-weight-bold " style={{font:'normal normal normal 20px/24px Lato'}} ><br />BTC</strong>
                         </div>
                       </CircularProgressbarWithChildren>
                       </div>
-                      <div className="balance-hr" />
-                      <div style={{ width : '90px' }}>
+                      {/* <div style={{ width : '90px' }}>
                       <CircularProgressbarWithChildren value={othersPercent}
                         styles={{ 
                           path : {
@@ -319,18 +321,16 @@ class Balance extends React.PureComponent {
                           }}>
                            {othersPercent}% <strong><br /> Refers</strong>
                         </div>
-                        {/* <br />
-                        <span className="main-color--blue font-weight-bold ">Refers</span> */}
                         
                       </CircularProgressbarWithChildren>
-                      </div>
-                      {/* <div className="eth-other-balance-stats">
+                      </div> */}
+                      <div className="eth-other-balance-stats">
                       <div style={{ display : 'flex' }}>
                       <div style={{ width : '50px' }}>
                       <CircularProgressbar value={23}
                         styles={{ 
                           path : {
-                            stroke : '#2D6DCD'
+                            stroke : '#00296B'
                           }
                          }}
                          strokeWidth="17"
@@ -350,7 +350,7 @@ class Balance extends React.PureComponent {
                       <CircularProgressbar value={2}
                         styles={{ 
                           path : {
-                            stroke : '#2D6DCD'
+                            stroke : '#00296B'
                           }
                          }}
                          strokeWidth="17"
@@ -365,7 +365,7 @@ class Balance extends React.PureComponent {
                         </span>
                      
                       </div>
-                      </div> */}
+                      </div>
                       </div>
                     </div>
                   </div>
@@ -376,27 +376,86 @@ class Balance extends React.PureComponent {
               <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
                 <div className="balance-card-inner-wrappper">
                   <h3 className="balance-card-inner-wrapper-heading">
-                    ILO Details
+                    Exchange Rates
                   </h3>
+                  <div className="exchange-trading-container" >
+                  <div className="exchange-text">You get*</div>
+                    <div className="exchange-trading-input" >
+                  <TextFieldInput
+                      type="number"
+                      value={this.state.CenInBtc}
+                      inputStyle={{
+                        fontSize: "15px",
+                        fontWeight: "900",
+                        color: "#748e94",
+                        width : '100%',
+                        height : '38px'
+                      }}
+                      auth={true}
+                      disabled
+                      />
+                        <span style={{ marginBottom: "0px", color: "#465490" ,marginTop : '10px',marginLeft : '10px', fontSize : '13px' }}>
+                       SWAN
+                      </span>
+                      </div>
+                      </div>
                   <div className="ico-details-middle">
-                    <div>
+                    {/* <div>
                     <img src={Planet} />
-                    </div>
-                    <div className="ico-details-circle">
-                      <span className="upto-2-percentage" >Up To <br/>
+                    </div> */}
+                    <div className="balance-text" style={{width : '85%'}}>
+                      {/* <span className="upto-2-percentage" >Up To <br/>
                        <span style={{ fontSize : '32px' }} >2%</span>  
-                       <br /> Extra</span>
+                       <br /> Extra</span> */}
+                       <span>Exchange rates refreshed in every 15 mins.</span>
                     </div>
-                    <div className="satalite-logo-container">
+                    {/* <div className="satalite-logo-container">
                       <img src={littleStar} className="little-star"/>
                     <img src={Satelite} />
-                    </div>
+                    </div> */}
                   </div>
-                  <img src={littleStar}/>
+                  {/* <img src={littleStar}/>
                   <img src={bigStar} style={{ float : 'right' }} />
                   <img src={Ellipse} className="ellipse-one"/>
-                  <img src={Ellipse} className="ellipse-two" />
-                  <div className="text-center">
+                  <img src={Ellipse} className="ellipse-two" /> */}
+                  {/* <DropdownButton 
+                      eventKey={4} 
+                      // className="account-balance-dropdown"
+                      className= "dropdown-toggle-split"
+                      title= "Ethereum"
+                      variant="success"
+                      width = "400px"
+                    >
+                      <MenuItem eventKey='5' value="weeklyOrDaily" name="daily" onClick={this.chartType } >
+                          Daily
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="weekly" onClick={this.chartType } >
+                          Weekly
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="monthly" onClick={this.chartType } >
+                          Monthly
+                          </MenuItem>
+                     </DropdownButton> */}
+                      <div className="exchange-dropdown-container">
+                    <label htmlFor="paymentMode" className="form-label main-color--blue"></label>
+                    <span className="select-wrapper">
+                      <select id="paymentMode" name="paymentMode" onChange={this.CurrencyChange} className="form-input exchange-rate-dropdown" required>
+                        {/* <option value="" hidden>Click to select wallet</option> */}
+                        <option value="BTC">Bitcoin</option>
+                        <option value="ETH">Ethereum</option>
+                        <option value="XLM">Stellar</option>
+                        <option value="USDT">USDT</option>
+                        
+
+                      {
+                          // <option value="USD">USD</option>
+                        // <option value="EUR">EUR</option>
+                      }
+                      </select>
+
+                    </span>
+                  </div>
+                  {/* <div className="text-center">
                     <p className="secondary-text">Total Coins</p>
                     <p className="total-coins">{(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0 }</p>
                   </div>
@@ -411,13 +470,13 @@ class Balance extends React.PureComponent {
                   </div>
                   <div style = {{marginBottom : 12}} className="text-center mt-30">
                   <Link to="/dashboard/contribution" onClick = {this.props.toggleContActive} role="button" className="invest">Invest Now</Link>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
           </div>
-          {/* <div className="row"> */}
-            {/* <div
+          {/* <div className="row">
+            <div
               className="col-lg-7 col-sm-12"
               style={{ 
                 //transform: "translateY(-39px)" ,
@@ -476,8 +535,8 @@ class Balance extends React.PureComponent {
               {this.state.weeklyOrDaily==='weekly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}</div>
                 </div>
               </div>
-            </div> */}
-            {/* <div className="col-lg-5 col-sm-12">
+            </div>
+            <div className="col-lg-5 col-sm-12">
               <div
                 className="balance-card"
                 // style={{
@@ -512,17 +571,17 @@ class Balance extends React.PureComponent {
                         auth={true}
                       />
                       {
-                      //   <input
-                      //   type="text"
-                      //   class="form-control"
-                      //   style={{
-                      //     height: "40px",
-                      //     borderRadius: "5px",
-                      //     border: "1px solid #979BA2",
-                      //     marginTop: "3px",
-                      //     padding : '8px'
-                      //   }}
-                      // ></input>
+                        <input
+                        type="text"
+                        class="form-control"
+                        style={{
+                          height: "40px",
+                          borderRadius: "5px",
+                          border: "1px solid #979BA2",
+                          marginTop: "3px",
+                          padding : '8px'
+                        }}
+                      ></input>
                       }
                       </div>
                       <div style={{ width : '35%'  , display : 'inline-block'}} className="centralex-coins">
@@ -573,38 +632,38 @@ class Balance extends React.PureComponent {
                           </div>
                       
                      { 
-                    //  <div className="btn-group mt-30">
-                    //     <button
-                    //       type="button"
-                    //       className="btn btn-default exchange-button"
-                    //       style={{ width: "181px", textAlign: "left" ,padding: '8px',
-                    //       border: "1px solid #979BA2" }}
-                    //     >
-                    //       <span><img style={{ width: '26px' }} src={ethLogo} />
-                    //       <span style={{ marginLeft : '3px' ,color : '#7F7F7F'  }} >Eth</span>
-                    //        </span>
-                    //     </button>
-                    //     <button
-                    //       type="button"
-                    //       className="btn btn-default dropdown-toggle"
-                    //       aria-haspopup="true"
-                    //       aria-expanded="false"
-                    //       style={{ padding: '11px',
-                    //       border: "1px solid #979BA2" }}
-                    //       //onClick={handleMenu}
-                    //     >
-                    //       <span className="caret"></span>
-                    //     </button>
-                    //   </div>
+                     <div className="btn-group mt-30">
+                        <button
+                          type="button"
+                          className="btn btn-default exchange-button"
+                          style={{ width: "181px", textAlign: "left" ,padding: '8px',
+                          border: "1px solid #979BA2" }}
+                        >
+                          <span><img style={{ width: '26px' }} src={ethLogo} />
+                          <span style={{ marginLeft : '3px' ,color : '#7F7F7F'  }} >Eth</span>
+                           </span>
+                        </button>
+                        <button
+                          type="button"
+                          className="btn btn-default dropdown-toggle"
+                          aria-haspopup="true"
+                          aria-expanded="false"
+                          style={{ padding: '11px',
+                          border: "1px solid #979BA2" }}
+                          //onClick={handleMenu}
+                        >
+                          <span className="caret"></span>
+                        </button>
+                      </div>
                       }
                     </div>
                   </div>
                 </div>
                 <hr style={{ borderTop: "1px solid #CEE2FE", width: "90%" }} />
-              </div> */}
-            {/* </div>
+              </div>
+            </div>
             </div> */}
-          <div className="row">
+          {/* <div className="row">
             <div className="col-lg-7 last-card"style={{ marginBottom : '30px' , marginTop : '12px' , height : "auto" }} >
                  <div className="balance-card" style={{ height : '384px' }}>
                     <div className="balance-card-inner-wrappper">
@@ -641,9 +700,9 @@ class Balance extends React.PureComponent {
                             }
                             
                         </div>
-                        {/* <div className="referral-logo-container">
+                         <div className="referral-logo-container">
                           <img src={Referral} className="referral-logo" />
-                        </div> */}
+                        </div> 
                       </div>
                       <div style={{width: '86%' , position: 'relative'}}>
                             <input value={this.state.referalUrl }
@@ -698,6 +757,49 @@ class Balance extends React.PureComponent {
                           <span className="confirmed-circle-text">{this.props.userInfo.referral.success}<span className="Confirmed-referrals-count"># of Confirmed Referrals</span></span>
                         </div>
                       </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className = "row" >
+          <div className="col-lg-12 col-sm-12" style={{marginTop : 12}}>
+              <div className="balance-card last-card">
+                <div className="balance-card-inner-wrappper">
+                  <h3 className="balance-card-inner-wrapper-heading text-center">
+                    Purchase SWAN Tokens
+                  </h3>
+                  
+                  {/* <p className="balance-text">
+                  Total SWAN tokens available for purchase
+                  </p> */}
+                  <div className="col-sm-12">
+                    <div className="balance-botton-inner-wrapper">
+                     
+                      {/* <div className="balance"> */}
+                      <div className="text-center" style={{marginTop: '16px'}}>
+                    <p className="secondary-text">Total SWAN tokens available for purchase</p>
+                    <p className="total-coins">{(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ? this.props.crowdsaleStateData.crowdsaleState.totalTokens : 0 }</p>
+                  </div>
+                  <div className="coins-left-container">
+                  <div className="progress">
+                  <div className="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style={{width : `${a}%` , color : '#465390' }}>
+                <span> {(this.props.crowdsaleStateData && this.props.crowdsaleStateData.crowdsaleState ) ?
+                  Math.round((this.props.crowdsaleStateData.crowdsaleState.distributedTokens / this.props.crowdsaleStateData.crowdsaleState.totalTokens) * 100)   :   '0'  } % </span>
+                  </div>
+                  {a==0?<span style={{textAlign:'center', marginLeft:'50%'}}>0%</span>:''}
+                  </div>
+                  </div>
+                  <div className="text-center">
+                    <span>4,00,000</span>
+                    <br/>
+                    <span>Remaining SWAN Tokens for Purchase</span>
+                  </div>
+                  <div style = {{marginBottom : 12}} className="text-center mt-30">
+                  <Link to="/dashboard/contribution" onClick = {this.props.toggleContActive} role="button" className="invest" style={{background : '#2498D5'}}>Purchase Now</Link>
+                  </div>
+                      {/* </div> */}
+                    </div>
                   </div>
                 </div>
               </div>

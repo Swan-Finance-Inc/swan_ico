@@ -23,6 +23,12 @@ import { push } from 'react-router-redux';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
 import BellIcon from 'react-bell-icon';
 import { notification } from 'antd';
+import TextFieldInput from "../../components/TextFieldInput";
+import PhoneInput from 'react-phone-number-input';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+
+
 export class NavBarContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -34,7 +40,8 @@ export class NavBarContainer extends React.PureComponent {
     this.state = {
       name: 'Username',
       showSignOut: false,
-      deleteProfile:false
+      deleteProfile:false,
+      showProfile: false
     };
   }
 
@@ -80,6 +87,19 @@ export class NavBarContainer extends React.PureComponent {
       deleteProfile: false
     })
   }
+
+  userProfile=()=>{
+    this.setState({
+      showProfile : true
+    })
+  }
+
+  closeProfile=()=>{
+    this.setState({
+      showProfile: false
+    })
+  }
+
   deleteProfileYes =()=>{
     console.log(" Yes On Delete Profile in nav container");
     this.props.handleDeleteUser();
@@ -137,8 +157,9 @@ export class NavBarContainer extends React.PureComponent {
             // /</Nav>/</NavDropdown>
             }
                 <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
-                <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Manage Profile</MenuItem>
-                <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem>
+                <MenuItem style={{ cursor: 'pointer' }} onClick={this.userProfile}><i className="fa fa-user"></i>{this.props.username ? this.props.username : this.state.name} </MenuItem>
+                <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Setting</MenuItem>
+                {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem> */}
                 {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetInfo}><i className={this.props.flag===false?"fa fa-toggle-off":"fa fa-toggle-on"}></i>Reset Info flag</MenuItem> */}
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showDeleteProfile}><i className="fa fa-user-times"></i>Delete Profile</MenuItem>
                 <MenuItem style={{ cursor: 'pointer' }} onClick={this.showSignOut}><i className="fa fa-power-off"></i>Sign Out</MenuItem>
@@ -190,6 +211,218 @@ export class NavBarContainer extends React.PureComponent {
                       <button className=" col-sm-3  btn btn-outline-red" style={{marginLeft:'15%'}} onClick={this.deleteProfileYes}>YES</button>
                       <button className="col-sm-3  btn  btn-outline" style={{marginLeft:'15%'}} onClick={this.closeDeleteProfile}>GO Back</button>
                     </div>
+                  </div>
+                </Modal.Body>
+              </Modal>
+            </div>
+            <div >
+              <Modal  show={this.state.showProfile} onHide={this.closeProfile} bsSize="large" dialogClassName="modal-profile">
+              <Modal.Header>
+              <div className="col-sm-12 text-right" style={{'cursor': 'pointer'}}>
+                        <i className="fa fa-close" onClick={this.closeProfile}></i>
+                    </div>
+                <Modal.Title><div className='' style ={{color : "#2D6DCD"}} >Profile</div></Modal.Title>
+              </Modal.Header>
+                <Modal.Body dialogClassName="modal-body" >
+                  <div className="row">
+                    <div className="col-md-4" style={{textAlign:'center', marginRight : 70,height : "270px"}}>
+                    <img className="img-responsive profile-Image"  src={'https://s3.amazonaws.com/websiteimagesrama/dummyProfile.png' } alt="back id" id="back_img_src"  />
+                    <br /><button className="changeImage" type = "button" onClick={this.uploadProfileImage} >Change Image</button>
+                    <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg}/>
+        
+                    </div>
+                    
+                  <div className="col-md-7" style={{marginLeft:"-14px", height : "270px"}}>
+                    <div className="row">
+                      <TextFieldInput
+                        type="text"
+                        name="email"
+                        label="Email"
+                        // placeholder="thats and email"
+                        value={this.state.email}
+                        //variant="outlined"
+                        //required={true}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+
+                        }}
+                        disabled={true}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd',
+                          marginBottom : 15
+                        }}
+                      />
+                      <div className="row">
+                        <div className="col-md-6">
+                        <TextFieldInput
+                        type="text"
+                        name="fullName"
+                        label="First Name"
+                        value={this.state.fullName}
+                        //variant="outlined"
+                        //required={true}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+                        
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd',
+                          marginBottom : 15
+
+                        }}
+                      />
+                        </div>
+                      <div className="col-md-6">
+                      <TextFieldInput
+                        type="text"
+                        name="secondName"
+                        label="Last Name"
+                        value={this.state.secondName}
+                        //variant="outlined"
+                        //required={true}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+                        
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd',
+                          marginBottom : 15
+
+                        }}
+                      />
+                      </div>
+                      
+                      </div>
+                       <div className="label-for-date" >Date Of Birth</div> 
+                      <TextFieldInput
+                        type="date"
+                        name="dob"
+                        label="Date Of Birth"
+                        value={this.state.dob}
+                        shrink = {false}
+                        //variant="outlined"
+                        //required={true}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          marginBottom : 15,
+                          color: '#2d6dcd',
+                        }}
+                      />
+                      
+                      </div>
+                      </div>
+
+                     <div className="col-md-12">
+                    <TextFieldInput
+                        type="text"
+                        name="address"
+                        label="Address"
+                        value={this.state.address}
+                        //variant="outlined"
+                        //required={true}
+                        disabled={this.state.edit}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd'
+                        }}
+                      />
+                    </div> 
+                    <div className="col-md-6">
+                    <select id="gender" name="gender" className="form-control textFieldInput" onChange={this.handleInput} 
+                    value={this.state.gender}>
+                      <option value="" hidden>Select your gender</option>
+                      <option value="MALE">MALE</option>
+                      <option value="FEMALE">FEMALE</option>
+                      <option value="DECLINE TO STATE">DECLINE TO STATE</option>
+                    </select>
+                    </div>
+                    <div className="col-md-6">
+                    <PhoneInput id="phone"
+                        placeholder="Enter phone number"
+                        name="phone"
+                        value= "7082082819"
+                        // disabled={this.props.profile.phone_number?true:''}
+                        className="form-control textFieldInput"
+                        onChange={ phone => this.setState({ phone }) }
+                        // error={ phone ? (isValidNumber(phone) ? undefined : <span style={{position : "relative" , top : "12px"}} >Invalid phone number</span>) : '' }
+                        />
+                    </div>
+                    <div className="col-md-12" style={{marginTop : 15}}>
+                  <TextFieldInput
+                        type="text"
+                        name='referal Url'
+                        label="Your Referal URL"
+                        value={`https://centralex.com/launchpad/signup/refer/${this.state.referalUrl}`}
+                        //variant="outlined"
+                        //required={true}
+                        disabled={true}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd'
+                        }}
+                      />
+                      <div style = {{position : "absolute" , bottom : '13px' , right : '31px'}}>
+                            <CopyToClipboard text={this.state.referalUrl}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}> 
+                              <span >
+                              <FileCopyOutlinedIcon
+                                className="file-copy-conatiner-press"
+                                style={{ outline : 'none' ,fontSize : '20px' , cursor : "pointer"  }}
+                                />
+                              </span>
+                            </CopyToClipboard>
+                            </div>
+                  </div>
+                  </div>
+                  
+                  <div className="row" style ={{marginTop : 40}} >
+                   <div className="col-sm-6 text-center" style={{display : "flex" , justifyContent : "flex-end"}}>
+                    <button  className="profile-button" onClick = {()=> this.setState({edit : false})} >Edit</button>
+                  </div> 
+                  <div className="col-sm-12 text-center" style={{display : "flex" , justifyContent : "center"}}>
+                    <button type="submit" id = "personal" className="profile-button" onClick={this.updateProfile}>Save</button>
+                  </div>
+                </div>
+                  <div className="row">
+                     <div className="col-sm-12 text-center">
+                      <button className=" col-sm-3  btn btn-outline-red" style={{marginLeft:'15%'}} onClick={this.deleteProfileYes}>YES</button>
+                      <button className="col-sm-3  btn  btn-outline" style={{marginLeft:'15%'}} onClick={this.closeDeleteProfile}>GO Back</button>
+                    </div> 
                   </div>
                 </Modal.Body>
               </Modal>

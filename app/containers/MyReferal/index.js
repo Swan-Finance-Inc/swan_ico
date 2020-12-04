@@ -33,6 +33,12 @@ import MyPaginnation from "../../components/MyPaginnation";
 import EmptyFile from "../../images/EmptyFile.svg";
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import { ToastContainer, toast } from 'react-toastify';
+import { DownOutlined } from "@ant-design/icons";
+import TextFieldInput from "../../components/TextFieldInput";
+import ethLogo from "../../images/ethLogo.png";
+import { Navbar, Nav, MenuItem, NavDropdown, Modal ,Badge , DropdownButton, Button} from 'react-bootstrap';
+import { Menu, Dropdown ,Popconfirm, message} from "antd";
+import Bar from "../../components/Bar";
 
 export class MyReferal extends React.PureComponent {
   // eslint-disable-line react/prefer-stateless-function
@@ -41,6 +47,7 @@ export class MyReferal extends React.PureComponent {
     this.state = {
       infoShow: false,
       referralUrl :'',
+      weeklyOrDaily: 'daily',
       users: [
         {
           local: {
@@ -126,10 +133,10 @@ export class MyReferal extends React.PureComponent {
         let users = [];
         let data = nextProps.referData;
         console.log(data, " data in willrecieveprops");
-        data.transactions.forEach((tran, i) => {
-          tran.forEach((entry, j) => transaction.push(entry));
-        });
-        data.users.forEach((user, i) => users.push(user));
+        // data.transactions.forEach((tran, i) => {
+        //   tran.forEach((entry, j) => transaction.push(entry));
+        // });
+        // data.users.forEach((user, i) => users.push(user));
         // data.users.forEach((user,i)=>users.push(tran));
         this.setState({
           transactions: transaction,
@@ -305,10 +312,38 @@ export class MyReferal extends React.PureComponent {
     );
   };
 
+  
+
   render() {
     console.log(this.props, " props in myreferal");
     console.log(this.state, " state in myreferal");
     const { loading } = this.props;
+    const menu = (
+      <Menu>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">
+            1st menu item
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">
+            2nd menu item
+          </a>
+        </Menu.Item>
+        <Menu.Item>
+          <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">
+            3rd menu item
+          </a>
+        </Menu.Item>
+        <Menu.Item danger>a danger item</Menu.Item>
+      </Menu>
+    );
+    const referralsEarned = {
+      date : 32,
+      tokensEarned : 50,
+      userCreatedAt : 10,
+
+    }
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
         <Helmet>
@@ -318,62 +353,152 @@ export class MyReferal extends React.PureComponent {
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
             <div className="row">
-              <div className="col-lg-12">
-                <div className="renove-bottom-shadow balance-card" style={{ height: "auto" }}>
-                  <div className="balance-card-inner-wrappper">
-                    <div
-                      style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                      }}
+            <div
+              className="col-lg-7 col-sm-7"
+              style={{ 
+               marginTop : '12px' }}
+             >
+              <div className="balance-card" id="fixed-height">
+                <div
+                  className="balance-card-inner-wrappper"
+                ><div className="">
+                  <h5
+                    style={{
+                      font: "normal normal bold 20px/24px Lato",
+                      letterSpacing: "0.43px",
+                      color: "#B0C9F0",
+                      display: "inline-block",
+                      opacity: 1,
+                      marginTop: 0,
+                      fontSize: "16px",
+                    }}
+                  >
+                    Tokens Earned by Referral {this.state.weeklyOrDaily==='weekly'?'(This Week)':''}
+                  </h5>
+                    <DropdownButton 
+                      eventKey={4} 
+                      className="account-balance-dropdown"
+                      title={this.state.weeklyOrDaily}
                     >
-                      <h3
-                        className="mt-30 balance-card-inner-wrapper-heading"
-                        style={{ lineHeight: "1.3" }}
-                      >
-                        Invite your friends and <br/> earn up to
-                         10% in CenX tokens.
-                      </h3>
-                      <hr className="invite-hr" />
-                      <p className="mt-30 referral-content">
-                      Earn up to 10% on the ongoing referral
-                      <br/> bonus of your referred transaction fee.
-                      </p>
-                      <div className="referral-logo-container" style={{ width : '274px' }}>
-                        <img src={Referral} className="referral-logo" style={{ width : 'inherit' }}/>
+                      <MenuItem eventKey='5' value="weeklyOrDaily" name="daily" onClick={this.chartType } >
+                          Daily
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="weekly" onClick={this.chartType } >
+                          Weekly
+                          </MenuItem>
+                          <MenuItem eventKey='5' value="weeklyOrDaily" name="monthly" onClick={this.chartType } >
+                          Monthly
+                          </MenuItem>
+                     </DropdownButton>
+                     
+                  <Dropdown overlay={menu} disabled>
+                  <a className="ant-dropdown-link" onClick={e => e.preventDefault()}>
+                    Daily <DownOutlined />
+                  </a>
+                </Dropdown>
+                <Dropdown overlay={menu} disabled>
+                  <a className="ant-dropdown-link"
+                  style={{marginLeft : '50px' }}
+                  onClick={e => e.preventDefault()}>
+                    Weekly <DownOutlined />
+                  </a>
+                </Dropdown>
+                </div>
+              <div>{this.state.weeklyOrDaily==='daily'?<Bar graphData={referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
+              {this.state.weeklyOrDaily==='monthly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
+              {this.state.weeklyOrDaily==='weekly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}</div>
+                </div>
+              </div>
+            </div>
+            <div
+              className="col-lg-5 col-sm-5"
+              style={{marginTop: '13px' }}
+            >
+              <div
+                className="balance-card"
+                style={{
+                  borderTopRightRadius: 0,
+                  borderTopLeftRadius: 0,
+                  padding: "12px 0px 29px 15px",
+                }}
+              >
+                <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>
+                  <h4 className="exchange-heading">Referral Tokens Earned</h4>
+                    <p style={{ marginBottom: "0px", color: "#465390" ,fontSize: "32px", marginLeft : '10px' }}>
+                    {
+                    350
+                    }
+                    </p>
+                  <div className="col-sm-12" style={{ position : 'relative' }}>
+                      <div className="Pending-referrals">
+                        <div id="circle">
+                          <span className="circle-text">0<span className="Pending-referrals-count"> # of Pending Referrals</span></span>
+                        </div>
                       </div>
-                    </div>
-                    <div>
-                      <p
-                        className="main-color--blue"
-                        style={{ fontSize: "15px", fontWeight: "500" }}
-                      >
-                        Share the Unique Invite Link
-                      </p>
-                     {
-                      // <div className="copy-clipboard" style={{ width: "40%" }}>
-                      //   <input
-                      //     id="foo"
-                      //     value={this.state.referralUrl}
-                      //     className="my-referral-code copy-clipboard-input"
-                      //   />
-                      //   <button className="btn  my-referral-code file-copy" style={{right : '-52px' }}>
-                      //       <FileCopyOutlinedIcon
-                      //       style={{ outline : 'none' }}
-                      //       />
-                      //   </button>
-                      // </div>
-                      }
-                       <div style={{width: '69%' , position: 'relative', marginBottom : '20px'}}>
-                            <input value={this.state.referralUrl }
+                  </div>
+                  <div className="col-sm-12" style={{ position : 'relative' }}>
+                      <div className="Confirmed-referrals">
+                        <div id="confirmed-circle">
+                          <span className="confirmed-circle-text">0<span className="Confirmed-referrals-count"># of Confirmed Referrals</span></span>
+                        </div>
+                      </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
+
+            <div className="row">
+            <div className="col-lg-12 last-card"style={{ marginBottom : '30px' , marginTop : '12px' , height : "auto" }} >
+                 <div className="balance-card">
+                    <div className="balance-card-inner-wrappper">
+                      <div style={{ display : 'flex' , justifyContent : 'space-between' }}>
+                        <div>
+                        <h3 className="balance-card-inner-wrapper-heading" style={{ lineHeight: '1.3'}}>
+                        Invite Your friends 
+                        <b/> & Earn CenX tokens
+                          </h3>
+                          <p  className="mt-30 referral-content">
+                          Earn up to 10% on the ongoing referral bonus <b/>
+                          of your referred transaction fee. </p>
+                            <p  className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
+                            {
+                          //     <div className="code copy-clipboard">
+                          //   <input id="foo" value={this.state.referalUrl}
+                          //   className="copy-clipboard-input"
+                          //   disabled
+                          //   />
+                          //   <button className="btn file-copy" style={{ right: '-145px' }}
+                          //   onCopy={this.state.referalUrl}
+                          //   >
+                          //   <FileCopyOutlinedIcon
+                          //  // onClick={(e) => console.log(e.target.files ) }
+                          //   style={{ outline : 'none' }}
+                          //   />
+                          //   </button>
+                          //   {
+                          //   //   <button class="btn" data-clipboard-target="#foo" id="clipboard-target-buttton">
+                          //   // <img src={mdCopy} className="copy-clip" />
+                          //   // </button>
+                          //   }
+                          //   </div>
+                            }
+                            
+                        </div>
+                         <div className="referral-logo-container">
+                          <img src={Referral} className="referral-logo" />
+                        </div> 
+                      </div>
+                      <div style={{width: '86%' , position: 'relative'}}>
+                            <input value={this.state.referalUrl }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input"
                               />
-                            <CopyToClipboard text={this.state.referralUrl}
+                            <CopyToClipboard text={this.state.referalUrl}
                               onCopy={() => {this.setState({copied: true});
                                toast.success("Copied");
                               }}>
-                              <span className="file-copy-conatiner">
+                              <span className="file-copy-conatiner" style = {{height : '-webkit-fill-available'}} >
                               <FileCopyOutlinedIcon
                                 style={{ outline : 'none' ,fontSize : '20px'  }}
                                 />
@@ -381,12 +506,49 @@ export class MyReferal extends React.PureComponent {
                             </CopyToClipboard>
                         </div>
                     </div>
+                   
+                 </div>
+            </div>
+            {/* <div
+              className="col-lg-5 col-sm-12"
+              style={{marginTop: '13px' }}
+            >
+              <div
+                className="balance-card"
+                style={{
+                  borderTopRightRadius: 0,
+                  borderTopLeftRadius: 0,
+                  padding: "12px 0px 29px 15px",
+                  height: "384px",
+                }}
+              >
+                <div className="balance-botton-inner-wrapper" style={{marginTop : '-15px' }}>
+                  <h4 className="exchange-heading">Referral Tokens Earned</h4>
+                    <p style={{ marginBottom: "0px", color: "#465390" ,fontSize: "32px", marginLeft : '10px' }}>
+                    {
+                    350
+                    }
+                    </p>
+                  <div className="col-sm-12" style={{ position : 'relative' }}>
+                      <div className="Pending-referrals">
+                        <div id="circle">
+                          <span className="circle-text">0<span className="Pending-referrals-count"> # of Pending Referrals</span></span>
+                        </div>
+                      </div>
+                  </div>
+                  <div className="col-sm-12" style={{ position : 'relative' }}>
+                      <div className="Confirmed-referrals">
+                        <div id="confirmed-circle">
+                          <span className="confirmed-circle-text">0<span className="Confirmed-referrals-count"># of Confirmed Referrals</span></span>
+                        </div>
+                      </div>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
+          </div>
 
-            <div className="contribution-card" style={{ marginBottom: "30px" ,marginTop: '15px'}}>
+            {/* <div className="contribution-card" style={{ marginBottom: "30px" ,marginTop: '15px'}}>
               <div className="row">
                 <div className="col-sm-12">
                   <div className="customCard-header transaction-container">
@@ -412,7 +574,6 @@ export class MyReferal extends React.PureComponent {
                       >
                         <option value="" disabled selected hidden></option>
                         <option value="Ethereum">ETHEREUM</option>
-                        {/* <option value="Bitcoin">BITCOIN</option> */}
                       </select>
                     </div>
                   </div>
@@ -433,9 +594,7 @@ export class MyReferal extends React.PureComponent {
                           value={this.state.transactionParam.createdLl}
                           placeholderText="start"
                         />
-                        {
-                          // <input id="createdMinFilter" type="date" onChange={this.handleMinCreatedFilter} className="form-control text-center filter-input" placeholder="min"/>
-                        }
+    
                       </div>
                       <div>
                         <span className="to">To</span>
@@ -447,9 +606,7 @@ export class MyReferal extends React.PureComponent {
                           value={this.state.transactionParam.createdUl}
                           placeholderText="end"
                         />
-                        {
-                          // <input id="createdMaxFilter" type="date" onChange={this.handleMaxCreatedFilter} className="form-control text-center filter-input" placeholder="max"/>
-                        }
+                  
                       </div>
                     </div>
                   </div>
@@ -500,25 +657,8 @@ export class MyReferal extends React.PureComponent {
                       getTdProps={(state, rowInfo, column, instance) => ({
                         onClick: (e, handleOriginal) => {
                           console.log(rowInfo);
-                          // console.log("It was in this row:", rowInfo);
-                          // this.props.getMessages(rowInfo.original.ticketId);
-                          // this.setState({
-                          //
-                          //   currentTicketDetails : {
-                          //     subject: rowInfo.original.subject,
-                          //     messages: rowInfo.original.messages,
-                          //     createdAt: rowInfo.original.createdAt,
-                          //     status: rowInfo.original.status,
-                          //     ticketId: rowInfo.original.ticketId
-                          //   },
-                          //   currentTicketMessages: rowInfo.original.messages
-                          // })
-                          // this.handleShowTicket();
-                          // IMPORTANT! React-Table uses onClick internally to trigger
-                          // events like expanding SubComponents and pivots.
-                          // By default a custom 'onClick' handler will override this functionality.
-                          // If you want to fire the original onClick handler, call the
-                          // 'handleOriginal' function.
+                 
+                         
                           if (handleOriginal) {
                             handleOriginal();
                           }
@@ -539,7 +679,7 @@ export class MyReferal extends React.PureComponent {
                   )}
                 </div>
               </div>
-            </div>
+            </div> */}
 
             {
               //   {

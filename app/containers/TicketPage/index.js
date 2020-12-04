@@ -205,11 +205,11 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
               <div className="row">
                   <div className="col-sm-12">
                       <div className="customCard-header transaction-container">
-                        <h2 className="trasnaction">Tickets</h2>
+                        <h2 className="trasnaction">Customer Support</h2>
                         <span id="Clear-all"><a onClick={this.clearFilter} id="clearType">Clear All</a></span>
                       </div>  
                   </div>
-                  <div className="col-sm-4">
+                  {/* <div className="col-sm-4">
                       <div className="transactions-filters">
                         <div className="transactions-filters-card">
                     <label htmlFor="kycFilter" id="transaction-type"><h4 style={{color : '#B0C9F0' }}>No Of Tickets:</h4></label>
@@ -220,11 +220,25 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                         </select>
                         </div>
                       </div>
-                  </div>
-                  <div className="col-sm-7">
+                  </div> */}
+                  <div className="col-sm-12 text-center">
                       <button  className="btn new-ticket" onClick={this.showCreateTicket}>New Ticket</button>
                   </div>
              </div> 
+             <div className="row">
+                  <div className="col-sm-4">
+                      <div className="transactions-filters">
+                        <div className="transactions-filters-card">
+                    <label htmlFor="kycFilter" id="transaction-type"><h4 style={{color : '#00296B' }}>No Of Tickets:</h4></label>
+                        <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onClick={this.handleTypeFilter}>
+                          <option value="" disabled selected hidden></option>
+                          <option value='1'>1</option>
+                          <option value='2'>2</option>
+                        </select>
+                        </div>
+                      </div>
+                  </div>
+             </div>
              <div className="row">
                 <div className="col-sm-12 ">
               {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} />:    <ReactTable
