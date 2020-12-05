@@ -2022,8 +2022,12 @@ font-size: 25px;
   }
 
   #fixed-height{
-	  height: auto !important;
-	  min-height: 352px;
+	//   height: auto !important;
+	 height: 332px;
+  }
+
+  .last-card{
+	  height: 290px;
   }
 
   .large-text{
@@ -2037,12 +2041,12 @@ font-size: 25px;
 	  box-shadow: 0px 3px 6px #2D6DCD6E;
 	  border-radius: 4px;
 	  opacity: 1;
-	  height: 363px;
+	  height: 332px;
   }
 
 //my-referral-code copy-clipboard-input
   .balance-card-inner-wrappper{
-	padding: 8px 16px;
+	padding: 23px 20px;
   }
 
   .balance-card-inner-wrapper-heading{
@@ -2086,12 +2090,37 @@ font-size: 25px;
   .exchange-trading-container{
 	  display: flex;
 	  flex-direction: column;
-	  padding-left: 34px !important;
+	//   padding-left: 34px !important;
   }
 
-  .exchange-trading-bottom div { 
-	  display: inline-block;
+  .exchange-trading-input{
+	  display: flex;
   }
+
+  .exchange-rate-dropdown{
+	border-radius: 4px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+    border: 1px solid #979BA2 !important;
+    width: 87% !important;
+  }
+
+  .exchange-dropdown-container{
+	margin-top: 60px;
+  }
+
+  .exchange-text{
+    color: #465490; //#2D6DCD;
+	font-size: 14px;
+	font-weight: 800;
+	padding: 7px 14px;
+	padding-left: 0px;
+	line-height: 20px;
+	margin-top: 14px;
+  }
+
+  	.text-field-input{
+		  width: 100%;
+	  }
 
 //   .centralexCoin , .centralexCoin [class="MuiInputBase-input"] {
 // 	width: 90% !important;
@@ -2249,6 +2278,7 @@ font-size: 25px;
 	position: relative;
 }
 
+
 .ico-details-middle{
 	display: flex;
     justify-content: space-between;
@@ -2293,7 +2323,7 @@ font-size: 25px;
 		outline: none;
 		color: #fff;
 	}
-	padding: 12px 75px;
+	padding: 12px 60px;
 }
 
 /*  Kyc  */
@@ -2306,27 +2336,29 @@ font-size: 25px;
 	border-radius: 5px;
 	opacity: 1;
 	padding: 10px 16px;
+	margin-bottom: 40px;
 }
 
 .kyc-verification-header{
-	color: #2D6DCD;
+	color: #00296B;
 	font: normal 24px Lato;
 }
 
 .kyc-status{
-	color: #B0C9F0;
+	color: #00296B;
 	font: normal 18px Lato;
 	margin-top: 20px;
 }
 
 .kyc-factorial{
-	width: 454px;
+	width: auto;
 	height: 68px;
-	font: normal 24px Lato;
+	font: bold 30px Lato;
 	letter-spacing: 0.64px;
 	color: #FFFFFF;
 	opacity: 1;
-	border-radius: 4px;
+	border-radius: 38px;
+	background: #2498D5;
 }
 
 /*  Contribution */
@@ -2412,7 +2444,7 @@ font-size: 25px;
 
 .transaction-container .trasnaction{
 	display: inline-block;
-	font: normal normal 37px Lato;
+	font: normal normal 30px Lato;
 	letter-spacing: 0.64px;
 	color: #00296B;
 	opacity: 1;
@@ -2420,7 +2452,7 @@ font-size: 25px;
 }
 
 #Clear-all a{
-	color: #2D6DCD !important;
+	color: #00296B !important;
 	text-decoration: underline;
 	font-family: Lato;
 	display: inline-block;
@@ -2441,8 +2473,8 @@ font-size: 25px;
 .transactions-filters-card .form-control{
 	width: 30%;
 	margin-left: 15px;
-	color: #2D6DCD;
-	border-bottom: 1px solid #2D6DCD;
+	color: #00296B;
+	border-bottom: 1px solid #00296B;
 
 }
 .transactions-filters-card label{
@@ -2516,10 +2548,10 @@ font-size: 25px;
     height: 37px;
     margin-top: 18px;
     font-size: 18px;
-	box-shadow: 0px 3px 6px #2D6DCD6E;
+	// box-shadow: 0px 3px 6px #2498D5;
 	outline: none !important;
 	margin-left: 20px;
-	background-color: #465390;
+	background-color: #2498D5;
 	color: white;
 	border-radius: 22px !important;
 	&:hover , &:focus {

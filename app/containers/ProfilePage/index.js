@@ -27,7 +27,7 @@ import 'react-phone-number-input/style.css'
 import { parseNumber, formatNumber, isValidNumber } from 'libphonenumber-js'
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import Switch from 'react-toggle-switch';
-
+import ResetPasword from '../ResetPassword'
 
 export class ProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
@@ -210,6 +210,11 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
          currentView:'wallet'
        })
      }
+     else if(view == 'resetPassword'){
+       this.setState({
+         currentView: 'resetPassword'
+       })
+     }
   }
   handleToggle(e) {
     this.setState({
@@ -310,20 +315,25 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
               <div className="row">
               <div className="col-md-12">
                 <div style={{display:'flex',flexDirection:'row'}}>
-                  { this.state.currentView === 'personal' ? (
+                  {/* { this.state.currentView === 'personal' ? (
                     <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer', backgroundColor: '#465390', color: 'white', borderRadius: '5px'}} className="personal"><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>PERSONAL</h2></div>
                   ) : (
                     <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px' , color : '#465390'}}>PERSONAL</h2></div>
-                  )}
+                  )} */}
                   { this.state.currentView === 'notifications' ? (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer', backgroundColor: '#465390', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:'10px 0px',cursor:'pointer', backgroundColor: '#2d6dcd', color: 'white', borderRadius: '4px 0px 0px 4px', border : "1px solid #2d6dcd",padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>NOTIFICATIONS</h2></div>
                   ) : (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:'10px 0px',cursor:'pointer', border : "1px solid #2d6dcd", borderRadius: '4px 0px 0px 4px',padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>NOTIFICATIONS</h2></div>
                   )}
-                  { this.state.currentView === 'wallet' ? (
+                  {/* { this.state.currentView === 'wallet' ? (
                     <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#465390', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>WALLET</h2></div>
                   ) : (
                     <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>WALLET</h2></div>
+                  )} */}
+                  { this.state.currentView === 'resetPassword' ? (
+                    <div  onClick={()=>this.changeView("resetPassword")} style={{margin:'10px 0px',cursor:'pointer', backgroundColor: '#2d6dcd', color: 'white', borderRadius: '4px 0px 0px 4px', border : "1px solid #2d6dcd",padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>Reset Password/PIN</h2></div>
+                  ) : (
+                    <div  onClick={()=>this.changeView("resetPassword")} style={{margin:'10px 0px',cursor:'pointer', border : "1px solid #2d6dcd", borderRadius: '4px 0px 0px 4px',padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>Reset Password/PIN</h2></div>
                   )}
                   {/* <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div> */}
                   {/* <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div> */}
@@ -557,8 +567,15 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                 </div>
                 </form>
       </div>
+  }
+      {this.state.currentView==='resetPassword' &&
+      <div>
+      <ResetPasword/>
 
-    }
+      </div>
+
+      }
+
               {
                 // <div className="row">
                 //   <div className="col-sm-12 text-center checkbox">

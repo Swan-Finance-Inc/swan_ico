@@ -81,7 +81,7 @@ class TextFieldInput extends Component {
   render() {
     const classes = this.props;
     return (
-      <div>
+      <div className = "text-field-input">
         <ThemeProvider theme={theme}>
           {
             this.props.auth ?
