@@ -54,9 +54,9 @@ export class Stake extends React.PureComponent{
       
       const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
       //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
-      let tokenAmount = this.state.tokens;
+      let tokenAmount = web3.utils.toWei(this.state.tokens);
       const contract = new web3.eth.Contract(abi, address);
-      console.log("contract hai: ")
+      console.log("contract hai: ", tokenAmount)
 
       let pvtKey = this.props.ethWallet.private_key;
       let rawTransaction = {
@@ -170,7 +170,7 @@ export class Stake extends React.PureComponent{
         
         const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
         //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
-        let tokenAmount = this.state.tokens;
+        let tokenAmount = web3.utils.toWei(this.state.tokens);
         const contract = new web3.eth.Contract(abi, address);
         console.log("contract hai: ")
   

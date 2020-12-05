@@ -14,7 +14,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectInvestPage, {
-makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading
+makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectContributionData, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -167,7 +167,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   // Begin Lifecycle methods
 
   componentDidMount() {
-    // this.props.getData();
+    this.props.getData();
     this.props.listHotWallet();
     
     // if(this.state.paymentMode=='viaMetamaskExt')
@@ -261,7 +261,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("enetered claim tokens")
     var address = constants.stakeContractAddress;
     var abi = constants.stakeContractAbi;
-    var id = this.state.currInterestAccountDetails.id;
+    var id = this.state.currInterestAccountDetails.proposalId;
     //var spender = constants.stakeContractAddress;
 
     try{    
@@ -320,7 +320,8 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("enetered withdraw tokens")
     var address = constants.stakeContractAddress;
     var abi = constants.stakeContractAbi;
-    var id = this.state.currInterestAccountDetails.id;
+    var id = this.state.currInterestAccountDetails.proposalId;
+    
     //var spender = constants.stakeContractAddress;
 
     try{    
@@ -329,7 +330,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
     //let tokenAmount = this.state.tokens;
     const contract = new web3.eth.Contract(abi, address);
-    console.log("contract hai: ")
+    console.log("contract hai: ", id)
 
     let pvtKey = this.state.ethWallet.private_key;
     let rawTransaction = {
@@ -387,8 +388,10 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     //console.log("contract hai: ", contract)
     while (i <= this.state.depositCount) {
       result = await contract.methods.interestAccountDetails(userAddress,i).call();
-      result.id=i;
+      //result.id=i;
       console.log("ay result", result)
+      result.amount = web3.utils.fromWei(result.amount)
+      console.log("fir ay result", result.amount)
       i++;
       finResult.push(result);
     }
@@ -445,28 +448,27 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.successData,"success data in contributeepegE");
-    // const data = nextProps.successData;
-    // this.setState({
-    //   eurToDollar: data.eurUsd,
-    //   ethToDollar: data.ethUsd,
-    //   btcToDollar: data.btcUsd,
-    //   tokensPerEther: data.tokenPerEther,
-    //   tokensPerBitcoin: data.tokenPerBtc,
-    //   tokensPerUsd:  1 / data.tokenUsd,
-    //   tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
-    //   ethAddress: data.ethAddress,
-    //   btcAddress: data.btcAddress,
-    //   time: nextProps.deadline,
-    //   bonus: data.bonus,
-    //   stage: data.stage,
-    //   minInvest: data.minInvest,
-    //   tokenPrice: data.tokenUsd,
-    //   isBonusOrDiscount:data.isBonusOrDiscount,
-    //   discount:data.discount,
-    //   loading: false,
-    //   fromAddressEth:nextProps.userInfo.userInfo.ethAddress
-    // });
+    console.log(nextProps.successData,"success data in contributeepegE");
+    const data = nextProps.successData;
+    this.setState({
+      eurToDollar: data.eurUsd,
+      ethToDollar: data.ethUsd,
+      btcToDollar: data.btcUsd,
+      tokensPerEther: data.tokenPerEther,
+      tokensPerBitcoin: data.tokenPerBtc,
+      tokensPerUsd:  1 / data.tokenUsd,
+      tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
+      ethAddress: data.ethAddress,
+      btcAddress: data.btcAddress,
+      time: nextProps.deadline,
+      bonus: data.bonus,
+      stage: data.stage,
+      minInvest: data.minInvest,
+      tokenPrice: data.tokenUsd,
+      isBonusOrDiscount:data.isBonusOrDiscount,
+      discount:data.discount,
+      loading: false,
+    });
     // if (nextProps.successPayment) {
     //   console.log(nextProps.successPayment);
 
@@ -1776,7 +1778,7 @@ hide=(e)=>{
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
             <div className="col-sm-12 col-md-12 col-lg-12">
-          <div className="balance-card" style={{ marginBottom : '2em', }}>
+          <div className="balance-card" style={{ marginBottom : '2em', height:"360px" }}>
             <div className="row">
               <div className="col-sm-12 col-md-5">
                   {/* <h4 className="wallet-panel-heading" style={{ paddingLeft: '20px',paddingTop: '10px' }}>Wallet</h4> */}
@@ -1814,7 +1816,7 @@ hide=(e)=>{
                   </div>
                   <div className="col-md-6 col-lg-6 col-sm-6" style={{textAlign:'center'}}>
                     120 days remaining &nbsp;
-                  <button className='btn btn-primary' >$0 (NA)</button> 
+                  <button className='btn btn-primary' >${this.state.swanBalance==0?'0 (NA)':this.state.tokenPrice*this.state.swanBalance+'~'}</button> 
                   </div>
 
                 </div>
@@ -1964,7 +1966,7 @@ InvestPage.propTypes = {
 const mapStateToProps = createStructuredSelector({
   investpage: makeSelectInvestPage(),
   // contributionCurrency: makeSelectContributionCurrency(),
-  // successData: makeSelectContributionData(),
+  successData: makeSelectContributionData(),
   // successPayment: makeSelectContributionSuccess(),
   // successNotPayment : makeSelectContributionNotSuccess(),
   // global: makeGlobalParent(),
@@ -1985,7 +1987,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     // selectCurrency: () => (dispatch(selectAction())),
-    // getData: () => (dispatch(getData())),
+    getData: () => (dispatch(getData())),
     // confirmPayment: (data) => (dispatch(confirmPayment(data))),
     addCenxWallet: (data) => (dispatch(addCenxWallet(data))),
     getCenxWallet: () => (dispatch(getCenxWallet())),

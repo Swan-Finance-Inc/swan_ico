@@ -14,7 +14,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectWalletPage, {
-makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading
+makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectContributionData, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -41,6 +41,7 @@ import Satelite from "../../images/Satelite.svg";
 import { TransactionHistory } from "../TransactionHistory";
 import {ethLogo} from '../../images/logoETH.png';
 import logo from '../../images/swan-logo-big.svg';
+import stellarLogo from '../../images/logoXLM.png'
 // import {Footer} from '../../components/footer/footer.js'
 import queryString from "query-string";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -64,6 +65,8 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       curr: '',
       btcToDollar: 7500,
       ethToDollar: 600,
+      xlmToDollar : 1,
+      usdtToDollar : 1,
       eurToDollar: 0,
       currencyQuantity: 0,
       dollarQuantity: 0,
@@ -71,6 +74,8 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       tokensWithBonus: 0,
       tokensPerEther: 0,
       tokensPerBitcoin: 0,
+      tokensPerStellar: 0,
+      tokensPerUsdt: 0,
       tokensPerUsd: 0,
       tokensPerEur: 0,
       ethAddress: false,
@@ -123,6 +128,10 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       usdtBalance: 0,
       swanBalance: 0,
       currAddress: '',
+      dollarBalanceUsdt: 0,
+      dollarBalanceXlm: 0,
+      dollarBalanceEth: 0,
+      dollarBalanceBtc: 0,
     };
 
     // this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -142,6 +151,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     this.getBitcoinBalance = this.getBitcoinBalance.bind(this);
     this.getStellarBalance = this.getStellarBalance.bind(this);
     this.getEthereumBalance = this.getEthereumBalance.bind(this);
+    this.getUsdtBalance = this.getUsdtBalance.bind(this);
     // //this.openShowEthWalletCreate = this.openShowEthWalletCreate.bind(this);
     // this.checkWallet = this.checkWallet.bind(this);
 
@@ -175,7 +185,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   // Begin Lifecycle methods
 
   componentDidMount() {
-    // this.props.getData();
+    this.props.getData();
     this.props.listHotWallet();
     // if(this.state.paymentMode=='viaMetamaskExt')
     // {this.interval = setInterval(() => this.getMetamaskAddress(), 1000);}
@@ -213,7 +223,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   getBitcoinBalance=()=>{
     axios.get(`https://api.blockcypher.com/v1/btc/test3/addrs/${this.state.btcWallet.address}`)
       .then((res) => res.data)
-      .then((obj) => this.setState({btcBalance: obj.final_balance}))
+      .then((obj) => this.setState({btcBalance: obj.final_balance, dollarBalanceBtc: this.state.btcToDollar*this.satoshi_to_btc(obj.final_balance)}))
       .then(obj => console.log(obj))
       .catch((err) => console.log(err))
   }
@@ -225,7 +235,8 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
         else{
           console.log("agaya balance", res)
 
-          this.setState({ethBalance:web3.utils.fromWei(res)});
+          this.setState({ethBalance:web3.utils.fromWei(res),
+          dollarBalanceEth: this.state.ethToDollar*web3.utils.fromWei(res)});
         }
       }.bind(this));
       this.getSwanBalance();
@@ -240,9 +251,32 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       console.log("Type:", balance.asset_type, ", Balance:", balance.balance);
       let totalbalance = balance.balance;
       if(balance.asset_type == 'native'){
-        this.setState({xlmBalance: totalbalance });
+        this.setState({xlmBalance: totalbalance,
+        dollarBalanceXlm: this.state.xlmToDollar*totalbalance });
       }
     }.bind(this));
+  }
+
+  getUsdtBalance=async()=>{
+    var address = '0xD92E713d051C37EbB2561803a3b5FBAbc4962431';
+    var abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_upgradedAddress","type":"address"}],"name":"deprecate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"deprecated","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_evilUser","type":"address"}],"name":"addBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"upgradedAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balances","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maximumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_maker","type":"address"}],"name":"getBlackListStatus","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowed","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newBasisPoints","type":"uint256"},{"name":"newMaxFee","type":"uint256"}],"name":"setParams","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"issue","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"redeem","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"basisPointsRate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isBlackListed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_clearedUser","type":"address"}],"name":"removeBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"MAX_UINT","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_blackListedUser","type":"address"}],"name":"destroyBlackFunds","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_initialSupply","type":"uint256"},{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"_decimals","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Issue","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Redeem","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"newAddress","type":"address"}],"name":"Deprecate","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"feeBasisPoints","type":"uint256"},{"indexed":false,"name":"maxFee","type":"uint256"}],"name":"Params","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_blackListedUser","type":"address"},{"indexed":false,"name":"_balance","type":"uint256"}],"name":"DestroyedBlackFunds","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"AddedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"RemovedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"}];
+    var result=0;
+    console.log("abi: ", abi, address, this.state.usdtWallet)
+    try{
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    let userAddress = web3.utils.toChecksumAddress(this.state.usdtWallet.address);
+    const contract = new web3.eth.Contract(abi, address);
+    //console.log("contract hai: ", contract)
+        
+    result = await contract.methods.balanceOf(userAddress).call();
+    
+    this.setState({usdtBalance: result,
+    dollarBalanceUsdt: this.state.usdtToDollar*result/1000000});
+    console.log("heheUSDTBalance",web3.utils.fromWei(result));
+    } catch(err){
+      toast.error(`Error in getSwanBalance ${err}`)
+        console.log("error in get swan balance")
+    }
   }
 
   getSwanBalance=async()=>{
@@ -250,7 +284,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.tokenContractAbi, result=0;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))       //--prodChange
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -267,28 +301,32 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
 
   
   componentWillReceiveProps(nextProps) {
-    // console.log(nextProps.successData,"success data in contributeepegE");
-    // const data = nextProps.successData;
-    // this.setState({
-    //   eurToDollar: data.eurUsd,
-    //   ethToDollar: data.ethUsd,
-    //   btcToDollar: data.btcUsd,
-    //   tokensPerEther: data.tokenPerEther,
-    //   tokensPerBitcoin: data.tokenPerBtc,
-    //   tokensPerUsd:  1 / data.tokenUsd,
-    //   tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
-    //   ethAddress: data.ethAddress,
-    //   btcAddress: data.btcAddress,
-    //   time: nextProps.deadline,
-    //   bonus: data.bonus,
-    //   stage: data.stage,
-    //   minInvest: data.minInvest,
-    //   tokenPrice: data.tokenUsd,
-    //   isBonusOrDiscount:data.isBonusOrDiscount,
-    //   discount:data.discount,
-    //   loading: false,
-    //   fromAddressEth:nextProps.userInfo.userInfo.ethAddress
-    // });
+    console.log(nextProps.successData,"success data in contributeepegE");
+    const data = nextProps.successData;
+    this.setState({
+      eurToDollar: data.eurUsd,
+      ethToDollar: data.ethUsd,
+      btcToDollar: data.btcUsd,
+      xlmToDollar: data.xlmUsd,
+      usdtToDollar: data.usdtUsd,
+      tokensPerEther: data.tokenPerEther,
+      tokensPerBitcoin: data.tokenPerBtc,
+      tokensPerStellar: data.tokenPerXlm,
+      tokensPerUsdt: data.tokenPerUsdt,
+      tokensPerUsd:  1 / data.tokenUsd,
+      tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
+      ethAddress: data.ethAddress,
+      btcAddress: data.btcAddress,
+      time: nextProps.deadline,
+      bonus: data.bonus,
+      stage: data.stage,
+      minInvest: data.minInvest,
+      tokenPrice: data.tokenUsd,
+      isBonusOrDiscount:data.isBonusOrDiscount,
+      discount:data.discount,
+      loading: false,
+      //fromAddressEth:nextProps.userInfo.userInfo.ethAddress
+    });
     // if (nextProps.successPayment) {
     //   console.log(nextProps.successPayment);
 
@@ -367,6 +405,8 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
             if(hasUsdtWalletCreated){
               this.setState({
                 usdtWallet: hasUsdtWalletCreated
+              },()=>{
+                this.getUsdtBalance()
               })
             }
             if(hasXlmWalletCreated){
@@ -1454,6 +1494,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
     // console.log(this.state," state in contribution page")
     const { loading } = this.props
     const {language} = this.state
+
     // this.setState({
     //   loading : this.props
     // });
@@ -1804,7 +1845,8 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
             <div className="row">
               <div className="col-sm-4 col-md-4 col-lg-4">
               <div className="kyc-status" style={{marginTop:"3px"}}>Account Balance:</div>
-              <div className="col-sm-12 col-md-12 col-lg-12">$0</div>  
+              <div className="col-sm-12 col-md-12 col-lg-12">$ {((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)).toPrecision(7)}
+              </div>  
               <br />
               <br />
               <div className="kyc-status" style={{marginTop:"0px"}}>Swan Balance:</div>
@@ -1822,11 +1864,11 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                           fontSize: "16px",
                         }}
                       >
-                       Token Percentage 
+                       Balance Percentage 
                       </h5>
                       <div className="account-balance-statistics" style={{marginTop:'30px'}}>
                       <div style={{ width : '90px' }}>
-                      <CircularProgressbarWithChildren value={12}
+                      <CircularProgressbarWithChildren value={Math.round((this.state.ethToDollar*this.state.ethBalance*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
                             stroke : '#465390'
@@ -1839,7 +1881,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                             color : '#2D6DCD',
                             letterSpacing: '0px'
                           }}>
-                           12%  <strong><br /> ETH</strong>
+                           {Math.round((this.state.ethToDollar*this.state.ethBalance*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%  <strong><br /> ETH</strong>
                         </div>
                       </CircularProgressbarWithChildren>
                       </div>
@@ -1867,7 +1909,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <div className="eth-other-balance-stats">
                       <div style={{ display : 'flex' }}>
                       <div style={{ width : '50px' }}>
-                      <CircularProgressbar value={23}
+                      <CircularProgressbar value={Math.round((this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
                             stroke : '#2D6DCD'
@@ -1879,15 +1921,15 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <span
                       style={{marginLeft: '12px', width: 'max-content'}}
                       >
-                      <span className="main-color--blue ">23%</span>   
+                      <span className="main-color--blue ">{Math.round((this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%</span>   
                         <br />
-                        <span className="main-color--blue font-weight-bold ">Ethereum</span>
+                        <span className="main-color--blue font-weight-bold ">BTC</span>
                         </span>
                      
                       </div>
                       <div style={{ display : 'flex' , marginTop : '10px' }}>
                       <div style={{ width : '50px' }}>
-                      <CircularProgressbar value={2}
+                      <CircularProgressbar value={Math.round(((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance))*100/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
                             stroke : '#2D6DCD'
@@ -1899,7 +1941,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <span
                       style={{marginLeft: '12px', width: 'max-content'}}
                       >
-                      <span className="main-color--blue ">2%</span>   
+                      <span className="main-color--blue ">{Math.round(((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance))*100/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%</span>   
                         <br />
                         <span className="main-color--blue font-weight-bold ">Others</span>
                         </span>
@@ -1961,7 +2003,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-12">
                 <div className="col-sm-12 col-md-12 col-lg-12" style={{backgroundColor:"#C2CBF2", cursor:"pointer", padding:"7px", marginTop:"10px"}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"left",  marginLeft:"5px"}}>
                     Name
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
@@ -1981,14 +2023,15 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+                  <img className="cryptoBuddy_Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAS1BMVEVHcEz4lBr4lhv/miT4lBr7lRz/szP4kxr4lBr4lBr9lx35lBr4kxr6lRv3kxr////++PH+7Nf937z7xIL80Z74pkL6uWr3min5r1Xgn4fZAAAADnRSTlMAq0YP7TkFwNaKHXj6XnPArAgAAASxSURBVHjazVvdmqsgDKy/qLUBBNT3f9Jz0e7ZaqlMEFdz269NCpNkEpLbLUaK6tFmQjRN2fdl0wiRtY+quP2JFHkrSlpJT0REpWjzY62o81b0tCm9aPP6IPVVWxIkZVul197dG2JIc+/S/vmM2JKlO4ZKUJSINCbkkeqJiES+/+4z2iXZPizU95J2Snnf4ZVVQwmkiYVC3VIiaaMOoROUTEQEEvKSEkrJdoeWEkvLu/6MkkvGAEIh6AARcKoumiP0U9+AFnTH6CeipjtXPxFyBsWB+hELanGkfupFyBcyOliyP44/zIiUc39tGIzjfmcjKnfs+K+klGowEysvdOkAOMunTLyQWCcDgHnq109rBjPvgkHFB9TwNMASEZF9XgeCCS9HqiMikHoaMBIRkX63JhCPfJdw5+tfQGCS79YE5J7CA9YQ4ADS4wlQCLTajm4DAv+t4QdELARpKaVU/42IhYAvHEEh4OeapdR2dDsgQEQixgVn+S5KR0Pg0xWxGGilT4YICKyPAIxB2mvAM/owIbA6AowFTPK7KCYElo7QYd+YzKBkQDhpqYsJgs7oTQMsgx78hkNeFhi3z0DDt9DEpkETuAZlmDDk8oApBASpMWLw4gU1Ow3JsEDuWNZxTHReos7vG3qCEwKbiS0wMH/zDcSClhGGP4nY0vGdVd4QHQ7HRR9JxNaxf1qnirA/9kUMBNxXsM3LQ9AYCBJA4JsFIwSCNBDwxigLgaBMBIHPDwEYlrdbkQ4CH5QBAEHBr4c2ILC+H8CA6vZICQH+CTz4TrAJgYkbilp2T2YbAstYBKTljO2FZsvRV1zFIcFY7IGA1HacvtJ2hKKLW7MDAj+s3JpxHD+zMkKMGq4BTsIC1SgNNxAaWL+C+HF56/dAYEs/Rgt7rgEK1D+AFUrPvALnK8c8sJzRHyyZIFwmgmn2E1KD/yDXCzyJYLYeQupwA0SCRPBJSBXeKBFpEoFRbEb6MiCLh8AyD645MYbDjJeON7nAKhMpsDx87IfAFwsgX3iwKJkLUN6BnwsqFik1gTt2bDpABYuWD6FukOLCsIQKE6ftPK3Lch3u442IFyKlmZVSSj0M4aqHW5lRixSnkzfpzGG2AlxBjpTnBm4IWi4I+wJpUGiUbznFjUQCadHM/pSvP57IVvqxsgRoUm2QsOH3/WQabQQryIE2XZAGKz0M2nNNKkzKXm26wB04oEUd2Sls4VZtjBEOSQScZjXTCOAAGn673sFlAdKmvHMfLBh1CVQWdRGDG69LsFbvL4uyiIdz9wswN34/DYyVV/xnu5+0oDZCpJQaGqjoRczswOKx+Ofp2tg399AWrQiqiKfb5WPxwprJzfM8O/zRTMQ8XrtFjFHsl8LPNMB8u/RCYIrSn0UNMHghEKXfN8pz3wMBrtyjhljSQcA7xAInxQQQqHYMMjljdkOgTTHKtQMC32cKOaM8L3owpvGAyHE+Z4YpQQi60kDj+SOdRw+1UnCo9dix3v7swWJouLs+e7T7uOHuBh+vP3m8//wFh/NXPC6w5HL+ms/5i07nr3pdYNnt/HW/Cyw8XmDl8wJLrxdY+73A4vMVVr83lt9f//zw5fcj1v//AUJgzq1BOb7uAAAAAElFTkSuQmCC"></img>
                     Bitcoin
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
                     {this.satoshi_to_btc(this.state.btcBalance)} BTC
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    7698
+                    $ {(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance).toPrecision(3))}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Deposit</button>
@@ -2001,14 +2044,15 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+                    <img className="cryptoBuddy_Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAQlBMVEVHcExnge9if+tjf+xifutif+tvgvZjf+tkgexjgOtifurAy/b///+Bl+78/P5rheuSpfCltfO1wvV1ju3s7/zX3vmZ+KnyAAAACnRSTlMAHPpp1u0KuT+IQ31QMAAABPlJREFUeNrNW1uiqyAMVFTeIKDuf6v3o6etD9Qk0NuyABnJZBJC0jSUxWWnhBB9PzA29L0QQnWSN/9lcanEoDXTTK8W00zrQagPo+BSic2+x8U+CEKqQYPWoGT93VvVa8TqVVv354VGLyFrbs/wAFgtCJS/r3gKbcH2WmstyrjAu6Fsf81YV3L6va6werIdlK601FesX8oEOeiKa5BfO36iGUTt/TUTiBjFMdIXXHUELcb7xjlBz6BvP7C/Tt6Eughw+zvvjZnAmgRAwHHqt1hvTISrIgfwD7Oitd4Y4+CSxKv63zg/AKQRjqCq/hj7AADmodbsUpEkbn9nnwDgPNT6QpVbpP7PbwAJERfaWgIc7RsAwgjnNEASYPJrAAgengUmJAH0YtcAEGJwRgNk/hXsFgBCDHSf27/TaAnYAkDwUHflHpDsHgCGh6wt9YA/Bm4AmLHAE4gM3AKA85AdeChoDNwCwPBQFB3Ai4E7ABgxkCUHYGweAFkPsUHInwGgBiVBZeABQCQdQUsJQnkAcB4y3RKj0OSvACDEQBGjgLGXACI+IkiqBGQBIHgoSRaY7wAkrA04KgwlewcALgYDx1tgx8AsADgPJd4CiwUAiDgbiAIG5gGAxUA0TdNwRBV0nGEAwDd2jqRAsjAAYB5KHAWchwKAioHCUWDJ7G+XmAMQ4SSAq0DM/P5ijHORzMOhaTicgQcDzI+tnHMxEcWAIzhosts/ADgXEomHEn4fcTvTvw/7b4WI5yHr4E4w70x/ALCHkGBuINAM9PscaL0CzghMQAG8g9B84Pt2rcgwQvxQ4CRgyTjcfr0sESEAekQQ8ktOc5w7hXAvBj0MwDifam4WgPsTpwQAMACD0GwMCsCDDOFeChkoCC3GoAE4F9KtGDAQgGQMCYBzLtwCgJhgilQA03hrApgXuEQCMNbyAq11wAOABIMeno+MEQcAlhMJTEI0JTiACXg3EI0AuMF0SYVL44+3ABTI/k8IY4AAmN5mm25fD0AJSfKv8tPRJc+NH+6VsAOmZIudw5kdzk7fpftwyCQwKZ28tYvLu2R++ymCEgIOTcuDtda/PrhxyazxAywaD/CLibHWWh8z6pxxvQDPR8BXs0dKkKNCzvjQpFQhLqePi6G3y94lD66HSMsl5noen0lx2lIhY3zoxYRxVIHidTed4/q0M6cPvZ0KXIlmet9NVi6ZVq6XkHVzhSxSrQs0b3XOhkvY5Vhiy3SbMn28SBhgN9O/Mh2mRrKpEc3hLGUC1ogUvlS7KxM+qTBFUoFGEorVcV8gGjMxGlil60nl+n2daI6H0gSwPrTqJMA8WIz3xWpopbalPdkEX6dczwT10SpdAwDXyiX52W65AgAuVAv6w+XWF31RqZ52BOEcgKMdAPbd6PTlFP5iJYue70/fjqEfYKKwgWFVN/eUB7NcKw+uhSPmAMCfrrsabXQHAIQnywIeTscmlpHOQMoDZkEbj6rTS2i2AOAEELWa2eZNK5cu8QAiDfwKQDEBKDSIbwDlBCA1cyxPALFAAkslGddTet9ezZFtxdYjJJj1vHpjtfUID/xEa/Xi4QT4SHP55MEe2IPnLFCSGFw1/pFFufr+PzDi8f0hl++P+TQN//Kg0w+MejVNUzzspoeSYbdyJjBRPvr55YHHEgh1p06/uf0PjP3+wOAzdPRb/5f585OT+Pzw+yfG//8BUsAQ+7Jxz/gAAAAASUVORK5CYII="></img>
                     Ethereum
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
                     {this.state.ethBalance} ETH
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    7698
+                    $ {(this.state.ethToDollar*this.state.ethBalance).toPrecision(5)}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Deposit</button>
@@ -2021,14 +2065,15 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+                    <img className="cryptoBuddy_Logo" style={{width:"31px"}} src={stellarLogo}></img>
                     Stellar
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    {this.state.xlmBalance} XLM
+                    {Math.round(this.state.xlmBalance)} XLM
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    7698
+                    $ {(this.state.xlmToDollar*this.state.xlmBalance).toPrecision(7)}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Deposit</button>
@@ -2041,14 +2086,15 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+                    <img className="cryptoBuddy_Logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2326A17B'/%3E%3Cpath fill='%23FFF' d='M17.922 17.383v-.002c-.11.008-.677.042-1.942.042-1.01 0-1.721-.03-1.971-.042v.003c-3.888-.171-6.79-.848-6.79-1.658 0-.809 2.902-1.486 6.79-1.66v2.644c.254.018.982.061 1.988.061 1.207 0 1.812-.05 1.925-.06v-2.643c3.88.173 6.775.85 6.775 1.658 0 .81-2.895 1.485-6.775 1.657m0-3.59v-2.366h5.414V7.819H8.595v3.608h5.414v2.365c-4.4.202-7.709 1.074-7.709 2.118 0 1.044 3.309 1.915 7.709 2.118v7.582h3.913v-7.584c4.393-.202 7.694-1.073 7.694-2.116 0-1.043-3.301-1.914-7.694-2.117'/%3E%3C/g%3E%3C/svg%3E"></img>
                     USDT
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    23 USDT
+                    {this.state.usdtBalance/1000000} USDT
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    7698
+                    $ {this.state.usdtToDollar*this.state.usdtBalance/1000000}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Deposit</button>
@@ -2081,7 +2127,7 @@ WalletPage.propTypes = {
 const mapStateToProps = createStructuredSelector({
   walletpage: makeSelectWalletPage(),
   // contributionCurrency: makeSelectContributionCurrency(),
-  // successData: makeSelectContributionData(),
+  successData: makeSelectContributionData(),
   // successPayment: makeSelectContributionSuccess(),
   // successNotPayment : makeSelectContributionNotSuccess(),
   // global: makeGlobalParent(),
@@ -2102,7 +2148,7 @@ function mapDispatchToProps(dispatch) {
   return {
     dispatch,
     // selectCurrency: () => (dispatch(selectAction())),
-    // getData: () => (dispatch(getData())),
+    getData: () => (dispatch(getData())),
     // confirmPayment: (data) => (dispatch(confirmPayment(data))),
     addCenxWallet: (data) => (dispatch(addCenxWallet(data))),
     getCenxWallet: () => (dispatch(getCenxWallet())),

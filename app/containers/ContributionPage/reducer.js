@@ -106,6 +106,8 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['success', 'ethUsd'], action.data.ethUsd)
         .setIn(['success', 'btcUsd'], action.data.btcUsd)
         .setIn(['success', 'eurUsd'], action.data.eurUsd)
+        .setIn(['success', 'xlmUsd'], action.data.xlmUsd)
+        .setIn(['success', 'usdtUsd'], action.data.usdtUsd)
         .setIn(['success', 'ethAddress'], action.data.ethAddress)
         .setIn(['success', 'btcAddress'], action.data.btcAddress)
         .setIn(['success', 'bonus'], action.data.bonus)
@@ -116,6 +118,8 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['success', 'mainSaleTokenUsd'], action.data.mainSaleTokenUsd)
         .setIn(['success', 'tokenPerEther'], action.data.tokenPerEther)
         .setIn(['success', 'tokenPerBtc'], action.data.tokenPerBtc)
+        .setIn(['success', 'tokenPerXlm'], action.data.tokenPerXlm)
+        .setIn(['success', 'tokenPerUsdt'], action.data.tokenPerUsdt)
         .setIn(['success', 'isBonusOrDiscount'], action.data.isBonusOrDiscount)
         .setIn(['success', 'discount'], action.data.staticDiscount)
         .set('failure', false);
