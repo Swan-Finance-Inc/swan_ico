@@ -1,7 +1,7 @@
 {
-  "name": "Centralex-ico-user-dashboard",
+  "name": "SWAN-ico-user-dashboard",
   "version": "3.5.0",
-  "description": "Centralex ico user dashboard",
+  "description": "SWAN ico user dashboard",
   "repository": {
     "type": "git",
     "url": "git://github.com/react-boilerplate/react-boilerplate.git"

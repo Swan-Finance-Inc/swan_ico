@@ -1294,7 +1294,7 @@ hide=(e)=>{
             <div className="row">
               <div className="col-sm-12">
                 <div style={{ marginTop : '40px', marginBottom : '30px' , paddingLeft : '20px'}}>
-                <h5 className="main-color--blue">1 Centralex TOKEN =${this.state.tokenPrice}</h5>
+                <h5 className="main-color--blue">1 SWAN TOKEN =${this.state.tokenPrice}</h5>
                 </div>
               </div>
             </div>
@@ -1384,11 +1384,11 @@ hide=(e)=>{
                 </div> */}
 
                 <div className="form-group align-left-label">
-                  <label htmlFor="tokens" className="form-label main-color--blue">CenX Tokens</label>
+                  <label htmlFor="tokens" className="form-label main-color--blue">SWAN Tokens</label>
                   <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right form-one-style" disabled required/>
                 </div>
                 <div className="form-group align-left-label">
-                  <label htmlFor="tokensWithBonus" className="form-label main-color--blue">CenX Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
+                  <label htmlFor="tokensWithBonus" className="form-label main-color--blue">SWAN Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
                   <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right form-one-style" disabled required/>
                 </div>
                 </div>

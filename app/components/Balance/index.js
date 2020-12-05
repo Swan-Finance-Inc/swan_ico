@@ -254,8 +254,8 @@ class Balance extends React.PureComponent {
                       title={this.state.balanceType}
                     >
                       <MenuItem eventKey='1' value="cexToken" onClick={() => 
-                        this.setState({balanceType : this.state.balanceType === "USD" ? "CENX Token" : 'USD' }) } >
-                          {this.state.balanceType === "USD" ? "CENX Token" : "USD"   }
+                        this.setState({balanceType : this.state.balanceType === "USD" ? "SWAN Token" : 'USD' }) } >
+                          {this.state.balanceType === "USD" ? "SWAN Token" : "USD"   }
                           </MenuItem>
                      </DropdownButton>
                     </Nav>  
@@ -612,7 +612,7 @@ class Balance extends React.PureComponent {
                         <div>
                         <h3 className="balance-card-inner-wrapper-heading" style={{ lineHeight: '1.3'}}>
                         Invite Your friends 
-                        <b/> & Earn CenX tokens
+                        <b/> & Earn SWAN tokens
                           </h3>
                           <p  className="mt-30 referral-content">
                           Earn up to 10% on the ongoing referral bonus <b/>

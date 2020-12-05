@@ -54,6 +54,7 @@ export class ContributionConfirm extends React.PureComponent {
     this.txValidator = this.txValidator.bind(this);
     this.makeTransaction = this.makeTransaction.bind(this);
     this.initiateTransaction = this.initiateTransaction.bind(this);
+    this.getUTXOdetails = this.getUTXOdetails.bind(this);
     //this.makeFinalPayment = this.makeFinalPayment.bind(this);
   }
   // End Constructor
@@ -165,58 +166,94 @@ export class ContributionConfirm extends React.PureComponent {
   }
 
   getUTXOdetails = (obj) => {
+    console.log("API Obj: ",obj)
     var result = [];
     var amount = 3000;
-    var TX_FEES = 0.0013;
+    var TX_FEES = 350;
+    var keyPair = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.testnet);
     var unspentUTXOS = obj.txrefs;
-    console.log("before sort: ", unspentUTXOS);
-    unspentUTXOS.sort((a, b) => a.value - b.value);
-    console.log("after sort: ", unspentUTXOS);
-    let totalUTXOAmount = 0,
-      i = 0;
+    console.log("unspent", unspentUTXOS)
+    try{
+      if(unspentUTXOS.length==0 || unspentUTXOS===undefined){
+        toast.error('Unspent transactions not found. Check balance')
+        return('Unspent transactions not found. Check balance')
+      } else
+        {
+        console.log("before sort: ", unspentUTXOS);
+        unspentUTXOS.sort((a, b) => a.value - b.value);
+        console.log("after sort: ", unspentUTXOS);
+        let totalUTXOAmount = 0,
+          i = 0;
+          
+          while (i < unspentUTXOS.length && totalUTXOAmount < amount) {
+            const utxo = unspentUTXOS[i++];
+            totalUTXOAmount += utxo.value;
+            utxo.spent = true;
+            result.push(utxo);
+          }
+
+              // there was not enough balance in the hot wallet
+        if (totalUTXOAmount < amount) {
+          unspentUTXOS.forEach((utxo) => (utxo.spent = false));
+          toast.error('insufficient balance in wallet')
+          return Promise.reject({
+            message: `not enought balance in hot wallet:`,
+            err: 'insufficient balance in hot wallet',
+          });
+        }
+        
+        const totalAmount = result.reduce((acc, utxo) => acc + utxo.value, 0);
+        const change = Math.round(totalAmount - amount - TX_FEES);
+        console.log("total amount to be sent", totalAmount, "and change", change);
+        if (change < 0) {
+          toast.error('insufficient balance in wallet to provide fees');
+          return Promise.reject({
+            message: `not enought balance in hot wallet`,
+            err: 'insufficient balance in wallet',
+          });
+        }
+        const NETWORK = btclib.networks.testnet;
+
+        try
+        {const to = 'mhKiusBhp4KjDo7pKf96zGKioMts1PLEA2';
+        const txBuilder = new btclib.TransactionBuilder(btclib.networks.testnet);
+        console.log("txn builder");
+        txBuilder.addOutput(to, amount);
+        console.log("add output to");
+        txBuilder.addOutput(this.props.currWallet.address, change);
+        console.log("get change");
+
+        result.forEach((utxo) => txBuilder.addInput(utxo.tx_hash, utxo.tx_output_n));
+        console.log("add input done now will sign: ", this.props.currWallet.private_key);
+        for (let i = 0; i < result.length; i++) {txBuilder.sign(i, keyPair);}
+        //txBuilder.sign(0, this.props.currWallet.private_key);
+        const tx = txBuilder.build(); 
+        console.log("txn builder builld");  
+        console.log("tx: ", tx)  
+        const txHex = tx.toHex();
+        console.log('trxn hex comes: ', txHex);
+        let bodyy = {tx: txHex} 
+        // https://live.blockcypher.com/btc-testnet/pushtx/
+        //--prodChange
+        const sendTxData = () =>
+              fetch(`https://api.blockcypher.com/v1/btc/test3/txs/push`, { headers: { 'Content-Type': 'application/json'} , method: "POST", body:JSON.stringify(bodyy) })
+                  .then(r => r.json())
+                  .then(jsonn => (console.log("txData send for monitoring bach gye",jsonn), jsonn))
+                  .catch(err => console.error("txData send for monitoring lag gaye",err));    
+        sendTxData()
+          .then((r) => (console.log("what happens now>>>??", r.tx.hash), this.props.finalPayment(this.props.currWallet.address, r.tx.hash)))
+          .catch((error) => console.log(error,"sendTxData catch error occured"));   
       
-      while (i < unspentUTXOS.length && totalUTXOAmount < amount) {
-        const utxo = unspentUTXOS[i++];
-        totalUTXOAmount += utxo.value;
-        utxo.spent = true;
-        result.push(utxo);
+      } catch(error){console.log("error in trxnVuilder", error)} 
+        
+                                                                    
+
+
+        return result;
       }
-
-      		// there was not enough balance in the hot wallet
-		if (totalUTXOAmount < amount) {
-      unspentUTXOS.forEach((utxo) => (utxo.spent = false));
-      toast.error('insufficient balance in wallet')
-			return Promise.reject({
-				message: `not enought balance in hot wallet:`,
-				err: 'insufficient balance in hot wallet',
-			});
+    }catch(err){
+      toast.err(`Error in building trx ${err}`)
     }
-    
-    const totalAmount = result.reduce((acc, utxo) => acc + utxo.value, 0);
-    const change = (totalAmount - amount - TX_FEES).toFixed();
-    console.log("total amount to be sent", totalAmount, "and change", change);
-    if (change < 0) {
-      toast.error('insufficient balance in wallet to provide fees');
-      return Promise.reject({
-        message: `not enought balance in hot wallet`,
-        err: 'insufficient balance in wallet',
-      });
-    }
-    const NETWORK = btclib.networks.testnet;
-
-    const to = 'mhKiusBhp4KjDo7pKf96zGKioMts1PLEA2';
-    // const txBuilder = new btclib.TransactionBuilder();
-    // txBuilder.addOutput(to, amount);
-    // txBuilder.addOutput('mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC', change);
-
-    // result.forEach((utxo) => txBuilder.addInput(utxo.tx_hash, utxo.tx_output_n));
-    // for (let i = 0; i < result.length; i++) {txBuilder.sign(i, 'tpubD6NzVbkrYhZ4XieVAMFnF3XXwmC4zQQA7pjV4DVaVRomt7Vidi5hs961BYibkPKURAeassEFkVPx3RMXKJJ7v82bJFj34BASWhJeR1UuLED');}
-    // const tx = txBuilder.build();     
-    // const txHex = tx.toHex();
-    // console.log('trxn hex comes: ', txHex);                                                                        
-
-
-		return result;
   }
 
   initiateTransaction = async () =>{
@@ -254,7 +291,7 @@ export class ContributionConfirm extends React.PureComponent {
               else
               {
                 console.log("Send signed trxn res: ", res);
-                //this.props.finalPayment(sender, res);
+                this.props.finalPayment(sender, res);
               }
             }.bind(this))
         }
@@ -272,9 +309,12 @@ export class ContributionConfirm extends React.PureComponent {
       const TESTNET = btclib.networks.testnet;
       var address = this.props.currWallet.address
       console.log("then after key: ",this.props.currWallet.private_key, "address:: ", address);
-      var yourAddressPrivateKeyWIF = btclib.PrivateKey('testnet').toWIF();
-      var yourAddresskeyPair = btclib.ECPair.fromWIF(yourAddressPrivateKeyWIF, TESTNET)
-      console.log("match this: ", yourAddresskeyPair.getAddress())
+      // var yourAddressPrivateKeyWIF = btclib.PrivateKey('testnet').toWIF();
+      // var yourAddresskeyPair = btclib.ECPair.fromWIF(yourAddressPrivateKeyWIF, TESTNET)
+      // console.log("match this: ", yourAddresskeyPair.getAddress())
+      //var key = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.testnet);
+      //address = key.getAddress();
+      //console.log("web se aaiy key: ", key)
 
       // var Insight = bitExplorers.Insight;
       // console.log("Insight aaya: ", Insight)
@@ -289,7 +329,7 @@ export class ContributionConfirm extends React.PureComponent {
       // })
 
       //axios.get('https://api.blockcypher.com/v1/btc/test3/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspaentOnly=true')
-      axios.get('https://api.blockcypher.com/v1/btc/test3/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspentOnly=true')
+      axios.get(`https://api.blockcypher.com/v1/btc/test3/addrs/${address}?unspentOnly=true`)                     //--prodChange
       .then((res) => res.data)
       .then((obj) => this.getUTXOdetails(obj))
       .then(obj => console.log(obj))
@@ -331,7 +371,12 @@ export class ContributionConfirm extends React.PureComponent {
       // Submit the transaction to the Horizon server. The Horizon server will then
       // submit the transaction into the network for us.
       const transactionResult = await server.submitTransaction(transaction);
-      if (!!transactionResult) {console.log("ho gya stellar transfer::: ", transactionResult)}
+      if (!!transactionResult) {
+        console.log("ho gya stellar transfer::: ", transactionResult)
+        this.props.finalPayment(this.props.currWallet.address, transactionResult);
+      } else {
+        toast.error("Error in submitting Stellar Transaction. Check Stellar Explorer")
+      }
     }
   }
 

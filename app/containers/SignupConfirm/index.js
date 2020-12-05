@@ -74,7 +74,7 @@ export class SignupConfirm extends React.PureComponent { // eslint-disable-line 
                 <div className="signin-card-body">
                   <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
                   <p>If you DON’T see our emails, please check your SPAM folder.</p>
-                  <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@centralex.io</p>
+                  <p> To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@swan.io</p>
                 </div>
               </div>
             </div>

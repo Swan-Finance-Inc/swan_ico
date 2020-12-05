@@ -332,7 +332,7 @@ export class MyReferal extends React.PureComponent {
                         style={{ lineHeight: "1.3" }}
                       >
                         Invite your friends and <br/> earn up to
-                         10% in CenX tokens.
+                         10% in SWAN tokens.
                       </h3>
                       <hr className="invite-hr" />
                       <p className="mt-30 referral-content">

@@ -24,6 +24,7 @@ import 'react-circular-progressbar/dist/styles.css';
 import { selectAction, getData, confirmPayment, reload,finalizePayment,listHotWallet, addCenxWallet,
   createHotWallet ,clearContribution, getCenxWallet } from './actions';
 import { Stake } from '../../components/Stake';
+import { EarnInterest } from '../../components/EarnInterest';
 import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
@@ -45,6 +46,7 @@ import logo from '../../images/swan-logo-big.svg';
 import queryString from "query-string";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import constants from '../../utils/contractConfig'
 let loadSimplex = false;
 export class InvestPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
@@ -113,7 +115,15 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       usdtWallet:'',
       xlmWallet:'',
       currAddress: '',
-      stake: true,
+      stake: false,
+      earnInterest: false,
+      depositCount:0,
+      swanBalance:0,
+      interestAccountDetails:[],
+      showDetails: false,
+      currInterestAccountDetails:'',
+      claimLoader: false,
+      trxnReceipt: '',
     };
 
     // this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -132,21 +142,15 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     this.showQR = this.showQR.bind(this);
     // //this.openShowEthWalletCreate = this.openShowEthWalletCreate.bind(this);
     // this.checkWallet = this.checkWallet.bind(this);
+    this.getSwanBalance = this.getSwanBalance.bind(this);
+    this.getDepositCount = this.getDepositCount.bind(this);
+    this.getInterestAccountDetails = this.getInterestAccountDetails.bind(this);
+    this.updateStatusFromContract = this.updateStatusFromContract.bind(this);
+    this.checkHashStatus = this.checkHashStatus.bind(this);
+    this.claimTokens = this.claimTokens.bind(this);
 
 
     console.log("yetopropshai",this.props)
-
-    // const script = document.createElement("script");
-
-    // script.src = "https://cdn.test-simplexcc.com/sdk/v1/js/sdk.js";
-    // script.async = true;
-
-    // document.body.appendChild(script);
-    // const s = document.createElement("script");
-
-    // s.src = "https://iframe.sandbox.test-simplexcc.com/form-sdk.js";
-
-    // document.body.appendChild(s);
 
   }
   
@@ -165,6 +169,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   componentDidMount() {
     // this.props.getData();
     this.props.listHotWallet();
+    
     // if(this.state.paymentMode=='viaMetamaskExt')
     // {this.interval = setInterval(() => this.getMetamaskAddress(), 1000);}
     
@@ -196,6 +201,247 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     
 
 
+  }
+  checkHashStatus(hash, callback) {
+
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    web3.eth.getTransactionReceipt(hash, function(error, rcpt) {
+                    if(error) {
+                        console.error(error);
+                    } else {
+                        if(rcpt == null) {
+                            setTimeout(function() {
+    //call iteratively till hash matches and block is mined
+                                this.checkHashStatus(hash, callback);
+                            }.bind(this), 5000);
+                        } else {
+                            console.log("rcpt",rcpt)
+                            this.setState({
+                              trxnReceipt: rcpt
+                            },()=>callback())
+                            //call the function once block is committed
+                            
+                        }
+                    }
+                }.bind(this))
+            }
+    updateStatusFromContract(){
+      // if(this.state.trxnReceipt.status && this.state.claimLoader){
+      //   toast.success('Claim successfull')
+      //   this.setState({
+      //     claimLoader:false
+      //   })
+      // } else {
+      //   toast.error('Transaction not confirmed. Error encountered.')
+      //   this.setState({
+      //     claimLoader:false
+      //   })
+      // }
+      if(this.state.trxnReceipt.status && this.state.claimLoader){
+        this.setState({
+          claimLoader:false,
+        });
+        toast.success('Claim Successfull');
+      } else if(this.state.trxnReceipt.status && this.state.withdrawLoader){
+        this.setState({
+          withdrawLoader:false
+        })
+        toast.success('Withdraw Successfull');
+      } else {
+        toast.error('Transaction not confirmed');
+        this.setState({
+          claimLoader:false,
+          withdrawStart:false,
+        });
+      }
+      
+      console.log("got callback");
+    }
+  claimTokens=()=>{
+    console.log("enetered claim tokens")
+    var address = constants.stakeContractAddress;
+    var abi = constants.stakeContractAbi;
+    var id = this.state.currInterestAccountDetails.id;
+    //var spender = constants.stakeContractAddress;
+
+    try{    
+    
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
+    //let tokenAmount = this.state.tokens;
+    const contract = new web3.eth.Contract(abi, address);
+    console.log("contract hai: ")
+
+    let pvtKey = this.state.ethWallet.private_key;
+    let rawTransaction = {
+    "from": this.state.ethWallet.address,
+      "to": address,
+      "value": '0x0',
+      'gasPrice': web3.utils.toHex(20 * 1e9),
+      'gasLimit': web3.utils.toHex(210000),
+      "chainId": "0x03",
+      "data": contract.methods.payOuts(id).encodeABI(),
+      }; //--prodChange
+      try
+      {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
+        if(err)
+        {console.log("Error occured in signtrxn",err)}
+        else
+        {
+          console.log("Sign trxn res: ", res);
+          web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
+            if(err)
+            { toast.error(`Error in sending trxn: ${err}`)
+              console.log("Error occured in sendDisngnedtrxnn", err)}
+            else
+            {
+              toast.success('Transaction initiated, Wait for confirmation');
+              console.log("Send signed trxn res: ", res);
+              this.setState({
+                claimLoader:true
+              })
+              this.checkHashStatus(res, this.updateStatusFromContract);
+            }
+          }.bind(this))
+      }
+    }.bind(this));
+    } catch(error){
+      toast.error(`Error in signing trxn: ${error}`)
+      console.log("in catch of sending transaction trxn: ",error);
+    }
+    //const result = await contract.methods.transfer('0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632','1').send({ from: '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E', value: web3.utils.toWei('0.01',"ether") });
+    //console.log("hehe",result);
+    } catch(err){
+        toast.error(`Error in claiming tokens: ${err}`)
+        console.log(err,"error hai")
+    }
+  }
+  withdrawTokens=()=>{
+    console.log("enetered withdraw tokens")
+    var address = constants.stakeContractAddress;
+    var abi = constants.stakeContractAbi;
+    var id = this.state.currInterestAccountDetails.id;
+    //var spender = constants.stakeContractAddress;
+
+    try{    
+    
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
+    //let tokenAmount = this.state.tokens;
+    const contract = new web3.eth.Contract(abi, address);
+    console.log("contract hai: ")
+
+    let pvtKey = this.state.ethWallet.private_key;
+    let rawTransaction = {
+    "from": this.state.ethWallet.address,
+      "to": address,
+      "value": '0x0',
+      'gasPrice': web3.utils.toHex(20 * 1e9),
+      'gasLimit': web3.utils.toHex(210000),
+      "chainId": "0x03",
+      "data": contract.methods.claimInterestTokens(id).encodeABI(),
+      }; //--prodChange
+      try
+      {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
+        if(err)
+        {console.log("Error occured in signtrxn",err)}
+        else
+        {
+          console.log("Sign trxn res: ", res);
+          web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
+            if(err)
+            { toast.error(`Error in sending trxn: ${err}`)
+              console.log("Error occured in sendDisngnedtrxnn", err)}
+            else
+            {
+              toast.success('Transaction initiated, Wait for confirmation');
+              console.log("Send signed trxn res: ", res);
+              this.setState({
+                withdrawLoader:true
+              })
+              this.checkHashStatus(res, this.updateStatusFromContract);
+            }
+          }.bind(this))
+      }
+    }.bind(this));
+    } catch(error){
+      toast.error(`Error in signing trxn: ${error}`)
+      console.log("in catch of sending transaction trxn: ",error);
+    }
+    //const result = await contract.methods.transfer('0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632','1').send({ from: '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E', value: web3.utils.toWei('0.01',"ether") });
+    //console.log("hehe",result);
+    } catch(err){
+        toast.error(`Error in claiming tokens: ${err}`)
+        console.log(err,"error hai")
+    }
+  }
+
+  getInterestAccountDetails=async()=>{
+    var address = constants.stakeContractAddress;
+    var abi = constants.stakeContractAbi, result,finResult=[],i=1;
+    console.log("abi: ", abi, address, this.state.ethWallet)
+    try{
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    const contract = new web3.eth.Contract(abi, address);
+    //console.log("contract hai: ", contract)
+    while (i <= this.state.depositCount) {
+      result = await contract.methods.interestAccountDetails(userAddress,i).call();
+      result.id=i;
+      console.log("ay result", result)
+      i++;
+      finResult.push(result);
+    }
+    
+    
+    this.setState({interestAccountDetails: finResult});
+    console.log("finResult", finResult);
+    } catch(err){
+      toast.error(`Error in getInterestAccountDEtaisl ${err}`)
+        console.log("error in get swan balance")
+    }
+  }
+
+  getDepositCount=async()=>{
+    var address = constants.stakeContractAddress;
+    var abi = constants.stakeContractAbi, result=0;
+    console.log("abi: ", abi, address, this.state.ethWallet)
+    try{
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    const contract = new web3.eth.Contract(abi, address);
+    //console.log("contract hai: ", contract)
+        
+    result = await contract.methods.interestAccountNumber(userAddress).call();
+    
+    this.setState({depositCount: result},()=>{
+      this.getInterestAccountDetails();
+    });
+    console.log("hehe", result);
+    } catch(err){
+      toast.error(`Error in getDEpositCount ${err}`)
+        console.log("error in get swan balance")
+    }
+  }
+
+  getSwanBalance=async()=>{
+    var address = constants.tokenContractAddress;
+    var abi = constants.tokenContractAbi, result=0;
+    console.log("abi: ", abi, address, this.state.ethWallet)
+    try{
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    const contract = new web3.eth.Contract(abi, address);
+    //console.log("contract hai: ", contract)
+        
+    result = await contract.methods.balanceOf(userAddress).call();
+    
+    this.setState({swanBalance: web3.utils.fromWei(result)});
+    console.log("hehe",web3.utils.fromWei(result));
+    } catch(err){
+      toast.error(`Error in getSwanBalance ${err}`)
+        console.log("error in get swan balance")
+    }
   }
 
   componentWillReceiveProps(nextProps) {
@@ -289,6 +535,10 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
             if(hasEthWalletCreated){
               this.setState({
                 ethWallet: hasEthWalletCreated
+              },()=>{
+                this.getSwanBalance();
+                this.getDepositCount();
+                
               })
             }
             if(hasUsdtWalletCreated){
@@ -508,7 +758,8 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
 
   comeBack() {
     this.setState({
-      stake: false
+      stake: false,
+      earnInterest: false
     })
 
   }
@@ -1337,6 +1588,12 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
      
 // }
 
+  showDate (time) {
+    var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let userCreatedAt = new Date(time*1000)
+  return <span className="depositText" style={{fontWeight:"bold"}}>{userCreatedAt.getDate()}<br />{months[userCreatedAt.getMonth()]} {userCreatedAt.getFullYear()}</span>
+}
+
 openDeposit () {
   this.setState({
     showDeposit:true
@@ -1395,6 +1652,16 @@ hide=(e)=>{
       return (
       <div>
         <Stake  
+        ethWallet = {this.state.ethWallet}
+        back={this.comeBack}
+        />  
+      </div>
+      )
+    } else if (this.state.earnInterest){
+      return (
+      <div>
+        <EarnInterest  
+        ethWallet = {this.state.ethWallet}
         back={this.comeBack}
         />  
       </div>
@@ -1410,6 +1677,48 @@ hide=(e)=>{
         
 
       </Helmet>
+      <div className="static-modal">
+          <Modal show={this.state.showDetails} bsSize="medium" onHide={this.hide} dialogClassName="">
+            <Modal.Body>
+              <div>
+                <div className="row">
+                  <div className="col-sm-12 text-right">
+                    <i className="fa fa-close" style={{cursor:'pointer'}} onClick={() => {this.setState({ showDetails:false })}}></i>
+                  </div>
+                </div>
+                <div className="row" style={{textAlign:"center"}}>
+                  <h3>Earn Interest</h3>
+                  <h4>{this.state.currInterestAccountDetails.amount} SWAN</h4>
+                </div>
+                <div className="row">
+                  <div className="col-sm-6 col-md-6 col-lg-6 depositText" style={{paddingLeft:"40px"}}>
+                    Total tokens
+                    <br />
+                    APY
+                    <br />
+                    Total Interest Earned
+                  </div>
+                  <div className="col-sm-1 col-md-1 col-lg-1"><div className="balance-hr"></div></div>
+                  <div className="col-sm-5 col-md-5 col-lg-5" style={{fontWeight:"bold"}}>
+                  {this.state.currInterestAccountDetails.amount} SWAN
+                  <br />
+                  {this.state.currInterestAccountDetails.interestRate}%
+                  <br />
+                  {this.state.currInterestAccountDetails.amount * this.state.currInterestAccountDetails.interestRate/100} SWAN
+                  </div>
+                </div>
+                <div className="row" style={{marginTop:"20px", textAlign:"center"}}>
+                  <div className="col-sm-6 col-md-6 col-lg-6" style={{marginTop:"20px"}}>
+                  Claim Weekly Interests </div><div className="col-sm-6 col-md-6 col-lg-6" style={{marginTop:"20px", textAlign:"center"}}> <span style={{backgroundColor:"#D6E4FE", marginLeft:"10px", cursor:"pointer", padding:"7px", width:"100px"}} onClick={()=>this.claimTokens()}>{this.state.claimLoader?<i className="fa fa-cog fa-spin fa-3x fa-fw" style={{fontSize:'15px'}} />:<i className="fa fa-plus-circle" style={{color:'rgb(45, 109, 205)'}}></i>}Claim</span>
+                  </div><div className="col-sm-6 col-md-6 col-lg-6" style={{marginTop:"20px", textAlign:"center"}}>
+                  Withdraw Staked Tokens </div><div className="col-sm-6 col-md-6 col-lg-6" style={{marginTop:"20px", textAlign:"center"}}> <span style={{backgroundColor:"#D6E4FE", marginLeft:"10px", cursor:"pointer", padding:"7px", width:"100px"}} onClick={()=>this.withdrawTokens()}>{this.state.withdrawLoader?<i className="fa fa-cog fa-spin fa-3x fa-fw" style={{fontSize:'15px'}} />:<i className="fa fa-plus-circle" style={{color:'rgb(45, 109, 205)'}}></i>}Withdraw</span>
+                  </div>
+                </div>
+            
+              </div>
+            </Modal.Body>
+          </Modal>
+        </div>
         <div className="static-modal">
           <Modal show={this.state.buyEth} bsSize="large" onHide={this.hide} dialogClassName="myModal">
           <Modal.Header>
@@ -1552,7 +1861,7 @@ hide=(e)=>{
                     16% APY
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3" style={{marginBottom:'5px'}}>
-                    <button className="btn btn-primary">EARN INTREST</button>
+                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true})}>EARN INTREST</button>
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3">
                     3 Months
@@ -1564,7 +1873,7 @@ hide=(e)=>{
                     20%APY
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3" style={{marginBottom:'5px'}}>
-                    <button className="btn btn-primary">EARN INTREST</button>
+                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true})}>EARN INTREST</button>
                   </div>
 
                 </div>
@@ -1607,21 +1916,26 @@ hide=(e)=>{
                 <br />
                 <hr />
                 <div className="row">
-                  <div className="col-md-3 col-lg-3 col-sm-3" style={{fontSize:"20px"}}>
-                                Date
+                  
+
+
+                {this.state.interestAccountDetails.map(d=>
+                <div className="col-sm-12 col-md-12 col-lg-12">
+                  <div style={{textAlign:"center", marginLeft:"-40px"}} >
+                    <div className="col-md-3 col-lg-3 col-sm-3" style={{fontSize:"20px"}}>{this.showDate(d.time)}</div>
+                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>{d.amount} SWAN<div className="depositText" style={{fontWeight:"16px"}}>Ends in 24 days</div></div>
+                    <div className="col-md-3 col-lg-3 col-sm-3 depositText" style={{fontSize:"16px"}}>Total Earnings<br /><span style={{fontWeight:"bold",fontSize:"20px",color:"#414857"}}>{d.amount*d.interestRate/100} SWAN</span></div>
+                    <div className="col-md-2 col-lg-2 col-sm-2 depositText" >APY<br /><span style={{fontSize:"30px"}}>{d.interestRate}%</span></div>
+                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontSize:"16px"}} onClick={()=>this.setState({showDetails:true,currInterestAccountDetails:d})}><a>Check Details</a></div>
                   </div>
-                  <div className="col-md-2 col-lg-2 col-sm-2" style={{}}>
-                    How Much?
+                  <div className="row" style={{margin:"20px"}}>
+                    <div className="col-sm-12 col-md-12 col-lg-12" style={{height:"2px",borderWidth:"0",color:"gray",backgroundColor:"gray",opacity:"10%"}}></div>
                   </div>
-                  <div className="col-md-3 col-lg-3 col-sm-3" style={{fontSize:"20px"}}>
-                                Total Earnings
-                  </div>
-                  <div className="col-md-2 col-lg-2 col-sm-2" style={{}}>
-                    APY
-                  </div>
-                  <div className="col-md-2 col-lg-2 col-sm-2" style={{fontSize:"20px"}}>
-                                <a>Check Details</a>
-                  </div>
+                </div>
+                
+
+                  )}
+
 
                 </div>
                 <br />

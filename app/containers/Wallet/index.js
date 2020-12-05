@@ -45,6 +45,11 @@ import logo from '../../images/swan-logo-big.svg';
 import queryString from "query-string";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
+import axios from 'axios';
+import StellarSdk from 'stellar-sdk';
+import constants from '../../utils/contractConfig';
+
+
 let loadSimplex = false;
 export class WalletPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
@@ -112,6 +117,11 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       btcWallet:'',
       usdtWallet:'',
       xlmWallet:'',
+      btcBalance: 0,
+      ethBalance: 0,
+      xlmBalance: 0,
+      usdtBalance: 0,
+      swanBalance: 0,
       currAddress: '',
     };
 
@@ -129,6 +139,9 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     this.openSimplex = this.openSimplex.bind(this);
     this.openDeposit = this.openDeposit.bind(this);
     this.showQR = this.showQR.bind(this);
+    this.getBitcoinBalance = this.getBitcoinBalance.bind(this);
+    this.getStellarBalance = this.getStellarBalance.bind(this);
+    this.getEthereumBalance = this.getEthereumBalance.bind(this);
     // //this.openShowEthWalletCreate = this.openShowEthWalletCreate.bind(this);
     // this.checkWallet = this.checkWallet.bind(this);
 
@@ -197,6 +210,62 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
 
   }
 
+  getBitcoinBalance=()=>{
+    axios.get(`https://api.blockcypher.com/v1/btc/test3/addrs/${this.state.btcWallet.address}`)
+      .then((res) => res.data)
+      .then((obj) => this.setState({btcBalance: obj.final_balance}))
+      .then(obj => console.log(obj))
+      .catch((err) => console.log(err))
+  }
+
+  getEthereumBalance=()=>{
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
+      web3.eth.getBalance(web3.utils.toChecksumAddress(this.state.ethWallet.address), function(err,res){
+        if(err){console.log("aggaya : ", err)}
+        else{
+          console.log("agaya balance", res)
+
+          this.setState({ethBalance:web3.utils.fromWei(res)});
+        }
+      }.bind(this));
+      this.getSwanBalance();
+  }
+
+
+  getStellarBalance=async()=>{
+    const server = new StellarSdk.Server("https://horizon-testnet.stellar.org"); //--prodChange
+    const account = await server.loadAccount(this.state.xlmWallet.address)
+      console.log("Balances for account: " + account);
+      account.balances.forEach(function(balance) {
+      console.log("Type:", balance.asset_type, ", Balance:", balance.balance);
+      let totalbalance = balance.balance;
+      if(balance.asset_type == 'native'){
+        this.setState({xlmBalance: totalbalance });
+      }
+    }.bind(this));
+  }
+
+  getSwanBalance=async()=>{
+    var address = constants.tokenContractAddress;
+    var abi = constants.tokenContractAbi, result=0;
+    console.log("abi: ", abi, address, this.state.ethWallet)
+    try{
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    const contract = new web3.eth.Contract(abi, address);
+    //console.log("contract hai: ", contract)
+        
+    result = await contract.methods.balanceOf(userAddress).call();
+    
+    this.setState({swanBalance: web3.utils.fromWei(result)});
+    console.log("hehe",web3.utils.fromWei(result));
+    } catch(err){
+      toast.error(`Error in getSwanBalance ${err}`)
+        console.log("error in get swan balance")
+    }
+  }
+
+  
   componentWillReceiveProps(nextProps) {
     // console.log(nextProps.successData,"success data in contributeepegE");
     // const data = nextProps.successData;
@@ -283,11 +352,16 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
             if(hasBtcWalletCreated){
               this.setState({
                 btcWallet: hasBtcWalletCreated
+              },()=>{
+                this.getBitcoinBalance()
               })
+              
             }
             if(hasEthWalletCreated){
               this.setState({
                 ethWallet: hasEthWalletCreated
+              },()=>{
+                this.getEthereumBalance()
               })
             }
             if(hasUsdtWalletCreated){
@@ -298,7 +372,11 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
             if(hasXlmWalletCreated){
               this.setState({
                 xlmWallet: hasXlmWalletCreated
+              },()=>{
+                this.getStellarBalance()
               })
+              
+              
             }
           }
         })
@@ -1188,43 +1266,43 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   //   }
   // }
 
-    if( this.state.hotWalletList.length > 0 ){
-      let hasBtcWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "BTC")
-      console.log("WWWWWWWWWWWHHHHHHHHHHHHHHHHaaaaaaaaaaaaattttttttttttttSSSSSSSSSSS this: ",hasBtcWalletCreated);
-      if(hasBtcWalletCreated){ //btc wallet already present
-        toast.info("Please wait while your btc wallet is being fetched")
-        console.log("EEEEEEEEEEEEXXXXXXXXXXEEEEEEEEEEEECUTED AAAAAA");
-        // this.setState({
-        //   confirmContri : true
-        // })
-      } else { //btc wallet created
-        console.log("EEEEEEEEEEEXXXXXXXXXXXXEEEEEECCCCCCCCCCCCUUUUUUUUUUUUTEEEEEEEEEE BBBBB")
-        toast.info("Please wait while your btc wallet is being created")
-        // this.setState({
-        //   confirmContri : true,
-        //   iswalletCreating : true
-        // },
-        //   () => {
-            this.props.createHotWallet({
-              wallet_type : 'BTC'
-            })
-        //   }
-        // )
-      }
-    }else{
-      console.log("EEEEEEEEXXXXXXXXXUUUUUUUECCCCCCCCCCUTED CCCCCCC")
-      toast.info("Please wait while your wallet is being created")
-      this.setState({
-        confirmContri : true,
-        iswalletCreating : true
-      },
-        () => {
-          this.props.createHotWallet({
-            wallet_type : 'BTC'
-          })
-        }
-      )
-    }
+    // if( this.state.hotWalletList.length > 0 ){
+    //   let hasBtcWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "BTC")
+    //   console.log("WWWWWWWWWWWHHHHHHHHHHHHHHHHaaaaaaaaaaaaattttttttttttttSSSSSSSSSSS this: ",hasBtcWalletCreated);
+    //   if(hasBtcWalletCreated){ //btc wallet already present
+    //     toast.info("Please wait while your btc wallet is being fetched")
+    //     console.log("EEEEEEEEEEEEXXXXXXXXXXEEEEEEEEEEEECUTED AAAAAA");
+    //     // this.setState({
+    //     //   confirmContri : true
+    //     // })
+    //   } else { //btc wallet created
+    //     console.log("EEEEEEEEEEEXXXXXXXXXXXXEEEEEECCCCCCCCCCCCUUUUUUUUUUUUTEEEEEEEEEE BBBBB")
+    //     toast.info("Please wait while your btc wallet is being created")
+    //     // this.setState({
+    //     //   confirmContri : true,
+    //     //   iswalletCreating : true
+    //     // },
+    //     //   () => {
+    //         this.props.createHotWallet({
+    //           wallet_type : 'BTC'
+    //         })
+    //     //   }
+    //     // )
+    //   }
+    // }else{
+    //   console.log("EEEEEEEEXXXXXXXXXUUUUUUUECCCCCCCCCCUTED CCCCCCC")
+    //   toast.info("Please wait while your wallet is being created")
+    //   this.setState({
+    //     confirmContri : true,
+    //     iswalletCreating : true
+    //   },
+    //     () => {
+    //       this.props.createHotWallet({
+    //         wallet_type : 'BTC'
+    //       })
+    //     }
+    //   )
+    // }
 
     // if(this.state.hotWalletList.length > 0 ){
     //   let hasEthWalletCreated =  this.state.hotWalletList.find(wallet => wallet.ticker !== "BTC" )
@@ -1360,7 +1438,7 @@ hide=(e)=>{
     url:logo
   })
 }
-
+satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 // openShowEthWalletCreate () {
 //   this.setState({
 //     showEthWalletCreate: true
@@ -1504,7 +1582,7 @@ hide=(e)=>{
 
                           <li>- If you have deposited, please pay attention to the text messages, site letters and emails we send to you.</li>
                           <li>- Only send coin to this address. Sending any other assets to this address may result in loss of your deposit. </li>
-                          <li>- CENX tokens will be distributed after <strong>Dec 1st</strong></li>
+                          <li>- SWAN tokens will be distributed after <strong>Dec 1st</strong></li>
 
                           </ul>
                             
@@ -1606,7 +1684,7 @@ hide=(e)=>{
 
                     <li>- If you have deposited, please pay attention to the text messages, site letters and emails we send to you.</li>
                     <li>- Only send coin to this address. Sending any other assets to this address may result in loss of your deposit. </li>
-                    <li>- CENX tokens will be distributed after <strong>Dec 1st</strong></li>
+                    <li>- SWAN tokens will be distributed after <strong>Dec 1st</strong></li>
 
                     </ul>
                       }
@@ -1725,8 +1803,12 @@ hide=(e)=>{
               <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>          
             <div className="row">
               <div className="col-sm-4 col-md-4 col-lg-4">
-              <div className="kyc-status" style={{marginTop:"0px"}}>Account Balance:</div>
-              <div className="col-sm-12 col-md-12 col-lg-12 kyc-status">$0</div>              
+              <div className="kyc-status" style={{marginTop:"3px"}}>Account Balance:</div>
+              <div className="col-sm-12 col-md-12 col-lg-12">$0</div>  
+              <br />
+              <br />
+              <div className="kyc-status" style={{marginTop:"0px"}}>Swan Balance:</div>
+              <div className="col-sm-12 col-md-12 col-lg-12">{this.state.swanBalance} SWAN</div>              
               </div>
               <div className="col-sm-4 col-md-4 col-lg-4">
               <div className="balance-botton-inner-wrapper" >
@@ -1829,22 +1911,16 @@ hide=(e)=>{
               </div>
               
               <div className="col-sm-4 col-md-4 col-lg-4">
-                <div style={{backgroundColor:"#2d6dcd11", marginLeft:"50px", cursor:"pointer", padding:"7px", marginTop:"10px"}} onClick={this.openDeposit}><i className="fa fa-plus-circle" style={{color:'rgb(45, 109, 205)'}}></i>Deposit</div>
+                <div style={{backgroundColor:"#D6E4FE", marginLeft:"50px", cursor:"pointer", padding:"7px", marginTop:"10px"}} onClick={this.openDeposit}><i className="fa fa-plus-circle" style={{color:'rgb(45, 109, 205)'}}></i>Deposit</div>
                 <br />
-                <div style={{backgroundColor:"#2d6dcd11", marginLeft:"50px", cursor:"pointer", padding:"7px"}}><i className="fa fa-plus-circle" style={{color:'rgb(45, 109, 205)'}}></i>Withdraw</div>
+                <div style={{backgroundColor:"#D6E4FE", marginLeft:"50px", cursor:"pointer", padding:"7px"}}><i className="fa fa-plus-circle" style={{color:'rgb(45, 109, 205)'}}></i>Withdraw</div>
               </div>
               
 
               
               
 
-              {/* <Helmet>
 
-              {<script src='https://iframe.simplex-affiliates.com/form.js' type="text/javascript"></script>}
-                        {<script src="https://checkout.simplexcc.com/splx.js"></script>}          
-              </Helmet>
-              {<div id="simplex-form">
-              </div>} */}
             </div>
              
             </div>
@@ -1874,6 +1950,122 @@ hide=(e)=>{
               <h4 style={{ marginLeft:"20px" }}>You don't have any referral earning</h4>
             </div>
         </div>
+
+          <div className="col-sm-12 col-md-12 col-lg-12">
+            <div className="balance-card" style={{ marginBottom : '2em', height:"380px" }}>
+              <div className="row">
+                <div className="col-sm-12" style={{paddingLeft:"20px"}}>
+                  <div className="customCard-header transaction-container">
+                    <h2 className="trasnaction">Total Portfolio</h2>
+                  </div>
+                </div>
+                <div className="col-sm-12 col-md-12 col-lg-12">
+                <div className="col-sm-12 col-md-12 col-lg-12" style={{backgroundColor:"#C2CBF2", cursor:"pointer", padding:"7px", marginTop:"10px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                    Name
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                    Balance
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                    USD Value
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2">
+
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2">
+
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2">
+
+                  </div>
+                </div>
+                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    Bitcoin
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    {this.satoshi_to_btc(this.state.btcBalance)} BTC
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    7698
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Deposit</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Withdraw</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  </div>
+                </div>
+                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    Ethereum
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    {this.state.ethBalance} ETH
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    7698
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Deposit</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Withdraw</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  </div>
+                </div>
+                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    Stellar
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    {this.state.xlmBalance} XLM
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    7698
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Deposit</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Withdraw</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  </div>
+                </div>
+                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    USDT
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    23 USDT
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    7698
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Deposit</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary">Withdraw</button>
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  </div>
+                </div>
+                </div>
+              </div>
+              
+            </div>
+          </div>
+
         </div>
         </div>
        </div>
