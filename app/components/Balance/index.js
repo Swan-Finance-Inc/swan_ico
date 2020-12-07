@@ -44,8 +44,11 @@ class Balance extends React.PureComponent {
       CenInBtc : "",
       CenInEth : "",
       crowdsaleDetails : {},
-      weeklyOrDaily: 'daily'
+      weeklyOrDaily: 'daily',
+      curr: 'BTC',
+      exchangeRate: 0,
     };
+    this.CurrencyChange = this.CurrencyChange.bind(this);
   }
 
   componentDidMount(){
@@ -74,10 +77,10 @@ class Balance extends React.PureComponent {
   };
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
+    console.log(nextProps,"ae agye hege props")
     this.setState({
       ...this.state,
-      // crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails
+      crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails
     })
   }
 
@@ -143,6 +146,31 @@ class Balance extends React.PureComponent {
   
     this.setState({
       CenInEth
+    })
+  }
+
+  CurrencyChange(e){
+    console.log("je values", e.target.value, this.state.crowdsaleDetails)
+    this.setState({
+      curr:e.target.value
+    },()=>{
+      if(this.state.curr =='BTC'){
+        this.setState({
+          exchangeRate : this.state.crowdsaleDetails.tokenPerBtc
+        })
+      } else if(this.state.curr =='ETH'){
+        this.setState({
+          exchangeRate : this.state.crowdsaleDetails.tokenPerEther
+        })
+      } else if(this.state.curr =='XLM'){
+        this.setState({
+          exchangeRate : this.state.crowdsaleDetails.tokenPerXlm
+        })
+      } else if(this.state.curr =='USDT'){
+        this.setState({
+          exchangeRate : this.state.crowdsaleDetails.tokenPerUsdt
+        })
+      }
     })
   }
 
@@ -261,7 +289,7 @@ class Balance extends React.PureComponent {
                     </Nav>  
                       </span>     
                         <span style={{ fontSize: "32px", marginLeft: "12px" }}>
-                        {this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * 0.03).toFixed(3) :
+                        {this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * 1).toFixed(3) :
                         this.props.userInfo.tokens.total.toFixed(3)
                         }
                         </span>
@@ -383,7 +411,7 @@ class Balance extends React.PureComponent {
                     <div className="exchange-trading-input" >
                   <TextFieldInput
                       type="number"
-                      value={this.state.CenInBtc}
+                      value={this.state.exchangeRate}
                       inputStyle={{
                         fontSize: "15px",
                         fontWeight: "900",
@@ -391,7 +419,7 @@ class Balance extends React.PureComponent {
                         width : '100%',
                         height : '38px'
                       }}
-                      auth={true}
+                      
                       disabled
                       />
                         <span style={{ marginBottom: "0px", color: "#465490" ,marginTop : '10px',marginLeft : '10px', fontSize : '13px' }}>
@@ -440,11 +468,11 @@ class Balance extends React.PureComponent {
                     <label htmlFor="paymentMode" className="form-label main-color--blue"></label>
                     <span className="select-wrapper">
                       <select id="paymentMode" name="paymentMode" onChange={this.CurrencyChange} className="form-input exchange-rate-dropdown" required>
-                        {/* <option value="" hidden>Click to select wallet</option> */}
-                        <option value="BTC">Bitcoin</option>
-                        <option value="ETH">Ethereum</option>
-                        <option value="XLM">Stellar</option>
-                        <option value="USDT">USDT</option>
+                        <option value="" hidden>Click to select crypto</option>
+                        <option value="BTC">1 Bitcoin</option>
+                        <option value="ETH">1 Ethereum</option>
+                        <option value="XLM">1 Stellar</option>
+                        <option value="USDT">1 USDT</option>
                         
 
                       {
