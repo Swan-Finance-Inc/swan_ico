@@ -90,7 +90,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
   // }
 
   onChange(e) {
-    // console.log(e);
+    console.log(e , "vdslavruvbibg");
     this.setState({
       'g-recaptcha-response': e,
     });
@@ -220,14 +220,14 @@ showPassWord= (e)=>{
                     <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
                     </div>
                 </div>
-                <div className="col-xs-7 col-sm-6 col-md-10">
+                {/* <div className="col-xs-7 col-sm-6 col-md-10">
                   
                   <div className="header-right">
                     <div className="header-btn-group">
                       <div className="header-btn"><Link to="/signup">Sign Up</Link></div>
                     </div>
                   </div>
-                </div>
+                </div> */}
               </div>
             </div>
           </header>
@@ -237,8 +237,8 @@ showPassWord= (e)=>{
                 <div className="col-sm-6 col-sm-offset-3 ">
                   <div className="card-header">
                     <h1>Welcome</h1>
-                    <h3 style={{ color : '#fff', textAlign : 'center', marginTop : '0'
-                   }}>It’s better when you Sign In</h3>
+                    <h3 style={{ color : '#fff', textAlign : 'center', marginTop : '0', fontWeight:'bold'
+                   }}>Please Sign In</h3>
                   </div>
                   <div className="signin-card-body">
                     <form className onSubmit={this.formSubmit}>
@@ -246,7 +246,7 @@ showPassWord= (e)=>{
                       <TextFieldInput
                         type="text"
                         name="email"
-                        label="Email"
+                        label="Email ID"
                         value={this.state.email}
                         variant="outlined"
                         required={true}
@@ -264,7 +264,7 @@ showPassWord= (e)=>{
                         }}
                       />
                       </div>
-                      <div style={{ marginTop : '10px' }}>
+                      <div style={{ marginTop : '30px' }}>
                       <TextFieldInput
                         type="password"
                         name="password"
@@ -286,7 +286,7 @@ showPassWord= (e)=>{
                       />
                       <div className="forgot" style={{ fontSize : '14px' }}><Link to="/forgotPassword">Forgot Password?</Link></div>
                       </div>
-                      <div>
+                      {/* <div>
                       <TextFieldInput
                         name="otpToken"
                         type="number"
@@ -304,9 +304,9 @@ showPassWord= (e)=>{
                           color: '#465390'
                         }}
                       />
-                      </div>
+                      </div> */}
                       <div 
-                      className="signInCaptcha text-center mt-10">
+                      className="signInCaptcha text-center mt-10" >
                          <ReCAPTCHA type="image" ref="recaptcha"
                           className="form-captcha"
                            required sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk" onChange={this.onChange} />
@@ -363,6 +363,10 @@ showPassWord= (e)=>{
                     
                     
                     </form>
+                  </div>
+                  <div className="text-center" style={{fontSize: '19px' , color : '#fff' , marginBottom: '40px'}}>
+                  Don’t have any account yet?
+                  <Link to="/signup">Create Account</Link> 
                   </div>
                 </div>
               </div>

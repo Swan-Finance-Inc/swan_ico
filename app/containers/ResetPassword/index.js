@@ -102,15 +102,15 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
                   <form onSubmit={this.formSubmit}>
                   <div className="row form-group">
                   <div className="col-sm-4 col-md-4 col-lg-4">
-                      <label htmlFor="oldPassword"><span style={{fontWeight: 'bold',fontSize: "14px",color : "#2D6DCD "}}>OLD PASSWORD</span></label>
+                      <label htmlFor="oldPassword"><span style={{fontWeight: 'bold',fontSize: "14px",color : "#00296B"}}>OLD PASSWORD</span></label>
                       <input id="oldPassword" type="password" className="form-input form-control" name="oldPassword" placeholder="Enter Old Password" autoComplete="off" required />
                     </div>
                     <div className="col-sm-8 col-md-4 col-lg-4">
-                    <label htmlFor="newPassword"><span style={{fontWeight: 'bold',fontSize: "14px",color : "#2D6DCD "}}>NEW PASSWORD</span></label>
+                    <label htmlFor="newPassword"><span style={{fontWeight: 'bold',fontSize: "14px",color : "#00296B"}}>NEW PASSWORD</span></label>
                     <input id="newPassword" minLength={6} maxLength={256} type="password" className="form-input form-control" name="newPassword" placeholder="Enter New Password" autoComplete="off" required />
                     </div>
                     <div className="col-sm-8 col-md-4 col-lg-4">
-                    <label htmlFor="confPassword"><span style={{fontWeight: 'bold',fontSize: "14px",color : "#2D6DCD "}}>CONFIRM PASSWORD</span></label>
+                    <label htmlFor="confPassword"><span style={{fontWeight: 'bold',fontSize: "14px",color : "#00296B"}}>CONFIRM PASSWORD</span></label>
                     <input id="confPassword" minLength={6} maxLength={256} type="password" className="form-input form-control" name="confPassword" placeholder="Confirm New Password" autoComplete="off" required />
                     </div>
 

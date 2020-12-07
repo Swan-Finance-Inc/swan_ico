@@ -548,7 +548,7 @@ export class MyReferal extends React.PureComponent {
             </div> */}
           </div>
 
-            {/* <div className="contribution-card" style={{ marginBottom: "30px" ,marginTop: '15px'}}>
+            <div className="contribution-card" style={{ marginBottom: "30px" ,marginTop: '15px'}}>
               <div className="row">
                 <div className="col-sm-12">
                   <div className="customCard-header transaction-container">
@@ -679,7 +679,7 @@ export class MyReferal extends React.PureComponent {
                   )}
                 </div>
               </div>
-            </div> */}
+            </div>
 
             {
               //   {

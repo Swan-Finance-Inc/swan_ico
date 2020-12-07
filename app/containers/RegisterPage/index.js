@@ -314,13 +314,13 @@ export class RegisterPage extends React.PureComponent {
                     </div>
                 </div>
                 <div className="col-xs-5 col-sm-6 col-md-10">
-                  <div className="header-right">
+                  {/* <div className="header-right">
                     <div className="header-btn-group">
                       <div className="header-btn">
                         <Link to="/signin">Sign In</Link>
                       </div>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             </div>
@@ -335,11 +335,12 @@ export class RegisterPage extends React.PureComponent {
                   </div>
                   <div className="signin-card-body">
                     <form id="signupform" onSubmit={this.formSubmit}>
-                      <div>
+                      <div className="row">
+                      <div className="col col-md-6" >
                         <TextFieldInput
                           type="text"
                           name="fullname"
-                          label="Full Name"
+                          label="First Name"
                           value={this.state.fullname}
                           variant="outlined"
                           required={true}
@@ -356,11 +357,33 @@ export class RegisterPage extends React.PureComponent {
                           }}
                         />
                       </div>
-                      <div style={{ marginTop: "10px" }}>
+                      <div className="col col-md-6" >
+                        <TextFieldInput
+                          type="text"
+                          name="fullname"
+                          label="Last Name"
+                          value={this.state.fullname}
+                          variant="outlined"
+                          required={true}
+                          handleChange={(e) => {
+                            this.setState({
+                              [e.target.name]: e.target.value,
+                            });
+                          }}
+                          auth={true}
+                          inputStyle={{
+                            fontSize: "15px",
+                            fontWeight: "900",
+                            color: "#465390",
+                          }}
+                        />
+                      </div>
+                      </div>
+                      <div style={{ marginTop: "30px" }}>
                         <TextFieldInput
                           type="text"
                           name="email"
-                          label="Email"
+                          label="Email ID"
                           value={this.state.email}
                           variant="outlined"
                           required={true}
@@ -377,7 +400,7 @@ export class RegisterPage extends React.PureComponent {
                           }}
                         />
                       </div>
-                      <div style={{ marginTop: "10px" }}>
+                      <div style={{ marginTop: "30px" }}>
                         <TextFieldInput
                           type="password"
                           name="password"
@@ -398,7 +421,28 @@ export class RegisterPage extends React.PureComponent {
                           }}
                         />
                       </div>
-                      <div style={{ marginTop: "10px" }}>
+                      <div style={{ marginTop: "30px" }}>
+                        <TextFieldInput
+                          type="password"
+                          name="password"
+                          label="Confirm Password"
+                          value={this.state.password}
+                          variant="outlined"
+                          required={true}
+                          handleChange={(e) => {
+                            this.setState({
+                              [e.target.name]: e.target.value,
+                            });
+                          }}
+                          auth={true}
+                          inputStyle={{
+                            fontSize: "15px",
+                            fontWeight: "900",
+                            color: "#465390",
+                          }}
+                        />
+                      </div>
+                      <div style={{ marginTop: "30px" }}>
                         <TextFieldInput
                           type="text"
                           name="referralId"
@@ -419,12 +463,12 @@ export class RegisterPage extends React.PureComponent {
                           }}
                         />
                       </div>
-                      <div className="form-group" style={{ marginTop : '10px' , marginBottom : '0px' }}>
+                      {/* <div className="form-group" style={{ marginTop : '10px' , marginBottom : '0px' }}>
                         <label
                           className="form-check-label"
                           // htmlFor="user_accepted_policies"
                         >
-                          {/* <input
+                          <input
                             id="terms"
                             className="boolean required form-check-input"
                             // required
@@ -436,12 +480,12 @@ export class RegisterPage extends React.PureComponent {
                             aria-required="true"
                             type="checkbox"
                             name="user[accepted_policies]"
-                          /> */}
+                          />
                           &nbsp; I consent to receive email updates from
                           centralex.
                         </label>
-                      </div>
-                      <div className="form-group" style={{ marginTop : '10px' , marginBottom : '0px' }}>
+                      </div> */}
+                      <div className="form-group" style={{ marginTop : '30px' , marginBottom : '0px' }}>
                         <label className="form-check-label" htmlFor="usCitizen">
                           <input
                             id="usCitizen"
@@ -457,23 +501,22 @@ export class RegisterPage extends React.PureComponent {
                             name="usCitizen"
                           />
                           &nbsp; 
-                          I’m not US citizen and agree to the
+                          I certify that I am 18 years of age and older and agree to the
                           <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/User+agreement+V1.0.pdf"
-                        target="_blank"><strong className="main-color--blue"> User Agreement</strong></Link>  and 
-                          <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
-                        target="_blank"><strong className="main-color--blue"> &nbsp; &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+                        target="_blank"><strong className="main-color--lightblue"> User Agreement</strong></Link>  &nbsp;and<Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
+                        target="_blank"><strong className="main-color--lightblue">&nbsp;
                            Privacy Policy.</strong></Link>
                         </label>
                       </div>
                       <div className="form-group text-center">
-                        <ReCAPTCHA
+                        {/* <ReCAPTCHA
                           type="image"
                           ref="recaptcha"
                           className="form-captcha"
                           required
                           sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk"
                           onChange={this.onChange}
-                        />
+                        /> */}
 
                         <button
                           type="submit"
@@ -519,6 +562,9 @@ export class RegisterPage extends React.PureComponent {
                         //   </div>
                       }
                     </form>
+                  </div>
+                  <div className="text-center" style={{fontSize: '19px' , color : '#fff' , marginBottom: '40px'}}>
+                  Already have Swan account? <Link color= "#465490" to="/signin">Log in</Link>
                   </div>
                 </div>
               </div>

@@ -23,6 +23,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Activity from 'containers/Activity/Loadable';
 import Info from "../../components/Info";
+import Switch from 'react-toggle-switch';
 
 export class SecurityPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -188,7 +189,6 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
     }
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
-        {/* <h1>Security</h1> */}
         <div className="ui-content-body">
         <Helmet>
           <title>Security</title>
@@ -197,9 +197,8 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
           <div className="ui-container container-fluid">
             <div className="" style={{ marginBottom: '500px' }}>
             <div className="panel panel-default">
-              {/*<div className="panel-heading">Two-Factor Authentication</div>*/}
-              {console.log('SECURITY PAGE : *** ', this.props.flag)}
-              <div className="panel-heading blueBG">
+
+              <div className="setting-panel-heading">
                 {
                   !!this.props.flag ?
                     <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} />
@@ -207,7 +206,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                     null
                 }
 
-                Two-Factor Authentication
+                2FA
               </div>
                 <div className="panel-body" style={{fontSize:'16px'}}>
               <div className="row">
@@ -270,7 +269,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
           </div>
           <div className="panel panel-default">
             {/*<div className="panel-heading">Save Activity Log</div>*/}
-            <div className="panel-heading blueBG">
+            <div className="setting-panel-heading">
               {/* <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} /> */}
               {
                 !!this.props.flag ?
@@ -285,15 +284,18 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
               <div className="col-sm-12">
               <div className="checkbox">
                 <label>
-                  <input id="activityLog" checked={this.state.activityLog} type="checkbox" onChange={this.handleSaveActivityLog} />
+
+                  {/* <input id="activityLog" checked={this.state.activityLog} type="checkbox" onChange={this.handleSaveActivityLog} /> */}
                     Save My Activity Log
+              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+
                 </label>
               </div>
               </div>
             </div>
             <div className='row'>
             <div className='text-center'>
-            <button className="btn  filters" onClick={this.handleShowLogs} >{this.state.showLogs?'Hide Logs':'Show Logs'}</button>
+            <button className="invest" style={{background : '#2498D5'}} onClick={this.handleShowLogs} >{this.state.showLogs?'Hide Logs':'Show Logs'}</button>
             </div>
             </div>
             <div className='row'>

@@ -132,20 +132,7 @@ export class NavBarContainer extends React.PureComponent {
             <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
           </div>
           <div className="header-right hidden-xs">
-                {
-                  // <Link to="/dashboard/notification"  onClick={this.routeToNotifications} ><span  className="NotificationBell"><BellIcon width='30' color={'#D3A94A'} active={false} animate={false} /></span>
-                  //     <span className='badgeClass' style={{color:"#fff"}}><Badge>{2}</Badge></span>   </Link>
-                }
-              <Nav pullRight  className="profile-nav-bar">
-            
-                <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title= "Language" id="basic-nav-dropdown">
-                <MenuItem style={{ cursor: 'pointer' }} onClick={ () => console.log("") }>ENGLISH</MenuItem>
-                <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>FRENCH</MenuItem>
-                {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetInfo}><i className={this.props.flag===false?"fa fa-toggle-off":"fa fa-toggle-on"}></i>Reset Info flag</MenuItem> */}
-                <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>GERMAN</MenuItem>
-                <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>RUSSIAN</MenuItem>
-              </NavDropdown>
-            </Nav>
+             
 
             <Nav pullRight  className="profile-nav-bar">
             {
@@ -223,17 +210,56 @@ export class NavBarContainer extends React.PureComponent {
                     </div>
                 <Modal.Title><div className='' style ={{color : "#2D6DCD"}} >Profile</div></Modal.Title>
               </Modal.Header>
-                <Modal.Body dialogClassName="modal-body" >
+                <Modal.Body dialogClassName="profile-modal-body" className="profile-modal-body" >
                   <div className="row">
-                    <div className="col-md-4" style={{textAlign:'center', marginRight : 70,height : "270px"}}>
+                    <div className="col-md-4" style={{textAlign:'center', marginRight : 70,height : "137px"}}>
                     <img className="img-responsive profile-Image"  src={'https://s3.amazonaws.com/websiteimagesrama/dummyProfile.png' } alt="back id" id="back_img_src"  />
-                    <br /><button className="changeImage" type = "button" onClick={this.uploadProfileImage} >Change Image</button>
+                    <br />
+                    {/* <button className="changeImage" type = "button" onClick={this.uploadProfileImage} >Change Image</button> */}
                     <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg}/>
         
                     </div>
                     
                   <div className="col-md-7" style={{marginLeft:"-14px", height : "270px"}}>
                     <div className="row">
+                    <TextFieldInput
+                        type="text"
+                        name="fullName"
+                        label="First Name"
+                        value={this.state.fullName}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+                        
+                        }}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd',
+                          marginBottom : 15
+
+                        }}
+                      />
+                      <TextFieldInput
+                        type="text"
+                        name="secondName"
+                        label="Last Name"
+                        value={this.state.secondName}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+                        
+                        }}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd',
+                          marginBottom : 15
+
+                        }}
+                      />
                       <TextFieldInput
                         type="text"
                         name="email"
@@ -257,59 +283,8 @@ export class NavBarContainer extends React.PureComponent {
                           marginBottom : 15
                         }}
                       />
-                      <div className="row">
-                        <div className="col-md-6">
-                        <TextFieldInput
-                        type="text"
-                        name="fullName"
-                        label="First Name"
-                        value={this.state.fullName}
-                        //variant="outlined"
-                        //required={true}
-                        handleChange={(e) => {
-                          this.setState({
-                            [e.target.name]: e.target.value
-                          })
-                        
-                        }}
-                        //auth={false}
-                        inputStyle={{
-                          fontSize: '15px',
-                          fontWeight: '900',
-                          color: '#2d6dcd',
-                          marginBottom : 15
-
-                        }}
-                      />
-                        </div>
-                      <div className="col-md-6">
-                      <TextFieldInput
-                        type="text"
-                        name="secondName"
-                        label="Last Name"
-                        value={this.state.secondName}
-                        //variant="outlined"
-                        //required={true}
-                        handleChange={(e) => {
-                          this.setState({
-                            [e.target.name]: e.target.value
-                          })
-                        
-                        }}
-                        //auth={false}
-                        inputStyle={{
-                          fontSize: '15px',
-                          fontWeight: '900',
-                          color: '#2d6dcd',
-                          marginBottom : 15
-
-                        }}
-                      />
-                      </div>
                       
-                      </div>
-                       <div className="label-for-date" >Date Of Birth</div> 
-                      <TextFieldInput
+                      {/* <TextFieldInput
                         type="date"
                         name="dob"
                         label="Date Of Birth"
@@ -330,7 +305,7 @@ export class NavBarContainer extends React.PureComponent {
                           marginBottom : 15,
                           color: '#2d6dcd',
                         }}
-                      />
+                      /> */}
                       
                       </div>
                       </div>
@@ -359,16 +334,37 @@ export class NavBarContainer extends React.PureComponent {
                       />
                     </div> 
                     <div className="col-md-6">
-                    <select id="gender" name="gender" className="form-control textFieldInput" onChange={this.handleInput} 
+                    {/* <select id="gender" name="gender" className="form-control textFieldInput" onChange={this.handleInput} 
                     value={this.state.gender}>
                       <option value="" hidden>Select your gender</option>
                       <option value="MALE">MALE</option>
                       <option value="FEMALE">FEMALE</option>
                       <option value="DECLINE TO STATE">DECLINE TO STATE</option>
-                    </select>
+                    </select> */}
+                    <TextFieldInput
+                        type="text"
+                        name="address"
+                        label="City/Town"
+                        value={this.state.address}
+                        //variant="outlined"
+                        //required={true}
+                        disabled={this.state.edit}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd'
+                        }}
+                      />
                     </div>
                     <div className="col-md-6">
-                    <PhoneInput id="phone"
+                    {/* <PhoneInput id="phone"
                         placeholder="Enter phone number"
                         name="phone"
                         value= "7082082819"
@@ -376,10 +372,31 @@ export class NavBarContainer extends React.PureComponent {
                         className="form-control textFieldInput"
                         onChange={ phone => this.setState({ phone }) }
                         // error={ phone ? (isValidNumber(phone) ? undefined : <span style={{position : "relative" , top : "12px"}} >Invalid phone number</span>) : '' }
-                        />
+                        /> */}
+                        <TextFieldInput
+                        type="text"
+                        name="address"
+                        label="Address"
+                        value={this.state.address}
+                        //variant="outlined"
+                        //required={true}
+                        disabled={this.state.edit}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd'
+                        }}
+                      />
                     </div>
-                    <div className="col-md-12" style={{marginTop : 15}}>
-                  <TextFieldInput
+                    <div className="col-md-6" >
+                  {/* <TextFieldInput
                         type="text"
                         name='referal Url'
                         label="Your Referal URL"
@@ -406,7 +423,51 @@ export class NavBarContainer extends React.PureComponent {
                                 />
                               </span>
                             </CopyToClipboard>
-                            </div>
+                            </div> */}
+                            <TextFieldInput
+                        type="text"
+                        name="address"
+                        label="Pin/Zip code"
+                        value={this.state.address}
+                        //variant="outlined"
+                        //required={true}
+                        disabled={this.state.edit}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd'
+                        }}
+                      />
+                  </div>
+                  <div className="col-md-6" >
+                  <TextFieldInput
+                        type="text"
+                        name="address"
+                        label="Address"
+                        value={this.state.address}
+                        //variant="outlined"
+                        //required={true}
+                        disabled={this.state.edit}
+                        handleChange={(e) => {
+                          this.setState({
+                            [e.target.name]: e.target.value
+                          })
+
+                        }}
+                        //auth={false}
+                        inputStyle={{
+                          fontSize: '15px',
+                          fontWeight: '900',
+                          color: '#2d6dcd'
+                        }}
+                      />
                   </div>
                   </div>
                   
@@ -414,16 +475,16 @@ export class NavBarContainer extends React.PureComponent {
                    <div className="col-sm-6 text-center" style={{display : "flex" , justifyContent : "flex-end"}}>
                     <button  className="profile-button" onClick = {()=> this.setState({edit : false})} >Edit</button>
                   </div> 
-                  <div className="col-sm-12 text-center" style={{display : "flex" , justifyContent : "center"}}>
+                  <div className="col-sm-6 text-center" style={{display : "flex" , justifyContent : "start"}}>
                     <button type="submit" id = "personal" className="profile-button" onClick={this.updateProfile}>Save</button>
                   </div>
                 </div>
-                  <div className="row">
+                  {/* <div className="row">
                      <div className="col-sm-12 text-center">
                       <button className=" col-sm-3  btn btn-outline-red" style={{marginLeft:'15%'}} onClick={this.deleteProfileYes}>YES</button>
                       <button className="col-sm-3  btn  btn-outline" style={{marginLeft:'15%'}} onClick={this.closeDeleteProfile}>GO Back</button>
                     </div> 
-                  </div>
+                  </div> */}
                 </Modal.Body>
               </Modal>
             </div>

@@ -28,6 +28,7 @@ import { parseNumber, formatNumber, isValidNumber } from 'libphonenumber-js'
 import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import Switch from 'react-toggle-switch';
 import ResetPasword from '../ResetPassword'
+import { Navbar, Nav, MenuItem, NavDropdown, Modal ,Badge } from 'react-bootstrap';
 
 export class ProfilePage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
@@ -112,7 +113,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       loginAlert,
       ethAddress,
       valid: true,
-      currentView:'personal',
+      currentView:'notifications',
       notifyMe
     }
         this.props.getProfileData();
@@ -296,7 +297,7 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       <div className="ui-content-body">
         <div className="ui-container container-fluid">
         <div className="panel panel-default">
-              <div className="panel-heading">Manage Profile</div>
+              <div className="setting-panel-heading">Settings</div>
                 <div className="panel-body" style={{fontSize:'16px'}}>
           <div className=" contribution row">
           {loading?<LoadingSpinner />:
@@ -321,9 +322,9 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px' , color : '#465390'}}>PERSONAL</h2></div>
                   )} */}
                   { this.state.currentView === 'notifications' ? (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:'10px 0px',cursor:'pointer', backgroundColor: '#2d6dcd', color: 'white', borderRadius: '4px 0px 0px 4px', border : "1px solid #2d6dcd",padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:'10px 0px',cursor:'pointer', backgroundColor: '#2d6dcd', color: 'white', borderRadius: '5px 0px 0px 5px', border : "1px solid #2498D5",padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>NOTIFICATIONS</h2></div>
                   ) : (
-                    <div  onClick={()=>this.changeView("notifications")} style={{margin:'10px 0px',cursor:'pointer', border : "1px solid #2d6dcd", borderRadius: '4px 0px 0px 4px',padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>NOTIFICATIONS</h2></div>
+                    <div  onClick={()=>this.changeView("notifications")} style={{margin:'10px 0px',cursor:'pointer', border : "1px solid #2d6dcd", borderRadius: '5px 0px 0px 5px',padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>NOTIFICATIONS</h2></div>
                   )}
                   {/* { this.state.currentView === 'wallet' ? (
                     <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer', backgroundColor: '#465390', color: 'white', borderRadius: '5px'}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>WALLET</h2></div>
@@ -331,15 +332,15 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
                     <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>WALLET</h2></div>
                   )} */}
                   { this.state.currentView === 'resetPassword' ? (
-                    <div  onClick={()=>this.changeView("resetPassword")} style={{margin:'10px 0px',cursor:'pointer', backgroundColor: '#2d6dcd', color: 'white', borderRadius: '4px 0px 0px 4px', border : "1px solid #2d6dcd",padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>Reset Password/PIN</h2></div>
+                    <div  onClick={()=>this.changeView("resetPassword")} style={{margin:'10px 0px',cursor:'pointer', backgroundColor: '#2d6dcd', color: 'white', borderRadius: '0px 5px 5px 0px', border : "1px solid #2498D5",padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#fff'}}>Reset Password/PIN</h2></div>
                   ) : (
-                    <div  onClick={()=>this.changeView("resetPassword")} style={{margin:'10px 0px',cursor:'pointer', border : "1px solid #2d6dcd", borderRadius: '4px 0px 0px 4px',padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>Reset Password/PIN</h2></div>
+                    <div  onClick={()=>this.changeView("resetPassword")} style={{margin:'10px 0px',cursor:'pointer', border : "1px solid #2d6dcd", borderRadius: '0px 5px 5px 0px',padding : "0px 12px"}}><h2  style={{margin:10, fontSize: '16px',color : '#465390'}}>Reset Password/PIN</h2></div>
                   )}
                   {/* <div onClick={ ()=>this.changeView("personal")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>PERSONAL</h2></div> */}
                   {/* <div  onClick={()=>this.changeView("notifications")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>NOTIFICATION</h2></div> */}
                   {/* <div  onClick={()=>this.changeView("wallet")} style={{margin:10,cursor:'pointer'}}><h2  style={{margin:10}}>WALLET</h2></div> */}
                 </div>
-                <hr style={{height:"1px",border:"none",color:"#000",backgroundColor:"#000"}}/>
+                {/* <hr style={{height:"1px",border:"none",color:"#000",backgroundColor:"#000"}}/> */}
 
               </div>
               </div>
@@ -529,16 +530,37 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
           <form onSubmit={this.updateNotification}>
         <div className="form-group">
           <label htmlFor="sendMail" className="control-label col-sm-8 col-xs-8" >I would like to receive email after every login</label>
-          <div className="col-sm-2 col-xs-2">
+          <div className="col-sm-4 col-xs-4" style={{textAlign: 'end'}}>
           <Switch onClick={this.toggleLoginAlert} on={this.state.loginAlert}/>
         </div>
         </div>
       <div className="form-group">
       <label htmlFor="deleteTransaction" className="control-label col-sm-8 col-xs-8" >Notify me for latest News and alerts</label>
-      <div className="col-sm-2 col-xs-2">
+      <div className="col-sm-4 col-xs-4" style={{textAlign: 'end'}}>
       <Switch onClick={this.toggleLatestNewsAlert} on={this.state.notifyMe}/>
       </div>
       </div>
+      <div className="form-group">
+      <label htmlFor="deleteTransaction" className="control-label col-sm-6 col-xs-6" >Language</label>
+      <div className="col-sm-6 col-xs-6">
+      <Nav pullRight  className="profile-nav-bar">
+            
+            <NavDropdown style={{ display: 'flex' , left : '31px' }} className="dropdown-usermenu zineum-username" title= "ENG" id="basic-nav-dropdown">
+            <MenuItem style={{ cursor: 'pointer' }} onClick={ () => console.log("") }>ENGLISH</MenuItem>
+            <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>FRENCH</MenuItem>
+            <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>GERMAN</MenuItem>
+            <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>RUSSIAN</MenuItem>
+          </NavDropdown>
+        </Nav>
+      </div>
+      </div>
+      <div className="form-group">
+      <label htmlFor="deleteTransaction" className="control-label col-sm-8 col-xs-8" >Currency</label>
+      <div className="col-sm-4 col-xs-4" style={{textAlign: 'end'}}>
+      <Switch  on={this.state.notifyMe}/>
+      </div>
+      </div>
+      
       <div className="row">
                   <div className="col-sm-12 text-center">
                     <button type="submit" className="normal-button">Update </button>
