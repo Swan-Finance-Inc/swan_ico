@@ -11,6 +11,7 @@ import { Helmet } from 'react-helmet';
 import ReactTable from 'react-table';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
+import { Link } from "react-router-dom";
 
 import 'react-table/react-table.css';
 import { Modal, Button } from 'react-bootstrap';
@@ -223,6 +224,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                   </div> */}
                   <div className="col-sm-12 text-center">
                       <button  className="btn new-ticket" onClick={this.showCreateTicket}>New Ticket</button>
+                      <span style={{float:'right',marginTop:'18px',paddingRight:'22px'}}><Link style={{color:'#00296B'}} to='/dashboard' >help@swanfinance.io</Link></span>
                   </div>
              </div> 
              <div className="row">

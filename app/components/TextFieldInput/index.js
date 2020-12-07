@@ -19,13 +19,13 @@ const CssTextField = withStyles({
     },
     '& .MuiOutlinedInput-root': {
       '& fieldset': {
-        borderColor: '#2D6DCD',
+        borderColor: '#2498D5',
       },
       '&:hover fieldset': {
-        borderColor: '#2D6DCD',
+        borderColor: '#2498D5',
       },
       '&.Mui-focused fieldset': {
-        borderColor: '#2D6DCD',
+        borderColor: '#2498D5',
       },
     },
   }

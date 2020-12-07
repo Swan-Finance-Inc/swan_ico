@@ -33,7 +33,7 @@ import Web3 from 'web3';
 import { Modal } from 'react-bootstrap';
 import Info from "../../components/Info";
 import { Link } from 'react-router-dom';
-import { isInteger } from 'lodash';
+import { isInteger, concat } from 'lodash';
 import littleStar from "../../images/littleStar.svg";
 import bigStar from "../../images/bigStar.svg";
 import Ellipse from '../../images/Ellipse.svg';
@@ -1614,6 +1614,56 @@ hide=(e)=>{
   })
 }
 
+apyMode = (e)=>{
+  var sorted = [];
+  sorted = this.state.interestAccountDetails.map(d=>{
+    return d
+  })
+  // sorted.push(this.state.interestAccountDetails)
+  console.log(sorted , "vfdjksnvnvbtkbg")
+  if(e.target.value ==='lTh'){
+    sorted.sort(function(a , b) {
+      return (a.interestRate - b.interestRate )
+    })
+  }
+  else if (e.target.value ==='hTl')
+  sorted.sort(function(a , b) {
+    return (b.interestRate - a.interestRate )
+  })
+
+  this.setState({
+    interestAccountDetails : sorted
+  })
+}
+
+lookupPeriod = (e) =>{
+  sorted = this.state.interestAccountDetails.map(d=>{
+    return d
+  })
+  console.log(sorted , "vfdjksnvnvbtkbg")
+  if(e.target.value ==='lTh'){
+    sorted.sort(function(a , b) {
+      var adate = new Date(a.time * 1000);
+      var aday = adate.getDay();
+      var bdate = new Date(b.time * 1000);
+      var bday = bdate.getDay();
+      return (aday - bday )
+    })
+  }
+  else if (e.target.value ==='hTl')
+  sorted.sort(function(a , b) {
+    var adate = new Date(a.time * 1000);
+      var aday = adate.getDay();
+      var bdate = new Date(b.time * 1000);
+      var bday = bdate.getDay();
+    return (bday - aday )
+  })
+
+  this.setState({
+    interestAccountDetails : sorted
+  })
+}
+
 // openShowEthWalletCreate () {
 //   this.setState({
 //     showEthWalletCreate: true
@@ -1625,7 +1675,7 @@ hide=(e)=>{
         
 
       
-     console.log(this.state," sttate in contribution page")
+     console.log(this.state.interestAccountDetails," sttate in contribution page")
     // console.log(this.state," state in contribution page")
     const { loading } = this.props
     const {language} = this.state
@@ -1897,7 +1947,7 @@ hide=(e)=>{
               <div className="col-md-3 col-lg-3 col-sm-3">
                 APY
                 <span className="select-wrapper">
-                      <select id="APYMode" name="APYMode" className="form-input form-one-style" required>
+                      <select id="APYMode" name="APYMode" className="form-input form-one-style" required onChange={this.apyMode} >
                         <option value="hTl">High to Low</option>
                         <option value="lTh">Low to High</option>
                       </select>
@@ -1907,7 +1957,7 @@ hide=(e)=>{
                 <div className="col-md-3 col-lg-3 col-sm-3">
                 Lookup Period
                 <span className="select-wrapper">
-                      <select id="LUPMode" name="LUPMode" className="form-input form-one-style" required>
+                      <select id="LUPMode" name="LUPMode" className="form-input form-one-style" required onChange={this.lookupPeriod}>
                         <option value="hTl">High to Low</option>
                         <option value="lTh">Low to High</option>
                       </select>
@@ -1921,11 +1971,14 @@ hide=(e)=>{
                   
 
 
-                {this.state.interestAccountDetails.map(d=>
+                {this.state.interestAccountDetails.map(d=>{
+                  var date = new Date(1607349601 * 1000);
+                  var day = date.getDay();
+                  return(
                 <div className="col-sm-12 col-md-12 col-lg-12">
                   <div style={{textAlign:"center", marginLeft:"-40px"}} >
                     <div className="col-md-3 col-lg-3 col-sm-3" style={{fontSize:"20px"}}>{this.showDate(d.time)}</div>
-                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>{d.amount} SWAN<div className="depositText" style={{fontWeight:"16px"}}>Ends in 24 days</div></div>
+                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>{d.amount} SWAN<div className="depositText" style={{fontWeight:"16px"}}>Ends in {30-day} days</div></div>
                     <div className="col-md-3 col-lg-3 col-sm-3 depositText" style={{fontSize:"16px"}}>Total Earnings<br /><span style={{fontWeight:"bold",fontSize:"20px",color:"#414857"}}>{d.amount*d.interestRate/100} SWAN</span></div>
                     <div className="col-md-2 col-lg-2 col-sm-2 depositText" >APY<br /><span style={{fontSize:"30px"}}>{d.interestRate}%</span></div>
                     <div className="col-md-2 col-lg-2 col-sm-2" style={{fontSize:"16px"}} onClick={()=>this.setState({showDetails:true,currInterestAccountDetails:d})}><a>Check Details</a></div>
@@ -1934,7 +1987,7 @@ hide=(e)=>{
                     <div className="col-sm-12 col-md-12 col-lg-12" style={{height:"2px",borderWidth:"0",color:"gray",backgroundColor:"gray",opacity:"10%"}}></div>
                   </div>
                 </div>
-                
+                  )}
 
                   )}
 

@@ -403,7 +403,7 @@ class Balance extends React.PureComponent {
                     {/* <div>
                     <img src={Planet} />
                     </div> */}
-                    <div className="balance-text" style={{width : '85%'}}>
+                    <div className="balance-text" style={{width : '85%', padding : '18px 14px'}}>
                       {/* <span className="upto-2-percentage" >Up To <br/>
                        <span style={{ fontSize : '32px' }} >2%</span>  
                        <br /> Extra</span> */}

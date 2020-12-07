@@ -563,8 +563,8 @@ export class RegisterPage extends React.PureComponent {
                       }
                     </form>
                   </div>
-                  <div className="text-center" style={{fontSize: '19px' , color : '#fff' , marginBottom: '40px'}}>
-                  Already have Swan account? <Link color= "#465490" to="/signin">Log in</Link>
+                  <div className="text-center" style={{fontSize: '19px' , color : '#fff' , marginBottom: '40px', fontWeight: 'bold'}}>
+                  Already have Swan account? <Link style={{color : '#465490'}} to="/signin">Log in</Link>
                   </div>
                 </div>
               </div>

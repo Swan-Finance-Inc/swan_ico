@@ -364,9 +364,9 @@ showPassWord= (e)=>{
                     
                     </form>
                   </div>
-                  <div className="text-center" style={{fontSize: '19px' , color : '#fff' , marginBottom: '40px'}}>
+                  <div className="text-center" style={{fontSize: '19px' , color : '#fff' , marginBottom: '40px', fontWeight:'bold'}}>
                   Don’t have any account yet?
-                  <Link to="/signup">Create Account</Link> 
+                  <Link style={{color:'#465490'}} to="/signup">Create Account</Link> 
                   </div>
                 </div>
               </div>
