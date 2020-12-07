@@ -38,9 +38,11 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       infoShow: false,
       confirmContri: false,
       usdEurContributionConfirm: false,
-      curr: 'Ethereum',
+      curr: '',
       btcToDollar: 7500,
       ethToDollar: 600,
+      xlmToDollar: 1,
+      usdtToDollar: 1,
       eurToDollar: 0,
       currencyQuantity: 0,
       dollarQuantity: 0,
@@ -48,6 +50,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       tokensWithBonus: 0,
       tokensPerEther: 0,
       tokensPerBitcoin: 0,
+      tokensPerStellar: 0,
+      tokensPerUsdt: 0,
       tokensPerUsd: 0,
       tokensPerEur: 0,
       ethAddress: false,
@@ -88,6 +92,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       xlmWallet:'',
       currAddress: '',
       currWallet: '',
+      clientAddress: '',
+      currRate: 0,
     };
 
     this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -128,8 +134,12 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       eurToDollar: data.eurUsd,
       ethToDollar: data.ethUsd,
       btcToDollar: data.btcUsd,
+      xlmToDollar: data.xlmUsd,
+      usdtToDollar: data.usdtUsd,
       tokensPerEther: data.tokenPerEther,
       tokensPerBitcoin: data.tokenPerBtc,
+      tokensPerStellar: data.tokenPerXlm,
+      tokensPerUsdt: data.tokenPerUsdt,
       tokensPerUsd:  1 / data.tokenUsd,
       tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
       ethAddress: data.ethAddress,
@@ -349,10 +359,10 @@ gobackDollar=(e)=>{
       type: this.state.curr,
       amount: this.state.currencyQuantity,
       fromAddress:fromAdd,
-      toAddress: this.props.successData.ethAddress,
-      tokenReceivingAddress:this.state.fromAddressEth,
+      toAddress: this.state.clientAddress,
+      tokenReceivingAddress:this.state.ethWallet.address,
       usdAmount: this.state.dollarsInvested,
-      rate:this.state.ethToDollar,
+      rate:this.state.currRate,
       phase:this.state.stage,
       tokenPrice : this.state.tokenPrice,
       bonus:this.state.bonus,
@@ -846,36 +856,68 @@ gobackDollar=(e)=>{
 
     } else if (e.target.value === 'USDT') {
       if(this.state.usdtWallet){
+        add=this.state.usdtWallet.address
         let currencyQuantity = document.getElementById('amt');
-      this.setState({
-        fromAddress: this.state.usdtWallet.address,
-        valid: true,
-        validBlank: 'false',
-        curr: 'USDT',
-        validWallet: true,
-        dollarsInvested: currencyQuantity.value,
-        currencyQuantity: currencyQuantity.value,
-        tokens: currencyQuantity.value * this.state.tokensPerUsd,
-        tokensWithBonus: currencyQuantity.value * this.state.tokensPerUsd + this.state.tokensPerUsd * currencyQuantity.value * 0.01 * this.state.bonus
-      })
+        if(this.state.isBonusOrDiscount==='staticDiscount'){
+          console.log(" inside  usdt type",this.state)
+          this.setState({
+           fromAddress: add,
+            valid: true,
+            validBlank: 'false',
+            curr: 'USDT',
+            validWallet: true,
+            currencyQuantity: this.state.amtInvested,
+           dollarsInvested: currencyQuantity.value * this.state.usdtToDollar,
+           tokens: (currencyQuantity.value*this.state.usdtToDollar)/this.state.tokenPrice,
+           tokensWithBonus: (currencyQuantity.value*this.state.usdtToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+          });
+        }else{
+          this.setState({
+           fromAddress: add,
+            valid: true,
+            validBlank: 'false',
+            curr: 'USDT',
+            validWallet: true,
+            currencyQuantity: this.state.amtInvested,
+           dollarsInvested: currencyQuantity.value * this.state.usdtToDollar,
+           tokens: currencyQuantity.value * this.state.tokensPerUsdt,
+           tokensWithBonus: currencyQuantity.value * this.state.tokensPerUsdt + currencyQuantity.value * this.state.tokensPerUsdt * 0.01 * this.state.bonus
+          });
+        }
       } else {
         toast.error('Creat USDT wallet to continue');
       }
       
     } else if (e.target.value === 'XLM') {
       if(this.state.xlmWallet){
+        add =this.state.xlmWallet.address
         let currencyQuantity = document.getElementById('amt');
-      this.setState({
-        fromAddress: this.state.xlmWallet.address,
-        valid: true,
-        validBlank: 'false',
-        curr: 'Stellar',
-        validWallet: true,
-        dollarsInvested: currencyQuantity.value * 1.16,
-        currencyQuantity: currencyQuantity.value,
-        tokens: currencyQuantity.value * this.state.tokensPerEur,
-        tokensWithBonus: currencyQuantity.value * this.state.tokensPerEur + this.state.tokensPerEur * currencyQuantity.value * 0.01 * this.state.bonus
-      })
+        if(this.state.isBonusOrDiscount==='staticDiscount'){
+          console.log(" inside  stellar type",this.state)
+          this.setState({
+           fromAddress: add,
+            valid: true,
+            validBlank: 'false',
+            curr: 'Stellar',
+            validWallet: true,
+            currencyQuantity: this.state.amtInvested,
+           dollarsInvested: currencyQuantity.value * this.state.xlmToDollar,
+           tokens: (currencyQuantity.value*this.state.xlmToDollar)/this.state.tokenPrice,
+           tokensWithBonus: (currencyQuantity.value*this.state.xlmToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+          });
+        }else{
+          this.setState({
+           fromAddress: add,
+            valid: true,
+            validBlank: 'false',
+            curr: 'Stellar',
+            validWallet: true,
+            currencyQuantity: this.state.amtInvested,
+           dollarsInvested: currencyQuantity.value * this.state.xlmToDollar,
+           tokens: currencyQuantity.value * this.state.tokensPerStellar,
+           tokensWithBonus: currencyQuantity.value * this.state.tokensPerStellar + currencyQuantity.value * this.state.tokensPerStellar * 0.01 * this.state.bonus
+          });
+        }
       } else {
         toast.error('Create Stellar wallet to continue');
       }
@@ -943,22 +985,40 @@ gobackDollar=(e)=>{
      } else if (this.state.curr == 'Stellar') {
       //  currencyQuant.value = e.target.value / this.state.ethToDollar;
         if(this.state.isBonusOrDiscount==='staticDiscount'){
-            console.log(this.state," inside staticDiscount ")
+            console.log(this.state," inside stellar staticDiscount ")
           this.setState({
             currencyQuantity: currencyQuant.value,
-            dollarsInvested: currencyQuant.value * this.state.ethToDollar,
-            tokens: (currencyQuant.value*this.state.ethToDollar)/this.state.tokenPrice,
-            tokensWithBonus: (currencyQuant.value*this.state.ethToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+            dollarsInvested: currencyQuant.value * this.state.xlmToDollar,
+            tokens: (currencyQuant.value*this.state.xlmToDollar)/this.state.tokenPrice,
+            tokensWithBonus: (currencyQuant.value*this.state.xlmToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
           });
         }else {
           this.setState({
             currencyQuantity: currencyQuant.value,
-            dollarsInvested: currencyQuant.value * this.state.ethToDollar,
-            tokens: this.state.tokensPerEther * currencyQuant.value,
-            tokensWithBonus: this.state.tokensPerEther * currencyQuant.value + this.state.tokensPerEther * currencyQuant.value * 0.01 * this.state.bonus
+            dollarsInvested: currencyQuant.value * this.state.xlmToDollar,
+            tokens: this.state.tokensPerStellar * currencyQuant.value,
+            tokensWithBonus: this.state.tokensPerStellar * currencyQuant.value + this.state.tokensPerStellar * currencyQuant.value * 0.01 * this.state.bonus
           });
         }
-      }
+      } else if (this.state.curr == 'USDT') {
+        //  currencyQuant.value = e.target.value / this.state.ethToDollar;
+          if(this.state.isBonusOrDiscount==='staticDiscount'){
+              console.log(this.state," inside USDT staticDiscount ")
+            this.setState({
+              currencyQuantity: currencyQuant.value,
+              dollarsInvested: currencyQuant.value * this.state.usdtToDollar,
+              tokens: (currencyQuant.value*this.state.usdtToDollar)/this.state.tokenPrice,
+              tokensWithBonus: (currencyQuant.value*this.state.usdtToDollar)/(this.state.tokenPrice - (this.state.tokenPrice*(this.state.discount/100))),
+            });
+          }else {
+            this.setState({
+              currencyQuantity: currencyQuant.value,
+              dollarsInvested: currencyQuant.value * this.state.usdtToDollar,
+              tokens: this.state.tokensPerUsdt * currencyQuant.value,
+              tokensWithBonus: this.state.tokensPerUsdt * currencyQuant.value + this.state.tokensPerUsdt * currencyQuant.value * 0.01 * this.state.bonus
+            });
+          }
+        }
    }
   //  updatetime() {
   //   if (this.state.timer > 0) {
@@ -1021,7 +1081,9 @@ gobackDollar=(e)=>{
       if(this.state.ethWallet){
         this.setState({
           confirmContri : true,
-          currWallet: this.state.ethWallet
+          currWallet: this.state.ethWallet,
+          clientAddress: '0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632',
+          currRate : this.state.ethToDollar,
         })
       } else {
         toast.error('Ethereum Wallet not found');
@@ -1031,7 +1093,9 @@ gobackDollar=(e)=>{
       if(this.state.btcWallet){
         this.setState({
           confirmContri : true,
-          currWallet: this.state.btcWallet
+          currWallet: this.state.btcWallet,
+          clientAddress: 'mhKiusBhp4KjDo7pKf96zGKioMts1PLEA2',
+          currRate : this.state.btcToDollar,
         })
       } else {
         toast.error('Bitcoin Wallet not found');
@@ -1040,7 +1104,9 @@ gobackDollar=(e)=>{
       if(this.state.xlmWallet){
         this.setState({
           confirmContri : true,
-          currWallet: this.state.xlmWallet
+          currWallet: this.state.xlmWallet,
+          clientAddress: 'GBDKEZGRBMBWDKPUILGUDQ737AV7A563QWWDJZVTRJ6LBMYEVRQY2546',
+          currRate : this.state.xlmToDollar,
         })
       } else {
         toast.error('Stellar Wallet not found');
@@ -1049,7 +1115,9 @@ gobackDollar=(e)=>{
       if(this.state.usdtWallet){
         this.setState({
           confirmContri : true,
-          currWallet: this.state.usdtWallet
+          currWallet: this.state.usdtWallet,
+          clientAddress: '0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632',
+          currRate : this.state.usdtToDollar,
         })
       } else {
         toast.error('USDT Wallet not found');
@@ -1220,6 +1288,7 @@ hide=(e)=>{
       currentReceivingWalletAddress={this.state.currentReceivingWalletAddress}
       metamaskAccount = {this.state.metamaskAccount}
       currWallet = {this.state.currWallet}
+      clientAddress = {this.state.clientAddress}
       />
       </div>
       );
@@ -1294,7 +1363,7 @@ hide=(e)=>{
             <div className="row">
               <div className="col-sm-12">
                 <div style={{ marginTop : '40px', marginBottom : '30px' , paddingLeft : '20px'}}>
-                <h5 className="main-color--blue">1 Centralex TOKEN =${this.state.tokenPrice}</h5>
+                <h5 className="main-color--blue">1 SWAN TOKEN =${this.state.tokenPrice}</h5>
                 </div>
               </div>
             </div>
@@ -1324,13 +1393,13 @@ hide=(e)=>{
                   <div className='row howMuch' style={{ display: 'flex',flexDirection: 'column',
                    paddingLeft: '20px', paddingTop: '10px'}}>
                   <div className="trade-in-centralex">
-                  <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} Centralex Tokens</span>
+                  <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Stellar') ? (this.state.tokensPerStellar) : (this.state.tokensPerUsdt)} Centralex Tokens</span>
                   {
                     this.state.curr !== 'Dollar' ?
                     <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?
                         this.state.ethToDollar : (this.state.curr === 'Bitcoin') ?
-                        (this.state.btcToDollar).toFixed(2) :
-                        (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null}</span>
+                        (this.state.btcToDollar) :
+                        (this.state.curr === 'Stellar') ? (this.state.xlmToDollar) : (this.state.usdtToDollar)}</span>
                     : null
                   }
                   <br/>
@@ -1361,7 +1430,7 @@ hide=(e)=>{
                   //   <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' />
                   //  </div>:
                     <div className="form-group">
-                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' :(this.state.curr =='Bitcoin') ? 'BTC' :(this.state.curr =='USDT') ? 'USDT' : 'Stellar'} wallet you are investing from?</label>
+                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' :(this.state.curr =='Bitcoin') ? 'BTC' :(this.state.curr =='USDT') ? 'USDT' :(this.state.curr=='Stellar') ? 'Stellar' : '*'} wallet you are investing from?</label>
                     <input onChange={this.validator} type="text" value={this.state.fromAddress} disabled placeholder='' className="form-input form-control text-left form-one-style" required   />
                   </div>
                   }
@@ -1384,11 +1453,11 @@ hide=(e)=>{
                 </div> */}
 
                 <div className="form-group align-left-label">
-                  <label htmlFor="tokens" className="form-label main-color--blue">CenX Tokens</label>
+                  <label htmlFor="tokens" className="form-label main-color--blue">SWAN Tokens</label>
                   <input id="tokens" type="text" value={this.state.tokens} className="form-input form-control text-right form-one-style" disabled required/>
                 </div>
                 <div className="form-group align-left-label">
-                  <label htmlFor="tokensWithBonus" className="form-label main-color--blue">CenX Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
+                  <label htmlFor="tokensWithBonus" className="form-label main-color--blue">SWAN Tokens With {this.state.isBonusOrDiscount==='staticDiscount'?"Discount":"Bonus"} ({this.state.isBonusOrDiscount==='staticDiscount'?this.state.discount:this.state.bonus}%)</label>
                   <input id="tokensWithBonus" type="text" value={this.state.tokensWithBonus} className="form-input form-control text-right form-one-style" disabled required/>
                 </div>
                 </div>
@@ -1397,8 +1466,8 @@ hide=(e)=>{
               
             <div className="row">
               <div className="col-sm-12 text-center" style={{ marginBottom : '30px' , marginTop : '0px' }}>
-              {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>}
-              {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>}
+              {/* {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>} */}
+              {/* {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>} */}
               {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
               <button className="form-button " type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
               onClick={() => this.checkWallet()} >Continue</button>

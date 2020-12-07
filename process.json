@@ -1,6 +1,6 @@
 {
   "apps": [{
-    "name": "ico_user_centralex",
+    "name": "ico_user_SWAN",
     "script": "server",
     "instances": "max",
     "exec_mode": "cluster",

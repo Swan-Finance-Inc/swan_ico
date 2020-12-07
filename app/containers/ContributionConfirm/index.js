@@ -54,6 +54,7 @@ export class ContributionConfirm extends React.PureComponent {
     this.txValidator = this.txValidator.bind(this);
     this.makeTransaction = this.makeTransaction.bind(this);
     this.initiateTransaction = this.initiateTransaction.bind(this);
+    this.getUTXOdetails = this.getUTXOdetails.bind(this);
     //this.makeFinalPayment = this.makeFinalPayment.bind(this);
   }
   // End Constructor
@@ -164,65 +165,104 @@ export class ContributionConfirm extends React.PureComponent {
     this.props.finalPayment(sender, hash)
   }
 
+//  exports.satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
+//  exports.btc_to_satoshi = (value) => parseInt(1e8 * value);
+
   getUTXOdetails = (obj) => {
+    console.log("API Obj: ",obj)
     var result = [];
     var amount = 3000;
-    var TX_FEES = 0.0013;
+    var TX_FEES = 350;
+    var keyPair = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.testnet);
     var unspentUTXOS = obj.txrefs;
-    console.log("before sort: ", unspentUTXOS);
-    unspentUTXOS.sort((a, b) => a.value - b.value);
-    console.log("after sort: ", unspentUTXOS);
-    let totalUTXOAmount = 0,
-      i = 0;
+    console.log("unspent", unspentUTXOS)
+    try{
+      if(unspentUTXOS.length==0 || unspentUTXOS===undefined){
+        toast.error('Unspent transactions not found. Check balance')
+        return('Unspent transactions not found. Check balance')
+      } else
+        {
+        console.log("before sort: ", unspentUTXOS);
+        unspentUTXOS.sort((a, b) => a.value - b.value);
+        console.log("after sort: ", unspentUTXOS);
+        let totalUTXOAmount = 0,
+          i = 0;
+          
+          while (i < unspentUTXOS.length && totalUTXOAmount < amount) {
+            const utxo = unspentUTXOS[i++];
+            totalUTXOAmount += utxo.value;
+            utxo.spent = true;
+            result.push(utxo);
+          }
+
+              // there was not enough balance in the hot wallet
+        if (totalUTXOAmount < amount) {
+          unspentUTXOS.forEach((utxo) => (utxo.spent = false));
+          toast.error('insufficient balance in wallet')
+          return Promise.reject({
+            message: `not enought balance in hot wallet:`,
+            err: 'insufficient balance in hot wallet',
+          });
+        }
+        
+        const totalAmount = result.reduce((acc, utxo) => acc + utxo.value, 0);
+        const change = Math.round(totalAmount - amount - TX_FEES);
+        console.log("total amount to be sent", totalAmount, "and change", change);
+        if (change < 0) {
+          toast.error('insufficient balance in wallet to provide fees');
+          return Promise.reject({
+            message: `not enought balance in hot wallet`,
+            err: 'insufficient balance in wallet',
+          });
+        }
+        const NETWORK = btclib.networks.testnet;
+
+        try
+        {const to = this.props.clientAddress;
+        const txBuilder = new btclib.TransactionBuilder(btclib.networks.testnet);
+        console.log("txn builder");
+        txBuilder.addOutput(to, amount);
+        console.log("add output to");
+        txBuilder.addOutput(this.props.currWallet.address, change);
+        console.log("get change");
+
+        result.forEach((utxo) => txBuilder.addInput(utxo.tx_hash, utxo.tx_output_n));
+        console.log("add input done now will sign: ", this.props.currWallet.private_key);
+        for (let i = 0; i < result.length; i++) {txBuilder.sign(i, keyPair);}
+        //txBuilder.sign(0, this.props.currWallet.private_key);
+        const tx = txBuilder.build(); 
+        console.log("txn builder builld");  
+        console.log("tx: ", tx)  
+        const txHex = tx.toHex();
+        console.log('trxn hex comes: ', txHex);
+        let bodyy = {tx: txHex} 
+        // https://live.blockcypher.com/btc-testnet/pushtx/
+        //--prodChange
+        const sendTxData = () =>
+              fetch(`https://api.blockcypher.com/v1/btc/test3/txs/push`, { headers: { 'Content-Type': 'application/json'} , method: "POST", body:JSON.stringify(bodyy) })
+                  .then(r => r.json())
+                  .then(jsonn => (console.log("txData send for monitoring bach gye",jsonn), jsonn))
+                  .catch(err => console.error("txData send for monitoring lag gaye",err));    
+        sendTxData()
+          .then((r) => (console.log("what happens now>>>??", r.tx.hash), this.props.finalPayment(this.props.currWallet.address, r.tx.hash)))
+          .catch((error) => console.log(error,"sendTxData catch error occured"));   
       
-      while (i < unspentUTXOS.length && totalUTXOAmount < amount) {
-        const utxo = unspentUTXOS[i++];
-        totalUTXOAmount += utxo.value;
-        utxo.spent = true;
-        result.push(utxo);
+      } catch(error){console.log("error in trxnVuilder", error)} 
+        
+                                                                    
+
+
+        return result;
       }
-
-      		// there was not enough balance in the hot wallet
-		if (totalUTXOAmount < amount) {
-      unspentUTXOS.forEach((utxo) => (utxo.spent = false));
-      toast.error('insufficient balance in wallet')
-			return Promise.reject({
-				message: `not enought balance in hot wallet:`,
-				err: 'insufficient balance in hot wallet',
-			});
+    }catch(err){
+      toast.err(`Error in building trx ${err}`)
     }
-    
-    const totalAmount = result.reduce((acc, utxo) => acc + utxo.value, 0);
-    const change = (totalAmount - amount - TX_FEES).toFixed();
-    console.log("total amount to be sent", totalAmount, "and change", change);
-    if (change < 0) {
-      toast.error('insufficient balance in wallet to provide fees');
-      return Promise.reject({
-        message: `not enought balance in hot wallet`,
-        err: 'insufficient balance in wallet',
-      });
-    }
-    const NETWORK = btclib.networks.testnet;
-
-    const to = 'mhKiusBhp4KjDo7pKf96zGKioMts1PLEA2';
-    // const txBuilder = new btclib.TransactionBuilder();
-    // txBuilder.addOutput(to, amount);
-    // txBuilder.addOutput('mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC', change);
-
-    // result.forEach((utxo) => txBuilder.addInput(utxo.tx_hash, utxo.tx_output_n));
-    // for (let i = 0; i < result.length; i++) {txBuilder.sign(i, 'tpubD6NzVbkrYhZ4XieVAMFnF3XXwmC4zQQA7pjV4DVaVRomt7Vidi5hs961BYibkPKURAeassEFkVPx3RMXKJJ7v82bJFj34BASWhJeR1UuLED');}
-    // const tx = txBuilder.build();     
-    // const txHex = tx.toHex();
-    // console.log('trxn hex comes: ', txHex);                                                                        
-
-
-		return result;
   }
 
   initiateTransaction = async () =>{
     if(this.props.currency==="Ethereum"){
         const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
-        let receiver = web3.utils.toChecksumAddress(this.props.ethAddress);
+        let receiver = web3.utils.toChecksumAddress(this.props.clientAddress);
         let amount = this.props.currencyQty;
         let sender = web3.utils.toChecksumAddress(this.props.currWallet.address);
         let pvtKey = this.props.currWallet.private_key;
@@ -254,7 +294,7 @@ export class ContributionConfirm extends React.PureComponent {
               else
               {
                 console.log("Send signed trxn res: ", res);
-                //this.props.finalPayment(sender, res);
+                this.props.finalPayment(sender, res);
               }
             }.bind(this))
         }
@@ -272,9 +312,12 @@ export class ContributionConfirm extends React.PureComponent {
       const TESTNET = btclib.networks.testnet;
       var address = this.props.currWallet.address
       console.log("then after key: ",this.props.currWallet.private_key, "address:: ", address);
-      var yourAddressPrivateKeyWIF = btclib.PrivateKey('testnet').toWIF();
-      var yourAddresskeyPair = btclib.ECPair.fromWIF(yourAddressPrivateKeyWIF, TESTNET)
-      console.log("match this: ", yourAddresskeyPair.getAddress())
+      // var yourAddressPrivateKeyWIF = btclib.PrivateKey('testnet').toWIF();
+      // var yourAddresskeyPair = btclib.ECPair.fromWIF(yourAddressPrivateKeyWIF, TESTNET)
+      // console.log("match this: ", yourAddresskeyPair.getAddress())
+      //var key = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.testnet);
+      //address = key.getAddress();
+      //console.log("web se aaiy key: ", key)
 
       // var Insight = bitExplorers.Insight;
       // console.log("Insight aaya: ", Insight)
@@ -289,7 +332,7 @@ export class ContributionConfirm extends React.PureComponent {
       // })
 
       //axios.get('https://api.blockcypher.com/v1/btc/test3/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspaentOnly=true')
-      axios.get('https://api.blockcypher.com/v1/btc/test3/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspentOnly=true')
+      axios.get(`https://api.blockcypher.com/v1/btc/test3/addrs/${address}?unspentOnly=true`)                     //--prodChange
       .then((res) => res.data)
       .then((obj) => this.getUTXOdetails(obj))
       .then(obj => console.log(obj))
@@ -312,9 +355,9 @@ export class ContributionConfirm extends React.PureComponent {
         networkPassphrase: StellarSdk.Networks.TESTNET})
         // Add a payment operation to the transaction
         .addOperation(StellarSdk.Operation.payment({
-          destination: 'GBDKEZGRBMBWDKPUILGUDQ737AV7A563QWWDJZVTRJ6LBMYEVRQY2546',
+          destination: this.props.clientAddress,
           asset: StellarSdk.Asset.native(),
-          amount: '100'
+          amount: amount
         }))
         // Make this transaction valid for the next 30 seconds only
         .setTimeout(30)
@@ -331,7 +374,61 @@ export class ContributionConfirm extends React.PureComponent {
       // Submit the transaction to the Horizon server. The Horizon server will then
       // submit the transaction into the network for us.
       const transactionResult = await server.submitTransaction(transaction);
-      if (!!transactionResult) {console.log("ho gya stellar transfer::: ", transactionResult)}
+      if (!!transactionResult) {
+        console.log("ho gya stellar transfer::: ", transactionResult)
+        this.props.finalPayment(this.props.currWallet.address, transactionResult);
+      } else {
+        toast.error("Error in submitting Stellar Transaction. Check Stellar Explorer")
+      }
+    } else if(this.props.currency === 'USDT') {
+      var address = '0xD92E713d051C37EbB2561803a3b5FBAbc4962431';
+      var abi = [{"constant":true,"inputs":[],"name":"name","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_upgradedAddress","type":"address"}],"name":"deprecate","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_spender","type":"address"},{"name":"_value","type":"uint256"}],"name":"approve","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"deprecated","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_evilUser","type":"address"}],"name":"addBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_from","type":"address"},{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transferFrom","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"upgradedAddress","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"balances","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"decimals","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"maximumFee","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"_totalSupply","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"unpause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_maker","type":"address"}],"name":"getBlackListStatus","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"},{"name":"","type":"address"}],"name":"allowed","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"paused","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"who","type":"address"}],"name":"balanceOf","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[],"name":"pause","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"getOwner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"owner","outputs":[{"name":"","type":"address"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"symbol","outputs":[{"name":"","type":"string"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_to","type":"address"},{"name":"_value","type":"uint256"}],"name":"transfer","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"newBasisPoints","type":"uint256"},{"name":"newMaxFee","type":"uint256"}],"name":"setParams","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"issue","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"amount","type":"uint256"}],"name":"redeem","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[{"name":"_owner","type":"address"},{"name":"_spender","type":"address"}],"name":"allowance","outputs":[{"name":"remaining","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[],"name":"basisPointsRate","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":true,"inputs":[{"name":"","type":"address"}],"name":"isBlackListed","outputs":[{"name":"","type":"bool"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"_clearedUser","type":"address"}],"name":"removeBlackList","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":true,"inputs":[],"name":"MAX_UINT","outputs":[{"name":"","type":"uint256"}],"payable":false,"stateMutability":"view","type":"function"},{"constant":false,"inputs":[{"name":"newOwner","type":"address"}],"name":"transferOwnership","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"constant":false,"inputs":[{"name":"_blackListedUser","type":"address"}],"name":"destroyBlackFunds","outputs":[],"payable":false,"stateMutability":"nonpayable","type":"function"},{"inputs":[{"name":"_initialSupply","type":"uint256"},{"name":"_name","type":"string"},{"name":"_symbol","type":"string"},{"name":"_decimals","type":"uint256"}],"payable":false,"stateMutability":"nonpayable","type":"constructor"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Issue","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"amount","type":"uint256"}],"name":"Redeem","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"newAddress","type":"address"}],"name":"Deprecate","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"feeBasisPoints","type":"uint256"},{"indexed":false,"name":"maxFee","type":"uint256"}],"name":"Params","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_blackListedUser","type":"address"},{"indexed":false,"name":"_balance","type":"uint256"}],"name":"DestroyedBlackFunds","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"AddedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":false,"name":"_user","type":"address"}],"name":"RemovedBlackList","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"owner","type":"address"},{"indexed":true,"name":"spender","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Approval","type":"event"},{"anonymous":false,"inputs":[{"indexed":true,"name":"from","type":"address"},{"indexed":true,"name":"to","type":"address"},{"indexed":false,"name":"value","type":"uint256"}],"name":"Transfer","type":"event"},{"anonymous":false,"inputs":[],"name":"Pause","type":"event"},{"anonymous":false,"inputs":[],"name":"Unpause","type":"event"}];
+      var result=0;
+      let tokenAmount = this.props.currencyQty*1000000;
+      console.log("abi: ", abi, address)
+      try{
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+      let userAddress = web3.utils.toChecksumAddress(this.props.currWallet.address);
+      const contract = new web3.eth.Contract(abi, address);
+      //console.log("contract hai: ", contract)
+
+      let pvtKey = this.props.currWallet.private_key;
+        let rawTransaction = {
+        "from": userAddress,
+          "to": address,
+          "value": '0x0',
+          'gasPrice': web3.utils.toHex(20 * 1e9),
+          'gasLimit': web3.utils.toHex(210000),
+          "chainId": "0x04",
+          "data": contract.methods.transfer(this.props.clientAddress, tokenAmount).encodeABI(),
+          }; //--prodChange
+          try
+          {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
+            if(err)
+            {console.log("Error occured in signtrxn",err)}
+            else
+            {
+              console.log("Sign trxn res: ", res);
+              web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
+                if(err)
+                { toast.error(`Error in sending trxn: ${err}`)
+                  console.log("Error occured in sendDisngnedtrxnn", err)}
+                else
+                {
+                  console.log("Send signed trxn res: ", res);
+                  this.props.finalPayment(userAddress, res);
+                }
+              }.bind(this))
+          }
+        }.bind(this));
+        } catch(error){
+          toast.error(error)
+          console.log("in catch of sending transaction trxn: ",error);
+        }
+      } catch(err){
+        toast.error(`Error in usdt tranxn ${err}`)
+          console.log("error in making USDT trxn")
+      }
     }
   }
 
@@ -617,10 +714,11 @@ export class ContributionConfirm extends React.PureComponent {
                 <div className="purchase-container">
                   <h4 className="main-color--blue">Confirm Payment</h4>
                   <p className="main-color--blue">
-                    {this.props.paymentMode == 'viaMetamaskExt'?'This is the QR code of Centralex`s Ethereum address':
+                    {/* {this.props.paymentMode == 'viaMetamaskExt'?'This is the QR code of SWAN`s Ethereum address':
                         `Scan this Address QR Code from your${" "}
                         ${this.props.currency} wallet${" "}`
-                    }
+                    } */}
+                    This is the QR code SWAN's {this.state.curr} address
                  </p>
                   <div className="qr-code" style={{ }}>
                       {this.props.currency === "Bitcoin" ? (
@@ -630,12 +728,9 @@ export class ContributionConfirm extends React.PureComponent {
                       )}
                   </div>
                   <p className="main-color--blue">
-                  {this.props.paymentMode == 'viaMetamaskExt'?'Click the button below to ':
-                        ''
-                    }
-                 Send the indicated amount to this {this.props.currency} Address </p>
+                  Click the button below to send the indicated amount to this {this.props.currency} Address </p>
                  <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
-                              <input value={`${this.props.currencyQty} ETH`}
+                              <input value={`${this.props.currencyQty} ${this.props.currency}`}
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input" style={{textAlign:'center', font: 'normal 18px Lato'}}
                               />
@@ -651,11 +746,11 @@ export class ContributionConfirm extends React.PureComponent {
                             </CopyToClipboard>
                         </div>
                         <div style={{width: '27em' , position: 'relative', marginBottom : '20px'}}>
-                            <input value={this.props.ethAddress }
+                            <input value={this.props.clientAddress }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input " style={{textAlign:'center', font: 'normal 18px Lato'}}
                               />
-                            <CopyToClipboard text={this.props.ethAddress}
+                            <CopyToClipboard text={this.props.clientAddress}
                               onCopy={() => {this.setState({copied: true});
                                toast.success("Copied");
                               }}>
@@ -668,7 +763,7 @@ export class ContributionConfirm extends React.PureComponent {
                         </div>
 
                  <p className="main-color--blue">
-                 You will receive {(this.props.tokens).toFixed(3)} Centralex coins </p>
+                 You will receive {(this.props.tokens).toFixed(3)} SWAN tokens </p>
                  <div className="btn-row confirm-transaction-button">
                     <button 
                      className="form-button btn btn-primary"

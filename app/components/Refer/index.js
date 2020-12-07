@@ -22,7 +22,7 @@ import {
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import Info from "../Info";
 
-const SHARE_POST = 'Centralex introduces a unique tokensale platform for the Community.You can earn upto 2000 centralex Tokens , Sign-up';
+const SHARE_POST = 'SWAN introduces a unique tokensale platform for the Community.You can earn upto 2000 SWAN Tokens , Sign-up';
 
 class Refer extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props) {
@@ -76,7 +76,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                 :
                 null
             }
-            Refer & Earn - Invite Your Friends & Get Free Centralex Tokens
+            Refer & Earn - Invite Your Friends & Get Free SWAN Tokens
           </div>
           <div className="panel-body">
         <div className="row">
@@ -85,7 +85,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
               <div className="row">
                 <div className="col-sm-12 col-md-6 col-md-offset-3">
 
-                  <p>Share your unique referral link with your friends and you will earn free Centralex Tokens.</p>
+                  <p>Share your unique referral link with your friends and you will earn free SWAN Tokens.</p>
                   <p>Refer bonus is {percent}% of tokens purchased by the referee</p>
                   <div className="referral-link">
                   <input type="text" onChange={ (e) => {this.setState({ link : e.target.value })}} value={`https://tokensale.centralex.com/signup/refer/${this.state.code}`} id="myInput" />
@@ -99,7 +99,7 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
                   <div className="referral">
 
 
-                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.centralex.com/signup/refer/${this.state.code}?channel=facebook`} quote={`centralex.com introduces a unique tokensale platform for the Community.You can earn upto 2000 centralex Tokens , Sign-up`}>
+                    <FacebookShareButton style={{ marginRight: '10px' }} url={`https://tokensale.centralex.com/signup/refer/${this.state.code}?channel=facebook`} quote={`SWAN.com introduces a unique tokensale platform for the Community.You can earn upto 2000 SWAN Tokens , Sign-up`}>
                       <FacebookIcon size={42} round />
 
                     </FacebookShareButton>
