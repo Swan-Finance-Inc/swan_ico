@@ -1393,7 +1393,7 @@ hide=(e)=>{
                   <div className='row howMuch' style={{ display: 'flex',flexDirection: 'column',
                    paddingLeft: '20px', paddingTop: '10px'}}>
                   <div className="trade-in-centralex">
-                  <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Stellar') ? (this.state.tokensPerStellar) : (this.state.tokensPerUsdt)} Centralex Tokens</span>
+                  <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Stellar') ? (this.state.tokensPerStellar) : (this.state.tokensPerUsdt)} SWAN Tokens</span>
                   {
                     this.state.curr !== 'Dollar' ?
                     <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?

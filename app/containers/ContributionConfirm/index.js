@@ -375,7 +375,7 @@ export class ContributionConfirm extends React.PureComponent {
       // submit the transaction into the network for us.
       const transactionResult = await server.submitTransaction(transaction);
       if (!!transactionResult) {
-        console.log("ho gya stellar transfer::: ", transactionResult)
+        console.log("ho gya stellar transfer::: ", transactionResult.hash)
         this.props.finalPayment(this.props.currWallet.address, transactionResult.hash);
       } else {
         toast.error("Error in submitting Stellar Transaction. Check Stellar Explorer")
