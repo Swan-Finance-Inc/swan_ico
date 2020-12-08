@@ -2034,7 +2034,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     $ {(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance).toPrecision(3))}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Deposit</button>
+                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Withdraw</button>
@@ -2055,7 +2055,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     $ {(this.state.ethToDollar*this.state.ethBalance).toPrecision(5)}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Deposit</button>
+                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Withdraw</button>
@@ -2076,7 +2076,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     $ {(this.state.xlmToDollar*this.state.xlmBalance).toPrecision(7)}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Deposit</button>
+                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Withdraw</button>
@@ -2097,7 +2097,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     $ {this.state.usdtToDollar*this.state.usdtBalance/1000000}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Deposit</button>
+                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary">Withdraw</button>

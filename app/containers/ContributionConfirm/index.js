@@ -171,7 +171,7 @@ export class ContributionConfirm extends React.PureComponent {
   getUTXOdetails = (obj) => {
     console.log("API Obj: ",obj)
     var result = [];
-    var amount = 3000;
+    var amount = this.satoshi_to_btc(this.props.currencyQty);
     var TX_FEES = 350;
     var keyPair = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.testnet);
     var unspentUTXOS = obj.txrefs;
@@ -375,8 +375,8 @@ export class ContributionConfirm extends React.PureComponent {
       // submit the transaction into the network for us.
       const transactionResult = await server.submitTransaction(transaction);
       if (!!transactionResult) {
-        console.log("ho gya stellar transfer::: ", transactionResult)
-        this.props.finalPayment(this.props.currWallet.address, transactionResult);
+        console.log("ho gya stellar transfer::: ", transactionResult.hash)
+        this.props.finalPayment(this.props.currWallet.address, transactionResult.hash);
       } else {
         toast.error("Error in submitting Stellar Transaction. Check Stellar Explorer")
       }
@@ -487,7 +487,8 @@ export class ContributionConfirm extends React.PureComponent {
   }
 
 
-
+  //satoshi to BTC conversion
+  satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
   // End Container functions
 
   // Begin render function

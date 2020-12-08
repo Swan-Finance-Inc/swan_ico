@@ -124,6 +124,8 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       currInterestAccountDetails:'',
       claimLoader: false,
       trxnReceipt: '',
+      isStaker: false,
+      monthDuration:16,
     };
 
     // this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -148,6 +150,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     this.updateStatusFromContract = this.updateStatusFromContract.bind(this);
     this.checkHashStatus = this.checkHashStatus.bind(this);
     this.claimTokens = this.claimTokens.bind(this);
+    this.getStakedOrNot = this.getStakedOrNot.bind(this);
 
 
     console.log("yetopropshai",this.props)
@@ -377,6 +380,68 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     }
   }
 
+  claimStakedTokens=()=>{
+    console.log("enetered claimStaked tokens")
+    var address = constants.stakeContractAddress;
+    var abi = constants.stakeContractAbi;
+    //var id = this.state.currInterestAccountDetails.proposalId;
+    
+    //var spender = constants.stakeContractAddress;
+
+    try{    
+    
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
+    //let tokenAmount = this.state.tokens;
+    const contract = new web3.eth.Contract(abi, address);
+    console.log("contract hai: ")
+
+    let pvtKey = this.state.ethWallet.private_key;
+    let rawTransaction = {
+    "from": this.state.ethWallet.address,
+      "to": address,
+      "value": '0x0',
+      'gasPrice': web3.utils.toHex(20 * 1e9),
+      'gasLimit': web3.utils.toHex(210000),
+      "chainId": "0x03",
+      "data": contract.methods.claimStakeTokens().encodeABI(),
+      }; //--prodChange
+      try
+      {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
+        if(err)
+        {console.log("Error occured in signtrxn",err)}
+        else
+        {
+          console.log("Sign trxn res: ", res);
+          web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
+            if(err)
+            { toast.error(`Error in sending trxn: ${err}`)
+              console.log("Error occured in sendDisngnedtrxnn", err)}
+            else
+            {
+              toast.success('Transaction initiated, Wait for confirmation');
+              console.log("Send signed trxn res: ", res);
+              this.setState({
+                withdrawLoader:true
+              })
+              this.checkHashStatus(res, this.updateStatusFromContract);
+            }
+          }.bind(this))
+      }
+    }.bind(this));
+    } catch(error){
+      toast.error(`Error in signing trxn: ${error}`)
+      console.log("in catch of sending transaction trxn: ",error);
+    }
+    //const result = await contract.methods.transfer('0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632','1').send({ from: '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E', value: web3.utils.toWei('0.01',"ether") });
+    //console.log("hehe",result);
+    } catch(err){
+        toast.error(`Error in claiming tokens: ${err}`)
+        console.log(err,"error hai")
+    }
+  }
+
+
   getInterestAccountDetails=async()=>{
     var address = constants.stakeContractAddress;
     var abi = constants.stakeContractAbi, result,finResult=[],i=1;
@@ -540,6 +605,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
               },()=>{
                 this.getSwanBalance();
                 this.getDepositCount();
+                this.getStakedOrNot();
                 
               })
             }
@@ -1504,6 +1570,26 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     // }
   }
 
+  getStakedOrNot=async()=>{
+    var address = constants.stakeContractAddress;
+    var abi = constants.stakeContractAbi, result=0;
+    console.log("abi: ", abi, address, this.state.ethWallet)
+    try{
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    const contract = new web3.eth.Contract(abi, address);
+    //console.log("contract hai: ", contract)
+        
+    result = await contract.methods.isStaker(userAddress).call();
+    
+    this.setState({isStaker: result});
+    //console.log("hehe",web3.utils.fromWei(result));
+    } catch(err){
+      toast.error(`Error in getStakedOrNot ${err}`)
+        console.log("error in get swan balance")
+    }
+  }
+
   downloadTxtFile = () => {
     if(this.state.cenxWalletPvtKey==''){
       this.props.getCenxWallet();
@@ -1713,6 +1799,8 @@ lookupPeriod = (e) =>{
       return (
       <div>
         <EarnInterest  
+        isStaker={this.state.isStaker}
+        monthDuration={this.state.monthDuration}
         ethWallet = {this.state.ethWallet}
         back={this.comeBack}
         />  
@@ -1845,7 +1933,8 @@ lookupPeriod = (e) =>{
               Stake $2000 of SWAN tokens to earn higher interest rates for SWAN and all other cryptocurrencies and stablecoins. Without staking $2000 of SWAN tokens here, the interest rates are 4% less.
               </div>
               <div className="col-md-6 col-lg-6 col-sm-6" style={{textAlign:'center'}}>
-               <button className='fractal-id-btn' onClick={()=>this.setState({stake:true})}>STAKE NOW</button> 
+               {this.state.isStaker?<button className='fractal-id-btn' onClick={()=>this.claimStakedTokens()}>{this.state.withdrawLoader?<i className="fa fa-cog fa-spin fa-3x fa-fw" style={{fontSize:'15px'}} />:'UNSTAKE'}</button>
+               :<button className='fractal-id-btn' onClick={()=>this.setState({stake:true})}>STAKE NOW</button> }
               </div>
 
             </div>
@@ -1913,7 +2002,7 @@ lookupPeriod = (e) =>{
                     16% APY
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3" style={{marginBottom:'5px'}}>
-                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true})}>EARN INTREST</button>
+                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true, monthDuration:1})}>EARN INTREST</button>
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3">
                     3 Months
@@ -1925,7 +2014,7 @@ lookupPeriod = (e) =>{
                     20%APY
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3" style={{marginBottom:'5px'}}>
-                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true})}>EARN INTREST</button>
+                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true, monthDuration:3})}>EARN INTREST</button>
                   </div>
 
                 </div>

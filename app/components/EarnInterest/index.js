@@ -13,7 +13,7 @@ export class EarnInterest extends React.PureComponent{
         super(props);
         this.state = {
           interest: 16,
-          duration: 1,
+          duration: this.props.monthDuration,
           tokens:0,
           trxnReceipt: '',
           approveLoader: false,
@@ -23,7 +23,7 @@ export class EarnInterest extends React.PureComponent{
           stakeSuccess: false,
           stakeStart: false,
           showEarnInterest: false,
-          isStaker: false,
+          isStaker: this.props.isStaker,
         };
         this.goBack = this.goBack.bind(this);
         this.changeInterest = this.changeInterest.bind(this);
@@ -34,7 +34,8 @@ export class EarnInterest extends React.PureComponent{
         this.getStakedOrNot = this.getStakedOrNot.bind(this);
     }
     componentDidMount(){
-      this.getStakedOrNot();
+      //this.getStakedOrNot();
+      this.changeInterest(this.state.duration);
       
     }
 
@@ -43,16 +44,30 @@ export class EarnInterest extends React.PureComponent{
     }
 
     changeInterest = (view)=>{
-     if(view === 'oneMonth') {
+     if(view === 1) {
+       if(this.state.isStaker){
         this.setState({
           interest:16,
           duration: 1
         })
-     } else if(view === 'threeMonths'){
-      this.setState({
-        interest:20,
-        duration: 3
-      })
+       } else {
+        this.setState({
+          interest:12,
+          duration: 1
+        })
+       }
+     } else if(view === 3){
+       if(this.state.isStaker){
+        this.setState({
+          interest:20,
+          duration: 3
+        })
+       } else {
+        this.setState({
+          interest:16,
+          duration: 3
+        })
+       }
      }
     }
 
@@ -370,15 +385,15 @@ export class EarnInterest extends React.PureComponent{
                               <div style={{color:"#465490", fontSize:"20px", fontWeight:"bold"}}>Choose Earn Interest Period</div>
                             <div className="col-md-12">
                               <div style={{display:'flex',flexDirection:'row', justifyContent:'center', }}>
-                                { this.state.interest === 16 ? (
-                                  <div onClick={ ()=>this.changeInterest("oneMonth")} style={{margin:"5px",cursor:'pointer', backgroundColor: '#2498D5', color: 'white', borderRadius: '5px'}} className="personal"><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>1 Month</h2></div>
+                                { this.state.duration === 1 ? (
+                                  <div onClick={ ()=>this.changeInterest(1)} style={{margin:"5px",cursor:'pointer', backgroundColor: '#2498D5', color: 'white', borderRadius: '5px'}} className="personal"><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>1 Month</h2></div>
                                 ) : (
-                                  <div onClick={ ()=>this.changeInterest("oneMonth")} style={{margin:"5px",cursor:'pointer'}}><h2  style={{margin:"5px", fontSize: '16px' , color : '#2498D5'}}>1 Month</h2></div>
+                                  <div onClick={ ()=>this.changeInterest(1)} style={{margin:"5px",cursor:'pointer'}}><h2  style={{margin:"5px", fontSize: '16px' , color : '#2498D5'}}>1 Month</h2></div>
                                 )}
-                                { this.state.interest === 20 ? (
-                                  <div  onClick={()=>this.changeInterest("threeMonths")} style={{margin:"5px",cursor:'pointer', backgroundColor: '#2498D5', color: 'white', borderRadius: '5px'}}><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>3 Months</h2></div>
+                                { this.state.duration === 3 ? (
+                                  <div  onClick={()=>this.changeInterest(3)} style={{margin:"5px",cursor:'pointer', backgroundColor: '#2498D5', color: 'white', borderRadius: '5px'}}><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>3 Months</h2></div>
                                 ) : (
-                                  <div  onClick={()=>this.changeInterest("threeMonths")} style={{margin:"5px",cursor:'pointer'}}><h2  style={{margin:"5px", fontSize: '16px',color : '#2498D5'}}>3 Months</h2></div>
+                                  <div  onClick={()=>this.changeInterest(3)} style={{margin:"5px",cursor:'pointer'}}><h2  style={{margin:"5px", fontSize: '16px',color : '#2498D5'}}>3 Months</h2></div>
                                 )}
                               </div>
                             </div>
