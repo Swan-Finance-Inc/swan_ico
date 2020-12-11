@@ -48,7 +48,8 @@ export class RegisterPage extends React.PureComponent {
       password_class: "fa fa-fw fa-eye-slash",
       conf_password_class: "fa fa-fw fa-eye-slash",
       channel: "",
-      fullname: "",
+      firstName:'',
+      lastName:'',
       email: "",
       password: "",
       confirmPassword: "",
@@ -103,7 +104,6 @@ export class RegisterPage extends React.PureComponent {
   }
 
   onChange(e) {
-    // console.log(e);
     this.setState({
       "g-recaptcha-response": e,
     });
@@ -150,11 +150,18 @@ export class RegisterPage extends React.PureComponent {
     // var nameRegex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
     var nameRegex = /^(?!\s+$)[A-Za-z]+$/ ;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    if(this.state.fullname.length < 4 || this.state.fullname.length > 20){
+    if(this.state.firstName.length < 4 || this.state.firstName.length > 20){
       this.notifyError("Name should be between 4 to 20 characters");
     }
     else
-    if(!nameRegex.test(this.state.fullname)){
+    if(!nameRegex.test(this.state.firstName)){
+      this.notifyError("Name should contain only alphabets without space")
+    }
+    if(this.state.lastName.length < 4 || this.state.lastName.length > 20){
+      this.notifyError("Name should be between 4 to 20 characters");
+    }
+    else
+    if(!nameRegex.test(this.state.lastName)){
       this.notifyError("Name should contain only alphabets without space")
     }
     else if(!this.state.email){
@@ -164,18 +171,19 @@ export class RegisterPage extends React.PureComponent {
       this.notifyError("Password should contain atleast 8 characters including 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.");
     }
     
-    // else if(!this.state.confirmPassword){
-    //   this.notifyError("Please enter the confirm password");
-    // }
-    // else if( this.state.password !== this.state.confirmPassword){
-    //   this.notifyError("Password Dont match");
-    // }
+    else if(!this.state.confirmPassword){
+      this.notifyError("Please enter the confirm password");
+    }
+    else if( this.state.password !== this.state.confirmPassword){
+      this.notifyError("Password didn't match");
+    }
     else if (!this.state.captcha) {
       this.notifyError("Please verify that you are not a robot");
     } 
     else{
       user = {
-        fullName: this.state.fullname,
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
         email: this.state.email,
         password: this.state.password,
         rfcode: this.state.referToken,
@@ -284,7 +292,6 @@ export class RegisterPage extends React.PureComponent {
   };
 
   render() {
-    console.log(this.props, " props in Register Page");
     console.log(this.state, " state in Register Page");
     if (localStorage.token) {
       return <Redirect to="/dashboard" />;
@@ -339,9 +346,9 @@ export class RegisterPage extends React.PureComponent {
                       <div className="col col-md-6" >
                         <TextFieldInput
                           type="text"
-                          name="fullname"
+                          name="firstName"
                           label="First Name"
-                          value={this.state.fullname}
+                          value={this.state.firstName}
                           variant="outlined"
                           required={true}
                           handleChange={(e) => {
@@ -360,9 +367,9 @@ export class RegisterPage extends React.PureComponent {
                       <div className="col col-md-6" >
                         <TextFieldInput
                           type="text"
-                          name="fullname"
+                          name="lastName"
                           label="Last Name"
-                          value={this.state.fullname}
+                          value={this.state.lastName}
                           variant="outlined"
                           required={true}
                           handleChange={(e) => {
@@ -424,9 +431,9 @@ export class RegisterPage extends React.PureComponent {
                       <div style={{ marginTop: "30px" }}>
                         <TextFieldInput
                           type="password"
-                          name="password"
+                          name="confirmPassword"
                           label="Confirm Password"
-                          value={this.state.password}
+                          value={this.state.confirmPassword}
                           variant="outlined"
                           required={true}
                           handleChange={(e) => {

@@ -164,8 +164,12 @@ export class Stake extends React.PureComponent{
         console.log("enetered stake tokens")
         var address = constants.stakeContractAddress;
         var abi = constants.stakeContractAbi;
+        var checkbox = document.getElementById('stakeToken').checked
         //var spender = constants.stakeContractAddress;
-  
+        if(!checkbox){
+          toast.error('Please confirm terms and conditions');
+          return
+        }
         try{    
         
         const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
@@ -229,6 +233,15 @@ export class Stake extends React.PureComponent{
         showStake:false,
       })
     }
+
+    onStakeToken = () =>{
+      if(this.state.tokens>0){
+        this.setState({showStake:true})
+      }
+      else{
+        toast.error('Please fill swan tokens')
+      }
+    }
   
 
     render(){
@@ -284,8 +297,28 @@ export class Stake extends React.PureComponent{
                               
                             </div>
                             <div className="row" style={{marginTop:"20px", textAlign:"center"}}>
+                            <div className="col-sm-12 col-md-12 col-lg-12" style={{marginTop:"20px"}}>
+                            <label className="form-check-label" htmlFor="stakeToken">
+                          <input
+                            id="stakeToken"
+                            className="boolean required form-check-input"
+                            required
+                            label="false"
+                            data-title="Please confirm"
+                            data-placement="left"
+                            data-trigger="manual"
+                            data-offset="0, 55"
+                            aria-required="true"
+                            type="checkbox"
+                            name="stakeToken"
+                          />
+                          &nbsp; 
+                          I Agree to Terms and Conditions
+                        
+                        </label>
+                              </div>
                               <div className="col-sm-12 col-md-12 col-lg-12" style={{marginTop:"20px"}}>
-                                <button className="btn btn-primary" onClick={()=>this.stakeTokens()}>Confirm</button>
+                                <button className="btn btn-primary" disabled={this.state.stakeStart||this.state.stakeSuccess?true:false} onClick={()=>this.stakeTokens()}>Confirm</button>
                               </div>
                               <div className="col-sm-12 col-md-12 col-lg-12" style={{marginTop:"20px"}}>
                                 <button className="btn" onClick={()=>this.setState({showStake:false})}>Cancel</button>
@@ -370,7 +403,7 @@ export class Stake extends React.PureComponent{
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right"}}>
                                   <button className="btn btn-primary">CANCEL</button>
-                                  <button className="btn-primary btn" onClick={()=>this.setState({showStake:true})}>STAKE TOKENS</button>
+                                  <button className="btn-primary btn" onClick={this.onStakeToken}>STAKE TOKENS</button>
                                 </div>
                               </div>
                             </div>

@@ -403,9 +403,9 @@ class Balance extends React.PureComponent {
             <div className="col-lg-5" style={{   }}>
               <div className="balance-card" id="fixed-height" style={{ overflow : 'hidden' }}>
                 <div className="balance-card-inner-wrappper">
-                  <h3 className="balance-card-inner-wrapper-heading">
+                  <h4 className="balance-card-inner-wrapper-heading">
                     Exchange Rates
-                  </h3>
+                  </h4>
                   <div className="exchange-trading-container" >
                   <div className="exchange-text">You get*</div>
                     <div className="exchange-trading-input" >

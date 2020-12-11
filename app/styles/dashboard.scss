@@ -151,6 +151,13 @@ color:blue
 	top: 70px;
 	left: 0px;
 }
+.removeImage{
+	width: auto;
+	background-color: transparent !important;
+	color: #465490;
+	border: none;
+	text-decoration: underline;
+}
 // .changeImage:hover {
 //   border-radius: 5%;
 // 	background-color:#000;
@@ -2044,7 +2051,7 @@ font-size: 25px;
 
   /*   new dashboard css */
   .main-color--blue {
-	color: #465390;
+	color: #00296B;
   }
 
   .main-color--lightblue{
@@ -2052,7 +2059,7 @@ font-size: 25px;
   }
   
   .font-weight-bold{
-	  font-weight: bold;
+	  font-weight: bold !important;
   }
 
   #fixed-height{
@@ -2085,6 +2092,7 @@ font-size: 25px;
 
   .balance-card-inner-wrapper-heading{
 	color: #465390;
+	font-weight: bold;
   }
   .balance-text{
 	background: #edeffb 0% 0% no-repeat padding-box;
@@ -3081,3 +3089,33 @@ font-size: 25px;
 	// 	-moz-box-shadow: 4px 4px 4px 4px #2D6DCD80;
 	// 	box-shadow: 4px 4px 4px 4px #2D6DCD80;
   }
+
+  .currency-dropdown{
+	  width: 80%;
+  }
+  .currency-button{
+	  width: 90%;
+	  text-align: left;
+	  height: 5rem;
+  }
+  .currency-menu{
+	  width: 100%;
+  }
+  .currency-dropdown-toggle{
+	width: 10%;
+	height: 5rem;
+  }
+
+  .nav-dropdown>a{
+	font-weight: bold !important;
+	padding: 7px 20px !important;
+  }
+
+  .nav-dropdown-signout>a{
+	font-weight: bold !important;
+	padding: 7px 20px !important;
+	  color:#D96363 !important;
+  }
+
+
+ 

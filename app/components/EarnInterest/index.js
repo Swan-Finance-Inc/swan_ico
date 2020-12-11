@@ -219,7 +219,12 @@ export class EarnInterest extends React.PureComponent{
         var address = constants.stakeContractAddress;
         var abi = constants.stakeContractAbi;
         //var spender = constants.stakeContractAddress;
-  
+        var checkbox = document.getElementById('earnInterest').checked
+        //var spender = constants.stakeContractAddress;
+        if(!checkbox){
+          toast.error('Please confirm terms and conditions');
+          return
+        }
         try{    
         
         const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
@@ -274,6 +279,14 @@ export class EarnInterest extends React.PureComponent{
         }
       }
   
+        onEarnInterest = () =>{
+          if(this.state.tokens >0){
+          this.setState({showEarnInterest:true})
+          }
+          else{
+            toast.error('Please fill swan tokens')
+          }
+        }
 
     render(){
 
@@ -333,8 +346,28 @@ export class EarnInterest extends React.PureComponent{
                               
                             </div>
                             <div className="row" style={{marginTop:"20px", textAlign:"center"}}>
+                              <div className="col-sm-12 col-md-12 col-lg-12">
+                              <label className="form-check-label" htmlFor="earnInterest">
+                          <input
+                            id="earnInterest"
+                            className="boolean required form-check-input"
+                            required
+                            label="false"
+                            data-title="Please confirm"
+                            data-placement="left"
+                            data-trigger="manual"
+                            data-offset="0, 55"
+                            aria-required="true"
+                            type="checkbox"
+                            name="earnInterest"
+                          />
+                          &nbsp; 
+                          I Agree to Terms and Conditions
+                        
+                        </label>
+                              </div>
                               <div className="col-sm-12 col-md-12 col-lg-12" style={{marginTop:"20px"}}>
-                                <button className="btn btn-primary" onClick={()=>this.stakeTokens()}>Confirm</button>
+                                <button disabled={this.state.stakeStart||this.state.stakeSuccess?true:false} className="btn btn-primary" onClick={()=>this.stakeTokens()}>Confirm</button>
                               </div>
                               <div className="col-sm-12 col-md-12 col-lg-12" style={{marginTop:"20px"}}>
                                 <button className="btn" onClick={()=>this.setState({showEarnInterest:false})}>Cancel</button>
@@ -447,7 +480,7 @@ export class EarnInterest extends React.PureComponent{
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right"}}>
                                   <button className="btn btn-primary">CANCEL</button>
-                                  <button className="btn-primary btn" onClick={()=>this.setState({showEarnInterest:true})}>EARN INTEREST</button>
+                                  <button className="btn-primary btn" onClick={this.onEarnInterest}>EARN INTEREST</button>
                                 </div>
                               </div>
                             </div>

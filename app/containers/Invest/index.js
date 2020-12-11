@@ -172,7 +172,6 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   componentDidMount() {
     this.props.getData();
     this.props.listHotWallet();
-    
     // if(this.state.paymentMode=='viaMetamaskExt')
     // {this.interval = setInterval(() => this.getMetamaskAddress(), 1000);}
     
@@ -1723,17 +1722,27 @@ apyMode = (e)=>{
 }
 
 lookupPeriod = (e) =>{
+  var sorted = []
   sorted = this.state.interestAccountDetails.map(d=>{
     return d
   })
   console.log(sorted , "vfdjksnvnvbtkbg")
   if(e.target.value ==='lTh'){
     sorted.sort(function(a , b) {
+      // var adate = new Date(a.time * 1000);
+      // var aday = adate.getDay();
+      // var bdate = new Date(b.time * 1000);
+      // var bday = bdate.getDay();
+
+
       var adate = new Date(a.time * 1000);
-      var aday = adate.getDay();
       var bdate = new Date(b.time * 1000);
-      var bday = bdate.getDay();
-      return (aday - bday )
+      var currentDate = new Date();
+      var aminutes = ((currentDate.getTime()-adate.getTime()))/60000;
+      var bminutes = ((currentDate.getTime()-bdate.getTime()))/60000;
+      var aday = Math.round(aminutes/1440)
+      var bday = Math.round(bminutes/1440)
+      return (bday - aday )
     })
   }
   else if (e.target.value ==='hTl')
@@ -1742,7 +1751,15 @@ lookupPeriod = (e) =>{
       var aday = adate.getDay();
       var bdate = new Date(b.time * 1000);
       var bday = bdate.getDay();
-    return (bday - aday )
+
+      var adate = new Date(a.time * 1000);
+      var bdate = new Date(b.time * 1000);
+      var currentDate = new Date();
+      var aminutes = ((currentDate.getTime()-adate.getTime()))/60000;
+      var bminutes = ((currentDate.getTime()-bdate.getTime()))/60000;
+      var aday = Math.round(aminutes/1440)
+      var bday = Math.round(bminutes/1440)
+    return (aday - bday )
   })
 
   this.setState({
@@ -2061,8 +2078,10 @@ lookupPeriod = (e) =>{
 
 
                 {this.state.interestAccountDetails.map(d=>{
-                  var date = new Date(1607349601 * 1000);
-                  var day = date.getDay();
+                  var date = new Date(d.time * 1000);
+                  var currentDate = new Date();
+                  var minutes = ((currentDate.getTime()-date.getTime()))/60000;
+                  var day = Math.round(minutes/1440)
                   return(
                 <div className="col-sm-12 col-md-12 col-lg-12">
                   <div style={{textAlign:"center", marginLeft:"-40px"}} >
@@ -2070,7 +2089,7 @@ lookupPeriod = (e) =>{
                     <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>{d.amount} SWAN<div className="depositText" style={{fontWeight:"16px"}}>Ends in {30-day} days</div></div>
                     <div className="col-md-3 col-lg-3 col-sm-3 depositText" style={{fontSize:"16px"}}>Total Earnings<br /><span style={{fontWeight:"bold",fontSize:"20px",color:"#414857"}}>{d.amount*d.interestRate/100} SWAN</span></div>
                     <div className="col-md-2 col-lg-2 col-sm-2 depositText" >APY<br /><span style={{fontSize:"30px"}}>{d.interestRate}%</span></div>
-                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontSize:"16px"}} onClick={()=>this.setState({showDetails:true,currInterestAccountDetails:d})}><a>Check Details</a></div>
+                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontSize:"16px"}} onClick={()=>this.setState({showDetails:true,currInterestAccountDetails:d})}><a style={{color:'#2498D5',textDecoration:'underline'}}>Check Details</a></div>
                   </div>
                   <div className="row" style={{margin:"20px"}}>
                     <div className="col-sm-12 col-md-12 col-lg-12" style={{height:"2px",borderWidth:"0",color:"gray",backgroundColor:"gray",opacity:"10%"}}></div>

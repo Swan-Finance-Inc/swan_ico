@@ -27,8 +27,8 @@ import TextFieldInput from "../../components/TextFieldInput";
 import PhoneInput from 'react-phone-number-input';
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
-
-
+import profileDummy from '../../images/Profile.png'
+import editIcon from '../../images/edit-icon.png'
 export class NavBarContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -122,7 +122,7 @@ export class NavBarContainer extends React.PureComponent {
 
 
   render() {
-    console.log(this.props.history," tttttttttttttttttttttttttttttt");
+    console.log(this.props," tttttttttttttttttttttttttttttt");
 
     return (
       <header style = {{height : "60px"}} >
@@ -144,15 +144,15 @@ export class NavBarContainer extends React.PureComponent {
             // /</Nav>/</NavDropdown>
             }
                 <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
-                <MenuItem style={{ cursor: 'pointer' }} onClick={this.userProfile}><i className="fa fa-user"></i>{this.props.username ? this.props.username : this.state.name} </MenuItem>
-                <MenuItem style={{ cursor: 'pointer' }} ><i className="fa fa-user"></i>Wallet</MenuItem>
-                <MenuItem style={{ cursor: 'pointer' }} onClick={this.profile}><i className="fa fa-user"></i>Setting</MenuItem>
-                <MenuItem style={{ cursor: 'pointer' }} ><i className="fa fa-user"></i>Reports</MenuItem>
-                <MenuItem style={{ cursor: 'pointer' }} ><i className="fa fa-user"></i>Help</MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} onClick={this.userProfile}>{this.props.username ? this.props.username : this.state.name} </MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} >Wallet</MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} onClick={this.profile}>Setting</MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} >Reports</MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} >Help</MenuItem>
                 {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem> */}
                 {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetInfo}><i className={this.props.flag===false?"fa fa-toggle-off":"fa fa-toggle-on"}></i>Reset Info flag</MenuItem> */}
                 {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.showDeleteProfile}><i className="fa fa-user-times"></i>Delete Profile</MenuItem> */}
-                <MenuItem style={{ cursor: 'pointer' }} onClick={this.showSignOut}><i className="fa fa-power-off"></i>Sign Out</MenuItem>
+                <MenuItem className="nav-dropdown-signout" style={{ cursor: 'pointer' }} onClick={this.showSignOut}><i className="fa fa-power-off"></i>Sign Out</MenuItem>
               </NavDropdown>
             </Nav>
 
@@ -215,12 +215,17 @@ export class NavBarContainer extends React.PureComponent {
               </Modal.Header>
                 <Modal.Body dialogClassName="profile-modal-body" className="profile-modal-body" >
                   <div className="row">
-                    <div className="col-md-4" style={{textAlign:'center', marginRight : 70,height : "137px"}}>
-                    <img className="img-responsive profile-Image"  src={'https://s3.amazonaws.com/websiteimagesrama/dummyProfile.png' } alt="back id" id="back_img_src"  />
-                    <br />
-                    {/* <button className="changeImage" type = "button" onClick={this.uploadProfileImage} >Change Image</button> */}
-                    <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px'}} style={{display: "none"}} onChange={this.handleBackImg}/>
-        
+                    <div className="col-md-5" style={{textAlign:'center', right:'42px',height : "137px"}}>
+                    <img className="img-responsive profile-Image"  src={profileDummy } alt="back id" id="back_img_src"  />
+                    <img className="img-responsive profile-Image" style={{width:'25px',height:'25px',left:'197px',bottom:'46px'}} src={editIcon } alt="back id" id="back_img_src"  onClick={this.uploadProfileImage}/>
+                    {/* <br /> */}
+                    {/* <button className="changeImage" type = "button"  >Change Image</button> */}
+                    <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px',display:'none'}}  onChange={this.handleBackImg}/>
+                    <div className="col-md-12" style={{position:'relative',bottom:'20px'}}>
+                    <button className="removeImage" type = "button"  >Remove Image</button>
+                    <div>Max file size is</div>
+                    </div>
+                   
                     </div>
                     
                   <div className="col-md-7" style={{marginLeft:"-14px", height : "270px"}}>

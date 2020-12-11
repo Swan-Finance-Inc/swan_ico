@@ -13,7 +13,7 @@ import { compose } from 'redux';
 import ReactTable from 'react-table';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-
+import { Link } from 'react-router-dom';
 import { makeGlobalParent } from 'containers/App/selectors';
 import { toast } from 'react-toastify';
 import { depositSuccess } from 'containers/App/actions';
@@ -29,6 +29,7 @@ import moment from 'moment';
 import Info from "../../components/Info";
 import MyPaginnation from "../../components/MyPaginnation";
 import EmptyFile from "../../images/EmptyFile.svg";
+import { CSVLink} from "react-csv/lib";
 var months = [
   "January",
   "February",
@@ -55,7 +56,24 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
       infoShow: false,
       size : '',
       data: [],
+      headers : [
+        { label: "created_at", key: "created_at" },
+        { label: "type", key: "type" },
+        { label: "amount", key: "amount" },
+        { label: "tokenPrice", key: "tokenPrice" },
+        { label: "transactionHash", key: "transactionHash" },
+        { label: "status", key: "status" },
+        { label: "tokens", key: "tokens" },
+        { label: "phase", key: "phase" },
+        { label: "rate", key: "rate" },
+
+      ],
       columns: [
+        {
+          Header: 'Time',
+          accessor: 'created_at',
+          filter: <h3>hello</h3>,
+        },
         {
           Header: 'Currency',
           accessor: 'type', // Custom cell components!
@@ -74,7 +92,17 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
         {
           Header: 'Transaction Hash',
           accessor: 'transactionHash', // Custom cell components!
-          className: 'text-center'
+          className: 'text-center',
+          Cell:({value}) =>{
+            // const hash = uritemplate.parse(
+            //   `ropsten.etherscan.io/tx/${value}`
+            // );
+            var uri =  `https://ropsten.etherscan.io/tx/${value}`
+            // console.log(uri, "dsavcrfuvrebvgkdb");
+            // window.open(uri, "_blank");  
+            return(
+            <span style={{cursor:'pointer'}} onClick = {() => window.open(uri , "_blank" ) } >{value}</span>)
+          }
         },
         {
           Header: 'Transaction Status',
@@ -107,34 +135,30 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
              accessor: 'rate', // Custom cell components!
              className: 'text-right'
            },
-        {
-          Header: 'Time',
-          accessor: 'created_at',
-          filter: <h3>hello</h3>,
-        },
+        
         {
           Header: 'Type',
           accessor: 'type',
           filter: <h3>hello</h3>,
         },
-        {
-          Header: 'Bonus /Discount',
-          accessor: 'isBonusOrDiscount',
-          className:'text-center',
-          Cell:({value})=>{
-            if(value==='staticDiscount')
-            return "Discount"
-            else {
-              return "Bonus"
-            }
-          }
+        // {
+        //   Header: 'Bonus /Discount',
+        //   accessor: 'isBonusOrDiscount',
+        //   className:'text-center',
+        //   Cell:({value})=>{
+        //     if(value==='staticDiscount')
+        //     return "Discount"
+        //     else {
+        //       return "Bonus"
+        //     }
+        //   }
 
-        },
-        {
-          Header: 'Discount(%)',
-          accessor: 'discount',
-          filter: <h3>hello</h3>,
-        },
+        // },
+        // {
+        //   Header: 'Discount(%)',
+        //   accessor: 'discount',
+        //   filter: <h3>hello</h3>,
+        // },
         {
           Header: 'Bonus(%)',
           accessor: 'bonus',
@@ -438,11 +462,26 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     //     </div>
     //   )
     //         }
+
+  //   download_csv =() => {
+  //     var csv = 'Currency,transactionHash\n';
+  // //  console.log(this.state.data, 'iuhdsvaiurhvuriv')
+  //     this.state.data.forEach(function(row) {
+  //             csv += row.transactionHash
+  //             csv += "\n";
+  //             console.log(row ,'iuhdsvaiurhvuriv')
+  //     });
+  //     var hiddenElement = document.createElement('a');
+  //     hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+  //     hiddenElement.target = '_blank';
+  //     hiddenElement.download = 'people.csv';
+  //     hiddenElement.click();
+  // }
   render() {
 
     
     console.log(this.props," props in transaction history");
-    console.log(this.state," state in transaction history");
+    // console.log(this.state.data," state in transaction history");
     let loading = this.props.loading
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
@@ -581,8 +620,16 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                 </div>
               </div>
               </div>  
+              <div className='col-sm-12' style={{textAlign:'right', paddingRight:'35px', color:'rgb(176, 201, 240)' }} >
+                {
+                  this.state.data.length > 0 ? <CSVLink style={{color:'#00296B'}} data={this.state.data} headers={this.state.headers}  >Download CSV</CSVLink>
+                  :
+                  ''
+                }
               
+              </div>
               <div className='col-sm-12'>
+
                 {console.log("poor", this.state.data, this.state.columns)}
                   {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
                       showPaginationBottom={false}
