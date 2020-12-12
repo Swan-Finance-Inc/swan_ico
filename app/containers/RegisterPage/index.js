@@ -184,8 +184,8 @@ export class RegisterPage extends React.PureComponent {
       user = {
         // firstName: this.state.firstName,
         // lastName: this.state.lastName,
-        fullName: this.state.firstname,
-        secondName: this.state.lastname,
+        fullName: this.state.firstName,
+        secondName: this.state.lastName,
         email: this.state.email,
         password: this.state.password,
         rfcode: this.state.referToken,

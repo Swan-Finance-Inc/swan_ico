@@ -947,8 +947,10 @@ var RegisterPage_RegisterPage = function (_React$PureComponent) {
         this.notifyError("Please verify that you are not a robot");
       } else {
         user = {
-          firstName: this.state.firstName,
-          lastName: this.state.lastName,
+          // firstName: this.state.firstName,
+          // lastName: this.state.lastName,
+          fullName: this.state.firstName,
+          secondName: this.state.lastName,
           email: this.state.email,
           password: this.state.password,
           rfcode: this.state.referToken,
