@@ -30,7 +30,8 @@ import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
 import {LoadingSpinner} from 'components/LoadingSpinner/Loadable';
 import Web3 from 'web3';
-import { Modal } from 'react-bootstrap';
+import { Modal,Dropdown, Button, MenuItem} from 'react-bootstrap';
+
 import Info from "../../components/Info";
 import { Link } from 'react-router-dom';
 import { isInteger, concat } from 'lodash';
@@ -59,6 +60,8 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       confirmContri: false,
       usdEurContributionConfirm: false,
       curr: '',
+      apySort :'High to Low',
+      lookUpSort:'High to Low',
       btcToDollar: 7500,
       ethToDollar: 600,
       eurToDollar: 0,
@@ -1696,18 +1699,25 @@ apyMode = (e)=>{
   sorted = this.state.interestAccountDetails.map(d=>{
     return d
   })
+
   // sorted.push(this.state.interestAccountDetails)
   console.log(sorted , "vfdjksnvnvbtkbg")
-  if(e.target.value ==='lTh'){
+  if(e.currentTarget.dataset.myValue ==='lTh'){
+    this.setState({
+      apySort : 'Low to High'
+    })
     sorted.sort(function(a , b) {
       return (a.interestRate - b.interestRate )
     })
   }
-  else if (e.target.value ==='hTl')
+  else if (e.currentTarget.dataset.myValue ==='hTl'){
+    this.setState({
+      apySort : 'High to Low'
+    })
   sorted.sort(function(a , b) {
     return (b.interestRate - a.interestRate )
   })
-
+  }
   this.setState({
     interestAccountDetails : sorted
   })
@@ -1719,7 +1729,10 @@ lookupPeriod = (e) =>{
     return d
   })
   console.log(sorted , "vfdjksnvnvbtkbg")
-  if(e.target.value ==='lTh'){
+  if(e.currentTarget.dataset.myValue ==='lTh'){
+    this.setState({
+      lookUpSort : 'Low to High'
+    })
     sorted.sort(function(a , b) {
       // var adate = new Date(a.time * 1000);
       // var aday = adate.getDay();
@@ -1737,7 +1750,10 @@ lookupPeriod = (e) =>{
       return (bday - aday )
     })
   }
-  else if (e.target.value ==='hTl')
+  else if (e.currentTarget.dataset.myValue ==='hTl'){
+    this.setState({
+      lookUpSort : 'High to Low'
+    })
   sorted.sort(function(a , b) {
     var adate = new Date(a.time * 1000);
       var aday = adate.getDay();
@@ -1753,7 +1769,7 @@ lookupPeriod = (e) =>{
       var bday = Math.round(bminutes/1440)
     return (aday - bday )
   })
-
+}
   this.setState({
     interestAccountDetails : sorted
   })
@@ -1961,12 +1977,12 @@ lookupPeriod = (e) =>{
               </div>
               <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>          
                 <div className="row">
-                  <div className="col-md-6 col-lg-6 col-sm-6" style={{fontSize:"20px"}}>
+                  <div className="col-md-6 col-lg-6 col-sm-6" style={{fontSize:"20px",color:'#465490'}}>
                                 Stake SWAN Account
                   </div>
                   <div className="col-md-6 col-lg-6 col-sm-6" style={{textAlign:'center'}}>
                     120 days remaining &nbsp;
-                  <button className='btn btn-primary' >${this.state.swanBalance==0?'0 (NA)':this.state.tokenPrice*this.state.swanBalance+'~'}</button> 
+                  <button className='swanBox'>${this.state.swanBalance==0?'0 (NA)':this.state.tokenPrice*this.state.swanBalance+'~'}</button> 
                   </div>
 
                 </div>
@@ -2013,7 +2029,7 @@ lookupPeriod = (e) =>{
                     16% APY
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3" style={{marginBottom:'5px'}}>
-                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true, monthDuration:1})}>EARN INTREST</button>
+                    <button className="swanBox" style={{padding:'6px 14px'}} onClick={()=>this.setState({earnInterest:true, monthDuration:1})}>EARN INTEREST</button>
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3">
                     3 Months
@@ -2025,7 +2041,7 @@ lookupPeriod = (e) =>{
                     20%APY
                   </div>
                   <div className="col-md-3 col-mg-3 col-sm-3" style={{marginBottom:'5px'}}>
-                    <button className="btn btn-primary" onClick={()=>this.setState({earnInterest:true, monthDuration:3})}>EARN INTREST</button>
+                    <button className="swanBox" style={{padding:'6px 14px'}} onClick={()=>this.setState({earnInterest:true, monthDuration:3})}>EARN INTEREST</button>
                   </div>
 
                 </div>
@@ -2045,24 +2061,40 @@ lookupPeriod = (e) =>{
               <div style={{ paddingLeft: '20px',paddingTop: '10px' }}> 
               <div className="row">
               <div className="col-md-3 col-lg-3 col-sm-3">
-                APY
-                <span className="select-wrapper">
-                      <select id="APYMode" name="APYMode" className="form-input form-one-style" required onChange={this.apyMode} >
-                        <option value="hTl">High to Low</option>
-                        <option value="lTh">Low to High</option>
-                      </select>
+              <span style={{color:'#ACBDD8'}} >APY</span>
 
-                    </span>
+                <div className="select-wrapper">
+                <Dropdown className="sorting-dropdown" >
+                                  <Button className="sorting-button" variant="success">{this.state.apySort}</Button>
+                                  <Dropdown.Toggle className="sorting-dropdown-toggle" split variant="success" id="dropdown-split-basic"/>
+                                  <Dropdown.Menu className="currency-menu" >
+                                    <MenuItem data-my-value="hTl" onClick={this.apyMode}>
+                                      High to Low
+                                      </MenuItem>
+                                    <MenuItem data-my-value="lTh" onClick={this.apyMode}>
+                                      Low to High
+                                      </MenuItem>
+                                  </Dropdown.Menu>
+                                </Dropdown>
+                    </div>
                 </div>     
                 <div className="col-md-3 col-lg-3 col-sm-3">
-                Lookup Period
-                <span className="select-wrapper">
-                      <select id="LUPMode" name="LUPMode" className="form-input form-one-style" required onChange={this.lookupPeriod}>
-                        <option value="hTl">High to Low</option>
-                        <option value="lTh">Low to High</option>
-                      </select>
+                <span style={{color:'#ACBDD8'}} >Lookup Period</span>
+                <div className="select-wrapper">
+                <Dropdown className="sorting-dropdown" >
+                                  <Button className="sorting-button" variant="success">{this.state.lookUpSort}</Button>
+                                  <Dropdown.Toggle className="sorting-dropdown-toggle" split variant="success" id="dropdown-split-basic"/>
+                                  <Dropdown.Menu className="currency-menu" >
+                                    <MenuItem data-my-value="hTl" onClick={this.lookupPeriod}>
+                                      High to Low
+                                      </MenuItem>
+                                    <MenuItem data-my-value="lTh" onClick={this.lookupPeriod}>
+                                      Low to High
+                                      </MenuItem>
+                                  </Dropdown.Menu>
+                                </Dropdown>
 
-                    </span>
+                    </div>
                 </div>
                 </div>
                 <br />

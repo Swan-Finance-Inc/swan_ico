@@ -384,7 +384,7 @@ export class NavBarContainer extends React.PureComponent {
                         <TextFieldInput
                         type="text"
                         name="address"
-                        label="Address"
+                        label="State"
                         value={this.state.address}
                         //variant="outlined"
                         //required={true}
@@ -458,7 +458,7 @@ export class NavBarContainer extends React.PureComponent {
                   <TextFieldInput
                         type="text"
                         name="address"
-                        label="Address"
+                        label="Country"
                         value={this.state.address}
                         //variant="outlined"
                         //required={true}

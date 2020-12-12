@@ -190,7 +190,7 @@ color:blue
 .profile-button {
 	width: 119px;
 	height: 43px;
-	background: #2D6DCD 0% 0% no-repeat padding-box;
+	background: #2498D5 0% 0% no-repeat padding-box;
 	border-radius: 4px;
 	opacity: 1;
 	outline: none;
@@ -3042,15 +3042,20 @@ font-size: 25px;
   }
 
   .tempBack {
+	  color : #465490;
+	  font-weight: bold;
 	  font-size: 20px;
 	  border-radius: 4px;
 	  padding: 5px;
-	  width: 20em;
+	  padding-right: 0px;
+	  width: 18em;
 	  border: 2px solid #2D6DCD6E;
 	//   -webkit-box-shadow: 1px 1px 1px 1px #2D6DCD6E;
 	// -moz-box-shadow: 1px 1px 1px 1px #2D6DCD6E;
 	// box-shadow: 1px 1px 1px 1px #2D6DCD6E;
   }
+
+ 
 
   .depositText{
 	  color: #ACBDD8;
@@ -3075,11 +3080,12 @@ font-size: 25px;
   }
 
   .swanBox{
+	  position: relative;
+	  left: 20px;
 	  border: 2px solid #F2F7FF;
 	  background-color: #2498D5;
 	  color: white;
-	  margin-left: 15px;
-	  //margin-top: -2px;
+	  box-shadow: 0px 0px 6px #2D6DCD80;
 	  padding: 6px;
 	  padding-left: 45px;
 	  padding-right: 45px;
@@ -3090,6 +3096,64 @@ font-size: 25px;
 	// 	-moz-box-shadow: 4px 4px 4px 4px #2D6DCD80;
 	// 	box-shadow: 4px 4px 4px 4px #2D6DCD80;
   }
+
+  .swanApprove{
+
+	border: 1px solid #2498D5;
+	background-color: #2498D5;
+	color: white;
+	padding: 6px;
+	padding-left: 45px;
+	padding-right: 45px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	box-shadow: 0px 0px 6px #2D6DCD80;
+	&:focus , &:active , &:hover{
+		outline : none
+	  }
+}
+
+.swanCancel{
+	border: 2px solid #F2F7FF;
+	background-color: #fff;
+	color: #89ABDE;
+	margin-right: 50px;
+
+	padding: 6px;
+	padding-left: 70px;
+	padding-right: 70px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+  &:focus , &:active , &:hover{
+	outline : none
+  }
+}
+
+
+.swanText{
+	position: absolute;
+	bottom: -9px;
+	left: 1px;
+	border: 1px solid #fff;
+	background-color: #2498D5;
+	color: white;
+	padding: 6px;
+	padding-left: 20px;
+	padding-right: 20px;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	
+}
+
+.option-custom{
+	border: none;
+	color: #000;
+	font-weight: normal;
+	background-color: transparent;
+	&:focus , &:active{
+		outline: none;
+	}
+}
 
   .currency-dropdown{
 	  width: 80%;
@@ -3106,6 +3170,43 @@ font-size: 25px;
 	width: 10%;
 	height: 5rem;
   }
+
+  .sorting-dropdown{
+	width: 100%;
+	box-shadow: 0px 3px 6px #2D6DCD6E;
+}
+.sorting-button{
+	width: 80%;
+	text-align: left;
+	height: 4rem;
+	background-color: #DFF4FF;
+	border: none;
+	&:hover,&:focus,&:active {
+	border-right: 1px solid #2498D5;
+	background-color: #DFF4FF;
+	outline: none;
+	}
+}
+.sorting-menu {
+	width: 100%;
+}
+.sorting-dropdown-toggle{
+  width: 20%;
+  height: 4rem;
+  background-color: #DFF4FF;
+	border: none;
+	border-left: 1px solid #2498D5;
+	&:hover,&:focus,&:active{
+		background-color: #DFF4FF;
+	border-left: 1px solid #2498D5;
+	outline: none;
+
+	}
+
+	.sorting-dropdown-toggle>span{
+		color: red;
+	}
+}
 
   .nav-dropdown>a{
 	font-weight: bold !important;

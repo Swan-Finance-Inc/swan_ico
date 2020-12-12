@@ -400,36 +400,44 @@ export class EarnInterest extends React.PureComponent{
                               </div>
                               <div className="col-sm-8 col-md-8 col-lg-8">
                                    <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                      <h2 className="trasnaction">Earn Interest</h2>
+                                      <h2 className="trasnaction" style={{paddingTop:30,fontWeight:'bold'}}>Earn Interest</h2>
                                     </div>  
                               </div>
                               
                             </div>
                             <div style={{marginLeft:"-100px", marginTop:"50px"}}>
                             <div className="row" style={{textAlign:"center"}}>
-                              <div>
-                                <span className="swanBox">Choose Digital Asset</span>
-                                <select id="CDAMode" name="CDAMode" className="form-style" required>
+                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center'}}>
+
+                           
+                              <div className="tempBack" style={{width:'19em'}}>
+                                <span className="swanBox" style={{left:'-14px',padding:'6px 6px'}}>Choose Digital Asset</span>
+                                <select  id="CDAMode" name="CDAMode" className="form-style option-custom" required>
                                   <option value="SWAN">SWAN (SWAN)</option>
                                   <option value="BTC">BTC</option>
                                   <option value="USDT">USDT</option>
                                   <option value="XLM">XLM</option>
                                 </select>
+                         
+                                
                               </div>
+                           
+                              </div>
+                              
                             </div>
                             <div className="row" style={{textAlign:"center", marginTop:"55px"}}>
                               <div style={{color:"#465490", fontSize:"20px", fontWeight:"bold"}}>Choose Earn Interest Period</div>
                             <div className="col-md-12">
                               <div style={{display:'flex',flexDirection:'row', justifyContent:'center', }}>
                                 { this.state.duration === 1 ? (
-                                  <div onClick={ ()=>this.changeInterest(1)} style={{margin:"5px",cursor:'pointer', backgroundColor: '#2498D5', color: 'white', borderRadius: '5px'}} className="personal"><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>1 Month</h2></div>
+                                  <div onClick={ ()=>this.changeInterest(1)} style={{cursor:'pointer',border:'1px solid #fff'}} className="swanApprove" ><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>1 Month</h2></div>
                                 ) : (
-                                  <div onClick={ ()=>this.changeInterest(1)} style={{margin:"5px",cursor:'pointer'}}><h2  style={{margin:"5px", fontSize: '16px' , color : '#2498D5'}}>1 Month</h2></div>
+                                  <div onClick={ ()=>this.changeInterest(1)} style={{cursor:'pointer',padding:'6px 45px',margin:0}} className="swanCancel" ><h2  style={{margin:"5px", fontSize: '16px' , color : '#89ABDE'}}>1 Month</h2></div>
                                 )}
                                 { this.state.duration === 3 ? (
-                                  <div  onClick={()=>this.changeInterest(3)} style={{margin:"5px",cursor:'pointer', backgroundColor: '#2498D5', color: 'white', borderRadius: '5px'}}><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>3 Months</h2></div>
+                                  <div  onClick={()=>this.changeInterest(3)} style={{cursor:'pointer',border:'1px solid #fff'}} className="swanApprove"><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>3 Months</h2></div>
                                 ) : (
-                                  <div  onClick={()=>this.changeInterest(3)} style={{margin:"5px",cursor:'pointer'}}><h2  style={{margin:"5px", fontSize: '16px',color : '#2498D5'}}>3 Months</h2></div>
+                                  <div  onClick={()=>this.changeInterest(3)} style={{cursor:'pointer',padding:'6px 45px',margin:0}} className="swanCancel"><h2  style={{margin:"5px", fontSize: '16px',color : '#89ABDE'}}>3 Months</h2></div>
                                 )}
                               </div>
                             </div>
@@ -439,51 +447,63 @@ export class EarnInterest extends React.PureComponent{
                             <div className="row" style={{marginTop:"40px"}}>
                             <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:"center"}}>
 
-                              <div className="" style={{position:"relative",justifyContent:"center",border:"1px solid #F2F7FF", borderRadius:"2px", boxShadow:"1px 1px 1px 2px #00000029", width:"auto"}}>
-                                Interest Rate<br />{this.state.interest} % APY
+                              <div className="" style={{maxWidth:'273px',border:"1px solid #2D6DCD6E", borderRadius:"2px"}}>
+                                <div style={{color:'#89ABDE', fontSize:'20px',marginTop:'16px'}}>Interest Rate</div>
+                                <br />
+                                
+                                <div className="swanApprove" style={{borderRadius:'0px'}}>{this.state.interest} % APY</div>
                               </div>
                             </div>
                           </div>
                             :<div className="row" style={{marginTop:"40px"}}>
-                              <div className="col-sm-6 col-md-6 col-lg-6" style={{textAlign:"center"}}>
+                              <div className="col-sm-5 col-md-5 col-lg-5" style={{textAlign:"-webkit-center"}}>
 
-                                <div className="" style={{border:"1px solid #F2F7FF", borderRadius:"2px", boxShadow:"1px 1px 1px 2px #00000029"}}>
-                                  Interest Rate<br />{this.state.interest} % APY
+                                <div className="" style={{maxWidth:'273px',border:"1px solid #2D6DCD6E", borderRadius:"2px"}}>
+                                <div style={{color:'#89ABDE', fontSize:'20px',marginTop:'16px'}}>Interest Rate</div>
+                                <br />
+                                
+                                <div className="swanApprove" style={{borderRadius:'0px'}}>{this.state.interest} % APY</div>
                                 </div>
                               </div>
-                              <div className="col-sm-6 col-md-6 col-lg-6" style={{textAlign:"center"}}>
-                                You have not staked SWAN tokens yet. Stake $2000 of SWAN tokens to earn higher interest rates.
+                              <div className="col-sm-7 col-md-7 col-lg-7" style={{textAlign:"center"}}>
+                                <div style={{boxShadow: '3px 3px 6px #00000029',maxWidth:'450px',padding : 13,borderRadius:'20px'}}>
+                                <div style={{marginBottom: 14}}>You have not staked SWAN tokens yet. Stake $2000 of SWAN tokens to earn higher interest rates.
+                                </div>
                                 <br />
-                                <button className="btn btn-primary" onClick={this.goBack}>STAKE NOW</button>
+                                <button className="swanBox"  onClick={this.goBack}>STAKE NOW</button>
+                                
+                                </div>
                               </div>
                             </div>}
                             <div style={{padding:'10px'}}>
                               <div className={this.state.approveStart||this.state.approveSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                        <div className="trasnaction">1. Contract Approval</div>
+                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>1. Contract Approval</div>
                                 </div> 
-                                <div className="form-group" style={{margin:"0px 50px"}}>
-                                  <input className="investInputBox" onChange={this.amtApprove} />Approved: 0 SWAN
+                                <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
+                                <span className="swanText">SWAN</span>
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />Approved: 0 SWAN
                                 </div> 
                                 {this.state.approveLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
-                                <div style={{textAlign:"right"}}>
-                                  <button className="btn btn-primary">CANCEL</button>
-                                  <button className="btn-primary btn" onClick={()=>this.approveTokens()}>APPROVE</button>
+                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
+                                  <button className="swanCancel">CANCEL</button>
+                                  <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
                                 </div>
                               </div>
                             </div>
                             <div style={{padding:'10px'}}>
                               <div className={this.state.stakeStart||this.state.stakeSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                        <div className="trasnaction">2. Stake SWAN Tokens</div>
+                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>2. Stake SWAN Tokens</div>
                                 </div> 
-                                <div className="form-group" style={{margin:"0px 50px"}}>
-                                  <input className="investInputBox" onChange={this.amtApprove} /> Minimum Required: 50
+                                <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
+                                <span className="swanText">SWAN</span>
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} /> Minimum Required: 50
                                 </div> 
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
-                                <div style={{textAlign:"right"}}>
-                                  <button className="btn btn-primary">CANCEL</button>
-                                  <button className="btn-primary btn" onClick={this.onEarnInterest}>EARN INTEREST</button>
+                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}} >
+                                  <button className="swanCancel">CANCEL</button>
+                                  <button className="swanApprove" onClick={this.onEarnInterest}>EARN INTEREST</button>
                                 </div>
                               </div>
                             </div>
