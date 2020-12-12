@@ -518,6 +518,9 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                         <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onChange={this.handleTypeFilter}>
                           <option value="" disabled selected hidden></option>
                           <option value='Ethereum'>ETHEREUM</option>
+                          <option value='Bitcoin'>Bitcoin</option>
+                          <option value='Stellar'>Stellar</option>
+                          <option value='USDT'>USDT</option>
                           {/* <option value='Bitcoin'>BITCOIN</option> */}
                         </select>
                         </div>
