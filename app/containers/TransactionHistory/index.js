@@ -128,6 +128,16 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               return 'Crowd Sale'
               else if(value=="preSale")
               return 'Pre Sale'
+              else if(value=="privateSale")
+              return 'Private Sale'
+              else if(value=="crowdSaleRoundOne")
+              return 'CrowdSale Round-1'
+              else if(value=="crowdSaleRoundTwo")
+              return 'CrowdSale Round-2'
+              else if(value=="crowdSaleRoundThree")
+              return 'CrowdSale Round-3'
+              else if(value=="crowdSaleRoundFour")
+              return 'CrowdSale Round-4'
             }
           },
           {
