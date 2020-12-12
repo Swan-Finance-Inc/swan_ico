@@ -14,7 +14,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectInvestPage, {
-makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectContributionData, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading
+makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectContributionData,makeSelectContributionSuccess,makeSelectContributionNotSuccess, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -133,7 +133,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     // this.paymentModeChange = this.paymentModeChange.bind(this);
     // this.currencyQuantityChange = this.currencyQuantityChange.bind(this);
     this.comeBack = this.comeBack.bind(this);
-    // this.confirm = this.confirm.bind(this);
+    this.confirm = this.confirm.bind(this);
     // // this.updatetime = this.updatetime.bind(this);
     // this.amtInvested = this.amtInvested.bind(this);
     // this.validator = this.validator.bind(this);
@@ -533,15 +533,15 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       discount:data.discount,
       loading: false,
     });
-    // if (nextProps.successPayment) {
-    //   console.log(nextProps.successPayment);
+    if (nextProps.successPayment) {
+      console.log(nextProps.successPayment);
 
-    //   // this.notifyDeposit(nextProps.successPayment);
-    // }
-    // if (nextProps.successNotPayment) {
-    //   toast.error(nextProps.successNotPayment.message);
-    //   nextProps.clearContribution()
-    // }
+      // this.notifyDeposit(nextProps.successPayment);
+    }
+    if (nextProps.successNotPayment) {
+      toast.error(nextProps.successNotPayment.message);
+      nextProps.clearContribution()
+    }
     if (nextProps.walletAddedSuccess) {
       toast.info(nextProps.walletAddedSuccess.message);
       console.log(nextProps.walletAddedSuccess, "allolooloo")
@@ -801,27 +801,19 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   // }
 
 
-  // confirm(fromAdd, data) {
-  //   let body = {
-  //     tokens: this.state.tokensWithBonus,
-  //     type: this.state.curr,
-  //     amount: this.state.currencyQuantity,
-  //     fromAddress:fromAdd,
-  //     toAddress: this.props.successData.ethAddress,
-  //     tokenReceivingAddress:this.state.fromAddressEth,
-  //     usdAmount: this.state.dollarsInvested,
-  //     rate:this.state.ethToDollar,
-  //     phase:this.state.stage,
-  //     tokenPrice : this.state.tokenPrice,
-  //     bonus:this.state.bonus,
-  //     discount:this.state.discount,
-  //     isBonusOrDiscount:this.state.isBonusOrDiscount,
-  //     transactionHash : data
-  //   };
-  //   console.log("dddddddddddddddddddddddd",data,"hash");
-  //   console.log("bbbbbbbbbbbbbbbbbbbbbbbb",body,"body")
-  //   this.props.confirmPayment(body);
-  // }
+  confirm(type, duration, APY, fromAdd, investment, data) {
+    let body = {
+      type: type,
+      duration: duration,
+      ethAddress:fromAdd,
+      apy: APY,
+      tokenAmount: investment,
+      txHash : data
+    };
+    console.log("dddddddddddddddddddddddd",data,"hash");
+    console.log("bbbbbbbbbbbbbbbbbbbbbbbb",body,"body")
+    this.props.confirmPayment(body);
+  }
 
   comeBack() {
     this.setState({
@@ -1807,6 +1799,7 @@ lookupPeriod = (e) =>{
       return (
       <div>
         <Stake  
+        confirmInvestPayment={this.confirm}
         ethWallet = {this.state.ethWallet}
         back={this.comeBack}
         />  
@@ -1816,6 +1809,7 @@ lookupPeriod = (e) =>{
       return (
       <div>
         <EarnInterest  
+        confirmInvestPayment={this.confirm}
         isStaker={this.state.isStaker}
         monthDuration={this.state.monthDuration}
         ethWallet = {this.state.ethWallet}
@@ -2128,8 +2122,8 @@ const mapStateToProps = createStructuredSelector({
   investpage: makeSelectInvestPage(),
   // contributionCurrency: makeSelectContributionCurrency(),
   successData: makeSelectContributionData(),
-  // successPayment: makeSelectContributionSuccess(),
-  // successNotPayment : makeSelectContributionNotSuccess(),
+  successPayment: makeSelectContributionSuccess(),
+  successNotPayment : makeSelectContributionNotSuccess(),
   // global: makeGlobalParent(),
   // transactionId: makeSelectTransactionId(),
   // userInfo: makeSelectDashBoardWelcomePage(),
@@ -2149,7 +2143,7 @@ function mapDispatchToProps(dispatch) {
     dispatch,
     // selectCurrency: () => (dispatch(selectAction())),
     getData: () => (dispatch(getData())),
-    // confirmPayment: (data) => (dispatch(confirmPayment(data))),
+    confirmPayment: (data) => (dispatch(confirmPayment(data))),
     addCenxWallet: (data) => (dispatch(addCenxWallet(data))),
     getCenxWallet: () => (dispatch(getCenxWallet())),
     // reload: () => (dispatch(reload())),

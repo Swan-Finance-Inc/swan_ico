@@ -81,7 +81,7 @@ export class ContributionConfirm extends React.PureComponent {
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
       const query = queryString.parse(href);
-      query.chl = this.props.currWallet.address;
+      query.chl = this.props.clientAddress;
       const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
         query
       )}`;

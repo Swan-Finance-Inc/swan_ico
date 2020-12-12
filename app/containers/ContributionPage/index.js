@@ -56,6 +56,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       tokensPerEur: 0,
       ethAddress: false,
       btcAddress: false,
+      xlmAddress: false,
+      usdtAddress: false,
       fromAddress: '',
       fromAddressEth:'',
       tokenReceiveAddress: false,
@@ -144,6 +146,8 @@ export class ContributionPage extends React.PureComponent { // eslint-disable-li
       tokensPerEur: 1 / data.tokenUsd * data.eurUsd,
       ethAddress: data.ethAddress,
       btcAddress: data.btcAddress,
+      xlmAddress: data.xlmAddress,
+      usdtAddress: data.usdtAddress,
       time: nextProps.deadline,
       bonus: data.bonus,
       stage: data.stage,
@@ -1082,7 +1086,7 @@ gobackDollar=(e)=>{
         this.setState({
           confirmContri : true,
           currWallet: this.state.ethWallet,
-          clientAddress: '0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632',
+          clientAddress: this.state.ethAddress,
           currRate : this.state.ethToDollar,
         })
       } else {
@@ -1094,7 +1098,7 @@ gobackDollar=(e)=>{
         this.setState({
           confirmContri : true,
           currWallet: this.state.btcWallet,
-          clientAddress: 'mhKiusBhp4KjDo7pKf96zGKioMts1PLEA2',
+          clientAddress: this.state.btcAddress,
           currRate : this.state.btcToDollar,
         })
       } else {
@@ -1105,7 +1109,7 @@ gobackDollar=(e)=>{
         this.setState({
           confirmContri : true,
           currWallet: this.state.xlmWallet,
-          clientAddress: 'GBDKEZGRBMBWDKPUILGUDQ737AV7A563QWWDJZVTRJ6LBMYEVRQY2546',
+          clientAddress: this.state.xlmAddress,
           currRate : this.state.xlmToDollar,
         })
       } else {
@@ -1116,7 +1120,7 @@ gobackDollar=(e)=>{
         this.setState({
           confirmContri : true,
           currWallet: this.state.usdtWallet,
-          clientAddress: '0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632',
+          clientAddress: this.state.usdtAddress,
           currRate : this.state.usdtToDollar,
         })
       } else {
