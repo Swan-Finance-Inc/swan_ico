@@ -215,9 +215,11 @@ showPassWord= (e)=>{
                   {/* <div className="logo"><Link to="/"> <img
                     src={ logo } alt="centralex"
                   /></Link></div> */}
-                  <div className="header-left">
-                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+                  <div className="header-left" style={{cursor:'pointer' }}>
+                    <Link to='/signin'>
+                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><img style = {{width : "77%", height : '31px', marginLeft : 6}} src={ logo } alt="centralex" /></div>
                     <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
+                    </Link>
                     </div>
                 </div>
                 {/* <div className="col-xs-7 col-sm-6 col-md-10">
@@ -286,7 +288,7 @@ showPassWord= (e)=>{
                       />
                       <div className="forgot" style={{ fontSize : '14px' }}><Link to="/forgotPassword">Forgot Password?</Link></div>
                       </div>
-                      {/* <div>
+                      <div>
                       <TextFieldInput
                         name="otpToken"
                         type="number"
@@ -304,7 +306,7 @@ showPassWord= (e)=>{
                           color: '#465390'
                         }}
                       />
-                      </div> */}
+                      </div>
                       <div 
                       className="signInCaptcha text-center mt-10" >
                          <ReCAPTCHA type="image" ref="recaptcha"

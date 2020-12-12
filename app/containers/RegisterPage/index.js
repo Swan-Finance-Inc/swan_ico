@@ -182,8 +182,10 @@ export class RegisterPage extends React.PureComponent {
     } 
     else{
       user = {
-        firstName: this.state.firstName,
-        lastName: this.state.lastName,
+        // firstName: this.state.firstName,
+        // lastName: this.state.lastName,
+        fullName: this.state.firstname,
+        secondName: this.state.lastname,
         email: this.state.email,
         password: this.state.password,
         rfcode: this.state.referToken,
@@ -315,9 +317,11 @@ export class RegisterPage extends React.PureComponent {
             <div className="container">
               <div className="row">
                 <div className="col-xs-7 col-sm-6 col-md-2 clearfix">
-                <div className="header-left">
-                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/signup"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+                <div className="header-left" style={{cursor:'pointer'}}>
+                  <Link to='/signup'>
+                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></div>
                     <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
+                    </Link>                     
                     </div>
                 </div>
                 <div className="col-xs-5 col-sm-6 col-md-10">
@@ -516,14 +520,14 @@ export class RegisterPage extends React.PureComponent {
                         </label>
                       </div>
                       <div className="form-group text-center">
-                        {/* <ReCAPTCHA
+                        <ReCAPTCHA
                           type="image"
                           ref="recaptcha"
                           className="form-captcha"
                           required
                           sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk"
                           onChange={this.onChange}
-                        /> */}
+                        />
 
                         <button
                           type="submit"
