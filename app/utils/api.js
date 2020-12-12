@@ -23,8 +23,8 @@ if(pathLocation === '127.0.0.1:6036'){
     //Testing baseUrl
     // BaseUrl = 'http://localhost:7070/api/v1/'
     //  BaseUrl = 'http://127.0.0.1:7070/api/v1/'
-    // BaseUrl = 'http://127.0.0.1:7070/api/v1/'
-    BaseUrl = 'https://api.swanfinance.io/api/v1/'
+    BaseUrl = 'http://127.0.0.1:7070/api/v1/'
+    // BaseUrl = 'https://api.swanfinance.io/api/v1/'
     // BaseUrl = 'http://54.151.217.0:7070/api/v1/'
 
 
@@ -102,6 +102,8 @@ export default {
       axios.get(`${BaseUrl}user/deposit`, headers).then((res) => res.data).catch((err) => err.response.data),
     deposit: (headers, body) =>
       axios.put(`${BaseUrl}user/transactionfordeposit`, body, headers).then((res) => res.data).catch((err) => err.response.data),
+    investDeposit: (headers, body) =>
+      axios.post(`${BaseUrl}invest/deposit`, body, headers).then((res) => res.data).catch((err) => err.response.data),
     depositWithHash: (headers, body) =>
       axios.put(`${BaseUrl}user/transactionHashUpdate`, body, headers).then((res) => res.data).catch((err) => err.response.data),
     confirm: (token) =>

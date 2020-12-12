@@ -110,6 +110,8 @@ function contributionPageReducer(state = initialState, action) {
         .setIn(['success', 'usdtUsd'], action.data.usdtUsd)
         .setIn(['success', 'ethAddress'], action.data.ethAddress)
         .setIn(['success', 'btcAddress'], action.data.btcAddress)
+        .setIn(['success', 'xlmAddress'], action.data.xlmAddress)
+        .setIn(['success', 'usdtAddress'], action.data.usdtAddress)
         .setIn(['success', 'bonus'], action.data.bonus)
         .setIn(['success', 'stage'], action.data.stage)
         .setIn(['success', 'minInvest'], action.data.minInvest)

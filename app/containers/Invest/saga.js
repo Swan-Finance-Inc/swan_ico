@@ -37,12 +37,12 @@ export function* contribute() {
     };
     const body = yield select(makeSelectContributionConfirm());
     console.log(body," our body in contribute saga")
-    const apiData = yield call(api.user.deposit, headers, body);
+    const apiData = yield call(api.user.investDeposit, headers, body);
     console.log(apiData,"apiData in user.deposit")
     if (apiData.success) {
       yield put(depositSuccess(true));
       yield put(successFinalizePayment(true));
-      yield put(push('/launchpad/dashboard/transactionHistory'));
+      //yield put(push('/launchpad/dashboard/transactionHistory'));
       yield put(successPayment(apiData));
     }else{
       yield put(notSuccessPayment(apiData));

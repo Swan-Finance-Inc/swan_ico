@@ -48,15 +48,12 @@ const initialState = fromJS({
   },
   failure: false,
   paymentConfirm: {
-    tokens: false,
+    tokenAmount: 0,
     type: false,
-    amount: false,
-    fromAddress: false,
-    toAddress: false,
-    tokenReceivingAddress: false,
-    usdAmount: false,
-    transactionHash: false,
-    tokenPrice:0
+    duration: 0,
+    ethAddress: false,
+    apy: 0,
+    txHash: false
   },
   ethWallet:{
     publicKey: false,
@@ -98,20 +95,12 @@ function investPageReducer(state = initialState, action) {
         .set('getData', true);
     case CONFIRM_PAYMENT:
       return state
-        .setIn(['paymentConfirm', 'tokens'], action.data.tokens)
         .setIn(['paymentConfirm', 'type'], action.data.type)
-        .setIn(['paymentConfirm', 'amount'], action.data.amount)
-        .setIn(['paymentConfirm', 'fromAddress'], action.data.fromAddress)
-        .setIn(['paymentConfirm', 'toAddress'], action.data.toAddress)
-        .setIn(['paymentConfirm', 'tokenReceivingAddress'], action.data.tokenReceivingAddress)
-        .setIn(['paymentConfirm', 'usdAmount'], action.data.usdAmount)
-        .setIn(['paymentConfirm', 'rate'], action.data.rate)
-        .setIn(['paymentConfirm', 'phase'], action.data.phase)
-        .setIn(['paymentConfirm', 'transactionHash'], action.data.transactionHash)
-        .setIn(['paymentConfirm', 'tokenPrice'], action.data.tokenPrice)
-        .setIn(['paymentConfirm', 'bonus'], action.data.bonus)
-        .setIn(['paymentConfirm', 'discount'], action.data.discount)
-        .setIn(['paymentConfirm', 'isBonusOrDiscount'], action.data.isBonusOrDiscount);
+        .setIn(['paymentConfirm', 'tokenAmount'], action.data.tokenAmount)
+        .setIn(['paymentConfirm', 'ethAddress'], action.data.ethAddress)
+        .setIn(['paymentConfirm', 'apy'], action.data.apy)
+        .setIn(['paymentConfirm', 'duration'], action.data.duration)
+        .setIn(['paymentConfirm', 'txHash'], action.data.txHash);
     case ADD_CENX_WALLET:
       return state
         .setIn(['ethWallet', 'publicKey'], action.data.publicKey)

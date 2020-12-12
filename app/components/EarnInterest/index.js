@@ -24,6 +24,7 @@ export class EarnInterest extends React.PureComponent{
           stakeStart: false,
           showEarnInterest: false,
           isStaker: this.props.isStaker,
+          currTxHash: '',
         };
         this.goBack = this.goBack.bind(this);
         this.changeInterest = this.changeInterest.bind(this);
@@ -196,6 +197,7 @@ export class EarnInterest extends React.PureComponent{
             stakeSuccess:true
           })
           toast.success('Transaction confirmed. Tokens Deposited');
+          this.props.confirmInvestPayment('EarnInterest', this.state.duration, this.state.interest,this.props.ethWallet.address, this.state.tokens, this.state.currTxHash)
         } else if(!this.state.trxnReceipt.status && this.state.stakeStart){
           toast.error('Transaction not confirmed');
           this.setState({
@@ -260,7 +262,8 @@ export class EarnInterest extends React.PureComponent{
                   console.log("Send signed trxn res: ", res);
                   this.setState({
                     stakeLoader:true,
-                    stakeStart: true
+                    stakeStart: true,
+                    currTxHash: res
                   })
                   this.checkHashStatus(res, this.updateStatusFromContract);
                 }
