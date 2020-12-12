@@ -27,7 +27,7 @@ import { ContributionConfirm } from '../ContributionConfirm';
 import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
 import { Helmet } from 'react-helmet';
-import {LoadingSpinner} from 'components/LoadingSpinner/Loadable';
+import LoadingSpinner from 'components/LoadingSpinner/Loadable';
 import Web3 from 'web3';
 import { Modal,Dropdown, Button, MenuItem} from 'react-bootstrap';
 import Info from "../../components/Info";
@@ -132,6 +132,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       dollarBalanceXlm: 0,
       dollarBalanceEth: 0,
       dollarBalanceBtc: 0,
+      balanceFlag: false
     };
 
     // this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -291,7 +292,10 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
         
     result = await contract.methods.balanceOf(userAddress).call();
     
-    this.setState({swanBalance: web3.utils.fromWei(result)});
+    this.setState({
+      swanBalance: web3.utils.fromWei(result),
+      balanceFlag: true
+    });
     console.log("hehe",web3.utils.fromWei(result));
     } catch(err){
       toast.error(`Error in getSwanBalance ${err}`)
@@ -1495,7 +1499,16 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
     // console.log(this.state," state in contribution page")
     const { loading } = this.props
     const {language} = this.state
+    if(!this.state.balanceFlag){
+      return (
+        <div id="content" className="ui-content ui-content-aside-overlay">
 
+          <div className="ui-content-body">
+             <div className="ui-container container-fluid">
+            <LoadingSpinner />
+ </div></div></div> 
+      )
+    }
     // this.setState({
     //   loading : this.props
     // });

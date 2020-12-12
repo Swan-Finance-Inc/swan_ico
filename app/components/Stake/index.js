@@ -397,7 +397,8 @@ export class Stake extends React.PureComponent{
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
                                         <div className="trasnaction">2. Stake SWAN Tokens</div>
                                 </div> 
-                                <div className="form-group" style={{margin:"0px 50px"}}>
+                                <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
+                                  <span>Swan</span>
                                   <input className="investInputBox" onChange={this.amtApprove} />  Minimum Required: 50
                                 </div> 
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
