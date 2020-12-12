@@ -316,11 +316,11 @@ showPassWord= (e)=>{
                          <div className="form-group text-center mt-15 ">
                        <label className="form-check-label" htmlFor="user_accepted_policies">
                         <input id="remember" className="boolean required form-check-input" label="false" data-title="Remember me!" data-placement="left" data-trigger="manual" data-offset="0, 55" aria-required="true" type="checkbox" name="remember" style={{ marginRight: '10px' }} />I agree with 
-                       <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/User+agreement+V1.0.pdf"
+                       <Link to="https://swan-website.s3-ap-southeast-1.amazonaws.com/User+agreement+V1.0.pdf"
                         target="_blank"
                        > <strong style={{color :'#465390' }} > User Agreement </strong> </Link>
                           and 
-                        <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
+                        <Link to="https://swan-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
                         target="_blank"
                         >
                            <strong style={{color :'#465390' }} > Privacy Policy.</strong>  </Link>

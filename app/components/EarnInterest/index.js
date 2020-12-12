@@ -498,7 +498,7 @@ export class EarnInterest extends React.PureComponent{
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                 <span className="swanText">SWAN</span>
-                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} /> Minimum Required: 50
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />
                                 </div> 
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}} >

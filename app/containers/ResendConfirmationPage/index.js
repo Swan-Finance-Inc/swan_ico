@@ -104,7 +104,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
             <div className="signin-card-body">
               <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
               <p className="subtitle">If you DON’T see our emails, please check your SPAM folder.</p>
-              <p className="subtitle" > To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@centralex.com</p>
+              <p className="subtitle" > To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@swan.com</p>
             </div>
           </div>
         </div>
@@ -121,7 +121,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
               <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
                 <div className="header-left">
-                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
+                    <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="swan" /></Link></div>
                     <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
                     </div>
               </div>
