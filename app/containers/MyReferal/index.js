@@ -456,7 +456,7 @@ export class MyReferal extends React.PureComponent {
                         <div>
                         <h3 className="balance-card-inner-wrapper-heading" style={{ lineHeight: '1.3'}}>
                         Invite Your friends 
-                        <b/> & Earn CenX tokens
+                        <b/> & Earn Swan tokens
                           </h3>
                           <p  className="mt-30 referral-content">
                           Earn up to 10% on the ongoing referral bonus <b/>

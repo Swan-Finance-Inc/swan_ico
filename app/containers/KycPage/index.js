@@ -684,9 +684,9 @@ handleInput2=(e)=>{
           <div className="row">
             <div className="col-sm-12">
               <div className="kyc-verification">
-                  <h3 className="kyc-verification-header">KYC Verification</h3>
-                  <h4 className="kyc-status">KYC Status :{this.state.newKycStatus}</h4>
-                  <h4 className="kyc-status">KYC Journey Completed: {this.state.kycJourneyCompleted?"Yes":"No"}</h4>
+                  <h3 className="kyc-verification-header" style={{fontWeight:'bold'}}>KYC Verification</h3>
+                  <h4 className="kyc-status"><span style={{fontWeight:'bold'}}>KYC Status</span> :{this.state.newKycStatus}</h4>
+                  <h4 className="kyc-status"><span style={{fontWeight:'bold'}}>KYC Journey Completed</span>: {this.state.kycJourneyCompleted?"Yes":"No"}</h4>
                   <div className="text-center" style={{marginTop : '60px'}}>
                     <button className="invest kyc-factorial"
                     onClick={this.hitFractal} 
@@ -698,7 +698,7 @@ handleInput2=(e)=>{
           <div className="row">
             <div className="col-sm-12">
               <div className="kyc-verification">
-                  <h3 className="kyc-verification-header">Schedule a KYC Videoconference</h3>
+                  <h3 className="kyc-verification-header" style={{fontWeight:'bold'}}>Schedule a KYC Videoconference</h3>
                   <h4 className="kyc-status">For users outside of the European Union, a brief videoconference is required to verify ID.</h4>
                   <div className="text-center" style={{marginTop : '80px', display: 'flex' , justifyContent:'center', placeContent: 'space-evenly'}}>
                     <button className="invest kyc-factorial"

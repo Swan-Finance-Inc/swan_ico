@@ -351,7 +351,7 @@ export class Stake extends React.PureComponent{
                               </div>
                               <div className="col-sm-8 col-md-8 col-lg-8">
                                    <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                      <h2 className="trasnaction">Stake SWAN Tokens</h2>
+                                      <h2 className="trasnaction" style={{paddingTop:30,fontWeight:'bold'}}>Stake SWAN Tokens</h2>
                                     </div>  
                               </div>
                               
@@ -373,7 +373,7 @@ export class Stake extends React.PureComponent{
                               &nbsp;.
                               </div>
                               <div className="col-sm-4 col-md-4 col-lg-4">
-                                <div className="tempBack" >Rate of Interest&nbsp;<span className="swanBox">14 %</span></div>
+                                <div className="tempBack" >Rate of Interest&nbsp;<span className="swanBox" style={{paddingLeft:63,paddingRight:63 }}>14 %</span></div>
                               </div>
                               <div className="col-sm-4 col-md-4 col-lg-4" >
                               &nbsp;
@@ -383,31 +383,32 @@ export class Stake extends React.PureComponent{
                             <div style={{padding:'10px'}}>
                               <div className={this.state.approveStart||this.state.approveSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                        <div className="trasnaction">1. Contract Approval</div>
+                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>1. Contract Approval</div>
                                 </div> 
-                                <div className="form-group" style={{margin:"0px 50px"}}>
-                                  <input className="investInputBox" onChange={this.amtApprove} />  Approved: 0 SWAN
+                                <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
+                                <span className="swanText">SWAN</span>
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Approved: 0 SWAN
                                 </div> 
                                 {this.state.approveLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
-                                <div style={{textAlign:"right"}}>
-                                  <button className="btn btn-primary">CANCEL</button>
-                                  <button className="btn-primary btn" onClick={()=>this.approveTokens()}>APPROVE</button>
+                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
+                                  <button className="swanCancel">CANCEL</button>
+                                  <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
                                 </div>
                               </div>
                             </div>
                             <div style={{padding:'10px'}}>
                               <div className={this.state.stakeStart||this.state.stakeSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                        <div className="trasnaction">2. Stake SWAN Tokens</div>
+                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>2. Stake SWAN Tokens</div>
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
-                                  <span>Swan</span>
-                                  <input className="investInputBox" onChange={this.amtApprove} />  Minimum Required: 50
+                                  <span className="swanText">SWAN</span>
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Minimum Required: 50
                                 </div> 
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
-                                <div style={{textAlign:"right"}}>
-                                  <button className="btn btn-primary">CANCEL</button>
-                                  <button className="btn-primary btn" onClick={this.onStakeToken}>STAKE TOKENS</button>
+                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
+                                  <button className=" swanCancel">CANCEL</button>
+                                  <button className="swanApprove" onClick={this.onStakeToken}>STAKE TOKENS</button>
                                 </div>
                               </div>
                             </div>
