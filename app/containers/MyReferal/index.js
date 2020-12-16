@@ -85,24 +85,24 @@ export class MyReferal extends React.PureComponent {
       ],
       transactionCollumn: [
         {
-          Header: "Status",
+          Header: <div style={{color:'#00296B'}} >Status</div>,
           accessor: "status",
           className: "status",
         },
         {
-          Header: "Email",
+          Header: <div style={{color:'#00296B'}} >Email</div>,
           accessor: "initiatedBy.email",
           className: "status",
         },
         {
-          Header: "Tokens can be earned",
+          Header: <div style={{color:'#00296B'}} >Tokens can be earned</div>,
           accessor: (row) =>
             row.referBonus * 0.01 * ((row.tokens * 100) / (row.bonus + 100)), // Custom cell components!
           className: "email",
           id: "tokensCanbeEarned",
         },
         {
-          Header: "Created At",
+          Header: <div style={{color:'#00296B'}} >Created At</div>,
           accessor: "created_at", // Custom cell components!
           className: "created_at",
         },
@@ -173,7 +173,7 @@ export class MyReferal extends React.PureComponent {
           },
           () => {
             console.log(this.state, " in clearFilter clearType");
-            this.props.transactions(this.state.transactionParam);
+            this.props.getReferalData(this.state.transactionParam);
           }
         );
         break;
@@ -193,7 +193,7 @@ export class MyReferal extends React.PureComponent {
           },
           () => {
             console.log(this.state, " in clearFilter clearCreated");
-            this.props.transactions(this.state.transactionParam);
+            this.props.getReferalData(this.state.transactionParam);
           }
         );
         break;
@@ -214,7 +214,7 @@ export class MyReferal extends React.PureComponent {
       },
       () => {
         console.log(this.state, " in type filter handler");
-        this.props.transactions(this.state.transactionParam);
+        this.props.getReferalData(this.state.transactionParam);
       }
     );
   };
@@ -245,12 +245,12 @@ export class MyReferal extends React.PureComponent {
               "day"
             )
           ) {
-            this.props.transactions(this.state.transactionParam);
+            this.props.getReferalData(this.state.transactionParam);
           } else {
             toast.error("Min Date cannot be Greater than Max Date");
           }
         } else {
-          this.props.transactions(this.state.transactionParam);
+          this.props.getReferalData(this.state.transactionParam);
         }
       }
     );
@@ -281,12 +281,12 @@ export class MyReferal extends React.PureComponent {
                 "day"
               )
             ) {
-              this.props.transactions(this.state.transactionParam);
+              this.props.getReferalData(this.state.transactionParam);
             } else {
               toast.error("Min Date cannot be Greater than Max Date");
             }
           } else {
-            this.props.transactions(this.state.transactionParam);
+            this.props.getReferalData(this.state.transactionParam);
           }
         }
       );
@@ -307,7 +307,7 @@ export class MyReferal extends React.PureComponent {
       },
       () => {
         console.log(this.state, " in type filter handler");
-        this.props.transactions(this.state.transactionParam);
+        this.props.getReferalData(this.state.transactionParam);
       }
     );
   };
@@ -426,7 +426,7 @@ export class MyReferal extends React.PureComponent {
                   <h4 className="exchange-heading">Referral Tokens Earned</h4>
                     <p style={{ marginBottom: "0px", color: "#465390" ,fontSize: "32px", marginLeft : '10px' }}>
                     {
-                    350
+                    0
                     }
                     </p>
                   <div className="col-sm-12" style={{ position : 'relative' }}>
@@ -552,9 +552,9 @@ export class MyReferal extends React.PureComponent {
               <div className="row">
                 <div className="col-sm-12">
                   <div className="customCard-header transaction-container">
-                    <h2 className="trasnaction">Transactions</h2>
+                    <h2 className="trasnaction" style={{color:'#00296B',fontWeight:'bold'}} >Transactions</h2>
                     <span id="Clear-all">
-                      <a onClick={this.clearFilter} id="clearType">
+                      <a onClick={this.clearFilter} id="clearType" style={{color:'#00296B'}} >
                         Clear All
                       </a>
                     </span>
@@ -564,7 +564,7 @@ export class MyReferal extends React.PureComponent {
                   <div className="transactions-filters">
                     <div className="transactions-filters-card">
                       <label htmlFor="kycFilter" id="transaction-type">
-                        <h4 style={{ color : '#B0C9F0' }}>Transaction Type:</h4>
+                        <h4 style={{ color : '#00296B',fontWeight:'bold' }}>Transaction Type:</h4>
                       </label>
                       <select
                         className="form-control  filter-input"
@@ -583,7 +583,7 @@ export class MyReferal extends React.PureComponent {
                     <div className="transactions-filters-card">
                       <div>
                         <label htmlFor="createdFilter" id="transaction-type" style={{ color : '#B0C9F0' }}>
-                          <h4 style={{ color : '#B0C9F0' }}> Created At:</h4>
+                          <h4 style={{ color : '#00296B',fontWeight:'bold' }}> Created At:</h4>
                         </label>
                       </div>
                       <div className="clear-input-control-width">
@@ -597,7 +597,7 @@ export class MyReferal extends React.PureComponent {
     
                       </div>
                       <div>
-                        <span className="to">To</span>
+                        <span className="to" style={{color:'#00296B'}}>To</span>
                       </div>
                       <div className="clear-input-control-width">
                         <DatePicker
@@ -618,7 +618,7 @@ export class MyReferal extends React.PureComponent {
                   >
                     <div className="transactions-filters-card">
                       <label htmlFor="kycFilter" id="transaction-type">
-                        <h4 style={{ color : '#B0C9F0' }}>No Of Transactions:</h4>
+                        <h4 style={{ color : '#00296B',fontWeight:'bold' }}>No Of Transactions:</h4>
                       </label>
                       <select
                         className="form-control  filter-input"

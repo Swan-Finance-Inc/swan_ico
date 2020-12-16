@@ -369,7 +369,7 @@ label.form-check-label a:hover {
 	text-decoration:underline;
 }
 /* Media Queries */
- @media (max-width: 767px) {
+ @media (max-width: 768px) {
 	 .header-right {
 	flex-direction: column;
 	align-items: flex-end;
@@ -384,6 +384,10 @@ label.form-check-label a:hover {
 
 	.login-button{
 		width: 295px !important;
+	}
+
+	.lastName-input{
+		margin-top: 30px;
 	}
 
 	

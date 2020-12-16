@@ -391,7 +391,7 @@ export class Stake extends React.PureComponent{
                                 </div> 
                                 {this.state.approveLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
-                                  <button className="swanCancel">CANCEL</button>
+                                  {/* <button className="swanCancel">CANCEL</button> */}
                                   <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
                                 </div>
                               </div>
@@ -407,7 +407,7 @@ export class Stake extends React.PureComponent{
                                 </div> 
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
-                                  <button className=" swanCancel">CANCEL</button>
+                                  {/* <button className=" swanCancel">CANCEL</button> */}
                                   <button className="swanApprove" onClick={this.onStakeToken}>STAKE TOKENS</button>
                                 </div>
                               </div>

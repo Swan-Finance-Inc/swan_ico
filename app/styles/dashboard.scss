@@ -187,6 +187,11 @@ color:blue
 	left: 57px;
 }
 
+.nav-userimage{
+	width: 40px;
+	height: 40px;
+}
+
 .profile-button {
 	width: 119px;
 	height: 43px;
@@ -237,6 +242,8 @@ font-weight: 500;
 	 margin-left:50px;
 
 	}
+
+	
 }
 .header .header-btn > a:hover , .header .header-btn > a:focus {
 	// background-color: #519580 ;
@@ -1445,7 +1452,11 @@ opacity:0;
 }
 
 
+
 @media (max-width: 767px) {
+	.invest{
+		padding: 12px 30px !important;
+	}
 	.nav > li > a:hover {
 		background: none;
 	}
@@ -1730,7 +1741,7 @@ margin-top: 25px;
     width: 5px;
 }
 ::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 ::-webkit-scrollbar-thumb {
   background-color: darkgrey;
@@ -2914,11 +2925,34 @@ font-size: 25px;
 		width: 5.3% !important;
 	}
 }
+
+@media (width: 768px){
+	.account-balance-statistics{
+		flex-direction: column;
+	}
+
+	.balance-hr{
+		display: none;
+	}
+	.eth-other-balance-stats{
+		margin-top: 2px;
+	}
+	.wallet-deposit,.wallet-withdraw{
+		margin-left: 0px !important;
+	}
+	.fa-minus-circle{
+		margin: 0px 8px !important;
+	}
+
+}
   
 @media (max-width : 768px ){
 	.balance-card{
 		margin-top: 12px;
 		height: auto !important ;
+	}
+	.deposit-container{
+		padding-bottom: 20px;
 	}
 
 	.main-color--blue{
@@ -2927,6 +2961,9 @@ font-size: 25px;
 
 	.main-color--lightblue{
 		padding: 0px 4px;
+	}
+	.cryptoBuddy_Logo{
+		display: none;
 	}
 	
 	
@@ -3181,10 +3218,13 @@ font-size: 25px;
 	height: 4rem;
 	background-color: #DFF4FF;
 	border: none;
-	&:hover,&:focus,&:active {
+
+	&:hover,&:focus,&:active,&:visited {
 	border-right: 1px solid #2498D5;
-	background-color: #DFF4FF;
-	outline: none;
+	background-color: #DFF4FF !important;
+	cursor: default;
+	outline: none !important;
+	box-shadow: none;
 	}
 }
 .sorting-menu {
@@ -3197,7 +3237,7 @@ font-size: 25px;
 	border: none;
 	border-left: 1px solid #2498D5;
 	&:hover,&:focus,&:active{
-		background-color: #DFF4FF;
+		background-color: #DFF4FF !important;
 	border-left: 1px solid #2498D5;
 	outline: none;
 
@@ -3218,6 +3258,11 @@ font-size: 25px;
 	padding: 7px 20px !important;
 	  color:#D96363 !important;
   }
+
+  .profile-language-dropdown > a{
+	padding: 0px 15px !important;
+}
+
 
 
  

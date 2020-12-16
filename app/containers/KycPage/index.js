@@ -464,7 +464,7 @@ handleInput2=(e)=>{
               <div className="alert alert-success text-center">
                 <h5 className="alert-success">Your KYC is done.</h5>
                 <p>Now you can start investing by clicking on 
-                 <Link to="/dashboard/contribution" ><span className="alert-success" onClick={() => this.props.toggleContActive() }
+                 <Link to="/dashboard/contribution" ><span className="alert-success" style={{textDecoration:'underline'}} onClick={() => this.props.toggleContActive() }
                  > Contribution </span> </Link> 
                   button.</p>
               </div>

@@ -55,7 +55,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         referalUrl:'',
         profilePicUrl:'',
         profilePic:'',
-        currentView:'personal'
+        currentView:'notifications',
+        currency: 'usd'
     }
 
     this.handleInput = this.handleInput.bind(this);
@@ -114,7 +115,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       ethAddress,
       valid: true,
       currentView:'notifications',
-      notifyMe
+      notifyMe,
+      currency:'usd'
     }
         this.props.getProfileData();
   }
@@ -529,23 +531,23 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         <div>
           <form onSubmit={this.updateNotification}>
         <div className="form-group">
-          <label htmlFor="sendMail" className="control-label col-sm-8 col-xs-8" >I would like to receive email after every login</label>
+          <label htmlFor="sendMail" className="control-label col-sm-8 col-xs-8" style={{marginBottom:20}} >I would like to receive email after every login</label>
           <div className="col-sm-4 col-xs-4" style={{textAlign: 'end'}}>
           <Switch onClick={this.toggleLoginAlert} on={this.state.loginAlert}/>
         </div>
         </div>
       <div className="form-group">
-      <label htmlFor="deleteTransaction" className="control-label col-sm-8 col-xs-8" >Notify me for latest News and alerts</label>
+      <label htmlFor="deleteTransaction" className="control-label col-sm-8 col-xs-8" style={{marginBottom:20}} >Notify me for latest News and alerts</label>
       <div className="col-sm-4 col-xs-4" style={{textAlign: 'end'}}>
       <Switch onClick={this.toggleLatestNewsAlert} on={this.state.notifyMe}/>
       </div>
       </div>
       <div className="form-group">
-      <label htmlFor="deleteTransaction" className="control-label col-sm-6 col-xs-6" >Language</label>
+      <label htmlFor="deleteTransaction" className="control-label col-sm-6 col-xs-6" style={{marginBottom:20}}>Language</label>
       <div className="col-sm-6 col-xs-6">
       <Nav pullRight  className="profile-nav-bar">
             
-            <NavDropdown style={{ display: 'flex' , left : '31px' }} className="dropdown-usermenu zineum-username" title= "ENG" id="basic-nav-dropdown">
+            <NavDropdown style={{ display: 'flex' , left : '31px'}} className="dropdown-usermenu zineum-username profile-language-dropdown" title= "ENG" id="basic-nav-dropdown">
             <MenuItem style={{ cursor: 'pointer' }} onClick={ () => console.log("") }>ENGLISH</MenuItem>
             <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>FRENCH</MenuItem>
             <MenuItem style={{ cursor: 'pointer' }} onClick={() => console.log("")}>GERMAN</MenuItem>
@@ -555,15 +557,25 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
       </div>
       </div>
       <div className="form-group">
-      <label htmlFor="deleteTransaction" className="control-label col-sm-8 col-xs-8" >Currency</label>
-      <div className="col-sm-4 col-xs-4" style={{textAlign: 'end'}}>
-      <Switch  on={this.state.notifyMe}/>
+      <label htmlFor="deleteTransaction" className="control-label col-sm-8 col-xs-8" style={{marginBottom:20}}>Currency</label>
+      <div className="col-sm-4 col-xs-4" style={{display :'flex',justifyContent:'flex-end'}}>
+      
+      { this.state.currency === 'usd' ? (
+                    <div  className="swanApprove" style={{margin:0,padding:0,width:'25%',cursor:'pointer'}} ><span  style={{margin:10, fontSize: '14px',color : '#fff'}}>USD($)</span></div>
+                  ) : (
+                    <div  onClick={()=>this.setState({currency :'usd'})} className="swanCancel" style={{margin:0,padding:0,width:'25%',cursor:'pointer',border:'1px solid #2498D5',borderRadius:'4px 0px 0px 4px',borderRight:'none'}}><span  style={{margin:10, fontSize: '14px',color : '#465390'}}>USD($)</span></div>
+                  )}
+      { this.state.currency === 'euro' ? (
+                    <div    className="swanApprove" style={{margin:0,padding:0,width:'25%',cursor:'pointer'}}><span  style={{margin:10, fontSize: '14px',color : '#fff'}}>EURO(%)</span></div>
+                  ) : (
+                    <div  onClick={()=>this.setState({currency :'euro'})}  className="swanCancel" style={{margin:0,padding:0,width:'25%',cursor:'pointer',border:'1px solid #2498D5',borderRadius:'0px 4px 4px 0px',borderLeft:'none'}} ><span  style={{margin:10, fontSize: '14px',color : '#465390'}}>EURO(%)</span></div>
+                  )}            
       </div>
       </div>
       
       <div className="row">
                   <div className="col-sm-12 text-center">
-                    <button type="submit" className="normal-button">Update </button>
+                    <button type="submit" className="normal-button" style={{backgroundColor:'#2498D5'}} >Update </button>
                   </div>
                 </div>
                 </form>

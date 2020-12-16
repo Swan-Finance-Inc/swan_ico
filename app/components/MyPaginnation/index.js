@@ -16,7 +16,7 @@ class index extends Component {
           {data.length > 0 ? (
             data.map((d, i) => (
               <a href="javascript:void(0);" onClick={onPageChange}>
-                {i}
+                {i+1}
               </a>
             ))
           ) : 

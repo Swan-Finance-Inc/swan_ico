@@ -22,7 +22,7 @@ import { toast } from 'react-toastify';
 import { Modal, Button } from 'react-bootstrap';
 
 import { Contribution, DashBoard, KYC, Referral, Security, Tickets, Transactions , Wallet, 
-  Annoucement , News , PrivatePolicy, WhitePaper, Info, Settings,Support
+  Annoucement , News , PrivatePolicy, WhitePaper, Info, Settings,Support ,Stake,StakeWhite
 } from '../../components/Icons/index';
 
 export class SideBarNav extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
@@ -276,7 +276,14 @@ export class SideBarNav extends React.PureComponent { // eslint-disable-line rea
                </Link>
             </li>
             <li onMouseEnter = {() => { this.state.investAct === 'active' ? '' : this.setState({investAct : true })} } onMouseLeave = { () =>{this.state.investAct === 'active'? '' : this.setState({investAct : false }) }} className={`${this.state.investAct} nav-item`} ><Link to="/dashboard/invest" role="button" onClick={this.toggleInvestActive}>
-               <Wallet color={this.state.investAct ? '#fff' : '#465390'}/>
+               {
+                 this.state.investAct ? 
+                 <StakeWhite/>
+                 :
+                 <Stake/>
+               }
+               
+            
                {/* <span className={`ui-nav-text ${this.state.walletAct}`}>Wallets</span>  */}
                </Link>
             </li>

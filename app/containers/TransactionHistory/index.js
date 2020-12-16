@@ -57,40 +57,41 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
       size : '',
       data: [],
       headers : [
-        { label: "created_at", key: "created_at" },
-        { label: "type", key: "type" },
-        { label: "amount", key: "amount" },
-        { label: "tokenPrice", key: "tokenPrice" },
-        { label: "transactionHash", key: "transactionHash" },
-        { label: "status", key: "status" },
-        { label: "tokens", key: "tokens" },
-        { label: "phase", key: "phase" },
-        { label: "rate", key: "rate" },
+        { label: "Time", key: "created_at" },
+        { label: "Currency", key: "type" },
+        { label: "Amount", key: "amount" },
+        { label: "Token Price($)", key: "tokenPrice" },
+        { label: "Transaction Hash", key: "transactionHash" },
+        { label: "Transaction Status", key: "status" },
+        { label: "SWAN Tokens", key: "tokens" },
+        { label: "Fund Raise Rounds", key: "phase" },
+        { label: "Rate", key: "rate" },
+        {label: 'Bonus(%)' , key: 'bonus'}
 
       ],
       columns: [
         {
-          Header: 'Time',
+          Header: <span style= {{color:'#00296B'}} >Time</span>,
           accessor: 'created_at',
           filter: <h3>hello</h3>,
         },
         {
-          Header: 'Currency',
+          Header: <span style= {{color:'#00296B'}} >Currency</span>,
           accessor: 'type', // Custom cell components!
           className: 'text-center'
         },
         {
-          Header: 'Amount',
+          Header: <span style= {{color:'#00296B'}} >Amount</span>,
           accessor: 'amount', // Custom cell components!
           className: 'text-right'
         },
         {
-          Header: 'Token Price($)',
+          Header: <span style= {{color:'#00296B'}} >Token Price($)</span>,
           accessor: 'tokenPrice', // Custom cell components!
           className: 'text-center'
         },
         {
-          Header: 'Transaction Hash',
+          Header: <span style= {{color:'#00296B'}} >Transaction Hash</span>,
           accessor: 'transactionHash', // Custom cell components!
           className: 'text-center',
           Cell:({value}) =>{
@@ -105,18 +106,18 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
           }
         },
         {
-          Header: 'Transaction Status',
+          Header: <span style= {{color:'#00296B'}} >Transaction Status</span>,
           accessor: 'status', // Custom cell components!
           className: 'text-center'
         },
         {
-          Header: 'SWAN Tokens',
+          Header: <span style= {{color:'#00296B'}} >SWAN Tokens</span>,
           accessor: 'tokens', // Custom cell components!
           className: 'text-right'
         },
        {
 
-            Header: 'Phase',
+            Header: <span style= {{color:'#00296B'}} >Fund Raise Rounds</span>,
             accessor: 'phase', // Custom cell components!
             className: 'text-center',
             Cell: ({ value }) => {
@@ -141,13 +142,13 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
             }
           },
           {
-             Header: 'Rate',
+             Header: <span style= {{color:'#00296B'}} >Rate</span>,
              accessor: 'rate', // Custom cell components!
              className: 'text-right'
            },
         
         {
-          Header: 'Type',
+          Header: <span style= {{color:'#00296B'}} >Type</span>,
           accessor: 'type',
           filter: <h3>hello</h3>,
         },
@@ -170,7 +171,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
         //   filter: <h3>hello</h3>,
         // },
         {
-          Header: 'Bonus(%)',
+          Header: <span style= {{color:'#00296B'}} >Bonus(%)</span>,
           accessor: 'bonus',
           filter: <h3>hello</h3>,
         }
@@ -507,14 +508,14 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               <div className="row">
                   <div className="col-sm-12">
                       <div className="customCard-header transaction-container">
-                        <h2 className="trasnaction">Transactions</h2>
+                        <h2 className="trasnaction" style={{color:'#00296B',fontWeight:'bold'}}>Transactions</h2>
                         <span id="Clear-all"><a onClick={this.clearFilter} id="clearType">Clear All</a></span>
                       </div>  
                   </div>
                   <div className="col-sm-4">
                       <div className="transactions-filters">
                         <div className="transactions-filters-card">
-                        <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>Transaction Type:</h4></label>
+                        <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color:'#00296B',fontWeight:'bold' }}>Transaction Type:</h4></label>
                         <select className="form-control  filter-input" style={{padding:'0px'}} id="typeFilter" onChange={this.handleTypeFilter}>
                           <option value="" disabled selected hidden></option>
                           <option value='Ethereum'>ETHEREUM</option>
@@ -529,7 +530,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                   <div className="col-sm-8">
                     <div className="transactions-filters">
                     <div className="transactions-filters-card">
-                        <div><label htmlFor="createdFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>Created At:</h4></label></div>
+                        <div><label htmlFor="createdFilter" id="transaction-type"><h4 style={{ color:'#00296B',fontWeight:'bold' }}>Created At:</h4></label></div>
                             <div  className="clear-input-control-width">
                             <DatePicker
                             style={{width: '84%' }}
@@ -605,7 +606,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
 
                             </div>
                             <div>
-                              <span className="to">To</span>
+                              <span className="to"style={{color:'#00296B',fontWeight:'bold'}} >To</span>
                             </div>
                             <div className="clear-input-control-width">
                             <DatePicker
@@ -624,7 +625,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               <div className="col-sm-12">
               <div className="transactions-filters" style={{ paddingTop : '0px' }}>
                 <div className="transactions-filters-card">
-                <label htmlFor="kycFilter" id="transaction-type"><h4 style={{ color : '#B0C9F0' }}>No Of Transactions:</h4></label>
+                <label htmlFor="kycFilter" id="transaction-type"><h4 style={{color:'#00296B',fontWeight:'bold'}}>No Of Transactions:</h4></label>
                 <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="pageFilter" onChange = { this.handleRowFilter } >
                   <option value="" disabled selected hidden></option>
                   <option value='5'>5</option>
@@ -635,7 +636,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               </div>  
               <div className='col-sm-12' style={{textAlign:'right', paddingRight:'35px', color:'rgb(176, 201, 240)' }} >
                 {
-                  this.state.data.length > 0 ? <CSVLink style={{color:'#00296B'}} data={this.state.data} headers={this.state.headers}  >Download CSV</CSVLink>
+                  this.state.data.length > 0 ? <CSVLink style={{color:'#00296B',textDecoration:'underline'}} data={this.state.data} headers={this.state.headers}  >Download CSV</CSVLink>
                   :
                   ''
                 }

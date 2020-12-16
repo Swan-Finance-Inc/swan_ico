@@ -1395,7 +1395,7 @@ hide=(e)=>{
                     </span>
                   </div>
                   <div className='row howMuch' style={{ display: 'flex',flexDirection: 'column',
-                   paddingLeft: '20px', paddingTop: '10px'}}>
+                   paddingLeft: '15px', paddingTop: '10px'}}>
                   <div className="trade-in-centralex">
                   <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Stellar') ? (this.state.tokensPerStellar) : (this.state.tokensPerUsdt)} SWAN Tokens</span>
                   {
@@ -1473,7 +1473,7 @@ hide=(e)=>{
               {/* {(this.state.valid == false && this.state.validBlank == 'false') ? <p style={{color:"#ff0000"}}>Please enter a valid address</p>:<p></p>} */}
               {/* {(this.state.validWallet == false && this.state.validWalletBlank == 'false' && this.state.curr == 'Bitcoin') ? <p style={{color:"#ff0000"}}>Please enter a valid ERC20 wallet address</p>:<p></p>} */}
               {(this.props.successData.stage=='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End') && <div><sup>No transactions during {this.props.successData.stage}</sup></div>}
-              <button className="form-button " type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
+              <button className="invest" style={{color:'#2498D5'}} type="submit" disabled={this.props.userInfo.userInfo.kycStatus!=='ACCEPTED'||this.props.successData.stage==='CrowdSale Not Started'||this.props.successData.stage==='Private Sale Start'||this.props.successData.stage==='Private Sale End'} 
               onClick={() => this.checkWallet()} >Continue</button>
               </div>
               </div>

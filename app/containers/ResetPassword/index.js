@@ -89,16 +89,16 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
       <div >
 
         <section>
-        <div className="ui-container container-fluid">
+        <div className="ui-container container-fluid" style={{paddingLeft:'0px'}}>
         <div className="panel panel-default">
           {/* <div className="panel-heading">Reset Password</div> */}
           <div className="panel-body" style={{fontSize:'16px'}}>
             <div className="row">
-              <div className="col-sm-12  col-md-12">
+              <div className="col-sm-12  col-md-12" style={{paddingLeft:'0px'}}>
                 {/* <div className="card-header">
                   <h1 className="reset-title">Reset Password</h1>
                 </div> */}
-                <div className="contribution" style={{ marginBottom: '200px' }}>
+                <div className="contribution" style={{ marginBottom: '200px',paddingLeft:'0px' }}>
                   <form onSubmit={this.formSubmit}>
                   <div className="row form-group">
                   <div className="col-sm-4 col-md-4 col-lg-4">
@@ -116,7 +116,7 @@ export class ResetPassword extends React.PureComponent { // eslint-disable-line 
 
                 </div>
                 <div className="text-center" style = {{marginTop : 60}}>
-                      <button type="submit" className="form-button">Reset Password</button>
+                      <button type="submit" className="form-button" style={{backgroundColor:'#2498D5'}} >Reset Password</button>
                     </div>
                   </form>
                 </div>

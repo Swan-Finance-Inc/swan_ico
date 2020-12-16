@@ -425,7 +425,7 @@ export class EarnInterest extends React.PureComponent{
                               </div>
                               
                             </div>
-                            <div className="row" style={{textAlign:"center", marginTop:"55px"}}>
+                            <div className="row" style={{textAlign:"center", marginTop:"55px",marginBottom:'70px'}}>
                               <div style={{color:"#465490", fontSize:"20px", fontWeight:"bold"}}>Choose Earn Interest Period</div>
                             <div className="col-md-12">
                               <div style={{display:'flex',flexDirection:'row', justifyContent:'center', }}>
@@ -465,8 +465,8 @@ export class EarnInterest extends React.PureComponent{
                                 <div className="swanApprove" style={{borderRadius:'0px'}}>{this.state.interest} % APY</div>
                                 </div>
                               </div>
-                              <div className="col-sm-7 col-md-7 col-lg-7" style={{textAlign:"center"}}>
-                                <div style={{boxShadow: '3px 3px 6px #00000029',maxWidth:'450px',padding : 13,borderRadius:'20px'}}>
+                              <div className="col-sm-7 col-md-7 col-lg-7" style={{textAlign:"center",display:'flex',justifyContent:'center', marginTop:'-10px'}}>
+                                <div style={{boxShadow: '3px 3px 6px #00000029',maxWidth:'450px',padding : 13,borderRadius:'20px',border: '1px solid #D9D9D9'}}>
                                 <div style={{marginBottom: 14}}>You have not staked SWAN tokens yet. Stake $2000 of SWAN tokens to earn higher interest rates.
                                 </div>
                                 <br />
@@ -486,7 +486,7 @@ export class EarnInterest extends React.PureComponent{
                                 </div> 
                                 {this.state.approveLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
-                                  <button className="swanCancel">CANCEL</button>
+                                  {/* <button className="swanCancel">CANCEL</button> */}
                                   <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
                                 </div>
                               </div>
@@ -502,7 +502,7 @@ export class EarnInterest extends React.PureComponent{
                                 </div> 
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}} >
-                                  <button className="swanCancel">CANCEL</button>
+                                  {/* <button className="swanCancel">CANCEL</button> */}
                                   <button className="swanApprove" onClick={this.onEarnInterest}>EARN INTEREST</button>
                                 </div>
                               </div>

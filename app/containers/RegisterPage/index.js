@@ -148,6 +148,7 @@ export class RegisterPage extends React.PureComponent {
     // console.log(terms.checked)
     // console.log(this.state.referToken);
     // var nameRegex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     var nameRegex = /^(?!\s+$)[A-Za-z]+$/ ;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
     if(this.state.firstName.length < 4 || this.state.firstName.length > 20){
@@ -166,6 +167,9 @@ export class RegisterPage extends React.PureComponent {
     }
     else if(!this.state.email){
       this.notifyError("Please enter the email");
+    }
+    else if(!emailRegex.test(this.state.email)){
+      this.notifyError('Please enter valid email')
     }
     else if(this.state.password.length < 8 || !passwordRegex.test(this.state.password) ){
       this.notifyError("Password should contain atleast 8 characters including 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character.");
@@ -368,7 +372,7 @@ export class RegisterPage extends React.PureComponent {
                           }}
                         />
                       </div>
-                      <div className="col col-md-6" >
+                      <div className="col col-md-6 lastName-input">
                         <TextFieldInput
                           type="text"
                           name="lastName"

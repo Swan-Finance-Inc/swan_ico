@@ -12,12 +12,13 @@ import { compose } from 'redux';
 import { Navbar, Nav, MenuItem, NavDropdown, Modal ,Badge } from 'react-bootstrap';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectNavBarContainer from './selectors';
+import makeSelectNavBarContainer, { makeSelectDetails, makeSelectUpdateSuccess ,makeSelectImageReturn, makeSelectUserInfo, makeSelectLoading } from './selectors';
+import makeSelectDashBoardWelcomePage from 'containers/DashBoardWelcomePage/selectors';
 import reducer from './reducer';
 import saga from './saga';
 import logo from '../../images/swan-logo.png';
 import notifications from '../../images/notification-icon.png'
-// import { signOut }  from './actions';
+import { updateDetails, resetSuccess ,uploadProfileImage, getProfileData, getProfileRemove } from './actions';
 import { userLoggedOut } from '../App/actions';
 import { push } from 'react-router-redux';
 import { Switch, Route, Redirect, Link } from 'react-router-dom';
@@ -29,6 +30,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import profileDummy from '../../images/Profile.png'
 import editIcon from '../../images/edit-icon.png'
+
 export class NavBarContainer extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -41,18 +43,25 @@ export class NavBarContainer extends React.PureComponent {
       name: 'Username',
       showSignOut: false,
       deleteProfile:false,
-      showProfile: false
+      showProfile: false,
+      firstName:'',
+      LastName:'',
+      email:'',
+      userAddress:'',
+
     };
   }
 
-  // componentDidMount() {
-  //   const script = document.createElement('script');
+  componentDidMount() {
+    const { email, fullName , secondName } = this.props.userInfo.userInfo;
+    this.setState({
+      email,
+      firstName : fullName,
+      LastName : secondName
+    })
+    this.props.getProfileData();
 
-  //   script.src = 'https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-
-
-  //   document.body.appendChild(script);
-  // }
+  }
 
   signOut() {
   // //console.log("sign out")
@@ -122,30 +131,27 @@ export class NavBarContainer extends React.PureComponent {
 
 
   render() {
-    console.log(this.props," tttttttttttttttttttttttttttttt");
-
+    console.log(this.props.userInfo.userInfo,"krjdbghkdhbdbbskf");
+    const {userInfo} = this.props.userInfo
     return (
       <header style = {{height : "60px"}} >
         <Navbar fluid fixedTop style={{borderWidth: '0' , border : '1px solid #465490'}} className="navbar-back">
-          <div className="header-left">
+          <div className="header-left" style={{cursor:'pointer'}} onClick ={()=> window.location.reload() } >
             <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
             <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
           </div>
           <div className="header-right hidden-xs">
+             <div style={{position:'relative', top:'6px'}}>
+             <img className="img-responsive nav-userimage"  src={profileDummy } alt="back id" id="back_img_src"  />
+
+             </div>
              
 
             <Nav pullRight  className="profile-nav-bar">
-            {
-            //   //<NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">
-            // {/*<NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title='Language' id="basic-nav-dropdown">*/}
             
-            // {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectEnglish}><i ></i>English</MenuItem> */}
-            // {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.selectChinese}><i ></i>Chinese</MenuItem> */}
-            // /</Nav>/</NavDropdown>
-            }
                 <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
-                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} onClick={this.userProfile}>{this.props.username ? this.props.username : this.state.name} </MenuItem>
-                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} >Wallet</MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} onClick={this.userProfile}>{this.props.username ? this.props.username : this.state.name} <br/> <span style={{color:'#7C7C7C'}} >{this.props.email} </span> </MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} ><Link  to="/dashboard/wallet">Wallet</Link></MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} onClick={this.profile}>Setting</MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} >Reports</MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} >Help</MenuItem>
@@ -234,7 +240,7 @@ export class NavBarContainer extends React.PureComponent {
                         type="text"
                         name="fullName"
                         label="First Name"
-                        value={this.state.fullName}
+                        value={this.state.firstName}
                         handleChange={(e) => {
                           this.setState({
                             [e.target.name]: e.target.value
@@ -253,7 +259,7 @@ export class NavBarContainer extends React.PureComponent {
                         type="text"
                         name="secondName"
                         label="Last Name"
-                        value={this.state.secondName}
+                        value={this.state.lastName}
                         handleChange={(e) => {
                           this.setState({
                             [e.target.name]: e.target.value
@@ -507,11 +513,21 @@ NavBarContainer.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   navbarcontainer: makeSelectNavBarContainer(),
+  userInfo: makeSelectDashBoardWelcomePage(),
+  updateSuccess: makeSelectUpdateSuccess(),
+  ImageRet:makeSelectImageReturn(),
+  updateUserInfo:makeSelectUserInfo(),
+  loading:makeSelectLoading(),
 });
 
 function mapDispatchToProps(dispatch) {
   return {
     dispatch,
+    updateDetail : (data) => dispatch(updateDetails(data)),
+    resetSuccess : (data) => dispatch(resetSuccess(data)),
+    uploadProfileImage : (data) => dispatch(uploadProfileImage(data)),
+    getProfileData: (data) => dispatch(getProfileData(data)),
+    getProfileRemove: (data) => dispatch(getProfileRemove(data)),
     signout: () => dispatch(userLoggedOut()),
     push: (route) => dispatch(push(route)),
   };

@@ -141,7 +141,7 @@ class TextFieldInput extends Component {
                           onClick={this.handleClickShowPassword}
                           disableRipple
                         >
-                          {this.state.showPassword ? <Visibility style={{ fontSize: '17px' }} /> : <VisibilityOff style={{ fontSize: '17px' }} />}
+                          {this.state.showPassword ? <VisibilityOff style={{ fontSize: '17px' }} /> : <Visibility style={{ fontSize: '17px' }} />}
                         </IconButton>
                       </InputAdornment>
                     ),
