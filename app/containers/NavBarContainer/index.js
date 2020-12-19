@@ -30,6 +30,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import FileCopyOutlinedIcon from '@material-ui/icons/FileCopyOutlined';
 import profileDummy from '../../images/Profile.png'
 import editIcon from '../../images/edit-icon.png'
+import { ToastContainer, toast } from 'react-toastify';
 
 export class NavBarContainer extends React.PureComponent {
   constructor(props) {
@@ -38,6 +39,7 @@ export class NavBarContainer extends React.PureComponent {
     this.resetPassword = this.resetPassword.bind(this);
     this.showSignOut = this.showSignOut.bind(this);
     this.closeSignOut = this.closeSignOut.bind(this);
+    this.updateProfile = this.updateProfile.bind(this);
     this.profile = this.profile.bind(this);
     this.state = {
       name: 'Username',
@@ -45,22 +47,61 @@ export class NavBarContainer extends React.PureComponent {
       deleteProfile:false,
       showProfile: false,
       firstName:'',
-      LastName:'',
+      lastName:'',
       email:'',
       userAddress:'',
-
+      address:'',
+      town:'',
+      state:'',
+      pinCode:'',
+      country:'',
+      edit:true
     };
   }
 
-  componentDidMount() {
+  componentWillMount(){
     const { email, fullName , secondName } = this.props.userInfo.userInfo;
     this.setState({
       email,
       firstName : fullName,
-      LastName : secondName
+      lastName : secondName,
+     profilePicUrl:this.props.userInfo.userInfo.imageProfile
+
     })
     this.props.getProfileData();
+  }
 
+  componentDidMount() {
+    
+    this.setState({
+     profilePicUrl:this.props.userInfo.userInfo.imageProfile
+
+    })
+  }
+
+  componentWillReceiveProps(nextProps){
+    console.log(nextProps);
+    if(nextProps.updateSuccess){
+      if(nextProps.updateSuccess.success){
+        console.log('toast block')
+        toast.success(nextProps.updateSuccess.message);
+        nextProps.resetSuccess();
+      }
+    }
+    if(nextProps.ImageRet){
+      console.log(" success");
+      this.setState({
+        profilePicUrl:nextProps.ImageRet.imageUrl
+      })
+      nextProps.resetSuccess();
+    }
+    if(nextProps.updateUserInfo){
+      console.log(" isnide update profile info")
+       this.setState({
+         profilePicUrl:nextProps.updateUserInfo.imageProfile
+       })
+       nextProps.getProfileRemove();
+    }
   }
 
   signOut() {
@@ -129,14 +170,68 @@ export class NavBarContainer extends React.PureComponent {
     this.props.toggleInfo()
   }
 
+  uploadProfileImage=()=>{
+    console.log("in handleback")
+
+    document.getElementById('profileImage').click()
+  }
+
+  handleBackImg=(e)=> {
+    e.preventDefault();
+    console.log("in handleback");
+
+    var reader = new FileReader();
+    var file = e.target.files[0];
+    if(file.size > 5*1024*1024){
+      toast.error('File size should be less than 5MB');
+    }else{
+        this.setState({
+          profilePicUrl : '/assets/img/uploading.svg',
+        })
+      this.props.uploadProfileImage({ imageProfile :file})
+    }
+  }
+
+   updateProfile(){
+    var regex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    console.log(this.state,"dlvjnaudvgfdyv");
+    if(!regex.test(this.state.firstName)){
+      toast.error("Invalid Firstname Name")
+    }
+    else
+    if(this.state.firstName.length < 4 || this.state.firstName.length > 20){
+      toast.error("First name should be between 4 to 20 characters")
+    }
+    else
+    if(!regex.test(this.state.lastName)){
+      toast.error("Invalid Lastname Name")
+    }
+    else
+    if(this.state.lastName.length < 4 || this.state.lastName.length > 20){
+      toast.error("Last name should be between 4 to 20 characters")
+    
+    }
+    // else if()
+    // {}
+    else{
+
+      const {firstName , lastName } = this.state;
+      this.props.updateDetail({fullName:firstName,secondName:lastName});
+    }
+    // else{
+    //   toast.error('Please enter valid ETH Wallet address');
+    // }
+  }
+
 
   render() {
-    console.log(this.props.userInfo.userInfo,"krjdbghkdhbdbbskf");
+    console.log(this.props,"krjdbghkdhbdbbskf");
     const {userInfo} = this.props.userInfo
+    const {profilePicUrl} = this.state
     return (
       <header style = {{height : "60px"}} >
         <Navbar fluid fixedTop style={{borderWidth: '0' , border : '1px solid #465490'}} className="navbar-back">
-          <div className="header-left" style={{cursor:'pointer'}} onClick ={()=> window.location.reload() } >
+          <div  className={this.props.animationFlag?"header-left animate-logo":"header-left"} style={{cursor:'pointer'}} onClick ={()=> window.location.reload() } >
             <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
             <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
           </div>
@@ -222,14 +317,14 @@ export class NavBarContainer extends React.PureComponent {
                 <Modal.Body dialogClassName="profile-modal-body" className="profile-modal-body" >
                   <div className="row">
                     <div className="col-md-5" style={{textAlign:'center', right:'42px',height : "137px"}}>
-                    <img className="img-responsive profile-Image"  src={profileDummy } alt="back id" id="back_img_src"  />
-                    <img className="img-responsive profile-Image" style={{width:'25px',height:'25px',left:'197px',bottom:'46px'}} src={editIcon } alt="back id" id="back_img_src"  onClick={this.uploadProfileImage}/>
+                    <img className="img-responsive profile-Image"  src={profilePicUrl?profilePicUrl:profileDummy } alt="back id" id="back_img_src"  />
+                    <img className="img-responsive profile-Image" style={{width:'25px',height:'25px',left:'197px',bottom:'46px',cursor:'pointer'}} src={editIcon } alt="back id" id="back_img_src"  onClick={this.uploadProfileImage}/>
                     {/* <br /> */}
                     {/* <button className="changeImage" type = "button"  >Change Image</button> */}
                     <input type="file" accept="image/png, image/jpeg" id="profileImage" name="back_id" style={{margin:'10px 0px 0px 30px',display:'none'}}  onChange={this.handleBackImg}/>
                     <div className="col-md-12" style={{position:'relative',bottom:'20px'}}>
                     <button className="removeImage" type = "button"  >Remove Image</button>
-                    <div>Max file size is</div>
+                    <div>Max file size is 5Mb</div>
                     </div>
                    
                     </div>
@@ -238,7 +333,7 @@ export class NavBarContainer extends React.PureComponent {
                     <div className="row">
                     <TextFieldInput
                         type="text"
-                        name="fullName"
+                        name="firstName"
                         label="First Name"
                         value={this.state.firstName}
                         handleChange={(e) => {
@@ -247,6 +342,7 @@ export class NavBarContainer extends React.PureComponent {
                           })
                         
                         }}
+                        disabled = {this.state.edit}
                         inputStyle={{
                           fontSize: '15px',
                           fontWeight: '900',
@@ -257,9 +353,10 @@ export class NavBarContainer extends React.PureComponent {
                       />
                       <TextFieldInput
                         type="text"
-                        name="secondName"
+                        name="lastName"
                         label="Last Name"
                         value={this.state.lastName}
+                        disabled={this.state.edit}
                         handleChange={(e) => {
                           this.setState({
                             [e.target.name]: e.target.value
@@ -357,9 +454,9 @@ export class NavBarContainer extends React.PureComponent {
                     </select> */}
                     <TextFieldInput
                         type="text"
-                        name="address"
+                        name="town"
                         label="City/Town"
-                        value={this.state.address}
+                        value={this.state.town}
                         //variant="outlined"
                         //required={true}
                         disabled={this.state.edit}
@@ -389,9 +486,9 @@ export class NavBarContainer extends React.PureComponent {
                         /> */}
                         <TextFieldInput
                         type="text"
-                        name="address"
+                        name="state"
                         label="State"
-                        value={this.state.address}
+                        value={this.state.state}
                         //variant="outlined"
                         //required={true}
                         disabled={this.state.edit}
@@ -440,9 +537,9 @@ export class NavBarContainer extends React.PureComponent {
                             </div> */}
                             <TextFieldInput
                         type="text"
-                        name="address"
+                        name="pinCode"
                         label="Pin/Zip code"
-                        value={this.state.address}
+                        value={this.state.pinCode}
                         //variant="outlined"
                         //required={true}
                         disabled={this.state.edit}
@@ -463,9 +560,9 @@ export class NavBarContainer extends React.PureComponent {
                   <div className="col-md-6" >
                   <TextFieldInput
                         type="text"
-                        name="address"
+                        name="country"
                         label="Country"
-                        value={this.state.address}
+                        value={this.state.country}
                         //variant="outlined"
                         //required={true}
                         disabled={this.state.edit}

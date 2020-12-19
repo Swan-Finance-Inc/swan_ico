@@ -2269,6 +2269,10 @@ font-size: 25px;
     cursor: pointer;
 }
 
+.disable-cursor{
+	cursor: not-allowed;
+}
+
 
 .d-flex{
 	display: flex;
@@ -3262,6 +3266,8 @@ font-size: 25px;
   .profile-language-dropdown > a{
 	padding: 0px 15px !important;
 }
+
+
 
 
 

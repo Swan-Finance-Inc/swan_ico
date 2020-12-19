@@ -122,7 +122,7 @@ export class MyReferal extends React.PureComponent {
     this.props.getReferalData();
     this.setState({
       ...this.state,
-      referralUrl:`https://tokensale.centralex.com/signup/refer/${this.props.referralCode}`
+      referralUrl:`http://3.20.185.108:6036/signin/refer/${this.props.referralCode}`
     })
   }
   componentWillReceiveProps(nextProps) {
@@ -490,11 +490,11 @@ export class MyReferal extends React.PureComponent {
                         </div> 
                       </div>
                       <div style={{width: '86%' , position: 'relative'}}>
-                            <input value={this.state.referalUrl }
+                            <input value={this.state.referralUrl }
                               onChange={({target: {value}}) => this.setState({value, copied: false})}
                               className="copy-input"
                               />
-                            <CopyToClipboard text={this.state.referalUrl}
+                            <CopyToClipboard text={this.state.referralUrl}
                               onCopy={() => {this.setState({copied: true});
                                toast.success("Copied");
                               }}>
@@ -642,7 +642,7 @@ export class MyReferal extends React.PureComponent {
                         marginTop: "20px",
                         fontSize: "12px",
                         cursor: this.state.transactions ? "" : "pointer",
-                        height : this.state.transactions.length > 0 ? '100%' : '400px' 
+                        height : this.state.transactions.length > 0 ? '100%' : '410px' 
                       }}
                       data={this.state.transactions}
                       columns={this.state.transactionCollumn}

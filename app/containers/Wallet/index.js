@@ -230,6 +230,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   }
 
   getEthereumBalance=()=>{
+    console.log("dvafduvsbfd")
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
       web3.eth.getBalance(web3.utils.toChecksumAddress(this.state.ethWallet.address), function(err,res){
         if(err){console.log("aggaya : ", err)}
@@ -423,12 +424,19 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
               
             }
           }
+        
         })
       }
       else{
         toast.error(nextProps.listHotWalletRet.message) 
       }
       nextProps.clearContribution()
+    }
+      else{
+        console.log("afrovjoei")
+      this.setState({
+        balanceFlag:true
+      })
     }
 
     if(nextProps.createHotWalletRet){
@@ -1495,7 +1503,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
         
 
       
-     console.log(this.state," sttate in contribution page")
+     console.log(this.state.copied," sttate in contribution page")
     // console.log(this.state," state in contribution page")
     const { loading } = this.props
     const {language} = this.state
@@ -1631,16 +1639,20 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
                               <div className="trasnaction">Your Wallet Address</div>
-                              <div className="form-group" style={{display:'flex'}}>
+                              <div  className="form-group" style={{display:'flex'}}  >
                               
-                              <input id="fromAddress" type="text" value={this.state.currAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' />
+                              <input id="fromAddress" type="text" value={this.state.currAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
                               <CopyToClipboard text={this.state.currAddress}
-                              onCopy={() => {this.setState({copied: true});
-                               toast.success("Copied");
-                              }}>
-                              <span className="file-copy-conatiner" style = {{height : '-webkit-fill-available',position:'relative',right:'40px',border:'none'}} >
+                              onCopy={() => { this.state.currAddress.length > 0 ? (
+                                this.setState({copied: true}), toast.success("Copied") )
+                               : ''
+                              }}
+                              
+                              >
+                              <span  className= {this.state.currAddress.length<=0 ? "file-copy-conatiner disable-cursor" : "file-copy-conatiner"} style = {{height : '-webkit-fill-available',position:'relative',right:'40px',border:'none'}}  >
                               <FileCopyOutlinedIcon
                                 style={{ outline : 'none' ,fontSize : '20px'  }}
+                                
                                 />
                               </span>
                             </CopyToClipboard>
