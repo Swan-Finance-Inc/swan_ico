@@ -395,7 +395,7 @@ export class Stake extends React.PureComponent{
                               </div>
                               </div>
                             </div>
-                            {/* <div style={{padding:'10px'}}>
+                            <div style={{padding:'10px'}}>
                               
                               <div className={this.state.approveStart||this.state.approveSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%",position:'relative'}}>
                               {
@@ -420,12 +420,12 @@ export class Stake extends React.PureComponent{
                                 }
                                 
                                 {this.state.approveLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
-                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}> */}
+                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
                                   {/* <button className="swanCancel">CANCEL</button> */}
-                                  {/* <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
+                                  <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
                                 </div>
                               </div>
-                            </div> */}
+                            </div>
                             <div style={{padding:'10px'}}>
                               <div className={this.state.stakeStart||this.state.stakeSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
