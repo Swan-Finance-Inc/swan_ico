@@ -305,6 +305,9 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
               this.setState({
                 claimLoader:true
               })
+              setTimeout( () => this.setState({
+                claimLoader:false
+              }) , 3000)
               this.checkHashStatus(res, this.updateStatusFromContract);
             }
           }.bind(this))
@@ -365,6 +368,10 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
               this.setState({
                 withdrawLoader:true
               })
+              var id = setTimeout( () => this.setState({
+                withdrawLoader:false
+              }) , 3000)
+             
               this.checkHashStatus(res, this.updateStatusFromContract);
             }
           }.bind(this))
@@ -426,7 +433,10 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
               this.setState({
                 withdrawLoader:true
               })
+              
               this.checkHashStatus(res, this.updateStatusFromContract);
+             
+
             }
           }.bind(this))
       }
@@ -1790,6 +1800,7 @@ lookupPeriod = (e) =>{
     // console.log(this.state," state in contribution page")
     const { loading } = this.props
     const {language} = this.state
+ 
     // this.setState({
     //   loading : this.props
     // });
@@ -1957,7 +1968,7 @@ lookupPeriod = (e) =>{
               <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>          
             <div className="row">
               <div className="col-md-6 col-lg-6 col-sm-6" style={{fontSize:"20px"}}>
-              Stake $2000 of SWAN tokens to earn higher interest rates for SWAN and all other cryptocurrencies and stablecoins. Without staking $2000 of SWAN tokens here, the interest rates are 4% less.
+              Stake 2000 SWAN tokens to earn higher interest rates for SWAN and all other cryptocurrencies and stablecoins. Without staking 2000 SWAN tokens here, the interest rates are 4% less.
               </div>
               <div className="col-md-6 col-lg-6 col-sm-6" style={{textAlign:'center'}}>
                {this.state.isStaker?<button className='fractal-id-btn' onClick={()=>this.claimStakedTokens()}>{this.state.withdrawLoader?<i className="fa fa-cog fa-spin fa-3x fa-fw" style={{fontSize:'15px'}} />:'UNSTAKE'}</button>
@@ -1982,7 +1993,7 @@ lookupPeriod = (e) =>{
                   </div>
                   <div className="col-md-6 col-lg-6 col-sm-6" style={{textAlign:'center'}}>
                     120 days remaining &nbsp;
-                  <button className='swanBox'>${this.state.swanBalance==0?'0 (NA)':this.state.tokenPrice*this.state.swanBalance+'~'}</button> 
+                  <button className='swanBox'>{this.state.swanBalance==0?'0 (NA)':this.state.tokenPrice*this.state.swanBalance+'~'}</button> 
                   </div>
 
                 </div>

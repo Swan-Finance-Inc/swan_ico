@@ -32,9 +32,10 @@ export function* uploadProfileImage(){
       },
     }
     const data = yield select(makeSelectProfileImage());
+    console.log(data,"sdjahkdv")
     const fd = new FormData();
     fd.append('imageProfile',data)
-    const apiData = yield call(api.user.uploadProfileImage, headers, fd);
+    const apiData = yield call(api.user.uploadProfileImage, headers,fd);
     console.log(apiData,'api data....')
     if(apiData.success){
       console.log(" Succeasaaaaaaa");

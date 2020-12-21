@@ -8,8 +8,12 @@ header .container {
 }
 .header-left {
 	float: left;
-	margin-left: 0;
+	margin-left: 90px;
 	min-width: 183px;
+	transition: margin-left 1s;
+}
+.animate-logo{
+	margin-left: 0px;
 }
 .header-right {
 	float:right;

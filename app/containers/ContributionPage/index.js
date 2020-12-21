@@ -1050,7 +1050,7 @@ gobackDollar=(e)=>{
 
     let amount =  document.getElementById('amt').value;
     if(!amount){
-        toast.error("Please enter the amount");
+        toast.error("Please select the mode of Payment");
         // toast('txnJash: 0xfa03207cb875340aec8f81408a39994c616c284a13bd2589c453810bb63b4a87', {
         //   position: "top-center",
         //   autoClose: 5000,

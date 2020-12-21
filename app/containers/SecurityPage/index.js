@@ -196,7 +196,91 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
         </Helmet>
           <div className="ui-container container-fluid">
             <div className="" style={{ marginBottom: '500px' }}>
-            <div className="panel panel-default">
+
+              <div className="panel panel-default" style={{boxShadow:'0px 3px 6px #2D6DCD6E'}}>
+                  <div className="setting-panel-heading" >
+                  2FA
+                  </div>
+                  <div className = "panel-body first-card" >
+                   <div className="row" style={{borderBottom:'1px solid #2D6DCD6E',padding:'20px 10px'}}  >
+                    <div className="col col-md-12" >
+                      <div>
+                      <span style={{color:'#00296B',fontWeight:'bold'}} >Security Key </span>Recommended: YubiKey
+
+                        <button className="security-button" > Setup</button>
+                      </div>
+                      <a style={{color:'#465490',textDecoration:'underline'}} >What is security Key</a>
+                      <div style={{color:'#7C7C7C',padding:'10px 0px'}} >Protected Action</div>
+
+                      <div className="row" >
+                            <div className="col col-md-3" style={{borderRight:'1px solid #2D6DCD6E'}} >
+                              <span style={{color:'#7C7C7C'}}>
+                              withdrawl &  API
+                              </span>
+                                <div style={{float:'right'}} >
+              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+
+                                </div>
+                            </div>
+                            <div className="col col-md-3" style={{color:'#7C7C7C',borderRight:'1px solid #2D6DCD6E'}} >
+                                Login
+                              <div style={{float:'right'}}>
+              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+
+              </div>
+                            </div>
+                            <div className="col col-md-3" style={{color:'#7C7C7C'}}>
+                                  Reset Password
+                                  <div style={{float:'right'}}>
+              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+
+                                  </div>
+                            </div>
+                      </div>
+                    </div>
+                    </div>
+
+                      <div className="row" style={{borderBottom:'1px solid #2D6DCD6E',padding:'20px 10px'}} >
+                        <div className ='col col-md-6' >
+                          <div>
+                            <span style={{color:'#00296B',fontWeight:'bold'}} >
+                            Google Authentication
+                            </span>
+                            <br/>
+                            <span style={{color:'#7C7C7C'}} >
+                            Used for withdrawals and security modifications
+                            </span>
+                            <br/>
+                            <a style={{color:'#465490',textDecoration:'underline'}} >
+                           Having trouble with your Google Authenticator?
+
+                            </a>
+                          </div>
+                          </div>
+                          <div className='col col-md-6'>
+                          <div>
+                            <button className="security-button">Enable</button>
+                          </div>
+                          </div>
+                      </div>
+                      <div className="row" style={{padding:'20px 10px'}} >
+                        <div className="col col-md-12" >
+                          <span style={{color:'#00296B'}} >
+                          SMS Authentication
+                          </span>
+                          <br/>
+                          <span style={{color:'#7C7C7C'}} >
+                          Used for withdrawals and security modifications
+                          </span>
+                         
+                        <div>
+                          <button className="security-button">ON</button>
+                        </div>
+                        </div>
+                   </div>
+                  </div>
+              </div>
+            {/* <div className="panel panel-default">
 
               <div className="setting-panel-heading">
                 {
@@ -266,8 +350,8 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                 </div>
               </div>
             </div>
-          </div>
-          <div className="panel panel-default">
+          </div> */}
+          <div className="panel panel-default" style={{boxShadow:'0px 3px 6px #2D6DCD6E'}}>
             {/*<div className="panel-heading">Save Activity Log</div>*/}
             <div className="setting-panel-heading">
               {/* <Info hanldeToggle={this.resetInfo} toggleFlag={this.state.infoShow} /> */}
@@ -283,13 +367,19 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
             <div className="row">
               <div className="col-sm-12">
               <div className="checkbox">
-                <label>
+                
 
                   {/* <input id="activityLog" checked={this.state.activityLog} type="checkbox" onChange={this.handleSaveActivityLog} /> */}
-                    Save My Activity Log
-              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+                   
+                    <div style={{display:'flex'}} >
+                      <div className='first-card' style={{color:'#7C7C7C',fontWeight:'bold'}}> Save My Activity Log</div>
+                   <div style={{marginLeft:'50px'}}>
+                   <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
 
-                </label>
+                   </div>
+              </div>
+                
+                
               </div>
               </div>
             </div>

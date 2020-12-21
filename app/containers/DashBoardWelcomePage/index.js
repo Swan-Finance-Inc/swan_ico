@@ -106,7 +106,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
       infoFlag: false,
       crowdsaleStateData:{},
       referralsEarned:{},
-      weeklyOrDaily: 'daily'
+      weeklyOrDaily: 'daily',
+      animationFlag : false
     };
     this.toggleContActive = this.toggleContActive.bind(this);
     this.togglePrivacyActive = this.togglePrivacyActive.bind(this);
@@ -145,6 +146,18 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   componentDidMount() {
+    window.onscroll = () =>{
+      if(window.scrollY > 100){
+          this.setState({
+            animationFlag : true
+          })
+      }
+      else{
+        this.setState({
+          animationFlag : false
+        })
+      }
+    }
     const outer = this;
     this.props.getToggleInfoActiveAction();
     this.props.getReferralsEarned();
@@ -975,8 +988,8 @@ export class DashBoardWelcomePage extends React.PureComponent {
     }
     return (
       <div>
-        <NavBarContainer routeToNotifications={this.toggleNotificationsActive} username={this.props.dashboardwelcomepage.userInfo.fullName} email = {this.props.dashboardwelcomepage.userInfo.email} handleDeleteUser={this.handleDeleteUser} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
-        <div id="ui" className={this.state.compact}>
+        <NavBarContainer animationFlag = {this.state.animationFlag} routeToNotifications={this.toggleNotificationsActive} username={this.props.dashboardwelcomepage.userInfo.fullName} email = {this.props.dashboardwelcomepage.userInfo.email} handleDeleteUser={this.handleDeleteUser} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
+        <div id="ui"  className={this.state.compact}>
         <Helmet>
           <title>User|Dashboard</title>
           <meta name="description" content="Description of Dashboard" />
@@ -1026,7 +1039,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
             toggleHowToBuyActive ={this.toggleHowToBuyActive}
           />
           {(this.props.location.pathname == '/dashboard') ?
-             (this.props.dashboardwelcomepage.loading?<LoadingSpinner />:<div id="content" className="ui-content ui-content-aside-overlay">
+             (this.props.dashboardwelcomepage.loading?<LoadingSpinner />:<div id="content" className="ui-content ui-content-aside-overlay"  >
              {/* AJ comment*/}
              {/*{
                 (this.props.dashboardwelcomepage.userInfo.kycDetails.rejectReason.length > 0) ?

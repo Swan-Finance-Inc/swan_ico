@@ -48,6 +48,7 @@ class Balance extends React.PureComponent {
       weeklyOrDaily: 'daily',
       curr: '',
       exchangeRate: 0,
+      crowdsaleState: {}
     };
     this.CurrencyChange = this.CurrencyChange.bind(this);
   }
@@ -81,7 +82,8 @@ class Balance extends React.PureComponent {
     console.log(nextProps,"ae agye hege props")
     this.setState({
       ...this.state,
-      crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails
+      crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails,
+      crowdsaleState : nextProps.crowdsaleStateData.crowdsaleState
     })
   }
 
@@ -174,12 +176,6 @@ class Balance extends React.PureComponent {
       }
     })
   }
-
-
-
-
-
-  
   render() {
     console.log(this.state,'state in balance')
     console.log(this.props,'props in balance')
@@ -192,7 +188,6 @@ class Balance extends React.PureComponent {
 
     
   //   b =  this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd * this.props.userInfo.tokens.total;
-
   // }else {
   //   b=0.03 * this.props.userInfo.tokens.total;
   // }
@@ -246,6 +241,7 @@ class Balance extends React.PureComponent {
 
     return (
       <div>
+        <div  ></div>
         <div className="container-fluid nomarginpadding">
           <div className="row">
             <div className="col-lg-7 col-sm-12">
@@ -289,8 +285,8 @@ class Balance extends React.PureComponent {
                      </DropdownButton>
                     </Nav>  
                       </span>     
-                        <span style={{ fontSize: "32px", marginLeft: "12px" }}>$
-                        {this.state.balanceType === "USD" ? (this.props.userInfo.tokens.total * 1).toFixed(2) :
+                        <span style={{ fontSize: "32px", marginLeft: "12px" }}>
+                        {this.state.balanceType === "USD" ? (`$ ${( this.props.userInfo.tokens.total * 1).toFixed(2)}`) :
                          this.props.userInfo.tokens.total.toFixed(2)
                         }
                         </span>

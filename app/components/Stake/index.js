@@ -7,7 +7,7 @@ import { Modal } from 'react-bootstrap';
 //import {Loader} from '../../../static/assets/img/loaderNu.svg';
 import LoadingSpinner from '../LoadingSpinner'
 import constants from '../../utils/contractConfig';
-
+import greenTick from '../../images/greentick.png'
 export class Stake extends React.PureComponent{
     constructor(props){
         super(props);
@@ -22,6 +22,8 @@ export class Stake extends React.PureComponent{
           stakeStart: false,
           showStake: false,
           currTxHash: '',
+          approveError:'',
+          stakeSwanError:''
         };
         this.goBack = this.goBack.bind(this);
         this.amtApprove = this.amtApprove.bind(this);
@@ -78,7 +80,11 @@ export class Stake extends React.PureComponent{
             console.log("Sign trxn res: ", res);
             web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
               if(err)
-              { toast.error(`Error in sending trxn: ${err}`)
+              { 
+                this.setState({
+                  approveError : `${err}`
+                })
+                // toast.error(`Error in sending trxn: ${err}`)
                 console.log("Error occured in sendDisngnedtrxnn", err)}
               else
               {
@@ -94,13 +100,19 @@ export class Stake extends React.PureComponent{
         }
       }.bind(this));
       } catch(error){
-        toast.error(`Error in signing trxn: ${error}`)
+        this.setState({
+          approveError : ` ${error}`
+        })
+        // toast.error(`Error in signing trxn: ${error}`)
         console.log("in catch of sending transaction trxn: ",error);
       }
       //const result = await contract.methods.transfer('0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632','1').send({ from: '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E', value: web3.utils.toWei('0.01',"ether") });
       //console.log("hehe",result);
       } catch(err){
-          toast.error(`Error in approving tokens: ${err}`)
+          this.setState({
+            approveError : `${err}`
+          })
+          // toast.error(`Error in approving tokens: ${err}`)
           console.log(err,"error hai")
       }
     }
@@ -242,7 +254,10 @@ export class Stake extends React.PureComponent{
         this.setState({showStake:true})
       }
       else{
-        toast.error('Please fill swan tokens')
+        this.setState({
+          stakeSwanError :'Please fill swan tokens'
+        })
+        // toast.error('Please fill swan tokens')
       }
     }
   
@@ -294,7 +309,7 @@ export class Stake extends React.PureComponent{
                                 <div className="col-sm-12 col-md-12 col-lg-12" style={{height:"2px",borderWidth:"0",color:"gray",backgroundColor:"gray",paddingLeft:"20px",opacity:"10%"}}></div>
                                 
                                 <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:"center"}}>
-                                  By Staking $2000 of SWAN tokens, you qualify for higher interest rates in the 'Earn Interest' accounts for all cryptocurrencies and stablecoins.
+                                  By Staking 2000 SWAN tokens, you qualify for higher interest rates in the 'Earn Interest' accounts for all cryptocurrencies and stablecoins.
                                 </div>
                               </div>
                               
@@ -381,16 +396,31 @@ export class Stake extends React.PureComponent{
                               </div>
                             </div>
                             {/* <div style={{padding:'10px'}}>
-                              <div className={this.state.approveStart||this.state.approveSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
+                              
+                              <div className={this.state.approveStart||this.state.approveSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%",position:'relative'}}>
+                              {
+                                this.state.approveSuccess ? 
+                              <img src={greenTick } height ='150px' width = '150px' style={{zIndex:'4',position:'absolute',top:'30px',left:'40%'}} />
+                                : ''
+                              }
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
                                         <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>1. Contract Approval</div>
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                 <span className="swanText">SWAN</span>
                                   <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Approved: 0 SWAN
+                                  
                                 </div> 
+                                {
+                                  this.state.approveError &&
+                                  <div style={{margin:'4px 50px',width:'54%',backgroundColor:'#ffcccc',color:'#D96363',padding:'6px 25px',fontWeight:'bold'}} >
+                                  <div>An Error Occurred!</div>
+                                      <span>{this.state.approveError}</span>
+                                  </div>
+                                }
+                                
                                 {this.state.approveLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
-                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
+                                <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}> */}
                                   {/* <button className="swanCancel">CANCEL</button> */}
                                   {/* <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
                                 </div>
@@ -404,10 +434,19 @@ export class Stake extends React.PureComponent{
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                   <span className="swanText">SWAN</span>
                                   <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Minimum Required: 50
+                                
                                 </div> 
+                                {
+                                  this.state.stakeSwanError &&
+                                  <div style={{margin:'4px 50px',width:'54%',backgroundColor:'#ffcccc',color:'#D96363',padding:'6px 25px',fontWeight:'bold'}} >
+                                    <div>An error Occurred!</div>
+                                      <span>{this.state.stakeSwanError}</span>
+                                  </div>
+                                }
+                                
                                 {this.state.stakeLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
-                                  {/* <button className=" swanCancel">CANCEL</button> */}
+                                  
                                   <button className="swanApprove" onClick={this.onStakeToken}>STAKE TOKENS</button>
                                 </div>
                               </div>
