@@ -407,7 +407,7 @@ export class EarnInterest extends React.PureComponent{
                             </div>
                             <div style={{marginLeft:"-100px", marginTop:"50px"}}>
                             <div className="row" style={{textAlign:"center"}}>
-                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center'}}>
+                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center', marginLeft:"100px"}}>
 
                            
                               <div className="tempBack" style={{width:'19em'}}>
@@ -475,7 +475,7 @@ export class EarnInterest extends React.PureComponent{
                                 </div>
                               </div>
                             </div>}
-                            <div style={{padding:'10px'}}>
+                            {/* <div style={{padding:'10px'}}>
                               <div className={this.state.approveStart||this.state.approveSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
                                         <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>1. Contract Approval</div>
@@ -487,14 +487,14 @@ export class EarnInterest extends React.PureComponent{
                                 {this.state.approveLoader?<div className="signForDone"><LoadingSpinner></LoadingSpinner></div>:null}
                                 <div style={{textAlign:"right",padding:'20px',paddingRight:'30px'}}>
                                   {/* <button className="swanCancel">CANCEL</button> */}
-                                  <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
+                                  {/* <button className="swanApprove" style={{paddingLeft:65,paddingRight:65}} onClick={()=>this.approveTokens()}>APPROVE</button>
                                 </div>
                               </div>
-                            </div>
+                            </div> */}
                             <div style={{padding:'10px'}}>
                               <div className={this.state.stakeStart||this.state.stakeSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>2. Stake SWAN Tokens</div>
+                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>Earn Interest on SWAN Tokens</div>
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                 <span className="swanText">SWAN</span>

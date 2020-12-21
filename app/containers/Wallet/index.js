@@ -2127,7 +2127,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     {this.state.usdtBalance/1000000} USDT
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    $ {this.state.usdtToDollar*this.state.usdtBalance/1000000}
+                    $ {(this.state.usdtToDollar*this.state.usdtBalance/1000000).toFixed(2)}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
