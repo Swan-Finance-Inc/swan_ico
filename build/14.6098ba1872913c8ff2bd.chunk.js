@@ -363,7 +363,6 @@ var Balance = function (_React$PureComponent) {
 
 
       //   b =  this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd * this.props.userInfo.tokens.total;
-
       // }else {
       //   b=0.03 * this.props.userInfo.tokens.total;
       // }

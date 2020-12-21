@@ -176,12 +176,6 @@ class Balance extends React.PureComponent {
       }
     })
   }
-
-
-
-
-
-  
   render() {
     console.log(this.state,'state in balance')
     console.log(this.props,'props in balance')
@@ -194,7 +188,6 @@ class Balance extends React.PureComponent {
 
     
   //   b =  this.props.crowdsaleStateData.crowdsaleDetails.tokenUsd * this.props.userInfo.tokens.total;
-
   // }else {
   //   b=0.03 * this.props.userInfo.tokens.total;
   // }

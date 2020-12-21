@@ -257,17 +257,17 @@ font-weight: 500;
 
 
 
-body::-webkit-scrollbar {
-	width: 5px;
+// body::-webkit-scrollbar {
+// 	width: 5px;
 	
-}
-body::-webkit-scrollbar-track {
+// }
+bkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
-body::-webkit-scrollbar-thumb {
-  background-color: darkgrey;
-  outline: 1px solid slategrey;
-}
+// body::-webkit-scrollbar-thumb {
+//   background-color: darkgrey;
+//   outline: 1px solid slategrey;
+// }
 .field-icon {
   float: right;
   bottom:30px;
@@ -468,12 +468,14 @@ transition: all .301s;
 	//color:#fff;
 }
 .ui-content {
+	position: fixed !important;
 	width: 100%;
 	height: 100%;
 	margin-left: 0;
  -webkit-transition: margin-left .3s;
  transition: margin-left .3s;
  background-color: #F7FAFF !important;
+ overflow-y: scroll;
 }
  .ui-content::before, .ui-content::after {
  display: table;
@@ -490,6 +492,7 @@ transition: all .301s;
 	padding-top: 0px;
 	position: relative;
 	top: 25px;
+	margin-bottom: 70px;
 }
 .ui-aside-compact .nav > li > .nav-sub .nav-sub > li > a, .ui-aside-compact .nav > li > .nav-sub .nav-sub .nav-sub > li > a {
 	padding-left: 20px;

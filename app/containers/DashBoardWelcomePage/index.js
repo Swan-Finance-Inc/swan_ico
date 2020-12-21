@@ -989,7 +989,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     return (
       <div>
         <NavBarContainer animationFlag = {this.state.animationFlag} routeToNotifications={this.toggleNotificationsActive} username={this.props.dashboardwelcomepage.userInfo.fullName} email = {this.props.dashboardwelcomepage.userInfo.email} handleDeleteUser={this.handleDeleteUser} flag={this.state.infoFlag} toggleInfo={this.toggleInfo}/>
-        <div id="ui" className={this.state.compact}>
+        <div id="ui"  className={this.state.compact}>
         <Helmet>
           <title>User|Dashboard</title>
           <meta name="description" content="Description of Dashboard" />
