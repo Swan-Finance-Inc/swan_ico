@@ -27,7 +27,8 @@ export class EarnInterest extends React.PureComponent{
           isStaker: this.props.isStaker,
           currTxHash: '',
           approveError:'',
-          stakeSwanError:''
+          stakeSwanError:'',
+          approvedTokens: 0,
         };
         this.goBack = this.goBack.bind(this);
         this.changeInterest = this.changeInterest.bind(this);
@@ -36,10 +37,12 @@ export class EarnInterest extends React.PureComponent{
         this.updateStatusFromContract = this.updateStatusFromContract.bind(this);
         this.checkHashStatus = this.checkHashStatus.bind(this);
         this.getStakedOrNot = this.getStakedOrNot.bind(this);
+        this.getAllowance = this.getAllowance.bind(this);
     }
     componentDidMount(){
       //this.getStakedOrNot();
       this.changeInterest(this.state.duration);
+      this.getAllowance();
       
     }
 
@@ -99,6 +102,26 @@ export class EarnInterest extends React.PureComponent{
       } catch(err){
         toast.error(`Error in getStakedOrNot ${err}`)
           console.log("error in get swan balance")
+      }
+    }
+
+    getAllowance=async()=>{
+      var address = constants.tokenContractAddress;
+      var abi = constants.tokenContractAbi, result=0;
+      console.log("abi: ", abi, address, this.props.ethWallet)
+      try{
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+      let userAddress = web3.utils.toChecksumAddress(this.props.ethWallet.address);
+      const contract = new web3.eth.Contract(abi, address);
+      //console.log("contract hai: ", contract)
+          
+      result = await contract.methods.allowance(constants.stakeContractAddress, userAddress).call();
+      
+      this.setState({approvedTokens: result});
+      console.log("hehehuhu",result);
+      } catch(err){
+        toast.error(`Error in getAllowance ${err}`)
+          console.log("error in get allowance balance")
       }
     }
 
@@ -202,6 +225,7 @@ export class EarnInterest extends React.PureComponent{
             approveStart:false,
             approveSuccess:true
           });
+          this.getAllowance();
           toast.success('Transaction confirmed. Start Deposit');
         } else if(this.state.trxnReceipt.status && this.state.stakeStart){
           this.setState({
@@ -422,7 +446,7 @@ export class EarnInterest extends React.PureComponent{
                             </div>
                             <div style={{marginLeft:"-100px", marginTop:"50px"}}>
                             <div className="row" style={{textAlign:"center"}}>
-                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center'}}>
+                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center', marginLeft:"100px"}}>
 
                            
                               <div className="tempBack" style={{width:'19em'}}>
@@ -502,7 +526,7 @@ export class EarnInterest extends React.PureComponent{
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                 <span className="swanText">SWAN</span>
-                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />Approved: 0 SWAN
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />Approved: {this.state.approvedTokens} SWAN
                                 </div> 
                                 {
                                   this.state.approveError &&
@@ -521,7 +545,7 @@ export class EarnInterest extends React.PureComponent{
                             <div style={{padding:'10px'}}>
                               <div className={this.state.stakeStart||this.state.stakeSuccess?"balance-card disabledDiv":"balance-card"} style={{ marginBottom : '2em', marginTop:'3em', height:"100%"}}>
                                 <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>2. Stake SWAN Tokens</div>
+                                        <div className="trasnaction" style={{padding:'20px 0px',fontWeight:'bold'}}>2. Earn Interest on SWAN Tokens</div>
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                 <span className="swanText">SWAN</span>

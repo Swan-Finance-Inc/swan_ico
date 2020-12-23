@@ -63,6 +63,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       confirmContri: false,
       usdEurContributionConfirm: false,
       curr: '',
+      currWithdraw: '',
       btcToDollar: 7500,
       ethToDollar: 600,
       xlmToDollar : 1,
@@ -118,6 +119,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       temp:false,
       url:logo,
       showDeposit: false,
+      showWithdraw: false,
       ethWallet:'',
       btcWallet:'',
       usdtWallet:'',
@@ -132,7 +134,9 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       dollarBalanceXlm: 0,
       dollarBalanceEth: 0,
       dollarBalanceBtc: 0,
-      balanceFlag: false
+      balanceFlag: false,
+      withdrawAddress: '',
+      otp: 0,
     };
 
     // this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -148,11 +152,13 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     this.createCenxWallet = this.createCenxWallet.bind(this);
     this.openSimplex = this.openSimplex.bind(this);
     this.openDeposit = this.openDeposit.bind(this);
+    this.openWithdraw = this.openWithdraw.bind(this);
     this.showQR = this.showQR.bind(this);
     this.getBitcoinBalance = this.getBitcoinBalance.bind(this);
     this.getStellarBalance = this.getStellarBalance.bind(this);
     this.getEthereumBalance = this.getEthereumBalance.bind(this);
     this.getUsdtBalance = this.getUsdtBalance.bind(this);
+    this.saveData = this.saveData.bind(this);
     // //this.openShowEthWalletCreate = this.openShowEthWalletCreate.bind(this);
     // this.checkWallet = this.checkWallet.bind(this);
 
@@ -219,6 +225,12 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     
 
 
+  }
+
+  saveData(e){
+    this.setState({
+      [e.target.id]: e.target.value
+    })
   }
 
   getBitcoinBalance=()=>{
@@ -947,6 +959,13 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
           )}`;
           this.setState({url:uri,currAddress:currAddress}) 
   }
+  currencyChangeWithdraw(e){
+    this.setState({
+      currWithdraw:e.currentTarget.dataset.myValue
+    });
+
+
+  }
   currencyChange(e){
     // console.log(e.currentTarget.dataset.myValue,"dsjvabdkvbfdiuvbf")
     this.setState({
@@ -1479,6 +1498,11 @@ openDeposit () {
     showDeposit:true
   })
 }
+openWithdraw () {
+  this.setState({
+    showWithdraw:true
+  })
+}
 
 hide=(e)=>{
   this.setState({
@@ -1486,6 +1510,7 @@ hide=(e)=>{
     showEthWalletCreate: false,
     buyEth: false,
     showDeposit: false,
+    showWithdraw: false,
     curr:'',
     currAddress:'',
     url:logo
@@ -1581,6 +1606,119 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
         
 
       </Helmet>
+      <div className="static-modal">
+      <Modal show={this.state.showWithdraw} bsSize="large" onHide={this.hide} dialogClassName="myModal">
+          <Modal.Header>
+            <div className="col-sm-12 text-right" style={{marginBottom:"-30px", marginTop:"10px"}}>
+                <i className="fa fa-close" style={{cursor:'pointer'}} onClick={() => {this.setState({ showWithdraw:false, curr:'', currAddress:'',url:logo })}}></i>
+            </div>
+          <Modal.Title>
+            <div className='text-center' style={{marginBottom:"-20px"}}><h2>Withdraw</h2></div>
+            </Modal.Title>
+          </Modal.Header>
+            <Modal.Body>
+              <div className="container-fluid">
+              <div className="row">
+                  <div className="col-sm-12" >
+
+                      <div className="row">
+                        <div className="col-md-4" >
+                          <div className="qr-code" style={{marginTop:"45px" }}>
+                            <img src={this.state.url} style={{width:"145px" }}   alt="" />
+                          </div>
+                        </div>
+                        <div className = "col-md-8" style={{marginTop:"20px"}}>
+                          <div className="row">
+                            <div className="col-sm-12 col-md-12 col-lg-12">
+                              <div className="transaction-container">Select your currency</div>
+                              <div className="form-group">
+                                
+                                {/* <span className="select-wrapper">
+                                  <select id="paymentMode" name="paymentMode" onChange={this.currencyChange} className="form-input form-one-style" required>
+                                    <option value="" hidden>Click for options...</option>
+                                    <option value="BTC">Bitcoin</option>
+                                    <option value="ETH">Ethereum</option>
+                                    <option value="XLM">Stellar</option>
+                                    <option value="USDT">USDT</option>
+                                  </select>
+                                </span>                                      */}
+                                <Dropdown className="currency-dropdown" >
+                                  <Button className="currency-button" variant="success">{this.state.curr?this.state.curr:'Click for options...'}</Button>
+                                  <Dropdown.Toggle className="currency-dropdown-toggle" split variant="success" id="dropdown-split-basic"/>
+                                  <Dropdown.Menu className="currency-menu" >
+                                    <MenuItem data-my-value="BTC" onClick={this.currencyChangeWithdraw}>
+                                      <img className="cryptoBuddy_Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAS1BMVEVHcEz4lBr4lhv/miT4lBr7lRz/szP4kxr4lBr4lBr9lx35lBr4kxr6lRv3kxr////++PH+7Nf937z7xIL80Z74pkL6uWr3min5r1Xgn4fZAAAADnRSTlMAq0YP7TkFwNaKHXj6XnPArAgAAASxSURBVHjazVvdmqsgDKy/qLUBBNT3f9Jz0e7ZaqlMEFdz269NCpNkEpLbLUaK6tFmQjRN2fdl0wiRtY+quP2JFHkrSlpJT0REpWjzY62o81b0tCm9aPP6IPVVWxIkZVul197dG2JIc+/S/vmM2JKlO4ZKUJSINCbkkeqJiES+/+4z2iXZPizU95J2Snnf4ZVVQwmkiYVC3VIiaaMOoROUTEQEEvKSEkrJdoeWEkvLu/6MkkvGAEIh6AARcKoumiP0U9+AFnTH6CeipjtXPxFyBsWB+hELanGkfupFyBcyOliyP44/zIiUc39tGIzjfmcjKnfs+K+klGowEysvdOkAOMunTLyQWCcDgHnq109rBjPvgkHFB9TwNMASEZF9XgeCCS9HqiMikHoaMBIRkX63JhCPfJdw5+tfQGCS79YE5J7CA9YQ4ADS4wlQCLTajm4DAv+t4QdELARpKaVU/42IhYAvHEEh4OeapdR2dDsgQEQixgVn+S5KR0Pg0xWxGGilT4YICKyPAIxB2mvAM/owIbA6AowFTPK7KCYElo7QYd+YzKBkQDhpqYsJgs7oTQMsgx78hkNeFhi3z0DDt9DEpkETuAZlmDDk8oApBASpMWLw4gU1Ow3JsEDuWNZxTHReos7vG3qCEwKbiS0wMH/zDcSClhGGP4nY0vGdVd4QHQ7HRR9JxNaxf1qnirA/9kUMBNxXsM3LQ9AYCBJA4JsFIwSCNBDwxigLgaBMBIHPDwEYlrdbkQ4CH5QBAEHBr4c2ILC+H8CA6vZICQH+CTz4TrAJgYkbilp2T2YbAstYBKTljO2FZsvRV1zFIcFY7IGA1HacvtJ2hKKLW7MDAj+s3JpxHD+zMkKMGq4BTsIC1SgNNxAaWL+C+HF56/dAYEs/Rgt7rgEK1D+AFUrPvALnK8c8sJzRHyyZIFwmgmn2E1KD/yDXCzyJYLYeQupwA0SCRPBJSBXeKBFpEoFRbEb6MiCLh8AyD645MYbDjJeON7nAKhMpsDx87IfAFwsgX3iwKJkLUN6BnwsqFik1gTt2bDpABYuWD6FukOLCsIQKE6ftPK3Lch3u442IFyKlmZVSSj0M4aqHW5lRixSnkzfpzGG2AlxBjpTnBm4IWi4I+wJpUGiUbznFjUQCadHM/pSvP57IVvqxsgRoUm2QsOH3/WQabQQryIE2XZAGKz0M2nNNKkzKXm26wB04oEUd2Sls4VZtjBEOSQScZjXTCOAAGn673sFlAdKmvHMfLBh1CVQWdRGDG69LsFbvL4uyiIdz9wswN34/DYyVV/xnu5+0oDZCpJQaGqjoRczswOKx+Ofp2tg399AWrQiqiKfb5WPxwprJzfM8O/zRTMQ8XrtFjFHsl8LPNMB8u/RCYIrSn0UNMHghEKXfN8pz3wMBrtyjhljSQcA7xAInxQQQqHYMMjljdkOgTTHKtQMC32cKOaM8L3owpvGAyHE+Z4YpQQi60kDj+SOdRw+1UnCo9dix3v7swWJouLs+e7T7uOHuBh+vP3m8//wFh/NXPC6w5HL+ms/5i07nr3pdYNnt/HW/Cyw8XmDl8wJLrxdY+73A4vMVVr83lt9f//zw5fcj1v//AUJgzq1BOb7uAAAAAElFTkSuQmCC"></img>
+                                      (BTC) Bitcoin</MenuItem>
+                                    <MenuItem data-my-value="ETH" onClick={this.currencyChangeWithdraw}>
+                                      <img className="cryptoBuddy_Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAQlBMVEVHcExnge9if+tjf+xifutif+tvgvZjf+tkgexjgOtifurAy/b///+Bl+78/P5rheuSpfCltfO1wvV1ju3s7/zX3vmZ+KnyAAAACnRSTlMAHPpp1u0KuT+IQ31QMAAABPlJREFUeNrNW1uiqyAMVFTeIKDuf6v3o6etD9Qk0NuyABnJZBJC0jSUxWWnhBB9PzA29L0QQnWSN/9lcanEoDXTTK8W00zrQagPo+BSic2+x8U+CEKqQYPWoGT93VvVa8TqVVv354VGLyFrbs/wAFgtCJS/r3gKbcH2WmstyrjAu6Fsf81YV3L6va6werIdlK601FesX8oEOeiKa5BfO36iGUTt/TUTiBjFMdIXXHUELcb7xjlBz6BvP7C/Tt6Eughw+zvvjZnAmgRAwHHqt1hvTISrIgfwD7Oitd4Y4+CSxKv63zg/AKQRjqCq/hj7AADmodbsUpEkbn9nnwDgPNT6QpVbpP7PbwAJERfaWgIc7RsAwgjnNEASYPJrAAgengUmJAH0YtcAEGJwRgNk/hXsFgBCDHSf27/TaAnYAkDwUHflHpDsHgCGh6wt9YA/Bm4AmLHAE4gM3AKA85AdeChoDNwCwPBQFB3Ai4E7ABgxkCUHYGweAFkPsUHInwGgBiVBZeABQCQdQUsJQnkAcB4y3RKj0OSvACDEQBGjgLGXACI+IkiqBGQBIHgoSRaY7wAkrA04KgwlewcALgYDx1tgx8AsADgPJd4CiwUAiDgbiAIG5gGAxUA0TdNwRBV0nGEAwDd2jqRAsjAAYB5KHAWchwKAioHCUWDJ7G+XmAMQ4SSAq0DM/P5ijHORzMOhaTicgQcDzI+tnHMxEcWAIzhosts/ADgXEomHEn4fcTvTvw/7b4WI5yHr4E4w70x/ALCHkGBuINAM9PscaL0CzghMQAG8g9B84Pt2rcgwQvxQ4CRgyTjcfr0sESEAekQQ8ktOc5w7hXAvBj0MwDifam4WgPsTpwQAMACD0GwMCsCDDOFeChkoCC3GoAE4F9KtGDAQgGQMCYBzLtwCgJhgilQA03hrApgXuEQCMNbyAq11wAOABIMeno+MEQcAlhMJTEI0JTiACXg3EI0AuMF0SYVL44+3ABTI/k8IY4AAmN5mm25fD0AJSfKv8tPRJc+NH+6VsAOmZIudw5kdzk7fpftwyCQwKZ28tYvLu2R++ymCEgIOTcuDtda/PrhxyazxAywaD/CLibHWWh8z6pxxvQDPR8BXs0dKkKNCzvjQpFQhLqePi6G3y94lD66HSMsl5noen0lx2lIhY3zoxYRxVIHidTed4/q0M6cPvZ0KXIlmet9NVi6ZVq6XkHVzhSxSrQs0b3XOhkvY5Vhiy3SbMn28SBhgN9O/Mh2mRrKpEc3hLGUC1ogUvlS7KxM+qTBFUoFGEorVcV8gGjMxGlil60nl+n2daI6H0gSwPrTqJMA8WIz3xWpopbalPdkEX6dczwT10SpdAwDXyiX52W65AgAuVAv6w+XWF31RqZ52BOEcgKMdAPbd6PTlFP5iJYue70/fjqEfYKKwgWFVN/eUB7NcKw+uhSPmAMCfrrsabXQHAIQnywIeTscmlpHOQMoDZkEbj6rTS2i2AOAEELWa2eZNK5cu8QAiDfwKQDEBKDSIbwDlBCA1cyxPALFAAkslGddTet9ezZFtxdYjJJj1vHpjtfUID/xEa/Xi4QT4SHP55MEe2IPnLFCSGFw1/pFFufr+PzDi8f0hl++P+TQN//Kg0w+MejVNUzzspoeSYbdyJjBRPvr55YHHEgh1p06/uf0PjP3+wOAzdPRb/5f585OT+Pzw+yfG//8BUsAQ+7Jxz/gAAAAASUVORK5CYII="></img>
+                                      (ETH) Ethereum</MenuItem>
+                                    <MenuItem data-my-value="XLM" onClick={this.currencyChangeWithdraw}>
+                                      <img className="cryptoBuddy_Logo" style={{width:"31px"}} src={stellarLogo}></img>
+                                     (XLM) Stellar</MenuItem>
+                                    <MenuItem data-my-value="USDT" onClick={this.currencyChangeWithdraw}>
+                                      <img className="cryptoBuddy_Logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2326A17B'/%3E%3Cpath fill='%23FFF' d='M17.922 17.383v-.002c-.11.008-.677.042-1.942.042-1.01 0-1.721-.03-1.971-.042v.003c-3.888-.171-6.79-.848-6.79-1.658 0-.809 2.902-1.486 6.79-1.66v2.644c.254.018.982.061 1.988.061 1.207 0 1.812-.05 1.925-.06v-2.643c3.88.173 6.775.85 6.775 1.658 0 .81-2.895 1.485-6.775 1.657m0-3.59v-2.366h5.414V7.819H8.595v3.608h5.414v2.365c-4.4.202-7.709 1.074-7.709 2.118 0 1.044 3.309 1.915 7.709 2.118v7.582h3.913v-7.584c4.393-.202 7.694-1.073 7.694-2.116 0-1.043-3.301-1.914-7.694-2.117'/%3E%3C/g%3E%3C/svg%3E"></img>
+                                      (USDT) USDT</MenuItem>
+                                  </Dropdown.Menu>
+                                </Dropdown>
+                              </div>
+                            </div>
+                            <div className="col-sm-12 col-md-12 col-lg-12">
+                              <button className="trasnaction">Get OTP on email to proceed</button>
+                            </div>
+                            <div className="col-sm-12 col-md-12 col-lg-12">
+                              <div className="trasnaction">Enter OTP:</div>
+                              <div  className="form-group" style={{display:'flex'}}  >
+                              
+                              <input id="otp" type="text" onChange={()=>this.saveData()} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
+                              </div>
+                            </div>
+                            <div className="col-sm-12 col-md-12 col-lg-12">
+                              <div className="trasnaction">Send funds to:</div>
+                              <div  className="form-group" style={{display:'flex'}}  >
+                              
+                              <input id="withdrawAddress" type="text" onChange={()=>this.saveData()} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
+                              </div>
+                            </div>
+                            <div className="col-sm-12 col-md-12 col-lg-12">
+                              <button className="trasnaction">Submit</button>
+                            </div>
+                          </div>
+                          
+                        </div>
+                        
+                        
+                        <div className="col-md-12">
+
+                          </div>
+
+                            <br />
+                            <br />
+                            <div className="col-md-12" style={{marginTop:"40px"}}>
+                          
+                            <ul type = "disc">
+                            Tips:
+
+                          <li>- If you have deposited, please pay attention to the text messages, site letters and emails we send to you.</li>
+                          <li>- Only send coin to this address. Sending any other assets to this address may result in loss of your deposit. </li>
+                          <li>- SWAN tokens will be distributed after <strong>Dec 1st</strong></li>
+
+                          </ul>
+                            
+
+                            </div>
+                      </div>
+                  
+                     
+                  
+                  </div>
+                </div>
+                <div className="row">
+                  
+                </div>
+                </div>
+            </Modal.Body>
+          </Modal>
+        </div>
       <div className="static-modal">
       <Modal show={this.state.showDeposit} bsSize="large" onHide={this.hide} dialogClassName="myModal">
           <Modal.Header>
@@ -2008,7 +2146,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
               <div className="col-sm-4 col-md-4 col-lg-4 deposit-container">
                 <div className="wallet-deposit" style={{backgroundColor:"#D6E4FE", marginLeft:"50px", cursor:"pointer", padding:"7px", marginTop:"10px",boxShadow: '2px 9px 9px darkgrey',color:'#2D6DCD',fontWeight:'bold'}} onClick={this.openDeposit}><i className="fa fa-plus-circle" style={{color:'rgb(45, 109, 205)',margin:'0px 10px'}}></i>Deposit</div>
                 <br />
-                <div className="wallet-withdraw" style={{backgroundColor:"#D6E4FE", marginLeft:"50px", cursor:"pointer", padding:"7px",boxShadow: '2px 9px 9px darkgrey',color:'#2D6DCD',fontWeight:'bold'}}><i className="fa fa-minus-circle" style={{color:'rgb(45, 109, 205)',margin:'0px 10px'}}></i>Withdraw</div>
+                <div className="wallet-withdraw" style={{backgroundColor:"#D6E4FE", marginLeft:"50px", cursor:"pointer", padding:"7px",boxShadow: '2px 9px 9px darkgrey',color:'#2D6DCD',fontWeight:'bold'}} onClick={this.openWithdraw}><i className="fa fa-minus-circle" style={{color:'rgb(45, 109, 205)',margin:'0px 10px'}}></i>Withdraw</div>
               </div>
               
 
@@ -2139,7 +2277,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     {this.state.usdtBalance/1000000} USDT
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    $ {this.state.usdtToDollar*this.state.usdtBalance/1000000}
+                    $ {(this.state.usdtToDollar*this.state.usdtBalance/1000000).toFixed(2)}
                   </div>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>

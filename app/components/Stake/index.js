@@ -23,17 +23,19 @@ export class Stake extends React.PureComponent{
           showStake: false,
           currTxHash: '',
           approveError:'',
-          stakeSwanError:''
+          stakeSwanError:'',
+          approvedTokens: 0,
         };
         this.goBack = this.goBack.bind(this);
         this.amtApprove = this.amtApprove.bind(this);
         this.updateStatusFromContract = this.updateStatusFromContract.bind(this);
         this.checkHashStatus = this.checkHashStatus.bind(this);
         this.stakeTokens = this.stakeTokens.bind(this);
+        this.getAllowance = this.getAllowance.bind(this);
 
     }
     componentDidMount(){
-      
+      this.getAllowance();
     }
 
     goBack() {
@@ -45,6 +47,26 @@ export class Stake extends React.PureComponent{
       this.setState({
         tokens: e.target.value,
       });
+    }
+
+    getAllowance=async()=>{
+      var address = constants.tokenContractAddress;
+      var abi = constants.tokenContractAbi, result=0;
+      console.log("abi: ", abi, address, this.props.ethWallet)
+      try{
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+      let userAddress = web3.utils.toChecksumAddress(this.props.ethWallet.address);
+      const contract = new web3.eth.Contract(abi, address);
+      //console.log("contract hai: ", contract)
+          
+      result = await contract.methods.allowance(constants.stakeContractAddress, userAddress).call();
+      
+      this.setState({approvedTokens: result});
+      console.log("hehehuhu",result);
+      } catch(err){
+        toast.error(`Error in getAllowance ${err}`)
+          console.log("error in get allowance balance")
+      }
     }
 
     approveTokens=()=>{
@@ -147,6 +169,7 @@ export class Stake extends React.PureComponent{
             approveStart:false,
             approveSuccess:true
           });
+          this.getAllowance();
           toast.success('Transaction confirmed. Start Staking');
         } else if(this.state.trxnReceipt.status && this.state.stakeStart){
           this.setState({
@@ -408,7 +431,7 @@ export class Stake extends React.PureComponent{
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                 <span className="swanText">SWAN</span>
-                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Approved: 0 SWAN
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Approved: {this.state.approvedTokens} SWAN
                                   
                                 </div> 
                                 {
@@ -433,7 +456,7 @@ export class Stake extends React.PureComponent{
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                   <span className="swanText">SWAN</span>
-                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Minimum Required: 50
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Minimum Required: 200,000
                                 
                                 </div> 
                                 {
