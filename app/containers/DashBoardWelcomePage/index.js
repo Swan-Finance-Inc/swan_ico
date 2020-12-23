@@ -146,7 +146,11 @@ export class DashBoardWelcomePage extends React.PureComponent {
   }
 
   componentDidMount() {
+
+    
+
     window.onscroll = () =>{
+      console.log(window.scrollY, "dsijvadhvfiusdhvu")
       if(window.scrollY > 100){
           this.setState({
             animationFlag : true

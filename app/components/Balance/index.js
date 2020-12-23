@@ -178,7 +178,7 @@ class Balance extends React.PureComponent {
   }
   render() {
     console.log(this.state,'state in balance')
-    console.log(this.props,'props in balance')
+    console.log(this.props.crowdsaleStateData,'props in balance')
     const { crowdsaleDetails } = this.state;
     // if(crowdsaleDetails.tokenUsd){
     //   crowdsaleDetails.tokenUsd = 0

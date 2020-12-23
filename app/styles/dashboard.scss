@@ -257,17 +257,17 @@ font-weight: 500;
 
 
 
-// body::-webkit-scrollbar {
-// 	width: 5px;
+body::-webkit-scrollbar {
+	width: 5px;
 	
-// }
+}
 bkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
-// body::-webkit-scrollbar-thumb {
-//   background-color: darkgrey;
-//   outline: 1px solid slategrey;
-// }
+body::-webkit-scrollbar-thumb {
+  background-color: darkgrey;
+  outline: 1px solid slategrey;
+}
 .field-icon {
   float: right;
   bottom:30px;
