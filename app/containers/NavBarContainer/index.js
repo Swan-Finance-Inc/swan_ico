@@ -194,6 +194,7 @@ export class NavBarContainer extends React.PureComponent {
 
    updateProfile(){
     var regex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
+    var pinregex = /^[0-9]*$/;
     console.log(this.state,"dlvjnaudvgfdyv");
     if(!regex.test(this.state.firstName)){
       toast.error("Invalid Firstname Name")
@@ -211,8 +212,9 @@ export class NavBarContainer extends React.PureComponent {
       toast.error("Last name should be between 4 to 20 characters")
     
     }
-    // else if()
-    // {}
+    else if(!pinregex.test(this.state.pinCode)){
+      toast.error('Pincode is should be a number')
+    }
     else{
 
       const {firstName , lastName } = this.state;
@@ -221,6 +223,10 @@ export class NavBarContainer extends React.PureComponent {
     // else{
     //   toast.error('Please enter valid ETH Wallet address');
     // }
+  }
+
+  walletLink = () =>{
+    this.props.push('/dashboard/wallet')
   }
 
 
@@ -233,7 +239,7 @@ export class NavBarContainer extends React.PureComponent {
         <Navbar fluid fixedTop style={{borderWidth: '0' , border : '1px solid #465490'}} className="navbar-back">
           <div  className={this.props.animationFlag?"header-left animate-logo":"header-left"} style={{cursor:'pointer'}} onClick ={()=> window.location.reload() } >
             <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
-            <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
+            <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
           </div>
           <div className="header-right hidden-xs">
              <div style={{position:'relative', top:'6px'}}>
@@ -246,7 +252,7 @@ export class NavBarContainer extends React.PureComponent {
             
                 <NavDropdown style={{ display: 'flex' }} className="dropdown-usermenu zineum-username" title={this.props.username ? this.props.username : this.state.name} id="basic-nav-dropdown">
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} onClick={this.userProfile}>{this.props.username ? this.props.username : this.state.name} <br/> <span style={{color:'#7C7C7C'}} >{this.props.email} </span> </MenuItem>
-                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} ><Link  to="/dashboard/wallet">Wallet</Link></MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} onClick={this.walletLink} >Wallet</MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} onClick={this.profile}>Setting</MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} >Reports</MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} >Help</MenuItem>

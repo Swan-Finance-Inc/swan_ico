@@ -66,6 +66,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
         { label: "SWAN Tokens", key: "tokens" },
         { label: "Fund Raise Rounds", key: "phase" },
         { label: "Rate", key: "rate" },
+        {label:'Type',key:'type'},
         {label: 'Bonus(%)' , key: 'bonus'}
 
       ],

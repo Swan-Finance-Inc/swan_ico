@@ -324,7 +324,7 @@ export class RegisterPage extends React.PureComponent {
                 <div className="header-left" style={{cursor:'pointer'}}>
                   <Link to='/signup'>
                     <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></div>
-                    <div style = {{color : '#2498D5',position : 'relative' , top : '18px' , fontWeight :'900' }} >SwanFinance</div>
+                    <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
                     </Link>                     
                     </div>
                 </div>

@@ -574,6 +574,9 @@ export class MyReferal extends React.PureComponent {
                       >
                         <option value="" disabled selected hidden></option>
                         <option value="Ethereum">ETHEREUM</option>
+                        <option value="Bitcoin">Bitcoin</option>
+                        <option value="Steller">Steller</option>
+                        <option value="USDT">USDT</option>
                       </select>
                     </div>
                   </div>

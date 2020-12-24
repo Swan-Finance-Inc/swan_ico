@@ -446,7 +446,7 @@ export class EarnInterest extends React.PureComponent{
                             </div>
                             <div style={{marginLeft:"-100px", marginTop:"50px"}}>
                             <div className="row" style={{textAlign:"center"}}>
-                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center', marginLeft:"100px"}}>
+                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center', marginLeft:"35px"}}>
 
                            
                               <div className="tempBack" style={{width:'19em'}}>
@@ -464,19 +464,19 @@ export class EarnInterest extends React.PureComponent{
                               </div>
                               
                             </div>
-                            <div className="row" style={{textAlign:"center", marginTop:"55px",marginBottom:'70px'}}>
-                              <div style={{color:"#465490", fontSize:"20px", fontWeight:"bold"}}>Choose Earn Interest Period</div>
+                            <div className="row" style={{textAlign:"center", marginTop:"55px",marginBottom:'70px',marginLeft:'55px'}}>
+                              <div style={{color:"#465490", fontSize:"30px", fontWeight:"bold",letterSpacing:'0.71px',marginBottom:'15px'}}>Choose Earn Interest Period</div>
                             <div className="col-md-12">
-                              <div style={{display:'flex',flexDirection:'row', justifyContent:'center', }}>
+                              <div style={{display:'flex',flexDirection:'row', justifyContent:'center', lineHeight:'normal' }}>
                                 { this.state.duration === 1 ? (
-                                  <div onClick={ ()=>this.changeInterest(1)} style={{cursor:'pointer',border:'1px solid #fff'}} className="swanApprove" ><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>1 Month</h2></div>
+                                  <div onClick={ ()=>this.changeInterest(1)} style={{cursor:'pointer',border:'1px solid #fff',padding:'6px 55px'}} className="swanApprove" ><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>1 Month</h2></div>
                                 ) : (
-                                  <div onClick={ ()=>this.changeInterest(1)} style={{cursor:'pointer',padding:'6px 45px',margin:0}} className="swanCancel" ><h2  style={{margin:"5px", fontSize: '16px' , color : '#89ABDE'}}>1 Month</h2></div>
+                                  <div onClick={ ()=>this.changeInterest(1)} style={{cursor:'pointer',padding:'6px 45px',margin:0,padding:'6px 55px'}} className="swanCancel" ><h2  style={{margin:"5px", fontSize: '16px' , color : '#89ABDE'}}>1 Month</h2></div>
                                 )}
                                 { this.state.duration === 3 ? (
-                                  <div  onClick={()=>this.changeInterest(3)} style={{cursor:'pointer',border:'1px solid #fff'}} className="swanApprove"><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>3 Months</h2></div>
+                                  <div  onClick={()=>this.changeInterest(3)} style={{cursor:'pointer',border:'1px solid #fff',padding:'6px 55px'}} className="swanApprove"><h2  style={{margin:"5px", fontSize: '16px',color : '#fff'}}>3 Months</h2></div>
                                 ) : (
-                                  <div  onClick={()=>this.changeInterest(3)} style={{cursor:'pointer',padding:'6px 45px',margin:0}} className="swanCancel"><h2  style={{margin:"5px", fontSize: '16px',color : '#89ABDE'}}>3 Months</h2></div>
+                                  <div  onClick={()=>this.changeInterest(3)} style={{cursor:'pointer',padding:'6px 45px',margin:0,padding:'6px 55px'}} className="swanCancel"><h2  style={{margin:"5px", fontSize: '16px',color : '#89ABDE'}}>3 Months</h2></div>
                                 )}
                               </div>
                             </div>

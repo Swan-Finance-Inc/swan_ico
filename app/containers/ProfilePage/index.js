@@ -121,6 +121,8 @@ export class ProfilePage extends React.PureComponent { // eslint-disable-line re
         this.props.getProfileData();
   }
   componentDidMount(){
+    console.log(localStorage.getItem('token') , "wejvbreiyvbefiyvbify")
+
     this.setState({
       referalUrl:`https://tokensale.centralex.com/signup/refer/${this.props.userInfo.userInfo.referral.code}`,
      profilePicUrl:this.props.userInfo.userInfo.imageProfile

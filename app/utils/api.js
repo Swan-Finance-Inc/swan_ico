@@ -12,6 +12,7 @@ if(!!pathLocation) {
    console.log('pathLocation : ', pathLocation);
   // BaseUrl = 'http://54.151.217.0:7070/api/v1/'
    BaseUrl = ' https://tokensale-backend.centralex.com/api/v1/'
+  // BaseUrl = 'https://api.swanfinance.io/api/v1/'
   
 // //   if(pathLocation === 'play.quillhash.com') {
 // //     console.log('PROD');
@@ -24,8 +25,8 @@ if(pathLocation === '127.0.0.1:6036'){
     // BaseUrl = 'http://localhost:7070/api/v1/'
     // BaseUrl = 'http://127.0.0.1:7070/api/v1/'
 
-    BaseUrl = 'http://127.0.0.1:7070/api/v1/'
-    // BaseUrl = 'https://api.swanfinance.io/api/v1/'
+    // BaseUrl = 'http://127.0.0.1:7070/api/v1/'
+    BaseUrl = 'https://api.swanfinance.io/api/v1/'
   //  BaseUrl = ' https://tokensale-backend.centralex.com/api/v1/'
 
 

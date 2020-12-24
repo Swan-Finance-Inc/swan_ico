@@ -38,6 +38,9 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
       enabled: false,
       copy: false,
       activityLog:false,
+      withdrawlSwitch:false,
+      loginSwitch:false,
+      resetPasswordSwitch:false,
       showLogs:false
     };
     this.verifyAuth = this.verifyAuth.bind(this);
@@ -218,21 +221,21 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                               withdrawl &  API
                               </span>
                                 <div style={{float:'right'}} >
-              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+              <Switch onClick={()=>this.setState((prevState)=>({withdrawlSwitch:!prevState.withdrawlSwitch}))} on = {this.state.withdrawlSwitch} />
 
                                 </div>
                             </div>
                             <div className="col col-md-3" style={{color:'#7C7C7C',borderRight:'1px solid #2D6DCD6E'}} >
                                 Login
                               <div style={{float:'right'}}>
-              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+              <Switch onClick={()=>this.setState((prevState)=>({loginSwitch:!prevState.loginSwitch}))} on = {this.state.loginSwitch}/>
 
               </div>
                             </div>
                             <div className="col col-md-3" style={{color:'#7C7C7C'}}>
                                   Reset Password
                                   <div style={{float:'right'}}>
-              <Switch onClick={this.handleSaveActivityLog} on={this.state.activityLog}/>
+              <Switch onClick={()=>this.setState((prevState)=>({resetPasswordSwitch:!prevState.resetPasswordSwitch}))} on = {this.state.resetPasswordSwitch}/>
 
                                   </div>
                             </div>
@@ -385,7 +388,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
             </div>
             <div className='row'>
             <div className='text-center'>
-            <button className="invest" style={{background : '#2498D5'}} onClick={this.handleShowLogs} >{this.state.showLogs?'Hide Logs':'Show Logs'}</button>
+            <button className="invest" style={{background : '#2498D5',fontSize:'20px',fontWeight:'bold'}} onClick={this.handleShowLogs} >{this.state.showLogs?'Hide Log':'Show Log'}</button>
             </div>
             </div>
             <div className='row'>
