@@ -46,7 +46,8 @@ export class ContributionConfirm extends React.PureComponent {
       validBlank: true,
       currentReceivingWalletAddress : '',
       curTime: new Date().toLocaleString(),
-      txHash : ''
+      txHash : '',
+      gasPrice: 0,
     };
     this.goBack = this.goBack.bind(this);
     this.confirmPayment = this.confirmPayment.bind(this);
@@ -78,6 +79,23 @@ export class ContributionConfirm extends React.PureComponent {
     //     currentReceivingWalletAddress: this.props.currentReceivingWalletAddress
     //   });
     // } else {
+
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)); //--prodChange
+      //const gasPrice = web3.eth.getGasPrice()
+
+          web3.eth.getGasPrice(function(err,res){
+            if(err){
+              toast.error(err)
+            } else {
+              this.setState({
+                gasPrice: web3.utils.fromWei(res)
+              });
+            }
+
+          }.bind(this))
+          
+
+
       const href =
         "https://chart.googleapis.com/chart?cht=qr&chl=&chs=180x180&choe=UTF-8&chld=L|2";
       const query = queryString.parse(href);
@@ -765,6 +783,8 @@ export class ContributionConfirm extends React.PureComponent {
 
                  <p className="main-color--blue">
                  You will receive {(this.props.tokens).toFixed(3)} SWAN tokens </p>
+                 <br />
+                 {this.props.currency == 'Ethereum'?<div>Transaction Fee: {(this.state.gasPrice * 21000).toFixed(10)}</div>:<div></div>}
                  <div className="btn-row confirm-transaction-button">
                     <button 
                      className="form-button btn btn-primary"
