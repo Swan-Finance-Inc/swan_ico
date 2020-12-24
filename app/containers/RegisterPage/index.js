@@ -321,7 +321,7 @@ export class RegisterPage extends React.PureComponent {
             <div className="container">
               <div className="row">
                 <div className="col-xs-7 col-sm-6 col-md-2 clearfix">
-                <div className="header-left" style={{cursor:'pointer'}}>
+                <div className="header-left" style={{cursor:'pointer',height:'56px'}}>
                   <Link to='/signup'>
                     <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></div>
                     <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
@@ -342,7 +342,7 @@ export class RegisterPage extends React.PureComponent {
           </header>
 
           <section className="signin-block">
-            <div className="container">
+            <div className="container login-container">
               <div className="row">
                 <div className="col-sm-6 col-sm-offset-3 ">
                   <div className="card-header">

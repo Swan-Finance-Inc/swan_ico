@@ -23,6 +23,13 @@ export const WALLET_FETCHED = 'app/WalletPage/WALLET_FETCHED';
 export const WALLET_ADDED = 'app/WalletPage/WALLET_ADDED';
 export const WALLET_NOT_ADDED = 'app/WalletPage/WALLET_NOT_ADDED';
 
+export const GET_OTP = 'app/WalletPage/GET_OTP';
+export const GET_OTP_SUCCESS = 'app/WalletPage/GET_OTP_SUCCESS';
+export const GET_OTP_FAILED = 'app/WalletPage/GET_OTP_FAILED';
+
+export const SEND_WITHDRAW_DATA = 'app/WalletPage/SEND_WITHDRAW_DATA';
+export const SEND_WITHDRAW_DATA_SUCCESS = 'app/WalletPage/SEND_WITHDRAW_DATA_SUCCESS';
+export const SEND_WITHDRAW_DATA_FAILURE = 'app/WalletPage/SEND_WITHDRAW_DATA_FAILURE'
 
 //Sending payment without hash
 export const SEND_PAYMENT = 'app/WalletPage/SEND_PAYMENT';

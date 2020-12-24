@@ -177,6 +177,7 @@ class Balance extends React.PureComponent {
     })
   }
   render() {
+    console.log(localStorage.getItem('token'),"dkjvahuvfi")
     console.log(this.state,'state in balance')
     console.log(this.props.crowdsaleStateData,'props in balance')
     const { crowdsaleDetails } = this.state;

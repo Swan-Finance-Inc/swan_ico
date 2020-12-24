@@ -26,7 +26,12 @@ import {
   WALLET_ADDED,
   WALLET_NOT_ADDED,
   WALLET_FETCHED,
-  GET_CENX_WALLET
+  GET_CENX_WALLET,
+  GET_OTP,
+  GET_OTP_SUCCESS,
+  GET_OTP_FAILED,
+  SEND_WITHDRAW_DATA,
+  SEND_WITHDRAW_DATA_SUCCESS
 } from './constants';
 
 const initialState = fromJS({
@@ -44,6 +49,8 @@ const initialState = fromJS({
     minInvest: false,
     tokenPerEther: 0,
     tokenPerBtc: 0,
+   
+
 
   },
   failure: false,
@@ -81,8 +88,17 @@ const initialState = fromJS({
   createHotWalletLoading:false,
   walletNotAddedSuccess: false,
   walletAddedSuccess: false,
-  walletFetchedSuccess:false
-
+  walletFetchedSuccess:false,
+  getOtp:false,
+  otpdata:false,
+  getOtpSuccess:false,
+  getOtpFailed: false,
+  withDrawlData : {
+    wallet_type : false,
+    otp:false,
+    to : false
+  },
+  sendWithdrawlRet:false
 });
 
 function walletPageReducer(state = initialState, action) {
@@ -221,6 +237,30 @@ function walletPageReducer(state = initialState, action) {
             .set('walletAddedSuccess', false)
             .set('walletNotAddedSuccess', false)
             .set('walletFetchedSuccess', false)
+            .set('otpdata',false)
+            .set('sendWithdrawlRet' , false)
+          case GET_OTP: 
+          return state
+            .set('loading' , true) 
+          case GET_OTP_SUCCESS: 
+          return state
+            .set('loading' , false) 
+            .set('otpdata' , action.data) 
+          case GET_OTP_FAILED: 
+          return state
+            .set('getOtpSuccess' , false) 
+            .set('getOtpFailed' , true)
+          case SEND_WITHDRAW_DATA:
+            return state
+              .set('loading' , true)
+              .setIn(['withDrawlData' , 'wallet_type'], action.data.wallet_type )
+              .setIn(['withDrawlData', 'otp'] , action.data.otp )   
+              .setIn(['withDrawlData', 'to'] , action.data.to)
+          case SEND_WITHDRAW_DATA_SUCCESS:
+            return state
+              .set('loading' , false)
+              .set('sendWithdrawlRet' , action.data)
+                        
     default:
       return state;
   }

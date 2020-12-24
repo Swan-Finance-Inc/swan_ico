@@ -63,7 +63,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
         captcha: true,
       });
     }
-    // console.log(this.state['g-recaptcha-response']);
+    console.log(this.state['g-recaptcha-response'] , "dlkvgrkeuvbsrbv");
   }
 
   forgotPass(e) {
@@ -107,7 +107,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
 
               <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="header-left">
+                <div className="header-left" >
                     <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
                     <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
                     </div>
@@ -123,7 +123,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
           </div>
         </header>
         <section className="signin-block">
-          <div className="container">
+          <div className="container login-container">
             <div className="row">
               <div className="col-sm-6 col-sm-offset-3">
                 <div className="card-header">

@@ -1,4 +1,5 @@
 import { createSelector } from 'reselect';
+import { create } from 'lodash';
 
 /**
  * Direct selector to the walletPage state domain
@@ -23,7 +24,7 @@ const makeSelectContributionCurrency = () => createSelector(
   (substate) => substate.get('currency')
 );
 const makeSelectContributionData = () => createSelector(
-  selectWalletPageDomain,
+  selectWalletPageDomain, 
   (substate) => substate.get('success').toJS()
 );
 
@@ -110,6 +111,19 @@ const makeSelectCreateHotWalletLoading = () => createSelector(
   (substate) => substate.get('createHotWalletLoading')
 )
 
+const makeSelectGetOtp = () => createSelector(
+  selectWalletPageDomain,
+  (substate) => substate.get('otpdata')
+)
+const makeSelectSendWithdraw = () => createSelector(
+  selectWalletPageDomain,
+  (substate) => substate.get('withDrawlData').toJS()
+)
+const makeSelectSendWithdrawRet = () => createSelector(
+  selectWalletPageDomain,
+  (substate) => substate.get('sendWithdrawlRet')
+)
+
 export default makeSelectWalletPage;
 export {
   selectWalletPageDomain,
@@ -132,5 +146,8 @@ export {
   makeSelectAddCenxWallet,
   makeSelectWalletAddedSuccess,
   makeSelectWalletNotAdded,
-  makeSelectWalletFetchedSuccess
+  makeSelectWalletFetchedSuccess,
+  makeSelectGetOtp,
+  makeSelectSendWithdrawRet,
+  makeSelectSendWithdraw 
 };

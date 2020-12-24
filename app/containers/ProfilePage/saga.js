@@ -15,7 +15,6 @@ export function* updateDetails(){
 
     const data = yield select(makeSelectDetails());
     const apiData = yield call(api.user.updateProfile, headers, data);
-
     if(apiData.success){
       yield put(updateDetailsSuccess(apiData))
     }

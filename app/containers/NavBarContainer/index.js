@@ -243,7 +243,7 @@ export class NavBarContainer extends React.PureComponent {
           </div>
           <div className="header-right hidden-xs">
              <div style={{position:'relative', top:'6px'}}>
-             <img className="img-responsive nav-userimage"  src={profileDummy } alt="back id" id="back_img_src"  />
+             <img className="img-responsive nav-userimage"  src={this.state.profilePicUrl?this.state.profilePicUrl:profileDummy } alt="back id" id="back_img_src"  />
 
              </div>
              

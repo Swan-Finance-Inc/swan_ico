@@ -136,7 +136,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
           </div>
         </header>
         <section className="signin-block">
-          <div className="container">
+          <div className="container login-container">
             <div className="row">
               <div className="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
                 <div className="resend">

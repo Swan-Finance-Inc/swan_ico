@@ -14,7 +14,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
 import makeSelectWalletPage, {
-makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectContributionData, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading
+makeSelectWalletNotAdded, makeSelectWalletAddedSuccess, makeSelectWalletFetchedSuccess, makeSelectContributionData, makeSelectGetHotWalletRet, makeSelectGetHotWalletLoading, makeSelectCreateHotWalletRet, makeSelectCreateHotWalletLoading,makeSelectGetOtp, makeSelectSendWithdraw, makeSelectSendWithdrawRet
 } from './selectors';
 import reducer from './reducer';
 import saga from './saga';
@@ -22,7 +22,7 @@ import { CircularProgressbarWithChildren } from 'react-circular-progressbar';
 import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import { selectAction, getData, confirmPayment, reload,finalizePayment,listHotWallet, addCenxWallet,
-  createHotWallet ,clearContribution, getCenxWallet } from './actions';
+  createHotWallet ,clearContribution, getCenxWallet,getOtp , sendWithdrawData , sendWithdrawdataSuccess} from './actions';
 import { ContributionConfirm } from '../ContributionConfirm';
 import { makeGlobalParent } from '../App/selectors';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
@@ -136,11 +136,13 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       dollarBalanceBtc: 0,
       balanceFlag: false,
       withdrawAddress: '',
-      otp: 0,
+      otp: '',
+      otpReceive: false
     };
 
     // this.onContributionConfirm = this.onContributionConfirm.bind(this);
     this.currencyChange = this.currencyChange.bind(this);
+    this.currencyChangeWithdraw = this.currencyChangeWithdraw.bind(this);
     // this.paymentModeChange = this.paymentModeChange.bind(this);
     // this.currencyQuantityChange = this.currencyQuantityChange.bind(this);
     // this.comeBack = this.comeBack.bind(this);
@@ -228,6 +230,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   }
 
   saveData(e){
+    console.log(e.target.id, "dsjkbvdsv")
     this.setState({
       [e.target.id]: e.target.value
     })
@@ -498,6 +501,18 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
    //     ethAddress:nextProps.successData.ethAddress
    //   })
    // }
+   if(nextProps.otpdata){
+     toast.success(nextProps.otpdata.message)
+     this.setState({
+       otpReceive : true
+     })
+     nextProps.clearContribution()
+
+   }
+   if(nextProps.sendWithdrawRet){
+     toast.success(nextProps.sendWithdrawRet.message)
+     nextProps.clearContribution()
+   }
  }
  componentWillUnmount(){
    //clearInterval(this.interval);
@@ -960,6 +975,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
           this.setState({url:uri,currAddress:currAddress}) 
   }
   currencyChangeWithdraw(e){
+    console.log(e.currentTarget.dataset.myValue , "vdvjarbesvbebvh")
     this.setState({
       currWithdraw:e.currentTarget.dataset.myValue
     });
@@ -1524,12 +1540,28 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 // }
 
   // End of container functions
+
+  getOtp = () =>{
+    
+    this.props.getOtp()
+  }
+
+  sendWithdrawData = () => {
+    const data = {
+      wallet_type : this.state.currWithdraw,
+      otp : this.state.otp,
+      to : this.state.withdrawAddress
+    }
+    console.log(data , "datat in wallet")
+    this.props.sendWithdrawData(data)
+  }
+
   render() {
         
 
       
      console.log(this.state.copied," sttate in contribution page")
-    // console.log(this.state," state in contribution page")
+    console.log(this.props,"props in wallet pages")
     const { loading } = this.props
     const {language} = this.state
     if(!this.state.balanceFlag){
@@ -1643,7 +1675,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                                   </select>
                                 </span>                                      */}
                                 <Dropdown className="currency-dropdown" >
-                                  <Button className="currency-button" variant="success">{this.state.curr?this.state.curr:'Click for options...'}</Button>
+                                  <Button className="currency-button" variant="success">{this.state.currWithdraw?this.state.currWithdraw:'Click for options...'}</Button>
                                   <Dropdown.Toggle className="currency-dropdown-toggle" split variant="success" id="dropdown-split-basic"/>
                                   <Dropdown.Menu className="currency-menu" >
                                     <MenuItem data-my-value="BTC" onClick={this.currencyChangeWithdraw}>
@@ -1663,25 +1695,32 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                               </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
-                              <button className="trasnaction">Get OTP on email to proceed</button>
+                              <button onClick={this.getOtp} className="trasnaction">Get OTP on email to proceed</button>
                             </div>
+                            
+                            
+                              {
+                                this.state.otpReceive &&
+                                <div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
                               <div className="trasnaction">Enter OTP:</div>
                               <div  className="form-group" style={{display:'flex'}}  >
                               
-                              <input id="otp" type="text" onChange={()=>this.saveData()} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
+                              <input id="otp" type="text" onChange={this.saveData} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
                               </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
                               <div className="trasnaction">Send funds to:</div>
                               <div  className="form-group" style={{display:'flex'}}  >
                               
-                              <input id="withdrawAddress" type="text" onChange={()=>this.saveData()} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
+                              <input id="withdrawAddress" type="text" onChange={this.saveData} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
                               </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
-                              <button className="trasnaction">Submit</button>
+                              <button className="trasnaction"  onClick= {this.sendWithdrawData} >Submit</button>
                             </div>
+                            </div>
+                             }   
                           </div>
                           
                         </div>
@@ -2323,7 +2362,10 @@ const mapStateToProps = createStructuredSelector({
   createHotWalletLoading:makeSelectCreateHotWalletLoading(),
   walletNotAddedSuccess: makeSelectWalletNotAdded(),
   walletAddedSuccess: makeSelectWalletAddedSuccess(),
-  walletFetchedSuccess: makeSelectWalletFetchedSuccess()
+  walletFetchedSuccess: makeSelectWalletFetchedSuccess(),
+  otpdata : makeSelectGetOtp(),
+  // sendWithdrawData : makeSelectSendWithdraw(),
+  sendWithdrawRet : makeSelectSendWithdrawRet()
 
 });
 
@@ -2339,7 +2381,9 @@ function mapDispatchToProps(dispatch) {
     // finalizePayment: (data) => (dispatch(finalizePayment(data))),
     listHotWallet : data => dispatch(listHotWallet(data)),
     createHotWallet : data => dispatch(createHotWallet(data)),
-    clearContribution : _ => dispatch(clearContribution())
+    clearContribution : _ => dispatch(clearContribution()),
+    getOtp : () => dispatch(getOtp()),
+    sendWithdrawData : (data) => dispatch(sendWithdrawData(data))
   };
 }
 

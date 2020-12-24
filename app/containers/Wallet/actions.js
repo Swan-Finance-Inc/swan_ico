@@ -30,7 +30,13 @@ import {
   WALLET_ADDED,
   WALLET_NOT_ADDED,
   GET_CENX_WALLET,
-  WALLET_FETCHED
+  WALLET_FETCHED,
+  GET_OTP,
+  GET_OTP_SUCCESS,
+  GET_OTP_FAILED,
+  SEND_WITHDRAW_DATA,
+  SEND_WITHDRAW_DATA_SUCCESS,
+  SEND_WITHDRAW_DATA_FAILURE
 } from './constants';
 
 export function defaultAction() {
@@ -195,4 +201,41 @@ export function clearContribution(data){
   }
 }
 
+export function getOtp(){
+  return {
+    type: GET_OTP,
+    
+  }
+}
 
+export function getOtpSuccess(data){
+  return {
+    type: GET_OTP_SUCCESS,
+    data
+  }
+}
+export function getOtpFailed(data){
+  return {
+    type: GET_OTP_FAILED,
+    data
+  }
+}
+
+export function sendWithdrawData(data){
+  return {
+    type: SEND_WITHDRAW_DATA,
+    data
+  }
+}
+export function sendWithdrawdataSuccess(data){
+  return {
+    type: SEND_WITHDRAW_DATA_SUCCESS,
+    data
+  }
+}
+export function sendWithdrawdataFailure(data){
+  return {
+    type: SEND_WITHDRAW_DATA_FAILURE,
+    data
+  }
+}

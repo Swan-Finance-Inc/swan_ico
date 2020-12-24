@@ -2,12 +2,14 @@ import api from 'utils/api';
 import { push } from 'react-router-redux';
 import { depositSuccess } from 'containers/App/actions';
 import { call, put, select, takeLatest } from 'redux-saga/effects';
-import { GET_DATA, CONFIRM_PAYMENT, RELOAD_PAGE, SEND_PAYMENT ,LIST_HOT_WALLET,CREATE_HOT_WALLET, ADD_CENX_WALLET, GET_CENX_WALLET } from './constants';
+import { GET_DATA, CONFIRM_PAYMENT, RELOAD_PAGE, SEND_PAYMENT ,LIST_HOT_WALLET,CREATE_HOT_WALLET, ADD_CENX_WALLET, GET_CENX_WALLET , GET_OTP, SEND_WITHDRAW_DATA} from './constants';
 import { successData, successPayment, notSuccessPayment, successFinalizePayment ,listHotWalletRet, walletAdded, walletNotAdded, walletFetched,
-  listHotWalletLoading, createHotWalletRet,createHotWalletLoading  } from './actions';
+  listHotWalletLoading, createHotWalletRet,createHotWalletLoading ,getOtpSuccess,getOtpFailed, sendWithdrawData ,sendWithdrawdataSuccess } from './actions';
 import { makeSelectContributionConfirm, makeSelectFinalTransaction ,makeSelectGetHotWallet,
   makeSelectCreateHotWallet,
-  makeSelectAddCenxWallet
+  makeSelectAddCenxWallet,
+  makeSelectGetOtp,
+  makeSelectSendWithdraw
 } from './selectors';
 import { codeErrorAction } from '../DashBoardWelcomePage/actions'
 export function* getData() {
@@ -160,6 +162,49 @@ export function* createHotWalletSaga() {
   }
 }
 
+export function* getOtpSaga() {
+  try {
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token'), 'lang': localStorage.getItem('language') },
+    };
+    // const body = yield select(makeSelectAddCenxWallet());
+    // console.log(body," our body in contribute saga")
+    const apiData = yield call(api.user.getOtp, headers);
+    console.log(apiData,"apiData in user.otp")
+   
+    if (apiData.success) {
+      console.log(apiData,"apiData in user.otp")
+      yield put(getOtpSuccess(apiData));
+    }
+  } catch (error) {
+     yield put(codeErrorAction());
+  console.log(error)
+ }
+}
+
+export function* sendWithdrawSaga() {
+  try {
+    const headers = {
+      headers: { 'x-auth-token': localStorage.getItem('token')},
+    };
+    // const body = yield select(makeSelectAddCenxWallet());
+    // console.log(body," our body in contribute saga")
+    const data = yield select(makeSelectSendWithdraw());
+    console.log(data , "In withdrawldatasaga")
+    const apiData = yield call(api.user.sendWithdrawData, headers , data);
+   
+    if (apiData.success) {
+      console.log(apiData,"apiData in user.otp")
+      yield put(sendWithdrawdataSuccess(apiData));
+    }
+  } catch (error) {
+     yield put(codeErrorAction());
+  console.log(error)
+ }
+}
+
+
+
 
 export default function* defaultSaga() {
   // See example in containers/HomePage/saga.js
@@ -171,7 +216,8 @@ export default function* defaultSaga() {
     takeLatest(LIST_HOT_WALLET, listHotWalletSaga),
     takeLatest(CREATE_HOT_WALLET, createHotWalletSaga),
     takeLatest(ADD_CENX_WALLET, addCenxWallet),
-    takeLatest(GET_CENX_WALLET, getCenxWallet)
-
+    takeLatest(GET_CENX_WALLET, getCenxWallet),
+    takeLatest(GET_OTP , getOtpSaga ),
+    takeLatest(SEND_WITHDRAW_DATA ,sendWithdrawSaga)
   ];
 }
