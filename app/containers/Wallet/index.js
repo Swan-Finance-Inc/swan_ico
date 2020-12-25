@@ -511,6 +511,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
    }
    if(nextProps.sendWithdrawRet){
      toast.success(nextProps.sendWithdrawRet.message)
+     toast.success(nextProps.sendWithdrawRet.hash)
      nextProps.clearContribution()
    }
  }
