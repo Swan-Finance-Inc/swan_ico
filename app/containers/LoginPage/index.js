@@ -90,7 +90,7 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
   // }
 
   onChange(e) {
-    console.log(e , "vdslavruvbibg");
+    console.log(e , "capctha")
     this.setState({
       'g-recaptcha-response': e,
     });
@@ -200,7 +200,7 @@ showPassWord= (e)=>{
    }
 }
   render() {
-    console.log(this.state['g-recaptcha-response'], "jhvavfkdvdsjkbv")
+    
     if (localStorage.token) {
       return <Redirect to="/dashboard" />;
     }

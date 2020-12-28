@@ -1163,6 +1163,41 @@ ol.rule-list li {
 	/* Confirm Contribution */
 
 }
+
+@media (max-width: 768px){
+	.wallet-portfolio-card{
+		flex-wrap: wrap;
+		padding: 0px;
+		font-size: 12px;
+		justify-content: space-evenly;
+	} 
+	.wallet-button{
+		font-size: 12px !important;
+	}
+	.wallet-button-div{
+		padding: 0px;
+		padding-left: 4px;
+		justify-content: space-evenly;
+	}
+
+	.wallet-table-heading{
+		justify-content: space-evenly;
+	}
+}
+
+@media (width: 1024px){
+	.ethereum-text{
+		font-size: 12px;
+	}
+}
+
+@media (max-width : 767px){
+	.account-balance-statistics{
+		width: auto !important;
+	}
+}
+
+
 // .ui-aside > .nav > li:hover > a, .ui-aside > .nav > li.active > a {
 // 	background: linear-gradient(to right, #5F00D4, #30006C 50%);
 // 	color: #fff;
@@ -2954,6 +2989,8 @@ font-size: 25px;
 	}
 
 }
+
+
   
 @media (max-width : 768px ){
 	.balance-card{
