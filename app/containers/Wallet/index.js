@@ -2043,7 +2043,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
         </div>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-            <div className="col-sm-9 col-md-9 col-lg-9">
+            <div className="col-sm-8 col-md-8 col-lg-9">
           <div className="balance-card" style={{ marginBottom : '2em', height:"280px" }}>
             <div className="row">
               <div className="col-sm-12 col-md-5">
@@ -2209,7 +2209,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 
         {/* <Footer/> */}
         </div>
-        <div className="col-sm-3 col-md-3 col-lg-3">
+        <div className="col-sm-4 col-md-4 col-lg-3">
         <div className="balance-card" style={{ marginBottom : '2em', height:"280px",padding:10}}>
             <div className="row" style={{ marginLeft:"10px" }}>
             <div className="customCard-header transaction-container">
@@ -2233,102 +2233,209 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                 </div>
                 <div className="col-sm-12 col-md-12 col-lg-12">
-                <div className="col-sm-12 col-md-12 col-lg-12" style={{backgroundColor:"#C2CBF2", cursor:"pointer", padding:"7px", marginTop:"10px",display:'flex'}}>
+                <div className="col-sm-12 col-md-12 col-lg-12" className="wallet-table-heading" style={{backgroundColor:"#C2CBF2", cursor:"pointer", padding:"7px", marginTop:"10px",display:'flex'}}>
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"left",  marginLeft:"5px"}}>
                     Name
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"1px"}}>
                     Balance
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"1px"}}>
                     USD Value
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"1px"}}>
+                    Wallet Address
                   </div>
                  
                 </div>
-                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px",display:'flex'}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+                
+                <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
                   <img className="cryptoBuddy_Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAS1BMVEVHcEz4lBr4lhv/miT4lBr7lRz/szP4kxr4lBr4lBr9lx35lBr4kxr6lRv3kxr////++PH+7Nf937z7xIL80Z74pkL6uWr3min5r1Xgn4fZAAAADnRSTlMAq0YP7TkFwNaKHXj6XnPArAgAAASxSURBVHjazVvdmqsgDKy/qLUBBNT3f9Jz0e7ZaqlMEFdz269NCpNkEpLbLUaK6tFmQjRN2fdl0wiRtY+quP2JFHkrSlpJT0REpWjzY62o81b0tCm9aPP6IPVVWxIkZVul197dG2JIc+/S/vmM2JKlO4ZKUJSINCbkkeqJiES+/+4z2iXZPizU95J2Snnf4ZVVQwmkiYVC3VIiaaMOoROUTEQEEvKSEkrJdoeWEkvLu/6MkkvGAEIh6AARcKoumiP0U9+AFnTH6CeipjtXPxFyBsWB+hELanGkfupFyBcyOliyP44/zIiUc39tGIzjfmcjKnfs+K+klGowEysvdOkAOMunTLyQWCcDgHnq109rBjPvgkHFB9TwNMASEZF9XgeCCS9HqiMikHoaMBIRkX63JhCPfJdw5+tfQGCS79YE5J7CA9YQ4ADS4wlQCLTajm4DAv+t4QdELARpKaVU/42IhYAvHEEh4OeapdR2dDsgQEQixgVn+S5KR0Pg0xWxGGilT4YICKyPAIxB2mvAM/owIbA6AowFTPK7KCYElo7QYd+YzKBkQDhpqYsJgs7oTQMsgx78hkNeFhi3z0DDt9DEpkETuAZlmDDk8oApBASpMWLw4gU1Ow3JsEDuWNZxTHReos7vG3qCEwKbiS0wMH/zDcSClhGGP4nY0vGdVd4QHQ7HRR9JxNaxf1qnirA/9kUMBNxXsM3LQ9AYCBJA4JsFIwSCNBDwxigLgaBMBIHPDwEYlrdbkQ4CH5QBAEHBr4c2ILC+H8CA6vZICQH+CTz4TrAJgYkbilp2T2YbAstYBKTljO2FZsvRV1zFIcFY7IGA1HacvtJ2hKKLW7MDAj+s3JpxHD+zMkKMGq4BTsIC1SgNNxAaWL+C+HF56/dAYEs/Rgt7rgEK1D+AFUrPvALnK8c8sJzRHyyZIFwmgmn2E1KD/yDXCzyJYLYeQupwA0SCRPBJSBXeKBFpEoFRbEb6MiCLh8AyD645MYbDjJeON7nAKhMpsDx87IfAFwsgX3iwKJkLUN6BnwsqFik1gTt2bDpABYuWD6FukOLCsIQKE6ftPK3Lch3u442IFyKlmZVSSj0M4aqHW5lRixSnkzfpzGG2AlxBjpTnBm4IWi4I+wJpUGiUbznFjUQCadHM/pSvP57IVvqxsgRoUm2QsOH3/WQabQQryIE2XZAGKz0M2nNNKkzKXm26wB04oEUd2Sls4VZtjBEOSQScZjXTCOAAGn673sFlAdKmvHMfLBh1CVQWdRGDG69LsFbvL4uyiIdz9wswN34/DYyVV/xnu5+0oDZCpJQaGqjoRczswOKx+Ofp2tg399AWrQiqiKfb5WPxwprJzfM8O/zRTMQ8XrtFjFHsl8LPNMB8u/RCYIrSn0UNMHghEKXfN8pz3wMBrtyjhljSQcA7xAInxQQQqHYMMjljdkOgTTHKtQMC32cKOaM8L3owpvGAyHE+Z4YpQQi60kDj+SOdRw+1UnCo9dix3v7swWJouLs+e7T7uOHuBh+vP3m8//wFh/NXPC6w5HL+ms/5i07nr3pdYNnt/HW/Cyw8XmDl8wJLrxdY+73A4vMVVr83lt9f//zw5fcj1v//AUJgzq1BOb7uAAAAAElFTkSuQmCC"></img>
                     Bitcoin
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    {this.satoshi_to_btc(this.state.btcBalance)} BTC
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    {this.satoshi_to_btc(this.state.btcBalance).toFixed(2)} BTC
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    $ {(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance).toFixed(2))}
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    $ {(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)).toFixed(2)}
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Withdraw</button>
+                  <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+
+                  {this.state.btcWallet.address?
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.btcWallet.address}
+                  </div>:''}
+                  {this.state.btcWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.btcWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.btcWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
                   </div>
+
+
                 </div>
-                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px",display:'flex'}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+                
+                <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4 ethereum-text"  style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
                     <img className="cryptoBuddy_Logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAMAAAD04JH5AAAAQlBMVEVHcExnge9if+tjf+xifutif+tvgvZjf+tkgexjgOtifurAy/b///+Bl+78/P5rheuSpfCltfO1wvV1ju3s7/zX3vmZ+KnyAAAACnRSTlMAHPpp1u0KuT+IQ31QMAAABPlJREFUeNrNW1uiqyAMVFTeIKDuf6v3o6etD9Qk0NuyABnJZBJC0jSUxWWnhBB9PzA29L0QQnWSN/9lcanEoDXTTK8W00zrQagPo+BSic2+x8U+CEKqQYPWoGT93VvVa8TqVVv354VGLyFrbs/wAFgtCJS/r3gKbcH2WmstyrjAu6Fsf81YV3L6va6werIdlK601FesX8oEOeiKa5BfO36iGUTt/TUTiBjFMdIXXHUELcb7xjlBz6BvP7C/Tt6Eughw+zvvjZnAmgRAwHHqt1hvTISrIgfwD7Oitd4Y4+CSxKv63zg/AKQRjqCq/hj7AADmodbsUpEkbn9nnwDgPNT6QpVbpP7PbwAJERfaWgIc7RsAwgjnNEASYPJrAAgengUmJAH0YtcAEGJwRgNk/hXsFgBCDHSf27/TaAnYAkDwUHflHpDsHgCGh6wt9YA/Bm4AmLHAE4gM3AKA85AdeChoDNwCwPBQFB3Ai4E7ABgxkCUHYGweAFkPsUHInwGgBiVBZeABQCQdQUsJQnkAcB4y3RKj0OSvACDEQBGjgLGXACI+IkiqBGQBIHgoSRaY7wAkrA04KgwlewcALgYDx1tgx8AsADgPJd4CiwUAiDgbiAIG5gGAxUA0TdNwRBV0nGEAwDd2jqRAsjAAYB5KHAWchwKAioHCUWDJ7G+XmAMQ4SSAq0DM/P5ijHORzMOhaTicgQcDzI+tnHMxEcWAIzhosts/ADgXEomHEn4fcTvTvw/7b4WI5yHr4E4w70x/ALCHkGBuINAM9PscaL0CzghMQAG8g9B84Pt2rcgwQvxQ4CRgyTjcfr0sESEAekQQ8ktOc5w7hXAvBj0MwDifam4WgPsTpwQAMACD0GwMCsCDDOFeChkoCC3GoAE4F9KtGDAQgGQMCYBzLtwCgJhgilQA03hrApgXuEQCMNbyAq11wAOABIMeno+MEQcAlhMJTEI0JTiACXg3EI0AuMF0SYVL44+3ABTI/k8IY4AAmN5mm25fD0AJSfKv8tPRJc+NH+6VsAOmZIudw5kdzk7fpftwyCQwKZ28tYvLu2R++ymCEgIOTcuDtda/PrhxyazxAywaD/CLibHWWh8z6pxxvQDPR8BXs0dKkKNCzvjQpFQhLqePi6G3y94lD66HSMsl5noen0lx2lIhY3zoxYRxVIHidTed4/q0M6cPvZ0KXIlmet9NVi6ZVq6XkHVzhSxSrQs0b3XOhkvY5Vhiy3SbMn28SBhgN9O/Mh2mRrKpEc3hLGUC1ogUvlS7KxM+qTBFUoFGEorVcV8gGjMxGlil60nl+n2daI6H0gSwPrTqJMA8WIz3xWpopbalPdkEX6dczwT10SpdAwDXyiX52W65AgAuVAv6w+XWF31RqZ52BOEcgKMdAPbd6PTlFP5iJYue70/fjqEfYKKwgWFVN/eUB7NcKw+uhSPmAMCfrrsabXQHAIQnywIeTscmlpHOQMoDZkEbj6rTS2i2AOAEELWa2eZNK5cu8QAiDfwKQDEBKDSIbwDlBCA1cyxPALFAAkslGddTet9ezZFtxdYjJJj1vHpjtfUID/xEa/Xi4QT4SHP55MEe2IPnLFCSGFw1/pFFufr+PzDi8f0hl++P+TQN//Kg0w+MejVNUzzspoeSYbdyJjBRPvr55YHHEgh1p06/uf0PjP3+wOAzdPRb/5f585OT+Pzw+yfG//8BUsAQ+7Jxz/gAAAAASUVORK5CYII="></img>
                     Ethereum
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    {this.state.ethBalance} ETH
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                    {(1*this.state.ethBalance).toFixed(2)} ETH
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
                     $ {(this.state.ethToDollar*this.state.ethBalance).toFixed(2)}
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Withdraw</button>
+                  <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+                  
+                  {this.state.ethWallet.address?
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold",overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.ethWallet.address}
+                  </div>:''}
+                  {this.state.ethWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.ethWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.ethWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
                   </div>
                 </div>
-                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px",display:'flex'}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+
+
+
+                <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
                     <img className="cryptoBuddy_Logo" style={{width:"31px"}} src={stellarLogo}></img>
                     Stellar
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
                     {Math.round(this.state.xlmBalance)} XLM
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
                     $ {(this.state.xlmToDollar*this.state.xlmBalance).toFixed(2)}
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
+
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Withdraw</button>
+
+                  <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+
+
+
+                  {this.state.xlmWallet.address?
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold",overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.xlmWallet.address}
+                  </div>:''}
+                  {this.state.xlmWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.xlmWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.xlmWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
                   </div>
                 </div>
-                <div className="col-sm-12 col-md-12 col-lg-12" style={{margin:"10px",display:'flex'}}>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
+
+
+
+                <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"left"}}>
                     <img className="cryptoBuddy_Logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2326A17B'/%3E%3Cpath fill='%23FFF' d='M17.922 17.383v-.002c-.11.008-.677.042-1.942.042-1.01 0-1.721-.03-1.971-.042v.003c-3.888-.171-6.79-.848-6.79-1.658 0-.809 2.902-1.486 6.79-1.66v2.644c.254.018.982.061 1.988.061 1.207 0 1.812-.05 1.925-.06v-2.643c3.88.173 6.775.85 6.775 1.658 0 .81-2.895 1.485-6.775 1.657m0-3.59v-2.366h5.414V7.819H8.595v3.608h5.414v2.365c-4.4.202-7.709 1.074-7.709 2.118 0 1.044 3.309 1.915 7.709 2.118v7.582h3.913v-7.584c4.393-.202 7.694-1.073 7.694-2.116 0-1.043-3.301-1.914-7.694-2.117'/%3E%3C/g%3E%3C/svg%3E"></img>
                     USDT
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
                     {this.state.usdtBalance/1000000} USDT
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
+                  <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
                     $ {(this.state.usdtToDollar*this.state.usdtBalance/1000000).toFixed(2)}
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary" onClick={this.openDeposit}>Deposit</button>
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary">Withdraw</button>
+                  <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
+
+
+                  {this.state.usdtWallet.address?
+                  // <div className="col-sm-11 col-md-9 col-lg-9">
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.usdtWallet.address}
+                  </div>:''}
+                  {this.state.usdtWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.usdtWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.usdtWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
                   </div>
                 </div>
+
+                
+                
+
+                
+                
+
+
                 </div>
               </div>
               

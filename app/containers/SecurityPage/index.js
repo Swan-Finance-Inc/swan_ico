@@ -213,26 +213,26 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                         <button className="security-button" > Setup</button>
                       </div>
                       <a style={{color:'#465490',textDecoration:'underline'}} >What is security Key</a>
-                      <div style={{color:'#7C7C7C',padding:'10px 0px'}} >Protected Action</div>
+                      <div style={{color:'#7C7C7C',padding:'10px 0px',fontSize:'12px'}} >Protected Action</div>
 
                       <div className="row" >
-                            <div className="col col-md-3" style={{borderRight:'1px solid #2D6DCD6E'}} >
-                              <span style={{color:'#7C7C7C'}}>
-                              withdrawl &  API
+                            <div className="col col-md-2" style={{borderRight:'1px solid #2D6DCD6E'}} >
+                              <span style={{color:'#7C7C7C',fontSize:'12px'}}>
+                              withdrawl & API
                               </span>
                                 <div style={{float:'right'}} >
               <Switch onClick={()=>this.setState((prevState)=>({withdrawlSwitch:!prevState.withdrawlSwitch}))} on = {this.state.withdrawlSwitch} />
 
                                 </div>
                             </div>
-                            <div className="col col-md-3" style={{color:'#7C7C7C',borderRight:'1px solid #2D6DCD6E'}} >
+                            <div className="col col-md-2" style={{color:'#7C7C7C',borderRight:'1px solid #2D6DCD6E',fontSize:'12px'}} >
                                 Login
                               <div style={{float:'right'}}>
               <Switch onClick={()=>this.setState((prevState)=>({loginSwitch:!prevState.loginSwitch}))} on = {this.state.loginSwitch}/>
 
               </div>
                             </div>
-                            <div className="col col-md-3" style={{color:'#7C7C7C'}}>
+                            <div className="col col-md-2" style={{color:'#7C7C7C',fontSize:'12px'}}>
                                   Reset Password
                                   <div style={{float:'right'}}>
               <Switch onClick={()=>this.setState((prevState)=>({resetPasswordSwitch:!prevState.resetPasswordSwitch}))} on = {this.state.resetPasswordSwitch}/>

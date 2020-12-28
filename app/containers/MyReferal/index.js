@@ -122,7 +122,7 @@ export class MyReferal extends React.PureComponent {
     this.props.getReferalData();
     this.setState({
       ...this.state,
-      referralUrl:`http://3.20.185.108:6036/signin/refer/${this.props.referralCode}`
+      referralUrl:`https://app.swanfinance.io/signin/refer/${this.props.referralCode}`
     })
   }
   componentWillReceiveProps(nextProps) {

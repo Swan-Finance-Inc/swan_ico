@@ -245,7 +245,7 @@ class Balance extends React.PureComponent {
         <div  ></div>
         <div className="container-fluid nomarginpadding">
           <div className="row">
-            <div className="col-lg-7 col-sm-12">
+            <div className="col-lg-7 col-sm-12 col-md-8">
               <div className="balance-card">
                 <div className="balance-card-inner-wrappper">
                   <h3 className="balance-card-inner-wrapper-heading">
@@ -398,7 +398,7 @@ class Balance extends React.PureComponent {
                 </div>
               </div>
             </div>
-            <div className="col-lg-5" style={{   }}>
+            <div className="col-lg-5 col-md-4 col-sm-12" style={{   }}>
               <div className="balance-card" id="fixed-height" >
                 <div className="balance-card-inner-wrappper">
                   <h4 className="balance-card-inner-wrapper-heading">

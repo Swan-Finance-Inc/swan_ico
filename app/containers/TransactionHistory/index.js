@@ -56,6 +56,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
       infoShow: false,
       size : '',
       data: [],
+      defaultPageSize:5,
       headers : [
         { label: "Time", key: "created_at" },
         { label: "Currency", key: "type" },
@@ -240,11 +241,25 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
     }
   }
   pageChange() {
+
+    // this.setState({
+    //   ...this.state,transactionParam:{
+    //     ...this.state.transactionParam,page:e.target.value
+    //   },
+    //     disablePrevious: true,
+    // }, () => {
+    //   console.log(this.state," in type filter handler")
+    //   this.props.transactions(this.state.transactionParam)
+    // });
+
+
+
+
     this.setState({
       ...this.state,transactionParam:{
         ...this.state.transactionParam,page:this.state.transactionParam.page + 1
       }
-    })
+    } , () =>  this.props.transactions(this.state.transactionParam))
     if (this.state.transactionParam.page + 1 > 1) {
       this.setState({
         disablePrevious: false,
@@ -259,7 +274,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
       );
       
     }
-    this.props.transactions(this.state.transactionParam.page + 1);
+   
   }
   pageSizeChange(e) {
     // console.log('page size change');
@@ -382,15 +397,24 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
   }
 
   handleRowFilter = (e) => {
+    console.log(e.target.getAttribute("value"),"jjjjjjjjjjjjjjjhhhhhhhhhhhhh")
+    const value = e.target.getAttribute("value")
     this.setState({
       ...this.state,transactionParam:{
-        ...this.state.transactionParam,page:e.target.value
+        ...this.state.transactionParam,page:value
       },
         disablePrevious: true,
     }, () => {
       console.log(this.state," in type filter handler")
       this.props.transactions(this.state.transactionParam)
     });
+  }
+
+  handleDefaultPageSize = (e) =>{
+    this.setState({
+      defaultPageSize: e.target.value
+    });
+    this.props.transactions(this.state.transactionParam)
   }
 
 
@@ -627,7 +651,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               <div className="transactions-filters" style={{ paddingTop : '0px' }}>
                 <div className="transactions-filters-card">
                 <label htmlFor="kycFilter" id="transaction-type"><h4 style={{color:'#00296B',fontWeight:'bold'}}>No Of Transactions:</h4></label>
-                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="pageFilter" onChange = { this.handleRowFilter } >
+                <select className="form-control  filter-input" style={{padding:'0px' , width : '10%'}} id="pageFilter" onChange = { this.handleDefaultPageSize } >
                   <option value="" disabled selected hidden></option>
                   <option value='5'>5</option>
                   <option value='10'>10</option>
@@ -647,12 +671,13 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
 
                 {console.log("poor", this.state.data, this.state.columns)}
                   {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
-                      showPaginationBottom={false}
+                      showPaginationBottom={true}
                       style={{ height : this.state.data.length > 0 ? '100%' : '400px' , marginTop : '20px'}}
                       data={this.state.data}
                       columns={this.state.columns}
-                      onPageChange={this.pageChange}
+                      // onPageChange={this.pageChange}
                      pageSizeOptions={[5, 10]}
+                      defaultPageSize={this.state.defaultPageSize}
                      noDataText={
                       <div>
                       <img src={EmptyFile} style={{ height: '143px' }} />
@@ -660,7 +685,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
                       </div>
                     }
                       rowsText={'transactions'}
-                      defaultPageSize={5}
+                     
                     //  pageSize = {this.state.size}
 
                     />}
@@ -671,9 +696,10 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
             <div className="col-sm-12 text-center my-pagibation">
             <MyPaginnation
               data={this.state.data}
-              onPageChange={this.pageChange}
+              onPageChange={this.handleRowFilter}
               previousChange={this.previousChange}
               disablePrevious={this.state.disablePrevious}
+              value = {this.state.transactionParam.page}
               />
             </div>
 
