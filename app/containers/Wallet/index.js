@@ -2270,16 +2270,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
 
-<<<<<<< HEAD
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
-=======
+
                   {this.state.btcWallet.address?
                   <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
                     {this.state.btcWallet.address}
@@ -2305,7 +2296,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
->>>>>>> master
+
                   </div>
 
 
@@ -2325,16 +2316,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
                   
-<<<<<<< HEAD
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
-=======
+
                   {this.state.ethWallet.address?
                   <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold",overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
                     {this.state.ethWallet.address}
@@ -2360,7 +2342,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
->>>>>>> master
+
                   </div>
                 </div>
 
@@ -2382,16 +2364,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
 
-<<<<<<< HEAD
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
-=======
+
 
 
                   {this.state.xlmWallet.address?
@@ -2419,7 +2392,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
->>>>>>> master
+
                   </div>
                 </div>
 
@@ -2439,16 +2412,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
 
-<<<<<<< HEAD
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
-                  </div>
-                  <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
-=======
+
 
                   {this.state.usdtWallet.address?
                   // <div className="col-sm-11 col-md-9 col-lg-9">
@@ -2476,7 +2440,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
->>>>>>> master
+
                   </div>
                 </div>
 
