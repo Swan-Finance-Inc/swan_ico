@@ -1850,7 +1850,7 @@ lookupPeriod = (e) =>{
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
       <Helmet>
-        <title>{language==='chinese'?'钱包':'Wallet'}</title>
+        <title>{language==='chinese'?'钱包':'Stake Swan'}</title>
         <meta name="description" content="Description of Invest" />
         
 

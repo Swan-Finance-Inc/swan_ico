@@ -239,7 +239,7 @@ export class NavBarContainer extends React.PureComponent {
         <Navbar fluid fixedTop style={{borderWidth: '0' , border : '1px solid #465490'}} className="navbar-back">
           <div  className={this.props.animationFlag?"header-left animate-logo":"header-left"} style={{cursor:'pointer'}} onClick ={()=> window.location.reload() } >
             <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
-            <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
+            <div className="logo-swan-text" style = {{color : '#2498D5',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
           </div>
           <div className="header-right hidden-xs">
              <div style={{position:'relative', top:'6px'}}>
@@ -254,8 +254,8 @@ export class NavBarContainer extends React.PureComponent {
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} onClick={this.userProfile}>{this.props.username ? this.props.username : this.state.name} <br/> <span style={{color:'#7C7C7C'}} >{this.props.email} </span> </MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} onClick={this.walletLink} >Wallet</MenuItem>
                 <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} onClick={this.profile}>Setting</MenuItem>
-                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} >Reports</MenuItem>
-                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} >Help</MenuItem>
+                {/* <MenuItem className="nav-dropdown" style={{ cursor: 'pointer' }} >Reports</MenuItem>
+                <MenuItem className="nav-dropdown" style={{ cursor: 'pointer', borderBottom:'1px solid #A2A9C7' }} >Help</MenuItem> */}
                 {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetPassword}><i className="fa fa-lock"></i>Reset password</MenuItem> */}
                 {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.resetInfo}><i className={this.props.flag===false?"fa fa-toggle-off":"fa fa-toggle-on"}></i>Reset Info flag</MenuItem> */}
                 {/* <MenuItem style={{ cursor: 'pointer' }} onClick={this.showDeleteProfile}><i className="fa fa-user-times"></i>Delete Profile</MenuItem> */}
@@ -263,9 +263,9 @@ export class NavBarContainer extends React.PureComponent {
               </NavDropdown>
             </Nav>
 
-            <div style = {{padding : "15px 15px" , marginTop : '5px', cursor : 'pointer'}}>
+            {/* <div style = {{padding : "15px 15px" , marginTop : '5px', cursor : 'pointer'}}>
               <img src = {notifications} style = {{width : "70%"}} />
-            </div>
+            </div> */}
           </div>
         </Navbar>
         <div className="static-modal">

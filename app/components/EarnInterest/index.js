@@ -235,6 +235,8 @@ export class EarnInterest extends React.PureComponent{
           })
           toast.success('Transaction confirmed. Tokens Deposited');
           this.props.confirmInvestPayment('EarnInterest', this.state.duration, this.state.interest,this.props.ethWallet.address, this.state.tokens, this.state.currTxHash)
+          window.location.reload();
+          
         } else if(!this.state.trxnReceipt.status && this.state.stakeStart){
           toast.error('Transaction not confirmed');
           this.setState({
@@ -439,14 +441,14 @@ export class EarnInterest extends React.PureComponent{
                               </div>
                               <div className="col-sm-8 col-md-8 col-lg-8">
                                    <div className=" transaction-container" style={{textAlign:"center", marginLeft:"40px"}}>
-                                      <h2 className="trasnaction" style={{paddingTop:30,fontWeight:'bold'}}>Earn Interest</h2>
+                                      <h2 className="trasnaction " style={{paddingTop:30,fontWeight:'bold',textAlign:'center'}}>Earn Interest</h2>
                                     </div>  
                               </div>
                               
                             </div>
                             <div style={{marginLeft:"-100px", marginTop:"50px"}}>
                             <div className="row" style={{textAlign:"center"}}>
-                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:'-webkit-center', marginLeft:"35px"}}>
+                            <div className="col-sm-12 col-md-12 col-lg-12  text-align-chrome" style={{ marginLeft:"35px"}}>
 
                            
                               <div className="tempBack" style={{width:'19em'}}>
@@ -484,7 +486,7 @@ export class EarnInterest extends React.PureComponent{
                             </div>
                             {this.state.isStaker?
                             <div className="row" style={{marginTop:"40px"}}>
-                            <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:"center"}}>
+                            <div className="col-sm-12 col-md-12 col-lg-12 text-align-chrome" >
 
                               <div className="" style={{maxWidth:'273px',border:"1px solid #2D6DCD6E", borderRadius:"2px"}}>
                                 <div style={{color:'#89ABDE', fontSize:'20px',marginTop:'16px'}}>Interest Rate</div>
@@ -495,7 +497,7 @@ export class EarnInterest extends React.PureComponent{
                             </div>
                           </div>
                             :<div className="row" style={{marginTop:"40px"}}>
-                              <div className="col-sm-5 col-md-5 col-lg-5" style={{textAlign:"-webkit-center"}}>
+                              <div className="col-sm-5 col-md-5 col-lg-5 text-align-chrome" >
 
                                 <div className="" style={{maxWidth:'273px',border:"1px solid #2D6DCD6E", borderRadius:"2px"}}>
                                 <div style={{color:'#89ABDE', fontSize:'20px',marginTop:'16px'}}>Interest Rate</div>

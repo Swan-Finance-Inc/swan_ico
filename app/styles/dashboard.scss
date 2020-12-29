@@ -259,10 +259,16 @@ font-weight: 500;
 
 body::-webkit-scrollbar {
 	width: 5px;
-	display: none;
-	
+	// display: none;
 }
-bkit-scrollbar-track {
+
+// @media (min-width:767px){
+// 	body::-webkit-scrollbar{
+// 		display: none;
+// 	}
+// }
+
+body::-webkit-scrollbar-track {
 	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 body::-webkit-scrollbar-thumb {
@@ -472,12 +478,12 @@ transition: all .301s;
 .ui-content {
 	
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	margin-left: 0;
  -webkit-transition: margin-left .3s;
  transition: margin-left .3s;
- background-color: #F7FAFF !important;
- overflow-y: scroll;
+//  background-color: #a5a5a5 !important;
+//  overflow-y: scroll;
 }
  .ui-content::before, .ui-content::after {
  display: table;
@@ -1183,6 +1189,8 @@ ol.rule-list li {
 	.wallet-table-heading{
 		justify-content: space-evenly;
 	}
+
+
 }
 
 @media (width: 1024px){
@@ -1508,9 +1516,9 @@ opacity:0;
    }
 	.logo img {
 		max-width: 175px !important;
-		width: 50% !important;
+		width: auto !important;
 		height: 40px !important;
-		margin-left: 35px !important;
+		// margin-left: 35px !important;
    // width: 100%;
    }
 	.ui-content-body {
@@ -2497,6 +2505,7 @@ font-size: 25px;
 	padding: 10px;
 	//opacity: 0.18;
 	width: fit-content;
+	width: -moz-fit-content;
 	border-radius: 0.25em;
 
 }
@@ -2934,7 +2943,7 @@ font-size: 25px;
 
 .confirm-payment-card .contribution-hr{
 	margin: 0;
-    height: 1220px;
+    height: 97.2rem;
     position: absolute;
 	top: -20px;
 	border-left: 4px solid #DAE5F6;
@@ -3245,6 +3254,13 @@ font-size: 25px;
 	  width: 90%;
 	  text-align: left;
 	  height: 5rem;
+	  &:hover,&:focus,&:active{
+		background-color: #fff !important;
+		border-color: #ccc !important;
+	outline: none !important;
+	box-shadow: none !important;
+	cursor: default !important;
+	  }
   }
   .currency-menu{
 	  width: 100%;
@@ -3331,6 +3347,12 @@ font-size: 25px;
 .switch-toggle{
 	width: 17px !important;
     height: 17px !important;
+}
+
+.text-align-chrome{
+	text-align: -webkit-center;
+	text-align: -moz-center ;
+
 }
 
 

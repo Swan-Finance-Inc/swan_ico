@@ -107,9 +107,9 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
 
               <div className="col-xs-7 col-sm-6 col-sm-6 col-md-4 clearfix">
                 <ToastContainer position="top-center" autoClose={2800} hideProgressBar={false} newestOnTop closeOnClick pauseOnHover={false} />
-                <div className="header-left" >
+                <div className="header-left" style={{marginLeft:'0px'}}>
                     <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><Link to="/"><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></Link></div>
-                    <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
+                    <div className="logo-swan-text" style = {{color : '#2498D5' ,fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
                     </div>
               </div>
               <div className="col-xs-5 col-sm-6 col-md-8">
@@ -140,7 +140,7 @@ export class ForgotPassword extends React.PureComponent { // eslint-disable-line
                       <ReCAPTCHA type="image" ref="recaptcha" className="form-captcha" required sitekey="6LdZP14UAAAAAB0O_-727DW-KoaFizUiwBhr4wmk" onChange={this.onChange} />
                     </div>
                     <div className="text-center">
-                      <button type="submit" className="form-button forgot-password-button">Submit</button>
+                      <button type="submit" className="login-button">Submit</button>
                     </div>
                   </form>
                 </div>

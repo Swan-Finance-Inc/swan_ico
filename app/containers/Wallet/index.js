@@ -486,9 +486,15 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
         //   currentReceivingWalletAddress : nextProps.createHotWalletRet.address,
         //   iswalletCreating : false
         // })
-        toast.info(nextProps.createHotWalletRet.message) 
+        this.setState({
+          iswalletCreating : false
+        })
+        toast.success(nextProps.createHotWalletRet.message) 
       }
       else{
+        this.setState({
+          iswalletCreating : false
+        })
         toast.error(nextProps.createHotWalletRet.message) 
       }
       nextProps.clearContribution()
@@ -973,7 +979,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
           const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
             query
           )}`;
-          this.setState({url:uri,currAddress:currAddress}) 
+          this.setState({url:uri,currAddress:currAddress,iswalletCreating:false}) 
   }
   currencyChangeWithdraw(e){
     console.log(e.currentTarget.dataset.myValue , "vdvjarbesvbebvh")
@@ -986,7 +992,8 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   currencyChange(e){
     // console.log(e.currentTarget.dataset.myValue,"dsjvabdkvbfdiuvbf")
     this.setState({
-      curr:e.currentTarget.dataset.myValue
+      curr:e.currentTarget.dataset.myValue,
+      iswalletCreating: true
     },()=>{
       if(this.state.curr == 'BTC'){
         if(this.state.btcWallet == ''){
@@ -1707,7 +1714,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                               <div className="trasnaction">Enter OTP:</div>
                               <div  className="form-group" style={{display:'flex'}}  >
                               
-                              <input id="otp" type="text" onChange={this.saveData} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
+                              <input id="otp" type="text" onChange={this.saveData} className="form-input form-control text-left form-one-style" required placeholder='Enter your OTP' style={{paddingRight:'36px'}} />
                               </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
@@ -1795,7 +1802,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                                     <option value="USDT">USDT</option>
                                   </select>
                                 </span>                                      */}
-                                <Dropdown className="currency-dropdown" >
+                                <Dropdown className="currency-dropdown" disabled = {this.state.iswalletCreating} >
                                   <Button className="currency-button" variant="success">{this.state.curr?this.state.curr:'Click for options...'}</Button>
                                   <Dropdown.Toggle className="currency-dropdown-toggle" split variant="success" id="dropdown-split-basic"/>
                                   <Dropdown.Menu className="currency-menu" >
@@ -2264,10 +2271,10 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button">Withdraw</button>
+                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
                   </div>
 
 
@@ -2291,10 +2298,10 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button">Withdraw</button>
+                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
                   </div>
                 </div>
 
@@ -2320,10 +2327,10 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button">Withdraw</button>
+                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
                   </div>
                 </div>
 
@@ -2347,10 +2354,10 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary wallet-button">Withdraw</button>
+                    <button className="btn btn-primary wallet-button" onClick={this.openWithdraw}>Withdraw</button>
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
-                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button>
+                    <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
                   </div>
                 </div>
 

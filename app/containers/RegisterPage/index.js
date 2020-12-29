@@ -151,15 +151,15 @@ export class RegisterPage extends React.PureComponent {
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     var nameRegex = /^(?!\s+$)[A-Za-z]+$/ ;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    if(this.state.firstName.length < 4 || this.state.firstName.length > 20){
-      this.notifyError("Name should be between 4 to 20 characters");
+    if(this.state.firstName.length < 1 || this.state.firstName.length > 20){
+      this.notifyError("Name should be between 1 to 20 characters");
     }
     else
     if(!nameRegex.test(this.state.firstName)){
       this.notifyError("Name should contain only alphabets without space")
     }
-    if(this.state.lastName.length < 4 || this.state.lastName.length > 20){
-      this.notifyError("Name should be between 4 to 20 characters");
+    if(this.state.lastName.length < 1 || this.state.lastName.length > 20){
+      this.notifyError("Name should be between 1 to 20 characters");
     }
     else
     if(!nameRegex.test(this.state.lastName)){
@@ -321,10 +321,10 @@ export class RegisterPage extends React.PureComponent {
             <div className="container">
               <div className="row">
                 <div className="col-xs-7 col-sm-6 col-md-2 clearfix">
-                <div className="header-left" style={{cursor:'pointer',height:'56px'}}>
+                <div className="header-left" style={{cursor:'pointer',height:'56px',marginLeft:'0px'}}>
                   <Link to='/signup'>
                     <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><img style = {{width : "77%", height : '31px', marginLeft : 6 }} src={ logo } alt="centralex" /></div>
-                    <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
+                    <div className="logo-swan-text" style = {{color : '#2498D5' ,fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
                     </Link>                     
                     </div>
                 </div>

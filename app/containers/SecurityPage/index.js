@@ -200,7 +200,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
           <div className="ui-container container-fluid">
             <div className="" style={{ marginBottom: '500px' }}>
 
-              <div className="panel panel-default" style={{boxShadow:'0px 3px 6px #2D6DCD6E'}}>
+              {/* <div className="panel panel-default" style={{boxShadow:'0px 3px 6px #2D6DCD6E'}}>
                   <div className="setting-panel-heading" >
                   2FA
                   </div>
@@ -282,8 +282,8 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                         </div>
                    </div>
                   </div>
-              </div>
-            {/* <div className="panel panel-default">
+              </div> */}
+            <div className="panel panel-default">
 
               <div className="setting-panel-heading">
                 {
@@ -342,7 +342,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                                 <input id="otp" type="number" name="otp" className="form-input form-control" placeholder="Your 2fa code" required />
                               </div>
                               <div className="text-center">
-                              <button type="submit" className="form-button" style={{ marginTop: '10px' }}>Verify</button>
+                              <button type="submit" className="form-button" style={{ marginTop: '10px',backgroundColor:'#2498D5' }}>Verify</button>
                               </div>
 
                             </form>
@@ -353,7 +353,7 @@ export class SecurityPage extends React.PureComponent { // eslint-disable-line r
                 </div>
               </div>
             </div>
-          </div> */}
+          </div>
           <div className="panel panel-default" style={{boxShadow:'0px 3px 6px #2D6DCD6E'}}>
             {/*<div className="panel-heading">Save Activity Log</div>*/}
             <div className="setting-panel-heading">

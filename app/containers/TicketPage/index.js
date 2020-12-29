@@ -35,6 +35,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
       //@aj
       infoShow: false,
       data: [],
+      messageSent: false,
       columns: [
         {
           Header: 'Ticket Date',
@@ -130,6 +131,9 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
     if(e.target[0].value.length < 1){
       return ;
     }
+    this.setState({
+      messageSent: true
+    })
     const message = {
       message: e.target[0].value,
       ticketId: this.state.currentTicketDetails.ticketId
@@ -180,7 +184,8 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
       if(!!nextProps.messageSuccess.success){
         this.setState({
           data: nextProps.tickets.tickets,
-          currentTicketMessages: nextProps.messages.messages
+          currentTicketMessages: nextProps.messages.messages,
+          messageSent: false
         })
         nextProps.resetTicketSuccess();
       }
@@ -466,7 +471,7 @@ export class TicketPage extends React.PureComponent { // eslint-disable-line rea
                           </div>
                         </div>
                         <div className="form-group text-center">
-                          <button type="submit" className="form-button">Send Message</button>
+                          <button type="submit" className="form-button">{this.state.messageSent ?  <LoadingSpinner style={{height: "50px" ,width:"50px"}}/>: "Send Message"}   </button>
 
                         </div>
                       </form>

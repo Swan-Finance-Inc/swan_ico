@@ -671,7 +671,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
 
                 {console.log("poor", this.state.data, this.state.columns)}
                   {loading?<LoadingSpinner style = {{alignItems:"center",marginTop:"70px",marginBottom:"90px", background:"#fff"}} /> :<ReactTable
-                      showPaginationBottom={false}
+                      showPaginationBottom={true}
                       style={{ height : this.state.data.length > 0 ? '100%' : '400px' , marginTop : '20px'}}
                       data={this.state.data}
                       columns={this.state.columns}
@@ -693,7 +693,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               </div>
             </div>
               
-            <div className="col-sm-12 text-center my-pagibation">
+            {/* <div className="col-sm-12 text-center my-pagibation">
             <MyPaginnation
               data={this.state.data}
               onPageChange={this.handleRowFilter}
@@ -701,7 +701,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               disablePrevious={this.state.disablePrevious}
               value = {this.state.transactionParam.page}
               />
-            </div>
+            </div> */}
 
 
 
