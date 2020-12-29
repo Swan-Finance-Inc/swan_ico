@@ -460,8 +460,9 @@ export class MyReferal extends React.PureComponent {
                         <b/> & Earn Swan tokens
                           </h3>
                           <p  className="mt-30 referral-content">
-                          Earn up to 10% on the ongoing referral bonus <b/>
-                          of your referred transaction fee. </p>
+                          Earn $50 of SWAN tokens for each person who <b/>
+                          signs up for an account.
+                          </p>
                             <p  className="main-color--blue" style={{fontSize : '15px'}}>Share the Unique Invite Link</p>
                             {
                           //     <div className="code copy-clipboard">

@@ -508,7 +508,7 @@ export class EarnInterest extends React.PureComponent{
                               </div>
                               <div className="col-sm-7 col-md-7 col-lg-7" style={{textAlign:"center",display:'flex',justifyContent:'center', marginTop:'-10px'}}>
                                 <div style={{boxShadow: '3px 3px 6px #00000029',maxWidth:'450px',padding : 13,borderRadius:'20px',border: '1px solid #D9D9D9'}}>
-                                <div style={{marginBottom: 14}}>You have not staked SWAN tokens yet. Stake 2000 SWAN tokens to earn higher interest rates.
+                                <div style={{marginBottom: 14}}>You have not staked SWAN tokens yet. Stake 2,000,000 SWAN tokens to earn higher interest rates.
                                 </div>
                                 <br />
                                 <button className="swanBox"  onClick={this.goBack}>STAKE NOW</button>
