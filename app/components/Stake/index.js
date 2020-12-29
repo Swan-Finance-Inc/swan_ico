@@ -332,7 +332,7 @@ export class Stake extends React.PureComponent{
                                 <div className="col-sm-12 col-md-12 col-lg-12" style={{height:"2px",borderWidth:"0",color:"gray",backgroundColor:"gray",paddingLeft:"20px",opacity:"10%"}}></div>
                                 
                                 <div className="col-sm-12 col-md-12 col-lg-12" style={{textAlign:"center"}}>
-                                  By Staking 2000 SWAN tokens, you qualify for higher interest rates in the 'Earn Interest' accounts for all cryptocurrencies and stablecoins.
+                                  By Staking  2,000,000  SWAN tokens, you qualify for higher interest rates in the 'Earn Interest' accounts for all cryptocurrencies and stablecoins.
                                 </div>
                               </div>
                               

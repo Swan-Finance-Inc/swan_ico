@@ -2050,7 +2050,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
         </div>
         <div className="ui-content-body">
           <div className="ui-container container-fluid">
-            <div className="col-sm-8 col-md-8 col-lg-9">
+            <div className="col-sm-12 col-md-12 col-lg-12">
           <div className="balance-card" style={{ marginBottom : '2em', height:"280px" }}>
             <div className="row">
               <div className="col-sm-12 col-md-5">
@@ -2109,7 +2109,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <CircularProgressbarWithChildren value={Math.round((this.state.ethToDollar*this.state.ethBalance*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
-                            stroke : '#465390'
+                            stroke : '#00296B'
                           }
                          }}
                          strokeWidth="9"
@@ -2150,7 +2150,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <CircularProgressbar value={Math.round((this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
-                            stroke : '#2D6DCD'
+                            stroke : '#00296B'
                           }
                          }}
                          strokeWidth="17"
@@ -2170,7 +2170,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <CircularProgressbar value={Math.round(((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance))*100/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
-                            stroke : '#2D6DCD'
+                            stroke : '#00296B'
                           }
                          }}
                          strokeWidth="17"
@@ -2216,7 +2216,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 
         {/* <Footer/> */}
         </div>
-        <div className="col-sm-4 col-md-4 col-lg-3">
+        {/* <div className="col-sm-4 col-md-4 col-lg-3">
         <div className="balance-card" style={{ marginBottom : '2em', height:"280px",padding:10}}>
             <div className="row" style={{ marginLeft:"10px" }}>
             <div className="customCard-header transaction-container">
@@ -2229,7 +2229,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
               <div className="col-sm-12"><h3 style={{ marginLeft:"10px" }}>USD 0</h3></div>
               <h4 style={{ marginLeft:"20px" }}>You don't have any referral earning</h4>
             </div>
-        </div>
+        </div> */}
 
           <div className="col-sm-12 col-md-12 col-lg-12">
             <div className="balance-card" style={{ marginBottom : '2em', height:"380px" }}>

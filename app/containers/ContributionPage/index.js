@@ -29,6 +29,8 @@ import {LoadingSpinner} from 'components/LoadingSpinner/Loadable';
 import Web3 from 'web3';
 import { Modal } from 'react-bootstrap';
 import Info from "../../components/Info";
+import { push } from 'react-router-redux';
+
 export class ContributionPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   // Begin constructor
   constructor(props) {
@@ -1354,8 +1356,8 @@ hide=(e)=>{
               </div>
             <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>
             {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus!== 'SUBMITTED' && 
-            <div className="kyc-status-before-contribution">
-            <div className="glow-text kyc-submit">Submit KYC to continue</div>
+            <div className="kyc-status-before-contribution" style={{cursor:'pointer'}} onClick={()=> this.props.push('/dashboard/kyc')}>
+            <div className="glow-text kyc-submit" >Submit KYC to continue</div>
             </div>
             }
             {this.props.userInfo.userInfo.kycStatus!=='ACCEPTED' && this.props.userInfo.userInfo.kycStatus === 'SUBMITTED' && 
@@ -1651,7 +1653,8 @@ function mapDispatchToProps(dispatch) {
     finalizePayment: (data) => (dispatch(finalizePayment(data))),
     listHotWallet : data => dispatch(listHotWallet(data)),
     createHotWallet : data => dispatch(createHotWallet(data)),
-    clearContribution : _ => dispatch(clearContribution())
+    clearContribution : _ => dispatch(clearContribution()),
+    push: (route) => dispatch(push(route)),
   };
 }
 

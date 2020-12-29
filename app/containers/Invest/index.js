@@ -1968,7 +1968,7 @@ lookupPeriod = (e) =>{
               <div style={{ paddingLeft: '20px',paddingTop: '10px' }}>          
             <div className="row">
               <div className="col-md-6 col-lg-6 col-sm-6" style={{fontSize:"20px"}}>
-              Stake 2,000,000 SWAN tokens to earn higher interest rates for SWAN and all other cryptocurrencies and stablecoins. Without staking 2000 SWAN tokens here, the interest rates are 4% less.
+              Stake 2,000,000 SWAN tokens to earn higher interest rates for SWAN and all other cryptocurrencies and stablecoins. Without staking 2,000,000 SWAN tokens here, the interest rates are 4% less.
               </div>
               <div className="col-md-6 col-lg-6 col-sm-6" style={{textAlign:'center'}}>
                {this.state.isStaker?<button className='fractal-id-btn' onClick={()=>this.claimStakedTokens()}>{this.state.withdrawLoader?<i className="fa fa-cog fa-spin fa-3x fa-fw" style={{fontSize:'15px'}} />:'UNSTAKE'}</button>
