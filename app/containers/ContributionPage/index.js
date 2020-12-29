@@ -1185,7 +1185,7 @@ hide=(e)=>{
         
 
       
-     console.log(this.props," props in contribution page")
+     console.log(this.props," props in contribution page", this.state)
     // console.log(this.state," state in contribution page")
     const { loading } = this.props
     // this.setState({

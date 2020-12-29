@@ -2244,11 +2244,14 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"left",  marginLeft:"5px"}}>
                     Name
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"1px"}}>
                     Balance
                   </div>
-                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"5px"}}>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"1px"}}>
                     USD Value
+                  </div>
+                  <div className="col-sm-2 col-md-2 col-lg-2" style={{color:"#465490", fontWeight:"bold", textAlign:"center",  marginLeft:"1px"}}>
+                    Wallet Address
                   </div>
                  
                 </div>
@@ -2267,6 +2270,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
 
+<<<<<<< HEAD
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
@@ -2275,6 +2279,33 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
+=======
+                  {this.state.btcWallet.address?
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.btcWallet.address}
+                  </div>:''}
+                  {this.state.btcWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.btcWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.btcWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
+                  </div>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
+>>>>>>> master
                   </div>
 
 
@@ -2294,6 +2325,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
                   
+<<<<<<< HEAD
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
@@ -2302,6 +2334,33 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
+=======
+                  {this.state.ethWallet.address?
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold",overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.ethWallet.address}
+                  </div>:''}
+                  {this.state.ethWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.ethWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.ethWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
+                  </div>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
+>>>>>>> master
                   </div>
                 </div>
 
@@ -2323,6 +2382,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
 
+<<<<<<< HEAD
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
@@ -2331,6 +2391,35 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
+=======
+
+
+                  {this.state.xlmWallet.address?
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold",overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.xlmWallet.address}
+                  </div>:''}
+                  {this.state.xlmWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.xlmWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.xlmWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
+                  </div>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
+>>>>>>> master
                   </div>
                 </div>
 
@@ -2350,6 +2439,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
 
+<<<<<<< HEAD
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary wallet-button" onClick={this.openDeposit}>Deposit</button>
                   </div>
@@ -2358,6 +2448,35 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}} onClick={()=> window.location.href = '/dashboard/contribution'}>Buy SWAN</button>
+=======
+
+                  {this.state.usdtWallet.address?
+                  // <div className="col-sm-11 col-md-9 col-lg-9">
+                  <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    {this.state.usdtWallet.address}
+                  </div>:''}
+                  {this.state.usdtWallet.address?
+                  <div className="col-sm-1 col-md-1 col-lg-1">
+                  <CopyToClipboard text={this.state.usdtWallet.address}
+                              onCopy={() => {this.setState({copied: true});
+                               toast.success("Copied");
+                              }}>
+                              <span className="" style = {{height : '-webkit-fill-available', cursor:"pointer"}} >
+                              <FileCopyOutlinedIcon
+                                style={{ outline : 'none' ,fontSize : '20px'  }}
+                                />
+                              </span>
+                    </CopyToClipboard>
+                  </div>:''}
+                  {this.state.usdtWallet.address?''
+                  :
+                  <div className="col-sm-11 col-md-9 col-lg-9 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
+                    Wallet not created
+                  </div>
+                  }
+                  <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
+                    <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
+>>>>>>> master
                   </div>
                 </div>
 

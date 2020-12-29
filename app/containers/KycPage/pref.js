@@ -15,6 +15,6 @@ module.exports = {
   
 
   scope: "uid:read email:read person.full_name:read verification.plus:read verification.liveness:read",
-  redirect_uri: "https://tokensale.centralex.com/dashboard/kyc",
+  redirect_uri: "https://app.swanfinance.io/dashboard/kyc",
 //     redirect_uri: "http://localhost:6036/dashboard/kyc",
 };

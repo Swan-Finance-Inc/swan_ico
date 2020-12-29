@@ -48,6 +48,7 @@ export class ContributionConfirm extends React.PureComponent {
       curTime: new Date().toLocaleString(),
       txHash : '',
       gasPrice: 0,
+      isDisabled: false,
     };
     this.goBack = this.goBack.bind(this);
     this.confirmPayment = this.confirmPayment.bind(this);
@@ -197,6 +198,9 @@ export class ContributionConfirm extends React.PureComponent {
     try{
       if(unspentUTXOS.length==0 || unspentUTXOS===undefined){
         toast.error('Unspent transactions not found. Check balance')
+        this.setState({
+          isDisabled:false
+        })
         return('Unspent transactions not found. Check balance')
       } else
         {
@@ -217,6 +221,9 @@ export class ContributionConfirm extends React.PureComponent {
         if (totalUTXOAmount < amount) {
           unspentUTXOS.forEach((utxo) => (utxo.spent = false));
           toast.error('insufficient balance in wallet')
+          this.setState({
+            isDisabled:false
+          })
           return Promise.reject({
             message: `not enought balance in hot wallet:`,
             err: 'insufficient balance in hot wallet',
@@ -228,6 +235,9 @@ export class ContributionConfirm extends React.PureComponent {
         console.log("total amount to be sent", totalAmount, "and change", change);
         if (change < 0) {
           toast.error('insufficient balance in wallet to provide fees');
+          this.setState({
+            isDisabled:false
+          })
           return Promise.reject({
             message: `not enought balance in hot wallet`,
             err: 'insufficient balance in wallet',
@@ -278,6 +288,9 @@ export class ContributionConfirm extends React.PureComponent {
   }
 
   initiateTransaction = async () =>{
+    this.setState({
+      isDisabled:true
+    })
     if(this.props.currency==="Ethereum"){
         const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
         let receiver = web3.utils.toChecksumAddress(this.props.clientAddress);
@@ -301,6 +314,9 @@ export class ContributionConfirm extends React.PureComponent {
         {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
           if(err)
           {console.log("Error occured in signtrxn",err)
+          this.setState({
+            isDisabled:false
+          })
         toast.error(`${err}`)}
           else
           {
@@ -308,10 +324,16 @@ export class ContributionConfirm extends React.PureComponent {
             web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
               if(err)
               {console.log("Error occured in sendDisngnedtrxnn", err)
+              this.setState({
+                isDisabled:false
+              })
             toast.error(`${err}`)}
               else
               {
                 console.log("Send signed trxn res: ", res);
+                this.setState({
+                  isDisabled:false
+                })
                 this.props.finalPayment(sender, res);
               }
             }.bind(this))
@@ -365,9 +387,9 @@ export class ContributionConfirm extends React.PureComponent {
       const userPublicKey = userKeypair.publicKey();
       console.log(this.props.currencyQty,"userkey",userPublicKey," and publickey", this.props.currWallet.public_key);
       const account = await server.loadAccount(userPublicKey);
-      const fee = await server.fetchBaseFee();
+      const fee = 200;
       const amount = this.props.currencyQty;
-
+      console.log(account," account ",fee," fee and amount", amount);
       const transaction = new StellarSdk.TransactionBuilder(account, { fee: fee
         ,
         networkPassphrase: StellarSdk.Networks.TESTNET})
@@ -378,7 +400,7 @@ export class ContributionConfirm extends React.PureComponent {
           amount: amount
         }))
         // Make this transaction valid for the next 30 seconds only
-        .setTimeout(30)
+        .setTimeout(60)
         // Uncomment to add a memo (https://www.stellar.org/developers/learn/concepts/transactions.html)
         // .addMemo(StellarSdk.Memo.text('Hello world!'))
         .build();
@@ -394,8 +416,14 @@ export class ContributionConfirm extends React.PureComponent {
       const transactionResult = await server.submitTransaction(transaction);
       if (!!transactionResult) {
         console.log("ho gya stellar transfer::: ", transactionResult.hash)
+        this.setState({
+          isDisabled:false
+        })
         this.props.finalPayment(this.props.currWallet.address, transactionResult.hash);
       } else {
+        this.setState({
+          isDisabled:false
+        })
         toast.error("Error in submitting Stellar Transaction. Check Stellar Explorer")
       }
     } else if(this.props.currency === 'USDT') {
@@ -423,17 +451,27 @@ export class ContributionConfirm extends React.PureComponent {
           try
           {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
             if(err)
-            {console.log("Error occured in signtrxn",err)}
+            {console.log("Error occured in signtrxn",err)
+            this.setState({
+              isDisabled:false
+            })
+          }
             else
             {
               console.log("Sign trxn res: ", res);
               web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
                 if(err)
                 { toast.error(`Error in sending trxn: ${err}`)
+                this.setState({
+                  isDisabled:false
+                })
                   console.log("Error occured in sendDisngnedtrxnn", err)}
                 else
                 {
                   console.log("Send signed trxn res: ", res);
+                  this.setState({
+                    isDisabled:false
+                  })
                   this.props.finalPayment(userAddress, res);
                 }
               }.bind(this))
@@ -506,7 +544,7 @@ export class ContributionConfirm extends React.PureComponent {
 
 
   //satoshi to BTC conversion
-  satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
+  satoshi_to_btc = (value) => Number((1e8 * value).toFixed(8));
   // End Container functions
 
   // Begin render function
@@ -789,7 +827,7 @@ export class ContributionConfirm extends React.PureComponent {
                     <button 
                      className="form-button btn btn-primary"
                      style={{ marginBottom : '20px' }}
-                     onClick={() => this.initiateTransaction()}
+                     onClick={() => this.initiateTransaction()} disabled={this.state.isDisabled}
                    >
                      Initiate Payment
                    </button>
