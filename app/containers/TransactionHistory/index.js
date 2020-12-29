@@ -100,7 +100,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
             // const hash = uritemplate.parse(
             //   `ropsten.etherscan.io/tx/${value}`
             // );
-            var uri =  `https://ropsten.etherscan.io/tx/${value}`
+            var uri =  `https://mainnet.etherscan.io/tx/${value}`
             // console.log(uri, "dsavcrfuvrebvgkdb");
             // window.open(uri, "_blank");  
             return(

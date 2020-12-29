@@ -695,7 +695,7 @@ handleInput2=(e)=>{
               </div>
             </div>  
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-sm-12">
               <div className="kyc-verification">
                   <h3 className="kyc-verification-header" style={{fontWeight:'bold'}}>Schedule a KYC Videoconference</h3>
@@ -710,7 +710,7 @@ handleInput2=(e)=>{
                   </div>
               </div>
             </div>  
-          </div>
+          </div> */}
       </div>
       </div>
       </div>

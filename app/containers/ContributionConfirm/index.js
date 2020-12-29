@@ -279,7 +279,7 @@ export class ContributionConfirm extends React.PureComponent {
 
   initiateTransaction = async () =>{
     if(this.props.currency==="Ethereum"){
-        const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
+        const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
         let receiver = web3.utils.toChecksumAddress(this.props.clientAddress);
         let amount = this.props.currencyQty;
         let sender = web3.utils.toChecksumAddress(this.props.currWallet.address);

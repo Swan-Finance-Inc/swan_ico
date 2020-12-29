@@ -246,7 +246,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
 
   getEthereumBalance=()=>{
     console.log("dvafduvsbfd")
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
       web3.eth.getBalance(web3.utils.toChecksumAddress(this.state.ethWallet.address), function(err,res){
         if(err){console.log("aggaya : ", err)}
         else{
@@ -301,7 +301,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.tokenContractAbi, result=0;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))       //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))       //--prodChange
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
