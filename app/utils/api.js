@@ -157,7 +157,7 @@ export default {
       .then((res) => res.data).catch((err) => err.response.data),
     getOtp: (headers) => 
     axios.get(`${BaseUrl}user/getOtp` , headers)
-      .then((res) =>   res.data ).catch((err) => err.response.data),
+      .then((res) => res.data).catch((err) => err.response.data),
     sendWithdrawData: (headers,data) =>
     axios.post(`${BaseUrl}wallet/withdrawBalance` ,data, headers )
       .then((res)=> res.data).catch((err)=> err.response.data )                   
