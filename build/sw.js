@@ -40,25 +40,14 @@ var __wpo = {
       "/icon-72x72.png",
       "/icon-96x96.png",
       "/manifest.json",
-<<<<<<< HEAD
-      "/main.b4d442f47d186dd408bf.js",
+      "/main.db8f20da883ef4813de4.js",
       "/"
     ],
     "additional": [
-      "/0.08f1f6c92deecfb04faa.chunk.js",
-      "/1.3d757a9f8eaf49c3aeca.chunk.js",
-      "/2.c2e79b6c429dc90414b4.chunk.js",
-      "/3.752079bfcdbab7cda59c.chunk.js",
-=======
-      "/main.c53ef59ea5cb7bb1597a.js",
-      "/"
-    ],
-    "additional": [
-      "/0.6a760301c3c2ea4b30bc.chunk.js",
+      "/0.cd5f6e07a20f4e77b7d9.chunk.js",
       "/1.69f263f047485d1549ee.chunk.js",
-      "/2.cc0a720e3b988931162a.chunk.js",
-      "/3.f33cd18a914551d3ab13.chunk.js",
->>>>>>> payla
+      "/2.a1ae154a4f2ba594845a.chunk.js",
+      "/3.8a663c744ae9b86e11e3.chunk.js",
       "/4.b8b64a992f965cff2ae4.chunk.js",
       "/5.be8c4c748e31bc534296.chunk.js",
       "/6.c486abe4d4af6895cdcb.chunk.js",
@@ -68,13 +57,8 @@ var __wpo = {
       "/10.6fe5d850165b0130efb8.chunk.js",
       "/11.260090743f2cac2a0f93.chunk.js",
       "/12.e64144bbdf03fab027e9.chunk.js",
-<<<<<<< HEAD
-      "/13.02aef18ff32c0d25693b.chunk.js",
-      "/14.3e748aeedb88f0a6b6b9.chunk.js",
-=======
       "/13.03e064b5f198dd4966e6.chunk.js",
-      "/14.cae37c251c4512f7e6d1.chunk.js",
->>>>>>> payla
+      "/14.531361c4b2d3ee0a6c5e.chunk.js",
       "/15.a8eae0a506cb2be8f960.chunk.js",
       "/16.4eb10c8cb202575b4278.chunk.js",
       "/17.4475e1df5048887dd920.chunk.js",
@@ -130,17 +114,10 @@ var __wpo = {
     "1eda04abf9a190365f077e2ce1d90815151a5177": "/icon-72x72.png",
     "3585b232832d19ce8046ceeaa4b0075388f2ad40": "/icon-96x96.png",
     "cea80e84d1510fba55ad650e59265bf4949b351c": "/manifest.json",
-<<<<<<< HEAD
-    "42a9cb617d82a2c574e49f86e201e66f0d1bab3b": "/0.08f1f6c92deecfb04faa.chunk.js",
-    "909942819574b9bbf6fe9b01e27998075b0b6bf0": "/1.3d757a9f8eaf49c3aeca.chunk.js",
-    "95ec876e009759b35ec7c208113f201eea60ff9f": "/2.c2e79b6c429dc90414b4.chunk.js",
-    "2f2028bb611d3a30f06a7e02daadad0d8da51eca": "/3.752079bfcdbab7cda59c.chunk.js",
-=======
-    "17adf20e4ae18a42ff390c8133465e225897871b": "/0.6a760301c3c2ea4b30bc.chunk.js",
+    "fb985dba7e95d1f1a8d2b3cefb9200bfd8e1e21a": "/0.cd5f6e07a20f4e77b7d9.chunk.js",
     "c2c35aed25c784367079de56a0dc344fac5dd729": "/1.69f263f047485d1549ee.chunk.js",
-    "583810bb023eb0c5a3bc11dd0196abfadf8e19f1": "/2.cc0a720e3b988931162a.chunk.js",
-    "52febebc0aea4727696d644ce301a877addab806": "/3.f33cd18a914551d3ab13.chunk.js",
->>>>>>> payla
+    "092bdc7b4175c1f4a8b53bfe467d301495f91c2f": "/2.a1ae154a4f2ba594845a.chunk.js",
+    "90c7c3dcc31f01d857e99fa6ada0e307d9a0c3ed": "/3.8a663c744ae9b86e11e3.chunk.js",
     "299b891d954d765ec0ad651c62829c369873abc2": "/4.b8b64a992f965cff2ae4.chunk.js",
     "2a422128ac828e31ae415070897ab4a654ffe64f": "/5.be8c4c748e31bc534296.chunk.js",
     "531decb76ef382d855a97fd51e2b3a8a76b66f15": "/6.c486abe4d4af6895cdcb.chunk.js",
@@ -150,13 +127,8 @@ var __wpo = {
     "349387f3e7030f6fab72c3c673abb57a6a7922ab": "/10.6fe5d850165b0130efb8.chunk.js",
     "bbc47d863a10c99d4a620c502af5d1a45ed06f9a": "/11.260090743f2cac2a0f93.chunk.js",
     "934ed063efb726fb5d4187f06f329a7de78bcac0": "/12.e64144bbdf03fab027e9.chunk.js",
-<<<<<<< HEAD
-    "0ba4262148642bb549c1afde789bfa6e10a4f2b0": "/13.02aef18ff32c0d25693b.chunk.js",
-    "19a865315cd0baaf576ce9cc04f228ac942ef8f7": "/14.3e748aeedb88f0a6b6b9.chunk.js",
-=======
     "73050422a68c0801991bc767650c1fc689a32438": "/13.03e064b5f198dd4966e6.chunk.js",
-    "1e546aebea383e3b16858867f86fb092b44b9f59": "/14.cae37c251c4512f7e6d1.chunk.js",
->>>>>>> payla
+    "6bc0e2616490c61cb2a6a191f1686864667abb4b": "/14.531361c4b2d3ee0a6c5e.chunk.js",
     "b9afd94cdff65cb2f83ccfb26eae326be1fb7cf8": "/15.a8eae0a506cb2be8f960.chunk.js",
     "fbf56fd1695d49bf8c8b8329469953e2ab5328c0": "/16.4eb10c8cb202575b4278.chunk.js",
     "46a3dfcf2bf8980388158babbb7280de09b84420": "/17.4475e1df5048887dd920.chunk.js",
@@ -168,21 +140,12 @@ var __wpo = {
     "2394e14b77876ebf6f9e9cc2e7c8ec35d348a6e6": "/23.97a17da6fca0870beb27.chunk.js",
     "cdd7df295edc99fe6b18e023bf9ccce47c33f5db": "/24.8a52bf7801fceb677e53.chunk.js",
     "f99c60ca12679618c8ac0f2f7176b6ad8d3b802b": "/25.5798d99dc0dfcb150e22.chunk.js",
-<<<<<<< HEAD
-    "46b8bda011847e1b452a5829f77db37027e0e7a8": "/main.b4d442f47d186dd408bf.js",
-    "3442ce56b88333c41216309cd319a3e1cdff3302": "/"
+    "e559e48415c0667adb93057c6030e5f3c3b73f8a": "/main.db8f20da883ef4813de4.js",
+    "b217eae32cb1fa5a369e4eabd14213b25f503f7c": "/"
   },
   "strategy": "changed",
   "responseStrategy": "cache-first",
-  "version": "12/29/2020, 1:26:00 AM",
-=======
-    "7758f2dca0a04bfbea8d61222fcc9ecf4f5046d5": "/main.c53ef59ea5cb7bb1597a.js",
-    "e3511b9eb0e8390ca79eb1e74083ab1806438fb5": "/"
-  },
-  "strategy": "changed",
-  "responseStrategy": "cache-first",
-  "version": "12/29/2020, 10:58:05 AM",
->>>>>>> payla
+  "version": "12/31/2020, 2:00:33 AM",
   "name": "webpack-offline",
   "pluginVersion": "5.0.5",
   "relativePaths": false
