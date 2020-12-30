@@ -100,7 +100,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
             // const hash = uritemplate.parse(
             //   `ropsten.etherscan.io/tx/${value}`
             // );
-            var uri =  `https://ropsten.etherscan.io/tx/${value}`
+            var uri =  `https://etherscan.io/tx/${value}`
             // console.log(uri, "dsavcrfuvrebvgkdb");
             // window.open(uri, "_blank");  
             return(
@@ -693,7 +693,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               </div>
             </div>
               
-            <div className="col-sm-12 text-center my-pagibation">
+            {/* <div className="col-sm-12 text-center my-pagibation">
             <MyPaginnation
               data={this.state.data}
               onPageChange={this.handleRowFilter}
@@ -701,7 +701,7 @@ export class TransactionHistory extends React.PureComponent { // eslint-disable-
               disablePrevious={this.state.disablePrevious}
               value = {this.state.transactionParam.page}
               />
-            </div>
+            </div> */}
 
 
 

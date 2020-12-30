@@ -16,6 +16,30 @@ header .container {
 .animate-logo{
 	margin-left: 0px;
 }
+
+.logo-swan-text{
+	position: relative;
+	 bottom:53px;
+	left:48px;
+}
+@media (max-width:767px){
+	.header-left{
+		margin-left: 0px;
+		min-width: 240px;
+		height: auto !important;
+	}
+	.logo{
+		padding: 10px 0px !important;
+		
+	}
+	.logo-swan-text{
+		bottom: 0px;
+		left: 0px;
+		padding: 7px 0px !important;
+
+	}
+}
+
 .header-right {
 	float:right;
 	display:-ms-flexbox;
@@ -106,7 +130,7 @@ header .container {
 	//background-color:#223A52 ;
 	background-color: #9edeef;
 	background-attachment: fixed;
-	overflow: scroll;
+
 	&.login{
 
 		//height:100vh;
@@ -281,7 +305,7 @@ color:#ffff !important;
 .signin-block{min-height:100vh;}
 
 @media(min-width:768px){
-	.signin-block{height:110vh !important ;}
+	// .signin-block{height:100vh !important ;}
 	.login-container{
 		height: 100%;
 		padding-bottom: 10px;

@@ -216,10 +216,10 @@ showPassWord= (e)=>{
                   {/* <div className="logo"><Link to="/"> <img
                     src={ logo } alt="centralex"
                   /></Link></div> */}
-                  <div className="header-left" style={{cursor:'pointer',height:'56px' }}>
+                  <div className="header-left" style={{cursor:'pointer',height:'56px',marginLeft:'0px' }}>
                     <Link to='/signin'>
                     <div className="logo" style = {{marginRight : '9px' , marginLeft : '6px'}} ><img style = {{width : "77%", height : '31px', marginLeft : 6}} src={ logo } alt="centralex" /></div>
-                    <div style = {{color : '#2498D5',position : 'relative' , bottom:'53px',left:'48px',fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
+                    <div className="logo-swan-text" style = {{color : '#2498D5' ,fontSize:'28px' , fontWeight :'bold' }} >SwanFinance</div>
                     </Link>
                     </div>
                 </div>

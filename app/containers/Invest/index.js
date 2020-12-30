@@ -209,7 +209,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   }
   checkHashStatus(hash, callback) {
 
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
     web3.eth.getTransactionReceipt(hash, function(error, rcpt) {
                     if(error) {
                         console.error(error);
@@ -271,7 +271,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
 
     try{    
     
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
     //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
     //let tokenAmount = this.state.tokens;
     const contract = new web3.eth.Contract(abi, address);
@@ -334,7 +334,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
 
     try{    
     
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
     //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
     //let tokenAmount = this.state.tokens;
     const contract = new web3.eth.Contract(abi, address);
@@ -399,7 +399,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
 
     try{    
     
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
     //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
     //let tokenAmount = this.state.tokens;
     const contract = new web3.eth.Contract(abi, address);
@@ -459,7 +459,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.stakeContractAbi, result,finResult=[],i=1;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -487,7 +487,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.stakeContractAbi, result=0;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -509,7 +509,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.tokenContractAbi, result=0;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -1579,7 +1579,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.stakeContractAbi, result=0;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -1850,7 +1850,7 @@ lookupPeriod = (e) =>{
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
       <Helmet>
-        <title>{language==='chinese'?'钱包':'Wallet'}</title>
+        <title>{language==='chinese'?'钱包':'Stake Swan'}</title>
         <meta name="description" content="Description of Invest" />
         
 

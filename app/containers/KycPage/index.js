@@ -18,7 +18,7 @@ import  makeSelectKycPage, { makeSelectSubmitKycSuccess, makeSelectSubmitKycFrac
 import reducer from './reducer';
 import saga from './saga';
 import makeSelectDashBoardWelcomePage from '../DashBoardWelcomePage/selectors';
-import { submitKyc, submitKycDoc, resetSuccess, submitKycDocSuccessRemove, fractalKYC, updateFractalKyc, updateFractalKycSuccess } from './actions';
+import { submitKyc, submitKycDoc, resetSuccess, submitKycDocSuccessRemove, fractalKYC, updateFractalKycSuccess } from './actions';
 import { ToastContainer, toast } from 'react-toastify';
 import { Redirect, Link } from 'react-router-dom';
 import { CountryDropdown, RegionDropdown } from 'react-country-region-selector';
@@ -36,7 +36,7 @@ import fetch from "node-fetch";
 
 import prefs from "./pref.js";
 
-
+let randValue = true;
 export class KycPage extends React.PureComponent { // eslint-disable-line react/prefer-stateless-function
   constructor(props){
     super(props)
@@ -69,7 +69,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       allUploaded : false,
       otherDoc : 'other',
       showOtherDoc : 'hidden',
-      kycStatus : 'Empty',
+      //kycStatus : 'Empty',
       kycJourneyCompleted : false,
       valid : true,
       submitCheck:true,
@@ -84,6 +84,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       emailForKyc: false,
       error:'',
       errorFlag: true,
+      kycStatus : '',
     }
 
     this.handleFrontImg = this.handleFrontImg.bind(this);
@@ -96,6 +97,30 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
     this.handleOtherDoc = this.handleOtherDoc.bind(this);
     this.handleInput = this.handleInput.bind(this);
     this.handleFractalKYC = this.handleFractalKYC.bind(this);
+    this.findCode = this.findCode.bind(this);
+
+
+
+
+  }
+  findCode() {
+    console.log("qwertyuioiuytrewqwertyu: ",this.props.location)
+    const parsed = queryString.parse(this.props.location.search);
+    console.log("Tell-me", parsed);
+
+   if(parsed.error) {
+     console.log("found error", parsed.error);
+     // this.setState({
+     //   errorFlag:true;
+     //   error:e
+     // })
+     toast.error(parsed.error_description);
+   }
+   if(parsed.code){
+     this.handleFractalKYC(parsed.code);
+   } else {
+     //this.props.updateFractalKyc(this.props.userInfo.userInfo.email);
+   }
   }
 
   // ethValidator(e) {
@@ -137,7 +162,8 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       city: this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.city ? this.props.userInfo.userInfo.kycDetails.city : '' ,
       address: this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.address ? this.props.userInfo.userInfo.kycDetails.address : '' ,
       address2: this.props.userInfo.userInfo.kycDetails && this.props.userInfo.userInfo.kycDetails.address2 ? this.props.userInfo.userInfo.kycDetails.address2 : '',
-      newKycStatus : this.props.userInfo.userInfo.kycStatus ? this.props.userInfo.userInfo.kycStatus : ''
+      kycStatus : this.props.userInfo.userInfo.kycStatus ? this.props.userInfo.userInfo.kycStatus : '',
+      kycJourneyCompleted : this.props.userInfo.userInfo.kycJourneyCompleted ? this.props.userInfo.userInfo.kycJourneyCompleted : '',
       // doc_number:this.props.userInfo.userInfo.kycDetails.documentNumber,
       // DocType:this.props.userInfo.userInfo.kycDetails.documentType,
       // frontImgUrl :this.props.userInfo.userInfo.kycDetails.imageFront,
@@ -146,23 +172,7 @@ export class KycPage extends React.PureComponent { // eslint-disable-line react/
       // residenProofUrl:this.props.userInfo.userInfo.kycDetails.residentProof,
 
     })
-    console.log("qwertyuioiuytrewqwertyu: ",this.props.location)
-     const parsed = queryString.parse(this.props.location.search);
-     console.log("Tell-me", parsed);
-
-    if(parsed.error) {
-      console.log("found error", parsed.error);
-      // this.setState({
-      //   errorFlag:true;
-      //   error:e
-      // })
-      toast.error(parsed.error_description);
-    }
-    if(parsed.code){
-      this.handleFractalKYC(parsed.code);
-    } else {
-      //this.props.updateFractalKyc(this.props.userInfo.userInfo.email);
-    }
+    //randValue = false;
   }
   handleOtherDoc(e) {
     e.preventDefault();
@@ -326,13 +336,25 @@ handleInput2=(e)=>{
 
 
   componentWillReceiveProps(nextProps){
-    console.log("User infor next",nextProps.userInfo.userInfo.kycDetails.fullName)
-    // if(nextProps.updateFractalSuccess){
-    //   this.setState({
-    //     kycStatus: nextProps.updateFractalSuccess.kycStatus,
-    //     kycJourneyCompleted: nextProps.updateFractalSuccess.kycJourneyCompleted
-    //   })
-    // }
+    if(randValue){
+      this.findCode();
+      }
+      randValue=false;
+    console.log("User infor next",nextProps.updateFractalSuccess)
+    if(nextProps.updateFractalSuccess){
+      if(nextProps.updateFractalSuccess.error){
+        toast.error(nextProps.updateFractalSuccess.message);
+        }else
+       { toast.success("Fractal KYC status updated");
+        this.setState({
+        kycStatus: nextProps.updateFractalSuccess.kycStatus,
+        kycJourneyCompleted: nextProps.updateFractalSuccess.kycJourneyCompleted
+      })
+    }
+      
+     
+     nextProps.submitKycDocSuccessRemove()
+    }
     if(nextProps.kycpage.kycDocSuccess){
       if(nextProps.kycpage.kycDocSuccess.image == 'imageFront'){
           this.setState({
@@ -398,11 +420,10 @@ handleInput2=(e)=>{
   async handleFractalKYC(token){
     
     
-    let emailForKyc = this.props.userInfo.userInfo.email
+    //let emailForKyc = this.props.userInfo.userInfo.email
     
-    console.log("fractal KYC starts", this.props.userInfo.userInfo.email, "is the currentEmail & emailforkyc", emailForKyc);
+    //console.log("fractal KYC starts", this.props.userInfo.userInfo.email, "is the currentEmail & emailforkyc", emailForKyc);
     const detail = {
-      email : emailForKyc,
       code : token
     }
     await this.props.fractalKYC(detail);
@@ -427,8 +448,8 @@ handleInput2=(e)=>{
     //     <Redirect to={"/dashboard"} />
     //   )
     // }
-    if(this.props.userInfo.userInfo.kycStatus == 'SUBMITTED' || this.state.kycStatus == 'SUBMITTED'){
-      this.props.kycActive();
+    if(this.props.userInfo.userInfo.kycStatus == 'SUBMITTED' || this.state.kycStatus == 'SUBMITTED' || this.state.kycStatus == 'pending' ){
+      //this.props.kycActive();
       return (
         <div id="content" className="ui-content ui-content-aside-overlay">
         <Helmet>
@@ -695,7 +716,7 @@ handleInput2=(e)=>{
               </div>
             </div>  
           </div>
-          <div className="row">
+          {/* <div className="row">
             <div className="col-sm-12">
               <div className="kyc-verification">
                   <h3 className="kyc-verification-header" style={{fontWeight:'bold'}}>Schedule a KYC Videoconference</h3>
@@ -710,7 +731,7 @@ handleInput2=(e)=>{
                   </div>
               </div>
             </div>  
-          </div>
+          </div> */}
       </div>
       </div>
       </div>
@@ -737,7 +758,6 @@ function mapDispatchToProps(dispatch) {
     kycDone: () => dispatch(kycDone()),
     submitKycDoc : (data) => dispatch(submitKycDoc(data)),
     fractalKYC : (data) => dispatch(fractalKYC(data)),
-    updateFractalKyc : (data) => dispatch(updateFractalKyc(data)),
     resetSuccess : () => dispatch(resetSuccess()),
     submitKycDocSuccessRemove:()=>dispatch(submitKycDocSuccessRemove())
   };

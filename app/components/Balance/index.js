@@ -13,7 +13,7 @@ import Referral from "../../images/referral_main_page.png"
 import mdCopy from "../../images/md-copy.svg";
 import Planet from "../../images/Planet.svg";
 import Satelite from "../../images/Satelite.svg";
-import { Menu,Popconfirm, message} from "antd";
+import { Menu,Popconfirm, message ,Input} from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import btcStatus from "../../images/btcStatus.svg";
 import EthStatus from "../../images/EthStatus.svg";
@@ -287,7 +287,7 @@ class Balance extends React.PureComponent {
                     </Nav>  
                       </span>     
                         <span style={{ fontSize: "32px", marginLeft: "12px" }}>
-                        {this.state.balanceType === "USD" ? (`$ ${( this.props.userInfo.tokens.total * 1).toFixed(2)}`) :
+                        {this.state.balanceType === "USD" ?  this.props.userInfo.tokens.total * 0.001<1?(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(4)}`):(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(2)}`) :
                          this.props.userInfo.tokens.total.toFixed(2)
                         }
                         </span>
@@ -408,7 +408,7 @@ class Balance extends React.PureComponent {
                   <div className="exchange-text">You get*</div>
                     <div className="exchange-trading-input" >
                   <TextFieldInput
-                      type="number"
+                      type="text"
                       value={this.state.exchangeRate}
                       inputStyle={{
                         fontSize: "15px",

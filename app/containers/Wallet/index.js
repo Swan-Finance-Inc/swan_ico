@@ -246,7 +246,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
 
   getEthereumBalance=()=>{
     console.log("dvafduvsbfd")
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
       web3.eth.getBalance(web3.utils.toChecksumAddress(this.state.ethWallet.address), function(err,res){
         if(err){console.log("aggaya : ", err)}
         else{
@@ -301,7 +301,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.tokenContractAbi, result=0;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://ropsten.infura.io/v3/6dab407582414625bc25b19122311c8b`))       //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))       //--prodChange
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -486,9 +486,15 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
         //   currentReceivingWalletAddress : nextProps.createHotWalletRet.address,
         //   iswalletCreating : false
         // })
-        toast.info(nextProps.createHotWalletRet.message) 
+        this.setState({
+          iswalletCreating : false
+        })
+        toast.success(nextProps.createHotWalletRet.message) 
       }
       else{
+        this.setState({
+          iswalletCreating : false
+        })
         toast.error(nextProps.createHotWalletRet.message) 
       }
       nextProps.clearContribution()
@@ -973,7 +979,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
           const uri = `https://chart.googleapis.com/chart?cht=qr&${queryString.stringify(
             query
           )}`;
-          this.setState({url:uri,currAddress:currAddress}) 
+          this.setState({url:uri,currAddress:currAddress,iswalletCreating:false}) 
   }
   currencyChangeWithdraw(e){
     console.log(e.currentTarget.dataset.myValue , "vdvjarbesvbebvh")
@@ -986,7 +992,8 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   currencyChange(e){
     // console.log(e.currentTarget.dataset.myValue,"dsjvabdkvbfdiuvbf")
     this.setState({
-      curr:e.currentTarget.dataset.myValue
+      curr:e.currentTarget.dataset.myValue,
+      iswalletCreating: true
     },()=>{
       if(this.state.curr == 'BTC'){
         if(this.state.btcWallet == ''){
@@ -1707,7 +1714,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                               <div className="trasnaction">Enter OTP:</div>
                               <div  className="form-group" style={{display:'flex'}}  >
                               
-                              <input id="otp" type="text" onChange={this.saveData} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' style={{paddingRight:'36px'}} />
+                              <input id="otp" type="text" onChange={this.saveData} className="form-input form-control text-left form-one-style" required placeholder='Enter your OTP' style={{paddingRight:'36px'}} />
                               </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
@@ -1795,7 +1802,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                                     <option value="USDT">USDT</option>
                                   </select>
                                 </span>                                      */}
-                                <Dropdown className="currency-dropdown" >
+                                <Dropdown className="currency-dropdown" disabled = {this.state.iswalletCreating} >
                                   <Button className="currency-button" variant="success">{this.state.curr?this.state.curr:'Click for options...'}</Button>
                                   <Dropdown.Toggle className="currency-dropdown-toggle" split variant="success" id="dropdown-split-basic"/>
                                   <Dropdown.Menu className="currency-menu" >

@@ -9,7 +9,8 @@ module.exports = {
   // client_id: "SvZZDET5YaLvzkEmEOl4xFLgK7IrdqEeOrhhTTIk0UA",
   // client_secret: "V1C4mldA7kuYoEI9LUHW1P3zzckF3bOSCw0Ja16cHto",
   
-  client_id: "S8OLpS7A4bte3tS87TohcbZWkudOX_ezA2GfkCKapu0",
+  client_id : "NkDUdqPaS7TFrO0ulY-PS1EAVuboHc2jt8gwNxXnjvQ",
+  // client_id: "S8OLpS7A4bte3tS87TohcbZWkudOX_ezA2GfkCKapu0",
   client_secret: "EnHgqb4R_aTDz0MwzY48qOWOP8wSwZUQmyJFCceEzFg",
   
 
