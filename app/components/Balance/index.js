@@ -286,8 +286,8 @@ console.log(btc,eth,usdt,stellar,total, "sadkvnsdvjkskfjbvs")
                     </Nav>  
                       </span>     
                         <span style={{ fontSize: "32px", marginLeft: "12px" }}>
-                        {this.state.balanceType === "USD" ? (`$ ${( this.props.userInfo.tokens.total * 1).toFixed(2)}`) :
-                         ((this.props.userInfo.tokens.total).toFixed(2)*1000).toFixed(2)
+                        {this.state.balanceType === "USD" ?  this.props.userInfo.tokens.total * 0.001<1?(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(4)}`):(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(2)}`) :
+                         this.props.userInfo.tokens.total.toFixed(2)
                         }
                         </span>
                       </div>

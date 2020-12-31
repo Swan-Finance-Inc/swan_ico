@@ -77,9 +77,9 @@ export function* submitKycDoc() {
   }
 }
 
-export function* getKycDetails() {
-  fractalKYC
-}
+// export function* getKycDetails() {
+//   fractalKYC
+// }
 export function* fractalKYC() {
   console.log("entered saga");
   try {
@@ -97,6 +97,7 @@ export function* fractalKYC() {
   console.log(apiData," apidata in fractalKycDetails")
     if(apiData){
       //yield put(submitKycSuccess(apiData));
+      yield put(updateFractalKycSuccess(apiData));
       console.log(apiData, "success!!!")
     }else{
       console.log(apiData);

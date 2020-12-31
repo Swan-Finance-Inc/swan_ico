@@ -2270,7 +2270,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
 
-
                   {this.state.btcWallet.address?
                   <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold", overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
                     {this.state.btcWallet.address}
@@ -2296,7 +2295,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
-
                   </div>
 
 
@@ -2316,7 +2314,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
                   
-
                   {this.state.ethWallet.address?
                   <div className="col-sm-10 col-md-8 col-lg-8 wallet-button-div" style={{fontWeight:"bold",overflow:"hidden", whiteSpace:"nowrap", textOverflow:"ellipsis", msTextOverflow:"ellipsis"}}>
                     {this.state.ethWallet.address}
@@ -2342,7 +2339,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
-
                   </div>
                 </div>
 
@@ -2363,7 +2359,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
 
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
-
 
 
 
@@ -2392,7 +2387,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
-
                   </div>
                 </div>
 
@@ -2411,7 +2405,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   </div>
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
-
 
 
                   {this.state.usdtWallet.address?
@@ -2440,7 +2433,6 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                   }
                   <div className="col-sm-1 col-md-3 col-lg-3 wallet-button-div" style={{fontWeight:"bold", textAlign:"center"}}>
                     <Link to='/dashboard/contribution'><button className="btn btn-primary-green wallet-button" style={{backgroundColor:"green"}}>Buy SWAN</button></Link>
-
                   </div>
                 </div>
 
