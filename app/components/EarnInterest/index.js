@@ -90,7 +90,7 @@ export class EarnInterest extends React.PureComponent{
       var abi = constants.stakeContractAbi, result=0;
       console.log("abi: ", abi, address, this.props.ethWallet)
       try{
-      const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`))
       let userAddress = web3.utils.toChecksumAddress(this.props.ethWallet.address);
       const contract = new web3.eth.Contract(abi, address);
       //console.log("contract hai: ", contract)
@@ -110,7 +110,7 @@ export class EarnInterest extends React.PureComponent{
       var abi = constants.tokenContractAbi, result=0;
       console.log("abi: ", abi, address, this.props.ethWallet)
       try{
-      const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`))
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`))
       let userAddress = web3.utils.toChecksumAddress(this.props.ethWallet.address);
       const contract = new web3.eth.Contract(abi, address);
       //console.log("contract hai: ", contract)
@@ -133,7 +133,7 @@ export class EarnInterest extends React.PureComponent{
 
       try{    
       
-      const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
       //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
       let tokenAmount = web3.utils.toWei(this.state.tokens);
       const contract = new web3.eth.Contract(abi, address);
@@ -197,7 +197,7 @@ export class EarnInterest extends React.PureComponent{
 
     checkHashStatus(hash, callback) {
 
-      const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+      const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
       web3.eth.getTransactionReceipt(hash, function(error, rcpt) {
                       if(error) {
                           console.error(error);
@@ -268,7 +268,7 @@ export class EarnInterest extends React.PureComponent{
         }
         try{    
         
-        const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+        const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
         //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
         let tokenAmount = web3.utils.toWei(this.state.tokens);
         const contract = new web3.eth.Contract(abi, address);

@@ -400,7 +400,7 @@ handleInput2=(e)=>{
     
     let emailForKyc = this.props.userInfo.userInfo.email
     
-    console.log("fractal KYC starts", this.props.userInfo.userInfo.email, "is the currentEmail & emailforkyc", emailForKyc);
+    console.log("fractal KYC starts", this.props.userInfo.userInfo.email, "is the currentEmail & emailforkyc", emailForKyc , "and token" , token);
     const detail = {
       email : emailForKyc,
       code : token
@@ -692,6 +692,12 @@ handleInput2=(e)=>{
                     onClick={this.hitFractal} 
                     >Start KYC With Fractal</button>
                   </div>
+                  <div className="col-md-12" style={{marginTop:"40px", marginLeft:"-15px"}}>
+                   
+                    <h5>Instruction: In Fractal, please Log in with the same email ID used on this SwanFinance platform <div style={{color:"red"}}>If you find another user already signed in Fractal, please logout from Fractal to proceed with your KYC</div></h5>
+                  
+                     
+                      </div>
               </div>
             </div>  
           </div>

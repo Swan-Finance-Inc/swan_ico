@@ -108,11 +108,16 @@ export class LoginPage extends React.PureComponent { // eslint-disable-line reac
     toast.success(message);
   }
   formValidation(user) {
+    var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     const { email, password ,rememberMe} = user;
     if (email.length <= 0) {
       this.notify('Enter your Email');
       return false;
-    } else if (password.length === 0) {
+    } 
+    else if(!emailRegex.test(this.state.email)){
+      this.notify('Please enter valid email')
+    }
+     else if (password.length === 0) {
       this.notify('Enter your password');
       return false;
     } 

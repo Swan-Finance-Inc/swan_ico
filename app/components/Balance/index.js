@@ -256,7 +256,7 @@ console.log(btc,eth,usdt,stellar,total, "sadkvnsdvjkskfjbvs")
                     our comprehensive verification methods to protect our
                     customers.
                   </p>
-                  <div className="col-sm-6">
+                  <div className="col-sm-6" style={{width:'fit-content'}}>
                     <div className="balance-botton-inner-wrapper">
                       <h5
                         style={{
