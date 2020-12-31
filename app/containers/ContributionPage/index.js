@@ -1437,7 +1437,7 @@ hide=(e)=>{
                   //   <input id="fromAddress" onChange={this.validator} type="text" value={this.state.fromAddress} className="form-input form-control text-left form-one-style" required placeholder='Enter your Ethereum Wallet Address' />
                   //  </div>:
                     <div className="form-group">
-                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' :(this.state.curr =='Bitcoin') ? 'BTC' :(this.state.curr =='USDT') ? 'USDT' :(this.state.curr=='Stellar') ? 'Stellar' : '*'} wallet you are investing from?</label>
+                    <label htmlFor="sendingAddress" className="form-label main-color--blue">Address of {(this.state.curr == 'Ethereum') ? 'ETH' :(this.state.curr =='Bitcoin') ? 'BTC' :(this.state.curr =='USDT') ? 'USDT' :(this.state.curr=='Stellar') ? 'Stellar' : '__'} wallet you are using to pay.</label>
                     <input onChange={this.validator} type="text" value={this.state.fromAddress} disabled placeholder='' className="form-input form-control text-left form-one-style" required   />
                   </div>
                   }
@@ -1449,7 +1449,7 @@ hide=(e)=>{
               <div className="col-sm-6">
                 <div>
                      <div className="form-group align-left-label">
-                  <label htmlFor="amt" className="form-label main-color--blue">How much {this.state.curr} you would like to invest?</label>
+                  <label htmlFor="amt" className="form-label main-color--blue">How much {this.state.curr} would you like to purchase?</label>
                   <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control form-one-style " required />
                 </div>
 

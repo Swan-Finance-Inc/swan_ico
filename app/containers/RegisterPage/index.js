@@ -517,8 +517,8 @@ export class RegisterPage extends React.PureComponent {
                           />
                           &nbsp; 
                           I certify that I am 18 years of age and older and agree to the
-                          <Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/User+agreement+V1.0.pdf"
-                        target="_blank"><strong className="main-color--lightblue"> User Agreement</strong></Link>  &nbsp;and<Link to="https://centralex-website.s3-ap-southeast-1.amazonaws.com/Privacy+policy+V1.0.pdf"
+                          <Link to="https://swanfinance.io/terms-of-use"
+                        target="_blank"><strong className="main-color--lightblue"> User Agreement</strong></Link>  &nbsp;and<Link to="https://swanfinance.io/privacy-policy"
                         target="_blank"><strong className="main-color--lightblue">&nbsp;
                            Privacy Policy.</strong></Link>
                         </label>
