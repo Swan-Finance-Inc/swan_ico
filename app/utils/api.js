@@ -34,14 +34,14 @@ if(pathLocation === '127.0.0.1:6036'){
   } else if(pathLocation === '3.20.185.108:6036'){
     console.log("TEST using test aPI")
     //Testing baseUrl
-    BaseUrl = 'http://https://test-api.swanfinance.io/api/v1/'
+    BaseUrl = 'https://test-api.swanfinance.io/api/v1/'
   }
   else{
     console.log('TEST using prod http-API');
     //For localhost or other baseURL
     //BaseUrl = 'http://localhost:3000/api/v1/';
     // BaseUrl = 'https://api.swanfinance.io/api/v1/'
-    BaseUrl = 'http://https://test-api.swanfinance.io/api/v1/'
+    BaseUrl = 'https://test-api.swanfinance.io/api/v1/'
   }
  }
 
