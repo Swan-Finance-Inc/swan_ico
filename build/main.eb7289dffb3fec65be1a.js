@@ -3216,13 +3216,13 @@ if (!!pathLocation) {
   } else if (pathLocation === '3.20.185.108:6036') {
     console.log("TEST using test aPI");
     //Testing baseUrl
-    BaseUrl = 'http://3.20.185.108:7070/api/v1/';
+    BaseUrl = 'http://https://test-api.swanfinance.io/api/v1/';
   } else {
     console.log('TEST using prod http-API');
     //For localhost or other baseURL
     //BaseUrl = 'http://localhost:3000/api/v1/';
     // BaseUrl = 'https://api.swanfinance.io/api/v1/'
-    BaseUrl = 'http://3.20.185.108:7070/api/v1/';
+    BaseUrl = 'http://https://test-api.swanfinance.io/api/v1/';
   }
 }
 
