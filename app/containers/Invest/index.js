@@ -284,7 +284,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       "value": '0x0',
       'gasPrice': web3.utils.toHex(20 * 1e9),
       'gasLimit': web3.utils.toHex(210000),
-      "chainId": "0x03",
+      "chainId": "0x04",
       "data": contract.methods.payOuts(id).encodeABI(),
       }; //--prodChange
       try
@@ -347,7 +347,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       "value": '0x0',
       'gasPrice': web3.utils.toHex(20 * 1e9),
       'gasLimit': web3.utils.toHex(210000),
-      "chainId": "0x03",
+      "chainId": "0x04",
       "data": contract.methods.claimInterestTokens(id).encodeABI(),
       }; //--prodChange
       try
@@ -412,7 +412,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       "value": '0x0',
       'gasPrice': web3.utils.toHex(20 * 1e9),
       'gasLimit': web3.utils.toHex(210000),
-      "chainId": "0x03",
+      "chainId": "0x04",
       "data": contract.methods.claimStakeTokens().encodeABI(),
       }; //--prodChange
       try

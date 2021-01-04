@@ -315,8 +315,8 @@ export class ContributionConfirm extends React.PureComponent {
         "to": receiver,
         "value": web3.utils.toHex(web3.utils.toWei(amount, "ether")),
         "gas": 21000,
-        "chainId": 3
-        }; //--prodChange
+        "chainId": 4
+        }; //--prodChanges
         try
         {let signTransaction = web3.eth.accounts.signTransaction(rawTransaction, pvtKey, function(err, res){
           if(err)
