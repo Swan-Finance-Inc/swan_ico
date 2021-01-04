@@ -1993,7 +1993,7 @@ lookupPeriod = (e) =>{
                   </div>
                   <div className="col-md-6 col-lg-6 col-sm-6" style={{textAlign:'center'}}>
                     120 days remaining &nbsp;
-                  <button className='swanBox'>{this.state.swanBalance==0?'0 (NA)':this.state.tokenPrice*this.state.swanBalance+'~'}</button> 
+                  <button className='swanBox'>{this.state.swanBalance==0?'0 (NA)':this.state.swanBalance+'~ SWAN' }</button> 
                   </div>
 
                 </div>
