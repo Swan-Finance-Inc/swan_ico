@@ -316,7 +316,7 @@ var _ref2 = _jsx('div', {
 
 var _ref3 = _jsx('p', {}, void 0, 'If you DON\u2019T see our emails, please check your SPAM folder.');
 
-var _ref4 = _jsx('p', {}, void 0, ' To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@swanfinance.io');
+var _ref4 = _jsx('p', {}, void 0, ' To avoid our email to you being considered as SPAM, please add the following email to your contact list: noreply@swanfinance.io');
 
 var SignupConfirm_SignupConfirm = function (_React$PureComponent) {
   _inherits(SignupConfirm, _React$PureComponent);

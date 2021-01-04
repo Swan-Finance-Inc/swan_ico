@@ -335,7 +335,7 @@ var _ref3 = _jsx('p', {
 
 var _ref4 = _jsx('p', {
   className: 'subtitle'
-}, void 0, ' To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@swanfinance.com');
+}, void 0, ' To avoid our email to you being considered as SPAM, please add the following email to your contact list: noreply@swanfinance.io');
 
 var _ref5 = _jsx(lib["ToastContainer"], {
   position: 'top-center',

@@ -461,7 +461,7 @@ export class RegisterPage extends React.PureComponent {
                         <TextFieldInput
                           type="text"
                           name="referralId"
-                          label="Referral Id(Optional)"
+                          label="Referral Code(Optional)"
                           value={this.state.referralId}
                           variant="outlined"
                           required={true}

@@ -104,7 +104,7 @@ export class ResendConfirmationPage extends React.PureComponent { // eslint-disa
             <div className="signin-card-body">
               <h2 style={{ textAlign: 'center' }}>WARNING.</h2>
               <p className="subtitle">If you DON’T see our emails, please check your SPAM folder.</p>
-              <p className="subtitle" > To avoid our email to you being considered as SPAM, please add the following email to your contact list: hello@swanfinance.com</p>
+              <p className="subtitle" > To avoid our email to you being considered as SPAM, please add the following email to your contact list: noreply@swanfinance.io</p>
             </div>
           </div>
         </div>
