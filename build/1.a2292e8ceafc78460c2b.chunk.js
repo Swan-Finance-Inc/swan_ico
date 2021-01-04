@@ -1178,7 +1178,7 @@ var RegisterPage_RegisterPage = function (_React$PureComponent) {
       }, void 0, _jsx(TextFieldInput["a" /* default */], {
         type: "text",
         name: "referralId",
-        label: "Referral Id(Optional)",
+        label: "Referral Code(Optional)",
         value: this.state.referralId,
         variant: "outlined",
         required: true,
