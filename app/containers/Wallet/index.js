@@ -1568,7 +1568,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
         
 
       
-     console.log(this.state.copied," sttate in contribution page")
+     console.log(this.state," sttate in contribution page")
     console.log(this.props,"props in wallet pages")
     const { loading } = this.props
     const {language} = this.state
