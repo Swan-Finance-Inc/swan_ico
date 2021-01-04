@@ -1747,7 +1747,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 
                           <li>- If you have deposited, please pay attention to the text messages, site letters and emails we send to you.</li>
                           <li>- Only send coin to this address. Sending any other assets to this address may result in loss of your deposit. </li>
-                          <li>- SWAN tokens will be distributed after <strong>Dec 1st</strong></li>
+                         
 
                           </ul>
                             
@@ -1861,7 +1861,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 
                           <li>- If you have deposited, please pay attention to the text messages, site letters and emails we send to you.</li>
                           <li>- Only send coin to this address. Sending any other assets to this address may result in loss of your deposit. </li>
-                          <li>- SWAN tokens will be distributed after <strong>Dec 1st</strong></li>
+                          
 
                           </ul>
                             
@@ -1963,7 +1963,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
 
                     <li>- If you have deposited, please pay attention to the text messages, site letters and emails we send to you.</li>
                     <li>- Only send coin to this address. Sending any other assets to this address may result in loss of your deposit. </li>
-                    <li>- SWAN tokens will be distributed after <strong>Dec 1st</strong></li>
+                    
 
                     </ul>
                       }

@@ -1449,7 +1449,7 @@ hide=(e)=>{
               <div className="col-sm-6">
                 <div>
                      <div className="form-group align-left-label">
-                  <label htmlFor="amt" className="form-label main-color--blue">How much {this.state.curr} would you like to purchase?</label>
+                  <label htmlFor="amt" className="form-label main-color--blue">How much {this.state.curr} would you like to use?</label>
                   <input id="amt" step='0.000001' onChange={this.amtInvested} type="number" className="form-input form-control form-one-style " required />
                 </div>
 
