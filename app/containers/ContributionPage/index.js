@@ -523,7 +523,7 @@ gobackDollar=(e)=>{
         let contractNetId = 3;
 
         if(contractNetId !== netId) {
-          toast.error(`Please switch metamask network to rinkeby`);
+          toast.error(`Please switch metamask network to mainnet`);
           // this.setState({
           //   errorContract: true,
           //   errorMessage: `Please switch metamask network to ${this.props.contractData.contractNetwork}`
@@ -1351,7 +1351,7 @@ hide=(e)=>{
           <div className="contribution-card" style={{ marginBottom : '2em' }}>
             <div className="row">
               <div className="col-sm-12">
-                  <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' , fontWeight:'bold' }}>Purchase SWAN tokens</h4><span style={{paddingLeft: "20px"}} >Working on rinkeby for testing, txnhash in console</span>
+                  <h4 className="main-color--blue" style={{ paddingLeft: '20px',paddingTop: '10px' , fontWeight:'bold' }}>Purchase SWAN tokens</h4><span style={{paddingLeft: "20px"}} >Working on mainnet for testing, txnhash in console</span>
                   <hr className="contribution-hr" />
                 </div>
               </div>

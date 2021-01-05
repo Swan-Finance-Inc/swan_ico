@@ -133,7 +133,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
     this.closeAlert = this.closeAlert.bind(this);
     this.showVideo = this.showVideo.bind(this);
     this.closeVideo = this.closeVideo.bind(this);
-    this.web3 = new Web3(new Web3.providers.WebsocketProvider('wss://rinkeby.io/ws'));
+    this.web3 = new Web3(new Web3.providers.WebsocketProvider('wss://mainnet.io/ws'));
     this.contract = new this.web3.eth.Contract(ABI, '0xcc760e05f33d4d9775248fac39e8cfde40476270');
   }
   componentWillMount() {
@@ -147,10 +147,7 @@ export class DashBoardWelcomePage extends React.PureComponent {
 
   componentDidMount() {
 
-    // document.getElementById('content').onscroll = (e)=>{
-    //   console.log("Amit", "dsijvadhvfiusdhvu")
-
-    // }
+   
 
     window.onscroll = () =>{
       console.log( "dsijvadhvfiusdhvu")

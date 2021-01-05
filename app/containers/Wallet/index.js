@@ -246,7 +246,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
 
   getEthereumBalance=()=>{
     console.log("dvafduvsbfd")
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`));//--prodChange
       web3.eth.getBalance(web3.utils.toChecksumAddress(this.state.ethWallet.address), function(err,res){
         if(err){console.log("aggaya : ", err)}
         else{
@@ -280,7 +280,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     var result=0;
     console.log("abi: ", abi, address, this.state.usdtWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`)) //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`)) //--prodChange
     let userAddress = web3.utils.toChecksumAddress(this.state.usdtWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -301,7 +301,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.tokenContractAbi, result=0;
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
-    const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`))       //--prodChange
+    const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))       //--prodChange
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
@@ -1452,7 +1452,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       else
       {toast.error("Your KYC should be accepted for creating wallet")}
     }else
-    {const web3 = new Web3(new Web3.providers.HttpProvider(`https://rinkeby.infura.io/v3/6dab407582414625bc25b19122311c8b`));//--prodChange
+    {const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`));//--prodChange
     let account = web3.eth.accounts.create(web3.utils.randomHex(32));
     if(account.address){
       const href =
