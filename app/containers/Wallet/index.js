@@ -137,7 +137,8 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       balanceFlag: false,
       withdrawAddress: '',
       otp: '',
-      otpReceive: false
+      otpReceive: false,
+      isallCurrencyZero : false
     };
 
     // this.onContributionConfirm = this.onContributionConfirm.bind(this);
@@ -1573,6 +1574,18 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
     console.log(this.props,"props in wallet pages")
     const { loading } = this.props
     const {language} = this.state
+
+    if(this.state.ethBalance==0&&this.state.btcBalance==0&&this.state.usdtBalance==0&&this.state.xlmBalance==0){
+      this.setState({
+        isallCurrencyZero : true
+      })
+    }
+    else{
+      this.setState({
+        isallCurrencyZero : false
+      })
+    }
+
     if(!this.state.balanceFlag){
       return (
         <div id="content" className="ui-content ui-content-aside-overlay">
@@ -2107,7 +2120,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       </h5>
                       <div className="account-balance-statistics" style={{marginTop:'30px'}}>
                       <div style={{ width : '90px' }}>
-                      <CircularProgressbarWithChildren value={Math.round((this.state.ethToDollar*this.state.ethBalance*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
+                      <CircularProgressbarWithChildren value={this.state.isallCurrencyZero? 0: Math.round((this.state.ethToDollar*this.state.ethBalance*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
                             stroke : '#00296B'
@@ -2120,7 +2133,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                             color : '#2D6DCD',
                             letterSpacing: '0px'
                           }}>
-                           {Math.round((this.state.ethToDollar*this.state.ethBalance*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%  <strong><br /> ETH</strong>
+                           {this.state.isallCurrencyZero? 0:Math.round((this.state.ethToDollar*this.state.ethBalance*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%  <strong><br /> ETH</strong>
                         </div>
                       </CircularProgressbarWithChildren>
                       </div>
@@ -2148,7 +2161,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <div className="eth-other-balance-stats">
                       <div style={{ display : 'flex' }}>
                       <div style={{ width : '50px' }}>
-                      <CircularProgressbar value={Math.round((this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
+                      <CircularProgressbar value={this.state.isallCurrencyZero? 0:Math.round((this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
                             stroke : '#00296B'
@@ -2160,7 +2173,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <span
                       style={{marginLeft: '12px', width: 'max-content'}}
                       >
-                      <span className="main-color--blue ">{Math.round((this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%</span>   
+                      <span className="main-color--blue ">{this.state.isallCurrencyZero? 0:Math.round((this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)*100)/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%</span>   
                         <br />
                         <span className="main-color--blue font-weight-bold ">BTC</span>
                         </span>
@@ -2168,7 +2181,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       </div>
                       <div style={{ display : 'flex' , marginTop : '10px' }}>
                       <div style={{ width : '50px' }}>
-                      <CircularProgressbar value={Math.round(((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance))*100/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
+                      <CircularProgressbar value={this.state.isallCurrencyZero? 0:Math.round(((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance))*100/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}
                         styles={{ 
                           path : {
                             stroke : '#00296B'
@@ -2180,7 +2193,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                       <span
                       style={{marginLeft: '12px', width: 'max-content'}}
                       >
-                      <span className="main-color--blue ">{Math.round(((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance))*100/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%</span>   
+                      <span className="main-color--blue ">{this.state.isallCurrencyZero? 0:Math.round(((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance))*100/((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)))}%</span>   
                         <br />
                         <span className="main-color--blue font-weight-bold ">Others</span>
                         </span>
