@@ -192,7 +192,7 @@ export class ContributionConfirm extends React.PureComponent {
     var result = [];
     var amount = this.satoshi_to_btc(this.props.currencyQty);
     var TX_FEES = 350;
-    var keyPair = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.testnet);
+    var keyPair = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.bitcoin);
     var unspentUTXOS = obj.txrefs;
     console.log("unspent", unspentUTXOS)
     try{
@@ -243,11 +243,11 @@ export class ContributionConfirm extends React.PureComponent {
             err: 'insufficient balance in wallet',
           });
         }
-        const NETWORK = btclib.networks.testnet;
+        const NETWORK = btclib.networks.bitcoin;
 
         try
         {const to = this.props.clientAddress;
-        const txBuilder = new btclib.TransactionBuilder(btclib.networks.testnet);
+        const txBuilder = new btclib.TransactionBuilder(btclib.networks.bitcoin);
         console.log("txn builder");
         txBuilder.addOutput(to, amount);
         console.log("add output to");
@@ -356,7 +356,7 @@ export class ContributionConfirm extends React.PureComponent {
       //console.log("bitcocin ki key", key)
       //var privateKey = bitcore.PrivateKey.fromWIF(key);
       //var address = privateKey.toAddress();
-      const TESTNET = btclib.networks.testnet;
+      const TESTNET = btclib.networks.bitcoin;
       var address = this.props.currWallet.address
       console.log("then after key: ",this.props.currWallet.private_key, "address:: ", address);
       // var yourAddressPrivateKeyWIF = btclib.PrivateKey('testnet').toWIF();
@@ -400,7 +400,7 @@ export class ContributionConfirm extends React.PureComponent {
       console.log(account," account ",fee," fee and amount", amount);
       const transaction = new StellarSdk.TransactionBuilder(account, { fee: fee
         ,
-        networkPassphrase: StellarSdk.Networks.TESTNET})
+        networkPassphrase: StellarSdk.Networks.PUBLIC})
         // Add a payment operation to the transaction
         .addOperation(StellarSdk.Operation.payment({
           destination: this.props.clientAddress,
