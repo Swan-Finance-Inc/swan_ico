@@ -286,8 +286,8 @@ console.log(btc,eth,usdt,stellar,total, "sadkvnsdvjkskfjbvs")
                     </Nav>  
                       </span>     
                         <span style={{ fontSize: "32px", marginLeft: "12px" }}>
-                        {this.state.balanceType === "USD" ?  this.props.userInfo.tokens.total * 0.001<1?(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(4)}`):(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(2)}`) :
-                         this.props.userInfo.tokens.total.toFixed(2)
+                        {this.state.balanceType === "USD" ?  this.props.userInfo.tokens.total * 0.001<1?(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(5)}`):(`$ ${( this.props.userInfo.tokens.total * 0.001).toFixed(5)}`) :
+                         this.props.userInfo.tokens.total.toFixed(5)
                         }
                         </span>
                       </div>
@@ -777,7 +777,7 @@ console.log(btc,eth,usdt,stellar,total, "sadkvnsdvjkskfjbvs")
                   <h4 className="exchange-heading">Referral Tokens Earned</h4>
                     <p style={{ marginBottom: "0px", color: "#465390" ,fontSize: "32px", marginLeft : '10px' }}>
                     {
-                    (this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo).toFixed(2)
+                    (this.props.userInfo.tokens.referralLevelOne + this.props.userInfo.tokens.referralLevelTwo).toFixed(5)
                     }
                     </p>
                   <div className="col-sm-12" style={{ position : 'relative' }}>

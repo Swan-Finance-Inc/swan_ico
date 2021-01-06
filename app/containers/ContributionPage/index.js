@@ -1400,7 +1400,7 @@ hide=(e)=>{
                   <div className='row howMuch' style={{ display: 'flex',flexDirection: 'column',
                    paddingLeft: '15px', paddingTop: '10px'}}>
                   <div className="trade-in-centralex">
-                  <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr?this.state.curr: "USDT"  } = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Stellar') ? (this.state.tokensPerStellar) : (this.state.tokensPerUsdt)} SWAN Tokens</span>
+                  <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr?this.state.curr: "USDT"  } = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(5) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(5) : (this.state.curr === 'Stellar') ? (this.state.tokensPerStellar) : (this.state.tokensPerUsdt)} SWAN Tokens</span>
                   {
                     this.state.curr !== 'Dollar' ?
                     <span style={{float: 'left'}}>1  {this.state.curr?this.state.curr: "USDT" } = ${(this.state.curr === 'Ethereum') ?
@@ -1530,12 +1530,12 @@ hide=(e)=>{
         //                   </span>
         //                 </div>
         //                 <div className='row howMuch'>
-        //                 <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(2) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(2) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(2)} Centralex Tokens</span>
+        //                 <span id="currency-tokens" style={{float: 'right'}}>1  {this.state.curr} = {(this.state.curr === 'Ethereum') ? this.state.tokensPerEther.toFixed(5) : (this.state.curr === 'Bitcoin') ? (this.state.tokensPerBitcoin).toFixed(5) : (this.state.curr === 'Dollar') ? (this.state.tokensPerUsd) : (this.state.tokensPerEur).toFixed(5)} Centralex Tokens</span>
         //                 {
         //                   this.state.curr !== 'Dollar' ?
         //                   <span style={{float: 'left'}}>1  {this.state.curr} = ${(this.state.curr === 'Ethereum') ?
         //                      this.state.ethToDollar : (this.state.curr === 'Bitcoin') ?
-        //                      (this.state.btcToDollar).toFixed(2) :
+        //                      (this.state.btcToDollar).toFixed(5) :
         //                       (this.state.curr === 'Euro') ? (this.state.eurToDollar) : null}</span>
         //                   : null
         //                 }

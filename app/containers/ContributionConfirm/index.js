@@ -267,7 +267,7 @@ export class ContributionConfirm extends React.PureComponent {
         // https://live.blockcypher.com/btc-testnet/pushtx/
         //--prodChange
         const sendTxData = () =>
-              fetch(`https://api.blockcypher.com/v1/btc/test3/txs/push`, { headers: { 'Content-Type': 'application/json'} , method: "POST", body:JSON.stringify(bodyy) })
+              fetch(`https://api.blockcypher.com/v1/btc/main/txs/push`, { headers: { 'Content-Type': 'application/json'} , method: "POST", body:JSON.stringify(bodyy) })
                   .then(r => r.json())
                   .then(jsonn => (console.log("txData send for monitoring bach gye",jsonn), jsonn))
                   .catch(err => console.error("txData send for monitoring lag gaye",err));    
@@ -378,8 +378,8 @@ export class ContributionConfirm extends React.PureComponent {
       //   }
       // })
 
-      //axios.get('https://api.blockcypher.com/v1/btc/test3/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspaentOnly=true')
-      axios.get(`https://api.blockcypher.com/v1/btc/test3/addrs/${address}?unspentOnly=true`)                     //--prodChange
+      //axios.get('https://api.blockcypher.com/v1/btc/main/addrs/mwVnnxxm1oj9rxNYeGBFmcFCWeL7W7QwBC?unspaentOnly=true')
+      axios.get(`https://api.blockcypher.com/v1/btc/main/addrs/${address}?unspentOnly=true`)                     //--prodChange
       .then((res) => res.data)
       .then((obj) => this.getUTXOdetails(obj))
       .then(obj => console.log(obj))

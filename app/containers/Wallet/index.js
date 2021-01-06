@@ -238,7 +238,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   }
 
   getBitcoinBalance=()=>{
-    axios.get(`https://api.blockcypher.com/v1/btc/test3/addrs/${this.state.btcWallet.address}`)
+    axios.get(`https://api.blockcypher.com/v1/btc/main/addrs/${this.state.btcWallet.address}`)
       .then((res) => res.data)
       .then((obj) => this.setState({btcBalance: obj.final_balance, dollarBalanceBtc: this.state.btcToDollar*this.satoshi_to_btc(obj.final_balance)}))
       .then(obj => console.log(obj))
@@ -2111,7 +2111,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
             <div className="row">
               <div className="col-sm-4 col-md-4 col-lg-4">
               <div className="kyc-status" style={{marginTop:"3px"}}>Account Balance:</div>
-              <div className="col-sm-12 col-md-12 col-lg-12">$ {((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)).toFixed(2)}
+              <div className="col-sm-12 col-md-12 col-lg-12">$ {((this.state.usdtToDollar*this.state.usdtBalance/1000000)+(this.state.xlmToDollar*this.state.xlmBalance)+(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance))+(this.state.ethToDollar*this.state.ethBalance)).toFixed(5)}
               </div>  
               <br />
               <br />
@@ -2290,10 +2290,10 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     Bitcoin
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    {this.satoshi_to_btc(this.state.btcBalance).toFixed(2)} BTC
+                    {this.satoshi_to_btc(this.state.btcBalance).toFixed(5)} BTC
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    $ {(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)).toFixed(2)}
+                    $ {(this.state.btcToDollar*this.satoshi_to_btc(this.state.btcBalance)).toFixed(5)}
                   </div>
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
@@ -2334,10 +2334,10 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     Ethereum
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    {(1*this.state.ethBalance).toFixed(2)} ETH
+                    {(1*this.state.ethBalance).toFixed(5)} ETH
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    $ {(this.state.ethToDollar*this.state.ethBalance).toFixed(2)}
+                    $ {(this.state.ethToDollar*this.state.ethBalance).toFixed(5)}
                   </div>
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
@@ -2381,7 +2381,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     {Math.round(this.state.xlmBalance)} XLM
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    $ {(this.state.xlmToDollar*this.state.xlmBalance).toFixed(2)}
+                    $ {(this.state.xlmToDollar*this.state.xlmBalance).toFixed(5)}
                   </div>
 
                   </div>
@@ -2429,7 +2429,7 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                     {this.state.usdtBalance/1000000} USDT
                   </div>
                   <div className="col-sm-2 col-md-4 col-lg-4" style={{color:"#99A3B7", fontWeight:"bold", textAlign:"center"}}>
-                    $ {(this.state.usdtToDollar*this.state.usdtBalance/1000000).toFixed(2)}
+                    $ {(this.state.usdtToDollar*this.state.usdtBalance/1000000).toFixed(5)}
                   </div>
                   </div>
                   <div className="col-sm-12 col-md-6 col-lg-6 wallet-portfolio-card" style={{marginTop:"20px",display:'flex'}}>
