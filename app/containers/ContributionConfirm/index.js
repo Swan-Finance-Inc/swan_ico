@@ -388,7 +388,7 @@ export class ContributionConfirm extends React.PureComponent {
 
     } else if(this.props.currency === "Stellar") {
       try{
-      const server = new StellarSdk.Server('https://horizon-testnet.stellar.org');
+      const server = new StellarSdk.Server('https://horizon.stellar.org');
       //StellarSdk.Network.useTestNetwork();
       console.log("stellar payment initiated");
       const userKeypair = StellarSdk.Keypair.fromSecret(this.props.currWallet.private_key);

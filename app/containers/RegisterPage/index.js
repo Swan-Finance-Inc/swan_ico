@@ -151,15 +151,16 @@ export class RegisterPage extends React.PureComponent {
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
     var nameRegex = /^(?!\s+$)[A-Za-z]+$/ ;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    if(this.state.firstName.length < 1 || this.state.firstName.length > 20){
-      this.notifyError("Name should be between 1 to 20 characters");
+    if(this.state.firstName.length < 4 || this.state.firstName.length > 20){
+      this.notifyError("Name should be between 4 to 20 characters");
     }
     else
     if(!nameRegex.test(this.state.firstName)){
       this.notifyError("Name should contain only alphabets without space")
     }
-    if(this.state.lastName.length < 1 || this.state.lastName.length > 20){
-      this.notifyError("Name should be between 1 to 20 characters");
+    else
+    if(this.state.lastName.length < 4 || this.state.lastName.length > 20){
+      this.notifyError("Name should be between 4 to 20 characters");
     }
     else
     if(!nameRegex.test(this.state.lastName)){

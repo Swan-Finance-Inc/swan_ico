@@ -1596,6 +1596,8 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
  </div></div></div> 
       )
     }
+
+    
     // this.setState({
     //   loading : this.props
     // });
@@ -1657,9 +1659,13 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
       <Helmet>
         <title>{language==='chinese'?'钱包':'Wallet'}</title>
         <meta name="description" content="Description of Wallet" />
-        
-
       </Helmet>
+      {
+      this.state.iswalletCreating ? <div style ={{display: 'flex',width: '100%',height: '100vh',zIndex: 999999,backgroundColor: 'rgb(242, 242, 242 , 0.7)'}}>
+      {/* <LoadingSpinner style={{placeSelf:'center',width:'100%'}} /> */}
+     </div>
+     :''
+    }
       <div className="static-modal">
       <Modal show={this.state.showWithdraw} bsSize="large" onHide={this.hide} dialogClassName="myModal">
           <Modal.Header>
@@ -1782,6 +1788,14 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
         </div>
       <div className="static-modal">
       <Modal show={this.state.showDeposit} bsSize="large" onHide={this.hide} dialogClassName="myModal">
+      {
+      this.state.iswalletCreating ? <div style ={{display: 'flex',position:'absolute',width: '100%',height: '100%',zIndex: 100,backgroundColor: 'rgb(242, 242, 242 , 0.7)'}}>
+      <LoadingSpinner style={{placeSelf:'center',width:'100%'}} />
+     </div>
+     :''
+    }
+        
+        
           <Modal.Header>
             <div className="col-sm-12 text-right" style={{marginBottom:"-30px", marginTop:"10px"}}>
                 <i className="fa fa-close" style={{cursor:'pointer'}} onClick={() => {this.setState({ showDeposit:false, curr:'', currAddress:'',url:logo })}}></i>
