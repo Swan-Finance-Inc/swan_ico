@@ -14,7 +14,6 @@ class LoadingSpinner extends React.PureComponent {
      super(props)
    }
   render() {
-    console.log(" in spinnner");
     if(this.props.type==='text'){
       return (
         <div>Loading...... </div>

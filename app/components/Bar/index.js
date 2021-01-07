@@ -14,7 +14,6 @@ class index extends React.Component {
 
 
     componentDidMount=()=>{
-        console.log("sheeshssa: ", this.state.graphData, "pooop", this.props.typeChart);
         if (this.props.typeChart == 'daily'){
             var ctx = document.getElementById('myChart');
             new Chart(ctx, {
@@ -68,7 +67,6 @@ class index extends React.Component {
     })
 
         } else if(this.props.typeChart == 'monthly'){
-            console.log("currrrrrr: ", this.state.graphData.tokensEarnedMonthly," ",this.state.graphData.monthDate)
             var ctx = document.getElementById('myChart');
             new Chart(ctx, {
         type: 'line',

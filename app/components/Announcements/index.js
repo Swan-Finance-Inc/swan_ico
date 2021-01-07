@@ -23,8 +23,7 @@ class Announcements extends React.PureComponent { // eslint-disable-line react/p
   }
 
   render() {
-    console.log(this.props," props in dashboard/news")
-    console.log(this.state," state in dashboard/news")
+
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
       <div className="ui-content-body">

@@ -54,7 +54,6 @@ class Balance extends React.PureComponent {
   }
 
   componentDidMount(){
-    console.log("dhoompichakdhoom")
     this.setState({
       referalUrl:`https://centralex.com/signup/refer/${this.props.referralCode}`
     })
@@ -63,7 +62,6 @@ class Balance extends React.PureComponent {
   toggleTranActive = (e) => {
     this.props.compact();
     this.props.toggleTranActive();
-    // console.log('toggling', e);
   };
   togglemyReferal = (e) => {
     this.props.compact();
@@ -79,7 +77,6 @@ class Balance extends React.PureComponent {
   };
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps,"ae agye hege props")
     this.setState({
       ...this.state,
       crowdsaleDetails : nextProps.crowdsaleStateData.crowdsaleDetails,
@@ -91,7 +88,6 @@ class Balance extends React.PureComponent {
     this.setState({
       infoShow: !this.state.infoShow,
     });
-    console.log("infoShow : ", this.state.infoShow);
   };
 
   resetInfo = () => {
@@ -100,7 +96,6 @@ class Balance extends React.PureComponent {
 
 
    confirm =  (e) => {
-    console.log(e);
     message.success('Click on Yes');
   }
 
@@ -120,7 +115,6 @@ class Balance extends React.PureComponent {
   }
 
   chartType = (e) =>{
-    console.log('pooooooooooooooooooooooooooo: ',e.target.name)
     this.setState({
       weeklyOrDaily : e.target.name
     })
@@ -153,7 +147,6 @@ class Balance extends React.PureComponent {
   }
 
   CurrencyChange(e){
-    console.log("je values", e.currentTarget.dataset.myValue, this.state.crowdsaleDetails)
     this.setState({
       curr:e.currentTarget.dataset.myValue
     },()=>{
@@ -177,9 +170,6 @@ class Balance extends React.PureComponent {
     })
   }
   render() {
-    console.log(localStorage.getItem('token'),"dkjvahuvfi")
-    console.log(this.state,'state in balance')
-    console.log(this.props.crowdsaleStateData,'props in balance')
     const { crowdsaleDetails } = this.state;
     // if(crowdsaleDetails.tokenUsd){
     //   crowdsaleDetails.tokenUsd = 0
@@ -217,7 +207,6 @@ class Balance extends React.PureComponent {
           stellarPercent = Math.round(stellar*100/total),
           othersPercent = Math.round(others*100/total);
         }
-console.log(btc,eth,usdt,stellar,total, "sadkvnsdvjkskfjbvs")
     const menu = (
       <Menu>
         <Menu.Item>

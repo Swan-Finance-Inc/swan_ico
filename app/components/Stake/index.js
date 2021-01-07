@@ -52,7 +52,7 @@ export class Stake extends React.PureComponent{
     getAllowance=async()=>{
       var address = constants.tokenContractAddress;
       var abi = constants.tokenContractAbi, result=0;
-      console.log("abi: ", abi, address, this.props.ethWallet)
+
       try{
       const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
       let userAddress = web3.utils.toChecksumAddress(this.props.ethWallet.address);
@@ -62,15 +62,15 @@ export class Stake extends React.PureComponent{
       result = await contract.methods.allowance(constants.stakeContractAddress, userAddress).call();
       
       this.setState({approvedTokens: result});
-      console.log("hehehuhu",result);
+ 
       } catch(err){
         toast.error(`Error in getAllowance ${err}`)
-          console.log("error in get allowance balance")
+     
       }
     }
 
     approveTokens=()=>{
-      console.log("enetered approve tokens")
+   
       var address = constants.tokenContractAddress;
       var abi = constants.tokenContractAbi;
       var spender = constants.stakeContractAddress;
@@ -81,7 +81,7 @@ export class Stake extends React.PureComponent{
       //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
       let tokenAmount = web3.utils.toWei(this.state.tokens);
       const contract = new web3.eth.Contract(abi, address);
-      console.log("contract hai: ", tokenAmount)
+
 
       let pvtKey = this.props.ethWallet.private_key;
       let rawTransaction = {
@@ -99,7 +99,7 @@ export class Stake extends React.PureComponent{
           {console.log("Error occured in signtrxn",err)}
           else
           {
-            console.log("Sign trxn res: ", res);
+          
             web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
               if(err)
               { 
@@ -107,11 +107,11 @@ export class Stake extends React.PureComponent{
                   approveError : `${err}`
                 })
                 // toast.error(`Error in sending trxn: ${err}`)
-                console.log("Error occured in sendDisngnedtrxnn", err)}
+                }
               else
               {
                 toast.success('Transaction initiated, Wait for confirmation');
-                console.log("Send signed trxn res: ", res);
+         
                 this.setState({
                   approveLoader:true,
                   approveStart: true
@@ -126,7 +126,7 @@ export class Stake extends React.PureComponent{
           approveError : ` ${error}`
         })
         // toast.error(`Error in signing trxn: ${error}`)
-        console.log("in catch of sending transaction trxn: ",error);
+  
       }
       //const result = await contract.methods.transfer('0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632','1').send({ from: '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E', value: web3.utils.toWei('0.01',"ether") });
       //console.log("hehe",result);
@@ -135,7 +135,7 @@ export class Stake extends React.PureComponent{
             approveError : `${err}`
           })
           // toast.error(`Error in approving tokens: ${err}`)
-          console.log(err,"error hai")
+      
       }
     }
 
@@ -456,7 +456,7 @@ export class Stake extends React.PureComponent{
                                 </div> 
                                 <div className="form-group" style={{margin:"0px 50px",color:'#89ABDE'}}>
                                   <span className="swanText">SWAN</span>
-                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Minimum Required: 200,000
+                                  <input className="investInputBox" style={{paddingLeft:'98px'}} onChange={this.amtApprove} />  Minimum Required: 2,000,000
                                 
                                 </div> 
                                 {

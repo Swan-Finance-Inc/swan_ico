@@ -51,7 +51,6 @@ class Refer extends React.PureComponent { // eslint-disable-line react/prefer-st
     this.setState({
       infoShow: !this.state.infoShow
     });
-    console.log('infoShow : ', this.state.infoShow);
   }
 
   resetInfo=()=>{

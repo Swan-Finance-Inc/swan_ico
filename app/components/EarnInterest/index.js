@@ -88,45 +88,36 @@ export class EarnInterest extends React.PureComponent{
     getStakedOrNot=async()=>{
       var address = constants.stakeContractAddress;
       var abi = constants.stakeContractAbi, result=0;
-      console.log("abi: ", abi, address, this.props.ethWallet)
       try{
       const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
       let userAddress = web3.utils.toChecksumAddress(this.props.ethWallet.address);
       const contract = new web3.eth.Contract(abi, address);
-      //console.log("contract hai: ", contract)
           
       result = await contract.methods.isStaker(userAddress).call();
       
       this.setState({isStaker: result});
-      //console.log("hehe",web3.utils.fromWei(result));
       } catch(err){
         toast.error(`Error in getStakedOrNot ${err}`)
-          console.log("error in get swan balance")
       }
     }
 
     getAllowance=async()=>{
       var address = constants.tokenContractAddress;
       var abi = constants.tokenContractAbi, result=0;
-      console.log("abi: ", abi, address, this.props.ethWallet)
       try{
       const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
       let userAddress = web3.utils.toChecksumAddress(this.props.ethWallet.address);
       const contract = new web3.eth.Contract(abi, address);
-      //console.log("contract hai: ", contract)
           
       result = await contract.methods.allowance(constants.stakeContractAddress, userAddress).call();
       
       this.setState({approvedTokens: result});
-      console.log("hehehuhu",result);
       } catch(err){
         toast.error(`Error in getAllowance ${err}`)
-          console.log("error in get allowance balance")
       }
     }
 
     approveTokens=()=>{
-      console.log("enetered approve tokens")
       var address = constants.tokenContractAddress;
       var abi = constants.tokenContractAbi;
       var spender = constants.stakeContractAddress;
@@ -137,7 +128,6 @@ export class EarnInterest extends React.PureComponent{
       //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
       let tokenAmount = web3.utils.toWei(this.state.tokens);
       const contract = new web3.eth.Contract(abi, address);
-      console.log("contract hai: ")
 
       let pvtKey = this.props.ethWallet.private_key;
       let rawTransaction = {
@@ -155,7 +145,6 @@ export class EarnInterest extends React.PureComponent{
           {console.log("Error occured in signtrxn",err)}
           else
           {
-            console.log("Sign trxn res: ", res);
             web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
               if(err)
               { 
@@ -163,11 +152,11 @@ export class EarnInterest extends React.PureComponent{
                   this.setState({
                     approveError : `${err}`
                   })
-                console.log("Error occured in sendDisngnedtrxnn", err)}
+               }
               else
               {
                 toast.success('Transaction initiated, Wait for confirmation');
-                console.log("Send signed trxn res: ", res);
+              
                 this.setState({
                   approveLoader:true,
                   approveStart: true
@@ -182,7 +171,7 @@ export class EarnInterest extends React.PureComponent{
           this.setState({
             approveError : `${err}`
           })
-        console.log("in catch of sending transaction trxn: ",error);
+       
       }
       //const result = await contract.methods.transfer('0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632','1').send({ from: '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E', value: web3.utils.toWei('0.01',"ether") });
       //console.log("hehe",result);
@@ -191,7 +180,7 @@ export class EarnInterest extends React.PureComponent{
           this.setState({
             approveError : `${err}`
           })
-          console.log(err,"error hai")
+      
       }
     }
 
@@ -208,7 +197,7 @@ export class EarnInterest extends React.PureComponent{
                                   this.checkHashStatus(hash, callback);
                               }.bind(this), 5000);
                           } else {
-                              console.log("rcpt",rcpt)
+                            
                               this.setState({
                                 trxnReceipt: rcpt
                               },()=>callback())
@@ -251,12 +240,12 @@ export class EarnInterest extends React.PureComponent{
           });
         }
         
-        console.log("got callback");
+      
       }
 
 
       stakeTokens=()=>{
-        console.log("enetered (EI)stake tokens")
+ 
         var address = constants.stakeContractAddress;
         var abi = constants.stakeContractAbi;
         //var spender = constants.stakeContractAddress;
@@ -272,7 +261,7 @@ export class EarnInterest extends React.PureComponent{
         //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
         let tokenAmount = web3.utils.toWei(this.state.tokens);
         const contract = new web3.eth.Contract(abi, address);
-        console.log("contract hai: ", tokenAmount)
+        
   
         let pvtKey = this.props.ethWallet.private_key;
         let rawTransaction = {
@@ -290,15 +279,15 @@ export class EarnInterest extends React.PureComponent{
             {console.log("Error occured in signtrxn",err)}
             else
             {
-              console.log("Sign trxn res: ", res);
+             
               web3.eth.sendSignedTransaction(res.rawTransaction, function(err,res){
                 if(err)
                 { toast.error(`Error in sending trxn: ${err}`)
-                  console.log("Error occured in sendDisngnedtrxnn", err)}
+                  }
                 else
                 {
                   toast.success('Transaction initiated, Wait for confirmation');
-                  console.log("Send signed trxn res: ", res);
+             
                   this.setState({
                     stakeLoader:true,
                     stakeStart: true,
@@ -311,13 +300,13 @@ export class EarnInterest extends React.PureComponent{
         }.bind(this));
         } catch(error){
           toast.error(`Error in signing trxn: ${error}`)
-          console.log("in catch of sending transaction trxn: ",error);
+          
         }
         //const result = await contract.methods.transfer('0x8f69A29B647Ff8657Da8e37013Ec40fFe5860632','1').send({ from: '0xB32d0b0922e7bC945ccD5CB60e7B1ac53546d11E', value: web3.utils.toWei('0.01',"ether") });
         //console.log("hehe",result);
         } catch(err){
             toast.error(`Error in (EI)staking tokens: ${err}`)
-            console.log(err,"error hai")
+        
         }
       }
   

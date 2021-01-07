@@ -33,7 +33,6 @@ class Info extends React.PureComponent { // eslint-disable-line react/prefer-sta
   }
 
   render() {
-    console.log(" inside info Component ")
     return (
       <div>
         <i className="fa fa-info" style={{float:'right',marginRight:'20px', cursor:'pointer'}} onClick={this.show} ></i>

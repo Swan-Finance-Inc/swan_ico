@@ -23,8 +23,6 @@ class FaqPage extends React.PureComponent { // eslint-disable-line react/prefer-
   }
 
   render() {
-    console.log(this.props," props in faqPage")
-    console.log(this.state," state in faqPage")
     return (
       <div id="content" className="ui-content ui-content-aside-overlay">
       <div className="ui-content-body">
