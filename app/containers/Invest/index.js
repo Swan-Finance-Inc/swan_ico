@@ -262,7 +262,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
       
       console.log("got callback");
     }
-  claimTokens=()=>{
+  claimTokens= async ()=>{
     console.log("enetered claim tokens")
     var address = constants.stakeContractAddress;
     var abi = constants.stakeContractAbi;
@@ -276,13 +276,13 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     //let tokenAmount = this.state.tokens;
     const contract = new web3.eth.Contract(abi, address);
     console.log("contract hai: ")
-
+    var gasPrice = await web3.eth.getGasPrice();
     let pvtKey = this.state.ethWallet.private_key;
     let rawTransaction = {
     "from": this.state.ethWallet.address,
       "to": address,
       "value": '0x0',
-      'gasPrice': web3.utils.toHex(20 * 1e9),
+      'gasPrice': web3.utils.toHex(gasPrice),
       'gasLimit': web3.utils.toHex(210000),
       "chainId": "0x01",
       "data": contract.methods.payOuts(id).encodeABI(),
@@ -324,7 +324,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
         console.log(err,"error hai")
     }
   }
-  withdrawTokens=()=>{
+  withdrawTokens= async ()=>{
     console.log("enetered withdraw tokens")
     var address = constants.stakeContractAddress;
     var abi = constants.stakeContractAbi;
@@ -339,13 +339,13 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     //let tokenAmount = this.state.tokens;
     const contract = new web3.eth.Contract(abi, address);
     console.log("contract hai: ", id)
-
+    var gasPrice = await web3.eth.getGasPrice();
     let pvtKey = this.state.ethWallet.private_key;
     let rawTransaction = {
     "from": this.state.ethWallet.address,
       "to": address,
       "value": '0x0',
-      'gasPrice': web3.utils.toHex(20 * 1e9),
+      'gasPrice': web3.utils.toHex(gasPrice),
       'gasLimit': web3.utils.toHex(210000),
       "chainId": "0x01",
       "data": contract.methods.claimInterestTokens(id).encodeABI(),
@@ -389,7 +389,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     }
   }
 
-  claimStakedTokens=()=>{
+  claimStakedTokens= async ()=>{
     console.log("enetered claimStaked tokens")
     var address = constants.stakeContractAddress;
     var abi = constants.stakeContractAbi;
@@ -404,13 +404,13 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     //let tokenAmount = this.state.tokens;
     const contract = new web3.eth.Contract(abi, address);
     console.log("contract hai: ")
-
+    var gasPrice = await web3.eth.getGasPrice();
     let pvtKey = this.state.ethWallet.private_key;
     let rawTransaction = {
     "from": this.state.ethWallet.address,
       "to": address,
       "value": '0x0',
-      'gasPrice': web3.utils.toHex(20 * 1e9),
+      'gasPrice': web3.utils.toHex(gasPrice),
       'gasLimit': web3.utils.toHex(210000),
       "chainId": "0x01",
       "data": contract.methods.claimStakeTokens().encodeABI(),

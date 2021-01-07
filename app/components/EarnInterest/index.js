@@ -117,7 +117,7 @@ export class EarnInterest extends React.PureComponent{
       }
     }
 
-    approveTokens=()=>{
+    approveTokens= async ()=>{
       var address = constants.tokenContractAddress;
       var abi = constants.tokenContractAbi;
       var spender = constants.stakeContractAddress;
@@ -128,13 +128,13 @@ export class EarnInterest extends React.PureComponent{
       //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
       let tokenAmount = web3.utils.toWei(this.state.tokens);
       const contract = new web3.eth.Contract(abi, address);
-
+      var gasPrice = await web3.eth.getGasPrice();
       let pvtKey = this.props.ethWallet.private_key;
       let rawTransaction = {
       "from": this.props.ethWallet.address,
         "to": address,
         "value": '0x0',
-        'gasPrice': web3.utils.toHex(20 * 1e9),
+        'gasPrice': web3.utils.toHex(gasPrice),
         'gasLimit': web3.utils.toHex(210000),
         "chainId": "0x01",
         "data": contract.methods.approve(spender, tokenAmount).encodeABI(),
@@ -244,7 +244,7 @@ export class EarnInterest extends React.PureComponent{
       }
 
 
-      stakeTokens=()=>{
+      stakeTokens= async()=>{
  
         var address = constants.stakeContractAddress;
         var abi = constants.stakeContractAbi;
@@ -261,6 +261,7 @@ export class EarnInterest extends React.PureComponent{
         //let recipientAddress = web3.utils.toChecksumAddress(req.body.recipientAddress);
         let tokenAmount = web3.utils.toWei(this.state.tokens);
         const contract = new web3.eth.Contract(abi, address);
+      var gasPrice = await web3.eth.getGasPrice();
         
   
         let pvtKey = this.props.ethWallet.private_key;
@@ -268,7 +269,7 @@ export class EarnInterest extends React.PureComponent{
         "from": this.props.ethWallet.address,
           "to": address,
           "value": '0x0',
-          'gasPrice': web3.utils.toHex(20 * 1e9),
+          'gasPrice': web3.utils.toHex(gasPrice),
           'gasLimit': web3.utils.toHex(210000),
           "chainId": "0x01",
           "data": contract.methods.earnInterest(tokenAmount, this.state.duration).encodeABI(),

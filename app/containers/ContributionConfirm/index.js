@@ -449,13 +449,13 @@ export class ContributionConfirm extends React.PureComponent {
       let userAddress = web3.utils.toChecksumAddress(this.props.currWallet.address);
       const contract = new web3.eth.Contract(abi, address);
       //console.log("contract hai: ", contract)
-
+      var gasPrice = await web3.eth.getGasPrice();
       let pvtKey = this.props.currWallet.private_key;
         let rawTransaction = {
         "from": userAddress,
           "to": address,
           "value": '0x0',
-          'gasPrice': web3.utils.toHex(20 * 1e9),
+          'gasPrice': web3.utils.toHex(gasPrice),
           'gasLimit': web3.utils.toHex(210000),
           "chainId": "0x01",
           "data": contract.methods.transfer(this.props.clientAddress, tokenAmount).encodeABI(),
