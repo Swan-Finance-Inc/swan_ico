@@ -208,8 +208,8 @@ export class NavBarContainer extends React.PureComponent {
       toast.error("Invalid Lastname Name")
     }
     else
-    if(this.state.lastName.length < 4 || this.state.lastName.length > 20){
-      toast.error("Last name should be between 4 to 20 characters")
+    if(this.state.lastName.length < 2 || this.state.lastName.length > 30){
+      toast.error("Last name should be between 2 to 30 characters")
     
     }
     else if(!pinregex.test(this.state.pinCode)){
