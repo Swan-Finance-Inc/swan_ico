@@ -2117,7 +2117,7 @@ lookupPeriod = (e) =>{
                 {this.state.interestAccountDetails.map(d=>{
                   var date = new Date(d.time * 1000);
                   var nextdate = new Date(d.time * 1000);
-                  var stakeMonth = nextdate.setMonth(nextdate.getMonth()+3)
+                  var stakeMonth = nextdate.setMonth(nextdate.getMonth()+d.timeperiod)
                   var stakeDate = new Date(stakeMonth) 
                   var currentDate = new Date();
                   var minutes = ((currentDate.getTime()-date.getTime()))/60000;
