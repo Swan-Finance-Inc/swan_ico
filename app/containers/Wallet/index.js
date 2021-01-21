@@ -301,7 +301,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
   getSwanBalance=async()=>{
     var address = constants.tokenContractAddress;
     var abi = constants.tokenContractAbi, result=0;
-    console.log("abi: ", abi, address, this.state.ethWallet)
+    console.log("abi: in wallet", abi, address, this.state.ethWallet.address)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))       //--prodChange
     let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);

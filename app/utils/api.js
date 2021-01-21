@@ -28,7 +28,7 @@ if(pathLocation === '127.0.0.1:6036'){
     // BaseUrl = 'http://127.0.0.1:7070/api/v1/'
     // BaseUrl = 'https://api.swanfinance.io/api/v1/'
   //  BaseUrl = ' https://tokensale-backend.centralex.com/api/v1/'
-  BaseUrl = 'https://test-api.swanfinance.io/api/v1/'
+  BaseUrl = 'https://api.swanfinance.io/api/v1/'
 
 
 

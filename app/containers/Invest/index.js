@@ -457,10 +457,10 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   getInterestAccountDetails=async()=>{
     var address = constants.stakeContractAddress;
     var abi = constants.stakeContractAbi, result,finResult=[],i=1;
-    console.log("abi: ", abi, address, this.state.ethWallet)
+    console.log("abi: in getInterest", abi, address, this.state.ethWallet,this.state.depositCount)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
     while (i <= this.state.depositCount) {
@@ -488,12 +488,12 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
         
     result = await contract.methods.interestAccountNumber(userAddress).call();
-    
+    console.log(result , "sdkjvncakjvbfhdv")
     this.setState({depositCount: result},()=>{
       this.getInterestAccountDetails();
     });
@@ -507,10 +507,10 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
   getSwanBalance=async()=>{
     var address = constants.tokenContractAddress;
     var abi = constants.tokenContractAbi, result=0;
-    console.log("abi: ", abi, address, this.state.ethWallet)
+    console.log("abi: in invest", abi, address, this.state.ethWallet.address)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
         
@@ -613,7 +613,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
             }
             if(hasEthWalletCreated){
               this.setState({
-                ethWallet: hasEthWalletCreated
+                ethWallet: '0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72'
               },()=>{
                 this.getSwanBalance();
                 this.getDepositCount();
@@ -1580,7 +1580,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
+    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
         
@@ -2116,14 +2116,20 @@ lookupPeriod = (e) =>{
 
                 {this.state.interestAccountDetails.map(d=>{
                   var date = new Date(d.time * 1000);
+                  var nextdate = new Date(d.time * 1000);
+                  var stakeMonth = nextdate.setMonth(nextdate.getMonth()+3)
+                  var stakeDate = new Date(stakeMonth) 
                   var currentDate = new Date();
                   var minutes = ((currentDate.getTime()-date.getTime()))/60000;
-                  var day = Math.round(minutes/1440)
+                  var stakeminutes = ((stakeDate.getTime()-date.getTime()))/60000;
+                  var stakeday = Math.round(stakeminutes/1440);
+                  var day = Math.round(minutes/1440);
+                  // console.log(stakeday , ' sttate in contribution page')
                   return(
                 <div className="col-sm-12 col-md-12 col-lg-12">
                   <div style={{textAlign:"center", marginLeft:"-40px"}} >
                     <div className="col-md-3 col-lg-3 col-sm-3" style={{fontSize:"20px"}}>{this.showDate(d.time)}</div>
-                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>{d.amount} SWAN<div className="depositText" style={{fontWeight:"16px"}}>Ends in {30-day} days</div></div>
+                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>{d.amount} SWAN<div className="depositText" style={{fontWeight:"16px"}}>Ends in {stakeday-day} days</div></div>
                     <div className="col-md-3 col-lg-3 col-sm-3 depositText" style={{fontSize:"16px"}}>Total Earnings<br /><span style={{fontWeight:"bold",fontSize:"20px",color:"#414857"}}>{d.amount*d.interestRate/100} SWAN</span></div>
                     <div className="col-md-2 col-lg-2 col-sm-2 depositText" >APY<br /><span style={{fontSize:"30px"}}>{d.interestRate}%</span></div>
                     <div className="col-md-2 col-lg-2 col-sm-2" style={{fontSize:"16px"}} onClick={()=>this.setState({showDetails:true,currInterestAccountDetails:d})}><a style={{color:'#2498D5',textDecoration:'underline'}}>Check Details</a></div>
