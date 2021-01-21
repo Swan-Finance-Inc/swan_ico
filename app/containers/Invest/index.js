@@ -460,7 +460,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("abi: in getInterest", abi, address, this.state.ethWallet,this.state.depositCount)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
     while (i <= this.state.depositCount) {
@@ -488,7 +488,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
         
@@ -510,7 +510,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("abi: in invest", abi, address, this.state.ethWallet.address)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
         
@@ -613,7 +613,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
             }
             if(hasEthWalletCreated){
               this.setState({
-                ethWallet: '0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72'
+                ethWallet: hasEthWalletCreated
               },()=>{
                 this.getSwanBalance();
                 this.getDepositCount();
@@ -1580,7 +1580,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     console.log("abi: ", abi, address, this.state.ethWallet)
     try{
     const web3 = new Web3(new Web3.providers.HttpProvider(`https://mainnet.infura.io/v3/d7d0528ca2d9420f923a62ed98149712`))
-    let userAddress = web3.utils.toChecksumAddress('0xfD24DfC90cB2438B25EDFBD9A5Aa8C0a6B71Ff72');
+    let userAddress = web3.utils.toChecksumAddress(this.state.ethWallet.address);
     const contract = new web3.eth.Contract(abi, address);
     //console.log("contract hai: ", contract)
         
