@@ -1686,22 +1686,24 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                           <div className="qr-code" style={{marginTop:"45px" }}>
                             <img src={this.state.url} style={{width:"145px" }}   alt="" />
                           </div>
+                          <div>
+                            <div>Procedure :</div>
+                            <ol>
+                              <li>Click on One Time Password(OTP) button.</li>
+                              <li>You will receive an OTP on your email.</li>
+                              <li>Fill the required fields and click submit.</li>
+                            </ol>
+                          </div>
                         </div>
                         <div className = "col-md-8" style={{marginTop:"20px"}}>
                           <div className="row">
+                          <div className="col-sm-12 col-md-12 col-lg-12">
+                              <button onClick={this.getOtp} className="trasnaction">Click to get One Time Password(OTP) on your email.</button>
+                            </div>
+                            
                             <div className="col-sm-12 col-md-12 col-lg-12">
                               <div className="transaction-container">Select your currency</div>
                               <div className="form-group">
-                                
-                                {/* <span className="select-wrapper">
-                                  <select id="paymentMode" name="paymentMode" onChange={this.currencyChange} className="form-input form-one-style" required>
-                                    <option value="" hidden>Click for options...</option>
-                                    <option value="BTC">Bitcoin</option>
-                                    <option value="ETH">Ethereum</option>
-                                    <option value="XLM">Stellar</option>
-                                    <option value="USDT">USDT</option>
-                                  </select>
-                                </span>                                      */}
                                 <Dropdown className="currency-dropdown" >
                                   <Button className="currency-button" variant="success">{this.state.currWithdraw?this.state.currWithdraw:'Click for options...'}</Button>
                                   <Dropdown.Toggle className="currency-dropdown-toggle" split variant="success" id="dropdown-split-basic"/>
@@ -1722,13 +1724,11 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                                 </Dropdown>
                               </div>
                             </div>
-                            <div className="col-sm-12 col-md-12 col-lg-12">
-                              <button onClick={this.getOtp} className="trasnaction">Get OTP on email to proceed</button>
-                            </div>
+                             
                             
                             
-                              {
-                                this.state.otpReceive &&
+                              
+                                
                                 <div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
                               <div className="trasnaction">Enter OTP:</div>
@@ -1745,10 +1745,10 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                               </div>
                             </div>
                             <div className="col-sm-12 col-md-12 col-lg-12">
-                              <button className="trasnaction"  onClick= {this.sendWithdrawData} >Submit</button>
+                              <button className="trasnaction"  disabled={!this.state.otpReceive} onClick= {this.sendWithdrawData} >Submit</button>
                             </div>
                             </div>
-                             }   
+                               
                           </div>
                           
                         </div>
