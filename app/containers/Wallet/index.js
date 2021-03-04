@@ -42,6 +42,7 @@ import { TransactionHistory } from "../TransactionHistory";
 import {ethLogo} from '../../images/logoETH.png';
 import logo from '../../images/swan-logo-big.svg';
 import stellarLogo from '../../images/logoXLM.png'
+import swanLogo from '../../images/logoSWAN.png'
 // import {Footer} from '../../components/footer/footer.js'
 import queryString from "query-string";
 import { CopyToClipboard } from "react-copy-to-clipboard";
@@ -124,6 +125,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
       btcWallet:'',
       usdtWallet:'',
       xlmWallet:'',
+      swanWallet:'',
       btcBalance: 0,
       ethBalance: 0,
       xlmBalance: 0,
@@ -408,6 +410,7 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
             let hasEthWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "ETH")
             let hasXlmWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "XLM")
             let hasUsdtWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "USDT")
+            let hasSwanWalletCreated = this.state.hotWalletList.find(wallet => wallet.ticker === "SWAN")
             console.log("mil gya bitcoin hot wallet", hasBtcWalletCreated)
             if(hasBtcWalletCreated){
               this.setState({
@@ -439,6 +442,12 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
               })
               
               
+            }
+
+            if(hasSwanWalletCreated){
+              this.setState({
+                swanWallet: hasSwanWalletCreated
+              })
             }
           }
         
@@ -480,6 +489,12 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
         } else if(this.state.curr=='USDT'){
           this.setState({
             usdtWallet:nextProps.createHotWalletRet.walletAddress,
+            currAddress: nextProps.createHotWalletRet.walletAddress.address
+          })
+          this.showQR(nextProps.createHotWalletRet.walletAddress.address)
+        } else if(this.state.curr=='SWAN'){
+          this.setState({
+            swanWallet:nextProps.createHotWalletRet.walletAddress,
             currAddress: nextProps.createHotWalletRet.walletAddress.address
           })
           this.showQR(nextProps.createHotWalletRet.walletAddress.address)
@@ -1032,11 +1047,20 @@ export class WalletPage extends React.PureComponent { // eslint-disable-line rea
             })
         } else {
           this.showQR(this.state.usdtWallet.address);  
-      }
+        }
+      } else if(this.state.curr == 'SWAN'){
+        if(this.state.swanWallet == ''){
+          console.log("call api for swanWallet")
+          this.props.createHotWallet({
+            wallet_type : 'SWAN'
+            })
+        } else {
+          this.showQR(this.state.swanWallet.address);  
+        }
       }
     })
 
-    console.log("sadde wallet", this.state.ethWallet, this.state.btcWallet, this.state.xlmWallet, this.state.usdtWallet)
+    console.log("sadde wallet", this.state.ethWallet, this.state.btcWallet, this.state.xlmWallet, this.state.usdtWallet, this.state.swanWallet)
     // this.props.createHotWallet({
     //   wallet_type : 'BTC'
     // })
@@ -1720,6 +1744,9 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                                     <MenuItem data-my-value="USDT" onClick={this.currencyChangeWithdraw}>
                                       <img className="cryptoBuddy_Logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2326A17B'/%3E%3Cpath fill='%23FFF' d='M17.922 17.383v-.002c-.11.008-.677.042-1.942.042-1.01 0-1.721-.03-1.971-.042v.003c-3.888-.171-6.79-.848-6.79-1.658 0-.809 2.902-1.486 6.79-1.66v2.644c.254.018.982.061 1.988.061 1.207 0 1.812-.05 1.925-.06v-2.643c3.88.173 6.775.85 6.775 1.658 0 .81-2.895 1.485-6.775 1.657m0-3.59v-2.366h5.414V7.819H8.595v3.608h5.414v2.365c-4.4.202-7.709 1.074-7.709 2.118 0 1.044 3.309 1.915 7.709 2.118v7.582h3.913v-7.584c4.393-.202 7.694-1.073 7.694-2.116 0-1.043-3.301-1.914-7.694-2.117'/%3E%3C/g%3E%3C/svg%3E"></img>
                                       (USDT) USDT</MenuItem>
+                                    <MenuItem data-my-value="SWAN" onClick={this.currencyChangeWithdraw}>
+                                      <img className="cryptoBuddy_Logo" src={swanLogo}></img>
+                                      (SWAN) SWAN</MenuItem>
                                   </Dropdown.Menu>
                                 </Dropdown>
                               </div>
@@ -1846,6 +1873,9 @@ satoshi_to_btc = (value) => Number((1e-8 * value).toFixed(8));
                                     <MenuItem data-my-value="USDT" onClick={this.currencyChange}>
                                       <img className="cryptoBuddy_Logo" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Ccircle cx='16' cy='16' r='16' fill='%2326A17B'/%3E%3Cpath fill='%23FFF' d='M17.922 17.383v-.002c-.11.008-.677.042-1.942.042-1.01 0-1.721-.03-1.971-.042v.003c-3.888-.171-6.79-.848-6.79-1.658 0-.809 2.902-1.486 6.79-1.66v2.644c.254.018.982.061 1.988.061 1.207 0 1.812-.05 1.925-.06v-2.643c3.88.173 6.775.85 6.775 1.658 0 .81-2.895 1.485-6.775 1.657m0-3.59v-2.366h5.414V7.819H8.595v3.608h5.414v2.365c-4.4.202-7.709 1.074-7.709 2.118 0 1.044 3.309 1.915 7.709 2.118v7.582h3.913v-7.584c4.393-.202 7.694-1.073 7.694-2.116 0-1.043-3.301-1.914-7.694-2.117'/%3E%3C/g%3E%3C/svg%3E"></img>
                                       (USDT) USDT</MenuItem>
+                                    <MenuItem data-my-value="SWAN" onClick={this.currencyChange}>
+                                      <img className="cryptoBuddy_Logo" src={swanLogo}></img>
+                                      (SWAN) SWAN</MenuItem>
                                   </Dropdown.Menu>
                                 </Dropdown>
                               </div>
