@@ -191,7 +191,7 @@ export class ContributionConfirm extends React.PureComponent {
     console.log("API Obj: ",obj)
     var result = [];
     var amount = this.satoshi_to_btc(this.props.currencyQty);
-    var TX_FEES = 350;
+    var TX_FEES = 20000;
     var keyPair = btclib.ECPair.fromWIF(this.props.currWallet.private_key, btclib.networks.bitcoin);
     var unspentUTXOS = obj.txrefs;
     console.log("unspent", unspentUTXOS)
@@ -314,7 +314,7 @@ export class ContributionConfirm extends React.PureComponent {
           "from": sender,
         "to": receiver,
         "value": web3.utils.toHex(web3.utils.toWei(amount, "ether")),
-        "gas": 21000,
+        "gas": 100000,
         "chainId": 1
         }; //--prodChanges
         try
@@ -395,7 +395,7 @@ export class ContributionConfirm extends React.PureComponent {
       const userPublicKey = userKeypair.publicKey();
       console.log(this.props.currencyQty,"userkey",userPublicKey," and publickey", this.props.currWallet.public_key);
       const account = await server.loadAccount(userPublicKey);
-      const fee = 200;
+      const fee = await server.fetchBaseFee();
       const amount = this.props.currencyQty;
       console.log(account," account ",fee," fee and amount", amount);
       const transaction = new StellarSdk.TransactionBuilder(account, { fee: fee
@@ -456,7 +456,7 @@ export class ContributionConfirm extends React.PureComponent {
           "to": address,
           "value": '0x0',
           'gasPrice': web3.utils.toHex(gasPrice),
-          'gasLimit': web3.utils.toHex(210000),
+          'gasLimit': web3.utils.toHex(100000),
           "chainId": "0x01",
           "data": contract.methods.transfer(this.props.clientAddress, tokenAmount).encodeABI(),
           }; //--prodChange
