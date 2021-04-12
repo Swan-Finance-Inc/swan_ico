@@ -149,22 +149,22 @@ export class RegisterPage extends React.PureComponent {
     // console.log(this.state.referToken);
     // var nameRegex = /^(?!\s+$)[A-Za-z\s-]+$/ ;
     var emailRegex = /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
-    var nameRegex = /^(?!\s+$)[A-Za-z]+$/ ;
+    var nameRegex = /^[a-zA-Z]+( [a-zA-Z]+)*$/ ;
     var passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/;
-    if(this.state.firstName.length < 4 || this.state.firstName.length > 20){
-      this.notifyError("First Name should be between 4 to 20 characters");
+    if(this.state.firstName.length < 1 || this.state.firstName.length > 20){
+      this.notifyError("First Name should be between 1 to 20 characters");
     }
     else
     if(!nameRegex.test(this.state.firstName)){
-      this.notifyError("Name should contain only alphabets without space")
+      this.notifyError("Name should contain only alphabets")
     }
     else
-    if(this.state.lastName.length < 2 || this.state.lastName.length > 30){
-      this.notifyError("Last Name should be between 2 to 30 characters");
+    if(this.state.lastName.length < 1 || this.state.lastName.length > 30){
+      this.notifyError("Last Name should be between 1 to 30 characters");
     }
     else
     if(!nameRegex.test(this.state.lastName)){
-      this.notifyError("Name should contain only alphabets without space")
+      this.notifyError("Name should contain only alphabets")
     }
     else if(!this.state.email){
       this.notifyError("Please enter the email");
@@ -200,11 +200,11 @@ export class RegisterPage extends React.PureComponent {
         channel: this.state.channel
       }
       this.props.registerUser(user);
-        this.setState({
-          captcha: false,
-          mail: user.email,
-        });
-        window.grecaptcha.reset();
+      this.setState({
+        captcha: false,
+        mail: user.email,
+      });
+      window.grecaptcha.reset();
     }
     // user = {
     //   fullName: e.target[0].value,
