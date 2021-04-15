@@ -193,7 +193,7 @@ export class RegisterPage extends React.PureComponent {
         secondName: this.state.lastName,
         email: this.state.email,
         password: this.state.password,
-        rfcode: this.state.referToken,
+        rfcode: this.state.referralId,
         termsAccepted: true,
         isUs: usCitizen.checked,
         captcha: this.state["g-recaptcha-response"],
