@@ -501,7 +501,29 @@ export class RegisterPage extends React.PureComponent {
                           centralex.
                         </label>
                       </div> */}
-                      <div className="form-group" style={{ marginTop : '30px' , marginBottom : '0px' }}>
+                      <div className="form-group" style={{ marginTop : '30px' , marginBottom : '0px'}}>
+                        <label className="form-check-label" htmlFor="referralTerms">
+                          <input
+                            id="referralTerms"
+                            className="boolean required form-check-input"
+                            required
+                            label="false"
+                            data-title="Please confirm"
+                            data-placement="left"
+                            data-trigger="manual"
+                            data-offset="0, 55"
+                            aria-required="true"
+                            type="checkbox"
+                            name="referralTerms"
+                          />
+                          &nbsp; 
+                          I understand
+                          <p style={{ fontSize : '12px', lineHeight: 'normal'}}>
+                          We welcome all new users to SwanFinance. We have a referral program where you can earn $50 of SWAN tokens by referring someone who buys $50 of SWAN. There is no bonus SWAN if your referrals only sign up for an account and pass KYC verification. They must buy at least $50 of SWAN
+                        </p>
+                        </label>
+                      </div>
+                      <div className="form-group" style={{ marginTop : '20px' , marginBottom : '0px'}}>
                         <label className="form-check-label" htmlFor="usCitizen">
                           <input
                             id="usCitizen"
