@@ -726,7 +726,21 @@ var _ref3 = _jsx("div", {
   id: "createAccount"
 }, void 0, "Create Your Account"));
 
-var _ref4 = _jsx("label", {
+var _ref4 = _jsx("input", {
+  id: "referralTerms",
+  className: "boolean required form-check-input",
+  required: true,
+  label: "false",
+  "data-title": "Please confirm",
+  "data-placement": "left",
+  "data-trigger": "manual",
+  "data-offset": "0, 55",
+  "aria-required": "true",
+  type: "checkbox",
+  name: "referralTerms"
+});
+
+var _ref5 = _jsx("label", {
   className: "form-check-label",
   htmlFor: "usCitizen"
 }, void 0, _jsx("input", {
@@ -1193,7 +1207,15 @@ var RegisterPage_RegisterPage = function (_React$PureComponent) {
       })), _jsx("div", {
         className: "form-group",
         style: { marginTop: '30px', marginBottom: '0px' }
-      }, void 0, _ref4), _jsx("div", {
+      }, void 0, _jsx("label", {
+        className: "form-check-label",
+        htmlFor: "referralTerms"
+      }, void 0, _ref4, "\xA0 I understand", _jsx("p", {
+        style: { fontSize: '12px', lineHeight: 'normal' }
+      }, void 0, "We welcome all new users to SwanFinance. We have a referral program where you can earn $50 of SWAN tokens by referring someone who buys $50 of SWAN. There is no bonus SWAN if your referrals only sign up for an account and pass KYC verification. They must buy at least $50 of SWAN"))), _jsx("div", {
+        className: "form-group",
+        style: { marginTop: '20px', marginBottom: '0px' }
+      }, void 0, _ref5), _jsx("div", {
         className: "form-group text-center"
       }, void 0, react_default.a.createElement(recaptcha_wrapper_default.a, {
         type: "image",
