@@ -123,16 +123,16 @@ export class MyReferal extends React.PureComponent {
     this.setState({
       ...this.state,
       referralUrl:`https://app.swanfinance.io/signup/refer/${this.props.referralCode}`
-    })
+    });
   }
+
   componentWillReceiveProps(nextProps) {
     if (nextProps.referData) {
       if (nextProps.referData.success) {
         console.log(" inside success in willrecieveprops ");
         let transaction = [];
         let users = [];
-        let data = nextProps.referData;
-        console.log(data, " data in willrecieveprops");
+        let data = nextProps.referData.result;
         // data.transactions.forEach((tran, i) => {
         //   tran.forEach((entry, j) => transaction.push(entry));
         // });
@@ -141,6 +141,7 @@ export class MyReferal extends React.PureComponent {
         this.setState({
           transactions: transaction,
           users: users,
+          data: data
         });
       }
     }
@@ -404,9 +405,11 @@ export class MyReferal extends React.PureComponent {
                   </a>
                 </Dropdown>
                 </div>
-              <div>{this.state.weeklyOrDaily==='daily'?<Bar graphData={referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
-              {this.state.weeklyOrDaily==='monthly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}
-              {this.state.weeklyOrDaily==='weekly'?<Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} />:''}</div>
+                    <div>
+                      {this.state.weeklyOrDaily === 'daily' ? <Bar graphData={referralsEarned} typeChart={this.state.weeklyOrDaily} /> : ''}
+                      {this.state.weeklyOrDaily === 'monthly' ? <Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} /> : ''}
+                      {this.state.weeklyOrDaily === 'weekly' ? <Bar graphData={this.props.referralsEarned} typeChart={this.state.weeklyOrDaily} /> : ''}
+                    </div>
                 </div>
               </div>
             </div>
@@ -426,20 +429,26 @@ export class MyReferal extends React.PureComponent {
                   <h4 className="exchange-heading">Referral Tokens Earned</h4>
                     <p style={{ marginBottom: "0px", color: "#465390" ,fontSize: "32px", marginLeft : '10px' }}>
                     {
-                    0
+                    this.state.data ? this.state.data.tokensTotal : 0
                     }
                     </p>
                   <div className="col-sm-12" style={{ position : 'relative' }}>
                       <div className="Pending-referrals">
                         <div id="circle">
-                          <span className="circle-text">0<span className="Pending-referrals-count"> # of Pending Referrals</span></span>
+                          <span className="circle-text">
+                            {this.state.data ? (this.state.data.referralTotal - this.state.data.referralSuccess) : 0}
+                            <span className="Pending-referrals-count"> # of Pending Referrals</span>
+                          </span>
                         </div>
                       </div>
                   </div>
                   <div className="col-sm-12" style={{ position : 'relative' }}>
                       <div className="Confirmed-referrals">
                         <div id="confirmed-circle">
-                          <span className="confirmed-circle-text">0<span className="Confirmed-referrals-count"># of Confirmed Referrals</span></span>
+                          <span className="confirmed-circle-text">
+                            {this.state.data ? this.state.data.referralSuccess : 0}
+                            <span className="Confirmed-referrals-count"># of Confirmed Referrals</span>
+                          </span>
                         </div>
                       </div>
                   </div>

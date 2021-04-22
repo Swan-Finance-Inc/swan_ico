@@ -887,25 +887,13 @@ var _ref5 = _jsx("h4", {
   className: "exchange-heading"
 }, void 0, "Referral Tokens Earned");
 
-var _ref6 = _jsx("div", {
-  className: "Pending-referrals"
-}, void 0, _jsx("div", {
-  id: "circle"
-}, void 0, _jsx("span", {
-  className: "circle-text"
-}, void 0, "0", _jsx("span", {
+var _ref6 = _jsx("span", {
   className: "Pending-referrals-count"
-}, void 0, " # of Pending Referrals"))));
+}, void 0, " # of Pending Referrals");
 
-var _ref7 = _jsx("div", {
-  className: "Confirmed-referrals"
-}, void 0, _jsx("div", {
-  id: "confirmed-circle"
-}, void 0, _jsx("span", {
-  className: "confirmed-circle-text"
-}, void 0, "0", _jsx("span", {
+var _ref7 = _jsx("span", {
   className: "Confirmed-referrals-count"
-}, void 0, "# of Confirmed Referrals"))));
+}, void 0, "# of Confirmed Referrals");
 
 var _ref8 = _jsx("b", {});
 
@@ -1173,8 +1161,7 @@ var MyReferal_MyReferal = function (_React$PureComponent) {
           console.log(" inside success in willrecieveprops ");
           var transaction = [];
           var users = [];
-          var data = nextProps.referData;
-          console.log(data, " data in willrecieveprops");
+          var data = nextProps.referData.result;
           // data.transactions.forEach((tran, i) => {
           //   tran.forEach((entry, j) => transaction.push(entry));
           // });
@@ -1182,7 +1169,8 @@ var MyReferal_MyReferal = function (_React$PureComponent) {
           // data.users.forEach((user,i)=>users.push(tran));
           this.setState({
             transactions: transaction,
-            users: users
+            users: users,
+            data: data
           });
         }
       }
@@ -1293,13 +1281,25 @@ var MyReferal_MyReferal = function (_React$PureComponent) {
         style: { marginTop: '-15px' }
       }, void 0, _ref5, _jsx("p", {
         style: { marginBottom: "0px", color: "#465390", fontSize: "32px", marginLeft: '10px' }
-      }, void 0, 0), _jsx("div", {
+      }, void 0, this.state.data ? this.state.data.tokensTotal : 0), _jsx("div", {
         className: "col-sm-12",
         style: { position: 'relative' }
-      }, void 0, _ref6), _jsx("div", {
+      }, void 0, _jsx("div", {
+        className: "Pending-referrals"
+      }, void 0, _jsx("div", {
+        id: "circle"
+      }, void 0, _jsx("span", {
+        className: "circle-text"
+      }, void 0, this.state.data ? this.state.data.referralTotal - this.state.data.referralSuccess : 0, _ref6)))), _jsx("div", {
         className: "col-sm-12",
         style: { position: 'relative' }
-      }, void 0, _ref7))))), _jsx("div", {
+      }, void 0, _jsx("div", {
+        className: "Confirmed-referrals"
+      }, void 0, _jsx("div", {
+        id: "confirmed-circle"
+      }, void 0, _jsx("span", {
+        className: "confirmed-circle-text"
+      }, void 0, this.state.data ? this.state.data.referralSuccess : 0, _ref7)))))))), _jsx("div", {
         className: "row"
       }, void 0, _jsx("div", {
         className: "col-lg-12 last-card",
