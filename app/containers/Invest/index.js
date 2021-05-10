@@ -330,7 +330,7 @@ export class InvestPage extends React.PureComponent { // eslint-disable-line rea
     var abi = constants.stakeContractAbi;
     var id = this.state.currInterestAccountDetails.proposalId;
     
-    //var spender = constants.stakeContractAddress;
+    // var spender = constants.stakeContractAddress;
 
     try{    
     
@@ -2124,12 +2124,22 @@ lookupPeriod = (e) =>{
                   var stakeminutes = ((stakeDate.getTime()-date.getTime()))/60000;
                   var stakeday = Math.round(stakeminutes/1440);
                   var day = Math.round(minutes/1440);
+                  var endsInDays = stakeday - day;
+                  var endsInText = 'Ends in' + endsInDays + ' days';
+                  if (endsInDays <= 0) {
+                    endsInText = 'Ended';
+                  }
                   // console.log(stakeday , ' sttate in contribution page')
                   return(
                 <div className="col-sm-12 col-md-12 col-lg-12">
                   <div style={{textAlign:"center", marginLeft:"-40px"}} >
                     <div className="col-md-3 col-lg-3 col-sm-3" style={{fontSize:"20px"}}>{this.showDate(d.time)}</div>
-                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>{d.amount} SWAN<div className="depositText" style={{fontWeight:"16px"}}>Ends in {stakeday-day} days</div></div>
+                    <div className="col-md-2 col-lg-2 col-sm-2" style={{fontWeight:"bold",fontSize:"20px"}}>
+                      {d.amount} SWAN
+                      <div className="depositText" style={{fontWeight:"16px"}}>
+                        { endsInText }
+                      </div>
+                    </div>
                     <div className="col-md-3 col-lg-3 col-sm-3 depositText" style={{fontSize:"16px"}}>Total Earnings<br /><span style={{fontWeight:"bold",fontSize:"20px",color:"#414857"}}>{d.amount*d.interestRate/100} SWAN</span></div>
                     <div className="col-md-2 col-lg-2 col-sm-2 depositText" >APY<br /><span style={{fontSize:"30px"}}>{d.interestRate}%</span></div>
                     <div className="col-md-2 col-lg-2 col-sm-2" style={{fontSize:"16px"}} onClick={()=>this.setState({showDetails:true,currInterestAccountDetails:d})}><a style={{color:'#2498D5',textDecoration:'underline'}}>Check Details</a></div>
