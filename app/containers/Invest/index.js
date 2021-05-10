@@ -2125,7 +2125,7 @@ lookupPeriod = (e) =>{
                   var stakeday = Math.round(stakeminutes/1440);
                   var day = Math.round(minutes/1440);
                   var endsInDays = stakeday - day;
-                  var endsInText = 'Ends in' + endsInDays + ' days';
+                  var endsInText = 'Ends in ' + endsInDays + ' days';
                   if (endsInDays <= 0) {
                     endsInText = 'Ended';
                   }
